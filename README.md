@@ -1,11 +1,11 @@
-![datannur logo](https://raw.githubusercontent.com/bassim-matar/datannur/main/public/assets/main-banner-dark.png?raw=true#gh-dark-mode-only)
-![datannur logo](https://raw.githubusercontent.com/bassim-matar/datannur/main/public/assets/main-banner.png?raw=true#gh-light-mode-only)
+![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/main-banner-dark.png?raw=true#gh-dark-mode-only)
+![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/main-banner.png?raw=true#gh-light-mode-only)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/v/release/bassim-matar/datannur?color=blue)](https://github.com/bassim-matar/datannur/releases)
-[![CI Tests](https://github.com/bassim-matar/datannur/actions/workflows/ci.yml/badge.svg)](https://github.com/bassim-matar/datannur/actions/workflows/ci.yml)
-[![Deploy Status](https://github.com/bassim-matar/datannur/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/bassim-matar/datannur/actions/workflows/deploy-pages.yml)
-[![Demo](https://img.shields.io/badge/demo-live-success)](https://bassim-matar.github.io/datannur/)
+[![GitHub release](https://img.shields.io/github/v/release/datannur/datannur?color=blue)](https://github.com/datannur/datannur/releases)
+[![CI Tests](https://github.com/datannur/datannur/actions/workflows/ci.yml/badge.svg)](https://github.com/datannur/datannur/actions/workflows/ci.yml)
+[![Deploy Status](https://github.com/datannur/datannur/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/datannur/datannur/actions/workflows/deploy-pages.yml)
+[![Demo](https://img.shields.io/badge/demo-live-success)](https://datannur.github.io/datannur/)
 
 # datannur
 
@@ -19,7 +19,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
 - **Browser-isolated** - No system access, inherently secure
 - **French interface** - Currently available in French, with multilingual support planned for future releases
 
-> **Contributing:** For development documentation and contributing guidelines, see [`CONTRIBUTING.md`](https://github.com/bassim-matar/datannur?tab=contributing-ov-file).
+> **Contributing:** For development documentation and contributing guidelines, see [`CONTRIBUTING.md`](https://github.com/datannur/datannur?tab=contributing-ov-file).
 
 **🌐 More info:** [datannur.com](https://datannur.com)
 
@@ -55,14 +55,14 @@ datannur is a client-side data catalog designed to organize and explore datasets
 
 ## Demo
 
-🚀 **[Try the live demo](https://bassim-matar.github.io/datannur/)**
+🚀 **[Try the live demo](https://datannur.github.io/datannur/)**
 
-![datannur interface](https://raw.githubusercontent.com/bassim-matar/datannur/main/public/assets/about-page/dossier-sitg-tab-dataset-dark.webp#gh-dark-mode-only)
-![datannur interface](https://raw.githubusercontent.com/bassim-matar/datannur/main/public/assets/about-page/dossier-sitg-tab-dataset.webp#gh-light-mode-only)
+![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/about-page/dossier-sitg-tab-dataset-dark.webp#gh-dark-mode-only)
+![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/about-page/dossier-sitg-tab-dataset.webp#gh-light-mode-only)
 
 ## Quick Start
 
-1. **Download** the app to your computer - [download here](https://github.com/bassim-matar/datannur/releases/latest/download/datannur-app-latest.zip)
+1. **Download** the app to your computer - [download here](https://github.com/datannur/datannur/releases/latest/download/datannur-app-latest.zip)
 2. **Open** the `index.html` file in your browser
 3. **Explore** the demo metadata to understand how it works
 4. **Replace** the demo metadata in `/data/db/` with your own
@@ -96,7 +96,7 @@ Here is the top-level structure:
 
 ### Database Structure
 
-datannur uses a client-side relational database powered by [jsonjsdb](https://github.com/bassim-matar/jsonjsdb). Your metadata must be structured as a relational database with specific requirements:
+datannur uses a client-side relational database powered by [jsonjsdb](https://github.com/datannur/jsonjsdb). Your metadata must be structured as a relational database with specific requirements:
 
 - **Database location**: By default in `/data/db/` folder (see [path](#path) for customization options)
 - **Tables**: Each table is stored in two files (`.json` and `.json.js`)
@@ -246,7 +246,7 @@ python3 python-scripts/update_app.py
 
 If you don't have Python, you can:
 
-1. Download the latest version from [Latest release](https://github.com/bassim-matar/datannur/releases/latest/download/datannur-app-latest.zip)
+1. Download the latest version from [Latest release](https://github.com/datannur/datannur/releases/latest/download/datannur-app-latest.zip)
 2. Replace the old files with new ones
 3. Keep your `/data/` folder to preserve your data
 

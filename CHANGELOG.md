@@ -9,6 +9,7 @@
 - fix: conditionally set app width to prevent fixed pixel width during static HTML generation
 - fix: link to new variable id for freq demo data
 - refactor: remove datasetVariables tab and use variables tab instead
+- refactor: migrate to datannur organization
 
 ## 0.15.2 (2025-12-07)
 

@@ -12,7 +12,7 @@ from typing import TypedDict, Optional, List
 from urllib.response import addinfourl
 
 REPO_PATH = Path(__file__).parent.parent
-GITHUB_REPO_API = "https://api.github.com/repos/bassim-matar/datannur/releases"
+GITHUB_REPO_API = "https://api.github.com/repos/datannur/datannur/releases"
 CONFIG_FILE = REPO_PATH / "data" / "update-app.json"
 ASSET_PRE_RELEASE = "datannur-app-pre-release.zip"
 ASSET_LATEST = "datannur-app-latest.zip"
