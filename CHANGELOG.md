@@ -1,6 +1,6 @@
 # datannur
 
-## unreleased
+## 0.16.0 (2025-12-14)
 
 - add: LLM tab navigation
 - change: split countEntities and listEntities llm tools
