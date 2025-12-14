@@ -59,7 +59,7 @@
       {#if __APP_VERSION__}
         <div>
           <a
-            href="https://github.com/bassim-matar/datannur/releases/tag/v{__APP_VERSION__}"
+            href="https://github.com/datannur/datannur/releases/tag/v{__APP_VERSION__}"
             target="_blanck"
           >
             v{__APP_VERSION__}
@@ -67,7 +67,7 @@
         </div>
       {/if}
       <div>
-        <a href="https://github.com/bassim-matar/datannur" target="_blanck">
+        <a href="https://github.com/datannur/datannur" target="_blanck">
           <Icon type="github" marginRight={false} /> github
         </a>
       </div>

@@ -150,7 +150,7 @@ Update `README.md` for new visible features.
 ### Tech Stack
 
 - **Frontend**: Svelte 5 + TypeScript + Vite
-- **Database**: [Jsonjsdb](https://github.com/bassim-matar/jsonjsdb) (client-side JSONJS)
+- **Database**: [Jsonjsdb](https://github.com/datannur/jsonjsdb) (client-side JSONJS)
 - **UI**: DataTables, Bulma (subset), Font Awesome
 - **Search**: FlexSearch
 - **Router**: Navigo

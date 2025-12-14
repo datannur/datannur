@@ -1,11 +1,11 @@
 blank_issues_enabled: true
 contact_links:
   - name: Documentation
-    url: https://github.com/bassim-matar/datannur/blob/main/README.md
+    url: https://github.com/datannur/datannur/blob/main/README.md
     about: Check the README for common questions and setup instructions
   - name: Live Demo
-    url: https://bassim-matar.github.io/datannur/
+    url: https://datannur.github.io/datannur/
     about: Try datannur online to see if your issue can be reproduced
   - name: Security Issue
-    url: https://github.com/bassim-matar/datannur/blob/main/SECURITY.md
+    url: https://github.com/datannur/datannur/blob/main/SECURITY.md
     about: Report security vulnerabilities privately
