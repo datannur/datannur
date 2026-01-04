@@ -1,6 +1,7 @@
 .DS_Store
 ~$*
 .venv
+.claude
 bundle-view.html
 /**/node_modules/
 /app/
