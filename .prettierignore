@@ -2,3 +2,5 @@
 **/*.json.js
 public/data/db/**/*.json
 app/data/db/**/*.json
+
+.claude
