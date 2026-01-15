@@ -1,5 +1,9 @@
 # datannur
 
+## unreleased
+
+- remove: md extension from LICENSE file
+
 ## 0.16.0 (2025-12-14)
 
 - add: LLM tab navigation

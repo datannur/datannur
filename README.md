@@ -82,7 +82,7 @@ Here is the top-level structure:
 ├── .htaccess                   # Apache configuration (clean URLs, cache)
 ├── .nojekyll                   # Disables Jekyll on GitHub Pages
 ├── CHANGELOG.md                # Application changelog
-├── LICENSE.md                  # License information
+├── LICENSE                     # License information
 ├── README.md                   # This documentation
 ├── index.html                  # Application entry point
 ├── manifest.json               # PWA configuration

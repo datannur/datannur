@@ -72,6 +72,6 @@ export default defineConfig({
     alias({ entries: aliases }),
     svelte(svelteConfig as Options),
     spaHtmlOptimizations(),
-    copyFilesToOutDir(outDir, ['LICENSE.md', 'CHANGELOG.md', 'README.md']),
+    copyFilesToOutDir(outDir, ['LICENSE', 'CHANGELOG.md', 'README.md']),
   ],
 })
