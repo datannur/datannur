@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- add: initial data template files for jsonjsdb, static-make, and update-app
 - remove: md extension from LICENSE file
 
 ## 0.16.0 (2025-12-14)

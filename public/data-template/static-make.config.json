@@ -1,0 +1,25 @@
+{
+  "domain": "https://example.com",
+  "indexSeo": false,
+  "appPath": ".",
+  "outDir": "static",
+  "dbMetaPath": "data/db",
+  "port": 8080,
+  "entities": ["institution", "folder", "tag", "doc", "dataset"],
+  "routes": [
+    "",
+    "institutions",
+    "folders",
+    "tags",
+    "docs",
+    "datasets",
+    "variables",
+    "modalities",
+    "favorite",
+    "options",
+    "about",
+    "search",
+    "meta",
+    "_error"
+  ]
+}
