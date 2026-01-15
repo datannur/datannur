@@ -3,6 +3,7 @@
 ## unreleased
 
 - add: initial data template files for jsonjsdb, static-make, and update-app
+- fix: HTTP server compatibility with Windows network drives (SMB shares)
 - remove: md extension from LICENSE file
 
 ## 0.16.0 (2025-12-14)
