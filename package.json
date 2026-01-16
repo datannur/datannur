@@ -8,6 +8,7 @@
   "main": "src/main.ts",
   "scripts": {
     "dev": "vite",
+    "dev:minimal": "DB=db-minimal vite",
     "dev:proxy": "python3 public/python-scripts/proxy_llm.py",
     "build": "vite build",
     "build:analyze": "BUNDLE_VIEW=true vite build",
@@ -88,7 +89,7 @@
     "flexsearch": "^0.8.212",
     "jquery": "^3.7.1",
     "jquery-powertip": "^1.3.2",
-    "jsonjsdb": "^0.8.7",
+    "jsonjsdb": "^0.8.9",
     "jszip": "^3.10.1",
     "marked": "^17.0.1",
     "mermaid": "^11.12.2",

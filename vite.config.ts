@@ -16,6 +16,8 @@ import {
 } from 'svelte-fileapp/vite'
 
 const outDir = 'app'
+const dbName = process.env.DB ?? 'db'
+const isDefaultDb = dbName === 'db'
 
 const { appVersion, aliases } = await initBuildConfig()
 
@@ -30,16 +32,18 @@ await copyPaths([
   ],
 ])
 
-const builder = await initJsonjsdbBuilder(
-  {
-    dbPath: 'public/data/db',
-    dbSourcePath: 'public/data/db-source',
-    previewPath: 'public/data/dataset',
-    mdPath: 'public/data/md',
-    configPath: 'public/data/jsonjsdb-config.html',
-  },
-  { isDevelopment: process.env.NODE_ENV === 'development' },
-)
+const builder = isDefaultDb
+  ? await initJsonjsdbBuilder(
+      {
+        dbPath: `public/data/${dbName}`,
+        dbSourcePath: 'public/data/db-source',
+        previewPath: 'public/data/dataset',
+        mdPath: 'public/data/md',
+        configPath: 'public/data/jsonjsdb-config.html',
+      },
+      { isDevelopment: process.env.NODE_ENV === 'development' },
+    )
+  : null
 
 export default defineConfig({
   base: '',
@@ -67,11 +71,18 @@ export default defineConfig({
   },
   plugins: [
     bundleSchemas('public/schemas', 'src/assets/db-schema.json'),
-    builder.getVitePlugins(FullReload),
+    builder?.getVitePlugins(FullReload),
     updateRouterIndex('src/page'),
     alias({ entries: aliases }),
     svelte(svelteConfig as Options),
     spaHtmlOptimizations(),
     copyFilesToOutDir(outDir, ['LICENSE', 'CHANGELOG.md', 'README.md']),
+    !isDefaultDb && {
+      name: 'inject-jsonjsdb-config',
+      transformIndexHtml(html) {
+        const config = `<div id="jsonjsdb-config" style="display:none" data-app-name="datannur-app-v2" data-path="data/${dbName}"></div>`
+        return html.replace('</body>', `${config}</body>`)
+      },
+    },
   ],
 })
