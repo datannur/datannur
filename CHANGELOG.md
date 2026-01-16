@@ -3,6 +3,8 @@
 ## unreleased
 
 - add: initial data template files for jsonjsdb, static-make, and update-app
+- add: alternative db for testing
+- fix: jsonjsdb with minimal data
 - fix: HTTP server compatibility with Windows network drives (SMB shares)
 - remove: md extension from LICENSE file
 

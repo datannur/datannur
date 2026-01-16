@@ -1,0 +1,9 @@
+[
+  {
+    "id": "dataset-1__var-id",
+    "name": "Identifiant",
+    "dataset_id": "dataset-1"
+  },
+  { "id": "dataset-1__var-name", "name": "Nom", "dataset_id": "dataset-1" },
+  { "id": "dataset-1__var-date", "name": "Date", "dataset_id": "dataset-1" }
+]

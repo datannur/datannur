@@ -1,0 +1,4 @@
+[
+  { "id": "folder-root", "name": "Dossier racine" },
+  { "id": "folder-child", "name": "Sous-dossier", "parent_id": "folder-root" }
+]

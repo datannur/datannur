@@ -1,0 +1,4 @@
+[
+  { "id": "dataset-1", "name": "Dataset de test", "folder_id": "folder-child" },
+  { "id": "dataset-empty", "name": "Dataset vide", "folder_id": "folder-root" }
+]
