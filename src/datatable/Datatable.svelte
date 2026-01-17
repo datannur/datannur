@@ -699,7 +699,6 @@
               .freq-value,
               .freq-number {
                 position: relative;
-                z-index: 1;
               }
 
               .freq-percent {
