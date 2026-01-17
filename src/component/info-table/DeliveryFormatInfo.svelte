@@ -6,7 +6,7 @@
 
 {#if deliveryFormat}
   <tr>
-    <td><Icon type="deliveryFormat" /> Format livraison</td>
+    <td><Icon type="deliveryFormat" /> Format</td>
     <td>{deliveryFormat}</td>
   </tr>
 {/if}
