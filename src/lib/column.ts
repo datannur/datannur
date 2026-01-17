@@ -518,10 +518,10 @@ export default class Column {
   static deliveryFormat(): ColumnType {
     return {
       data: 'deliveryFormat',
-      title: Render.icon('deliveryFormat') + 'Format livraison',
+      title: Render.icon('deliveryFormat') + 'Format',
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Format de livraison des données',
+      tooltip: 'Format des données',
       render: Render.shortText,
     }
   }

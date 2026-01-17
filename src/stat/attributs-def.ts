@@ -123,7 +123,7 @@ const attributsDef: Record<string, Attribut> = {
     variable: 'surveyType',
   },
   deliveryFormat: {
-    name: 'Format de livraison',
+    name: 'Format des données',
     type: 'category',
     variable: 'deliveryFormat',
   },
