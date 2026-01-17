@@ -2,6 +2,8 @@
 
 ## unreleased
 
+## 0.16.1 (2025-01-17)
+
 - add: initial data template files for jsonjsdb, static-make, and update-app
 - add: alternative db for testing
 - change: delivery format to just "format" in ui
