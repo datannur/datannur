@@ -11,7 +11,6 @@
   import 'datatables.net-fixedcolumns-bm/css/fixedColumns.bulma.min.css'
   import 'datatables.net-fixedheader-bm/css/fixedHeader.bulma.min.css'
   import 'datatables.net-scroller-bm/css/scroller.bulma.min.css'
-  import 'jquery-powertip/dist/css/jquery.powertip.min.css'
   import '@src/style/global.scss'
   import '@lib/viewport-manager'
   import IconSprite from '@layout/IconSprite.svelte'

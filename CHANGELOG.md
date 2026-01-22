@@ -3,6 +3,7 @@
 ## unreleased
 
 - add: folder type field
+- remove: jquery-powertip and use custom tooltip instead
 
 ## 0.16.1 (2025-01-17)
 

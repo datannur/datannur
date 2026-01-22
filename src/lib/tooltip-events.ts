@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import 'jquery-powertip'
+import { initTooltips as initTooltipLib } from '@lib/tooltip'
 import { addValuesToAttribut } from '@stat/stat'
 import definition from '@stat/attributs-def'
 import type { Row } from '@type'
@@ -13,22 +13,7 @@ export function setCurrentTabData(data: Row[]) {
 }
 
 export function initTooltips() {
-  jQuery('body').on('mouseover', '.use-tooltip', function (this: HTMLElement) {
-    const elem = jQuery(this)
-    if (!elem?.data('powertip-initialized')) {
-      elem?.data('powertip-initialized', true)
-      // @ts-expect-error - powerTip is a jQuery plugin
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      elem?.powerTip({
-        placement: elem.hasClass('tooltip-top') ? 'n' : 's',
-        smartPlacement: true,
-        mouseOnToPopup: true,
-      })
-      // @ts-expect-error - powerTip is a jQuery plugin
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      elem?.powerTip('show')
-    }
-  })
+  initTooltipLib()
 }
 
 export function initColumnStatBtn(
