@@ -190,6 +190,7 @@ export type Folder = BaseEntity &
     localisation?: string
     metadataPath?: string
     surveyType?: string
+    type?: string
     updatingEach?: string
     noMoreUpdate?: boolean
 
@@ -199,6 +200,7 @@ export type Folder = BaseEntity &
     nbDatasetRecursive?: number
     nbVariableRecursive?: number
     nextUpdateDate?: string
+    typeClean?: string
   }
 
 export type Institution = BaseEntity &

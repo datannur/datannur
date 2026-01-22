@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- add: folder type field
+
 ## 0.16.1 (2025-01-17)
 
 - add: initial data template files for jsonjsdb, static-make, and update-app

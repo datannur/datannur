@@ -65,6 +65,11 @@
         "description": "Delivery format (CSV, XML, ...)",
         "x-description-fr": "Format des données livrées (CSV, XML, ...)"
       },
+      "type": {
+        "type": ["string", "null"],
+        "description": "Folder type (useful for general filter)",
+        "x-description-fr": "Type de dossier (utile pour le filtre général)"
+      },
       "git_code": {
         "type": ["string", "null"],
         "description": "Code location on a GIT repo",

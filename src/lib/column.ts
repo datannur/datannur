@@ -225,6 +225,17 @@ export default class Column {
       render: Render.shortText,
     }
   }
+  static folderType(): ColumnType {
+    return {
+      data: 'typeClean',
+      title: Render.icon('type') + 'Type',
+      defaultContent: '',
+      name: 'type',
+      filterType: 'select',
+      tooltip: 'Type de dossier',
+      render: Render.shortText,
+    }
+  }
   static datatype(): ColumnType {
     return {
       data: 'typeClean',

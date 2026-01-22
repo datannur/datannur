@@ -92,6 +92,7 @@
         linkSameEntityTab: true,
       }),
       Column.description(),
+      Column.folderType(),
       Column.nbChildRecursive('folder', folderMax, folderPath),
       Column.nbDatasetRecursive('folder', datasetMax),
       Column.nbVariable('folder', variableMax, {
