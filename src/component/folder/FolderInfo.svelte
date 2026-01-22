@@ -15,6 +15,7 @@
   import CopyText from '@layout/CopyText.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
+  import TypeInfo from '@info-table/TypeInfo.svelte'
   import type { Folder } from '@type'
 
   let { folder }: { folder: Folder } = $props()
@@ -30,6 +31,7 @@
   {/if}
   <InstitutionInfo type="owner" institutionId={folder.ownerId} />
   <InstitutionInfo type="manager" institutionId={folder.managerId} />
+  <TypeInfo type={folder.typeClean} />
   {#if folder.lastUpdateDate}
     <LastUpdateInfo lastUpdateDate={folder.lastUpdateDate} />
   {/if}

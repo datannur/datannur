@@ -281,6 +281,7 @@ class Process {
       folder.nbChild = db.countRelated('parent', folder.id, 'folder')
       folder.nbChildRecursive = db.getAllChilds('folder', folder.id).length
       addNextUpdate(folder)
+      folder.typeClean = folder.type ?? ''
       if (db.use.owner)
         folder.ownerName = addName(folder, 'institution', 'owner')
       if (db.use.manager)
