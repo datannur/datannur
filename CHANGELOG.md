@@ -3,6 +3,7 @@
 ## unreleased
 
 - add: folder type field
+- add: allow q, Q and T as quarter separator in date format for evolution
 - remove: jquery-powertip and use custom tooltip instead
 
 ## 0.16.1 (2025-01-17)
