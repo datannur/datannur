@@ -1,5 +1,9 @@
 import { locale } from '@lib/constant'
 
+function isQuarterSeparator(char: string): boolean {
+  return 'tTqQ'.includes(char)
+}
+
 export function convertQuarterToFullDate(
   completeDate: string,
   mode: 'start' | 'end' = 'start',
@@ -37,7 +41,7 @@ export function dateToTimestamp(
     if (mode === 'end') completeDate += '/30'
   }
 
-  if (completeDate.length === 6 && completeDate[4] === 't') {
+  if (completeDate.length === 6 && isQuarterSeparator(completeDate[4])) {
     completeDate = convertQuarterToFullDate(completeDate, mode)
   }
   return Date.parse(completeDate)
@@ -114,10 +118,10 @@ export function getPeriod(
     if (startStr.length === 7) startStr += '/01'
     if (endStr.length === 4) endStr += '/12'
     if (endStr.length === 7) endStr += '/30'
-    if (startStr.length === 6 && startStr[4] === 't') {
+    if (startStr.length === 6 && isQuarterSeparator(startStr[4])) {
       startStr = convertQuarterToFullDate(startStr, 'start')
     }
-    if (endStr.length === 6 && endStr[4] === 't') {
+    if (endStr.length === 6 && isQuarterSeparator(endStr[4])) {
       endStr = convertQuarterToFullDate(endStr, 'end')
     }
     start = Date.parse(startStr)
