@@ -15,13 +15,11 @@
   let folderMax = 0
   let datasetMax = 0
   let tagMax = 0
-
   for (const doc of docs) {
-    if (doc.nbInstitution ?? 0 > institutionMax)
-      institutionMax = doc.nbInstitution ?? 0
-    if (doc.nbFolder ?? 0 > folderMax) folderMax = doc.nbFolder ?? 0
-    if (doc.nbDataset ?? 0 > datasetMax) datasetMax = doc.nbDataset ?? 0
-    if (doc.nbTag ?? 0 > tagMax) tagMax = doc.nbTag ?? 0
+    institutionMax = Math.max(institutionMax, doc.nbInstitution ?? 0)
+    folderMax = Math.max(folderMax, doc.nbFolder ?? 0)
+    datasetMax = Math.max(datasetMax, doc.nbDataset ?? 0)
+    tagMax = Math.max(tagMax, doc.nbTag ?? 0)
   }
 
   const docsSorted = [...docs]

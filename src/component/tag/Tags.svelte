@@ -26,18 +26,13 @@
   let levelMax = 0
   for (const tag of tags) {
     if (db.useRecursive.tag) tag.pathString = getParentPath(tag)
-    if (tag.nbChildRecursive ?? 0 > tagMax) tagMax = tag.nbChildRecursive ?? 0
-    if (tag.nbInstitutionRecursive ?? 0 > institutionMax)
-      institutionMax = tag.nbInstitutionRecursive ?? 0
-    if (tag.nbFolderRecursive ?? 0 > folderMax)
-      folderMax = tag.nbFolderRecursive ?? 0
-    if (tag.nbDocRecursive ?? 0 > docMax) docMax = tag.nbDocRecursive ?? 0
-    if (tag.nbDatasetRecursive ?? 0 > datasetMax)
-      datasetMax = tag.nbDatasetRecursive ?? 0
-    if (tag.nbVariableRecursive ?? 0 > variableMax)
-      variableMax = tag.nbVariableRecursive ?? 0
-    if ((tag.parents?.length ?? 0) + 1 > levelMax)
-      levelMax = (tag.parents?.length ?? 0) + 1
+    tagMax = Math.max(tagMax, tag.nbChildRecursive ?? 0)
+    institutionMax = Math.max(institutionMax, tag.nbInstitutionRecursive ?? 0)
+    folderMax = Math.max(folderMax, tag.nbFolderRecursive ?? 0)
+    docMax = Math.max(docMax, tag.nbDocRecursive ?? 0)
+    datasetMax = Math.max(datasetMax, tag.nbDatasetRecursive ?? 0)
+    variableMax = Math.max(variableMax, tag.nbVariableRecursive ?? 0)
+    levelMax = Math.max(levelMax, (tag.parents?.length ?? 0) + 1)
   }
 
   const tagsSorted = [...tags]

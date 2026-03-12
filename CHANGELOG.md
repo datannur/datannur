@@ -4,6 +4,7 @@
 
 - add: folder type field
 - add: allow q, Q and T as quarter separator in date format for evolution
+- fix: operator precedence bug with nullish coalescing in max calculations
 - remove: jquery-powertip and use custom tooltip instead
 
 ## 0.16.1 (2025-01-17)
