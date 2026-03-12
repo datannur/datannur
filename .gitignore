@@ -10,5 +10,6 @@ bundle-view.html
 /public/data/db-semantic/
 /public/data/deploy.config.json
 /public/data/llm-web.config.json
+/public/link/
 /src/page/.router-index.ts
 /src/assets/db-schema.json

@@ -2,6 +2,10 @@
 
 ## unreleased
 
+## 0.17.0 (2026-03-12)
+
+- add: share link button for file:// mode (copies redirect URL to clipboard)
+- add: link redirect template and generate_links.py script
 - add: folder type field
 - add: allow q, Q and T as quarter separator in date format for evolution
 - fix: operator precedence bug with nullish coalescing in max calculations

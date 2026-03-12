@@ -1,0 +1,6 @@
+<!doctype html>
+<script>
+  const m = location.href.match(/link\/(.+)\.html/)
+  if (m)
+    location.replace(location.href.replace(/link\/.*$/, 'index.html#/' + m[1]))
+</script>
