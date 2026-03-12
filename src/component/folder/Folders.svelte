@@ -30,21 +30,11 @@
   if (!isMeta) {
     for (const folder of folders) {
       folder.pathString = getParentPath(folder)
-      if (folder.nbDatasetRecursive ?? 0 > datasetMax) {
-        datasetMax = folder.nbDatasetRecursive ?? 0
-      }
-      if (folder.nbVariableRecursive ?? 0 > variableMax) {
-        variableMax = folder.nbVariableRecursive ?? 0
-      }
-      if (folder.nbChildRecursive ?? 0 > folderMax) {
-        folderMax = folder.nbChildRecursive ?? 0
-      }
-      if (folder.docsRecursive?.length ?? 0 > nbDocMax) {
-        nbDocMax = folder.docsRecursive?.length ?? 0
-      }
-      if ((folder.parents?.length ?? 0) + 1 > levelMax) {
-        levelMax = (folder.parents?.length ?? 0) + 1
-      }
+      datasetMax = Math.max(datasetMax, folder.nbDatasetRecursive ?? 0)
+      variableMax = Math.max(variableMax, folder.nbVariableRecursive ?? 0)
+      folderMax = Math.max(folderMax, folder.nbChildRecursive ?? 0)
+      nbDocMax = Math.max(nbDocMax, folder.docsRecursive?.length ?? 0)
+      levelMax = Math.max(levelMax, (folder.parents?.length ?? 0) + 1)
     }
     foldersSorted.sort((a, b) =>
       (a.pathString ?? '').localeCompare(b.pathString ?? ''),

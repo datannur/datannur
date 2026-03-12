@@ -38,22 +38,12 @@
   let nbDocMax = 0
   let nbSourcesMax = 0
   let nbDerivedMax = 0
-  for (const dataset of datasets) {
-    if (dataset.nbVariable ?? 0 > nbVariableMax) {
-      nbVariableMax = dataset.nbVariable ?? 0
-    }
-    if (dataset.nbRow ?? 0 > nbRowMax) {
-      nbRowMax = dataset.nbRow ?? 0
-    }
-    if (dataset.docsRecursive?.length ?? 0 > nbDocMax) {
-      nbDocMax = dataset.docsRecursive?.length ?? 0
-    }
-    if (dataset.sourceIds?.size ?? 0 > nbSourcesMax) {
-      nbSourcesMax = dataset.sourceIds?.size ?? 0
-    }
-    if (dataset.derivedIds?.size ?? 0 > nbDerivedMax) {
-      nbDerivedMax = dataset.derivedIds?.size ?? 0
-    }
+  for (const d of datasets) {
+    nbVariableMax = Math.max(nbVariableMax, d.nbVariable ?? 0)
+    nbRowMax = Math.max(nbRowMax, d.nbRow ?? 0)
+    nbDocMax = Math.max(nbDocMax, d.docsRecursive?.length ?? 0)
+    nbSourcesMax = Math.max(nbSourcesMax, d.sourceIds?.size ?? 0)
+    nbDerivedMax = Math.max(nbDerivedMax, d.derivedIds?.size ?? 0)
   }
 
   function defineColumns() {

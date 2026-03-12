@@ -22,24 +22,12 @@
   let levelMax = 0
   for (const institution of institutions) {
     institution.pathString = getParentPath(institution)
-    if (institution.nbChildRecursive ?? 0 > institutionMax) {
-      institutionMax = institution.nbChildRecursive ?? 0
-    }
-    if (institution.nbFolderRecursive ?? 0 > folderMax) {
-      folderMax = institution.nbFolderRecursive ?? 0
-    }
-    if (institution.nbDatasetRecursive ?? 0 > datasetMax) {
-      datasetMax = institution.nbDatasetRecursive ?? 0
-    }
-    if (institution.docsRecursive?.length ?? 0 > nbDocMax) {
-      nbDocMax = institution.docsRecursive?.length ?? 0
-    }
-    if (institution.nbVariableRecursive ?? 0 > variableMax) {
-      variableMax = institution.nbVariableRecursive ?? 0
-    }
-    if ((institution.parents?.length ?? 0) + 1 > levelMax) {
-      levelMax = (institution.parents?.length ?? 0) + 1
-    }
+    institutionMax = Math.max(institutionMax, institution.nbChildRecursive ?? 0)
+    folderMax = Math.max(folderMax, institution.nbFolderRecursive ?? 0)
+    datasetMax = Math.max(datasetMax, institution.nbDatasetRecursive ?? 0)
+    nbDocMax = Math.max(nbDocMax, institution.docsRecursive?.length ?? 0)
+    variableMax = Math.max(variableMax, institution.nbVariableRecursive ?? 0)
+    levelMax = Math.max(levelMax, (institution.parents?.length ?? 0) + 1)
   }
 
   const institutionsSorted = [...institutions]
