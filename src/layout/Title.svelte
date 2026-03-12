@@ -7,6 +7,7 @@
   import Head from '@frame/Head.svelte'
   import Icon from '@layout/Icon.svelte'
   import Favorite from '@favorite/Favorite.svelte'
+  import ShareLink from '@layout/ShareLink.svelte'
   import { onMount } from 'svelte'
   import type { MouseEventHandler } from 'svelte/elements'
   import type { FavoritableEntityName, MainEntityName } from '@type'
@@ -71,6 +72,7 @@
         {/if}
         {#if id}
           <Favorite type={entityFavoritable!} {id} {isFavorite} />
+          <ShareLink {type} {id} />
         {:else}
           <span class="separator">{separator}</span>
         {/if}
