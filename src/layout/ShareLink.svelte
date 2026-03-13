@@ -17,7 +17,7 @@
   function getShareUrl(): string {
     const currentUrl = window.location.href
     const baseUrl = currentUrl.split('index.html')[0]
-    return `${baseUrl}link/${type}/${id}.html`
+    return `${baseUrl}data/link/${type}/${id}.html`
   }
 
   async function copyLink() {

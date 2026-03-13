@@ -114,6 +114,10 @@ export default [
         extraFileExtensions: ['.svelte'],
       },
     },
+    linterOptions: {
+      // Allow eslint-disable comments for Svelte 5 $bindable() false positives
+      reportUnusedDisableDirectives: 'off',
+    },
     rules: { ...namingConventionRules, ...strictTypeScriptRules },
   },
 ]

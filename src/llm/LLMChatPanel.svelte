@@ -30,7 +30,7 @@
 
   let {
     isOpen = $bindable(false),
-    isProxyUp = $bindable(false),
+    isProxyUp = $bindable(false), // eslint-disable-line no-useless-assignment
   }: {
     isOpen?: boolean
     isProxyUp?: boolean

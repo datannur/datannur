@@ -12,16 +12,15 @@
     $props()
   const metaVariable = untrack(() => metaVariableProp)
 
-  let variablePreview: Record<string, unknown>[] = []
+  const metaDataset = db.get('metaDataset', metaVariable.metaDatasetId)
   let datasetPreview: Record<string, unknown>[] = []
-  let metaDataset = db.get('metaDataset', metaVariable.metaDatasetId)
   if (metaDataset?.metaFolderId === 'data') {
     datasetPreview = db.tables[metaDataset.name]
   } else if (metaDataset?.metaFolderId === 'userData') {
     const userData = getUserData()
     datasetPreview = userData?.[metaDataset.name] ?? []
   }
-  variablePreview = filterKeys(datasetPreview, [metaVariable.name])
+  const variablePreview = filterKeys(datasetPreview, [metaVariable.name])
 
   let tabs = tabsHelper({
     metaVariable,

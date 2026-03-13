@@ -163,24 +163,22 @@ function addCategory(
 ): ValueEntry[] {
   const set = new Set<string>()
   const values: Record<string, ValueEntry> = {}
-  const hasGetter = 'getValue' in attribut
   for (const item of items) {
-    let value: unknown | undefined = undefined
-    if (hasGetter && attribut.getValue) {
-      value = attribut.getValue(item)
-    } else if (attribut.variable) {
-      value = item[attribut.variable]
-    } else {
-      continue
-    }
-    if (
-      value === false ||
-      value === null ||
-      value === undefined ||
-      Number.isNaN(value) ||
-      value === ''
-    )
-      value = '__empty__'
+    // Skip if no source for value
+    if (!attribut.getValue && !attribut.variable) continue
+
+    const rawValue: unknown | undefined = attribut.getValue
+      ? attribut.getValue(item)
+      : item[attribut.variable!]
+
+    const value =
+      rawValue === false ||
+      rawValue === null ||
+      rawValue === undefined ||
+      Number.isNaN(rawValue) ||
+      rawValue === ''
+        ? '__empty__'
+        : rawValue
     const key = String(value)
     if (set.has(key)) {
       values[key].count += 1
@@ -241,34 +239,39 @@ function addWithHtml(items: DatabaseItem[], attribut: Attribut): ValueEntry[] {
   return getValuesSorted(values)
 }
 
+function getValuesForAttribut(items: DatabaseItem[], attribut: Attribut) {
+  const total = items.length
+  const subtypeTotal = () =>
+    attribut.subtype ? items.filter(attribut.subtype).length : total
+
+  if (attribut.type && ['numeric', 'string'].includes(attribut.type))
+    return { values: addNumeric(items, attribut), totalValue: total }
+  if (attribut.nonExclusive)
+    return { values: addNonExclusive(items, attribut), totalValue: total }
+  if (attribut.withHtml)
+    return { values: addWithHtml(items, attribut), totalValue: subtypeTotal() }
+  if (attribut.subtype)
+    return { values: addSubtype(items, attribut), totalValue: subtypeTotal() }
+  if (attribut.type === 'categoryOrdered')
+    return { values: addCategory(items, attribut, 'start'), totalValue: total }
+  return { values: addCategory(items, attribut), totalValue: total }
+}
+
 export function addValuesToAttribut(
   items: DatabaseItem[],
   attribut: Attribut,
 ): AttributWithValues | undefined {
-  let values: ValueEntry[] = []
-  let totalValue = items.length
-  if (attribut.type && ['numeric', 'string'].includes(attribut.type)) {
-    values = addNumeric(items, attribut)
-  } else if (attribut.nonExclusive) {
-    values = addNonExclusive(items, attribut)
-  } else if (attribut.withHtml) {
-    values = addWithHtml(items, attribut)
-    if (attribut.subtype) totalValue = items.filter(attribut.subtype).length
-  } else if (attribut.subtype) {
-    values = addSubtype(items, attribut)
-    totalValue = items.filter(attribut.subtype).length
-  } else if (attribut.type === 'categoryOrdered') {
-    values = addCategory(items, attribut, 'start')
-  } else {
-    values = addCategory(items, attribut)
-  }
-  if (values.length === 0) return
+  const { values: rawValues, totalValue } = getValuesForAttribut(
+    items,
+    attribut,
+  )
+  if (rawValues.length === 0) return
   if (
-    values.length === 1 &&
-    [0, '0', '__empty__'].includes(values[0].start as string | number)
+    rawValues.length === 1 &&
+    [0, '0', '__empty__'].includes(rawValues[0].start as string | number)
   )
     return
-  values = addReadableValues(values, attribut.type ?? '')
+  const values = addReadableValues(rawValues, attribut.type ?? '')
   return { ...attribut, values, totalValue }
 }
 

@@ -2,6 +2,10 @@
 
 ## unreleased
 
+- change: upgrade to Vite 8
+- change: move link files to data/link and optimize generation
+- refactor: code to satisfy ESLint 10 no-useless-assignment rule
+
 ## 0.17.0 (2026-03-12)
 
 - add: share link button for file:// mode (copies redirect URL to clipboard)

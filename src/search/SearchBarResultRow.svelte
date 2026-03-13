@@ -12,7 +12,7 @@
   let {
     item,
     searchValue,
-    isFocusIn = $bindable(),
+    isFocusIn = $bindable(), // eslint-disable-line no-useless-assignment
     selectInput,
   }: {
     item: SearchResult
