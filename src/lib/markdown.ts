@@ -5,14 +5,12 @@ const renderer = new marked.Renderer()
 renderer.link = ({ href, title, text }) => {
   if (!title) title = ''
 
-  let target = ''
   if (
     href.includes('http') ||
     href.includes('mailto') ||
     title.includes('new_tab')
   ) {
-    target = 'target="_blank" rel="noopener"'
-    return `<a href="${href}" ${target} class="basic-link" title="${title}">${text}</a>`
+    return `<a href="${href}" target="_blank" rel="noopener" class="basic-link" title="${title}">${text}</a>`
   }
 
   const base = getBaseLinkUrl()

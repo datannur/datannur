@@ -21,12 +21,10 @@ export default class PreviewManager {
   static getColumns(data: Row[]): Column[] {
     const cols: Column[] = []
     for (const [key, value] of Object.entries(data[0])) {
-      let render: Column['render'] = () => {}
-      if (typeof value === 'number') {
-        render = (data: unknown) => Render.num(escapeHtml(String(data)))
-      } else {
-        render = Render.longText
-      }
+      const render: Column['render'] =
+        typeof value === 'number'
+          ? (data: unknown) => Render.num(escapeHtml(String(data)))
+          : Render.longText
       cols.push({ data: key, title: key, defaultContent: '', render })
     }
     return cols

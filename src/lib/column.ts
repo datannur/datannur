@@ -70,16 +70,20 @@ export default class Column {
       ) => {
         data = escapeHtml(data)
         let indent = 0
-        let text = ''
-        if (!option.withLink) {
-          text = data
-        } else if (option.withIndent && !row.noIndent) {
-          text = link(row._entity + '/' + row.id, data, row._entity)
-          indent = row.parentsRelative?.length - row.minimumDeep
-        } else if (option?.isMeta && entity === 'variable' && row.storageKey) {
-          text = link(row._entity + '/' + row.id, row.storageKey, row._entity)
-        } else {
-          text = link(row._entity + '/' + row.id, data, row._entity)
+        let text = data
+        if (option.withLink) {
+          if (option.withIndent && !row.noIndent) {
+            text = link(row._entity + '/' + row.id, data, row._entity)
+            indent = row.parentsRelative?.length - row.minimumDeep
+          } else if (
+            option?.isMeta &&
+            entity === 'variable' &&
+            row.storageKey
+          ) {
+            text = link(row._entity + '/' + row.id, row.storageKey, row._entity)
+          } else {
+            text = link(row._entity + '/' + row.id, data, row._entity)
+          }
         }
         if (option.linkSameEntityTab && row.nbChild > 0) {
           text = link(
@@ -270,19 +274,15 @@ export default class Column {
     }
   }
   static owner(): ColumnType {
-    let render: ColumnType['render'] = () => {}
-    if (get(viewportManager.isMobile))
-      render = (data, type, row: EntityWithInstitution) => {
-        return wrapLongText(
-          link(`institution/${row.ownerId}`, escapeHtml(row.ownerName)),
-        )
-      }
-    else {
-      render = (data, type, row: EntityWithInstitution) => {
-        if (!row.ownerId) return ''
-        return Render.withParentsFromId('institution', row.ownerId, type)
-      }
-    }
+    const render: ColumnType['render'] = get(viewportManager.isMobile)
+      ? (data, type, row: EntityWithInstitution) =>
+          wrapLongText(
+            link(`institution/${row.ownerId}`, escapeHtml(row.ownerName)),
+          )
+      : (data, type, row: EntityWithInstitution) => {
+          if (!row.ownerId) return ''
+          return Render.withParentsFromId('institution', row.ownerId, type)
+        }
     return {
       data: 'ownerName',
       title: Render.icon('institution') + entityNames.owner,
@@ -293,19 +293,15 @@ export default class Column {
     }
   }
   static manager(): ColumnType {
-    let render: ColumnType['render'] = () => {}
-    if (get(viewportManager.isMobile))
-      render = (data, type, row: EntityWithInstitution) => {
-        return wrapLongText(
-          link(`institution/${row.managerId}`, escapeHtml(row.managerName)),
-        )
-      }
-    else {
-      render = (data, type, row: EntityWithInstitution) => {
-        if (!row.managerId) return ''
-        return Render.withParentsFromId('institution', row.managerId, type)
-      }
-    }
+    const render: ColumnType['render'] = get(viewportManager.isMobile)
+      ? (data, type, row: EntityWithInstitution) =>
+          wrapLongText(
+            link(`institution/${row.managerId}`, escapeHtml(row.managerName)),
+          )
+      : (data, type, row: EntityWithInstitution) => {
+          if (!row.managerId) return ''
+          return Render.withParentsFromId('institution', row.managerId, type)
+        }
     return {
       data: 'managerName',
       title: Render.icon('institution') + entityNames.manager,

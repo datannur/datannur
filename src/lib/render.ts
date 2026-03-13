@@ -137,21 +137,17 @@ export default class Render {
       const freqNum = Render.num(freqItem.freq, type)
       const percentText = type === 'display' ? ` (${percentDisplay}%)` : ''
 
-      let freqContent = ''
-      if (type === 'display') {
-        const freqDisplay = `
-        <div class="freq-item-container">
+      const freqContent =
+        type === 'display'
+          ? `<div class="freq-item-container">
           <div class="freq-background color-freq" style="width: ${percentBackground}%"></div>
           <span class="freq-value">${escapeHtml(freqItem.value)}</span>
           <span class="freq-number">${freqNum}</span>
         </div>`
-        freqContent = freqDisplay
-      } else {
-        freqContent = `${freqItem.value}: ${freqNum}${percentText}`
-      }
+          : `${freqItem.value}: ${freqNum}${percentText}`
 
-      if (i > 0 && type === 'export') freqContent = separator + freqContent
-      content += '<li>' + freqContent + '</li>'
+      const prefix = i > 0 && type === 'export' ? separator : ''
+      content += '<li>' + prefix + freqContent + '</li>'
       i += 1
     }
 
@@ -201,12 +197,7 @@ export default class Render {
     if (['md'].includes(entity)) {
       return `<span class='icon svg-icon icon-${entity}'> <svg><use href="#icon-${icon}" /></svg> </span>`
     }
-    let classNames = ''
-    if (icon.startsWith('fa-brands')) {
-      classNames = icon
-    } else {
-      classNames = `fas fa-${icon}`
-    }
+    const classNames = icon.startsWith('fa-brands') ? icon : `fas fa-${icon}`
     return `<span class='icon icon-${entity}'><i class='${classNames}'></i></span>`
   }
   static modalitiesName(modalities: Modality[]) {
