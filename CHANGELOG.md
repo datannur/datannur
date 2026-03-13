@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- change: move link files to data/link and optimize generation
+
 ## 0.17.0 (2026-03-12)
 
 - add: share link button for file:// mode (copies redirect URL to clipboard)

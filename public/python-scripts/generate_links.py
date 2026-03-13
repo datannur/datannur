@@ -2,10 +2,13 @@
 """Generate redirect link files for file:// sharing."""
 
 import json
+import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 # Entities that have detail pages
 ENTITIES = ["institution", "folder", "dataset", "variable", "modality", "tag", "doc"]
+MAX_WORKERS = int(os.environ.get("LINK_WORKERS", "8"))
 
 
 def get_base_dir() -> Path:
@@ -61,25 +64,32 @@ def load_entity_ids(db_dir: Path, entity: str) -> list[str]:
     return [str(item["id"]) for item in data if "id" in item]
 
 
-def generate_links(base_dir: Path) -> dict[str, int]:
-    """Generate all link redirect files. Returns count per entity."""
+def write_file(args: tuple[Path, bytes]) -> None:
+    """Write content to file."""
+    path, content = args
+    path.write_bytes(content)
+
+
+def generate_links(base_dir: Path) -> tuple[dict[str, int], int]:
+    """Generate all link redirect files. Returns (count per entity, files written)."""
     template_path = get_template_path(base_dir)
     if not template_path:
         print("❌ Template not found (link-redirect.html)")
-        return {}
+        return {}, 0
 
     db_dir = get_db_dir(base_dir)
     if not db_dir:
         print("❌ Database directory not found (data/db/)")
-        return {}
+        return {}, 0
 
     # Read template once into memory
     template_content = template_path.read_bytes()
 
-    # Output directory (same level as data/)
-    link_dir = base_dir / "link"
+    # Output directory (inside data/)
+    link_dir = base_dir / "data" / "link"
 
     counts = {}
+    files_to_write: list[tuple[Path, bytes]] = []
 
     for entity in ENTITIES:
         ids = load_entity_ids(db_dir, entity)
@@ -89,12 +99,23 @@ def generate_links(base_dir: Path) -> dict[str, int]:
         entity_dir = link_dir / entity
         entity_dir.mkdir(parents=True, exist_ok=True)
 
+        # Get existing files in one call (no stat per file)
+        existing = {f.name for f in entity_dir.iterdir() if f.name.endswith(".html")}
+
+        # Collect missing files to write
         for id_ in ids:
-            (entity_dir / f"{id_}.html").write_bytes(template_content)
+            filename = f"{id_}.html"
+            if filename not in existing:
+                files_to_write.append((entity_dir / filename, template_content))
 
         counts[entity] = len(ids)
 
-    return counts
+    # Write all files in parallel
+    if files_to_write:
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            executor.map(write_file, files_to_write)
+
+    return counts, len(files_to_write)
 
 
 def main():
@@ -102,12 +123,19 @@ def main():
 
     print(f"📁 Working directory: {base_dir}")
 
-    counts = generate_links(base_dir)
-
-    if not counts:
+    result = generate_links(base_dir)
+    if not result[0]:
         print("❌ No links generated")
     else:
-        print(f"✅ Generated {sum(counts.values())} link files")
+        counts, written = result
+        total = sum(counts.values())
+        skipped = total - written
+        if written > 0 and skipped > 0:
+            print(f"✅ {written} new, {skipped} skipped ({total} total)")
+        elif written > 0:
+            print(f"✅ {written} new link files created")
+        else:
+            print(f"✅ All {total} link files already exist")
 
 
 if __name__ == "__main__":
