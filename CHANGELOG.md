@@ -2,8 +2,11 @@
 
 ## unreleased
 
+## 0.17.1 (2026-03-18)
+
 - change: upgrade to Vite 8
 - change: move link files to data/link and optimize generation
+- change: adjust positioning of percent background in StatValue component
 - refactor: code to satisfy ESLint 10 no-useless-assignment rule
 
 ## 0.17.0 (2026-03-12)

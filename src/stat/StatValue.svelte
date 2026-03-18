@@ -55,9 +55,9 @@
     text-align: right;
     .percent-background {
       position: absolute;
-      top: 10px;
+      top: 2px;
       left: 0;
-      bottom: 10px;
+      bottom: 2px;
       z-index: 0;
       opacity: 0.5;
       border-radius: $rounded;
