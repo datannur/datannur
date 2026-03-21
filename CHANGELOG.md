@@ -2,6 +2,8 @@
 
 ## unreleased
 
+## 0.18.0 (2026-03-21)
+
 - add: descriptive statistics for variables (min, max, mean, std)
 - add: nb_files property for dataset entity
 - fix: schema:update corrupting $id URLs in manage-schemas script
