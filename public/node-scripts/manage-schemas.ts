@@ -24,7 +24,7 @@ interface JSONObject {
 function getMetaSchema(): { baseUrl: string } {
   const meta = JSON.parse(readFileSync(metaSchemaPath, 'utf-8')) as JSONObject
   const metaId = meta.$id as string
-  const baseUrl = metaId.replace('__meta__.json', '')
+  const baseUrl = metaId.substring(0, metaId.lastIndexOf('/') + 1)
   return { baseUrl }
 }
 
