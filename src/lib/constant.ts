@@ -60,6 +60,8 @@ export const columnCleanNames = {
   name: 'Nom',
   description: 'Description',
   updatingEach: ['Fréquence', 'de mise à jour'],
+  nbRow: 'Nombre de lignes',
+  nbFiles: 'Nombre de fichiers',
 } as const
 
 export const columnIcons = {
@@ -124,6 +126,7 @@ export const entityToIcon = {
   name: 'signature',
   description: 'comment',
   nbRow: 'grip-lines',
+  nbFiles: 'copy',
   link: 'link',
   recursive: 'rotate-left',
   functionality: 'screwdriver-wrench',

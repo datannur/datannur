@@ -42,12 +42,12 @@
         "x-description-fr": "Variable concernée par la modification"
       },
       "old_value": {
-        "type": ["string", "null"],
+        "type": ["string", "number", "null"],
         "description": "Value before modification",
         "x-description-fr": "Valeur avant modification"
       },
       "new_value": {
-        "type": ["string", "null"],
+        "type": ["string", "number", "null"],
         "description": "Value after modification",
         "x-description-fr": "Valeur après modification"
       },

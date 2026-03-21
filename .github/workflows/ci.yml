@@ -1,4 +1,4 @@
-name: CI Tests
+name: CI
 
 on:
   push:
@@ -15,9 +15,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    name: All Tests
+  checks:
+    runs-on: ubuntu-24.04-arm
+    name: Checks
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: TypeScript
+        run: npm run type-check
+
+      - name: Generate router index
+        run: node -e "import('svelte-fileapp/vite').then(m => m.updateRouterIndex('src/page').buildStart())"
+
+      - name: Svelte
+        run: npm run svelte-check
+
+      - name: Validate schemas
+        run: npm run validate-schemas
+
+  tests:
+    runs-on: ubuntu-24.04-arm
+    name: Tests
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,33 +71,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: pw-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            pw-${{ runner.os }}-
+            pw-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Install Playwright Chromium
         run: npx playwright install chromium
 
-      - name: Build
-        run: npm run build
-
-      - name: Prettier Format Check
-        run: npm run format:check
-
-      - name: ESLint
-        run: npm run lint
-
-      - name: TypeScript
-        run: npm run type-check
-
-      - name: Svelte
-        run: npm run svelte-check
-
-      - name: Validate JSON Schemas
-        run: npm run validate-schemas
-
-      - name: Tests (unit + UI)
-        run: npm run test:no-build
+      - name: Build & Tests
+        run: npm run test
 
       - name: Compute artifact name
         if: failure()

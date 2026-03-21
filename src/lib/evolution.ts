@@ -98,6 +98,12 @@ function addHistory(evoDeleted: EvolutionDeleted) {
 
     evo.date = timestampToDate(evo.timestamp)
     evo.folderId = getFolderId(evo.entity, item, parentItem)
+
+    if (evo.variable) {
+      evo.variable = evo.variable.replace(/_([a-z])/g, (m: string, c: string) =>
+        c.toUpperCase(),
+      )
+    }
   })
 
   db.tables.evolution = db.tables.evolution?.filter(evo => !evo._toHide)
@@ -315,7 +321,7 @@ export function highlightDiff(
 ) {
   if (!a && !b) return ''
 
-  if (variable === 'last_update') {
+  if (variable === 'lastUpdate') {
     a = timestampToDate((a as number) * 1000)
     b = timestampToDate((b as number) * 1000)
   }
