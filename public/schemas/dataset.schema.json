@@ -85,6 +85,11 @@
         "description": "Number of rows in the dataset",
         "x-description-fr": "Nombre de ligne dans le dataset"
       },
+      "nb_files": {
+        "type": ["integer", "null"],
+        "description": "Number of files in the dataset",
+        "x-description-fr": "Nombre de fichiers dans le dataset"
+      },
       "start_date": {
         "type": ["string", "number", "null"],
         "description": "Start of the period covered by the dataset",

@@ -107,6 +107,7 @@ export type Dataset = BaseEntity &
     link?: string
     localisation?: string
     nbRow?: number
+    nbFiles?: number
     lastUpdateDate?: string
     updatingEach?: string
     noMoreUpdate?: boolean

@@ -94,6 +94,11 @@ const attributsDef: Record<string, Attribut> = {
     type: 'numeric',
     variable: 'nbRow',
   },
+  nbFiles: {
+    name: 'Nombre de fichiers',
+    type: 'numeric',
+    variable: 'nbFiles',
+  },
   level: {
     name: "Niveau de l'arborecence",
     type: 'categoryOrdered',

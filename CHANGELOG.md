@@ -2,6 +2,9 @@
 
 ## unreleased
 
+- add: nb_files property for dataset entity
+- fix: evolution variable names now converted from snake_case to camelCase for consistent icon and label display
+
 ## 0.17.1 (2026-03-18)
 
 - change: upgrade to Vite 8

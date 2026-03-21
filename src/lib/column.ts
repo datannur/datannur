@@ -398,6 +398,23 @@ export default class Column {
       },
     }
   }
+  static nbFiles(nbFilesMax: number): ColumnType {
+    return {
+      data: 'nbFiles',
+      title: Render.icon('nbFiles') + 'Fichiers',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip: 'Nombre de fichiers',
+      render: (data, type) => {
+        if (type !== 'display') {
+          return data === '' || data === null ? 0 : parseInt(data)
+        }
+        if (!data) return ''
+        const percent = getPercent(data / nbFilesMax)
+        return `${Render.numPercent(data, percent, 'nbFiles', type)}`
+      },
+    }
+  }
   static nbSources(
     nbSourcesMax: number,
     entity: 'dataset' | 'variable',

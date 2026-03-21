@@ -14,6 +14,7 @@
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
+  import Render from '@lib/render'
   import type { Dataset } from '@type'
 
   let { dataset }: { dataset: Dataset } = $props()
@@ -31,6 +32,12 @@
     </tr>
   {/if}
   <RowInfo nbRow={dataset.nbRow} />
+  {#if dataset.nbFiles}
+    <tr>
+      <td><Icon type="nbFiles" /> Fichiers</td>
+      <td>{Render.num(dataset.nbFiles)}</td>
+    </tr>
+  {/if}
   {#if dataset.lastUpdateDate}
     <LastUpdateInfo lastUpdateDate={dataset.lastUpdateDate} />
   {/if}

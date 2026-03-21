@@ -35,12 +35,14 @@
 
   let nbVariableMax = 0
   let nbRowMax = 0
+  let nbFilesMax = 0
   let nbDocMax = 0
   let nbSourcesMax = 0
   let nbDerivedMax = 0
   for (const d of datasets) {
     nbVariableMax = Math.max(nbVariableMax, d.nbVariable ?? 0)
     nbRowMax = Math.max(nbRowMax, d.nbRow ?? 0)
+    nbFilesMax = Math.max(nbFilesMax, d.nbFiles ?? 0)
     nbDocMax = Math.max(nbDocMax, d.docsRecursive?.length ?? 0)
     nbSourcesMax = Math.max(nbSourcesMax, d.sourceIds?.size ?? 0)
     nbDerivedMax = Math.max(nbDerivedMax, d.derivedIds?.size ?? 0)
@@ -60,6 +62,7 @@
         showTitle: true,
       }),
       Column.nbRow(nbRowMax),
+      Column.nbFiles(nbFilesMax),
     ]
     if (isMeta) {
       return [
