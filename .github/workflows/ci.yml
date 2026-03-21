@@ -42,7 +42,9 @@ jobs:
         run: npm run type-check
 
       - name: Svelte
-        run: npm run svelte-check
+        run: |
+          node -e "import('svelte-fileapp/vite').then(m => m.updateRouterIndex('src/page'))"
+          npm run svelte-check
 
       - name: Validate schemas
         run: npm run validate-schemas
