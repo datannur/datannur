@@ -41,10 +41,11 @@ jobs:
       - name: TypeScript
         run: npm run type-check
 
+      - name: Generate router index
+        run: node -e "import('svelte-fileapp/vite').then(m => m.updateRouterIndex('src/page').buildStart())"
+
       - name: Svelte
-        run: |
-          node -e "import('svelte-fileapp/vite').then(m => m.updateRouterIndex('src/page'))"
-          npm run svelte-check
+        run: npm run svelte-check
 
       - name: Validate schemas
         run: npm run validate-schemas
