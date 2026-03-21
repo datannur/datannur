@@ -85,6 +85,26 @@
         "description": "End of the period covered by the variable",
         "x-description-fr": "Fin de la période couverte par la variable"
       },
+      "min": {
+        "type": ["number", "null"],
+        "description": "Minimum value (or minimum string length for text variables)",
+        "x-description-fr": "Valeur minimale (ou longueur minimale pour les variables texte)"
+      },
+      "max": {
+        "type": ["number", "null"],
+        "description": "Maximum value (or maximum string length for text variables)",
+        "x-description-fr": "Valeur maximale (ou longueur maximale pour les variables texte)"
+      },
+      "mean": {
+        "type": ["number", "null"],
+        "description": "Mean value (or mean string length for text variables)",
+        "x-description-fr": "Valeur moyenne (ou longueur moyenne pour les variables texte)"
+      },
+      "std": {
+        "type": ["number", "null"],
+        "description": "Standard deviation (or standard deviation of string length for text variables)",
+        "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
+      },
       "source_var_ids": {
         "type": ["string", "number", "null"],
         "description": "List of source variable keys (lineage)",

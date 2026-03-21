@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- add: descriptive statistics for variables (min, max, mean, std)
 - add: nb_files property for dataset entity
 - fix: evolution variable names now converted from snake_case to camelCase for consistent icon and label display
 

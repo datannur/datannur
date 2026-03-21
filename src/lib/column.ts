@@ -381,6 +381,15 @@ export default class Column {
       render: Render.freqPreview,
     }
   }
+  static stats(): ColumnType {
+    return {
+      data: 'statsPreview',
+      title: Render.icon('stat') + 'Stats',
+      defaultContent: '',
+      tooltip: 'Statistiques descriptives (min, max, moyenne, écart-type)',
+      render: Render.statsPreview,
+    }
+  }
   static nbRow(nbRowMax: number): ColumnType {
     return {
       data: 'nbRow',
