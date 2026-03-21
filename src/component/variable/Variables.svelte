@@ -61,6 +61,7 @@
       Column.nbSources(nbSourcesMax, 'variable'),
       Column.nbDerived(nbDerivedMax, 'variable'),
       ...(hasMultipleDatasets ? [Column.nbRow(nbRowMax)] : []),
+      Column.stats(),
       Column.nbMissing(),
       Column.nbDuplicates(),
       Column.nbValues(nbValueMax),

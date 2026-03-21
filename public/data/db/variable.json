@@ -14,7 +14,11 @@
     "modality_ids": null,
     "tag_ids": "cartes_reference, dangers_naturels, transport, systemes_reference, activites_economiques, images_aeriennes",
     "key": 1,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__annee",
@@ -31,7 +35,11 @@
     "modality_ids": null,
     "tag_ids": "personal_data, data_protection, couverture_sol",
     "key": 2,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__type_service",
@@ -48,7 +56,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, approvisionnement, agriculture",
     "key": 3,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__nb_employes",
@@ -65,7 +77,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, communication, systemes_reference, cadastre_foncier, dangers_naturels, limites_pol_admin",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__budget_annuel",
@@ -82,7 +98,11 @@
     "modality_ids": null,
     "tag_ids": "geologie, securite",
     "key": null,
-    "source_var_ids": "emplois_tech__annee, pollution_air__unite, emploi_jeunes__secteur_activite"
+    "source_var_ids": "emplois_tech__annee, pollution_air__unite, emploi_jeunes__secteur_activite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__cout_par_habitant",
@@ -99,7 +119,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, cadastre_foncier, infrastructures, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__nb_beneficiaires",
@@ -116,7 +140,11 @@
     "modality_ids": "modality_1, langue_sigle",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__taux_couverture",
@@ -133,7 +161,11 @@
     "modality_ids": "a_or_b_or_c, langue_sigle",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__region",
@@ -150,7 +182,11 @@
     "modality_ids": "modality_1",
     "tag_ids": "armee, agriculture, population, communication, images_aeriennes_2, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__quartier",
@@ -167,7 +203,11 @@
     "modality_ids": "a_or_b, langue_sigle",
     "tag_ids": "systemes_reference, flore, atmosphere, foret, transport",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__mode_gestion",
@@ -184,7 +224,11 @@
     "modality_ids": null,
     "tag_ids": "pseudonymous_data, images_aeriennes_2",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__type_infrastructure",
@@ -201,7 +245,11 @@
     "modality_ids": null,
     "tag_ids": "personal_data, images_aeriennes_2, images_aeriennes_1, images_aeriennes, foret, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__surface_infrastructure",
@@ -218,7 +266,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "sensible_data, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__nb_points_service",
@@ -235,7 +287,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__niveau_accessibilite",
@@ -252,7 +308,11 @@
     "modality_ids": null,
     "tag_ids": "infrastructures, systemes_reference, developpement_territorial, ouvrages, anonymous_data",
     "key": null,
-    "source_var_ids": "immobilier_prix__source_donnee, revenus_menages__niveau_formation, temperature_moy__vitesse_vent_moy"
+    "source_var_ids": "immobilier_prix__source_donnee, revenus_menages__niveau_formation, temperature_moy__vitesse_vent_moy",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__cout_investissement",
@@ -269,7 +329,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__satisfaction_usagers",
@@ -286,7 +350,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": 3,
+    "max": 43,
+    "mean": 17,
+    "std": 0.32
   },
   {
     "id": "ser_pub_loc__nb_interventions",
@@ -303,7 +371,11 @@
     "modality_ids": null,
     "tag_ids": "communication, images_aeriennes, securite, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__delai_moyen_traitement",
@@ -320,7 +392,11 @@
     "modality_ids": null,
     "tag_ids": "agriculture, ouvrages, altimetrie, climatologie, images_aeriennes_2",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "ser_pub_loc__source_financement",
@@ -337,7 +413,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie, images_aeriennes, elimination, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": -202223,
+    "max": 4535435,
+    "mean": 2343,
+    "std": 34.432
   },
   {
     "id": "accident_route__date_accident",
@@ -354,7 +434,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accident_route__type_accident",
@@ -371,7 +455,11 @@
     "modality_ids": null,
     "tag_ids": "localisation, systemes_reference, images_aeriennes_2, developpement_territorial, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accident_route__gravite",
@@ -388,7 +476,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, activites_economiques",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accident_route__nb_blesses",
@@ -405,7 +497,11 @@
     "modality_ids": null,
     "tag_ids": "culture, images_aeriennes_1, activites_economiques, climatologie",
     "key": null,
-    "source_var_ids": "tourisme_annu__prix_moy_nuit"
+    "source_var_ids": "tourisme_annu__prix_moy_nuit",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accident_route__cause_presumee",
@@ -422,7 +518,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__annee",
@@ -439,7 +539,11 @@
     "modality_ids": "a_or_b_or_c, modality_1",
     "tag_ids": "atmosphere, geologie, infrastructures, population, protection_env_nature",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__canton",
@@ -456,7 +560,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement",
     "key": 1,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__type_depense",
@@ -473,7 +581,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "securite, culture",
     "key": 2,
-    "source_var_ids": "accidents_travail__gravite"
+    "source_var_ids": "accidents_travail__gravite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__montant_total",
@@ -490,7 +602,11 @@
     "modality_ids": null,
     "tag_ids": "hydrographie",
     "key": null,
-    "source_var_ids": "exportations__delai_paiement, pollution_air__unite, exportations__delai_livraison, exportations__pays_destination"
+    "source_var_ids": "exportations__delai_paiement, pollution_air__unite, exportations__delai_livraison, exportations__pays_destination",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__montant_par_habitant",
@@ -507,7 +623,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie, ouvrages, systemes_reference, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__population_cible",
@@ -524,7 +644,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, transport, cartes_reference, sols",
     "key": null,
-    "source_var_ids": "revenus_menages__revenu_total_brut"
+    "source_var_ids": "revenus_menages__revenu_total_brut",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__mode_financement",
@@ -541,7 +665,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__institution_responsable",
@@ -558,7 +686,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, hydrographie, personal_data, securite, foret, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__cout_investissement",
@@ -575,7 +707,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, culture, infrastructures, societe, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__cout_fonctionnement",
@@ -592,7 +728,11 @@
     "modality_ids": null,
     "tag_ids": "flore, dangers_naturels, pseudonymous_data, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__nb_beneficiaires",
@@ -609,7 +749,11 @@
     "modality_ids": "langue_sigle",
     "tag_ids": "foret, localisation, elimination, infrastructures, hydrographie, protection_env_nature",
     "key": null,
-    "source_var_ids": "accident_route__type_accident, pop_region__type_region"
+    "source_var_ids": "accident_route__type_accident, pop_region__type_region",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__taux_croissance",
@@ -626,7 +770,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "temperature_moy__source_donnee, dep_sante__cout_investissement, pop_region__population_etrangere, eau_potable__ph"
+    "source_var_ids": "temperature_moy__source_donnee, dep_sante__cout_investissement, pop_region__population_etrangere, eau_potable__ph",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "dep_sante__region_sanitaire",
@@ -643,7 +791,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, population, images_aeriennes_2, sensible_data, hydrographie, agriculture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__annee",
@@ -660,7 +812,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__mois",
@@ -677,7 +833,11 @@
     "modality_ids": "vide",
     "tag_ids": "personal_data, activites_economiques, infrastructures, armee, altimetrie, dangers_naturels",
     "key": null,
-    "source_var_ids": "ser_pub_loc__budget_annuel, emplois_tech__region"
+    "source_var_ids": "ser_pub_loc__budget_annuel, emplois_tech__region",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__station",
@@ -694,7 +854,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__altitude_station",
@@ -711,7 +875,11 @@
     "modality_ids": null,
     "tag_ids": "population, anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__temp_moy",
@@ -728,7 +896,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, edifices, communication, images_aeriennes_1, limites_pol_admin, elimination",
     "key": null,
-    "source_var_ids": "ser_pub_loc__nb_points_service, eau_potable__conformite"
+    "source_var_ids": "ser_pub_loc__nb_points_service, eau_potable__conformite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__temp_min",
@@ -745,7 +917,11 @@
     "modality_ids": null,
     "tag_ids": "securite, couverture_sol, agriculture, activites_economiques",
     "key": null,
-    "source_var_ids": "ser_pub_loc__delai_moyen_traitement"
+    "source_var_ids": "ser_pub_loc__delai_moyen_traitement",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__temp_max",
@@ -762,7 +938,11 @@
     "modality_ids": null,
     "tag_ids": "sols, armee, anonymous_data, theme_iso",
     "key": null,
-    "source_var_ids": "accident_route__date_accident, tourisme_annu__nb_nuitees"
+    "source_var_ids": "accident_route__date_accident, tourisme_annu__nb_nuitees",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__dev_normale",
@@ -779,7 +959,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, altimetrie, population, protection_env_nature, cartes_reference, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__precipitation_mensuelle",
@@ -796,7 +980,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, communication",
     "key": null,
-    "source_var_ids": "emplois_tech__nb_offres_emploi"
+    "source_var_ids": "emplois_tech__nb_offres_emploi",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__nb_jours_gel",
@@ -813,7 +1001,11 @@
     "modality_ids": "langue_sigle",
     "tag_ids": "systemes_reference",
     "key": null,
-    "source_var_ids": "dep_sante__institution_responsable"
+    "source_var_ids": "dep_sante__institution_responsable",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__nb_jours_ete",
@@ -830,7 +1022,11 @@
     "modality_ids": null,
     "tag_ids": "faune, activites_economiques, societe",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__nb_jours_tres_chaud",
@@ -847,7 +1043,11 @@
     "modality_ids": null,
     "tag_ids": "flore, dangers_naturels, limites_pol_admin",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__humidite_moy",
@@ -864,7 +1064,11 @@
     "modality_ids": null,
     "tag_ids": "systemes_reference, theme_iso, agriculture, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__pression_moy",
@@ -881,7 +1085,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__ensoleillement",
@@ -898,7 +1106,11 @@
     "modality_ids": "langue_sigle",
     "tag_ids": "altimetrie, personal_data, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__rayonnement_solaire",
@@ -915,7 +1127,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__direction_vent_dominant",
@@ -932,7 +1148,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, altimetrie, sols, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__vitesse_vent_moy",
@@ -949,7 +1169,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, infrastructures, theme_iso, images_aeriennes_1, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__vitesse_vent_max",
@@ -966,7 +1190,11 @@
     "modality_ids": null,
     "tag_ids": "faune, climatologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__indice_chaleur",
@@ -983,7 +1211,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, developpement_territorial, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__indice_froid",
@@ -1000,7 +1232,11 @@
     "modality_ids": "a_or_b_or_c, modality_1",
     "tag_ids": "societe, personal_data, edifices, couverture_sol, geologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "temperature_moy__source_donnee",
@@ -1017,7 +1253,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, atmosphere, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__annee",
@@ -1034,7 +1274,11 @@
     "modality_ids": "only_zero",
     "tag_ids": "infrastructures, altimetrie, armee, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__region",
@@ -1051,7 +1295,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "atmosphere, edifices, data_protection, activites_economiques, climatologie",
     "key": null,
-    "source_var_ids": "ser_pub_loc__nb_beneficiaires, revenus_menages__epargne_mensuelle"
+    "source_var_ids": "ser_pub_loc__nb_beneficiaires, revenus_menages__epargne_mensuelle",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__canton",
@@ -1068,7 +1316,11 @@
     "modality_ids": null,
     "tag_ids": "communication, geologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__population_totale",
@@ -1085,7 +1337,11 @@
     "modality_ids": null,
     "tag_ids": "population, anonymous_data, approvisionnement, images_aeriennes_2, infrastructures, faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__population_suisse",
@@ -1102,7 +1358,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, culture, data_protection, images_aeriennes, altimetrie, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__population_etrangere",
@@ -1119,7 +1379,11 @@
     "modality_ids": null,
     "tag_ids": "flore, images_aeriennes_1, infrastructures",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__densite_population",
@@ -1136,7 +1400,11 @@
     "modality_ids": null,
     "tag_ids": "foret, activites_economiques, images_aeriennes, communication, infrastructures",
     "key": null,
-    "source_var_ids": "vente_voitures__modele, ser_pub_loc__niveau_accessibilite, revenus_menages__epargne_mensuelle"
+    "source_var_ids": "vente_voitures__modele, ser_pub_loc__niveau_accessibilite, revenus_menages__epargne_mensuelle",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__age_median",
@@ -1153,7 +1421,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__part_65_plus",
@@ -1170,7 +1442,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial",
     "key": null,
-    "source_var_ids": "exportations__incoterm, emploi_jeunes__formation_continue"
+    "source_var_ids": "exportations__incoterm, emploi_jeunes__formation_continue",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__part_0_14",
@@ -1187,7 +1463,11 @@
     "modality_ids": "canton_sigle, oui_non",
     "tag_ids": "agriculture, population, hydrographie, culture, couverture_sol, images_aeriennes",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__superficie_km2",
@@ -1204,7 +1484,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, altimetrie, foret, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__altitude_moyenne",
@@ -1221,7 +1505,11 @@
     "modality_ids": "oui_non",
     "tag_ids": "agriculture, securite, sensible_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__coord_x",
@@ -1238,7 +1526,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__coord_y",
@@ -1255,7 +1547,11 @@
     "modality_ids": "vide, modality_1",
     "tag_ids": "images_aeriennes, cartes_reference, anonymous_data, atmosphere, transport, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__type_region",
@@ -1272,7 +1568,11 @@
     "modality_ids": null,
     "tag_ids": "infrastructures, securite, flore, sensible_data, hydrographie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__taux_croissance_demo",
@@ -1289,7 +1589,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pop_region__source_donnee",
@@ -1306,7 +1610,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, data_protection, geologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__region",
@@ -1323,7 +1631,11 @@
     "modality_ids": null,
     "tag_ids": "faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__annee",
@@ -1340,7 +1652,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__ph",
@@ -1357,7 +1673,11 @@
     "modality_ids": "vide",
     "tag_ids": "dangers_naturels, activites_economiques, systemes_reference, protection_env_nature, transport, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__nitrates_mg_l",
@@ -1374,7 +1694,11 @@
     "modality_ids": "vide",
     "tag_ids": "faune, securite, atmosphere, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__pesticides_ug_l",
@@ -1391,7 +1715,11 @@
     "modality_ids": null,
     "tag_ids": "cartes_reference, approvisionnement, culture, edifices",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__bacteries_colonie_100ml",
@@ -1408,7 +1736,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, ouvrages, climatologie, sensible_data, transport, culture",
     "key": null,
-    "source_var_ids": "revenus_menages__patrimoine_total, temperature_moy__nb_jours_ete, immobilier_prix__charges_annuelles"
+    "source_var_ids": "revenus_menages__patrimoine_total, temperature_moy__nb_jours_ete, immobilier_prix__charges_annuelles",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__conformite",
@@ -1425,7 +1757,11 @@
     "modality_ids": "oui_non, canton_sigle",
     "tag_ids": "activites_economiques, approvisionnement, cartes_reference",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "eau_potable__source_prelevement",
@@ -1442,7 +1778,11 @@
     "modality_ids": null,
     "tag_ids": "localisation, hydrographie, atmosphere, activites_economiques, elimination, agriculture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__annee",
@@ -1459,7 +1799,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, developpement_territorial, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__mois",
@@ -1476,7 +1820,11 @@
     "modality_ids": null,
     "tag_ids": "transport",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__canton",
@@ -1493,7 +1841,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "ser_pub_loc__mode_gestion, pollution_air__sources_stationnaires, revenus_menages__statut_emploi, transport_pub__nb_lignes"
+    "source_var_ids": "ser_pub_loc__mode_gestion, pollution_air__sources_stationnaires, revenus_menages__statut_emploi, transport_pub__nb_lignes",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__region_touristique",
@@ -1510,7 +1862,11 @@
     "modality_ids": null,
     "tag_ids": "dangers_naturels, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__type_etablissement",
@@ -1527,7 +1883,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__categorie_etoiles",
@@ -1544,7 +1904,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_arrivees",
@@ -1561,7 +1925,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, armee, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_nuitees",
@@ -1578,7 +1946,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__pays_origine",
@@ -1595,7 +1967,11 @@
     "modality_ids": null,
     "tag_ids": "sols, approvisionnement, societe, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__continent_origine",
@@ -1612,7 +1988,11 @@
     "modality_ids": null,
     "tag_ids": "theme_iso, sensible_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_chambres",
@@ -1629,7 +2009,11 @@
     "modality_ids": null,
     "tag_ids": "faune, anonymous_data, flore, localisation, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_lits",
@@ -1646,7 +2030,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__taux_occupation_chambres",
@@ -1663,7 +2051,11 @@
     "modality_ids": null,
     "tag_ids": "agriculture, sensible_data, atmosphere, approvisionnement, sols, securite",
     "key": null,
-    "source_var_ids": "emplois_tech__region"
+    "source_var_ids": "emplois_tech__region",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__taux_occupation_lits",
@@ -1680,7 +2072,11 @@
     "modality_ids": null,
     "tag_ids": "systemes_reference, edifices",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__duree_moyenne_sejour",
@@ -1697,7 +2093,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "revenus_menages__nb_personnes"
+    "source_var_ids": "revenus_menages__nb_personnes",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_personnel",
@@ -1714,7 +2114,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_1, couverture_sol, geologie, systemes_reference, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__presence_familles",
@@ -1731,7 +2135,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, limites_pol_admin, societe, population",
     "key": null,
-    "source_var_ids": "emplois_tech__taux_croissance, accidents_travail__sexe_victime"
+    "source_var_ids": "emplois_tech__taux_croissance, accidents_travail__sexe_victime",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__presence_groupes",
@@ -1748,7 +2156,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie",
     "key": null,
-    "source_var_ids": "ser_pub_loc__delai_moyen_traitement"
+    "source_var_ids": "ser_pub_loc__delai_moyen_traitement",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__offre_wellness",
@@ -1765,7 +2177,11 @@
     "modality_ids": null,
     "tag_ids": "culture, securite, protection_env_nature, images_aeriennes_2, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__offre_restauration",
@@ -1782,7 +2198,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, images_aeriennes_2, faune, climatologie, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__prix_moy_nuit",
@@ -1799,7 +2219,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, pseudonymous_data, data_protection",
     "key": null,
-    "source_var_ids": "emploi_jeunes__sexe, revenus_menages__indice_satisfaction_vie, exportations__valeur_eur"
+    "source_var_ids": "emploi_jeunes__sexe, revenus_menages__indice_satisfaction_vie, exportations__valeur_eur",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__indice_satisfaction",
@@ -1816,7 +2240,11 @@
     "modality_ids": null,
     "tag_ids": "personal_data, images_aeriennes_1, population, pseudonymous_data",
     "key": null,
-    "source_var_ids": "revenus_menages__nb_heures_travail, immobilier_prix__etat_bien"
+    "source_var_ids": "revenus_menages__nb_heures_travail, immobilier_prix__etat_bien",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__altitude",
@@ -1833,7 +2261,11 @@
     "modality_ids": null,
     "tag_ids": "flore, climatologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__coord_x",
@@ -1850,7 +2282,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, agriculture, altimetrie, elimination",
     "key": null,
-    "source_var_ids": "accidents_travail__cout_assurance, emplois_tech2__source_donnee, usage_internet__connexion_domicile, vente_voitures__source_donnee"
+    "source_var_ids": "accidents_travail__cout_assurance, emplois_tech2__source_donnee, usage_internet__connexion_domicile, vente_voitures__source_donnee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__coord_y",
@@ -1867,7 +2303,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, societe, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__saison",
@@ -1884,7 +2324,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, elimination",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__type_clientele",
@@ -1901,7 +2345,11 @@
     "modality_ids": null,
     "tag_ids": "securite, atmosphere, elimination",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__classification_officielle",
@@ -1918,7 +2366,11 @@
     "modality_ids": null,
     "tag_ids": "couverture_sol, personal_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__gestion_etab",
@@ -1935,7 +2387,11 @@
     "modality_ids": "langue_sigle, a_or_b",
     "tag_ids": "flore, infrastructures, sols, localisation, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__source_donnee",
@@ -1952,7 +2408,11 @@
     "modality_ids": "modality_1",
     "tag_ids": "infrastructures, limites_pol_admin, atmosphere",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__nb_evenements_locaux",
@@ -1969,7 +2429,11 @@
     "modality_ids": null,
     "tag_ids": "geologie, securite, images_aeriennes_2, developpement_territorial, dangers_naturels, altimetrie",
     "key": null,
-    "source_var_ids": "conso_energie__type_energie, exportations__certification_requise, pollution_air__pression_atm"
+    "source_var_ids": "conso_energie__type_energie, exportations__certification_requise, pollution_air__pression_atm",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "tourisme_annu__taux_croissance_nuitees",
@@ -1986,7 +2450,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__date",
@@ -2003,7 +2471,11 @@
     "modality_ids": null,
     "tag_ids": "infrastructures",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__heure",
@@ -2020,7 +2492,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, personal_data, geologie, approvisionnement, culture, edifices",
     "key": null,
-    "source_var_ids": "accidents_travail__taux_accidents_secteur, emploi_jeunes__formation_continue"
+    "source_var_ids": "accidents_travail__taux_accidents_secteur, emploi_jeunes__formation_continue",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__station",
@@ -2037,7 +2513,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__polluant",
@@ -2054,7 +2534,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__concentration",
@@ -2071,7 +2555,11 @@
     "modality_ids": null,
     "tag_ids": "faune, couverture_sol, hydrographie, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__unite",
@@ -2088,7 +2576,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "exportations__secteur, pop_region__population_etrangere"
+    "source_var_ids": "exportations__secteur, pop_region__population_etrangere",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__temperature",
@@ -2105,7 +2597,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "altimetrie, personal_data, geologie, sols, faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__humidite",
@@ -2122,7 +2618,11 @@
     "modality_ids": null,
     "tag_ids": "elimination, edifices, hydrographie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__vent_vitesse",
@@ -2139,7 +2639,11 @@
     "modality_ids": null,
     "tag_ids": "pseudonymous_data",
     "key": null,
-    "source_var_ids": "accidents_travail__presence_temoins, usage_internet__sexe, emploi_jeunes__salaire_mensuel"
+    "source_var_ids": "accidents_travail__presence_temoins, usage_internet__sexe, emploi_jeunes__salaire_mensuel",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__vent_direction",
@@ -2156,7 +2660,11 @@
     "modality_ids": "oui_non, a_or_b",
     "tag_ids": "approvisionnement, cartes_reference, couverture_sol, altimetrie, geologie, anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__pression_atm",
@@ -2173,7 +2681,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie, societe",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__precipitations",
@@ -2190,7 +2702,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, agriculture, elimination, images_aeriennes_2, altimetrie, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__indice_qualite_air",
@@ -2207,7 +2723,11 @@
     "modality_ids": null,
     "tag_ids": "transport, dangers_naturels, faune, culture, sols, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__niveau_alerte",
@@ -2224,7 +2744,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_1, elimination, climatologie, sensible_data, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__zone_urbaine",
@@ -2241,7 +2765,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, dangers_naturels, theme_iso, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__trafic_local",
@@ -2258,7 +2786,11 @@
     "modality_ids": null,
     "tag_ids": "localisation, data_protection, pseudonymous_data, sante",
     "key": 1,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__sources_stationnaires",
@@ -2275,7 +2807,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, infrastructures",
     "key": null,
-    "source_var_ids": "emploi_jeunes__nb_heures_second_emploi, emploi_jeunes__anciennete_poste, tourisme_annu__classification_officielle, revenus_menages__charges_garde"
+    "source_var_ids": "emploi_jeunes__nb_heures_second_emploi, emploi_jeunes__anciennete_poste, tourisme_annu__classification_officielle, revenus_menages__charges_garde",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__sources_mobiles",
@@ -2292,7 +2828,11 @@
     "modality_ids": null,
     "tag_ids": "foret, dangers_naturels, sols, images_aeriennes",
     "key": 2,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__conditions_meteo",
@@ -2309,7 +2849,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, population, cartes_reference, atmosphere, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__niveau_bruit",
@@ -2326,7 +2870,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection, cadastre_foncier",
     "key": null,
-    "source_var_ids": "exportations__continent, vente_voitures__source_donnee"
+    "source_var_ids": "exportations__continent, vente_voitures__source_donnee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "pollution_air__source_donnee",
@@ -2343,7 +2891,11 @@
     "modality_ids": "modality_1, canton_sigle",
     "tag_ids": "activites_economiques, edifices, population, data_protection",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "transport_pub__localite",
@@ -2360,7 +2912,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "tourisme_annu__presence_familles, pop_region__source_donnee, exportations__type_produit"
+    "source_var_ids": "tourisme_annu__presence_familles, pop_region__source_donnee, exportations__type_produit",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "transport_pub__nb_lignes",
@@ -2377,7 +2933,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, foret, population, approvisionnement, transport, data_protection",
     "key": null,
-    "source_var_ids": "emplois_tech__annee, revenus_menages__region, revenus_menages__charges_sante"
+    "source_var_ids": "emplois_tech__annee, revenus_menages__region, revenus_menages__charges_sante",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "transport_pub__frequence_moyenne",
@@ -2394,7 +2954,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, data_protection, personal_data, approvisionnement, pseudonymous_data",
     "key": null,
-    "source_var_ids": "temperature_moy__altitude_station, pollution_air__temperature"
+    "source_var_ids": "temperature_moy__altitude_station, pollution_air__temperature",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__annee",
@@ -2411,7 +2975,11 @@
     "modality_ids": null,
     "tag_ids": "sols, couverture_sol, communication, protection_env_nature, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__tranche_age",
@@ -2428,7 +2996,11 @@
     "modality_ids": null,
     "tag_ids": "faune",
     "key": null,
-    "source_var_ids": "temperature_moy__nb_jours_ete, accidents_travail__responsabilite_identifiee, pop_region__coord_x"
+    "source_var_ids": "temperature_moy__nb_jours_ete, accidents_travail__responsabilite_identifiee, pop_region__coord_x",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__sexe",
@@ -2445,7 +3017,11 @@
     "modality_ids": null,
     "tag_ids": "foret, hydrographie, societe, geologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__region",
@@ -2462,7 +3038,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, personal_data, agriculture, sante, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__frequence_utilisation",
@@ -2479,7 +3059,11 @@
     "modality_ids": null,
     "tag_ids": "pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__nb_heures_semaine",
@@ -2496,7 +3080,11 @@
     "modality_ids": null,
     "tag_ids": "localisation, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__type_activite_principale",
@@ -2513,7 +3101,11 @@
     "modality_ids": null,
     "tag_ids": "systemes_reference, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__equipement_utilise",
@@ -2530,7 +3122,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, atmosphere",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__connexion_domicile",
@@ -2547,7 +3143,11 @@
     "modality_ids": null,
     "tag_ids": "sols, ouvrages, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__connexion_mobile",
@@ -2564,7 +3164,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, infrastructures, theme_iso, atmosphere, pseudonymous_data, developpement_territorial",
     "key": null,
-    "source_var_ids": "accidents_travail__rapport_medical, conso_energie__emissions_co2_tonnes, temperature_moy__indice_chaleur, temperature_moy__nb_jours_ete"
+    "source_var_ids": "accidents_travail__rapport_medical, conso_energie__emissions_co2_tonnes, temperature_moy__indice_chaleur, temperature_moy__nb_jours_ete",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__competence_numerique",
@@ -2581,7 +3185,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_1, population",
     "key": null,
-    "source_var_ids": "accidents_travail__type_contrat"
+    "source_var_ids": "accidents_travail__type_contrat",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__nb_applications_utilisees",
@@ -2598,7 +3206,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__achats_en_ligne",
@@ -2615,7 +3227,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, flore, culture, pseudonymous_data, elimination, systemes_reference",
     "key": null,
-    "source_var_ids": "temperature_moy__nb_jours_ete, revenus_menages__nb_membres_actifs, vente_voitures__co2_g_km, revenus_menages__presence_handicap"
+    "source_var_ids": "temperature_moy__nb_jours_ete, revenus_menages__nb_membres_actifs, vente_voitures__co2_g_km, revenus_menages__presence_handicap",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__streaming_video",
@@ -2632,7 +3248,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, developpement_territorial, theme_iso, infrastructures",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__reseaux_sociaux",
@@ -2649,7 +3269,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, data_protection, images_aeriennes_2, population, dangers_naturels, agriculture",
     "key": null,
-    "source_var_ids": "accidents_travail__mesures_prevention_post, ser_pub_loc__type_infrastructure, tourisme_annu__source_donnee, accidents_travail__annee"
+    "source_var_ids": "accidents_travail__mesures_prevention_post, ser_pub_loc__type_infrastructure, tourisme_annu__source_donnee, accidents_travail__annee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__confiance_internet",
@@ -2666,7 +3290,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "personal_data, foret, infrastructures, atmosphere",
     "key": null,
-    "source_var_ids": "vente_voitures__categorie, ser_pub_loc__quartier"
+    "source_var_ids": "vente_voitures__categorie, ser_pub_loc__quartier",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "usage_internet__source_donnee",
@@ -2683,7 +3311,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection, dangers_naturels, images_aeriennes_2, cadastre_foncier, faune, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__annee",
@@ -2700,7 +3332,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__region",
@@ -2717,7 +3353,11 @@
     "modality_ids": "vide, canton_sigle",
     "tag_ids": "data_protection, images_aeriennes, sols, securite, hydrographie, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__secteur_tech",
@@ -2734,7 +3374,11 @@
     "modality_ids": null,
     "tag_ids": "geologie, foret, anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__nb_entreprises",
@@ -2751,7 +3395,11 @@
     "modality_ids": null,
     "tag_ids": "transport, developpement_territorial",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__nb_employes",
@@ -2768,7 +3416,11 @@
     "modality_ids": null,
     "tag_ids": "securite, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__taux_croissance",
@@ -2785,7 +3437,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, approvisionnement, atmosphere, sols",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__salaire_median",
@@ -2802,7 +3458,11 @@
     "modality_ids": null,
     "tag_ids": "sante, hydrographie, systemes_reference, limites_pol_admin, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__niveau_formation",
@@ -2819,7 +3479,11 @@
     "modality_ids": null,
     "tag_ids": "theme_iso, data_protection, couverture_sol, culture",
     "key": null,
-    "source_var_ids": "pop_region__annee"
+    "source_var_ids": "pop_region__annee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__taux_vacance",
@@ -2836,7 +3500,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie, images_aeriennes_1, theme_iso, sante, armee",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__nb_offres_emploi",
@@ -2853,7 +3521,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, securite",
     "key": null,
-    "source_var_ids": "accidents_travail__cout_assurance"
+    "source_var_ids": "accidents_travail__cout_assurance",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech__source_donnee",
@@ -2870,7 +3542,11 @@
     "modality_ids": "langue_sigle, modality_1",
     "tag_ids": "edifices",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__annee",
@@ -2887,7 +3563,11 @@
     "modality_ids": null,
     "tag_ids": "elimination, hydrographie, images_aeriennes_1, personal_data, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__secteur_activite",
@@ -2904,7 +3584,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, data_protection, atmosphere, climatologie, securite, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__sous_secteur",
@@ -2921,7 +3605,11 @@
     "modality_ids": null,
     "tag_ids": "sante, infrastructures, faune, data_protection, theme_iso, elimination",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__type_accident",
@@ -2938,7 +3626,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "revenus_menages__sexe_chef_menage"
+    "source_var_ids": "revenus_menages__sexe_chef_menage",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__gravite",
@@ -2955,7 +3647,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, sante, climatologie, agriculture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__age_victime",
@@ -2972,7 +3668,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "climatologie, elimination, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__sexe_victime",
@@ -2989,7 +3689,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, altimetrie, atmosphere, couverture_sol",
     "key": null,
-    "source_var_ids": "eau_potable__bacteries_colonie_100ml"
+    "source_var_ids": "eau_potable__bacteries_colonie_100ml",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__nationalite",
@@ -3006,7 +3710,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "usage_internet__streaming_video, pop_region__coord_x, pollution_air__date, emploi_jeunes__mobilite_professionnelle"
+    "source_var_ids": "usage_internet__streaming_video, pop_region__coord_x, pollution_air__date, emploi_jeunes__mobilite_professionnelle",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__fonction",
@@ -3023,7 +3731,11 @@
     "modality_ids": "a_or_b",
     "tag_ids": "developpement_territorial, approvisionnement, altimetrie, armee, localisation, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__anciennete_poste",
@@ -3040,7 +3752,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, population, theme_iso, images_aeriennes, hydrographie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__type_contrat",
@@ -3057,7 +3773,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__horaire_travail",
@@ -3074,7 +3794,11 @@
     "modality_ids": null,
     "tag_ids": "armee, flore, images_aeriennes, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__lieu_accident",
@@ -3091,7 +3815,11 @@
     "modality_ids": "only_zero, oui_non",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__heure_accident",
@@ -3108,7 +3836,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "agriculture, images_aeriennes_2, foret, images_aeriennes, data_protection, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__presence_equipements",
@@ -3125,7 +3857,11 @@
     "modality_ids": null,
     "tag_ids": "societe, climatologie, transport, edifices, anonymous_data, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__formation_securite",
@@ -3142,7 +3878,11 @@
     "modality_ids": null,
     "tag_ids": "altimetrie, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__nb_jours_arret",
@@ -3159,7 +3899,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "temperature_moy__temp_moy, emploi_jeunes__canton, tourisme_annu__type_etablissement"
+    "source_var_ids": "temperature_moy__temp_moy, emploi_jeunes__canton, tourisme_annu__type_etablissement",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__cout_assurance",
@@ -3176,7 +3920,11 @@
     "modality_ids": null,
     "tag_ids": "personal_data, ouvrages",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__cout_total",
@@ -3193,7 +3941,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, population",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__temps_recuperation",
@@ -3210,7 +3962,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, armee, pseudonymous_data, sensible_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__rapport_medical",
@@ -3227,7 +3983,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__presence_temoins",
@@ -3244,7 +4004,11 @@
     "modality_ids": "langue_sigle",
     "tag_ids": "dangers_naturels, societe, communication",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__nb_temoins",
@@ -3261,7 +4025,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__mesures_prevention_existantes",
@@ -3278,7 +4046,11 @@
     "modality_ids": null,
     "tag_ids": "faune, agriculture, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__mesures_prevention_post",
@@ -3295,7 +4067,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "systemes_reference, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__statut_enquete",
@@ -3312,7 +4088,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "temperature_moy__station"
+    "source_var_ids": "temperature_moy__station",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__responsabilite_identifiee",
@@ -3329,7 +4109,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__type_responsabilite",
@@ -3346,7 +4130,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, anonymous_data, images_aeriennes_2, sols, pseudonymous_data, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__taux_accidents_secteur",
@@ -3363,7 +4151,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, cartes_reference, securite, hydrographie, population",
     "key": null,
-    "source_var_ids": "emploi_jeunes__formation_continue, usage_internet__nb_applications_utilisees, pollution_air__zone_urbaine"
+    "source_var_ids": "emploi_jeunes__formation_continue, usage_internet__nb_applications_utilisees, pollution_air__zone_urbaine",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__indice_risque",
@@ -3380,7 +4172,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin, couverture_sol, data_protection",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "accidents_travail__source_donnee",
@@ -3397,7 +4193,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, limites_pol_admin, systemes_reference, agriculture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__annee",
@@ -3414,7 +4214,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection",
     "key": 1,
-    "source_var_ids": "revenus_menages__salaire_horaire"
+    "source_var_ids": "revenus_menages__salaire_horaire",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__mois",
@@ -3431,7 +4235,11 @@
     "modality_ids": null,
     "tag_ids": "faune, culture, couverture_sol, personal_data, pseudonymous_data, communication",
     "key": 2,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__region",
@@ -3448,7 +4256,11 @@
     "modality_ids": "only_zero",
     "tag_ids": null,
     "key": 3,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__marque",
@@ -3465,7 +4277,11 @@
     "modality_ids": "a_or_b_or_c, modality_1",
     "tag_ids": "elimination, atmosphere, foret, cartes_reference",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__modele",
@@ -3482,7 +4298,11 @@
     "modality_ids": null,
     "tag_ids": "cartes_reference",
     "key": null,
-    "source_var_ids": "pop_region__region"
+    "source_var_ids": "pop_region__region",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__categorie",
@@ -3499,7 +4319,11 @@
     "modality_ids": "vide",
     "tag_ids": "infrastructures, armee, societe, theme_iso, systemes_reference, personal_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__carburant",
@@ -3516,7 +4340,11 @@
     "modality_ids": null,
     "tag_ids": "elimination, hydrographie, images_aeriennes, transport",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__prix_moyen",
@@ -3533,7 +4361,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, systemes_reference, edifices, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__puissance_hp",
@@ -3550,7 +4382,11 @@
     "modality_ids": null,
     "tag_ids": "flore",
     "key": null,
-    "source_var_ids": "ser_pub_loc__mode_gestion, emplois_tech2__region, emploi_jeunes__secteur_activite, conso_energie__conso_totale_mwh"
+    "source_var_ids": "ser_pub_loc__mode_gestion, emplois_tech2__region, emploi_jeunes__secteur_activite, conso_energie__conso_totale_mwh",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__co2_g_km",
@@ -3567,7 +4403,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages, altimetrie, faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__nb_places",
@@ -3584,7 +4424,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__transmission",
@@ -3601,7 +4445,11 @@
     "modality_ids": null,
     "tag_ids": "faune, theme_iso, activites_economiques",
     "key": null,
-    "source_var_ids": "emplois_tech__taux_vacance, emplois_tech__salaire_median, temperature_moy__nb_jours_ete"
+    "source_var_ids": "emplois_tech__taux_vacance, emplois_tech__salaire_median, temperature_moy__nb_jours_ete",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "vente_voitures__source_donnee",
@@ -3618,7 +4466,11 @@
     "modality_ids": "a_or_b",
     "tag_ids": "images_aeriennes, couverture_sol, personal_data, altimetrie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__annee",
@@ -3635,7 +4487,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, cartes_reference, sensible_data, culture, images_aeriennes_2",
     "key": null,
-    "source_var_ids": "accidents_travail__mesures_prevention_existantes, emplois_tech2__taux_croissance, accidents_travail__formation_securite"
+    "source_var_ids": "accidents_travail__mesures_prevention_existantes, emplois_tech2__taux_croissance, accidents_travail__formation_securite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__mois",
@@ -3652,7 +4508,11 @@
     "modality_ids": null,
     "tag_ids": "agriculture, geologie, sante, personal_data, edifices",
     "key": null,
-    "source_var_ids": "exportations__taux_croissance_secteur, emplois_tech__source_donnee"
+    "source_var_ids": "exportations__taux_croissance_secteur, emplois_tech__source_donnee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__secteur",
@@ -3669,7 +4529,11 @@
     "modality_ids": "oui_non",
     "tag_ids": "faune",
     "key": null,
-    "source_var_ids": "exportations__nb_unites"
+    "source_var_ids": "exportations__nb_unites",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__sous_secteur",
@@ -3686,7 +4550,11 @@
     "modality_ids": "a_or_b, oui_non",
     "tag_ids": "limites_pol_admin, communication",
     "key": null,
-    "source_var_ids": "pollution_air__pression_atm"
+    "source_var_ids": "pollution_air__pression_atm",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__pays_destination",
@@ -3703,7 +4571,11 @@
     "modality_ids": null,
     "tag_ids": "transport",
     "key": null,
-    "source_var_ids": "exportations__type_produit, accidents_travail__horaire_travail, tourisme_annu__offre_wellness"
+    "source_var_ids": "exportations__type_produit, accidents_travail__horaire_travail, tourisme_annu__offre_wellness",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__continent",
@@ -3720,7 +4592,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, infrastructures, sensible_data, images_aeriennes, edifices, foret",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__valeur_chf",
@@ -3737,7 +4613,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, protection_env_nature, limites_pol_admin, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__poids_kg",
@@ -3754,7 +4634,11 @@
     "modality_ids": null,
     "tag_ids": "culture, approvisionnement, altimetrie, transport, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__type_produit",
@@ -3771,7 +4655,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "limites_pol_admin, foret, agriculture, protection_env_nature, sensible_data",
     "key": null,
-    "source_var_ids": "usage_internet__frequence_utilisation, emploi_jeunes__taux_croissance_salaire, tourisme_annu__type_etablissement"
+    "source_var_ids": "usage_internet__frequence_utilisation, emploi_jeunes__taux_croissance_salaire, tourisme_annu__type_etablissement",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__classification_hs",
@@ -3788,7 +4676,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, limites_pol_admin, elimination, sols, dangers_naturels, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__nb_unites",
@@ -3805,7 +4697,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere, securite",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__entreprise_export",
@@ -3822,7 +4718,11 @@
     "modality_ids": "canton_sigle",
     "tag_ids": "climatologie, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__canton",
@@ -3839,7 +4739,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, hydrographie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__region",
@@ -3856,7 +4760,11 @@
     "modality_ids": null,
     "tag_ids": "communication, cadastre_foncier, couverture_sol, securite, sante, images_aeriennes",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__type_transport",
@@ -3873,7 +4781,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes",
     "key": null,
-    "source_var_ids": "revenus_menages__nb_enfants, temperature_moy__vitesse_vent_max"
+    "source_var_ids": "revenus_menages__nb_enfants, temperature_moy__vitesse_vent_max",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__delai_livraison",
@@ -3890,7 +4802,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_1, systemes_reference, altimetrie, hydrographie, climatologie",
     "key": null,
-    "source_var_ids": "exportations__pays_destination, usage_internet__nb_heures_semaine"
+    "source_var_ids": "exportations__pays_destination, usage_internet__nb_heures_semaine",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__assurance_transport",
@@ -3907,7 +4823,11 @@
     "modality_ids": null,
     "tag_ids": "edifices",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__incoterm",
@@ -3924,7 +4844,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, elimination, sensible_data, personal_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__devise_facturation",
@@ -3941,7 +4865,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, population, climatologie, agriculture, images_aeriennes_2",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__taux_change",
@@ -3958,7 +4886,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, armee, protection_env_nature",
     "key": null,
-    "source_var_ids": "temperature_moy__station"
+    "source_var_ids": "temperature_moy__station",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__valeur_usd",
@@ -3975,7 +4907,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "usage_internet__nb_heures_semaine, pop_region__canton, immobilier_prix__annee_construction, dep_sante__region_sanitaire"
+    "source_var_ids": "usage_internet__nb_heures_semaine, pop_region__canton, immobilier_prix__annee_construction, dep_sante__region_sanitaire",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__valeur_eur",
@@ -3992,7 +4928,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__certification_requise",
@@ -4009,7 +4949,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, altimetrie, images_aeriennes_1, armee",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__risque_pays",
@@ -4026,7 +4970,11 @@
     "modality_ids": "only_zero",
     "tag_ids": "sols, hydrographie, foret, faune, infrastructures, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__retour_client",
@@ -4043,7 +4991,11 @@
     "modality_ids": null,
     "tag_ids": "climatologie, infrastructures, protection_env_nature",
     "key": null,
-    "source_var_ids": "tourisme_annu__type_clientele, emploi_jeunes__contrat_secondaire, ser_pub_loc__surface_infrastructure"
+    "source_var_ids": "tourisme_annu__type_clientele, emploi_jeunes__contrat_secondaire, ser_pub_loc__surface_infrastructure",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__delai_paiement",
@@ -4060,7 +5012,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, altimetrie, images_aeriennes, localisation, protection_env_nature",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__taux_croissance_secteur",
@@ -4077,7 +5033,11 @@
     "modality_ids": null,
     "tag_ids": "infrastructures, protection_env_nature, couverture_sol",
     "key": null,
-    "source_var_ids": "temperature_moy__nb_jours_tres_chaud, revenus_menages__revenu_median, emploi_jeunes__formation_continue"
+    "source_var_ids": "temperature_moy__nb_jours_tres_chaud, revenus_menages__revenu_median, emploi_jeunes__formation_continue",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__volume_historique_region",
@@ -4094,7 +5054,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, data_protection, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "exportations__source_donnee",
@@ -4111,7 +5075,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere",
     "key": null,
-    "source_var_ids": "revenus_menages__taux_endettement, vente_voitures__prix_moyen"
+    "source_var_ids": "revenus_menages__taux_endettement, vente_voitures__prix_moyen",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__ville",
@@ -4128,7 +5096,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection, flore, approvisionnement, localisation",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__quartier",
@@ -4145,7 +5117,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": 1,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__type_bien",
@@ -4162,7 +5138,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques",
     "key": 2,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__surface_habitable",
@@ -4179,7 +5159,11 @@
     "modality_ids": null,
     "tag_ids": "localisation",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__surface_parcelle",
@@ -4196,7 +5180,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, hydrographie, images_aeriennes_2, couverture_sol, transport, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__nb_pieces",
@@ -4213,7 +5201,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, couverture_sol, limites_pol_admin, protection_env_nature",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__annee_construction",
@@ -4230,7 +5222,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_2, agriculture, approvisionnement",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__etat_bien",
@@ -4247,7 +5243,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "emploi_jeunes__source_donnee"
+    "source_var_ids": "emploi_jeunes__source_donnee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__prix_vente_chf",
@@ -4264,7 +5264,11 @@
     "modality_ids": null,
     "tag_ids": "sante, anonymous_data, dangers_naturels, personal_data, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__prix_m2_chf",
@@ -4281,7 +5285,11 @@
     "modality_ids": null,
     "tag_ids": "cartes_reference, flore, localisation",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__charges_annuelles",
@@ -4298,7 +5306,11 @@
     "modality_ids": null,
     "tag_ids": "systemes_reference, infrastructures, pseudonymous_data, edifices, data_protection",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__type_vente",
@@ -4315,7 +5327,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__nb_jours_marche",
@@ -4332,7 +5348,11 @@
     "modality_ids": null,
     "tag_ids": "sante, sensible_data, personal_data, dangers_naturels, cartes_reference",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__indice_attractivite",
@@ -4349,7 +5369,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, elimination, data_protection, edifices, images_aeriennes",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "immobilier_prix__source_donnee",
@@ -4366,7 +5390,11 @@
     "modality_ids": null,
     "tag_ids": "armee, ouvrages, climatologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__annee",
@@ -4383,7 +5411,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__secteur",
@@ -4400,7 +5432,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, activites_economiques, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__sous_secteur",
@@ -4417,7 +5453,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "communication, anonymous_data, images_aeriennes_1, developpement_territorial, sensible_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__type_energie",
@@ -4434,7 +5474,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__conso_totale_mwh",
@@ -4451,7 +5495,11 @@
     "modality_ids": null,
     "tag_ids": "hydrographie",
     "key": null,
-    "source_var_ids": "emploi_jeunes__source_donnee, pop_region__canton, accidents_travail__age_victime, tourisme_annu__categorie_etoiles"
+    "source_var_ids": "emploi_jeunes__source_donnee, pop_region__canton, accidents_travail__age_victime, tourisme_annu__categorie_etoiles",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__conso_par_employe",
@@ -4468,7 +5516,11 @@
     "modality_ids": "modality_1",
     "tag_ids": "societe",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__nb_employes",
@@ -4485,7 +5537,11 @@
     "modality_ids": "only_zero",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "revenus_menages__nb_enfants, immobilier_prix__type_vente, dep_sante__type_depense, temperature_moy__nb_jours_ete"
+    "source_var_ids": "revenus_menages__nb_enfants, immobilier_prix__type_vente, dep_sante__type_depense, temperature_moy__nb_jours_ete",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__part_renouvelable",
@@ -4502,7 +5558,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, flore",
     "key": null,
-    "source_var_ids": "dep_sante__population_cible"
+    "source_var_ids": "dep_sante__population_cible",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__emissions_co2_tonnes",
@@ -4519,7 +5579,11 @@
     "modality_ids": null,
     "tag_ids": "faune, altimetrie, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__intensite_energetique",
@@ -4536,7 +5600,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, localisation, sante, anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__region",
@@ -4553,7 +5621,11 @@
     "modality_ids": null,
     "tag_ids": "securite, edifices, systemes_reference, altimetrie, couverture_sol, sante",
     "key": null,
-    "source_var_ids": "accidents_travail__heure_accident, tourisme_annu__mois, dep_sante__type_depense, accident_route__nb_blesses"
+    "source_var_ids": "accidents_travail__heure_accident, tourisme_annu__mois, dep_sante__type_depense, accident_route__nb_blesses",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "conso_energie__source_donnee",
@@ -4570,7 +5642,11 @@
     "modality_ids": "modality_1, a_or_b_or_c",
     "tag_ids": "elimination",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__annee",
@@ -4587,7 +5663,11 @@
     "modality_ids": null,
     "tag_ids": "systemes_reference, atmosphere",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__canton",
@@ -4604,7 +5684,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes, sols, communication, hydrographie, systemes_reference, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__region",
@@ -4621,7 +5705,11 @@
     "modality_ids": "a_or_b",
     "tag_ids": "faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__type_menage",
@@ -4638,7 +5726,11 @@
     "modality_ids": null,
     "tag_ids": "theme_iso, data_protection, sols, altimetrie",
     "key": null,
-    "source_var_ids": "accidents_travail__annee, pollution_air__niveau_alerte, revenus_menages__nb_heures_travail"
+    "source_var_ids": "accidents_travail__annee, pollution_air__niveau_alerte, revenus_menages__nb_heures_travail",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__nb_personnes",
@@ -4655,7 +5747,11 @@
     "modality_ids": null,
     "tag_ids": "communication, pseudonymous_data, geologie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__nb_enfants",
@@ -4672,7 +5768,11 @@
     "modality_ids": null,
     "tag_ids": "sante, personal_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__age_chef_menage",
@@ -4689,7 +5789,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__sexe_chef_menage",
@@ -4706,7 +5810,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, anonymous_data, cadastre_foncier, sensible_data, images_aeriennes",
     "key": null,
-    "source_var_ids": "immobilier_prix__type_bien, emploi_jeunes__profession, revenus_menages__age_chef_menage, exportations__retour_client"
+    "source_var_ids": "immobilier_prix__type_bien, emploi_jeunes__profession, revenus_menages__age_chef_menage, exportations__retour_client",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__nationalite",
@@ -4723,7 +5831,11 @@
     "modality_ids": null,
     "tag_ids": "communication, societe, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenu_total_brut",
@@ -4740,7 +5852,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenu_total_net",
@@ -4757,7 +5873,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenu_par_personne",
@@ -4774,7 +5894,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "dep_sante__canton"
+    "source_var_ids": "dep_sante__canton",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenu_median",
@@ -4791,7 +5915,11 @@
     "modality_ids": null,
     "tag_ids": "anonymous_data, agriculture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenus_travail",
@@ -4808,7 +5936,11 @@
     "modality_ids": null,
     "tag_ids": "culture, images_aeriennes_1, altimetrie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenus_capital",
@@ -4825,7 +5957,11 @@
     "modality_ids": "only_zero",
     "tag_ids": "images_aeriennes_1, systemes_reference, population",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__revenus_transferts",
@@ -4842,7 +5978,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__impots_payes",
@@ -4859,7 +5999,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, hydrographie, cartes_reference, agriculture, flore, images_aeriennes_2",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__charges_logement",
@@ -4876,7 +6020,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__charges_transport",
@@ -4893,7 +6041,11 @@
     "modality_ids": null,
     "tag_ids": "faune, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__charges_sante",
@@ -4910,7 +6062,11 @@
     "modality_ids": null,
     "tag_ids": "securite, societe, limites_pol_admin, dangers_naturels",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__charges_alimentation",
@@ -4927,7 +6083,11 @@
     "modality_ids": "langue_sigle",
     "tag_ids": "climatologie, protection_env_nature, communication, transport, elimination",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__charges_garde",
@@ -4944,7 +6104,11 @@
     "modality_ids": null,
     "tag_ids": "geologie, personal_data",
     "key": null,
-    "source_var_ids": "tourisme_annu__mois, exportations__mois"
+    "source_var_ids": "tourisme_annu__mois, exportations__mois",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__patrimoine_total",
@@ -4961,7 +6125,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques, developpement_territorial, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__patrimoine_immobilier",
@@ -4978,7 +6146,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": "accidents_travail__formation_securite"
+    "source_var_ids": "accidents_travail__formation_securite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__taux_effort_logement",
@@ -4995,7 +6167,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, theme_iso",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__niveau_formation",
@@ -5012,7 +6188,11 @@
     "modality_ids": null,
     "tag_ids": "developpement_territorial, elimination",
     "key": null,
-    "source_var_ids": "emploi_jeunes__nb_heures_travail, ser_pub_loc__cout_investissement, usage_internet__source_donnee, vente_voitures__co2_g_km"
+    "source_var_ids": "emploi_jeunes__nb_heures_travail, ser_pub_loc__cout_investissement, usage_internet__source_donnee, vente_voitures__co2_g_km",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__situation_professionnelle",
@@ -5029,7 +6209,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes_1, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__statut_emploi",
@@ -5046,7 +6230,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, anonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__nb_heures_travail",
@@ -5063,7 +6251,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__salaire_horaire",
@@ -5080,7 +6272,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, ouvrages",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__indice_satisfaction_vie",
@@ -5097,7 +6293,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__indice_precarite",
@@ -5114,7 +6314,11 @@
     "modality_ids": null,
     "tag_ids": "agriculture, faune",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__taux_endettement",
@@ -5131,7 +6335,11 @@
     "modality_ids": null,
     "tag_ids": "faune, hydrographie, personal_data, population",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__epargne_mensuelle",
@@ -5148,7 +6356,11 @@
     "modality_ids": null,
     "tag_ids": "geologie, population",
     "key": null,
-    "source_var_ids": "ser_pub_loc__nb_points_service, vente_voitures__nb_places"
+    "source_var_ids": "ser_pub_loc__nb_points_service, vente_voitures__nb_places",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__recours_aides_sociales",
@@ -5165,7 +6377,11 @@
     "modality_ids": null,
     "tag_ids": "sante, couverture_sol, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__nb_membres_actifs",
@@ -5182,7 +6398,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__presence_handicap",
@@ -5199,7 +6419,11 @@
     "modality_ids": "modality_1",
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__cout_assurance_maladie",
@@ -5216,7 +6440,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages, sols, systemes_reference, transport, sensible_data, images_aeriennes_2",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "revenus_menages__source_donnee",
@@ -5233,7 +6461,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__annee",
@@ -5250,7 +6482,11 @@
     "modality_ids": null,
     "tag_ids": "couverture_sol, geologie, anonymous_data, foret, culture",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__age",
@@ -5267,7 +6503,11 @@
     "modality_ids": null,
     "tag_ids": "limites_pol_admin",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__sexe",
@@ -5284,7 +6524,11 @@
     "modality_ids": "a_or_b_or_c",
     "tag_ids": "securite, edifices, sols, couverture_sol",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__nationalite",
@@ -5301,7 +6545,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, population, theme_iso",
     "key": null,
-    "source_var_ids": "revenus_menages__charges_logement, temperature_moy__temp_min"
+    "source_var_ids": "revenus_menages__charges_logement, temperature_moy__temp_min",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__canton",
@@ -5318,7 +6566,11 @@
     "modality_ids": "a_or_b_or_c, modality_1",
     "tag_ids": "elimination, hydrographie, sols, limites_pol_admin, activites_economiques",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__region",
@@ -5335,7 +6587,11 @@
     "modality_ids": null,
     "tag_ids": "culture, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__niveau_formation",
@@ -5352,7 +6608,11 @@
     "modality_ids": null,
     "tag_ids": "hydrographie, climatologie, pseudonymous_data, images_aeriennes, culture, data_protection",
     "key": null,
-    "source_var_ids": "vente_voitures__transmission, accidents_travail__nationalite"
+    "source_var_ids": "vente_voitures__transmission, accidents_travail__nationalite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__statut_emploi",
@@ -5369,7 +6629,11 @@
     "modality_ids": null,
     "tag_ids": "flore",
     "key": null,
-    "source_var_ids": "exportations__type_produit"
+    "source_var_ids": "exportations__type_produit",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__secteur_activite",
@@ -5386,7 +6650,11 @@
     "modality_ids": null,
     "tag_ids": "pseudonymous_data, cadastre_foncier",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__profession",
@@ -5403,7 +6671,11 @@
     "modality_ids": null,
     "tag_ids": null,
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__type_contrat",
@@ -5420,7 +6692,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection, societe, images_aeriennes",
     "key": null,
-    "source_var_ids": "accidents_travail__cout_total, tourisme_annu__classification_officielle, conso_energie__conso_totale_mwh, vente_voitures__nb_places"
+    "source_var_ids": "accidents_travail__cout_total, tourisme_annu__classification_officielle, conso_energie__conso_totale_mwh, vente_voitures__nb_places",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__taux_occupation",
@@ -5437,7 +6713,11 @@
     "modality_ids": null,
     "tag_ids": "activites_economiques",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__salaire_mensuel",
@@ -5454,7 +6734,11 @@
     "modality_ids": null,
     "tag_ids": "culture, developpement_territorial, images_aeriennes_2, pseudonymous_data",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__nb_heures_travail",
@@ -5471,7 +6755,11 @@
     "modality_ids": null,
     "tag_ids": "hydrographie",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__anciennete_poste",
@@ -5488,7 +6776,11 @@
     "modality_ids": "a_or_b_or_c, oui_non",
     "tag_ids": "hydrographie, limites_pol_admin, approvisionnement, culture, securite, images_aeriennes_1",
     "key": null,
-    "source_var_ids": "pop_region__type_region"
+    "source_var_ids": "pop_region__type_region",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__mode_travail",
@@ -5505,7 +6797,11 @@
     "modality_ids": null,
     "tag_ids": "localisation, couverture_sol, communication, developpement_territorial, protection_env_nature, pseudonymous_data",
     "key": null,
-    "source_var_ids": "dep_sante__montant_par_habitant, pollution_air__concentration, emploi_jeunes__nationalite, pop_region__coord_y"
+    "source_var_ids": "dep_sante__montant_par_habitant, pollution_air__concentration, emploi_jeunes__nationalite, pop_region__coord_y",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__duree_chomage_precedent",
@@ -5522,7 +6818,11 @@
     "modality_ids": null,
     "tag_ids": "edifices, population, cartes_reference",
     "key": null,
-    "source_var_ids": "tourisme_annu__region_touristique, ser_pub_loc__satisfaction_usagers, emplois_tech2__source_donnee"
+    "source_var_ids": "tourisme_annu__region_touristique, ser_pub_loc__satisfaction_usagers, emplois_tech2__source_donnee",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__satisfaction_emploi",
@@ -5539,7 +6839,11 @@
     "modality_ids": null,
     "tag_ids": "data_protection, cartes_reference, infrastructures, developpement_territorial, societe",
     "key": null,
-    "source_var_ids": "tourisme_annu__duree_moyenne_sejour, accidents_travail__formation_securite"
+    "source_var_ids": "tourisme_annu__duree_moyenne_sejour, accidents_travail__formation_securite",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__mobilite_professionnelle",
@@ -5556,7 +6860,11 @@
     "modality_ids": null,
     "tag_ids": "transport",
     "key": null,
-    "source_var_ids": "exportations__certification_requise, dep_sante__type_depense, emploi_jeunes__contrat_secondaire, accidents_travail__presence_equipements"
+    "source_var_ids": "exportations__certification_requise, dep_sante__type_depense, emploi_jeunes__contrat_secondaire, accidents_travail__presence_equipements",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__formation_continue",
@@ -5573,7 +6881,11 @@
     "modality_ids": null,
     "tag_ids": "couverture_sol",
     "key": null,
-    "source_var_ids": "revenus_menages__presence_handicap, pollution_air__source_donnee, emplois_tech2__taux_croissance, revenus_menages__nb_personnes"
+    "source_var_ids": "revenus_menages__presence_handicap, pollution_air__source_donnee, emplois_tech2__taux_croissance, revenus_menages__nb_personnes",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__temps_transport",
@@ -5590,7 +6902,11 @@
     "modality_ids": null,
     "tag_ids": "faune, altimetrie, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__type_transport",
@@ -5607,7 +6923,11 @@
     "modality_ids": null,
     "tag_ids": "elimination, infrastructures, systemes_reference",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__conditions_travail",
@@ -5624,7 +6944,11 @@
     "modality_ids": null,
     "tag_ids": "population",
     "key": null,
-    "source_var_ids": "temperature_moy__temp_moy, accidents_travail__mesures_prevention_existantes"
+    "source_var_ids": "temperature_moy__temp_moy, accidents_travail__mesures_prevention_existantes",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__contrat_secondaire",
@@ -5641,7 +6965,11 @@
     "modality_ids": null,
     "tag_ids": "images_aeriennes",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__nb_heures_second_emploi",
@@ -5658,7 +6986,11 @@
     "modality_ids": null,
     "tag_ids": "ouvrages, edifices",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__taux_croissance_salaire",
@@ -5675,7 +7007,11 @@
     "modality_ids": null,
     "tag_ids": "theme_iso, images_aeriennes_1, pseudonymous_data, data_protection, societe, localisation",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emploi_jeunes__source_donnee",
@@ -5692,7 +7028,11 @@
     "modality_ids": null,
     "tag_ids": "approvisionnement, theme_iso, edifices, sante",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__annee",
@@ -5709,7 +7049,11 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, faune, flore",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__secteur_tech",
@@ -5726,7 +7070,11 @@
     "modality_ids": null,
     "tag_ids": "cartes_reference, images_aeriennes, theme_iso, atmosphere, personal_data, systemes_reference",
     "key": null,
-    "source_var_ids": "exportations__nb_unites, vente_voitures__source_donnee, conso_energie__conso_totale_mwh"
+    "source_var_ids": "exportations__nb_unites, vente_voitures__source_donnee, conso_energie__conso_totale_mwh",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__nb_entreprises",
@@ -5743,7 +7091,11 @@
     "modality_ids": null,
     "tag_ids": "population, images_aeriennes_2, transport, images_aeriennes",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__nb_employes",
@@ -5760,7 +7112,11 @@
     "modality_ids": null,
     "tag_ids": "atmosphere",
     "key": null,
-    "source_var_ids": "conso_energie__conso_totale_mwh, exportations__canton, accidents_travail__statut_enquete, vente_voitures__prix_moyen"
+    "source_var_ids": "conso_energie__conso_totale_mwh, exportations__canton, accidents_travail__statut_enquete, vente_voitures__prix_moyen",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__taux_croissance",
@@ -5777,7 +7133,11 @@
     "modality_ids": null,
     "tag_ids": "cadastre_foncier, hydrographie, transport, data_protection",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__region",
@@ -5794,7 +7154,11 @@
     "modality_ids": null,
     "tag_ids": "protection_env_nature, theme_iso, images_aeriennes_1",
     "key": null,
-    "source_var_ids": null
+    "source_var_ids": null,
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   },
   {
     "id": "emplois_tech2__source_donnee",
@@ -5811,6 +7175,10 @@
     "modality_ids": null,
     "tag_ids": "sensible_data, pseudonymous_data, approvisionnement",
     "key": null,
-    "source_var_ids": "exportations__secteur"
+    "source_var_ids": "exportations__secteur",
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
   }
 ]

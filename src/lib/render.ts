@@ -173,6 +173,11 @@ export default class Render {
     if (type !== 'display') return data
     return data.toLocaleString(locale)
   }
+  static statsPreview(data: string, type: string): string {
+    if (!data) return ''
+    if (type !== 'display') return data.replace(/<br>/g, ' ')
+    return data
+  }
   static favorite(
     data: boolean,
     type: string,

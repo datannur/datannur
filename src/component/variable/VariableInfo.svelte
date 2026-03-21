@@ -78,6 +78,29 @@
     />
   {/if}
   <RowInfo nbRow={variable.nbRow} />
+  {#if variable.min != null || variable.max != null}
+    <tr>
+      <td>
+        <Icon type="stat" />
+        Stats
+      </td>
+      <td>
+        {variable.min?.toLocaleString('fr') ?? '—'} — {variable.max?.toLocaleString(
+          'fr',
+        ) ?? '—'}
+        {#if variable.mean != null}
+          <br />moy. {variable.mean.toLocaleString('fr', {
+            maximumFractionDigits: 1,
+          })}{#if variable.std != null}
+            &nbsp;<span class="has-text-grey"
+              >±{variable.std.toLocaleString('fr', {
+                maximumFractionDigits: 1,
+              })}</span
+            >{/if}
+        {/if}
+      </td>
+    </tr>
+  {/if}
   {#if variable.nbMissing}
     <tr>
       <td>

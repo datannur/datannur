@@ -138,6 +138,10 @@ export type Variable = BaseEntity &
     nbDistinct?: number
     nbDuplicate?: number
     nbMissing?: number
+    min?: number | null
+    max?: number | null
+    mean?: number | null
+    std?: number | null
     type?: string
     sourceVarIds?: string
 
@@ -159,6 +163,7 @@ export type Variable = BaseEntity &
     nbValue?: number
     hasFreq?: boolean
     freqPreview?: FreqPreview[]
+    statsPreview?: string
   }
 
 export type Modality = BaseEntity &

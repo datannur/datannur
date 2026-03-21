@@ -28,6 +28,22 @@ function getNbValues(
   return 0
 }
 
+function formatStat(value: number | null | undefined): string {
+  if (value === null || value === undefined) return ''
+  return value.toLocaleString(locale, { maximumFractionDigits: 1 })
+}
+
+function buildStatsPreview(variable: Variable): string {
+  if (variable.min == null && variable.max == null) return ''
+  const minStr = formatStat(variable.min)
+  const maxStr = formatStat(variable.max)
+  const line1 = `${minStr} — ${maxStr}`
+  if (variable.mean == null) return line1
+  const meanStr = formatStat(variable.mean)
+  const stdStr = variable.std != null ? ` ±${formatStat(variable.std)}` : ''
+  return `${line1}<br>moy. ${meanStr}${stdStr}`
+}
+
 function addEntities(item: EntityTypeMap['tag' | 'doc']) {
   if (!item) return
   item.entities = []
@@ -383,6 +399,7 @@ class Process {
       }
       variable.valuesPreview = [...variable.values.slice(0, 10)]
       variable.typeClean = getVariableTypeClean(variable.type)
+      variable.statsPreview = buildStatsPreview(variable)
       variableAddDatasetInfo(variable)
       const nbValues = getNbValues(variable.values, variable)
       variable.nbDistinct = nbValues

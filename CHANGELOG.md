@@ -2,7 +2,11 @@
 
 ## unreleased
 
+## 0.18.0 (2026-03-21)
+
+- add: descriptive statistics for variables (min, max, mean, std)
 - add: nb_files property for dataset entity
+- fix: schema:update corrupting $id URLs in manage-schemas script
 - fix: evolution variable names now converted from snake_case to camelCase for consistent icon and label display
 
 ## 0.17.1 (2026-03-18)
