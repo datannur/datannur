@@ -633,7 +633,7 @@
     "entity_id": "ser_pub_loc__commune",
     "parent_entity_id": null,
     "variable": "min",
-    "old_value": 3,
+    "old_value": "3",
     "new_value": null,
     "name": null
   },
@@ -644,7 +644,7 @@
     "entity_id": "ser_pub_loc__commune",
     "parent_entity_id": null,
     "variable": "max",
-    "old_value": 45,
+    "old_value": "45",
     "new_value": null,
     "name": null
   },
@@ -655,7 +655,7 @@
     "entity_id": "ser_pub_loc__commune",
     "parent_entity_id": null,
     "variable": "mean",
-    "old_value": 12.8,
+    "old_value": "12.8",
     "new_value": null,
     "name": null
   },
@@ -666,7 +666,7 @@
     "entity_id": "ser_pub_loc__commune",
     "parent_entity_id": null,
     "variable": "std",
-    "old_value": 6.2,
+    "old_value": "6.2",
     "new_value": null,
     "name": null
   },
@@ -677,7 +677,7 @@
     "entity_id": "ser_pub_loc__annee",
     "parent_entity_id": null,
     "variable": "min",
-    "old_value": 2005,
+    "old_value": "2005",
     "new_value": null,
     "name": null
   },
@@ -688,7 +688,7 @@
     "entity_id": "ser_pub_loc__annee",
     "parent_entity_id": null,
     "variable": "max",
-    "old_value": 2024,
+    "old_value": "2024",
     "new_value": null,
     "name": null
   },
@@ -699,7 +699,7 @@
     "entity_id": "ser_pub_loc__annee",
     "parent_entity_id": null,
     "variable": "mean",
-    "old_value": 2015.3,
+    "old_value": "2015.3",
     "new_value": null,
     "name": null
   },
@@ -710,7 +710,7 @@
     "entity_id": "ser_pub_loc__annee",
     "parent_entity_id": null,
     "variable": "std",
-    "old_value": 5.7,
+    "old_value": "5.7",
     "new_value": null,
     "name": null
   },
@@ -721,7 +721,7 @@
     "entity_id": "ser_pub_loc__nb_employes",
     "parent_entity_id": null,
     "variable": "min",
-    "old_value": 1,
+    "old_value": "1",
     "new_value": null,
     "name": null
   },
@@ -732,7 +732,7 @@
     "entity_id": "ser_pub_loc__nb_employes",
     "parent_entity_id": null,
     "variable": "max",
-    "old_value": 450,
+    "old_value": "450",
     "new_value": null,
     "name": null
   },
@@ -743,7 +743,7 @@
     "entity_id": "ser_pub_loc__nb_employes",
     "parent_entity_id": null,
     "variable": "mean",
-    "old_value": 24.7,
+    "old_value": "24.7",
     "new_value": null,
     "name": null
   },
@@ -754,7 +754,7 @@
     "entity_id": "ser_pub_loc__nb_employes",
     "parent_entity_id": null,
     "variable": "std",
-    "old_value": 38.2,
+    "old_value": "38.2",
     "new_value": null,
     "name": null
   },
@@ -766,7 +766,7 @@
     "parent_entity_id": null,
     "variable": "min",
     "old_value": null,
-    "new_value": 3,
+    "new_value": "3",
     "name": null
   },
   {
@@ -777,7 +777,7 @@
     "parent_entity_id": null,
     "variable": "max",
     "old_value": null,
-    "new_value": 43,
+    "new_value": "43",
     "name": null
   },
   {
@@ -788,7 +788,7 @@
     "parent_entity_id": null,
     "variable": "mean",
     "old_value": null,
-    "new_value": 17,
+    "new_value": "17",
     "name": null
   },
   {
@@ -799,7 +799,7 @@
     "parent_entity_id": null,
     "variable": "std",
     "old_value": null,
-    "new_value": 0.32,
+    "new_value": "0.32",
     "name": null
   },
   {
@@ -810,7 +810,7 @@
     "parent_entity_id": null,
     "variable": "min",
     "old_value": null,
-    "new_value": -202223,
+    "new_value": "-202223",
     "name": null
   },
   {
@@ -821,7 +821,7 @@
     "parent_entity_id": null,
     "variable": "max",
     "old_value": null,
-    "new_value": 4535435,
+    "new_value": "4535435",
     "name": null
   },
   {
@@ -832,7 +832,7 @@
     "parent_entity_id": null,
     "variable": "mean",
     "old_value": null,
-    "new_value": 2343,
+    "new_value": "2343",
     "name": null
   },
   {
@@ -843,7 +843,51 @@
     "parent_entity_id": null,
     "variable": "std",
     "old_value": null,
-    "new_value": 34.432,
+    "new_value": "34.432",
+    "name": null
+  },
+  {
+    "timestamp": 1774134738,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "pollution_air__date",
+    "parent_entity_id": null,
+    "variable": "min",
+    "old_value": null,
+    "new_value": 1590102632,
+    "name": null
+  },
+  {
+    "timestamp": 1774134738,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "pollution_air__date",
+    "parent_entity_id": null,
+    "variable": "max",
+    "old_value": null,
+    "new_value": 1774134632,
+    "name": null
+  },
+  {
+    "timestamp": 1774134738,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "pollution_air__date",
+    "parent_entity_id": null,
+    "variable": "mean",
+    "old_value": null,
+    "new_value": 1726960232,
+    "name": null
+  },
+  {
+    "timestamp": 1774134738,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "pollution_air__date",
+    "parent_entity_id": null,
+    "variable": "std",
+    "old_value": null,
+    "new_value": 53,
     "name": null
   }
 ]

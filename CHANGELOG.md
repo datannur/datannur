@@ -2,6 +2,10 @@
 
 ## unreleased
 
+- add: date formatting for variable statistics (min, max, mean as dates, std in days)
+- add: character length suffix "car." for string variable statistics
+- refactor: use safeHtml directive for stats preview in variable detail view
+
 ## 0.18.0 (2026-03-21)
 
 - add: descriptive statistics for variables (min, max, mean, std)
