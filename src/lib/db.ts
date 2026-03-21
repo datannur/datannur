@@ -33,14 +33,25 @@ function formatStat(value: number | null | undefined): string {
   return value.toLocaleString(locale, { maximumFractionDigits: 1 })
 }
 
+function formatDate(timestamp: number): string {
+  return new Date(timestamp * 1000).toLocaleDateString(locale)
+}
+
 function buildStatsPreview(variable: Variable): string {
   if (variable.min == null && variable.max == null) return ''
-  const minStr = formatStat(variable.min)
-  const maxStr = formatStat(variable.max)
-  const line1 = `${minStr} — ${maxStr}`
+  const isDate = variable.type === 'date'
+  const minStr = isDate ? formatDate(variable.min!) : formatStat(variable.min)
+  const maxStr = isDate ? formatDate(variable.max!) : formatStat(variable.max)
+  const suffix = variable.type === 'string' ? ' car.' : ''
+  const line1 = `${minStr} — ${maxStr}${suffix}`
   if (variable.mean == null) return line1
-  const meanStr = formatStat(variable.mean)
-  const stdStr = variable.std != null ? ` ±${formatStat(variable.std)}` : ''
+  const meanStr = isDate ? formatDate(variable.mean) : formatStat(variable.mean)
+  const stdStr =
+    variable.std != null
+      ? isDate
+        ? ` ±${formatStat(variable.std)} j`
+        : ` ±${formatStat(variable.std)}`
+      : ''
   return `${line1}<br>moy. ${meanStr}${stdStr}`
 }
 

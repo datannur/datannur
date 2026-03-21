@@ -2472,10 +2472,10 @@
     "tag_ids": "infrastructures",
     "key": null,
     "source_var_ids": null,
-    "min": null,
-    "max": null,
-    "mean": null,
-    "std": null
+    "min": 1590102632,
+    "max": 1774134632,
+    "mean": 1726960232,
+    "std": 53
   },
   {
     "id": "pollution_air__heure",

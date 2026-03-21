@@ -13,6 +13,7 @@
   import PercentBar from '@info-table/PercentBar.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
+  import { safeHtml } from '@lib/html-sanitizer'
   import type { Variable } from '@type'
 
   let { variable: variableProp }: { variable: Variable } = $props()
@@ -78,26 +79,14 @@
     />
   {/if}
   <RowInfo nbRow={variable.nbRow} />
-  {#if variable.min != null || variable.max != null}
+  {#if variable.statsPreview}
     <tr>
       <td>
         <Icon type="stat" />
         Stats
       </td>
       <td>
-        {variable.min?.toLocaleString('fr') ?? '—'} — {variable.max?.toLocaleString(
-          'fr',
-        ) ?? '—'}
-        {#if variable.mean != null}
-          <br />moy. {variable.mean.toLocaleString('fr', {
-            maximumFractionDigits: 1,
-          })}{#if variable.std != null}
-            &nbsp;<span class="has-text-grey"
-              >±{variable.std.toLocaleString('fr', {
-                maximumFractionDigits: 1,
-              })}</span
-            >{/if}
-        {/if}
+        <span use:safeHtml={variable.statsPreview}></span>
       </td>
     </tr>
   {/if}
