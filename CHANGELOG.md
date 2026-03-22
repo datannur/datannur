@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- add: variable types "geometry", "datetime", "time"
+- fix: unknown variable type "???" causing URL encoding and localStorage issues, replaced with "inconnu"
 - add: date formatting for variable statistics (min, max, mean as dates, std in days)
 - add: character length suffix "car." for string variable statistics
 - refactor: use safeHtml directive for stats preview in variable detail view

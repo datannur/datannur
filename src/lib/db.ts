@@ -39,7 +39,7 @@ function formatDate(timestamp: number): string {
 
 function buildStatsPreview(variable: Variable): string {
   if (variable.min == null && variable.max == null) return ''
-  const isDate = variable.type === 'date'
+  const isDate = variable.type === 'date' || variable.type === 'datetime'
   const fmt = isDate ? formatDate : formatStat
   const minStr = variable.min != null ? fmt(variable.min) : ''
   const maxStr = variable.max != null ? fmt(variable.max) : ''

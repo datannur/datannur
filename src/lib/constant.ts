@@ -38,6 +38,9 @@ export const varTypes = {
   string: 'texte',
   boolean: 'booléen',
   date: 'date',
+  datetime: 'date-heure',
+  time: 'heure',
+  geometry: 'géométrie',
   other: 'autre',
 } as const
 
