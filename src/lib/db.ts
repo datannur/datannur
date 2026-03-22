@@ -40,18 +40,18 @@ function formatDate(timestamp: number): string {
 function buildStatsPreview(variable: Variable): string {
   if (variable.min == null && variable.max == null) return ''
   const isDate = variable.type === 'date'
-  const minStr = isDate ? formatDate(variable.min!) : formatStat(variable.min)
-  const maxStr = isDate ? formatDate(variable.max!) : formatStat(variable.max)
+  const fmt = isDate ? formatDate : formatStat
+  const minStr = variable.min != null ? fmt(variable.min) : ''
+  const maxStr = variable.max != null ? fmt(variable.max) : ''
   const suffix = variable.type === 'string' ? ' car.' : ''
   const line1 = `${minStr} — ${maxStr}${suffix}`
   if (variable.mean == null) return line1
-  const meanStr = isDate ? formatDate(variable.mean) : formatStat(variable.mean)
-  const stdStr =
-    variable.std != null
-      ? isDate
-        ? ` ±${formatStat(variable.std)} j`
-        : ` ±${formatStat(variable.std)}`
-      : ''
+  const meanStr = fmt(variable.mean)
+  let stdStr = ''
+  if (variable.std != null) {
+    const std = isDate ? Math.round(variable.std / 86400) : variable.std
+    stdStr = ` ±${formatStat(std)}${isDate ? ' j' : ''}`
+  }
   return `${line1}<br>moy. ${meanStr}${stdStr}`
 }
 
