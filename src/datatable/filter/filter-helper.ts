@@ -100,7 +100,7 @@ export default class FilterHelper {
         if (val === '__empty__') {
           column.search('^$', true, false).draw()
         } else {
-          column.search(val ? '^' + val : '', true, false).draw()
+          column.search(val ? '^' + val + '$' : '', true, false).draw()
         }
         this.updateFilterUrl(columnNum, val)
         this.updateFilterCount()
@@ -111,11 +111,11 @@ export default class FilterHelper {
       if (colFilterUrl) {
         select.val(colFilterUrl.replaceAll('\\', ''))
         column
-          .search(colFilterUrl ? '^' + colFilterUrl : '', true, false)
+          .search(colFilterUrl ? '^' + colFilterUrl + '$' : '', true, false)
           .draw()
         this.updateFilterCount()
       } else if (column.search() !== '') {
-        select.val(column.search().split('^')[1]).trigger('change')
+        select.val(column.search().replace(/^\^|\$$/g, '')).trigger('change')
       }
     } else {
       filterElem.on('keyup', event => {
