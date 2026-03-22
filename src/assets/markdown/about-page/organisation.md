@@ -77,7 +77,7 @@ $tag <--> $doc
 
 ### Doc
 
-Certains concepts peuvent être associés à des documentations (docs) au format Markdown ou PDF. Ces docs permettent de décrire ou expliquer en détail des institutions, dossiers ou datasets. Il peuvent être liées à plusieurs concepts, et inversement.
+Certains concepts peuvent être associés à des documentations (docs) au format Markdown ou PDF. Ces docs permettent de décrire ou expliquer en détail des institutions, dossiers ou datasets. Ils peuvent être liés à plusieurs concepts, et inversement.
 
 mermaid(
 $institution <--> $doc
