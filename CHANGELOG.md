@@ -2,6 +2,9 @@
 
 ## unreleased
 
+## 0.18.1 (2026-03-22)
+
+- fix: select filter matching partial values instead of exact values (e.g. "heure" also showing "date-heure")
 - add: variable types "geometry", "datetime", "time"
 - fix: unknown variable type "???" causing URL encoding and localStorage issues, replaced with "inconnu"
 - add: date formatting for variable statistics (min, max, mean as dates, std in days)
