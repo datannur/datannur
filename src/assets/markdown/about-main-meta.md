@@ -1,5 +1,5 @@
-La vue interne offre un aperçu des métadonnées du catalogue en explorant sa propre structure et organisation. Elle fournit une synthèse des datasets internes qui alimentent le fonctionnement de datannur.
+La vue interne permet d’explorer les métadonnées qui structurent le catalogue lui-même. Elle donne un aperçu des datasets internes utilisés par datannur pour organiser et faire fonctionner l’application.
 
-Cette fonctionnalité permet de visualiser l’architecture des données et de comprendre comment elles sont structurées au sein du catalogue. Elle est également utile pour vérifier l’intégrité de la base de données et s’assurer que tout fonctionne correctement.
+Elle est utile pour comprendre la structure interne du catalogue et, si nécessaire, vérifier l’intégrité de la base de données.
 
-Pour vérifier l'intégrité de la base de données, cliquer sur ce [lien](?app_mode=check_db 'new_tab').
+Pour lancer une vérification d’intégrité de la base, utilisez ce [lien](?app_mode=check_db 'new_tab').
