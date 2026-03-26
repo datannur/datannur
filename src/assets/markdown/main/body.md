@@ -1,21 +1,8 @@
-# L'annuaire de données pour les centraliser, sécuriser, standardiser
+# Explorer le catalogue de données
 
-Recherchez et organisez efficacement l'information pour maximiser votre productivité
+Ce catalogue permet d’explorer les jeux de données, les variables, les modalités, la documentation et les principales relations entre les éléments.
 
-Garantissez la qualité, la conformité et la protection des données pour renforcer votre crédibilité
-
-Améliorez l'interopérabilité et la réutilisation des données pour développer vos collaborations
-
-- **Facile** :
-  Pas d’installation, de configuration ni de dépendances : datannur est simple à déployer, à utiliser et à maintenir
-
-- **Universel** :
-  Utilisable partout - local, cloud ou stockage partagé : un dossier à copier, déplacer et ouvrir dans n’importe quel navigateur
-
-- **Complet** :
-  Structuré et flexible, organisé autour de 7 concepts clés : Institution, Dossier, Mot clé, Doc, Dataset, Variable et Modalité
-
-- **Sécurisé** :
-  Isolé dans le navigateur, datannur ne peut pas modifier la machine ni ses fichiers, garantissant une utilisation sécurisée
+Utilisez la recherche, l’arborescence ou l’assistant IA pour commencer l’exploration.
+Les pages [Structure](about?tab=aboutStructure) et [Fonctionnalités](about?tab=aboutFeatures) permettent aussi de mieux comprendre l’organisation du catalogue et les principaux usages de l’interface.
 
 Pour en savoir plus : [datannur.com](https://datannur.com)

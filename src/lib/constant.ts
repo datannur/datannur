@@ -132,7 +132,7 @@ export const entityToIcon = {
   nbFiles: 'copy',
   link: 'link',
   recursive: 'rotate-left',
-  functionality: 'screwdriver-wrench',
+  features: 'screwdriver-wrench',
   preview: 'eye',
   relation: 'arrows-left-right',
   evolution: 'history',

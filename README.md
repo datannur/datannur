@@ -175,7 +175,7 @@ The catalog supports several entities with flexible relationships. All tables ar
 
 > **📋 Schema Reference:** For complete schema details, see the metadata page at `index.html#/meta` in your catalog, which displays all tables and variables based on the current data structure. The "localisation" column indicates whether each table/variable exists only in schema, only in data, or both (when empty).
 >
-> **🔗 Entity Organization:** For information about entities and their relationships, see the about page at `index.html#/about?tab=about_organisation` in your catalog.
+> **🔗 Entity Structure:** For information about entities and their relationships, see the about page at `index.html#/about?tab=aboutStructure` in your catalog.
 
 #### Configuration Options
 
