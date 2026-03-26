@@ -67,6 +67,8 @@ datannur is a client-side data catalog designed to organize and explore datasets
 3. **Explore** the demo metadata to understand how it works
 4. **Replace** the demo metadata in `/data/db/` with your own
 
+> **Optional tools:** Some scripts (deploy, static generation, schema management, etc.) require **Node.js >= 22.6.0**. The update and DCAT export scripts require **Python >= 3.9**. Neither is needed to use the catalog itself.
+
 ## Project Structure
 
 > **📁 Context:** This structure represents the **distributed application** (inside the `app/` folder or downloaded package). For development structure, see the full repository.
@@ -260,6 +262,12 @@ Generate SEO-friendly static pages:
 
 ```bash
 npm run static-make
+```
+
+To generate static pages and deploy in one step:
+
+```bash
+npm run static-deploy
 ```
 
 **Configuration** in `data/static-make.config.json`:

@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- change: align and complete app package.json scripts with dev package.json, add engines field
+
 ## 0.18.1 (2026-03-22)
 
 - fix: select filter matching partial values instead of exact values (e.g. "heure" also showing "date-heure")
