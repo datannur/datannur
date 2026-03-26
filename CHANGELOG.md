@@ -1,8 +1,9 @@
 # datannur
 
-## unreleased
+## 0.18.2 (2026-03-26)
 
 - change: rename about page tabs "Organisation" to "Structure" and "Fonctionnalité" to "Features", simplify homepage body text
+- change: move homepage more-info text from hardcoded markdown to config database
 - change: align and complete app package.json scripts with dev package.json, add engines field
 - add: npm audit signatures and synced dependencies check in CI
 - add: ncu script to update both package.json files at once

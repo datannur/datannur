@@ -65,11 +65,19 @@ export const columnCleanNames = {
   updatingEach: ['Fréquence', 'de mise à jour'],
   nbRow: 'Nombre de lignes',
   nbFiles: 'Nombre de fichiers',
+  min: 'Minimum',
+  max: 'Maximum',
+  mean: 'Moyenne',
+  std: 'Écart-type',
 } as const
 
 export const columnIcons = {
   updatingEach: 'frequency',
   lastUpdate: 'lastUpdateDate',
+  min: 'stat',
+  max: 'stat',
+  mean: 'stat',
+  std: 'stat',
 } as const
 
 export const entityToIcon = {

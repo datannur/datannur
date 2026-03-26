@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",
@@ -72,7 +72,7 @@
     "typescript-eslint": "^8.57.2",
     "vite": "^8.0.3",
     "vite-plugin-full-reload": "^1.2.0",
-    "vitest": "^4.1.1"
+    "vitest": "^4.1.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",

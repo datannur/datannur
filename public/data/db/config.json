@@ -4,6 +4,10 @@
     "value": "contact@datannur.com"
   },
   {
+    "id": "more_info",
+    "value": "Cette version utilise des données fictives à des fins de démonstration."
+  },
+  {
     "id": "filter_1",
     "value": "open_data : Open Data"
   },
