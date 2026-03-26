@@ -36,7 +36,7 @@
     "api:dev": "npm run node:ts api/nodejs/server.ts"
   },
   "dependencies": {
-    "jsonjsdb-builder": "^0.6.5",
-    "svelte-fileapp": "^0.0.13"
+    "jsonjsdb-builder": "^0.6.9",
+    "svelte-fileapp": "^0.0.17"
   }
 }
