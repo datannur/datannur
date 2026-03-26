@@ -164,16 +164,16 @@ export const allTabs: Record<string, TabConfig> = {
     withoutProp: true,
     footerVisible: true,
   },
-  aboutOrganisation: {
-    name: 'Organisation',
+  aboutStructure: {
+    name: 'Structure',
     icon: 'diagram',
     component: AboutFile,
     footerVisible: true,
     useAboutFile: true,
   },
-  aboutFunctionality: {
+  aboutFeatures: {
     name: 'Fonctionnalité',
-    icon: 'functionality',
+    icon: 'features',
     component: AboutFile,
     footerVisible: true,
     useAboutFile: true,

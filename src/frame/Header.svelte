@@ -78,7 +78,7 @@
       {/if}
 
       <HeaderDropdown
-        title="Organisation"
+        title="Structure"
         pages={[
           'institution',
           'institutions',

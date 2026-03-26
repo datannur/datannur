@@ -1,6 +1,6 @@
 <script lang="ts">
-  import aboutOrganisation from '@markdown/about-page/organisation.md?raw'
-  import aboutFunctionality from '@markdown/about-page/functionality.md?raw'
+  import aboutStructure from '@markdown/about-page/structure.md?raw'
+  import aboutFeatures from '@markdown/about-page/features.md?raw'
   import { getAboutMain } from '@lib/get-about-main'
   import { tabsHelper } from '@tab/tabs-helper'
   import Title from '@layout/Title.svelte'
@@ -8,8 +8,8 @@
 
   const tabs = tabsHelper({
     aboutFile: getAboutMain(),
-    aboutOrganisation,
-    aboutFunctionality,
+    aboutStructure,
+    aboutFeatures,
   })
 </script>
 
