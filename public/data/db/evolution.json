@@ -854,7 +854,7 @@
     "parent_entity_id": null,
     "variable": "min",
     "old_value": null,
-    "new_value": 1590102632,
+    "new_value": "1590102632",
     "name": null
   },
   {
@@ -865,7 +865,7 @@
     "parent_entity_id": null,
     "variable": "max",
     "old_value": null,
-    "new_value": 1774134632,
+    "new_value": "1774134632",
     "name": null
   },
   {
@@ -876,7 +876,7 @@
     "parent_entity_id": null,
     "variable": "mean",
     "old_value": null,
-    "new_value": 1726960232,
+    "new_value": "1726960232",
     "name": null
   },
   {
@@ -887,7 +887,18 @@
     "parent_entity_id": null,
     "variable": "std",
     "old_value": null,
-    "new_value": 53,
+    "new_value": "53",
+    "name": null
+  },
+  {
+    "timestamp": 1774554790,
+    "type": "add",
+    "entity": "config",
+    "entity_id": "more_info",
+    "parent_entity_id": null,
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
     "name": null
   }
 ]
