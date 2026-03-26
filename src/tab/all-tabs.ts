@@ -172,7 +172,7 @@ export const allTabs: Record<string, TabConfig> = {
     useAboutFile: true,
   },
   aboutFeatures: {
-    name: 'Fonctionnalité',
+    name: 'Fonctionnalités',
     icon: 'features',
     component: AboutFile,
     footerVisible: true,
