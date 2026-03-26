@@ -32,6 +32,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Audit signatures
+        run: npm audit signatures
+
+      - name: Check synced dependencies
+        run: |
+          node -e '
+            const fs = require("fs");
+            const root = JSON.parse(fs.readFileSync("package.json", "utf8"));
+            const pub = JSON.parse(fs.readFileSync("public/package.json", "utf8"));
+            const strip = v => v.replace(/^[\^~]/, "");
+            const errors = Object.keys(pub.dependencies || {}).filter(p => {
+              const rv = (root.devDependencies || {})[p] || (root.dependencies || {})[p];
+              return !rv || strip(rv) !== strip(pub.dependencies[p]);
+            });
+            if (errors.length) { console.error("Mismatched versions:", errors); process.exit(1); }
+            console.log("All shared dependencies are in sync");
+          '
+
       - name: Format
         run: npm run format:check
 

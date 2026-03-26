@@ -8,6 +8,9 @@
     "url": "https://datannur.com"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=22.6.0"
+  },
   "datannur": {
     "dbPath": "data/db",
     "schemasPath": "schemas",
@@ -19,18 +22,21 @@
     "node:ts": "node --experimental-strip-types --disable-warning=ExperimentalWarning",
     "static-make": "npm run node:ts node-scripts/static-make.ts",
     "deploy": "npm run node:ts node-scripts/deploy.ts",
+    "static-deploy": "npm run static-make && npm run deploy",
     "sync-db": "npm run node:ts node-scripts/sync-db.ts",
     "validate-schemas": "npm run node:ts node-scripts/validate-schemas.ts",
     "schema:generate": "npm run node:ts node-scripts/manage-schemas.ts generate",
+    "schema:generate:strict": "npm run node:ts node-scripts/manage-schemas.ts generate --strict",
     "schema:update": "npm run node:ts node-scripts/manage-schemas.ts update",
+    "schema:update:strict": "npm run node:ts node-scripts/manage-schemas.ts update --strict",
     "schema:reset": "npm run node:ts node-scripts/manage-schemas.ts reset",
-    "openapi:generate": "npm run node:ts node-scripts/generate-api.ts",
-    "openapi:generate:dev": "NODE_ENV=development npm run node:ts node-scripts/generate-api.ts",
-    "schema:build": "npm run validate-schemas && npm run openapi:generate",
+    "api:generate": "npm run node:ts node-scripts/generate-api.ts",
+    "api:generate:dev": "NODE_ENV=development npm run node:ts node-scripts/generate-api.ts",
+    "schema:build": "npm run validate-schemas && npm run api:generate",
     "api:dev": "npm run node:ts api/nodejs/server.ts"
   },
   "dependencies": {
-    "jsonjsdb-builder": "^0.6.5",
-    "svelte-fileapp": "^0.0.13"
+    "jsonjsdb-builder": "^0.6.9",
+    "svelte-fileapp": "^0.0.17"
   }
 }

@@ -32,6 +32,8 @@
    npx playwright install  # Install browsers for UI tests
    ```
 
+   > **Requires Node.js >= 22.6.0**
+
 2. Develop and test:
 
    ```bash
@@ -111,14 +113,17 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 
 ### API & Schema Management
 
-| Command                    | Purpose                                   |
-| -------------------------- | ----------------------------------------- |
-| `npm run api:generate`     | Generate OpenAPI specs from schemas       |
-| `npm run schema:generate`  | Generate schemas from data                |
-| `npm run schema:update`    | Update schemas with new fields            |
-| `npm run schema:build`     | Validate schemas + generate OpenAPI       |
-| `npm run validate-schemas` | Validate all schemas and data files       |
-| `npm run api:dev`          | Start Node.js API dev server on port 3000 |
+| Command                          | Purpose                                   |
+| -------------------------------- | ----------------------------------------- |
+| `npm run validate-schemas`       | Validate all schemas and data files       |
+| `npm run schema:generate`        | Generate schemas from data                |
+| `npm run schema:generate:strict` | Generate schemas (strict mode)            |
+| `npm run schema:update`          | Update schemas with new fields            |
+| `npm run schema:update:strict`   | Update schemas (strict mode)              |
+| `npm run schema:reset`           | Reset schemas to default                  |
+| `npm run schema:build`           | Validate schemas + generate OpenAPI       |
+| `npm run api:generate`           | Generate OpenAPI specs from schemas       |
+| `npm run api:dev`                | Start Node.js API dev server on port 3000 |
 
 ## Guidelines
 
@@ -232,10 +237,11 @@ datannur provides two API implementations accessing the same JSON database:
 
 ### Maintainer Commands
 
-| Command               | Purpose                 |
-| --------------------- | ----------------------- |
-| `npm run static-make` | Generate SEO pages      |
-| `npm run deploy`      | Deploy to remote server |
+| Command                 | Purpose                              |
+| ----------------------- | ------------------------------------ |
+| `npm run static-make`   | Build + generate SEO pages           |
+| `npm run deploy`        | Deploy to remote server              |
+| `npm run static-deploy` | Build, generate SEO pages and deploy |
 
 ### Branch Cleanup
 
