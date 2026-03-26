@@ -35,6 +35,9 @@ jobs:
       - name: Audit signatures
         run: npm audit signatures
 
+      - name: Audit production vulnerabilities
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Check synced dependencies
         run: |
           node -e '
