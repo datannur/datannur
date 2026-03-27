@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "jsonjsdb-builder": "^0.6.9",
-    "svelte-fileapp": "^0.0.17"
+    "svelte-fileapp": "^0.0.19"
   }
 }
