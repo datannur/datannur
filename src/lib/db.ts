@@ -296,6 +296,11 @@ class Process {
       )
       item.nbDatasetRecursive = datasets.length
       item.nbVariableRecursive = variables.length
+      item.dataSizeRecursive =
+        datasets.reduce(
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          0,
+        ) || undefined
     })
   }
   static folder() {
@@ -320,6 +325,11 @@ class Process {
       )
       folder.nbDatasetRecursive = datasets.length
       folder.nbVariableRecursive = variables.length
+      folder.dataSizeRecursive =
+        datasets.reduce(
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          0,
+        ) || undefined
     })
   }
   static tag() {
@@ -341,8 +351,14 @@ class Process {
       ).length
       tag.nbFolderRecursive = getRecursive('tag', tag.id, 'folder').length
       tag.nbDocRecursive = getRecursive('tag', tag.id, 'doc').length
-      tag.nbDatasetRecursive = getRecursive('tag', tag.id, 'dataset').length
+      const datasets = getRecursive('tag', tag.id, 'dataset')
+      tag.nbDatasetRecursive = datasets.length
       tag.nbVariableRecursive = getRecursive('tag', tag.id, 'variable').length
+      tag.dataSizeRecursive =
+        datasets.reduce(
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          0,
+        ) || undefined
       addEntities(tag)
     })
   }

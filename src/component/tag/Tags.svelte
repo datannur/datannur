@@ -23,6 +23,7 @@
   let docMax = 0
   let datasetMax = 0
   let variableMax = 0
+  let dataSizeMax = 0
   let levelMax = 0
   for (const tag of tags) {
     if (db.useRecursive.tag) tag.pathString = getParentPath(tag)
@@ -32,6 +33,7 @@
     docMax = Math.max(docMax, tag.nbDocRecursive ?? 0)
     datasetMax = Math.max(datasetMax, tag.nbDatasetRecursive ?? 0)
     variableMax = Math.max(variableMax, tag.nbVariableRecursive ?? 0)
+    dataSizeMax = Math.max(dataSizeMax, tag.dataSizeRecursive ?? 0)
     levelMax = Math.max(levelMax, (tag.parents?.length ?? 0) + 1)
   }
 
@@ -87,6 +89,7 @@
       Column.nbDocRecursive('tag', docMax),
       Column.nbDatasetRecursive('tag', datasetMax),
       Column.nbVariable('tag', variableMax, { recursive: true }),
+      Column.dataSize(dataSizeMax, { recursive: true }),
     ])
 
     if (db.useRecursive.tag) {

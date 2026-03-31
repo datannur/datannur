@@ -900,5 +900,60 @@
     "old_value": null,
     "new_value": null,
     "name": null
+  },
+  {
+    "timestamp": 1774966382,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "ser_pub_loc",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": null,
+    "new_value": 134432,
+    "name": null
+  },
+  {
+    "timestamp": 1774966382,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "accident_route",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": null,
+    "new_value": 543,
+    "name": null
+  },
+  {
+    "timestamp": 1774966382,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "dep_sante",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": null,
+    "new_value": 956844335,
+    "name": null
+  },
+  {
+    "timestamp": 1774966382,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "vente_voitures",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": null,
+    "new_value": 958473,
+    "name": null
+  },
+  {
+    "timestamp": 1774966382,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "conso_energie",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": null,
+    "new_value": 49274393547,
+    "name": null
   }
 ]

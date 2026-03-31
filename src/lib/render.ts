@@ -173,6 +173,21 @@ export default class Render {
     if (type !== 'display') return data
     return data.toLocaleString(locale)
   }
+  static dataSize(bytes: NullableNumber): string {
+    if (!bytes) return ''
+    const units = ['o', 'Ko', 'Mo', 'Go', 'To']
+    let index = 0
+    let size = bytes
+    while (size >= 1024 && index < units.length - 1) {
+      size /= 1024
+      index++
+    }
+    const formatted =
+      index === 0
+        ? size.toString()
+        : size.toLocaleString(locale, { maximumFractionDigits: 1 })
+    return `${formatted} ${units[index]}`
+  }
   static statsPreview(data: string, type: string): string {
     if (!data) return ''
     if (type !== 'display') return data.replace(/<br>/g, ' ')

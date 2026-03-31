@@ -19,6 +19,7 @@
   let datasetMax = 0
   let nbDocMax = 0
   let variableMax = 0
+  let dataSizeMax = 0
   let levelMax = 0
   for (const institution of institutions) {
     institution.pathString = getParentPath(institution)
@@ -27,6 +28,7 @@
     datasetMax = Math.max(datasetMax, institution.nbDatasetRecursive ?? 0)
     nbDocMax = Math.max(nbDocMax, institution.docsRecursive?.length ?? 0)
     variableMax = Math.max(variableMax, institution.nbVariableRecursive ?? 0)
+    dataSizeMax = Math.max(dataSizeMax, institution.dataSizeRecursive ?? 0)
     levelMax = Math.max(levelMax, (institution.parents?.length ?? 0) + 1)
   }
 
@@ -48,6 +50,7 @@
     Column.nbVariable('institution', variableMax, {
       recursive: true,
     }),
+    Column.dataSize(dataSizeMax, { recursive: true }),
     Column.nbDoc('institution', nbDocMax),
     Column.tag(),
     Column.parents('institution'),

@@ -26,6 +26,7 @@
   let folderMax = 0
   let nbDocMax = 0
   let levelMax = 0
+  let dataSizeMax = 0
 
   if (!isMeta) {
     for (const folder of folders) {
@@ -35,6 +36,7 @@
       folderMax = Math.max(folderMax, folder.nbChildRecursive ?? 0)
       nbDocMax = Math.max(nbDocMax, folder.docsRecursive?.length ?? 0)
       levelMax = Math.max(levelMax, (folder.parents?.length ?? 0) + 1)
+      dataSizeMax = Math.max(dataSizeMax, folder.dataSizeRecursive ?? 0)
     }
     foldersSorted.sort((a, b) =>
       (a.pathString ?? '').localeCompare(b.pathString ?? ''),
@@ -88,6 +90,7 @@
       Column.nbVariable('folder', variableMax, {
         recursive: true,
       }),
+      Column.dataSize(dataSizeMax, { recursive: true }),
       Column.nbDoc('folder', nbDocMax),
       Column.tag(),
       Column.lastUpdate(),

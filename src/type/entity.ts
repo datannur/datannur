@@ -108,6 +108,7 @@ export type Dataset = BaseEntity &
     localisation?: string
     nbRow?: number
     nbFiles?: number
+    dataSize?: number
     lastUpdateDate?: string
     updatingEach?: string
     noMoreUpdate?: boolean
@@ -205,6 +206,7 @@ export type Folder = BaseEntity &
     managerName?: string
     nbDatasetRecursive?: number
     nbVariableRecursive?: number
+    dataSizeRecursive?: number
     nextUpdateDate?: string
     typeClean?: string
   }
@@ -224,6 +226,7 @@ export type Institution = BaseEntity &
     nbFolderRecursive?: number
     nbDatasetRecursive?: number
     nbVariableRecursive?: number
+    dataSizeRecursive?: number
   }
 
 export type Tag = BaseEntity &
@@ -241,6 +244,7 @@ export type Tag = BaseEntity &
     nbDocRecursive?: number
     nbDatasetRecursive?: number
     nbVariableRecursive?: number
+    dataSizeRecursive?: number
   }
 
 export type TagWithChildren = Tag & {

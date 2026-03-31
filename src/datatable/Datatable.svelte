@@ -751,6 +751,12 @@
               &.color-nbRow {
                 background: color('nbRow');
               }
+              &.color-nbFiles {
+                background: color('nbFiles');
+              }
+              &.color-dataSize {
+                background: color('dataSize');
+              }
               &.color-value {
                 background: color('value');
               }

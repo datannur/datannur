@@ -14,6 +14,7 @@
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
+  import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import Render from '@lib/render'
   import type { Dataset } from '@type'
 
@@ -38,6 +39,7 @@
       <td>{Render.num(dataset.nbFiles)}</td>
     </tr>
   {/if}
+  <DataSizeInfo dataSize={dataset.dataSize} />
   {#if dataset.lastUpdateDate}
     <LastUpdateInfo lastUpdateDate={dataset.lastUpdateDate} />
   {/if}
