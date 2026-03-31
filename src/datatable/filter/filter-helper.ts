@@ -5,10 +5,6 @@ import type { Column } from '@type'
 import { UrlParam } from 'svelte-fileapp'
 import { dateToTimestamp } from '@lib/time'
 
-interface FilterHistory {
-  columns: Record<number, { specialSearch?: string }>
-}
-
 interface ButtonInfo {
   text: string
   action: () => void
@@ -21,7 +17,6 @@ export default class FilterHelper {
   filterTableId: string
   onUpdateFilterCount: (count: number) => void
   datatable?: Api
-  historySearch?: FilterHistory | null
   constructor(
     tableId: string,
     entity: string,
@@ -34,7 +29,6 @@ export default class FilterHelper {
   }
   init(datatable: Api) {
     this.datatable = datatable
-    this.historySearch = this.getHistory()
     datatable.columns().every(index => {
       this.initColumn(datatable.column(index), index)
     })
@@ -93,14 +87,15 @@ export default class FilterHelper {
       select.appendTo(selectWrap)
       select.on('change', event => {
         const elem = jQuery(event.target)
-        let val = jQuery.fn.dataTable.util.escapeRegex(String(elem.val()))
+        let val = String(elem.val())
         if (val === 'true') val = 'vrai'
         if (val === 'false') val = 'faux'
 
         if (val === '__empty__') {
           column.search('^$', true, false).draw()
         } else {
-          column.search(val ? '^' + val + '$' : '', true, false).draw()
+          const escaped = jQuery.fn.dataTable.util.escapeRegex(val)
+          column.search(val ? '^' + escaped + '$' : '', true, false).draw()
         }
         this.updateFilterUrl(columnNum, val)
         this.updateFilterCount()
@@ -109,13 +104,16 @@ export default class FilterHelper {
       const colFilterUrl = this.getColFilterUrl(columnNum)
 
       if (colFilterUrl) {
-        select.val(colFilterUrl.replaceAll('\\', ''))
-        column
-          .search(colFilterUrl ? '^' + colFilterUrl + '$' : '', true, false)
-          .draw()
+        select.val(colFilterUrl)
+        const escaped = jQuery.fn.dataTable.util.escapeRegex(colFilterUrl)
+        column.search('^' + escaped + '$', true, false).draw()
         this.updateFilterCount()
       } else if (column.search() !== '') {
-        select.val(column.search().replace(/^\^|\$$/g, '')).trigger('change')
+        const rawVal = column
+          .search()
+          .replace(/^\^|\$$/g, '')
+          .replace(/\\(.)/g, '$1')
+        select.val(rawVal).trigger('change')
       }
     } else {
       filterElem.on('keyup', event => {
@@ -132,7 +130,6 @@ export default class FilterHelper {
 
         if (columnNum in this.filters) {
           this.searchEquationEnd(columnNum)
-          this.updateFilterHistory(columnNum, '')
         }
 
         let value = String(elem.val())
@@ -171,14 +168,8 @@ export default class FilterHelper {
       })
 
       const colFilterUrl = this.getColFilterUrl(columnNum)
-      const colHistory = this.getFilterHistory(columnNum)
       if (colFilterUrl) {
         filterElem.val(colFilterUrl).trigger('keyup')
-      } else if (
-        colHistory?.specialSearch &&
-        colHistory?.specialSearch !== ''
-      ) {
-        filterElem.val(colHistory?.specialSearch).trigger('keyup')
       } else if (column.search() !== '') {
         filterElem.val(column.search()).trigger('keyup')
       }
@@ -229,35 +220,6 @@ export default class FilterHelper {
     const dt = jQuery.fn.dataTable
     const toRemove = Object.values(this.filters)
     dt.ext.search = dt.ext.search.filter((v, i) => toRemove.indexOf(i) === -1)
-  }
-  getHistory() {
-    const jsonStr = localStorage.getItem(
-      'DataTables_history_search_' + this.tableId,
-    )
-    if (!jsonStr) return null
-    return JSON.parse(jsonStr) as FilterHistory
-  }
-  getFilterHistory(colNum: number) {
-    const colData = this.historySearch?.columns[colNum]
-    if (!colData) return {}
-    return colData
-  }
-  updateFilterHistory(colNum: number, value: string) {
-    if (!this.historySearch) {
-      this.historySearch = {
-        columns: {},
-      }
-    }
-    let colData = this.historySearch.columns[colNum]
-    if (!colData) {
-      colData = {}
-      this.historySearch.columns[colNum] = colData
-    }
-    colData.specialSearch = value
-    localStorage.setItem(
-      'DataTables_history_search_' + this.tableId,
-      JSON.stringify(this.historySearch),
-    )
   }
   updateFilterUrl(colNum: number, value: string) {
     const colId = this.filterTableId + '_' + colNum

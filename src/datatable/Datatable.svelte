@@ -148,6 +148,15 @@
         autoWidth: false,
         fixedColumns: { leftColumns: nbSticky },
         stateSave: true,
+        stateSaveParams: (
+          settings: unknown,
+          data: { columns: { search: { search: string } }[] },
+        ) => {
+          void settings
+          for (const col of data.columns) {
+            col.search.search = ''
+          }
+        },
         info: false,
         dom: '<"toolbar">ftB',
         order: [[0, 'asc']],

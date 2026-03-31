@@ -386,7 +386,7 @@
     "link": null,
     "data_path": "https://data.admin.ch/data/conso-energie.xlsx",
     "nb_files": 13,
-    "data_size": 49274393547,
+    "data_size": 49274393543,
     "tag_ids": "altimetrie, approvisionnement, armee, faune, images_aeriennes, culture",
     "doc_ids": "statpop-info, tourisme-exemple"
   },
