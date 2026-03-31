@@ -16,6 +16,7 @@
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import TypeInfo from '@info-table/TypeInfo.svelte'
+  import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import type { Folder } from '@type'
 
   let { folder }: { folder: Folder } = $props()
@@ -32,6 +33,7 @@
   <InstitutionInfo type="owner" institutionId={folder.ownerId} />
   <InstitutionInfo type="manager" institutionId={folder.managerId} />
   <TypeInfo type={folder.typeClean} />
+  <DataSizeInfo dataSize={folder.dataSizeRecursive} />
   {#if folder.lastUpdateDate}
     <LastUpdateInfo lastUpdateDate={folder.lastUpdateDate} />
   {/if}

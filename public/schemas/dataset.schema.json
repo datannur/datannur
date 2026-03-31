@@ -90,6 +90,11 @@
         "description": "Number of files in the dataset",
         "x-description-fr": "Nombre de fichiers dans le dataset"
       },
+      "data_size": {
+        "type": ["integer", "null"],
+        "description": "Size of the dataset in bytes",
+        "x-description-fr": "Taille du dataset en octets"
+      },
       "start_date": {
         "type": ["string", "number", "null"],
         "description": "Start of the period covered by the dataset",

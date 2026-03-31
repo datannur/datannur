@@ -891,14 +891,25 @@
     "name": null
   },
   {
-    "timestamp": 1774554790,
-    "type": "add",
-    "entity": "config",
-    "entity_id": "more_info",
+    "timestamp": 1774985291,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "pollution_air__heure",
     "parent_entity_id": null,
-    "variable": null,
-    "old_value": null,
-    "new_value": null,
+    "variable": "type",
+    "old_value": "string",
+    "new_value": "datetime",
+    "name": null
+  },
+  {
+    "timestamp": 1774987898,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "conso_energie",
+    "parent_entity_id": null,
+    "variable": "data_size",
+    "old_value": 49274393547,
+    "new_value": 49274393543,
     "name": null
   }
 ]

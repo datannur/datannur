@@ -2482,7 +2482,7 @@
     "dataset_id": "pollution_air",
     "name": "Heure",
     "original_name": "HEURE",
-    "type": "string",
+    "type": "datetime",
     "nb_distinct": 24,
     "nb_duplicate": 67020,
     "nb_missing": 6,

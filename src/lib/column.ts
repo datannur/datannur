@@ -424,6 +424,26 @@ export default class Column {
       },
     }
   }
+  static dataSize(
+    dataSizeMax: number,
+    option: { recursive?: boolean } = {},
+  ): ColumnType {
+    return {
+      data: 'dataSize' + (option.recursive ? 'Recursive' : ''),
+      title: Render.icon('dataSize') + 'Taille',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip: 'Taille des données',
+      render: (data, type) => {
+        if (type !== 'display') {
+          return data === '' || data === null ? 0 : parseInt(data)
+        }
+        if (!data) return ''
+        const percent = getPercent(data / dataSizeMax)
+        return `${Render.numPercent(Render.dataSize(data), percent, 'dataSize', type)}`
+      },
+    }
+  }
   static nbSources(
     nbSourcesMax: number,
     entity: 'dataset' | 'variable',

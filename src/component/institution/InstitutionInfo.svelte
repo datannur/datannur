@@ -6,6 +6,7 @@
   import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
+  import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import type { Institution } from '@type'
 
@@ -40,6 +41,7 @@
       </td>
     </tr>
   {/if}
+  <DataSizeInfo dataSize={institution.dataSizeRecursive} />
   {#if institution.period}
     <PeriodInfo
       period={institution.period}

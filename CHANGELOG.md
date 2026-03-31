@@ -1,5 +1,11 @@
 # datannur
 
+## 0.18.3 (2026-03-31)
+
+- add: data_size field for datasets with human-readable display and recursive aggregation on folders, institutions, and tags
+- fix: select filter writing escaped regex value in URL and not restoring correctly on reload
+- change: use URL as single source of truth for column filters, remove stateSave/localStorage filter persistence
+
 ## 0.18.2 (2026-03-26)
 
 - change: rename about page tabs "Organisation" to "Structure" and "Fonctionnalité" to "Features", simplify homepage body text
