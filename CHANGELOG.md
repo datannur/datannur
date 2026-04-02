@@ -1,5 +1,9 @@
 # datannur
 
+## 0.18.4 (2026-04-02)
+
+- fix: stats preview showing redundant min/max when values are equal, now displays single value
+
 ## 0.18.3 (2026-03-31)
 
 - add: data_size field for datasets with human-readable display and recursive aggregation on folders, institutions, and tags

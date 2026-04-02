@@ -44,8 +44,11 @@ function buildStatsPreview(variable: Variable): string {
   const minStr = variable.min != null ? fmt(variable.min) : ''
   const maxStr = variable.max != null ? fmt(variable.max) : ''
   const suffix = variable.type === 'string' ? ' car.' : ''
-  const line1 = `${minStr} — ${maxStr}${suffix}`
-  if (variable.mean == null) return line1
+  const sameMinMax = minStr && maxStr && minStr === maxStr
+  const line1 = sameMinMax
+    ? `${minStr}${suffix}`
+    : `${minStr} — ${maxStr}${suffix}`
+  if (sameMinMax || variable.mean == null) return line1
   const meanStr = fmt(variable.mean)
   let stdStr = ''
   if (variable.std != null) {
