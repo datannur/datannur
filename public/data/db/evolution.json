@@ -964,7 +964,62 @@
     "parent_entity_id": null,
     "variable": "sample_size",
     "old_value": null,
-    "new_value": 100000,
+    "new_value": "100000",
+    "name": null
+  },
+  {
+    "timestamp": 1775154977,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "tourisme_annu__classification_officielle",
+    "parent_entity_id": null,
+    "variable": "type",
+    "old_value": "string",
+    "new_value": null,
+    "name": null
+  },
+  {
+    "timestamp": 1775154977,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "conso_energie__sous_secteur",
+    "parent_entity_id": null,
+    "variable": "type",
+    "old_value": "string",
+    "new_value": "test",
+    "name": null
+  },
+  {
+    "timestamp": 1775155912,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "transport_pub__localite",
+    "parent_entity_id": null,
+    "variable": "type",
+    "old_value": "string",
+    "new_value": null,
+    "name": null
+  },
+  {
+    "timestamp": 1775155912,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "transport_pub__nb_lignes",
+    "parent_entity_id": null,
+    "variable": "type",
+    "old_value": "integer",
+    "new_value": null,
+    "name": null
+  },
+  {
+    "timestamp": 1775155912,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "transport_pub__frequence_moyenne",
+    "parent_entity_id": null,
+    "variable": "type",
+    "old_value": "float",
+    "new_value": null,
     "name": null
   }
 ]

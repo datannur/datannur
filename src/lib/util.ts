@@ -10,7 +10,7 @@ export function getPercent(value: number) {
 }
 
 export function getVariableTypeClean(type: string | undefined) {
-  if (!type || !(type in varTypes)) return 'inconnu'
+  if (!type || !(type in varTypes)) return undefined
   return varTypes[type as keyof typeof varTypes]
 }
 
