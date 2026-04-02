@@ -2,13 +2,7 @@ import escapeHtml from 'escape-html'
 import { link } from 'svelte-fileapp'
 import { get } from 'svelte/store'
 import { viewportManager } from '@lib/viewport-manager'
-import {
-  wrapLongText,
-  getPercent,
-  pluralize,
-  capitalize,
-  getVariableTypeClean,
-} from '@lib/util'
+import { wrapLongText, getPercent, pluralize, capitalize } from '@lib/util'
 import { getTimeAgo, getDatetime, dateToTimestamp } from '@lib/time'
 import { entityNames, entityToIcon } from '@lib/constant'
 import Render from '@lib/render'
@@ -248,16 +242,15 @@ export default class Column {
   }
   static datatype(): ColumnType {
     return {
-      data: 'type',
+      data: 'typeClean',
       title: Render.icon('type') + 'Type',
-      defaultContent: 'inconnu',
+      defaultContent: 'vide / manquant',
       name: 'type',
       filterType: 'select',
       tooltip: 'Type de données',
-      render: (data: string, type) => {
-        if (!data) return 'inconnu'
-        const clean = getVariableTypeClean(data)
-        return Render.shortText(clean, type)
+      render: (data, type) => {
+        if (!data) return 'vide / manquant'
+        return Render.shortText(data, type)
       },
     }
   }
