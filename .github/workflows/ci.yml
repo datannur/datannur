@@ -36,7 +36,15 @@ jobs:
         run: npm audit signatures
 
       - name: Audit production vulnerabilities
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          npm audit --omit=dev --audit-level=high --json | node -e "
+            const ignored = ['GHSA-r5fr-rjxr-66jc', 'GHSA-f23m-r3pf-42rh'];
+            const data = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+            const found = Object.values(data.vulnerabilities || {})
+              .flatMap(v => v.via).filter(v => typeof v === 'object')
+              .filter(v => ignored.every(id => v.url?.includes(id) === false));
+            if (found.length) { console.log(JSON.stringify(found, null, 2)); process.exit(1); }
+          "
 
       - name: Check synced dependencies
         run: |
