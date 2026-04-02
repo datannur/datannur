@@ -1,5 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte'
+  import { page } from 'svelte-fileapp'
   import { getLocalFilter } from '@lib/db'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
@@ -16,7 +17,7 @@
   const variables = untrack(() => variablesProp!)
   const isMeta = untrack(() => isMetaProp)
 
-  const hasMultipleDatasets = new Set(variables.map(v => v.datasetId)).size > 1
+  const showDatasetColumns = $page !== 'dataset'
   const variablesSorted = [...variables]
   const metaPath = isMeta ? 'metaVariable' : undefined
 
@@ -60,7 +61,7 @@
       Column.lineageType(),
       Column.nbSources(nbSourcesMax, 'variable'),
       Column.nbDerived(nbDerivedMax, 'variable'),
-      ...(hasMultipleDatasets ? [Column.nbRow(nbRowMax)] : []),
+      ...(showDatasetColumns ? [Column.nbRow(nbRowMax)] : []),
       Column.stats(),
       Column.nbMissing(),
       Column.nbDuplicates(),
@@ -72,7 +73,7 @@
       return [
         ...base,
         Column.metaLocalisation(),
-        ...(hasMultipleDatasets
+        ...(showDatasetColumns
           ? [Column.dataset(isMeta), Column.metaFolder()]
           : []),
       ]
@@ -81,7 +82,7 @@
       Column.favorite(),
       ...base,
       Column.modality(),
-      ...(hasMultipleDatasets
+      ...(showDatasetColumns
         ? [
             Column.dataset(isMeta),
             Column.folder(),
