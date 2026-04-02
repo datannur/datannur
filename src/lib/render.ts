@@ -134,7 +134,11 @@ export default class Render {
     for (const freqItem of freqData) {
       const percentDisplay = getPercent(freqItem.freq / freqItem.total)
       const percentBackground = getPercent(freqItem.freq / freqItem.max)
-      const freqNum = Render.num(freqItem.freq, type)
+      const scaledFreq = freqItem.scale
+        ? Math.round(freqItem.freq * freqItem.scale)
+        : freqItem.freq
+      const approx = freqItem.scale ? '≈ ' : ''
+      const freqNum = approx + Render.num(scaledFreq, type)
       const percentText = type === 'display' ? ` (${percentDisplay}%)` : ''
 
       const freqContent =

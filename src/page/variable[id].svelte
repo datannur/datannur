@@ -38,6 +38,11 @@
     variablePreview,
     evolutions,
   })
+
+  if (variable.sampleSize && variable.nbRow) {
+    const freqTab = tabs.find(t => t.key === 'freq')
+    if (freqTab) freqTab.props.scale = variable.nbRow / variable.sampleSize
+  }
 </script>
 
 <section class="section">

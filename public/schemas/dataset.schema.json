@@ -85,6 +85,11 @@
         "description": "Number of rows in the dataset",
         "x-description-fr": "Nombre de ligne dans le dataset"
       },
+      "sample_size": {
+        "type": ["integer", "null"],
+        "description": "Number of rows sampled for frequency analysis",
+        "x-description-fr": "Nombre de lignes échantillonnées pour l'analyse de fréquences"
+      },
       "nb_files": {
         "type": ["integer", "null"],
         "description": "Number of files in the dataset",

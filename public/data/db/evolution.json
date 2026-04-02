@@ -908,8 +908,63 @@
     "entity_id": "conso_energie",
     "parent_entity_id": null,
     "variable": "data_size",
-    "old_value": 49274393547,
-    "new_value": 49274393543,
+    "old_value": "49274393547",
+    "new_value": "49274393543",
+    "name": null
+  },
+  {
+    "timestamp": 1775142369,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "usage_internet",
+    "parent_entity_id": null,
+    "variable": "sample_size",
+    "old_value": null,
+    "new_value": "100000",
+    "name": null
+  },
+  {
+    "timestamp": 1775143200,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "pop_region",
+    "parent_entity_id": null,
+    "variable": "sample_size",
+    "old_value": null,
+    "new_value": "100000",
+    "name": null
+  },
+  {
+    "timestamp": 1775143200,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "usage_internet",
+    "parent_entity_id": null,
+    "variable": "sample_size",
+    "old_value": "100000",
+    "new_value": null,
+    "name": null
+  },
+  {
+    "timestamp": 1775143256,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "pop_region",
+    "parent_entity_id": null,
+    "variable": "sample_size",
+    "old_value": "100000",
+    "new_value": null,
+    "name": null
+  },
+  {
+    "timestamp": 1775143273,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "pop_region",
+    "parent_entity_id": null,
+    "variable": "sample_size",
+    "old_value": null,
+    "new_value": 100000,
     "name": null
   }
 ]

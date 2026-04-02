@@ -32,7 +32,7 @@
       <td>{dataset.typeClean}</td>
     </tr>
   {/if}
-  <RowInfo nbRow={dataset.nbRow} />
+  <RowInfo nbRow={dataset.nbRow} sampleSize={dataset.sampleSize} />
   {#if dataset.nbFiles}
     <tr>
       <td><Icon type="nbFiles" /> Fichiers</td>
