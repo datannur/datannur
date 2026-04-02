@@ -2,7 +2,13 @@ import escapeHtml from 'escape-html'
 import { link } from 'svelte-fileapp'
 import { get } from 'svelte/store'
 import { viewportManager } from '@lib/viewport-manager'
-import { wrapLongText, getPercent, pluralize, capitalize } from '@lib/util'
+import {
+  wrapLongText,
+  getPercent,
+  pluralize,
+  capitalize,
+  getVariableTypeClean,
+} from '@lib/util'
 import { getTimeAgo, getDatetime, dateToTimestamp } from '@lib/time'
 import { entityNames, entityToIcon } from '@lib/constant'
 import Render from '@lib/render'
@@ -242,13 +248,17 @@ export default class Column {
   }
   static datatype(): ColumnType {
     return {
-      data: 'typeClean',
+      data: 'type',
       title: Render.icon('type') + 'Type',
-      defaultContent: '',
+      defaultContent: 'inconnu',
       name: 'type',
       filterType: 'select',
       tooltip: 'Type de données',
-      render: Render.shortText,
+      render: (data: string, type) => {
+        if (!data) return 'inconnu'
+        const clean = getVariableTypeClean(data)
+        return Render.shortText(clean, type)
+      },
     }
   }
   static description(): ColumnType {

@@ -1,5 +1,10 @@
 # datannur
 
+## 0.18.5 (2026-04-02)
+
+- fix: variable tab hiding dataset, folder, institution columns when only one dataset, now only hides on dataset detail page
+- fix: variable type column visible even when all variables have no type, now uses raw type for empty column detection
+
 ## 0.18.4 (2026-04-02)
 
 - fix: stats preview showing redundant min/max when values are equal, now displays single value
