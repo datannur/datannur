@@ -3,6 +3,8 @@
 ## 0.18.4 (2026-04-02)
 
 - fix: stats preview showing redundant min/max when values are equal, now displays single value
+- add: sample_size field for datasets, displayed alongside nb_row
+- add: frequency extrapolation to full dataset size when sample_size is present, with ≈ prefix
 
 ## 0.18.3 (2026-03-31)
 

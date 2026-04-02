@@ -107,6 +107,7 @@ export type Dataset = BaseEntity &
     link?: string
     localisation?: string
     nbRow?: number
+    sampleSize?: number
     nbFiles?: number
     dataSize?: number
     lastUpdateDate?: string
@@ -125,6 +126,7 @@ export type Dataset = BaseEntity &
 export type FreqPreview = Freq & {
   total: number
   max: number
+  scale?: number
 }
 
 export type Variable = BaseEntity &
@@ -150,6 +152,7 @@ export type Variable = BaseEntity &
     typeClean?: string
     num?: number
     nbRow?: number
+    sampleSize?: number
     datasetName?: string
     datasetType?: string
     folderId?: string | number

@@ -6,7 +6,7 @@
   import escapeHtml from 'escape-html'
   import type { Freq, Column as ColumnType } from '@type'
 
-  let { freq: freqProp }: { freq: Freq[] } = $props()
+  let { freq: freqProp, scale }: { freq: Freq[]; scale?: number } = $props()
   const freq = untrack(() => freqProp)
 
   const freqSorted = [...freq].sort((a, b) => (b.freq || 0) - (a.freq || 0))
@@ -31,10 +31,13 @@
       className: 'text-right',
       render: (data, type) => {
         if (data === null || data === undefined || !totalFreq) return ''
-        const percentDisplay = getPercent(data / totalFreq)
-        const percentBackground = getPercent(data / maxFreq)
+        const freq = Number(data)
+        const percentDisplay = getPercent(freq / totalFreq)
+        const percentBackground = getPercent(freq / maxFreq)
+        const scaledFreq = scale ? Math.round(freq * scale) : freq
+        const approx = scale ? '≈\u00a0' : ''
         if (type === 'display') {
-          const freqNum = Render.num(data, type)
+          const freqNum = approx + Render.num(scaledFreq, type)
           return `
           <div class="freq-item-container">
             <div class="freq-background color-freq" style="width: ${percentBackground}%"></div>
@@ -43,7 +46,7 @@
           </div>`
         }
 
-        return Render.numPercent(data, percentDisplay, 'freq', type, true)
+        return Render.numPercent(scaledFreq, percentDisplay, 'freq', type, true)
       },
     })
 
