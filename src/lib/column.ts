@@ -893,7 +893,96 @@ export default class Column {
       render: (data: string | boolean, type) => {
         if (!data) return ''
         if (type !== 'display') return data
-        return `<i class="fas fa-key"></i>`
+        return `<span class="icon icon-key"><i class="fas fa-key"></i></span>`
+      },
+    }
+  }
+  static fkVar(): ColumnType {
+    return {
+      data: 'fkVarName',
+      title: Render.icon('fk') + 'Clé étrangère',
+      defaultContent: '',
+      tooltip: 'Variable référencée dans un autre dataset',
+      render: (data: string, type, row: EntityTypeMap['variable']) => {
+        if (!row.fkVarId) return ''
+        if (!data) return escapeHtml(String(row.fkVarId))
+        if (type !== 'display') return data
+        const varLink = link(
+          'variable/' + row.fkVarId,
+          escapeHtml(data),
+          'variable',
+        )
+        const datasetLink = link(
+          'dataset/' + row.fkDatasetId,
+          escapeHtml(row.fkDatasetName ?? ''),
+          'dataset',
+        )
+        return `${varLink}<br><small>${datasetLink}</small>`
+      },
+    }
+  }
+  static nbFk(nbFkMax: number): ColumnType {
+    return {
+      data: 'fkDatasetIds',
+      title: Render.icon('fk') + 'FK →',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip: 'Nombre de datasets référencés par clé étrangère (sortant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['dataset'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkMax)
+        const content = link(`dataset/${row.id}?tab=datasets`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
+      },
+    }
+  }
+  static nbFkRef(nbFkRefMax: number): ColumnType {
+    return {
+      data: 'fkReferencedByDatasetIds',
+      title: Render.icon('fk') + 'FK ←',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip:
+        'Nombre de datasets qui référencent ce dataset par clé étrangère (entrant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['dataset'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkRefMax)
+        const content = link(`dataset/${row.id}?tab=datasets`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
+      },
+    }
+  }
+  static nbFkRefVar(nbFkRefMax: number): ColumnType {
+    return {
+      data: 'fkReferencedByVarIds',
+      title: Render.icon('fk') + 'FK ←',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip:
+        'Nombre de variables qui référencent cette variable par clé étrangère (entrant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['variable'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkRefMax)
+        const content = link(`variable/${row.id}?tab=variables`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
       },
     }
   }
@@ -916,17 +1005,19 @@ export default class Column {
       render: Render.shortText,
     }
   }
-  static lineageType(): ColumnType {
+  static relationType(): ColumnType {
     return {
-      data: 'lineageType',
+      data: 'relationType',
       title: Render.icon('diagram') + 'Relation',
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Source (parent) ou dérivé (enfant)',
+      tooltip: 'Source (parent), dérivé (enfant) ou clé étrangère',
       render: data => {
         if (!data) return ''
         if (data === 'derived') return 'Dérivé'
         if (data === 'source') return 'Source'
+        if (data === 'fk') return 'Clé étrangère'
+        if (data === 'fk-ref') return 'Référencé par FK'
         return ''
       },
     }

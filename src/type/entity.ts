@@ -80,10 +80,10 @@ export type WithPeriod = {
   periodDuration?: string
 }
 
-export type WithLineage = {
+export type WithRelations = {
   sourceIds?: Set<string | number>
   derivedIds?: Set<string | number>
-  lineageType?: 'source' | 'derived'
+  relationType?: 'source' | 'derived' | 'fk' | 'fk-ref'
 }
 
 export type EntityWithRelations = BaseEntity & {
@@ -97,7 +97,7 @@ export type Dataset = BaseEntity &
   WithDocs &
   WithFavorite &
   WithPeriod &
-  WithLineage & {
+  WithRelations & {
     folderId?: string | number
     managerId?: string | number
     ownerId?: string | number
@@ -121,6 +121,8 @@ export type Dataset = BaseEntity &
     managerName?: string
     nbVariable?: number
     nextUpdateDate?: string
+    fkDatasetIds?: Set<string | number>
+    fkReferencedByDatasetIds?: Set<string | number>
   }
 
 export type FreqPreview = Freq & {
@@ -133,7 +135,7 @@ export type Variable = BaseEntity &
   WithTags &
   WithFavorite &
   WithPeriod &
-  WithLineage & {
+  WithRelations & {
     datasetId: string | number
     modalityIds?: string
     originalName?: string
@@ -147,9 +149,14 @@ export type Variable = BaseEntity &
     std?: number | null
     type?: string
     sourceVarIds?: string
+    fkVarId?: string | number
 
     // Computed fields added during processing
     typeClean?: string
+    fkVarName?: string
+    fkDatasetId?: string | number
+    fkDatasetName?: string
+    fkReferencedByVarIds?: Set<string | number>
     num?: number
     nbRow?: number
     sampleSize?: number

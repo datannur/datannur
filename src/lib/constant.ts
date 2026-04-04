@@ -153,5 +153,6 @@ export const entityToIcon = {
   internalId: 'fingerprint',
   nbSource: 'arrow-up',
   nbDerived: 'arrow-down',
+  fk: 'key',
   freq: 'chart-bar',
 } as const

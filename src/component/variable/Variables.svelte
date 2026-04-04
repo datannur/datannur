@@ -28,7 +28,7 @@
     dbFilters.forEach((filter, i) => (filterPos[filter.id] = i))
     toSort.sort(
       (a, b) =>
-        (b.lineageType ?? '').localeCompare(a.lineageType ?? '') ||
+        (b.relationType ?? '').localeCompare(a.relationType ?? '') ||
         (filterPos[a.datasetType ?? ''] ?? 0) -
           (filterPos[b.datasetType ?? ''] ?? 0) ||
         (a.folderName ?? '').localeCompare(b.folderName ?? '') ||
@@ -42,6 +42,7 @@
   let nbValueMax = 0
   let nbSourcesMax = 0
   let nbDerivedMax = 0
+  let nbFkRefMax = 0
   for (const variable of variables) {
     nbRowMax = Math.max(nbRowMax, variable.nbRow ?? 0)
     nbValueMax = Math.max(nbValueMax, variable.nbValue ?? 0)
@@ -49,6 +50,7 @@
       nbSourcesMax = Math.max(nbSourcesMax, variable.sourceIds?.size ?? 0)
       nbDerivedMax = Math.max(nbDerivedMax, variable.derivedIds?.size ?? 0)
     }
+    nbFkRefMax = Math.max(nbFkRefMax, variable.fkReferencedByVarIds?.size ?? 0)
   }
 
   function defineColumns() {
@@ -57,8 +59,10 @@
       Column.originalName(),
       Column.description(),
       Column.datatype(),
+      Column.relationType(),
       Column.isKey(),
-      Column.lineageType(),
+      Column.fkVar(),
+      Column.nbFkRefVar(nbFkRefMax),
       Column.nbSources(nbSourcesMax, 'variable'),
       Column.nbDerived(nbDerivedMax, 'variable'),
       ...(showDatasetColumns ? [Column.nbRow(nbRowMax)] : []),

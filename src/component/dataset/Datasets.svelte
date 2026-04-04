@@ -25,7 +25,7 @@
     dbFilters.forEach((filter, i) => (filterPos[filter.id] = i))
     toSort.sort(
       (a, b) =>
-        (b.lineageType ?? '').localeCompare(a.lineageType ?? '') ||
+        (b.relationType ?? '').localeCompare(a.relationType ?? '') ||
         (filterPos[a.type ?? ''] ?? 0) - (filterPos[b.type ?? ''] ?? 0) ||
         (a.folderName ?? '').localeCompare(b.folderName ?? '') ||
         a.name.localeCompare(b.name),
@@ -40,6 +40,8 @@
   let nbDocMax = 0
   let nbSourcesMax = 0
   let nbDerivedMax = 0
+  let nbFkMax = 0
+  let nbFkRefMax = 0
   for (const d of datasets) {
     nbVariableMax = Math.max(nbVariableMax, d.nbVariable ?? 0)
     nbRowMax = Math.max(nbRowMax, d.nbRow ?? 0)
@@ -48,13 +50,17 @@
     nbDocMax = Math.max(nbDocMax, d.docsRecursive?.length ?? 0)
     nbSourcesMax = Math.max(nbSourcesMax, d.sourceIds?.size ?? 0)
     nbDerivedMax = Math.max(nbDerivedMax, d.derivedIds?.size ?? 0)
+    nbFkMax = Math.max(nbFkMax, d.fkDatasetIds?.size ?? 0)
+    nbFkRefMax = Math.max(nbFkRefMax, d.fkReferencedByDatasetIds?.size ?? 0)
   }
 
   function defineColumns() {
     const base = [
       Column.name('dataset', 'Dataset', { isMeta }),
       Column.description(),
-      Column.lineageType(),
+      Column.relationType(),
+      Column.nbFk(nbFkMax),
+      Column.nbFkRef(nbFkRefMax),
       Column.nbSources(nbSourcesMax, 'dataset'),
       Column.nbDerived(nbDerivedMax, 'dataset'),
       Column.datasetType(),

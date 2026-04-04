@@ -31,11 +31,29 @@
     fill: main.$color-2 !important;
   }
 
+  .flowchart-link {
+    @each $entity in main.$entities {
+      &[data-id^='L_#{$entity}_'] {
+        stroke: main.color($entity) !important;
+      }
+    }
+  }
+
   .node.clickable {
     @each $entity in main.$entities {
-      &[id^='flowchart-#{$entity}-'] path {
+      &[id*='flowchart-#{$entity}-'] rect,
+      &[id*='flowchart-#{$entity}-'] path {
         stroke: main.color($entity) !important;
         fill: #{main.color($entity)}44 !important;
+      }
+      &[id*='flowchart-#{$entity}-']:hover {
+        rect,
+        path {
+          stroke: main.color($entity) !important;
+        }
+        span {
+          color: main.color($entity) !important;
+        }
       }
     }
   }
@@ -51,23 +69,6 @@
       padding: 3px 5px !important;
       border-radius: 10px !important;
       font-size: 10px !important;
-    }
-  }
-
-  @each $name, $color in main.$icon-colors {
-    g[id*='#{$name}'] {
-      rect {
-        stroke: $color !important;
-        fill: #{$color}44 !important;
-      }
-      &:hover {
-        rect {
-          stroke: $color !important;
-        }
-        span {
-          color: $color !important;
-        }
-      }
     }
   }
 }

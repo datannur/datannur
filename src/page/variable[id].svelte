@@ -2,7 +2,7 @@
   import { untrack } from 'svelte'
   import db from '@db'
   import { tabsHelper } from '@tab/tabs-helper'
-  import { getLineage } from '@lib/db'
+  import { getRelated, getFkRelatedVariables } from '@lib/db'
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import type { Variable } from '@type'
@@ -20,8 +20,9 @@
   }
 
   const variables = [
-    ...getLineage('variable', variable, 'source'),
-    ...getLineage('variable', variable, 'derived'),
+    ...getRelated('variable', variable, 'source'),
+    ...getRelated('variable', variable, 'derived'),
+    ...getFkRelatedVariables(variable),
   ]
 
   const evolutions = db
