@@ -164,6 +164,16 @@ function addSourceVar(variable: Variable) {
   }
 }
 
+function addFkVar(variable: Variable) {
+  if (!variable.fkVarId) return
+  const fkVar = db.get('variable', variable.fkVarId)
+  if (!fkVar) return
+  variable.fkVarName = fkVar.name
+  variable.fkDatasetId = fkVar.datasetId
+  const fkDataset = db.get('dataset', fkVar.datasetId)
+  variable.fkDatasetName = fkDataset?.name
+}
+
 function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
   if (!item.lastUpdateDate || !item.updatingEach || item.noMoreUpdate) return
   let diff = 0
@@ -436,6 +446,7 @@ class Process {
       variable.nbDistinct = nbValues
       variable.nbValue = nbValues
       addSourceVar(variable)
+      addFkVar(variable)
       if (variable.key) variable.key = 'oui'
 
       const freqData = db.getAll('freq', { variable })

@@ -147,9 +147,13 @@ export type Variable = BaseEntity &
     std?: number | null
     type?: string
     sourceVarIds?: string
+    fkVarId?: string | number
 
     // Computed fields added during processing
     typeClean?: string
+    fkVarName?: string
+    fkDatasetId?: string | number
+    fkDatasetName?: string
     num?: number
     nbRow?: number
     sampleSize?: number

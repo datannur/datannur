@@ -63,6 +63,26 @@
       </td>
     </tr>
   {/if}
+  {#if variable.fkVarId}
+    <tr>
+      <td>
+        <Icon type="fk" />
+        Clé étrangère
+      </td>
+      <td>
+        {#if variable.fkVarName}
+          <Link href="dataset/{variable.fkDatasetId}" entity="dataset"
+            >{variable.fkDatasetName}</Link
+          >&ensp;→&ensp;<Link
+            href="variable/{variable.fkVarId}"
+            entity="variable">{variable.fkVarName}</Link
+          >
+        {:else}
+          {variable.fkVarId}
+        {/if}
+      </td>
+    </tr>
+  {/if}
   <tr>
     <td>
       <Icon type="hashtag" />

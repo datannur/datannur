@@ -111,6 +111,11 @@
         "x-description-fr": "Liste des clés des variables sources (lineage)",
         "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
         "examples": ["id1,id2,id3", "single-id", null]
+      },
+      "fk_var_id": {
+        "type": ["string", "number", "null"],
+        "description": "Foreign key referencing a variable in another dataset",
+        "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
       }
     }
   }

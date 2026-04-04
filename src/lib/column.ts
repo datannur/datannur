@@ -893,7 +893,31 @@ export default class Column {
       render: (data: string | boolean, type) => {
         if (!data) return ''
         if (type !== 'display') return data
-        return `<i class="fas fa-key"></i>`
+        return `<span class="icon icon-key"><i class="fas fa-key"></i></span>`
+      },
+    }
+  }
+  static fkVar(): ColumnType {
+    return {
+      data: 'fkVarName',
+      title: Render.icon('fk') + 'Clé étrangère',
+      defaultContent: '',
+      tooltip: 'Variable référencée dans un autre dataset',
+      render: (data: string, type, row: EntityTypeMap['variable']) => {
+        if (!row.fkVarId) return ''
+        if (!data) return escapeHtml(String(row.fkVarId))
+        if (type !== 'display') return data
+        const varLink = link(
+          'variable/' + row.fkVarId,
+          escapeHtml(data),
+          'variable',
+        )
+        const datasetLink = link(
+          'dataset/' + row.fkDatasetId,
+          escapeHtml(row.fkDatasetName ?? ''),
+          'dataset',
+        )
+        return `${varLink}<br><small>${datasetLink}</small>`
       },
     }
   }

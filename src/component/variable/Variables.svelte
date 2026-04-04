@@ -58,6 +58,7 @@
       Column.description(),
       Column.datatype(),
       Column.isKey(),
+      Column.fkVar(),
       Column.lineageType(),
       Column.nbSources(nbSourcesMax, 'variable'),
       Column.nbDerived(nbDerivedMax, 'variable'),
