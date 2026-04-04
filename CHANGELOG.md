@@ -4,6 +4,7 @@
 
 - change: rename header menu "Structure" to "Organisation"
 - fix: mermaid diagram entity colors broken since mermaid v11.14, restore colored node borders, hover and arrows
+- fix: update jsonjsdb-builder to 0.6.10 (fix **table**.json rewritten on every startup)
 
 ## 0.18.5 (2026-04-02)
 
