@@ -1,5 +1,10 @@
 # datannur
 
+## 0.18.6 (2026-04-04)
+
+- change: rename header menu "Structure" to "Organisation"
+- fix: mermaid diagram entity colors broken since mermaid v11.14, restore colored node borders, hover and arrows
+
 ## 0.18.5 (2026-04-02)
 
 - fix: variable tab hiding dataset, folder, institution columns when only one dataset, now only hides on dataset detail page
