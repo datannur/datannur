@@ -172,6 +172,16 @@ function addFkVar(variable: Variable) {
   variable.fkDatasetId = fkVar.datasetId
   const fkDataset = db.get('dataset', fkVar.datasetId)
   variable.fkDatasetName = fkDataset?.name
+  if (!fkVar.fkReferencedByVarIds) fkVar.fkReferencedByVarIds = new Set()
+  fkVar.fkReferencedByVarIds.add(variable.id)
+  const dataset = db.get('dataset', variable.datasetId)
+  if (dataset && fkDataset && dataset.id !== fkDataset.id) {
+    if (!dataset.fkDatasetIds) dataset.fkDatasetIds = new Set()
+    dataset.fkDatasetIds.add(fkDataset.id)
+    if (!fkDataset.fkReferencedByDatasetIds)
+      fkDataset.fkReferencedByDatasetIds = new Set()
+    fkDataset.fkReferencedByDatasetIds.add(dataset.id)
+  }
 }
 
 function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
@@ -270,20 +280,55 @@ export function addMinimumDeep(
   }
 }
 
-export function getLineage<T extends 'dataset' | 'variable'>(
+export function getRelated<T extends 'dataset' | 'variable'>(
   entity: T,
   elem: EntityTypeMap[T],
-  lineageType: 'source' | 'derived',
-): (EntityTypeMap[T] & { lineageType: string })[] {
-  const lineage: (EntityTypeMap[T] & { lineageType: string })[] = []
-  const lineageIds = elem[`${lineageType}Ids`]
-  if (!lineageIds) return lineage
-  for (const id of lineageIds) {
+  relationType: 'source' | 'derived',
+): (EntityTypeMap[T] & { relationType: string })[] {
+  const related: (EntityTypeMap[T] & { relationType: string })[] = []
+  const relatedIds = elem[`${relationType}Ids`]
+  if (!relatedIds) return related
+  for (const id of relatedIds) {
     const item = db.get(entity, id)
     if (!item) continue
-    lineage.push({ ...item, lineageType })
+    related.push({ ...item, relationType })
   }
-  return lineage
+  return related
+}
+
+export function getFkRelated(
+  dataset: EntityTypeMap['dataset'],
+): (EntityTypeMap['dataset'] & { relationType: string })[] {
+  const result: (EntityTypeMap['dataset'] & { relationType: string })[] = []
+  if (dataset.fkDatasetIds) {
+    for (const id of dataset.fkDatasetIds) {
+      const item = db.get('dataset', id)
+      if (!item) continue
+      result.push({ ...item, relationType: 'fk' })
+    }
+  }
+  if (dataset.fkReferencedByDatasetIds) {
+    for (const id of dataset.fkReferencedByDatasetIds) {
+      const item = db.get('dataset', id)
+      if (!item) continue
+      result.push({ ...item, relationType: 'fk-ref' })
+    }
+  }
+  return result
+}
+
+export function getFkRelatedVariables(
+  variable: EntityTypeMap['variable'],
+): (EntityTypeMap['variable'] & { relationType: string })[] {
+  const result: (EntityTypeMap['variable'] & { relationType: string })[] = []
+  if (variable.fkReferencedByVarIds) {
+    for (const id of variable.fkReferencedByVarIds) {
+      const item = db.get('variable', id)
+      if (!item) continue
+      result.push({ ...item, relationType: 'fk-ref' })
+    }
+  }
+  return result
 }
 
 class Process {

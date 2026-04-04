@@ -778,6 +778,9 @@
               &.color-key {
                 background: color('key');
               }
+              &.color-fk {
+                background: color('fk');
+              }
             }
           }
           td span.deleted {

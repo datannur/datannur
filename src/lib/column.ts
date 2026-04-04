@@ -921,6 +921,71 @@ export default class Column {
       },
     }
   }
+  static nbFk(nbFkMax: number): ColumnType {
+    return {
+      data: 'fkDatasetIds',
+      title: Render.icon('fk') + 'FK →',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip: 'Nombre de datasets référencés par clé étrangère (sortant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['dataset'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkMax)
+        const content = link(`dataset/${row.id}?tab=datasets`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
+      },
+    }
+  }
+  static nbFkRef(nbFkRefMax: number): ColumnType {
+    return {
+      data: 'fkReferencedByDatasetIds',
+      title: Render.icon('fk') + 'FK ←',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip:
+        'Nombre de datasets qui référencent ce dataset par clé étrangère (entrant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['dataset'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkRefMax)
+        const content = link(`dataset/${row.id}?tab=datasets`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
+      },
+    }
+  }
+  static nbFkRefVar(nbFkRefMax: number): ColumnType {
+    return {
+      data: 'fkReferencedByVarIds',
+      title: Render.icon('fk') + 'FK ←',
+      filterType: 'input',
+      defaultContent: '',
+      tooltip:
+        'Nombre de variables qui référencent cette variable par clé étrangère (entrant)',
+      render: (
+        data: Set<string | number>,
+        type,
+        row: EntityTypeMap['variable'],
+      ) => {
+        if (!data || !data.size) return ''
+        const nb = data.size
+        if (type !== 'display') return nb
+        const percent = getPercent(nb / nbFkRefMax)
+        const content = link(`variable/${row.id}?tab=variables`, String(nb))
+        return `${Render.numPercent(content, percent, 'fk', type)}`
+      },
+    }
+  }
   static metaLocalisation(): ColumnType {
     return {
       data: 'metaLocalisation',
@@ -940,17 +1005,19 @@ export default class Column {
       render: Render.shortText,
     }
   }
-  static lineageType(): ColumnType {
+  static relationType(): ColumnType {
     return {
-      data: 'lineageType',
+      data: 'relationType',
       title: Render.icon('diagram') + 'Relation',
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Source (parent) ou dérivé (enfant)',
+      tooltip: 'Source (parent), dérivé (enfant) ou clé étrangère',
       render: data => {
         if (!data) return ''
         if (data === 'derived') return 'Dérivé'
         if (data === 'source') return 'Source'
+        if (data === 'fk') return 'Clé étrangère'
+        if (data === 'fk-ref') return 'Référencé par FK'
         return ''
       },
     }

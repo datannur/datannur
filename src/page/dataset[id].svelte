@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import db from '@db'
-  import { removeDuplicateById, getLineage } from '@lib/db'
+  import { removeDuplicateById, getRelated, getFkRelated } from '@lib/db'
   import { tabsHelper } from '@tab/tabs-helper'
   import Tabs from '@tab/Tabs.svelte'
   import Title from '@layout/Title.svelte'
@@ -24,8 +24,9 @@
 
   const datasets = dataset
     ? [
-        ...getLineage('dataset', dataset, 'source'),
-        ...getLineage('dataset', dataset, 'derived'),
+        ...getRelated('dataset', dataset, 'source'),
+        ...getRelated('dataset', dataset, 'derived'),
+        ...getFkRelated(dataset),
       ]
     : []
 
