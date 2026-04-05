@@ -41,6 +41,7 @@ export const varTypes = {
   datetime: 'date-heure',
   time: 'heure',
   geometry: 'géométrie',
+  binary: 'binaire',
   other: 'autre',
 } as const
 
