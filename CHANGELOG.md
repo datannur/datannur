@@ -1,5 +1,9 @@
 # datannur
 
+## unreleased
+
+- add: binary variable type
+
 ## 0.18.6 (2026-04-04)
 
 - change: rename header menu "Structure" to "Organisation"
