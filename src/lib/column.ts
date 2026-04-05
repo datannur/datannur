@@ -410,20 +410,20 @@ export default class Column {
       },
     }
   }
-  static nbFiles(nbFilesMax: number): ColumnType {
+  static nbResources(nbResourcesMax: number): ColumnType {
     return {
-      data: 'nbFiles',
-      title: Render.icon('nbFiles') + 'Fichiers',
+      data: 'nbResources',
+      title: Render.icon('nbResources') + 'Res.',
       filterType: 'input',
       defaultContent: '',
-      tooltip: 'Nombre de fichiers',
+      tooltip: 'Nombre de ressources',
       render: (data, type) => {
         if (type !== 'display') {
           return data === '' || data === null ? 0 : parseInt(data)
         }
         if (!data) return ''
-        const percent = getPercent(data / nbFilesMax)
-        return `${Render.numPercent(data, percent, 'nbFiles', type)}`
+        const percent = getPercent(data / nbResourcesMax)
+        return `${Render.numPercent(data, percent, 'nbResources', type)}`
       },
     }
   }

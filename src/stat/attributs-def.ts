@@ -94,10 +94,10 @@ const attributsDef: Record<string, Attribut> = {
     type: 'numeric',
     variable: 'nbRow',
   },
-  nbFiles: {
-    name: 'Nombre de fichiers',
+  nbResources: {
+    name: 'Nombre de ressources',
     type: 'numeric',
-    variable: 'nbFiles',
+    variable: 'nbResources',
   },
   level: {
     name: "Niveau de l'arborecence",
