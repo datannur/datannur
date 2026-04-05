@@ -760,8 +760,8 @@
               &.color-nbRow {
                 background: color('nbRow');
               }
-              &.color-nbFiles {
-                background: color('nbFiles');
+              &.color-nbResources {
+                background: color('nbResources');
               }
               &.color-dataSize {
                 background: color('dataSize');

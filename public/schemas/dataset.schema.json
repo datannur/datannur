@@ -90,10 +90,10 @@
         "description": "Number of rows sampled for frequency analysis",
         "x-description-fr": "Nombre de lignes échantillonnées pour l'analyse de fréquences"
       },
-      "nb_files": {
+      "nb_resources": {
         "type": ["integer", "null"],
-        "description": "Number of files in the dataset",
-        "x-description-fr": "Nombre de fichiers dans le dataset"
+        "description": "Number of resources (files, tables, ...) in the dataset",
+        "x-description-fr": "Nombre de ressources (fichiers, tables, ...) dans le dataset"
       },
       "data_size": {
         "type": ["integer", "null"],

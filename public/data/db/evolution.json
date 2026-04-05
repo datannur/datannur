@@ -599,7 +599,7 @@
     "entity": "dataset",
     "entity_id": "vente_voitures",
     "parent_entity_id": null,
-    "variable": "nb_files",
+    "variable": "nb_resources",
     "old_value": null,
     "new_value": "3",
     "name": null
@@ -610,7 +610,7 @@
     "entity": "dataset",
     "entity_id": "conso_energie",
     "parent_entity_id": null,
-    "variable": "nb_files",
+    "variable": "nb_resources",
     "old_value": null,
     "new_value": "12",
     "name": null
@@ -621,7 +621,7 @@
     "entity": "dataset",
     "entity_id": "conso_energie",
     "parent_entity_id": null,
-    "variable": "nb_files",
+    "variable": "nb_resources",
     "old_value": "12",
     "new_value": "13",
     "name": null

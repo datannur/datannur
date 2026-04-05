@@ -108,7 +108,7 @@ export type Dataset = BaseEntity &
     localisation?: string
     nbRow?: number
     sampleSize?: number
-    nbFiles?: number
+    nbResources?: number
     dataSize?: number
     lastUpdateDate?: string
     updatingEach?: string

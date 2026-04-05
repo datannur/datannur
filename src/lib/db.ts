@@ -357,7 +357,7 @@ class Process {
       item.nbVariableRecursive = variables.length
       item.dataSizeRecursive =
         datasets.reduce(
-          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
           0,
         ) || undefined
     })
@@ -386,7 +386,7 @@ class Process {
       folder.nbVariableRecursive = variables.length
       folder.dataSizeRecursive =
         datasets.reduce(
-          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
           0,
         ) || undefined
     })
@@ -415,7 +415,7 @@ class Process {
       tag.nbVariableRecursive = getRecursive('tag', tag.id, 'variable').length
       tag.dataSizeRecursive =
         datasets.reduce(
-          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbFiles || 1),
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
           0,
         ) || undefined
       addEntities(tag)

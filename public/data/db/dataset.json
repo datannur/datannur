@@ -18,7 +18,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://raw.githubusercontent.com/ofs-data/data/ser-pub-loc.csv",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": 134432,
     "tag_ids": "theme_iso, securite, approvisionnement, anonymous_data",
     "doc_ids": null
@@ -42,7 +42,7 @@
     "delivery_format": "xlsx",
     "link": "dataset/accident_route.xlsx",
     "data_path": "https://raw.githubusercontent.com/ofs-data/data/accident-route.json",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": 543,
     "tag_ids": "systemes_reference, armee, developpement_territorial",
     "doc_ids": null
@@ -66,7 +66,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://raw.githubusercontent.com/ofs-data/data/dep-sante.xlsx",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": 956844335,
     "tag_ids": "geologie, infrastructures, theme_iso, systemes_reference, sensible_data",
     "doc_ids": null
@@ -90,7 +90,7 @@
     "delivery_format": "sas",
     "link": null,
     "data_path": "https://opendata.swiss/data/temperature-moy.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "infrastructures, images_aeriennes_2, edifices, cadastre_foncier, ouvrages, elimination",
     "doc_ids": null
@@ -114,7 +114,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://data.admin.ch/data/pop-region.json",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "climatologie, personal_data, localisation, transport, faune, cadastre_foncier",
     "doc_ids": "statpop-info"
@@ -138,7 +138,7 @@
     "delivery_format": "xlsx",
     "link": null,
     "data_path": "https://opendata.swiss/data/eco-energies.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "sols, images_aeriennes_2",
     "doc_ids": "pdf-wiki"
@@ -162,7 +162,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://opendata.swiss/data/eau-potable.json",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": null,
     "doc_ids": "pdf_online, bevnat-variable"
@@ -186,7 +186,7 @@
     "delivery_format": "sas",
     "link": null,
     "data_path": "https://data.admin.ch/data/tourisme-annu.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "personal_data, data_protection, sensible_data, images_aeriennes_1",
     "doc_ids": null
@@ -210,7 +210,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://data.admin.ch/data/pollution-air.csv",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "sols, localisation, altimetrie, pseudonymous_data, dangers_naturels, theme_iso",
     "doc_ids": null
@@ -234,7 +234,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://statistique.admin.ch/data/transport-pub.xlsx",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "pseudonymous_data, transport, approvisionnement, infrastructures, theme_iso",
     "doc_ids": null
@@ -258,7 +258,7 @@
     "delivery_format": "sas",
     "link": null,
     "data_path": null,
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "sante, cadastre_foncier",
     "doc_ids": "pdf-wiki, tourisme-exemple"
@@ -282,7 +282,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://statistique.admin.ch/data/emplois-tech.xlsx",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "dangers_naturels",
     "doc_ids": null
@@ -306,7 +306,7 @@
     "delivery_format": "sas",
     "link": null,
     "data_path": "https://opendata.swiss/data/accidents-travail.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": null,
     "doc_ids": "bevnat-variable"
@@ -330,7 +330,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://opendata.swiss/data/vente-voitures.parquet",
-    "nb_files": 3,
+    "nb_resources": 3,
     "data_size": 958473,
     "tag_ids": null,
     "doc_ids": null
@@ -354,7 +354,7 @@
     "delivery_format": "xlsx",
     "link": null,
     "data_path": null,
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "securite, transport, personal_data, societe, elimination, systemes_reference",
     "doc_ids": null
@@ -378,7 +378,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://statistique.admin.ch/data/immobilier-prix.xlsx",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "activites_economiques, flore",
     "doc_ids": null
@@ -402,7 +402,7 @@
     "delivery_format": "sas",
     "link": null,
     "data_path": "https://data.admin.ch/data/conso-energie.xlsx",
-    "nb_files": 13,
+    "nb_resources": 13,
     "data_size": 49274393543,
     "tag_ids": "altimetrie, approvisionnement, armee, faune, images_aeriennes, culture",
     "doc_ids": "statpop-info, tourisme-exemple"
@@ -426,7 +426,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://data.admin.ch/data/revenus-menages.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "communication, anonymous_data, dangers_naturels, transport",
     "doc_ids": "pop-com-1, pdf_online"
@@ -450,7 +450,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://raw.githubusercontent.com/ofs-data/data/emploi-jeunes.parquet",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": "localisation",
     "doc_ids": null
@@ -474,7 +474,7 @@
     "delivery_format": "csv",
     "link": null,
     "data_path": "https://opendata.swiss/data/emplois-tech2.json",
-    "nb_files": null,
+    "nb_resources": null,
     "data_size": null,
     "tag_ids": null,
     "doc_ids": null

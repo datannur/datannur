@@ -3,6 +3,7 @@
 ## unreleased
 
 - add: binary variable type
+- change: rename nb_files to nb_resources to support tables alongside files
 
 ## 0.18.6 (2026-04-04)
 

@@ -33,10 +33,10 @@
     </tr>
   {/if}
   <RowInfo nbRow={dataset.nbRow} sampleSize={dataset.sampleSize} />
-  {#if dataset.nbFiles}
+  {#if dataset.nbResources}
     <tr>
-      <td><Icon type="nbFiles" /> Fichiers</td>
-      <td>{Render.num(dataset.nbFiles)}</td>
+      <td><Icon type="nbResources" /> Ressources</td>
+      <td>{Render.num(dataset.nbResources)}</td>
     </tr>
   {/if}
   <DataSizeInfo dataSize={dataset.dataSize} />
