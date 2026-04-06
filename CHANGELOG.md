@@ -1,12 +1,13 @@
 # datannur
 
-## unreleased
+## 0.18.7 (2026-04-07)
 
 - add: binary variable type
 - change: rename nb_files to nb_resources to support tables alongside files
 - fix: local LLM proxy cross-origin vulnerability, restrict CORS and add origin check on all endpoints
 - fix: origin validation bypass via `startswith` replaced by proper URL parsing
 - fix: PHP session token IP binding now enforced in verification
+- chore: update jsonjsdb-builder to 0.6.11
 
 ## 0.18.6 (2026-04-04)
 
