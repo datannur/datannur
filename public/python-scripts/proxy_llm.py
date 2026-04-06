@@ -13,6 +13,7 @@ import ssl
 import traceback
 import urllib.request
 import urllib.error
+from urllib.parse import urlparse
 import os
 import sys
 import time
@@ -103,35 +104,39 @@ class ProxyHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         print(f"{self.address_string()} - {format % args}")
 
+    def _is_allowed_origin(self, origin: str) -> bool:
+        """Check if origin is an allowed localhost or file:// origin"""
+        if not origin or origin == "null":
+            return True
+        try:
+            parsed = urlparse(origin)
+            return parsed.scheme in ("http", "https") and parsed.hostname in (
+                "localhost",
+                "127.0.0.1",
+            )
+        except Exception:
+            return False
+
     def _check_origin(self):
-        """Verify request comes from localhost or file://"""
+        """Verify request comes from localhost or file://, reject otherwise"""
         origin = self.headers.get("Origin", "")
-        host = self.headers.get("Host", "")
-
-        # Allow localhost and file:// protocol
-        allowed = (
-            origin.startswith("http://localhost")
-            or origin == "null"
-            or "localhost" in host
-        )
-
-        if not allowed:
+        if not self._is_allowed_origin(origin):
             self._send_json_response(403, {"error": "Forbidden origin"})
+            return False
+        return True
 
-        return allowed
+    def _get_cors_origin(self) -> str:
+        """Get validated origin for CORS headers"""
+        origin = self.headers.get("Origin", "")
+        if origin and self._is_allowed_origin(origin):
+            return origin
+        return "http://localhost:5173"
 
     def _send_json_response(self, status_code, data):
         """Send JSON response"""
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json")
-
-        # Restrict CORS to localhost and file://
-        origin = self.headers.get("Origin", "")
-        if origin.startswith("http://localhost") or origin == "null":
-            self.send_header("Access-Control-Allow-Origin", origin if origin else "*")
-        else:
-            self.send_header("Access-Control-Allow-Origin", "http://localhost:5173")
-
+        self.send_header("Access-Control-Allow-Origin", self._get_cors_origin())
         self.send_header("Access-Control-Allow-Credentials", "true")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode("utf-8"))
@@ -194,6 +199,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
     def _handle_chat_completions(self):
         """Handle /api/chat/completions endpoint"""
+        if not self._check_origin():
+            return
+
         creds = self._get_api_credentials()
         if not creds:
             return
@@ -251,14 +259,14 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     f"[ERROR] Infomaniak API error (status {response.status}): {error_body}"
                 )
                 self.send_response(response.status)
-                self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Access-Control-Allow-Origin", self._get_cors_origin())
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
                 self.wfile.write(error_body.encode())
                 return
 
             self.send_response(response.status)
-            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Origin", self._get_cors_origin())
             self.send_header(
                 "Content-Type",
                 "text/event-stream" if is_stream else "application/json",
@@ -290,6 +298,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
     def _handle_transcriptions(self):
         """Handle /api/audio/transcriptions endpoint with internal polling"""
+        if not self._check_origin():
+            return
+
         creds = self._get_api_credentials()
         if not creds:
             return
@@ -446,15 +457,8 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         """Handle CORS preflight"""
-        origin = self.headers.get("Origin", "")
-
         self.send_response(200)
-
-        # Restrict CORS
-        if origin.startswith("http://localhost") or origin == "null":
-            self.send_header("Access-Control-Allow-Origin", origin if origin else "*")
-        else:
-            self.send_header("Access-Control-Allow-Origin", "http://localhost:5173")
+        self.send_header("Access-Control-Allow-Origin", self._get_cors_origin())
 
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header(
