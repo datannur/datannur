@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.18.6",
+  "version": "0.18.7",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",
@@ -59,7 +59,7 @@
     "eslint-plugin-svelte": "^3.16.0",
     "globals": "^17.4.0",
     "jiti": "^2.6.1",
-    "jsonjsdb-builder": "^0.6.10",
+    "jsonjsdb-builder": "^0.6.11",
     "open-cli": "^9.0.0",
     "playwright": "^1.58.2",
     "prettier": "^3.8.1",

@@ -115,7 +115,13 @@ function verifySession(string $sessionToken, string $secret): bool {
     if (($sessionData['expires'] ?? 0) < time()) {
         return false;
     }
-    
+
+    // Enforce IP binding
+    $currentIp = $_SERVER['REMOTE_ADDR'] ?? '';
+    if (($sessionData['ip'] ?? '') !== $currentIp) {
+        return false;
+    }
+
     return true;
 }
 
