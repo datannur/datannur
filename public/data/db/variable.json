@@ -19,7 +19,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__annee",
@@ -41,7 +42,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__type_service",
@@ -63,7 +65,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__nb_employes",
@@ -85,7 +88,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__budget_annuel",
@@ -107,7 +111,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__cout_par_habitant",
@@ -129,7 +134,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__nb_beneficiaires",
@@ -151,7 +157,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__taux_couverture",
@@ -173,7 +180,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__region",
@@ -195,7 +203,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__quartier",
@@ -217,7 +226,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__mode_gestion",
@@ -239,7 +249,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__type_infrastructure",
@@ -261,7 +272,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__surface_infrastructure",
@@ -283,7 +295,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__nb_points_service",
@@ -305,7 +318,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__niveau_accessibilite",
@@ -327,7 +341,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__cout_investissement",
@@ -349,7 +364,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__satisfaction_usagers",
@@ -371,7 +387,8 @@
     "min": 3,
     "max": 43,
     "mean": 17,
-    "std": 0.32
+    "std": 0.32,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__nb_interventions",
@@ -393,7 +410,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__delai_moyen_traitement",
@@ -415,7 +433,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "ser_pub_loc__source_financement",
@@ -437,7 +456,8 @@
     "min": -202223,
     "max": 4535435,
     "mean": 2343,
-    "std": 34.432
+    "std": 34.432,
+    "is_pattern": null
   },
   {
     "id": "accident_route__date_accident",
@@ -459,7 +479,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accident_route__type_accident",
@@ -481,7 +502,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accident_route__gravite",
@@ -503,7 +525,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accident_route__nb_blesses",
@@ -525,7 +548,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accident_route__cause_presumee",
@@ -547,7 +571,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__annee",
@@ -569,7 +594,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__canton",
@@ -591,7 +617,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__type_depense",
@@ -613,7 +640,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__montant_total",
@@ -635,7 +663,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__montant_par_habitant",
@@ -657,7 +686,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__population_cible",
@@ -679,7 +709,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__mode_financement",
@@ -701,7 +732,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__institution_responsable",
@@ -723,7 +755,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__cout_investissement",
@@ -745,7 +778,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__cout_fonctionnement",
@@ -767,7 +801,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__nb_beneficiaires",
@@ -789,7 +824,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__taux_croissance",
@@ -811,7 +847,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "dep_sante__region_sanitaire",
@@ -833,7 +870,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__annee",
@@ -855,7 +893,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__mois",
@@ -877,7 +916,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__station",
@@ -899,7 +939,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__altitude_station",
@@ -921,7 +962,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__temp_moy",
@@ -943,7 +985,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__temp_min",
@@ -965,7 +1008,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__temp_max",
@@ -987,7 +1031,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__dev_normale",
@@ -1009,7 +1054,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__precipitation_mensuelle",
@@ -1031,7 +1077,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__nb_jours_gel",
@@ -1053,7 +1100,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__nb_jours_ete",
@@ -1075,7 +1123,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__nb_jours_tres_chaud",
@@ -1097,7 +1146,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__humidite_moy",
@@ -1119,7 +1169,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__pression_moy",
@@ -1141,7 +1192,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__ensoleillement",
@@ -1163,7 +1215,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__rayonnement_solaire",
@@ -1185,7 +1238,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__direction_vent_dominant",
@@ -1207,7 +1261,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__vitesse_vent_moy",
@@ -1229,7 +1284,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__vitesse_vent_max",
@@ -1251,7 +1307,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__indice_chaleur",
@@ -1273,7 +1330,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__indice_froid",
@@ -1295,7 +1353,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "temperature_moy__source_donnee",
@@ -1317,7 +1376,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__annee",
@@ -1339,7 +1399,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__region",
@@ -1361,7 +1422,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__canton",
@@ -1383,7 +1445,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__population_totale",
@@ -1405,7 +1468,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__population_suisse",
@@ -1427,7 +1491,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__population_etrangere",
@@ -1449,7 +1514,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__densite_population",
@@ -1471,7 +1537,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__age_median",
@@ -1493,7 +1560,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__part_65_plus",
@@ -1515,7 +1583,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__part_0_14",
@@ -1537,7 +1606,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__superficie_km2",
@@ -1559,7 +1629,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__altitude_moyenne",
@@ -1581,7 +1652,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__coord_x",
@@ -1603,7 +1675,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__coord_y",
@@ -1625,7 +1698,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__type_region",
@@ -1647,7 +1721,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__taux_croissance_demo",
@@ -1669,7 +1744,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pop_region__source_donnee",
@@ -1691,7 +1767,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__region",
@@ -1713,7 +1790,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__annee",
@@ -1735,7 +1813,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__ph",
@@ -1757,7 +1836,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__nitrates_mg_l",
@@ -1779,7 +1859,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__pesticides_ug_l",
@@ -1801,7 +1882,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__bacteries_colonie_100ml",
@@ -1823,7 +1905,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__conformite",
@@ -1845,7 +1928,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "eau_potable__source_prelevement",
@@ -1867,7 +1951,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__annee",
@@ -1889,7 +1974,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__mois",
@@ -1911,7 +1997,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__canton",
@@ -1933,7 +2020,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__region_touristique",
@@ -1955,7 +2043,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__type_etablissement",
@@ -1977,7 +2066,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__categorie_etoiles",
@@ -1999,7 +2089,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_arrivees",
@@ -2021,7 +2112,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_nuitees",
@@ -2043,7 +2135,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__pays_origine",
@@ -2065,7 +2158,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__continent_origine",
@@ -2087,7 +2181,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_chambres",
@@ -2109,7 +2204,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_lits",
@@ -2131,7 +2227,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__taux_occupation_chambres",
@@ -2153,7 +2250,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__taux_occupation_lits",
@@ -2175,7 +2273,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__duree_moyenne_sejour",
@@ -2197,7 +2296,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_personnel",
@@ -2219,7 +2319,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__presence_familles",
@@ -2241,7 +2342,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__presence_groupes",
@@ -2263,7 +2365,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__offre_wellness",
@@ -2285,7 +2388,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__offre_restauration",
@@ -2307,7 +2411,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__prix_moy_nuit",
@@ -2329,7 +2434,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__indice_satisfaction",
@@ -2351,7 +2457,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__altitude",
@@ -2373,7 +2480,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__coord_x",
@@ -2395,7 +2503,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__coord_y",
@@ -2417,7 +2526,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__saison",
@@ -2439,7 +2549,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__type_clientele",
@@ -2461,7 +2572,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__classification_officielle",
@@ -2483,7 +2595,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__gestion_etab",
@@ -2505,7 +2618,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__source_donnee",
@@ -2527,7 +2641,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__nb_evenements_locaux",
@@ -2549,7 +2664,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "tourisme_annu__taux_croissance_nuitees",
@@ -2571,7 +2687,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__date",
@@ -2593,7 +2710,8 @@
     "min": 1590102632,
     "max": 1774134632,
     "mean": 1726960232,
-    "std": 53
+    "std": 53,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__heure",
@@ -2615,7 +2733,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__station",
@@ -2637,7 +2756,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__polluant",
@@ -2659,7 +2779,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__concentration",
@@ -2681,7 +2802,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__unite",
@@ -2703,7 +2825,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__temperature",
@@ -2725,7 +2848,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__humidite",
@@ -2747,7 +2871,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__vent_vitesse",
@@ -2769,7 +2894,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__vent_direction",
@@ -2791,7 +2917,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__pression_atm",
@@ -2813,7 +2940,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__precipitations",
@@ -2835,7 +2963,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__indice_qualite_air",
@@ -2857,7 +2986,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__niveau_alerte",
@@ -2879,7 +3009,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__zone_urbaine",
@@ -2901,7 +3032,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__trafic_local",
@@ -2923,7 +3055,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__sources_stationnaires",
@@ -2945,7 +3078,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__sources_mobiles",
@@ -2967,7 +3101,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__conditions_meteo",
@@ -2989,7 +3124,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__niveau_bruit",
@@ -3011,7 +3147,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "pollution_air__source_donnee",
@@ -3033,7 +3170,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "transport_pub__localite",
@@ -3055,7 +3193,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "transport_pub__nb_lignes",
@@ -3077,7 +3216,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "transport_pub__frequence_moyenne",
@@ -3099,7 +3239,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__annee",
@@ -3121,7 +3262,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__tranche_age",
@@ -3143,7 +3285,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__sexe",
@@ -3165,7 +3308,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__region",
@@ -3187,7 +3331,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__frequence_utilisation",
@@ -3209,7 +3354,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__nb_heures_semaine",
@@ -3231,7 +3377,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__type_activite_principale",
@@ -3253,7 +3400,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__equipement_utilise",
@@ -3275,7 +3423,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__connexion_domicile",
@@ -3297,7 +3446,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__connexion_mobile",
@@ -3319,7 +3469,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__competence_numerique",
@@ -3341,7 +3492,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__nb_applications_utilisees",
@@ -3363,7 +3515,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__achats_en_ligne",
@@ -3385,7 +3538,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__streaming_video",
@@ -3407,7 +3561,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__reseaux_sociaux",
@@ -3429,7 +3584,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__confiance_internet",
@@ -3451,7 +3607,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "usage_internet__source_donnee",
@@ -3473,7 +3630,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__annee",
@@ -3495,7 +3653,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__region",
@@ -3517,7 +3676,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__secteur_tech",
@@ -3539,7 +3699,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__nb_entreprises",
@@ -3561,7 +3722,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__nb_employes",
@@ -3583,7 +3745,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__taux_croissance",
@@ -3605,7 +3768,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__salaire_median",
@@ -3627,7 +3791,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__niveau_formation",
@@ -3649,7 +3814,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__taux_vacance",
@@ -3671,7 +3837,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__nb_offres_emploi",
@@ -3693,7 +3860,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech__source_donnee",
@@ -3715,7 +3883,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__annee",
@@ -3737,7 +3906,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__secteur_activite",
@@ -3759,7 +3929,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__sous_secteur",
@@ -3781,7 +3952,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__type_accident",
@@ -3803,7 +3975,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__gravite",
@@ -3825,7 +3998,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__age_victime",
@@ -3847,7 +4021,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__sexe_victime",
@@ -3869,7 +4044,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__nationalite",
@@ -3891,7 +4067,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__fonction",
@@ -3913,7 +4090,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__anciennete_poste",
@@ -3935,7 +4113,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__type_contrat",
@@ -3957,7 +4136,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__horaire_travail",
@@ -3979,7 +4159,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__lieu_accident",
@@ -4001,7 +4182,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__heure_accident",
@@ -4023,7 +4205,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__presence_equipements",
@@ -4045,7 +4228,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__formation_securite",
@@ -4067,7 +4251,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__nb_jours_arret",
@@ -4089,7 +4274,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__cout_assurance",
@@ -4111,7 +4297,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__cout_total",
@@ -4133,7 +4320,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__temps_recuperation",
@@ -4155,7 +4343,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__rapport_medical",
@@ -4177,7 +4366,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__presence_temoins",
@@ -4199,7 +4389,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__nb_temoins",
@@ -4221,7 +4412,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__mesures_prevention_existantes",
@@ -4243,7 +4435,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__mesures_prevention_post",
@@ -4265,7 +4458,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__statut_enquete",
@@ -4287,7 +4481,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__responsabilite_identifiee",
@@ -4309,7 +4504,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__type_responsabilite",
@@ -4331,7 +4527,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__taux_accidents_secteur",
@@ -4353,7 +4550,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__indice_risque",
@@ -4375,7 +4573,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "accidents_travail__source_donnee",
@@ -4397,7 +4596,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__annee",
@@ -4419,7 +4619,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__mois",
@@ -4441,7 +4642,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__region",
@@ -4463,7 +4665,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__marque",
@@ -4485,7 +4688,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__modele",
@@ -4507,7 +4711,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__categorie",
@@ -4529,7 +4734,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__carburant",
@@ -4551,7 +4757,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__prix_moyen",
@@ -4573,7 +4780,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__puissance_hp",
@@ -4595,7 +4803,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__co2_g_km",
@@ -4617,7 +4826,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__nb_places",
@@ -4639,7 +4849,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__transmission",
@@ -4661,7 +4872,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "vente_voitures__source_donnee",
@@ -4683,7 +4895,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__annee",
@@ -4705,7 +4918,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__mois",
@@ -4727,7 +4941,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__secteur",
@@ -4749,7 +4964,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__sous_secteur",
@@ -4771,7 +4987,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__pays_destination",
@@ -4793,7 +5010,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__continent",
@@ -4815,7 +5033,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__valeur_chf",
@@ -4837,7 +5056,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__poids_kg",
@@ -4859,7 +5079,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__type_produit",
@@ -4881,7 +5102,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__classification_hs",
@@ -4903,7 +5125,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__nb_unites",
@@ -4925,7 +5148,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__entreprise_export",
@@ -4947,7 +5171,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__canton",
@@ -4969,7 +5194,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__region",
@@ -4991,7 +5217,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__type_transport",
@@ -5013,7 +5240,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__delai_livraison",
@@ -5035,7 +5263,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__assurance_transport",
@@ -5057,7 +5286,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__incoterm",
@@ -5079,7 +5309,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__devise_facturation",
@@ -5101,7 +5332,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__taux_change",
@@ -5123,7 +5355,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__valeur_usd",
@@ -5145,7 +5378,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__valeur_eur",
@@ -5167,7 +5401,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__certification_requise",
@@ -5189,7 +5424,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__risque_pays",
@@ -5211,7 +5447,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__retour_client",
@@ -5233,7 +5470,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__delai_paiement",
@@ -5255,7 +5493,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__taux_croissance_secteur",
@@ -5277,7 +5516,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__volume_historique_region",
@@ -5299,7 +5539,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "exportations__source_donnee",
@@ -5321,7 +5562,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__ville",
@@ -5343,7 +5585,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__quartier",
@@ -5365,7 +5608,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__type_bien",
@@ -5387,7 +5631,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__surface_habitable",
@@ -5409,7 +5654,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__surface_parcelle",
@@ -5431,7 +5677,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__nb_pieces",
@@ -5453,7 +5700,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__annee_construction",
@@ -5475,7 +5723,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__etat_bien",
@@ -5497,7 +5746,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__prix_vente_chf",
@@ -5519,7 +5769,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__prix_m2_chf",
@@ -5541,7 +5792,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__charges_annuelles",
@@ -5563,7 +5815,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__type_vente",
@@ -5585,7 +5838,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__nb_jours_marche",
@@ -5607,7 +5861,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__indice_attractivite",
@@ -5629,7 +5884,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "immobilier_prix__source_donnee",
@@ -5651,7 +5907,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__annee",
@@ -5673,7 +5930,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__secteur",
@@ -5695,7 +5953,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__sous_secteur",
@@ -5717,7 +5976,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__type_energie",
@@ -5739,7 +5999,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__conso_totale_mwh",
@@ -5761,7 +6022,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__conso_par_employe",
@@ -5783,7 +6045,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__nb_employes",
@@ -5805,7 +6068,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__part_renouvelable",
@@ -5827,7 +6091,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__emissions_co2_tonnes",
@@ -5849,7 +6114,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__intensite_energetique",
@@ -5871,7 +6137,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__region",
@@ -5893,7 +6160,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "conso_energie__source_donnee",
@@ -5915,7 +6183,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__annee",
@@ -5937,7 +6206,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__canton",
@@ -5959,7 +6229,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__region",
@@ -5981,7 +6252,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__type_menage",
@@ -6003,7 +6275,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__nb_personnes",
@@ -6025,7 +6298,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__nb_enfants",
@@ -6047,7 +6321,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__age_chef_menage",
@@ -6069,7 +6344,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__sexe_chef_menage",
@@ -6091,7 +6367,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__nationalite",
@@ -6113,7 +6390,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenu_total_brut",
@@ -6135,7 +6413,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenu_total_net",
@@ -6157,7 +6436,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenu_par_personne",
@@ -6179,7 +6459,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenu_median",
@@ -6201,7 +6482,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenus_travail",
@@ -6223,7 +6505,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenus_capital",
@@ -6245,7 +6528,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__revenus_transferts",
@@ -6267,7 +6551,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__impots_payes",
@@ -6289,7 +6574,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__charges_logement",
@@ -6311,7 +6597,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__charges_transport",
@@ -6333,7 +6620,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__charges_sante",
@@ -6355,7 +6643,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__charges_alimentation",
@@ -6377,7 +6666,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__charges_garde",
@@ -6399,7 +6689,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__patrimoine_total",
@@ -6421,7 +6712,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__patrimoine_immobilier",
@@ -6443,7 +6735,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__taux_effort_logement",
@@ -6465,7 +6758,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__niveau_formation",
@@ -6487,7 +6781,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__situation_professionnelle",
@@ -6509,7 +6804,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__statut_emploi",
@@ -6531,7 +6827,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__nb_heures_travail",
@@ -6553,7 +6850,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__salaire_horaire",
@@ -6575,7 +6873,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__indice_satisfaction_vie",
@@ -6597,7 +6896,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__indice_precarite",
@@ -6619,7 +6919,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__taux_endettement",
@@ -6641,7 +6942,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__epargne_mensuelle",
@@ -6663,7 +6965,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__recours_aides_sociales",
@@ -6685,7 +6988,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__nb_membres_actifs",
@@ -6707,7 +7011,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__presence_handicap",
@@ -6729,7 +7034,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__cout_assurance_maladie",
@@ -6751,7 +7057,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "revenus_menages__source_donnee",
@@ -6773,7 +7080,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__annee",
@@ -6795,7 +7103,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__age",
@@ -6817,7 +7126,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__sexe",
@@ -6839,7 +7149,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__nationalite",
@@ -6861,7 +7172,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": 1
   },
   {
     "id": "emploi_jeunes__canton",
@@ -6883,7 +7195,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__region",
@@ -6905,7 +7218,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__niveau_formation",
@@ -6927,7 +7241,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__statut_emploi",
@@ -6949,7 +7264,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__secteur_activite",
@@ -6971,7 +7287,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__profession",
@@ -6993,7 +7310,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__type_contrat",
@@ -7015,7 +7333,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__taux_occupation",
@@ -7037,7 +7356,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__salaire_mensuel",
@@ -7059,7 +7379,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__nb_heures_travail",
@@ -7081,7 +7402,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__anciennete_poste",
@@ -7103,7 +7425,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__mode_travail",
@@ -7125,7 +7448,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__duree_chomage_precedent",
@@ -7147,7 +7471,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__satisfaction_emploi",
@@ -7169,7 +7494,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__mobilite_professionnelle",
@@ -7191,7 +7517,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__formation_continue",
@@ -7213,7 +7540,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__temps_transport",
@@ -7235,7 +7563,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__type_transport",
@@ -7257,7 +7586,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__conditions_travail",
@@ -7279,7 +7609,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__contrat_secondaire",
@@ -7301,7 +7632,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__nb_heures_second_emploi",
@@ -7323,7 +7655,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__taux_croissance_salaire",
@@ -7345,7 +7678,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emploi_jeunes__source_donnee",
@@ -7367,7 +7701,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__annee",
@@ -7389,7 +7724,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__secteur_tech",
@@ -7411,7 +7747,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__nb_entreprises",
@@ -7433,7 +7770,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__nb_employes",
@@ -7455,7 +7793,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__taux_croissance",
@@ -7477,7 +7816,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__region",
@@ -7499,7 +7839,8 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   },
   {
     "id": "emplois_tech2__source_donnee",
@@ -7521,6 +7862,7 @@
     "min": null,
     "max": null,
     "mean": null,
-    "std": null
+    "std": null,
+    "is_pattern": null
   }
 ]

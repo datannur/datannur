@@ -599,7 +599,7 @@
     "entity": "dataset",
     "entity_id": "vente_voitures",
     "parent_entity_id": null,
-    "variable": "nb_resources",
+    "variable": "nb_files",
     "old_value": null,
     "new_value": "3",
     "name": null
@@ -610,7 +610,7 @@
     "entity": "dataset",
     "entity_id": "conso_energie",
     "parent_entity_id": null,
-    "variable": "nb_resources",
+    "variable": "nb_files",
     "old_value": null,
     "new_value": "12",
     "name": null
@@ -621,7 +621,7 @@
     "entity": "dataset",
     "entity_id": "conso_energie",
     "parent_entity_id": null,
-    "variable": "nb_resources",
+    "variable": "nb_files",
     "old_value": "12",
     "new_value": "13",
     "name": null
@@ -1021,5 +1021,126 @@
     "old_value": "float",
     "new_value": null,
     "name": null
+  },
+  {
+    "timestamp": 1776453328,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaaaaa",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaaaaa"
+  },
+  {
+    "timestamp": 1776453328,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaaaaaaaa",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaaaaaaaa"
+  },
+  {
+    "timestamp": 1776453328,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaa-aaaaaa",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaa-aaaaaa"
+  },
+  {
+    "timestamp": 1776453328,
+    "type": "update",
+    "entity": "variable",
+    "entity_id": "emploi_jeunes__nationalite",
+    "parent_entity_id": null,
+    "variable": "is_pattern",
+    "old_value": null,
+    "new_value": "1",
+    "name": null
+  },
+  {
+    "timestamp": 1776455385,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaa-aaaaaa-999999999-9999999999-999999999",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaa-aaaaaa-999999999-9999999999-999999999"
+  },
+  {
+    "timestamp": 1776455422,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaaaaaaaa9999999999999999999",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaaaaaaaa9999999999999999999"
+  },
+  {
+    "timestamp": 1776455498,
+    "type": "add",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaaaaaaaa9999999999999999999aaaaaaaaaaa9999999999aaaaa9999",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaaaaaaaa9999999999999999999aaaaaaaaaaa9999999999aaaaa9999"
+  },
+  {
+    "timestamp": 1776455498,
+    "type": "delete",
+    "entity": "freq",
+    "entity_id": "emploi_jeunes__nationalite---aaaaaaaaa9999999999999999999",
+    "parent_entity_id": "emploi_jeunes__nationalite",
+    "variable": null,
+    "old_value": null,
+    "new_value": null,
+    "name": "aaaaaaaaa9999999999999999999"
+  },
+  {
+    "timestamp": 1776457006,
+    "type": "update",
+    "entity": "value",
+    "entity_id": "canton_sigle---AI",
+    "parent_entity_id": "canton_sigle",
+    "variable": "description",
+    "old_value": "Appenzell Rhodes-Intérieures",
+    "new_value": "Appenzell Rhodes-Intérieures et autres régions d'ici et d'ailleur et de partout",
+    "name": "AI"
+  },
+  {
+    "timestamp": 1776457062,
+    "type": "update",
+    "entity": "value",
+    "entity_id": "canton_sigle---SZ",
+    "parent_entity_id": "canton_sigle",
+    "variable": "description",
+    "old_value": "Schwytz",
+    "new_value": "Schwytz et autres régions d'ici et d'ailleur et de partout et de part le monde mais aussi d'ici",
+    "name": "SZ"
+  },
+  {
+    "timestamp": 1776457062,
+    "type": "update",
+    "entity": "value",
+    "entity_id": "canton_sigle---AI",
+    "parent_entity_id": "canton_sigle",
+    "variable": "description",
+    "old_value": "Appenzell Rhodes-Intérieures et autres régions d'ici et d'ailleur et de partout",
+    "new_value": "Appenzell Rhodes-Intérieures",
+    "name": "AI"
   }
 ]

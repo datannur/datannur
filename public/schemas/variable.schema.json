@@ -116,6 +116,11 @@
         "type": ["string", "number", "null"],
         "description": "Foreign key referencing a variable in another dataset",
         "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
+      },
+      "is_pattern": {
+        "type": ["boolean", "integer", "null"],
+        "description": "Indicates that frequencies show value patterns instead of raw data",
+        "x-description-fr": "Indique que les fréquences affichent les patterns des valeurs plutôt que les données brutes"
       }
     }
   }

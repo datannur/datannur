@@ -623,6 +623,17 @@
             padding-left: 20px;
             list-style: initial;
             min-width: 100px;
+            li > span {
+              word-break: break-all;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              line-clamp: 2;
+            }
+          }
+          .ul-pattern {
+            list-style-type: 'p ';
           }
           .type-icon,
           .icon-type {
@@ -705,9 +716,19 @@
                 }
               }
 
-              .freq-value,
               .freq-number {
                 position: relative;
+                padding-left: 5px;
+                align-self: flex-start;
+              }
+              .freq-value {
+                position: relative;
+                word-break: break-all;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-clamp: 2;
+                -webkit-line-clamp: 2;
               }
 
               .freq-percent {

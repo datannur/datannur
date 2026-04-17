@@ -93,5 +93,30 @@
     "variable_id": "pop_region__type_region",
     "value": "montagne",
     "freq": 9481
+  },
+  {
+    "variable_id": "emploi_jeunes__nationalite",
+    "value": "aaaaaa",
+    "freq": 21
+  },
+  {
+    "variable_id": "emploi_jeunes__nationalite",
+    "value": "aaaaaaaaa",
+    "freq": 75
+  },
+  {
+    "variable_id": "emploi_jeunes__nationalite",
+    "value": "aaa-aaaaaa",
+    "freq": 43
+  },
+  {
+    "variable_id": "emploi_jeunes__nationalite",
+    "value": "aaa-aaaaaa-999999999-9999999999-999999999",
+    "freq": 44
+  },
+  {
+    "variable_id": "emploi_jeunes__nationalite",
+    "value": "aaaaaaaaa9999999999999999999aaaaaaaaaaa9999999999aaaaa9999",
+    "freq": 45
   }
 ]

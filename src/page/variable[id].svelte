@@ -40,6 +40,10 @@
     evolutions,
   })
 
+  if (variable.isPattern) {
+    const freqTab = tabs.find(t => t.key === 'freq')
+    if (freqTab) freqTab.props.isPattern = true
+  }
   if (variable.sampleSize && variable.nbRow) {
     const freqTab = tabs.find(t => t.key === 'freq')
     if (freqTab) freqTab.props.scale = variable.nbRow / variable.sampleSize
