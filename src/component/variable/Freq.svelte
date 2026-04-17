@@ -6,7 +6,11 @@
   import escapeHtml from 'escape-html'
   import type { Freq, Column as ColumnType } from '@type'
 
-  let { freq: freqProp, scale }: { freq: Freq[]; scale?: number } = $props()
+  let {
+    freq: freqProp,
+    scale,
+    isPattern = false,
+  }: { freq: Freq[]; scale?: number; isPattern?: boolean } = $props()
   const freq = untrack(() => freqProp)
 
   const freqSorted = [...freq].sort((a, b) => (b.freq || 0) - (a.freq || 0))
@@ -18,8 +22,8 @@
 
     columns.push({
       data: 'value',
-      title: Render.icon('value') + 'Valeur',
-      tooltip: 'Valeur de la variable',
+      title: Render.icon('value') + (isPattern ? 'Pattern' : 'Valeur'),
+      tooltip: isPattern ? 'Pattern de la variable' : 'Valeur de la variable',
       render: Render.longText,
     })
 

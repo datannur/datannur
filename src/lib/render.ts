@@ -108,7 +108,7 @@ export default class Render {
         valueContent += ' : ' + value.description
       }
       if (i > 0 && type === 'export') valueContent = separator + valueContent
-      content += '<li>' + escapeHtml(valueContent) + '</li>'
+      content += '<li><span>' + escapeHtml(valueContent) + '</span></li>'
       i += 1
     }
     if (nbValues > values.length && 'id' in row) {
@@ -128,7 +128,8 @@ export default class Render {
   static freqPreview(freqData: FreqPreview[], type: string, row: Variable) {
     if (!freqData || freqData.length === 0 || !row.id) return ''
 
-    let content = '<ul class="ul-value">'
+    const ulClass = row.isPattern ? 'ul-value ul-pattern' : 'ul-value'
+    let content = `<ul class="${ulClass}">`
     let i = 0
 
     for (const freqItem of freqData) {

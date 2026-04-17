@@ -150,6 +150,7 @@ export type Variable = BaseEntity &
     type?: string
     sourceVarIds?: string
     fkVarId?: string | number
+    isPattern?: boolean
 
     // Computed fields added during processing
     typeClean?: string
