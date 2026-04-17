@@ -1,5 +1,9 @@
 # datannur
 
+## unreleased
+
+- add: env var fallback (INFOMANIAK_API_KEY, INFOMANIAK_PRODUCT_ID) for LLM proxy credentials in proxy_llm.py
+
 ## 0.18.8 (2026-04-17)
 
 - add: is_pattern attribute for variables with distinct display in freq tab and preview
