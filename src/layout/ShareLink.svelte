@@ -1,6 +1,7 @@
 <script lang="ts">
   import { isHttp, isSsgRendering } from 'svelte-fileapp'
   import { updateTooltipText } from '@lib/tooltip'
+  import { loadLinkManifest, hasLink } from '@lib/link-manifest'
 
   let {
     type,
@@ -14,10 +15,17 @@
   const tooltipMsg = 'Copier le lien de partage'
   const tooltipMsgCopied = 'Lien copié !'
 
+  if (!isHttp && !isSsgRendering) {
+    loadLinkManifest()
+  }
+
   function getShareUrl(): string {
-    const currentUrl = window.location.href
-    const baseUrl = currentUrl.split('index.html')[0]
-    return `${baseUrl}data/link/${type}/${id}.html`
+    const url = window.location.href.split('?')[0]
+    if (!isHttp && hasLink(type, id)) {
+      const baseUrl = url.split('index.html')[0]
+      return `${baseUrl}data/link/${type}/${id}.html`
+    }
+    return url
   }
 
   async function copyLink() {
@@ -32,17 +40,15 @@
   }
 </script>
 
-{#if !isHttp && !isSsgRendering}
-  <button
-    class="icon share-link use-tooltip"
-    class:copied
-    onclick={copyLink}
-    aria-label="Copier le lien"
-    title={tooltipMsg}
-  >
-    <i class="fas fa-link"></i>
-  </button>
-{/if}
+<button
+  class="icon share-link use-tooltip"
+  class:copied
+  onclick={copyLink}
+  aria-label="Copier le lien"
+  title={tooltipMsg}
+>
+  <i class="fas fa-link"></i>
+</button>
 
 <style lang="scss">
   .share-link {

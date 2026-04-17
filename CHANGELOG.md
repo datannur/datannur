@@ -3,6 +3,7 @@
 ## 0.18.8 (2026-04-17)
 
 - add: is_pattern attribute for variables with distinct display in freq tab and preview
+- add: share button visible in all modes (HTTP, file://, SSG) with link.json.js manifest for file:// redirect lookup
 - fix: frequency value text overflow and number alignment on multi-line values
 
 ## 0.18.7 (2026-04-07)

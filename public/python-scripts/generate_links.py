@@ -70,6 +70,15 @@ def write_file(args: tuple[Path, bytes]) -> None:
     path.write_bytes(content)
 
 
+def generate_link_manifest(base_dir: Path, entity_ids: dict[str, list[str]]) -> None:
+    """Generate link.json.js manifest listing all redirect files."""
+    link_map = {entity: {id_: 1 for id_ in ids} for entity, ids in entity_ids.items()}
+
+    content = f"jsonjs.data.link = {json.dumps(link_map, ensure_ascii=False)}\n"
+    manifest_path = base_dir / "data" / "link.json.js"
+    manifest_path.write_text(content, encoding="utf-8")
+
+
 def generate_links(base_dir: Path) -> tuple[dict[str, int], int]:
     """Generate all link redirect files. Returns (count per entity, files written)."""
     template_path = get_template_path(base_dir)
@@ -89,6 +98,7 @@ def generate_links(base_dir: Path) -> tuple[dict[str, int], int]:
     link_dir = base_dir / "data" / "link"
 
     counts = {}
+    entity_ids: dict[str, list[str]] = {}
     files_to_write: list[tuple[Path, bytes]] = []
 
     for entity in ENTITIES:
@@ -108,12 +118,16 @@ def generate_links(base_dir: Path) -> tuple[dict[str, int], int]:
             if filename not in existing:
                 files_to_write.append((entity_dir / filename, template_content))
 
+        entity_ids[entity] = ids
         counts[entity] = len(ids)
 
     # Write all files in parallel
     if files_to_write:
         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             executor.map(write_file, files_to_write)
+
+    if entity_ids:
+        generate_link_manifest(base_dir, entity_ids)
 
     return counts, len(files_to_write)
 
