@@ -142,11 +142,16 @@ class ProxyHandler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(data).encode("utf-8"))
 
     def _get_api_credentials(self):
-        """Get API credentials from config file or headers (fallback)"""
+        """Get API credentials from config file, env vars, or headers (fallback)"""
         config = load_config()
 
         if config and "api_key" in config and "product_id" in config:
             return config["api_key"], config["product_id"]
+
+        api_key = os.environ.get("INFOMANIAK_API_KEY")
+        product_id = os.environ.get("INFOMANIAK_PRODUCT_ID")
+        if api_key and product_id:
+            return api_key, product_id
 
         api_key = self.headers.get("x-api-key")
         product_id = self.headers.get("x-product-id")
@@ -444,6 +449,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
         config = load_config()
         is_configured = (
             config is not None and "api_key" in config and "product_id" in config
+        ) or (
+            os.environ.get("INFOMANIAK_API_KEY")
+            and os.environ.get("INFOMANIAK_PRODUCT_ID")
         )
 
         self._send_json_response(
