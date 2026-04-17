@@ -87,7 +87,7 @@
     "datatables.net-scroller": "^2.4.3",
     "datatables.net-scroller-bm": "^2.4.3",
     "diff": "^8.0.4",
-    "dompurify": "^3.3.3",
+    "dompurify": "^3.4.0",
     "escape-html": "^1.0.3",
     "file-saver": "^2.0.5",
     "fitty": "^2.4.2",
