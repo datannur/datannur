@@ -1,7 +1,8 @@
 # datannur
 
-## unreleased
+## 0.19.0 (2026-04-19)
 
+- add: glossary `concept` entity with hierarchy, dedicated pages/tabs/stats, and variable association via `concept_id`
 - add: env var fallback (INFOMANIAK_API_KEY, INFOMANIAK_PRODUCT_ID) for LLM proxy credentials in proxy_llm.py
 
 ## 0.18.8 (2026-04-17)

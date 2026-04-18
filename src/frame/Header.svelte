@@ -86,14 +86,17 @@
           'folders',
           'tag',
           'tags',
+          'concept',
+          'concepts',
           'doc',
           'docs',
         ]}
-        ifUse={['institution', 'folder', 'tag', 'doc']}
+        ifUse={['institution', 'folder', 'tag', 'concept', 'doc']}
       >
         <HeaderLink standard="institution" />
         <HeaderLink standard="folder" />
         <HeaderLink standard="tag" />
+        <HeaderLink standard="concept" />
         <HeaderLink standard="doc" />
       </HeaderDropdown>
 

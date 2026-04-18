@@ -1,4 +1,4 @@
-datannur repose sur 7 concepts principaux, qui se répartissent en deux catégories :
+datannur repose sur 8 concepts principaux, qui se répartissent en deux catégories :
 
 - Intérieur du dataset : pour les éléments directement liés aux données elles-mêmes
 - Extérieur du dataset : pour les éléments qui structurent, organisent ou enrichissent les datasets
@@ -18,9 +18,10 @@ mermaid( $dataset --> $variable );
 
 ### Variable
 
-Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une modalité. Une variable peut être liée à plusieurs modalités, et inversement. Chaque variable peut également avoir des données de fréquence associées.
+Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une modalité. Une variable peut être liée à plusieurs modalités, et inversement. Elle peut aussi être rattachée à un concept du glossaire métier pour préciser le sens exact de la notion mesurée. Chaque variable peut également avoir des données de fréquence associées.
 
 mermaid(
+$concept --> $variable
 $variable <--> $modality
 $variable --> $freq
 );
@@ -64,7 +65,7 @@ $institution -- manager - owner --> $dataset
 
 ### Mot clé
 
-Les mots clés servent à enrichir les institutions, dossiers, datasets ou variables avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
+Les mots clés servent à enrichir les institutions, dossiers, datasets, variables ou concepts avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
 
 mermaid(
 $tag $recursive
@@ -72,17 +73,30 @@ $institution <--> $tag
 $folder <--> $tag
 $dataset <--> $tag
 $variable <--> $tag
+$concept <--> $tag
 $tag <--> $doc
+);
+
+### Concept
+
+Les concepts du glossaire métier servent à définir précisément certaines notions utilisées dans les données. Contrairement aux mots clés, ils ne classifient pas par thème : ils décrivent un sens métier explicite. Un concept peut être organisé en hiérarchie, être relié à plusieurs variables, et être enrichi par des mots clés ou des docs.
+
+mermaid(
+$concept $recursive
+$concept --> $variable
+$concept <--> $tag
+$concept <--> $doc
 );
 
 ### Doc
 
-Certains concepts peuvent être associés à des documentations (docs) au format Markdown ou PDF. Ces docs permettent de décrire ou expliquer en détail des institutions, dossiers ou datasets. Ils peuvent être liés à plusieurs concepts, et inversement.
+Des documentations (docs) au format Markdown ou PDF peuvent être associées à des institutions, dossiers, mots clés, concepts ou datasets. Elles permettent de décrire ou expliquer en détail ces éléments.
 
 mermaid(
 $institution <--> $doc
 $folder <--> $doc
 $tag <--> $doc
+$concept <--> $doc
 $dataset <--> $doc
 );
 
@@ -106,6 +120,10 @@ $tag <--> $doc
 $dataset --> $variable
 $dataset <--> $tag
 $dataset <--> $doc
+$concept $recursive
+$concept --> $variable
+$concept <--> $tag
+$concept <--> $doc
 $variable <--> $modality
 $variable <--> $tag
 $variable --> $freq

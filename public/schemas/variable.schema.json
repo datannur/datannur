@@ -121,6 +121,11 @@
         "type": ["boolean", "integer", "null"],
         "description": "Indicates that frequencies show value patterns instead of raw data",
         "x-description-fr": "Indique que les fréquences affichent les patterns des valeurs plutôt que les données brutes"
+      },
+      "concept_id": {
+        "type": ["string", "number", "null"],
+        "description": "Key of the related business concept",
+        "x-description-fr": "Clé du concept métier lié"
       }
     }
   }

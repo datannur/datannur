@@ -1,6 +1,7 @@
 import Institutions from '@component/institution/Institutions.svelte'
 import Folders from '@component/folder/Folders.svelte'
 import Tags from '@component/tag/Tags.svelte'
+import Concepts from '@component/concept/Concepts.svelte'
 import Docs from '@component/doc/Docs.svelte'
 import Datasets from '@component/dataset/Datasets.svelte'
 import Variables from '@component/variable/Variables.svelte'
@@ -12,6 +13,7 @@ import Freq from '@component/variable/Freq.svelte'
 import InstitutionInfo from '@component/institution/InstitutionInfo.svelte'
 import FolderInfo from '@component/folder/FolderInfo.svelte'
 import TagInfo from '@component/tag/TagInfo.svelte'
+import ConceptInfo from '@component/concept/ConceptInfo.svelte'
 import DocInfo from '@component/doc/DocInfo.svelte'
 import DatasetInfo from '@component/dataset/DatasetInfo.svelte'
 import VariableInfo from '@component/variable/VariableInfo.svelte'
@@ -46,6 +48,11 @@ export const allTabs: Record<string, TabConfig> = {
     name: 'Mot clé',
     icon: 'tag',
     component: Tags,
+  },
+  concepts: {
+    name: 'Concept',
+    icon: 'concept',
+    component: Concepts,
   },
   datasets: {
     name: 'Dataset',
@@ -185,6 +192,7 @@ const infoItems = {
   institution: InstitutionInfo,
   folder: FolderInfo,
   tag: TagInfo,
+  concept: ConceptInfo,
   doc: DocInfo,
   dataset: DatasetInfo,
   variable: VariableInfo,

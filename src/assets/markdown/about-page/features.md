@@ -64,6 +64,12 @@ Le catalogue peut relier à ses principaux éléments une ou plusieurs documenta
 
 ![Doc tourisme en Markdown](assets/about-page/doc-tourisme{darkMode}.webp?v=1)
 
+### Glossaire métier
+
+datannur peut aussi embarquer un glossaire métier sous forme de concepts. Ces concepts servent à définir précisément certaines notions utilisées dans les données et à lever les ambiguïtés sur le sens exact d’une variable.
+
+Chaque concept dispose de sa propre page, peut être organisé en hiérarchie, être enrichi par des mots clés ou des documents, et être relié aux variables concernées. Cette couche sémantique complète les métadonnées classiques en apportant un niveau d’explication plus métier.
+
 ### Dépendances (lineage)
 
 Pour chaque variable, datannur affiche ses liens de dépendance avec les autres variables du catalogue. Il distingue les variables sources, utilisées comme entrée, et les variables dérivées, qui en dépendent.
