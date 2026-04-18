@@ -58,6 +58,7 @@
       Column.name('variable', 'Variable', { isMeta }),
       Column.originalName(),
       Column.description(),
+      Column.concept(),
       Column.datatype(),
       Column.relationType(),
       Column.isKey(),

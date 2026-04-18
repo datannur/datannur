@@ -7,7 +7,16 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 # Entities that have detail pages
-ENTITIES = ["institution", "folder", "dataset", "variable", "modality", "tag", "doc"]
+ENTITIES = [
+    "institution",
+    "folder",
+    "dataset",
+    "variable",
+    "modality",
+    "tag",
+    "concept",
+    "doc",
+]
 MAX_WORKERS = int(os.environ.get("LINK_WORKERS", "8"))
 
 

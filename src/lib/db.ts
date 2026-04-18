@@ -421,6 +421,24 @@ class Process {
       addEntities(tag)
     })
   }
+  static concept() {
+    db.foreach('concept', concept => {
+      addEntity(concept, 'concept')
+      concept.isFavorite = false
+      concept.tags = db.getAll('tag', { concept })
+      addDocs('concept', concept)
+      if (db.useRecursive.concept)
+        concept.parents = db.getParents('concept', concept.id)
+      concept.nbChild = db.countRelated('parent', concept.id, 'concept')
+      concept.nbChildRecursive = db.getAllChilds('concept', concept.id).length
+      concept.nbVariable = db.countRelated('concept', concept.id, 'variable')
+      concept.nbVariableRecursive = getRecursive(
+        'concept',
+        concept.id,
+        'variable',
+      ).length
+    })
+  }
   static dataset() {
     const filters = getLocalFilter()
     const filterToName: { [id: string]: string } = {}
@@ -475,6 +493,13 @@ class Process {
       variable.isFavorite = false
       addPeriod(variable)
       variable.tags = db.getAll('tag', { variable })
+      if (db.use.concept && variable.conceptId) {
+        const concept = db.get('concept', variable.conceptId)
+        if (concept) {
+          variable.concept = concept
+          variable.conceptName = concept.name
+        }
+      }
       variable.modalities = []
       variable.values = []
       const modalities = db.getAll('modality', { variable })
@@ -669,6 +694,7 @@ export function dbAddProcessedData() {
   Process.institution()
   Process.folder()
   Process.tag()
+  Process.concept()
   Process.dataset()
   Process.doc()
   Process.variable()

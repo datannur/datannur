@@ -16,6 +16,7 @@ export const attributs = {
     'name',
     'description',
   ],
+  concept: ['tag', 'variable', 'level', 'name', 'description'],
   tag: ['entity', 'level', 'name', 'description'],
   doc: ['docType', 'entity', 'docPath', 'lastUpdateDoc', 'name', 'description'],
   dataset: [

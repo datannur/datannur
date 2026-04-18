@@ -138,6 +138,7 @@ export type Variable = BaseEntity &
   WithRelations & {
     datasetId: string | number
     modalityIds?: string
+    conceptId?: string | number
     originalName?: string
     key?: string | boolean
     nbDistinct?: number
@@ -176,6 +177,8 @@ export type Variable = BaseEntity &
     hasFreq?: boolean
     freqPreview?: FreqPreview[]
     statsPreview?: string
+    concept?: Concept
+    conceptName?: string
   }
 
 export type Modality = BaseEntity &
@@ -260,6 +263,20 @@ export type Tag = BaseEntity &
 
 export type TagWithChildren = Tag & {
   children?: { [key: string]: TagWithChildren }
+}
+
+export type Concept = BaseEntity &
+  WithRecursiveParent &
+  WithTags &
+  WithDocs &
+  WithFavorite & {
+    description?: string
+    nbVariable?: number
+    nbVariableRecursive?: number
+  }
+
+export type ConceptWithChildren = Concept & {
+  children?: { [key: string]: ConceptWithChildren }
 }
 
 export type Doc = BaseEntity &
@@ -365,6 +382,7 @@ export type MainEntityMap = {
   institution: Institution
   folder: Folder
   tag: Tag
+  concept: Concept
   doc: Doc
   dataset: Dataset
   variable: Variable

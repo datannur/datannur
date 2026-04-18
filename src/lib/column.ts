@@ -276,6 +276,34 @@ export default class Column {
       render: Render.tags,
     }
   }
+  static concept(): ColumnType {
+    return {
+      data: 'conceptName',
+      title: Render.icon('concept') + 'Concept',
+      defaultContent: '',
+      hasLongText: true,
+      tooltip: 'Concept métier associé',
+      name: 'concept',
+      render: (data: string, type, row: { conceptId?: string | number }) => {
+        if (!data || !row.conceptId) return ''
+        if (type !== 'display') return data
+        return wrapLongText(
+          link('concept/' + row.conceptId, escapeHtml(data), 'concept'),
+        )
+      },
+    }
+  }
+  static definition(): ColumnType {
+    return {
+      data: 'definition',
+      defaultContent: '',
+      title: Render.icon('description') + 'Définition',
+      hasLongText: true,
+      filterType: 'input',
+      tooltip: 'Définition métier',
+      render: Render.longText,
+    }
+  }
   static owner(): ColumnType {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
       ? (data, type, row: EntityWithInstitution) =>

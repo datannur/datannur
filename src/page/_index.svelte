@@ -15,6 +15,7 @@
   let institutions = db.getAll('institution')
   let folders = db.getAll('folder')
   let tags = db.getAll('tag')
+  let concepts = db.getAll('concept')
   const datasets = db.getAll('dataset')
   const variables = db.getAll('variable')
   const modalities = db.getAll('modality')
@@ -30,11 +31,16 @@
     makeParentsRelative(false, tags)
     addMinimumDeep(tags)
   }
+  if (db.useRecursive.concept) {
+    makeParentsRelative(false, concepts)
+    addMinimumDeep(concepts)
+  }
 
   const stat = [
     { entity: 'institution', items: institutions },
     { entity: 'folder', items: folders },
     { entity: 'tag', items: tags },
+    { entity: 'concept', items: concepts },
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
@@ -46,6 +52,7 @@
     institutions,
     folders,
     tags,
+    concepts,
     docs,
     datasets,
     variables,
@@ -58,6 +65,7 @@
     !db.use.institution &&
     !db.use.folder &&
     !db.use.tag &&
+    !db.use.concept &&
     !db.use.doc &&
     !db.use.dataset &&
     !db.use.variable &&
@@ -66,11 +74,13 @@
   const nbInstitution = institutions.length
   const nbFolder = folders.length
   const nbTag = tags.length
+  const nbConcept = concepts.length
 
   let showOpenAllSwitch = $derived(
     ($tabSelected.key === 'institutions' && nbInstitution > isBigLimit) ||
       ($tabSelected.key === 'folders' && nbFolder > isBigLimit) ||
-      ($tabSelected.key === 'tags' && nbTag > isBigLimit),
+      ($tabSelected.key === 'tags' && nbTag > isBigLimit) ||
+      ($tabSelected.key === 'concepts' && nbConcept > isBigLimit),
   )
 
   let showEvolutionSummarySwitch = $derived(

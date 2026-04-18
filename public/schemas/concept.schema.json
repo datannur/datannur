@@ -1,0 +1,50 @@
+{
+  "$schema": "./__meta__.schema.json",
+  "$id": "https://dev.datannur.com/schemas/concept.schema.json",
+  "x-db": "data",
+  "title": "concept",
+  "description": "Business glossary concepts",
+  "x-description-fr": "Concepts du glossaire métier",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Primary key of the concept",
+        "x-description-fr": "Clé primaire du concept"
+      },
+      "parent_id": {
+        "type": ["string", "number", "null"],
+        "description": "Key of the parent concept (domain hierarchy)",
+        "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
+      },
+      "tag_ids": {
+        "type": ["string", "number", "null"],
+        "description": "Keys of related keywords",
+        "x-description-fr": "Clés des mots clés liés",
+        "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+        "examples": ["id1,id2,id3", "single-id", null]
+      },
+      "doc_ids": {
+        "type": ["string", "number", "null"],
+        "description": "Keys of related documents",
+        "x-description-fr": "Clés des docs liés",
+        "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+        "examples": ["id1,id2,id3", "single-id", null]
+      },
+      "name": {
+        "type": ["string", "null"],
+        "description": "Concept name",
+        "x-description-fr": "Nom du concept"
+      },
+      "description": {
+        "type": ["string", "null"],
+        "description": "Business description of the concept",
+        "x-description-fr": "Description métier du concept"
+      }
+    }
+  }
+}

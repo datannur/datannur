@@ -180,8 +180,29 @@
     <TagsInfo tags={variable.tags} />
   {/if}
 </TableWrapper>
-{#if variable.description}
-  <DescriptionInfo description={variable.description} />
+{#if variable.description || variable.concept}
+  <div class="side-panels">
+    {#if variable.description}
+      <DescriptionInfo description={variable.description} />
+    {/if}
+    {#if variable.concept}
+      <div class="concept-wrapper">
+        <div style="font-weight: bold;">
+          <Icon type="concept" /> Concept
+        </div>
+        <div class="concept-content">
+          <Link href="concept/{variable.conceptId}" entity="concept"
+            >{variable.concept.name}</Link
+          >
+          {#if variable.concept.description}
+            <div class="concept-description">
+              {variable.concept.description}
+            </div>
+          {/if}
+        </div>
+      </div>
+    {/if}
+  </div>
 {/if}
 
 <style lang="scss">
@@ -190,6 +211,50 @@
   .breadcrumb {
     :global(a) {
       color: $color-1;
+    }
+  }
+
+  .side-panels {
+    width: calc(50% - 3px);
+    display: inline-block;
+    vertical-align: top;
+
+    :global(.description-wrapper) {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .concept-wrapper {
+    padding: 1em 0.75em;
+    box-sizing: border-box;
+  }
+
+  .concept-content {
+    padding: 0.5em 2.5rem;
+    max-width: 800px;
+    word-wrap: break-word;
+    box-sizing: border-box;
+  }
+
+  .concept-description {
+    margin-top: 0.5em;
+    font-size: 0.875em;
+  }
+
+  :global(body.mobile) {
+    .side-panels {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  :global(body.small-mobile) {
+    .side-panels {
+      .concept-content {
+        padding-top: 0;
+        padding-right: 5px;
+      }
     }
   }
 </style>

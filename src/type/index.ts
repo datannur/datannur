@@ -30,6 +30,8 @@ export type {
   Institution,
   Tag,
   TagWithChildren,
+  Concept,
+  ConceptWithChildren,
   Doc,
   FreqPreview,
   Log,

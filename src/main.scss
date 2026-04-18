@@ -52,6 +52,7 @@ $icon-colors: (
   'institution': #625d8c,
   'folder': #b68b4c,
   'tag': #396496,
+  'concept': #2b9fb3,
   'dataset': #79a487,
   'variable': #b26f52,
   'modality': #aa4e63,
@@ -168,6 +169,6 @@ $menu-mobile-limit: 1023px;
 }
 
 $entities:
-  'institution', 'folder', 'tag', 'dataset', 'variable', 'modality', 'value',
-  'log', 'entity', 'option', 'search', 'favorite', 'about', 'diagram',
+  'institution', 'folder', 'tag', 'concept', 'dataset', 'variable', 'modality',
+  'value', 'log', 'entity', 'option', 'search', 'favorite', 'about', 'diagram',
   'compare', 'stat', 'doc', 'evolution', 'features', 'preview', 'freq';
