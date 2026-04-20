@@ -1,5 +1,9 @@
 # datannur
 
+## 0.19.1 (2026-04-20)
+
+- change: align browser and web app chrome with light/dark theme colors and use manifest display mode `minimal-ui`
+
 ## 0.19.0 (2026-04-19)
 
 - add: glossary `concept` entity with hierarchy, dedicated pages/tabs/stats, and variable association via `concept_id`

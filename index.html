@@ -5,8 +5,13 @@
     <meta charset="utf-8" />
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f7f8" />
     <script>
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const themeColor = dark ? '#0b0b0b' : '#f6f7f8'
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', themeColor)
       document.documentElement.classList[dark ? 'add' : 'remove']('dark-mode')
     </script>
   </head>
