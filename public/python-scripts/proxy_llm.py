@@ -503,22 +503,22 @@ if __name__ == "__main__":
     if config:
         print(f"✓ Configuration loaded from {get_config_path()}")
     else:
-        print(f"⚠ No configuration found. Use /set_keys endpoint to configure.")
+        print("⚠ No configuration found. Use /set_keys endpoint to configure.")
         print(f"  Config will be saved to: {get_config_path()}")
 
     proxy_url = get_proxy_url()
     if proxy_url:
         print(f"✓ HTTP proxy configured: {proxy_url}")
     else:
-        print(f"✓ No HTTP proxy configured (direct connection)")
+        print("✓ No HTTP proxy configured (direct connection)")
 
     server = HTTPServer(("localhost", PORT), ProxyHandler)
     print(f"✓ LLM Proxy running on http://localhost:{PORT}")
-    print(f"✓ Endpoints:")
-    print(f"  - POST /set_keys - Configure API credentials")
-    print(f"  - GET  /status - Check configuration status")
-    print(f"  - POST /api/chat/completions - Chat completions")
-    print(f"  - POST /api/audio/transcriptions - Audio transcriptions")
+    print("✓ Endpoints:")
+    print("  - POST /set_keys - Configure API credentials")
+    print("  - GET  /status - Check configuration status")
+    print("  - POST /api/chat/completions - Chat completions")
+    print("  - POST /api/audio/transcriptions - Audio transcriptions")
     print("✓ Press Ctrl+C to stop")
     try:
         server.serve_forever()

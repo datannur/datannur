@@ -71,7 +71,7 @@ def main():
     server = ThreadingHTTPServer(("", APP_PORT), handler)
 
     print(f"\n  App: http://localhost:{APP_PORT}")
-    print(f"  Press Ctrl+C to stop\n")
+    print("  Press Ctrl+C to stop\n")
 
     webbrowser.open(f"http://localhost:{APP_PORT}")
 
