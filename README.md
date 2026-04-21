@@ -27,6 +27,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
 
 - [Demo](#demo)
 - [Quick Start](#quick-start)
+- [Windows Auto-Start](#windows-auto-start)
 - [Project Structure](#project-structure)
 - [Data Integration](#data-integration)
   - [Database Structure](#database-structure)
@@ -69,6 +70,28 @@ datannur is a client-side data catalog designed to organize and explore datasets
 4. **Replace** the demo metadata in `/data/db/` with your own
 
 > **Optional tools:** Some scripts (deploy, static generation, schema management, etc.) require **Node.js >= 22.6.0**. The update and DCAT export scripts require **Python >= 3.9**. Neither is needed to use the catalog itself.
+
+## Windows Auto-Start
+
+In corporate/institutional contexts (Windows, shared network drive, no admin rights), datannur can be auto-started at user login. Scripts live in `windows-setup/` inside the distributed app. Two independent targets, each with its own `install`/`uninstall` pair.
+
+**Three ways to access the catalog:**
+
+| Mode                                    | Prerequisites      | PWA installable | Shareable `http://` links | LLM |
+| --------------------------------------- | ------------------ | :-------------: | :-----------------------: | :-: |
+| Open `index.html` directly (`file://`)  | None               |       ❌        |            ❌             | ❌  |
+| `install-app.bat` (local HTTP server)   | None               |       ✅        |            ✅             | ❌  |
+| `install-llm.bat` (on top of the above) | Python 3 in `PATH` |       ✅        |            ✅             | ✅  |
+
+**How it works:**
+
+- `install-app.bat` — installs a native PowerShell static server (`System.Net.HttpListener`, zero dependencies). Auto-starts at login and serves the app on `http://localhost:<appPort>` (default `61291`).
+- `install-llm.bat` — installs a launcher for `python-scripts/proxy_llm.py` that auto-starts the local LLM proxy on `http://localhost:<llmProxyPort>` (default `61292`).
+- `uninstall-app.bat` / `uninstall-llm.bat` — remove every trace from the user profile (`%APPDATA%\...\Startup` entry + `%LOCALAPPDATA%\datannur\` bootstrap). Each target is independent.
+
+**Network-drive resilient:** auto-start uses a two-stage bootstrap (local `%LOCALAPPDATA%` launcher waits for the shared drive to appear before running the serve script on it). Safe when the drive is not yet mounted at login.
+
+**Ports** are read from `data/localhost-ports.config.json`. Logs land in `%LOCALAPPDATA%\datannur\logs\` (last 5 kept).
 
 ## Project Structure
 
