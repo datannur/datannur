@@ -184,7 +184,7 @@ for item in schema_files:
         errors += 1
 
 if errors > 0:
-    print(f"\n❌ Validation failed\n")
+    print("\n❌ Validation failed\n")
     sys.exit(1)
 
 print(f"✅ {total_items} items validated")

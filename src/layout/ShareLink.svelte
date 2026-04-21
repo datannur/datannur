@@ -1,31 +1,12 @@
 <script lang="ts">
-  import { isHttp, isSsgRendering } from 'svelte-fileapp'
   import { updateTooltipText } from '@lib/tooltip'
-  import { loadLinkManifest, hasLink } from '@lib/link-manifest'
-
-  let {
-    type,
-    id,
-  }: {
-    type: string
-    id: string | number
-  } = $props()
 
   let copied = $state(false)
   const tooltipMsg = 'Copier le lien de partage'
   const tooltipMsgCopied = 'Lien copié !'
 
-  if (!isHttp && !isSsgRendering) {
-    loadLinkManifest()
-  }
-
   function getShareUrl(): string {
-    const url = window.location.href.split('?')[0]
-    if (!isHttp && hasLink(type, id)) {
-      const baseUrl = url.split('index.html')[0]
-      return `${baseUrl}data/link/${type}/${id}.html`
-    }
-    return url
+    return window.location.href.split('?')[0]
   }
 
   async function copyLink() {

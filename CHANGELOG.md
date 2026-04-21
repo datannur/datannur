@@ -1,5 +1,14 @@
 # datannur
 
+## 0.19.1 (2026-04-20)
+
+- add: `windows-setup/` scripts for zero-admin auto-start at login (local PowerShell static server for `app`, Python launcher for `llm`), resilient to network drives not mounted at login
+- add: `python-scripts/install_autostart.py` / `uninstall_autostart.py` for auto-start at login on macOS (launchd) and Linux (systemd --user)
+- remove: `generate_links.py`, `link-redirect.html` template, `link.json.js` manifest and `data/link/` files (superseded by localhost mode; share button now always copies the current URL)
+- add: shared `data/localhost-ports.config.json` for local app server, local LLM proxy, and optional Node.js API dev server ports
+- change: frontend LLM config now auto-loads local proxy port from `localhost-ports.config.json` on `localhost`, `127.0.0.1`, and `::1`, with built-in fallbacks
+- change: align browser and web app chrome with light/dark theme colors and use manifest display mode `minimal-ui`
+
 ## 0.19.0 (2026-04-19)
 
 - add: glossary `concept` entity with hierarchy, dedicated pages/tabs/stats, and variable association via `concept_id`

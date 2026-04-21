@@ -513,7 +513,7 @@ def main():
         output_file.parent.mkdir(exist_ok=True)
 
     # Export
-    print(f"📊 Exporting datannur catalog to DCAT-AP-CH...")
+    print("📊 Exporting datannur catalog to DCAT-AP-CH...")
     print(f"   Data directory: {data_dir}")
     print(f"   Output file: {output_file}")
     print()

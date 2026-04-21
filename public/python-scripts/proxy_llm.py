@@ -23,6 +23,8 @@ from typing import Optional
 
 REPO_PATH = Path(__file__).parent.parent
 UPDATE_APP_CONFIG = REPO_PATH / "data" / "update-app.json"
+LOCAL_PORTS_CONFIG = REPO_PATH / "data" / "localhost-ports.config.json"
+DEFAULT_LLM_PROXY_PORT = 61292
 
 
 def get_proxy_url() -> Optional[str]:
@@ -34,6 +36,20 @@ def get_proxy_url() -> Optional[str]:
         return config.get("proxyUrl")
     except (json.JSONDecodeError, OSError):
         return None
+
+
+def get_llm_proxy_port() -> int:
+    """Get LLM proxy port from local config file."""
+    if not LOCAL_PORTS_CONFIG.exists():
+        return DEFAULT_LLM_PROXY_PORT
+    try:
+        config = json.loads(LOCAL_PORTS_CONFIG.read_text(encoding="utf-8"))
+        port = config.get("llmProxyPort")
+        if isinstance(port, int) and port > 0:
+            return port
+    except (json.JSONDecodeError, OSError):
+        pass
+    return DEFAULT_LLM_PROXY_PORT
 
 
 def get_config_dir():
@@ -497,28 +513,28 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    PORT = 3001
+    port = get_llm_proxy_port()
 
     config = load_config()
     if config:
         print(f"✓ Configuration loaded from {get_config_path()}")
     else:
-        print(f"⚠ No configuration found. Use /set_keys endpoint to configure.")
+        print("⚠ No configuration found. Use /set_keys endpoint to configure.")
         print(f"  Config will be saved to: {get_config_path()}")
 
     proxy_url = get_proxy_url()
     if proxy_url:
         print(f"✓ HTTP proxy configured: {proxy_url}")
     else:
-        print(f"✓ No HTTP proxy configured (direct connection)")
+        print("✓ No HTTP proxy configured (direct connection)")
 
-    server = HTTPServer(("localhost", PORT), ProxyHandler)
-    print(f"✓ LLM Proxy running on http://localhost:{PORT}")
-    print(f"✓ Endpoints:")
-    print(f"  - POST /set_keys - Configure API credentials")
-    print(f"  - GET  /status - Check configuration status")
-    print(f"  - POST /api/chat/completions - Chat completions")
-    print(f"  - POST /api/audio/transcriptions - Audio transcriptions")
+    server = HTTPServer(("localhost", port), ProxyHandler)
+    print(f"✓ LLM Proxy running on http://localhost:{port}")
+    print("✓ Endpoints:")
+    print("  - POST /set_keys - Configure API credentials")
+    print("  - GET  /status - Check configuration status")
+    print("  - POST /api/chat/completions - Chat completions")
+    print("  - POST /api/audio/transcriptions - Audio transcriptions")
     print("✓ Press Ctrl+C to stop")
     try:
         server.serve_forever()

@@ -72,7 +72,7 @@
         {/if}
         {#if id}
           <Favorite type={entityFavoritable!} {id} {isFavorite} />
-          <ShareLink {type} {id} />
+          <ShareLink />
         {:else}
           <span class="separator">{separator}</span>
         {/if}

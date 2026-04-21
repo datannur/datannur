@@ -14,7 +14,17 @@ const schemasPath = packageJson.datannur.schemasPath
 
 const schemasDir = join(publicDir, schemasPath)
 const dataDir = join(publicDir, dbPath)
+const localPortsConfigPath = join(
+  publicDir,
+  'data',
+  'localhost-ports.config.json',
+)
 const ignoreSchemas = ['__meta__.schema.json', '__table__.schema.json']
+const defaultNodeApiPort = 61293
+
+type LocalPortsConfig = {
+  nodeApiPort?: number
+}
 
 async function loadTables() {
   const files = await readdir(schemasDir)
@@ -32,6 +42,24 @@ async function loadTableData(
   const filePath = join(dataDir, `${tableName}.json`)
   const content = await readFile(filePath, 'utf-8')
   return JSON.parse(content) as Record<string, unknown>[]
+}
+
+async function loadNodeApiPort() {
+  try {
+    const content = await readFile(localPortsConfigPath, 'utf-8')
+    const config = JSON.parse(content) as LocalPortsConfig
+    if (
+      typeof config.nodeApiPort === 'number' &&
+      Number.isInteger(config.nodeApiPort) &&
+      config.nodeApiPort > 0
+    ) {
+      return config.nodeApiPort
+    }
+  } catch {
+    return defaultNodeApiPort
+  }
+
+  return defaultNodeApiPort
 }
 
 function applyFilters(
@@ -102,6 +130,7 @@ function sendJSON(res: ServerResponse, data: unknown, status = 200) {
 
 const tables = await loadTables()
 const tableSet = new Set(tables)
+const port = await loadNodeApiPort()
 
 const server = createServer(
   async (req: IncomingMessage, res: ServerResponse) => {
@@ -154,7 +183,6 @@ const server = createServer(
   },
 )
 
-const port = 3001
 const host = '0.0.0.0'
 
 server.listen(port, host, () => {

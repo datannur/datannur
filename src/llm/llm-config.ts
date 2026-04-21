@@ -27,11 +27,18 @@ export type LLMStatus = {
   error?: string
 }
 
+type LocalPortsConfig = {
+  llmProxyPort?: number
+}
+
+const defaultLLMProxyPort = 61292
+
 // Detect environment
 const isFileProtocol =
   typeof window !== 'undefined' && window.location.protocol === 'file:'
 const isLocalhost =
-  typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  typeof window !== 'undefined' &&
+  ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
 
 // Determine proxy URL based on environment:
 // - file:// protocol: no proxy available
@@ -39,7 +46,7 @@ const isLocalhost =
 // - web server: PHP proxy
 function getProxyURL(): string | undefined {
   if (isFileProtocol) return undefined
-  if (isLocalhost) return 'http://localhost:3001'
+  if (isLocalhost) return `http://localhost:${defaultLLMProxyPort}`
   return '/api/llm'
 }
 
@@ -58,6 +65,53 @@ export const defaultLLMConfig: LLMConfig = {
   temperature: 0.5,
 }
 
+let llmConfig: LLMConfig = { ...defaultLLMConfig }
+let llmConfigInitialization: Promise<void> | null = null
+
+function isValidPort(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value > 0
+}
+
+function buildProxyURL(port: number): string | undefined {
+  if (isFileProtocol) return undefined
+  if (isLocalhost) return `http://localhost:${port}`
+  return '/api/llm'
+}
+
+async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
+  if (!isLocalhost || isFileProtocol) {
+    return null
+  }
+
+  try {
+    const response = await fetch('/data/localhost-ports.config.json', {
+      cache: 'no-store',
+    })
+    if (!response.ok) {
+      return null
+    }
+    return (await response.json()) as LocalPortsConfig
+  } catch {
+    return null
+  }
+}
+
+export async function initializeLLMConfig(): Promise<void> {
+  llmConfigInitialization ??= (async () => {
+    const localPortsConfig = await loadLocalPortsConfig()
+    const llmProxyPort = isValidPort(localPortsConfig?.llmProxyPort)
+      ? localPortsConfig.llmProxyPort
+      : defaultLLMProxyPort
+
+    llmConfig = {
+      ...defaultLLMConfig,
+      proxyURL: buildProxyURL(llmProxyPort),
+    }
+  })()
+
+  await llmConfigInitialization
+}
+
 // Session state (replaces per-request Turnstile tokens)
 let turnstileSiteKey: string | null = null
 let turnstileLoaded = false
@@ -71,14 +125,14 @@ let turnstileTokenResolver: ((token: string) => void) | null = null
  * Get LLM config
  */
 export function getLLMConfig(): LLMConfig {
-  return defaultLLMConfig
+  return llmConfig
 }
 
 /**
  * Check if proxy is available
  */
 export function isProxyAvailable(): boolean {
-  return !!defaultLLMConfig.proxyURL
+  return !!llmConfig.proxyURL
 }
 
 /**
@@ -92,7 +146,7 @@ export function getSessionToken(): string | null {
  * Check if running on local proxy (no session needed)
  */
 export function isLocalProxy(): boolean {
-  return defaultLLMConfig.isLocalProxy
+  return llmConfig.isLocalProxy
 }
 
 /**
@@ -100,7 +154,9 @@ export function isLocalProxy(): boolean {
  * Call this when opening the chat panel
  */
 export async function createSession(): Promise<boolean> {
-  if (defaultLLMConfig.isLocalProxy) {
+  await initializeLLMConfig()
+
+  if (llmConfig.isLocalProxy) {
     return true // No session needed for local
   }
 
@@ -126,7 +182,7 @@ export async function createSession(): Promise<boolean> {
     }
 
     // Step 2: Exchange Turnstile token for a session token
-    const response = await fetch(`${defaultLLMConfig.proxyURL}/session.php`, {
+    const response = await fetch(`${llmConfig.proxyURL}/session.php`, {
       method: 'POST',
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -206,7 +262,7 @@ async function loadTurnstile(): Promise<boolean> {
 
   try {
     // Fetch siteKey from server
-    const response = await fetch(`${defaultLLMConfig.proxyURL}/status.php`)
+    const response = await fetch(`${llmConfig.proxyURL}/status.php`)
     if (!response.ok) {
       return false
     }
@@ -285,9 +341,11 @@ export async function setProxyCredentials(
   apiKey: string,
   productId: string,
 ): Promise<{ success: boolean; message?: string; error?: string }> {
-  const proxyURL = defaultLLMConfig.proxyURL
+  await initializeLLMConfig()
 
-  if (!proxyURL || !defaultLLMConfig.isLocalProxy) {
+  const proxyURL = llmConfig.proxyURL
+
+  if (!proxyURL || !llmConfig.isLocalProxy) {
     return {
       success: false,
       error: 'Credentials can only be set on local proxy.',
@@ -327,7 +385,9 @@ export async function setProxyCredentials(
  * Check if credentials are configured in proxy
  */
 export async function checkProxyStatus(): Promise<LLMStatus> {
-  const proxyURL = defaultLLMConfig.proxyURL
+  await initializeLLMConfig()
+
+  const proxyURL = llmConfig.proxyURL
 
   if (!proxyURL) {
     return {
@@ -338,7 +398,7 @@ export async function checkProxyStatus(): Promise<LLMStatus> {
   }
 
   try {
-    const statusEndpoint = defaultLLMConfig.isLocalProxy
+    const statusEndpoint = llmConfig.isLocalProxy
       ? `${proxyURL}/status`
       : `${proxyURL}/status.php`
 

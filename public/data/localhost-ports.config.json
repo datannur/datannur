@@ -1,0 +1,5 @@
+{
+  "appPort": 61291,
+  "llmProxyPort": 61292,
+  "nodeApiPort": 61293
+}

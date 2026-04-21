@@ -27,6 +27,8 @@ datannur is a client-side data catalog designed to organize and explore datasets
 
 - [Demo](#demo)
 - [Quick Start](#quick-start)
+- [Windows Auto-Start](#windows-auto-start)
+- [macOS / Linux Auto-Start](#macos--linux-auto-start)
 - [Project Structure](#project-structure)
 - [Data Integration](#data-integration)
   - [Database Structure](#database-structure)
@@ -47,6 +49,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
   - [Raw API](#raw-api)
   - [RESTful API](#restful-api)
 - [Advanced Configuration](#advanced-configuration)
+  - [Local Development Ports](#local-development-ports)
   - [DB Configuration](#db-configuration)
     - [app-name](#app-name)
     - [path](#path)
@@ -68,6 +71,45 @@ datannur is a client-side data catalog designed to organize and explore datasets
 4. **Replace** the demo metadata in `/data/db/` with your own
 
 > **Optional tools:** Some scripts (deploy, static generation, schema management, etc.) require **Node.js >= 22.6.0**. The update and DCAT export scripts require **Python >= 3.9**. Neither is needed to use the catalog itself.
+
+## Windows Auto-Start
+
+In corporate/institutional contexts (Windows, shared network drive, no admin rights), datannur can be auto-started at user login. Scripts live in `windows-setup/` inside the distributed app. Two independent targets, each with its own `install`/`uninstall` pair.
+
+**Three ways to access the catalog:**
+
+| Mode                                    | Prerequisites      | PWA installable | Shareable `http://` links | LLM |
+| --------------------------------------- | ------------------ | :-------------: | :-----------------------: | :-: |
+| Open `index.html` directly (`file://`)  | None               |       ❌        |            ❌             | ❌  |
+| `install-app.bat` (local HTTP server)   | None               |       ✅        |            ✅             | ❌  |
+| `install-llm.bat` (on top of the above) | Python 3 in `PATH` |       ✅        |            ✅             | ✅  |
+
+**How it works:**
+
+- `install-app.bat` — installs a native PowerShell static server (`System.Net.HttpListener`, zero dependencies). Auto-starts at login and serves the app on `http://localhost:<appPort>` (default `61291`).
+- `install-llm.bat` — installs a launcher for `python-scripts/proxy_llm.py` that auto-starts the local LLM proxy on `http://localhost:<llmProxyPort>` (default `61292`).
+- `uninstall-app.bat` / `uninstall-llm.bat` — remove every trace from the user profile (`%APPDATA%\...\Startup` entry + `%LOCALAPPDATA%\datannur\` bootstrap). Each target is independent.
+
+**Network-drive resilient:** auto-start uses a two-stage bootstrap (local `%LOCALAPPDATA%` launcher waits for the shared drive to appear before running the serve script on it). Safe when the drive is not yet mounted at login.
+
+**Ports** are read from `data/localhost-ports.config.json`. Logs land in `%LOCALAPPDATA%\datannur\logs\` (last 5 kept).
+
+## macOS / Linux Auto-Start
+
+On macOS and Linux, Python 3 is preinstalled (or readily available) so the local app server is just `python -m http.server`.
+
+```bash
+# macOS (launchd) or Linux (systemd --user)
+python3 python-scripts/install_autostart.py app     # auto-start local app server at login
+python3 python-scripts/install_autostart.py llm     # auto-start local LLM proxy at login
+python3 python-scripts/uninstall_autostart.py app   # remove the auto-start entry
+python3 python-scripts/uninstall_autostart.py llm
+```
+
+- macOS: creates `~/Library/LaunchAgents/com.datannur-<target>.plist`, logs in `~/Library/Logs/datannur/`.
+- Linux: creates `~/.config/systemd/user/datannur-<target>.service`, logs in `~/.local/state/datannur/logs/`.
+- Ports are read from `data/localhost-ports.config.json` (defaults `61291` / `61292`).
+- Services restart automatically on failure and start at user login.
 
 ## Project Structure
 
@@ -391,6 +433,26 @@ GET /api/php/dataset?folder_id=5
 > **Server requirement:** The RESTful API requires either PHP 7.4+ or Node.js to run. The Raw API works with any static file server.
 
 ## Advanced Configuration
+
+### Local Development Ports
+
+For local app serving and optional local APIs, you can define ports in `data/localhost-ports.config.json`.
+
+```json
+{
+  "appPort": 61291,
+  "llmProxyPort": 61292,
+  "nodeApiPort": 61293
+}
+```
+
+- `appPort`: local static app server used by `python-scripts/start_app.py`
+- `llmProxyPort`: local Python LLM proxy port
+- `nodeApiPort`: optional Node.js REST API dev server port
+
+If the file is missing or invalid, built-in defaults are used.
+
+When the app runs on `localhost`, `127.0.0.1`, or `::1`, the frontend LLM client automatically reads this file to find the local proxy port. On a deployed web server it uses `/api/llm`, and on `file://` it does not use a local proxy.
 
 ### DB Configuration
 

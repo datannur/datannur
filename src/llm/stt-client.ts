@@ -3,7 +3,12 @@
  * Handles both Whisper API and Chrome native speech recognition
  */
 
-import { getLLMConfig, getSessionToken, isLocalProxy } from './llm-config'
+import {
+  getLLMConfig,
+  getSessionToken,
+  initializeLLMConfig,
+  isLocalProxy,
+} from './llm-config'
 
 export type TranscriptionResponse = {
   text: string
@@ -99,6 +104,7 @@ export async function testGoogleSpeechAvailability(): Promise<boolean> {
 async function transcribeWithWhisper(
   audioBlob: Blob,
 ): Promise<TranscriptionResponse> {
+  await initializeLLMConfig()
   const config = getLLMConfig()
 
   if (!config.proxyURL) {
