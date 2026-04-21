@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-datannur unix-setup -- install/uninstall auto-start at user login (macOS + Linux).
+datannur auto-start helpers (macOS + Linux), shared by
+install_autostart.py and uninstall_autostart.py.
 
 Usage:
-    python3 install.py <app|llm>
-    python3 uninstall.py <app|llm>
+    python3 python-scripts/install_autostart.py <app|llm>
+    python3 python-scripts/uninstall_autostart.py <app|llm>
 
 User-scope only: no sudo, no root. Uses launchd on macOS and
 systemd --user on Linux. Logs land in a user-writable location.

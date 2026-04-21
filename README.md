@@ -96,14 +96,14 @@ In corporate/institutional contexts (Windows, shared network drive, no admin rig
 
 ## macOS / Linux Auto-Start
 
-On macOS and Linux, Python 3 is preinstalled (or readily available) so the local app server is just `python -m http.server`. Scripts live in `unix-setup/` inside the distributed app.
+On macOS and Linux, Python 3 is preinstalled (or readily available) so the local app server is just `python -m http.server`.
 
 ```bash
 # macOS (launchd) or Linux (systemd --user)
-python3 unix-setup/install.py app     # auto-start local app server at login
-python3 unix-setup/install.py llm     # auto-start local LLM proxy at login
-python3 unix-setup/uninstall.py app   # remove the auto-start entry
-python3 unix-setup/uninstall.py llm
+python3 python-scripts/install_autostart.py app     # auto-start local app server at login
+python3 python-scripts/install_autostart.py llm     # auto-start local LLM proxy at login
+python3 python-scripts/uninstall_autostart.py app   # remove the auto-start entry
+python3 python-scripts/uninstall_autostart.py llm
 ```
 
 - macOS: creates `~/Library/LaunchAgents/com.datannur-<target>.plist`, logs in `~/Library/Logs/datannur/`.
