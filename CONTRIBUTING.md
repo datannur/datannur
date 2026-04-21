@@ -113,17 +113,17 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 
 ### API & Schema Management
 
-| Command                          | Purpose                                   |
-| -------------------------------- | ----------------------------------------- |
-| `npm run validate-schemas`       | Validate all schemas and data files       |
-| `npm run schema:generate`        | Generate schemas from data                |
-| `npm run schema:generate:strict` | Generate schemas (strict mode)            |
-| `npm run schema:update`          | Update schemas with new fields            |
-| `npm run schema:update:strict`   | Update schemas (strict mode)              |
-| `npm run schema:reset`           | Reset schemas to default                  |
-| `npm run schema:build`           | Validate schemas + generate OpenAPI       |
-| `npm run api:generate`           | Generate OpenAPI specs from schemas       |
-| `npm run api:dev`                | Start Node.js API dev server on port 3000 |
+| Command                          | Purpose                                           |
+| -------------------------------- | ------------------------------------------------- |
+| `npm run validate-schemas`       | Validate all schemas and data files               |
+| `npm run schema:generate`        | Generate schemas from data                        |
+| `npm run schema:generate:strict` | Generate schemas (strict mode)                    |
+| `npm run schema:update`          | Update schemas with new fields                    |
+| `npm run schema:update:strict`   | Update schemas (strict mode)                      |
+| `npm run schema:reset`           | Reset schemas to default                          |
+| `npm run schema:build`           | Validate schemas + generate OpenAPI               |
+| `npm run api:generate`           | Generate OpenAPI specs from schemas               |
+| `npm run api:dev`                | Start Node.js API dev server (default port 61293) |
 
 ## Guidelines
 
@@ -198,6 +198,10 @@ datannur provides two API implementations accessing the same JSON database:
   - `apiVersion`: API version (auto-incremented on schema changes)
   - `schemasHash`: Schema checksum (auto-managed)
   - `openApiVersion`: OpenAPI specification version
+- Local server ports in `public/data/localhost-ports.config.json`:
+  - `appPort`: Local static app server used by `start_app.py`
+  - `llmProxyPort`: Local Python LLM proxy port
+  - `nodeApiPort`: Optional Node.js REST API dev server port
 
 **Schema-driven:**
 

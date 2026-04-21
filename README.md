@@ -47,6 +47,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
   - [Raw API](#raw-api)
   - [RESTful API](#restful-api)
 - [Advanced Configuration](#advanced-configuration)
+  - [Local Development Ports](#local-development-ports)
   - [DB Configuration](#db-configuration)
     - [app-name](#app-name)
     - [path](#path)
@@ -391,6 +392,26 @@ GET /api/php/dataset?folder_id=5
 > **Server requirement:** The RESTful API requires either PHP 7.4+ or Node.js to run. The Raw API works with any static file server.
 
 ## Advanced Configuration
+
+### Local Development Ports
+
+For local app serving and optional local APIs, you can define ports in `data/localhost-ports.config.json`.
+
+```json
+{
+  "appPort": 61291,
+  "llmProxyPort": 61292,
+  "nodeApiPort": 61293
+}
+```
+
+- `appPort`: local static app server used by `python-scripts/start_app.py`
+- `llmProxyPort`: local Python LLM proxy port
+- `nodeApiPort`: optional Node.js REST API dev server port
+
+If the file is missing or invalid, built-in defaults are used.
+
+When the app runs on `localhost`, `127.0.0.1`, or `::1`, the frontend LLM client automatically reads this file to find the local proxy port. On a deployed web server it uses `/api/llm`, and on `file://` it does not use a local proxy.
 
 ### DB Configuration
 

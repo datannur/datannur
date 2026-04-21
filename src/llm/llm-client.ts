@@ -3,7 +3,12 @@
  * Handles streaming chat completions and tool calls
  */
 
-import { getLLMConfig, getSessionToken, isLocalProxy } from './llm-config'
+import {
+  getLLMConfig,
+  getSessionToken,
+  initializeLLMConfig,
+  isLocalProxy,
+} from './llm-config'
 
 export type ChatMessage = {
   role: 'system' | 'user' | 'assistant' | 'tool'
@@ -121,6 +126,7 @@ export type ChatCompletionResponse = {
 export async function chatCompletion(
   options: ChatCompletionOptions,
 ): Promise<ChatCompletionResponse | null> {
+  await initializeLLMConfig()
   const config = getLLMConfig()
 
   const {
