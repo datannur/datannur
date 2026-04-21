@@ -28,6 +28,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
 - [Demo](#demo)
 - [Quick Start](#quick-start)
 - [Windows Auto-Start](#windows-auto-start)
+- [macOS / Linux Auto-Start](#macos--linux-auto-start)
 - [Project Structure](#project-structure)
 - [Data Integration](#data-integration)
   - [Database Structure](#database-structure)
@@ -92,6 +93,23 @@ In corporate/institutional contexts (Windows, shared network drive, no admin rig
 **Network-drive resilient:** auto-start uses a two-stage bootstrap (local `%LOCALAPPDATA%` launcher waits for the shared drive to appear before running the serve script on it). Safe when the drive is not yet mounted at login.
 
 **Ports** are read from `data/localhost-ports.config.json`. Logs land in `%LOCALAPPDATA%\datannur\logs\` (last 5 kept).
+
+## macOS / Linux Auto-Start
+
+On macOS and Linux, Python 3 is preinstalled (or readily available) so the local app server is just `python -m http.server`. Scripts live in `unix-setup/` inside the distributed app.
+
+```bash
+# macOS (launchd) or Linux (systemd --user)
+python3 unix-setup/install.py app     # auto-start local app server at login
+python3 unix-setup/install.py llm     # auto-start local LLM proxy at login
+python3 unix-setup/uninstall.py app   # remove the auto-start entry
+python3 unix-setup/uninstall.py llm
+```
+
+- macOS: creates `~/Library/LaunchAgents/com.datannur-<target>.plist`, logs in `~/Library/Logs/datannur/`.
+- Linux: creates `~/.config/systemd/user/datannur-<target>.service`, logs in `~/.local/state/datannur/logs/`.
+- Ports are read from `data/localhost-ports.config.json` (defaults `61291` / `61292`).
+- Services restart automatically on failure and start at user login.
 
 ## Project Structure
 
