@@ -87,7 +87,7 @@ def main():
         processes.append(subprocess.Popen([sys.executable, str(proxy_script)]))
 
     handler = functools.partial(SafeHTTPHandler, directory=str(APP_DIR))
-    server = ThreadingHTTPServer(("", app_port), handler)
+    server = ThreadingHTTPServer(("127.0.0.1", app_port), handler)
 
     print(f"\n  App: http://localhost:{app_port}")
     print("  Press Ctrl+C to stop\n")
