@@ -1,5 +1,11 @@
 # datannur
 
+## Unreleased
+
+- fix: bind local HTTP server and Node.js API on loopback only (`127.0.0.1`)
+- change: Windows auto-start uses a `.lnk` shortcut instead of `.vbs` to reduce EDR false positives
+- add: SLSA build provenance attestations on release zips
+
 ## 0.19.1 (2026-04-20)
 
 - add: `windows-setup/` scripts for zero-admin auto-start at login (local PowerShell static server for `app`, Python launcher for `llm`), resilient to network drives not mounted at login
