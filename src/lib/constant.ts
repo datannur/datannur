@@ -131,6 +131,7 @@ export const entityToIcon = {
   folderTreeInstitution: 'folder-tree',
   folderTreeFolder: 'folder-tree',
   folderTreeTag: 'folder-tree',
+  folderTreeConcept: 'folder-tree',
   gitCode: 'code-branch',
   tab: 'folder-closed',
   page: 'file-lines',
