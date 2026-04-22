@@ -6,6 +6,7 @@
     "data-template",
     "node-scripts",
     "python-scripts",
+    "windows-setup",
     "schemas",
     "index.html",
     "LICENSE",
