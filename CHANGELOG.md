@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- change: tab bar hides scrollbar and shows edge fade indicators with mouse-wheel horizontal scroll, fixing vertical overflow caused by the horizontal scrollbar height
 - fix: bind local HTTP server and Node.js API on loopback only (`127.0.0.1`)
 - change: Windows auto-start uses a `.lnk` shortcut instead of `.vbs` to reduce EDR false positives
 - add: SLSA build provenance attestations on release zips
