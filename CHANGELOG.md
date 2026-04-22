@@ -8,6 +8,7 @@
 - change: stat tab max-height now applies on all pages, not only the homepage
 - fix: bind local HTTP server and Node.js API on loopback only (`127.0.0.1`)
 - change: Windows auto-start uses a `.lnk` shortcut instead of `.vbs` to reduce EDR false positives
+- add: `windows-setup/install-shortcut.bat` and `python-scripts/install_shortcut.py` to install a Start Menu / `.desktop` shortcut that opens `index.html` in a chromeless browser window (`file://` mode, no server, no listener)
 - add: SLSA build provenance attestations on release zips
 
 ## 0.19.1 (2026-04-20)
