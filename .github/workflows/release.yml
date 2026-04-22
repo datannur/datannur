@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write       # sign attestations via Sigstore
+  attestations: write  # publish attestations to the repo
 
 jobs:
   release:
@@ -129,6 +131,11 @@ jobs:
             "datannur-app-pre-release.zip"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: '*.zip'
 
       - name: Create release
         run: |
