@@ -1,14 +1,14 @@
 <script lang="ts">
   import MiniMasonry from 'minimasonry'
   import { onMount, onDestroy, untrack } from 'svelte'
-  import Icon from '@layout/Icon.svelte'
-  import { onPageHomepage } from 'svelte-fileapp'
   import { documentWidth } from '@lib/viewport-manager'
   import { getColor } from '@lib/util'
   import { entityNames } from '@lib/constant'
   import { allTabs } from '@lib/store'
   import attributs from './attributs'
   import { addValues } from './stat'
+  import Icon from '@layout/Icon.svelte'
+  import ScrollableRow from '@layout/ScrollableRow.svelte'
   import StatBox from './StatBox.svelte'
   import type { AttributWithValues } from './stat'
   import type { MainEntity, Log, MainEntityName } from '@type'
@@ -109,7 +109,7 @@
 </script>
 
 {#if entities.length > 1}
-  <div class="btns">
+  <ScrollableRow class="btns">
     <button
       class="button"
       class:box-shadow={showAll}
@@ -134,10 +134,10 @@
         </span>
       </button>
     {/each}
-  </div>
+  </ScrollableRow>
 {/if}
 
-<div class="main-wrapper" class:homepage={$onPageHomepage}>
+<div class="main-wrapper">
   <div
     class="all-stat-container-wrapper"
     class:no-btns={!hasBtns}
@@ -158,14 +158,11 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
-  .main-wrapper.homepage .all-stat-container-wrapper {
-    max-height: max(calc(100vh - 270px), 80px);
-  }
-
   .all-stat-container-wrapper {
     position: relative;
     width: 100%;
     height: auto;
+    max-height: max(calc(100vh - 270px), 80px);
     overflow: auto;
     background: $background-2;
     @include scrollbar-light();
@@ -186,14 +183,14 @@
     }
   }
 
-  .btns {
+  :global(.btns) {
+    display: flex;
+    flex-wrap: nowrap;
     text-align: left;
     padding: 4px 0;
-    overflow-x: auto;
     white-space: nowrap;
-    @include scrollbar-light();
     .button {
-      float: left;
+      flex: none;
       margin: 5px;
       background: transparent;
       border-color: transparent !important;
@@ -224,33 +221,29 @@
     }
   }
 
-  :global(html.pageShadowColored .box-shadow.box-shadow-color) {
-    .btns .button {
-      @each $entity in $entities {
-        &.active.shadow-#{$entity} {
-          text-shadow: 0 0 10px #{color($entity)};
-        }
+  :global(html.pageShadowColored .box-shadow.box-shadow-color .btns .button) {
+    @each $entity in $entities {
+      &.active.shadow-#{$entity} {
+        text-shadow: 0 0 10px #{color($entity)};
       }
     }
   }
 
   :global(body.mobile) {
-    .main-wrapper.homepage .all-stat-container-wrapper {
+    .all-stat-container-wrapper {
       max-height: max(calc(100vh - 250px), 80px);
     }
   }
 
-  :global(body.small-mobile) {
-    .btns {
-      padding-left: 10px;
-      .button {
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 0;
-        margin-right: 0;
-        .btn-select-entity-name {
-          display: none;
-        }
+  :global(body.small-mobile .btns) {
+    padding-left: 10px;
+    .button {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+      .btn-select-entity-name {
+        display: none;
       }
     }
   }
