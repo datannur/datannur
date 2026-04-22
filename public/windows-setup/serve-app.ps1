@@ -4,8 +4,7 @@
 # (parent of windows-setup/). In-memory cache with gzip and ETag.
 param(
     [int]$Port = 0,
-    [switch]$NoBrowser,
-    [string]$DatannurTag = 'app'  # tag used by common-startup.ps1 for kill matching
+    [switch]$NoBrowser
 )
 
 $ErrorActionPreference = 'Stop'
