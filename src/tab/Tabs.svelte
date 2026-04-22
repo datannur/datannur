@@ -223,7 +223,7 @@
       content: '';
       position: absolute;
       top: 0;
-      bottom: 0;
+      bottom: 1px;
       width: 120px;
       pointer-events: none;
       opacity: 0;
