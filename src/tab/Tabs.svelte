@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte'
   import { tabSelected, footerVisible, allTabs } from '@lib/store'
-  import { UrlParam, isFirefox, getIsMobile } from 'svelte-fileapp'
+  import { UrlParam, getIsMobile } from 'svelte-fileapp'
   import { isBigLimit } from '@lib/constant'
+  import ScrollableRow from '@layout/ScrollableRow.svelte'
   import Logs from '@lib/logs'
   import TabsBody from '@tab/TabsBody.svelte'
   import TabTitle from '@tab/TabTitle.svelte'
@@ -13,7 +14,6 @@
 
   let isMobile = getIsMobile()
   let allKeys: unknown[] = []
-  let hasReverseScroll = !isFirefox
 
   let activeTab = $state(tabs[0]?.key)
   let activeTabBody = $state(tabs[0]?.key)
@@ -64,7 +64,7 @@
     loadTab(tabKey)
     setFooter(tab)
     $tabSelected = tab
-    centerActiveTab()
+    centerActiveTab(tabKey)
     Logs.add('selectTab', { entity: tabKey })
     if (tabs[0].key === tabKey) {
       UrlParam.delete('tab')
@@ -82,14 +82,18 @@
       tab.footerVisible || (typeof tab.nb === 'number' && tab.nb < isBigLimit)
   }
 
-  function centerActiveTab() {
-    setTimeout(() => {
-      const liActive = '#tabs-container ul.tabs-container-ul li.is-active'
-      const li: HTMLLIElement | null = document.querySelector(liActive)
-      if (!li || !ul) return
-      const position = ul.offsetWidth / 2 - li.offsetWidth / 2
-      ul.scrollLeft = 0 - (position - li.offsetLeft)
-    }, 1)
+  function centerActiveTab(tabKey?: string) {
+    const key = tabKey ?? activeTab
+    if (!key || !ul) return
+    const li: HTMLLIElement | null = document.querySelector(
+      `#tabs-container ul.tabs-container-ul li.tab-li-${key}`,
+    )
+    if (!li) return
+    const position = ul.offsetWidth / 2 - li.offsetWidth / 2
+    ul.scrollTo({
+      left: 0 - (position - li.offsetLeft),
+      behavior: 'smooth',
+    })
   }
 
   function setupTabs() {
@@ -164,21 +168,20 @@
 
 <svelte:window onresize={onResize} />
 
-<div
-  id="tabs-container"
-  class="tabs is-boxed"
-  class:no-first-tab={noFirstTab}
-  class:is-last-tab={isLastTab}
-  class:has-reverse-scroll={hasReverseScroll}
-  bind:this={ul}
->
-  {#key tabsTitleKey}
-    <ul class="tabs-container-ul">
-      {#each tabs as tab (tab.key)}
-        <TabTitle {tab} bind:activeTab {selectTab} />
-      {/each}
-    </ul>
-  {/key}
+<div class="tabs-wrapper">
+  <ScrollableRow
+    bind:element={ul}
+    id="tabs-container"
+    class={`tabs is-boxed${noFirstTab ? ' no-first-tab' : ''}${isLastTab ? ' is-last-tab' : ''}`}
+  >
+    {#key tabsTitleKey}
+      <ul class="tabs-container-ul">
+        {#each tabs as tab (tab.key)}
+          <TabTitle {tab} bind:activeTab {selectTab} />
+        {/each}
+      </ul>
+    {/key}
+  </ScrollableRow>
 </div>
 
 <TabsBody {tabs} {noFirstTab} {isLastTab} {activeTabBody} {tabsLoaded} />
@@ -186,37 +189,19 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
-  .tabs {
+  .tabs-wrapper {
+    max-width: var(--app-width);
+  }
+
+  :global(.tabs) {
     margin-bottom: -1px;
-    overflow-x: auto;
     z-index: 1;
     position: relative;
-    max-width: var(--app-width);
-    @include scrollbar-light();
 
-    & > ul {
+    & > :global(ul) {
       flex-grow: 0;
       border-bottom-width: 0;
       z-index: 1;
-    }
-  }
-
-  .tabs.has-reverse-scroll {
-    transform: rotateX(180deg);
-    .tabs-container-ul {
-      transform: rotateX(180deg);
-    }
-  }
-
-  :global(html.has-touch-screen) {
-    .tabs {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-        display: none;
-      }
     }
   }
 </style>

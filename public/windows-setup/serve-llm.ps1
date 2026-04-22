@@ -2,9 +2,6 @@
 # Launcher for the Python LLM proxy sidecar (python-scripts/proxy_llm.py).
 # Waits for the app directory, checks Python availability and the script file,
 # guards against duplicate launches, then starts the Python process.
-param(
-    [string]$DatannurTag = 'llm'  # tag used by common-startup.ps1 for kill matching
-)
 
 $ErrorActionPreference = 'Stop'
 

@@ -183,7 +183,7 @@ const server = createServer(
   },
 )
 
-const host = '0.0.0.0'
+const host = '127.0.0.1'
 
 server.listen(port, host, () => {
   console.log(`🚀 API Server running at http://localhost:${port}`)

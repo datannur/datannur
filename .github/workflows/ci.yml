@@ -39,9 +39,11 @@ jobs:
         run: |
           npm audit --omit=dev --audit-level=high --json | node -e "
             const ignored = ['GHSA-r5fr-rjxr-66jc', 'GHSA-f23m-r3pf-42rh'];
+            const blocking = new Set(['high', 'critical']);
             const data = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
             const found = Object.values(data.vulnerabilities || {})
               .flatMap(v => v.via).filter(v => typeof v === 'object')
+              .filter(v => blocking.has(v.severity))
               .filter(v => ignored.every(id => v.url?.includes(id) === false));
             if (found.length) { console.log(JSON.stringify(found, null, 2)); process.exit(1); }
           "
