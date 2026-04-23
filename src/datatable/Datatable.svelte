@@ -84,7 +84,7 @@
   let domTable: ReturnType<typeof jQuery> | null = null
 
   const isBig = data.length > isBigLimit
-  const maxHeightValue = 275
+  const maxHeightValue = 257
   const maxHeight = `max(calc(100vh - ${maxHeightValue}px), 170px)`
   const maxHeightLoad = `max(calc(100vh - ${maxHeightValue - 82}px), 80px)`
 

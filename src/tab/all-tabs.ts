@@ -169,7 +169,6 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'stat',
     component: Stat,
     withoutProp: true,
-    footerVisible: true,
   },
   aboutStructure: {
     name: 'Structure',
