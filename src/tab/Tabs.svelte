@@ -64,7 +64,6 @@
     loadTab(tabKey)
     setFooter(tab)
     $tabSelected = tab
-    centerActiveTab(tabKey)
     Logs.add('selectTab', { entity: tabKey })
     if (tabs[0].key === tabKey) {
       UrlParam.delete('tab')

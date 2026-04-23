@@ -162,7 +162,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    max-height: max(calc(100vh - 270px), 80px);
+    max-height: max(calc(100vh - 215px), 80px);
     overflow: auto;
     background: $background-2;
     @include scrollbar-light();
@@ -226,12 +226,6 @@
       &.active.shadow-#{$entity} {
         text-shadow: 0 0 10px #{color($entity)};
       }
-    }
-  }
-
-  :global(body.mobile) {
-    .all-stat-container-wrapper {
-      max-height: max(calc(100vh - 250px), 80px);
     }
   }
 

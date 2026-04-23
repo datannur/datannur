@@ -19,23 +19,16 @@
     fadeWidth = '120px',
   }: Props = $props()
 
+  let canScrollLeft = $state(false)
+  let canScrollRight = $state(false)
+
   function horizontalScroll(node: HTMLElement) {
     const update = () => {
-      const canLeft = node.scrollLeft > 1
-      const canRight = node.scrollLeft + node.clientWidth < node.scrollWidth - 1
-      node.dataset.canScrollLeft = canLeft ? 'true' : 'false'
-      node.dataset.canScrollRight = canRight ? 'true' : 'false'
-    }
-
-    const onWheel = (event: WheelEvent) => {
-      if (event.deltaY === 0 || event.deltaX !== 0) return
-      if (node.scrollWidth <= node.clientWidth) return
-      event.preventDefault()
-      node.scrollLeft += event.deltaY
+      canScrollLeft = node.scrollLeft > 1
+      canScrollRight = node.scrollLeft + node.clientWidth < node.scrollWidth - 1
     }
 
     node.addEventListener('scroll', update, { passive: true })
-    node.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('resize', update)
     const observer = new ResizeObserver(update)
     observer.observe(node)
@@ -44,18 +37,47 @@
     return {
       destroy() {
         node.removeEventListener('scroll', update)
-        node.removeEventListener('wheel', onWheel)
         window.removeEventListener('resize', update)
         observer.disconnect()
       },
     }
   }
+
+  function scrollToEdge(direction: 'left' | 'right') {
+    if (!element) return
+    element.scrollTo({
+      left: direction === 'left' ? 0 : element.scrollWidth,
+      behavior: 'smooth',
+    })
+  }
 </script>
 
 <div
   class="scrollable-row-wrapper"
+  class:can-scroll-left={canScrollLeft}
+  class:can-scroll-right={canScrollRight}
   style="--fade-color: {fadeColor}; --fade-width: {fadeWidth}"
 >
+  {#if canScrollLeft}
+    <button
+      type="button"
+      class="scroll-arrow scroll-arrow-left"
+      aria-label="Défiler vers la gauche"
+      onclick={() => scrollToEdge('left')}
+    >
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+  {/if}
+  {#if canScrollRight}
+    <button
+      type="button"
+      class="scroll-arrow scroll-arrow-right"
+      aria-label="Défiler vers la droite"
+      onclick={() => scrollToEdge('right')}
+    >
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  {/if}
   <div
     {id}
     class="scrollable-row-inner {scrollerClass}"
@@ -98,12 +120,45 @@
         color-mix(in srgb, var(--fade-color), transparent 100%)
       );
     }
-    &:has(:global([data-can-scroll-left='true']))::before {
+    &.can-scroll-left::before {
       opacity: 1;
     }
-    &:has(:global([data-can-scroll-right='true']))::after {
+    &.can-scroll-right::after {
       opacity: 1;
     }
+  }
+
+  .scroll-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 1px;
+    z-index: 3;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--color-2);
+    font-size: 1rem;
+    transition: color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-1);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .scroll-arrow-left {
+    left: 0;
+  }
+  .scroll-arrow-right {
+    right: 0;
   }
 
   .scrollable-row-inner {
