@@ -1,0 +1,12 @@
+{
+  "_comment": "Copy this file to deploy.config.json (same folder) and fill in your server details. Publishes the built VitePress site to your host.",
+  "name": "docs.datannur.com/app",
+  "host": "your-server-host",
+  "port": 22,
+  "username": "your-username",
+  "remotePath": "/var/www/docs.datannur.com/app",
+  "privateKeyPath": "~/.ssh/id_rsa",
+  "syncOption": {
+    "delete": true
+  }
+}

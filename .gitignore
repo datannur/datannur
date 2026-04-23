@@ -13,3 +13,6 @@ bundle-view.html
 /public/data/link/
 /src/page/.router-index.ts
 /src/assets/db-schema.json
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/
+/docs/deploy/deploy.config.json

@@ -1,7 +1,9 @@
 # datannur
 
-## Unreleased
+## 0.20.0 (2026-04-23)
 
+- add: VitePress documentation site in `docs/`, deployed to [docs.datannur.com/app](https://docs.datannur.com/app/) via `npm run docs:deploy`
+- change: slim `README.md` down to a pitch + links to the new documentation site; `CONTRIBUTING.md` refocused on code contribution
 - change: `ScrollableRow` replaces mouse-wheel horizontal scroll with clickable arrows over the edge fades, and tabs no longer auto-center on click
 
 ## 0.19.2 (2026-04-23)

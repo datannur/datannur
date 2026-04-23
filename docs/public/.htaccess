@@ -1,0 +1,16 @@
+# Serve clean URLs produced by VitePress (cleanUrls: true).
+
+# If a request doesn't match an existing file, try adding .html.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /app/
+
+    # If the request is not a real file and not a real directory,
+    # and the corresponding .html file exists, rewrite to it.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.+?)/?$ $1.html [L]
+
+</IfModule>

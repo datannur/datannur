@@ -219,17 +219,14 @@ async function buildRawApiSpec(
         description: `Returns the complete ${tableName} table as a JSON array`,
         tags: [tableName],
         responses: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           200: {
             description: 'Successful response',
             content: {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               'application/json': {
                 schema: { $ref: `#/components/schemas/${schemaName}` },
               },
             },
           },
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           404: { description: 'Table not found' },
         },
       },
@@ -376,11 +373,9 @@ async function buildRestfulApiSpec(
           },
         ],
         responses: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           200: {
             description: 'Successful response',
             content: {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               'application/json': {
                 schema: {
                   type: 'array',
@@ -408,17 +403,14 @@ async function buildRestfulApiSpec(
           },
         ],
         responses: {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           200: {
             description: 'Successful response',
             content: {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               'application/json': {
                 schema: { $ref: `#/components/schemas/${schemaName}` },
               },
             },
           },
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           404: { description: 'Record not found' },
         },
       },

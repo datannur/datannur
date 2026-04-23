@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.19.2",
+  "version": "0.20.0",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",
@@ -41,6 +41,11 @@
     "api:dev": "npm run node:ts public/api/nodejs/server.ts",
     "schema:build": "npm run validate-schemas && npm run api:generate",
     "ncu": "ncu -u && ncu -u --packageFile public/package.json",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:deploy": "npm run node:ts docs/deploy/deploy.ts",
+    "docs:release": "npm run docs:build && npm run docs:deploy",
     "check": "npm run format:check && npm run lint && npm run type-check && npm run svelte-check && npm run validate-schemas",
     "verify": "npm run check && npm run test"
   },
@@ -72,6 +77,7 @@
     "typescript-eslint": "^8.57.2",
     "vite": "^8.0.3",
     "vite-plugin-full-reload": "^1.2.0",
+    "vitepress": "^2.0.0-alpha.17",
     "vitest": "^4.1.2"
   },
   "dependencies": {

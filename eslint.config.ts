@@ -55,6 +55,11 @@ const namingConventionRules = {
     },
     {
       selector: 'property',
+      modifiers: ['requiresQuotes'],
+      format: null,
+    },
+    {
+      selector: 'property',
       filter: {
         regex: `^(${allowedProps.join('|')})$`,
         match: true,
@@ -90,6 +95,8 @@ export default [
       'node_modules/',
       'public/assets/',
       'src/page/.router-index.ts',
+      'docs/.vitepress/cache/',
+      'docs/.vitepress/dist/',
     ],
   },
   {

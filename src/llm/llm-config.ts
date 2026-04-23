@@ -185,9 +185,7 @@ export async function createSession(): Promise<boolean> {
     const response = await fetch(`${llmConfig.proxyURL}/session.php`, {
       method: 'POST',
       headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'X-Turnstile-Token': turnstileToken,
       },
       body: JSON.stringify({}),
@@ -355,7 +353,6 @@ export async function setProxyCredentials(
   try {
     const response = await fetch(`${proxyURL}/set_keys`, {
       method: 'POST',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       body: JSON.stringify({ api_key: apiKey, product_id: productId }),

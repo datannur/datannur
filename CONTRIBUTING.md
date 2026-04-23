@@ -111,6 +111,15 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 | `npm run check`      | All quality checks (lint + types)    |
 | `npm run verify`     | Complete verification (check + test) |
 
+### Documentation Site
+
+| Command                | Purpose                               |
+| ---------------------- | ------------------------------------- |
+| `npm run docs:dev`     | VitePress dev server                  |
+| `npm run docs:build`   | Build docs site                       |
+| `npm run docs:preview` | Preview built docs                    |
+| `npm run docs:deploy`  | Deploy docs to docs.datannur.com/app/ |
+
 ### API & Schema Management
 
 | Command                          | Purpose                                           |
@@ -148,7 +157,7 @@ Keep PRs focused - one feature, one bug fix, or one refactor. Avoid mixing styli
 
 ### Documentation
 
-Update `README.md` for new visible features.
+User-facing documentation lives in `docs/` (VitePress) and is published to [docs.datannur.com/app](https://docs.datannur.com/app/). Update the relevant page in `docs/` when adding or changing user-visible features. See [`docs:dev`, `docs:build`, `docs:deploy`](./package.json) scripts.
 
 ## Project Architecture
 
