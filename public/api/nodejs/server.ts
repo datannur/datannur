@@ -120,9 +120,7 @@ function parseUrl(url: string) {
 
 function sendJSON(res: ServerResponse, data: unknown, status = 200) {
   res.writeHead(status, {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'Content-Type': 'application/json',
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'Access-Control-Allow-Origin': '*',
   })
   res.end(JSON.stringify(data))
@@ -139,11 +137,8 @@ const server = createServer(
 
     if (req.method === 'OPTIONS') {
       res.writeHead(200, {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Access-Control-Allow-Origin': '*',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Access-Control-Allow-Methods': 'GET, OPTIONS',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Access-Control-Allow-Headers': 'Content-Type',
       })
       res.end()

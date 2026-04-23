@@ -36,5 +36,11 @@
       "@type": ["src/type/index.ts"]
     }
   },
-  "exclude": ["app", "node_modules"]
+  "include": ["**/*", "docs/.vitepress/**/*.ts"],
+  "exclude": [
+    "app",
+    "node_modules",
+    "docs/.vitepress/cache",
+    "docs/.vitepress/dist"
+  ]
 }

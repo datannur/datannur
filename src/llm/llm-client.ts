@@ -176,7 +176,6 @@ export async function chatCompletion(
     const accept = stream ? 'text/event-stream' : 'application/json'
 
     const headers: { [key: string]: string } = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Content-Type': contentType,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Accept: accept,
