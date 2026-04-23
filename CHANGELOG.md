@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- change: `ScrollableRow` replaces mouse-wheel horizontal scroll with clickable arrows over the edge fades, and tabs no longer auto-center on click
+
 ## 0.19.2 (2026-04-23)
 
 - change: reusable `ScrollableRow` component with hidden scrollbar, edge fade indicators, and mouse-wheel horizontal scroll; applied to the tab bar and to the stat entity selector
