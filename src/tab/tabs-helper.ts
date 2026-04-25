@@ -1,5 +1,6 @@
 import { allTabs } from '@tab/all-tabs'
 import attributs from '@stat/attributs'
+import type { Attribut } from '@stat/attributs-def'
 import type { Row } from '@type'
 import type { Component } from 'svelte'
 
@@ -24,16 +25,22 @@ export type Tab = TabConfig & {
   footerVisible?: boolean
 }
 
-function getNbStat(stat: unknown[], attributs: Record<string, unknown[]>) {
-  return (stat as Array<{ entity: string; items?: unknown[] }>).reduce(
-    (acc: number, entity) => {
-      if (entity.items?.length) {
-        return acc + ((attributs[entity.entity] as unknown[])?.length || 0)
-      }
-      return acc
-    },
-    0,
-  )
+type StatEntry = { entity: string; items?: unknown[] }
+
+function getNbStat(
+  stat: StatEntry[],
+  attributs: Record<string, Attribut[]>,
+): number {
+  return stat.reduce((acc, entry) => {
+    if (!entry.items?.length) return acc
+    return acc + (attributs[entry.entity]?.length ?? 0)
+  }, 0)
+}
+
+function isEmpty(value: unknown): boolean {
+  if (value === null || value === undefined || value === false) return true
+  if (Array.isArray(value) && value.length === 0) return true
+  return false
 }
 
 function getTab(key: string, value: unknown) {
@@ -43,17 +50,12 @@ function getTab(key: string, value: unknown) {
   }
   const config = allTabs[key]
 
-  if (
-    ([null, undefined, false].includes(value as null | undefined | boolean) ||
-      (Array.isArray(value) && value.length === 0)) &&
-    !config.withoutProp
-  )
-    return false
+  if (isEmpty(value) && !config.withoutProp) return false
 
   if (key === 'stat') {
-    const total = (value as Array<{ items?: unknown[] }>).reduce(
-      (acc: number, stat: { items?: unknown[] }) =>
-        acc + (stat.items?.length || 0),
+    const stat = (Array.isArray(value) ? value : []) as StatEntry[]
+    const total = stat.reduce(
+      (acc, entry) => acc + (entry.items?.length ?? 0),
       0,
     )
     if (total === 0) return false
@@ -61,8 +63,7 @@ function getTab(key: string, value: unknown) {
 
   const tab: Tab = { ...config, key, props: {} }
 
-  if (Array.isArray(value) || (typeof value === 'object' && value !== null))
-    tab.nb = (value as unknown[]).length
+  if (Array.isArray(value)) tab.nb = value.length
 
   if (config.isMeta) {
     tab.props.isMeta = true
@@ -71,20 +72,16 @@ function getTab(key: string, value: unknown) {
     tab.props[key] = value
   }
 
-  if (config.withoutNum) {
-    tab.nb = undefined
-  }
+  if (config.withoutNum) tab.nb = undefined
   if (config.loadAsync) tab.nb = '?'
 
-  if (config.useAboutFile) {
-    tab.props = { aboutFile: value }
-  }
+  if (config.useAboutFile) tab.props = { aboutFile: value }
 
   if (key === 'stat') {
-    tab.nb = getNbStat(value as unknown[], attributs)
+    tab.nb = getNbStat(value as StatEntry[], attributs)
   }
 
-  if (tab.footerVisible === undefined) tab.footerVisible = false
+  tab.footerVisible ??= false
 
   return tab
 }
