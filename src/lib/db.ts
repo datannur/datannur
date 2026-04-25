@@ -73,14 +73,15 @@ function addEntities(item: EntityTypeMap['tag' | 'doc']) {
     item.entities.push({ name: 'tag', nb: item.nbTag })
 }
 
-function addName(item: MainEntity, entity: MainEntityName, alias = '') {
-  if (!alias) alias = entity
+function getName(
+  item: MainEntity,
+  entity: MainEntityName,
+  alias: string = entity,
+) {
   const itemIdField = `${alias}Id` as keyof MainEntity
-  const itemId = itemIdField in item ? item[itemIdField] : undefined
-  let itemName = ''
-  if (typeof itemId === 'string' || typeof itemId === 'number')
-    itemName = db.get(entity, itemId)?.name as string
-  return itemName ?? ''
+  const itemId = item[itemIdField]
+  if (typeof itemId !== 'string' && typeof itemId !== 'number') return ''
+  return db.get(entity, itemId)?.name ?? ''
 }
 function addVariableNum(
   dataset: EntityTypeMap['dataset' | 'metaDataset'],
@@ -184,25 +185,41 @@ function addFkVar(variable: Variable) {
   }
 }
 
+const updateFrequencyDays: { [key: string]: number } = {
+  quotidien: 1,
+  quotidienne: 1,
+  hebdomadaire: 7,
+  bimensuel: 15,
+  bimensuelle: 15,
+  mensuel: 30,
+  mensuelle: 30,
+  bimestriel: 60,
+  bimestrielle: 60,
+  trimestriel: 90,
+  trimestrielle: 90,
+  quadrimestriel: 120,
+  quadrimestrielle: 120,
+  semestriel: 180,
+  semestrielle: 180,
+  annuel: 365,
+  annuelle: 365,
+  biennal: 2 * 365,
+  biennale: 2 * 365,
+  triennal: 3 * 365,
+  triennale: 3 * 365,
+  quadriennal: 4 * 365,
+  quadriennale: 4 * 365,
+  quinquennal: 5 * 365,
+  quinquennale: 5 * 365,
+}
+
 function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
   if (!item.lastUpdateDate || !item.updatingEach || item.noMoreUpdate) return
-  let diff = 0
-  const updatingEach = item.updatingEach.toLowerCase()
-  if (updatingEach === 'quotidienne') diff = 24 * 3600
-  else if (updatingEach === 'hebdomadaire') diff = 7 * (24 * 3600)
-  else if (updatingEach === 'mensuelle') diff = 30 * (24 * 3600)
-  else if (updatingEach === 'trimestrielle') diff = 90 * (24 * 3600)
-  else if (updatingEach === 'semestrielle') diff = 180 * (24 * 3600)
-  else if (updatingEach === 'annuelle') diff = 365 * (24 * 3600)
-  else if (updatingEach === 'biennale') diff = 2 * (365 * 24 * 3600)
-  else if (updatingEach === 'triennale') diff = 3 * (365 * 24 * 3600)
-  else if (updatingEach === 'quadrimestrielle') diff = 4 * (365 * 24 * 3600)
-  else if (updatingEach === 'quinquennale') diff = 5 * (365 * 24 * 3600)
-
-  if (diff) {
-    const lastUpdate = dateToTimestamp(item.lastUpdateDate)
-    item.nextUpdateDate = timestampToDate(lastUpdate + diff * 1000)
-  }
+  const days = updateFrequencyDays[item.updatingEach.toLowerCase()]
+  if (!days) return
+  const diff = days * 24 * 3600
+  const lastUpdate = dateToTimestamp(item.lastUpdateDate)
+  item.nextUpdateDate = timestampToDate(lastUpdate + diff * 1000)
 }
 
 function getInstitutionItems(
@@ -253,7 +270,14 @@ export function getParentPath(row: RecursiveEntity) {
 }
 
 export function removeDuplicateById<T extends MainEntity>(items: T[]): T[] {
-  return items.filter((v, i, a) => a.findIndex(v2 => v2.id === v.id) === i)
+  const seen = new Set<string | number>()
+  const result: T[] = []
+  for (const item of items) {
+    if (seen.has(item.id)) continue
+    seen.add(item.id)
+    result.push(item)
+  }
+  return result
 }
 
 export function filterKeys(list: Record<string, unknown>[], keys: string[]) {
@@ -350,11 +374,11 @@ class Process {
         'folder',
       ).length
       const datasets = getRecursive('institution', item.id, 'dataset')
-      const variables = datasets.flatMap(dataset =>
-        db.getAll('variable', { dataset }),
-      )
       item.nbDatasetRecursive = datasets.length
-      item.nbVariableRecursive = variables.length
+      item.nbVariableRecursive = datasets.reduce(
+        (sum, d) => sum + db.countRelated('dataset', d.id, 'variable'),
+        0,
+      )
       item.dataSizeRecursive =
         datasets.reduce(
           (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
@@ -374,16 +398,16 @@ class Process {
       addNextUpdate(folder)
       folder.typeClean = folder.type ?? ''
       if (db.use.owner)
-        folder.ownerName = addName(folder, 'institution', 'owner')
+        folder.ownerName = getName(folder, 'institution', 'owner')
       if (db.use.manager)
-        folder.managerName = addName(folder, 'institution', 'manager')
+        folder.managerName = getName(folder, 'institution', 'manager')
       addPeriod(folder)
       const datasets = getRecursive('folder', folder.id, 'dataset')
-      const variables = datasets.flatMap(dataset =>
-        db.getAll('variable', { dataset }),
-      )
       folder.nbDatasetRecursive = datasets.length
-      folder.nbVariableRecursive = variables.length
+      folder.nbVariableRecursive = datasets.reduce(
+        (sum, d) => sum + db.countRelated('dataset', d.id, 'variable'),
+        0,
+      )
       folder.dataSizeRecursive =
         datasets.reduce(
           (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
@@ -441,9 +465,9 @@ class Process {
   }
   static dataset() {
     const filters = getLocalFilter()
+    if (filters.length > 0) db.use.filter = true
     const filterToName: { [id: string]: string } = {}
     for (const filter of filters) {
-      db.use.filter = true
       filterToName[filter.id] = filter.name
     }
     db.foreach('dataset', dataset => {
@@ -452,11 +476,11 @@ class Process {
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
       if (db.use.owner)
-        dataset.ownerName = addName(dataset, 'institution', 'owner')
+        dataset.ownerName = getName(dataset, 'institution', 'owner')
       if (db.use.manager)
-        dataset.managerName = addName(dataset, 'institution', 'manager')
+        dataset.managerName = getName(dataset, 'institution', 'manager')
       if (db.use.folder) {
-        dataset.folderName = addName(dataset, 'folder')
+        dataset.folderName = getName(dataset, 'folder')
       } else dataset.folderName = ''
       addVariableNum(dataset, 'dataset', 'variable')
       dataset.nbVariable = db.countRelated('dataset', dataset.id, 'variable')
@@ -505,10 +529,10 @@ class Process {
       const modalities = db.getAll('modality', { variable })
       for (const modality of modalities) {
         const values = db.getAll('value', { modality })
-        variable.values = variable.values.concat(values)
-        variable.modalities = variable.modalities.concat(modality)
+        variable.values.push(...values)
+        variable.modalities.push(modality)
       }
-      variable.valuesPreview = [...variable.values.slice(0, 10)]
+      variable.valuesPreview = variable.values.slice(0, 10)
       variable.typeClean = getVariableTypeClean(variable.type)
       variable.statsPreview = buildStatsPreview(variable)
       variableAddDatasetInfo(variable)
@@ -555,12 +579,12 @@ class Process {
       addEntity(modality, 'modality')
       modality.isFavorite = false
       modality.nbVariable = db.countRelated('modality', modality.id, 'variable')
-      if (db.use.folder) modality.folderName = addName(modality, 'folder')
+      if (db.use.folder) modality.folderName = getName(modality, 'folder')
 
       modality.variables = db.getAll('variable', { modality })
       modality.values = db.getAll('value', { modality })
       modality.nbValue = modality.values.length
-      modality.valuesPreview = [...modality.values.slice(0, 10)]
+      modality.valuesPreview = modality.values.slice(0, 10)
       for (const value of modality.values) {
         value.modalityName = modality.name
         if (value.value === null) value.value = ''
@@ -650,28 +674,28 @@ function addDocRecursive() {
   for (const entity of ['institution', 'folder', 'dataset', 'tag'] as const) {
     db.foreach(entity, item => {
       item.docsRecursive = []
-      let docs: Doc[] = []
+      const docs: Doc[] = []
       if (entity === 'institution') {
         const childs = getRecursive(entity, item.id, entity)
         for (const child of childs) {
-          if (child.docs) docs = docs.concat(child.docs)
+          if (child.docs) docs.push(...child.docs)
         }
       }
       if (entity === 'institution' || entity === 'folder') {
         const folders = getRecursive(entity, item.id, 'folder')
         const datasets = getRecursive(entity, item.id, 'dataset')
         for (const folder of folders) {
-          if (folder.docs) docs = docs.concat(folder.docs)
+          if (folder.docs) docs.push(...folder.docs)
         }
         for (const dataset of datasets) {
-          if (dataset.docs) docs = docs.concat(dataset.docs)
+          if (dataset.docs) docs.push(...dataset.docs)
         }
       }
-      if (docs.length > 1) docs = removeDuplicateById(docs)
-      for (const doc of docs) {
-        item.docsRecursive?.push({ ...doc, inherited: 'hérité' })
+      const uniqueDocs = docs.length > 1 ? removeDuplicateById(docs) : docs
+      for (const doc of uniqueDocs) {
+        item.docsRecursive.push({ ...doc, inherited: 'hérité' })
       }
-      if (item.docs) item.docsRecursive = item.docsRecursive.concat(item.docs)
+      if (item.docs) item.docsRecursive.push(...item.docs)
     })
   }
 }

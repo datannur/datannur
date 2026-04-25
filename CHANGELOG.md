@@ -1,5 +1,13 @@
 # datannur
 
+## 0.20.1 (2026-04-25)
+
+- perf: speed up `db.ts` data preparation (O(n) dedup, fewer intermediate arrays)
+- fix: `quadrimestrielle` frequency mapped to 4 years instead of 120 days
+- change: tighten typing in `tabs-helper.ts` (remove `as` casts) and clean up `db.ts`
+- add: unit tests for `tabsHelper`
+- change: make the entire `numPercent` cell clickable (bar + number) instead of only the number
+
 ## 0.20.0 (2026-04-23)
 
 - add: VitePress documentation site in `docs/`, deployed to [docs.datannur.com/app](https://docs.datannur.com/app/) via `npm run docs:deploy`
