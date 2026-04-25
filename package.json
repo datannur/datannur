@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",

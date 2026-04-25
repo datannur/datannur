@@ -1,5 +1,9 @@
 # datannur
 
+## 0.20.1 (2026-04-25)
+
+- change: make the entire `numPercent` cell clickable (bar + number) instead of only the number
+
 ## 0.20.0 (2026-04-23)
 
 - add: VitePress documentation site in `docs/`, deployed to [docs.datannur.com/app](https://docs.datannur.com/app/) via `npm run docs:deploy`

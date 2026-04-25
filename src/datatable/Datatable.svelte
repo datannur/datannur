@@ -674,12 +674,18 @@
             }
             .num-percent-value {
               position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              top: 50%;
-              transform: translateY(-50%);
+              inset: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
               text-align: center;
+              & > a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+              }
             }
             .num-percent {
               position: absolute;
