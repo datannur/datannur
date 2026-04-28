@@ -1,11 +1,8 @@
 # datannur
 
-## Unreleased
+## 0.21.0 (2026-04-28)
 
-- change: rename `modality` to `enumeration` across entities, routes, components, schemas, API, and data files
-- change: rename `freq` to `frequency` across tabs, schemas, API routes, and data files
-- change: rename the header dropdowns to `Contexte` and `Données`
-- change: rename the institution entity, routes, components, schemas, and dataset files to organization
+- change: align app terminology by renaming `institution` to `organization`, `modality` to `enumeration`, `freq` to `frequency`, and the header dropdowns to `Contexte` / `Données`
 - add: `folder.link`, clarify `data_path` vs `link` in dataset/folder schemas, and reuse a shared `LinkInfo` row in detail views
 - fix: multi-line `numPercent` cells (e.g. dates) collapsing to a single line after the clickable-cell change
 
