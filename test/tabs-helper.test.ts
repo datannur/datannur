@@ -38,7 +38,7 @@ vi.mock('@tab/all-tabs', () => ({
 
 vi.mock('@stat/attributs', () => ({
   default: {
-    institution: [{ name: 'a' }, { name: 'b' }, { name: 'c' }],
+    organization: [{ name: 'a' }, { name: 'b' }, { name: 'c' }],
     folder: [{ name: 'a' }, { name: 'b' }],
   },
 }))
@@ -121,7 +121,7 @@ describe('tabsHelper', () => {
   it('skips stat tab when all entries have empty items', () => {
     const tabs = tabsHelper({
       stat: [
-        { entity: 'institution', items: [] },
+        { entity: 'organization', items: [] },
         { entity: 'folder', items: undefined },
       ],
     })
@@ -131,9 +131,9 @@ describe('tabsHelper', () => {
   it('computes nb for stat as sum of attributs lengths over non-empty entries', () => {
     const tabs = tabsHelper({
       stat: [
-        { entity: 'institution', items: [{}, {}] }, // 3 attributs
+        { entity: 'organization', items: [{}, {}] }, // 3 attributs
         { entity: 'folder', items: [{}] }, // 2 attributs
-        { entity: 'institution', items: [] }, // ignored
+        { entity: 'organization', items: [] }, // ignored
       ],
     })
     expect(tabs[0].nb).toBe(5)

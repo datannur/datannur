@@ -5,25 +5,25 @@
   import ExtendableText from '@layout/ExtendableText.svelte'
 
   let {
-    institutionId,
-    type = 'institution',
+    organizationId,
+    type = 'organization',
     isSelf = false,
   }: {
-    institutionId: string | number | undefined
-    type?: 'institution' | 'owner' | 'manager'
+    organizationId: string | number | undefined
+    type?: 'organization' | 'owner' | 'manager'
     isSelf?: boolean
   } = $props()
 
   const name = $derived(isSelf ? 'Partie de' : entityNames[type])
-  const icon = $derived(isSelf ? 'folderTreeInstitution' : 'institution')
+  const icon = $derived(isSelf ? 'folderTreeOrganization' : 'organization')
 </script>
 
-{#if institutionId}
+{#if organizationId}
   <tr>
     <td><Icon type={icon} /> {name}</td>
     <td>
       <ExtendableText>
-        <Breadcrumb type="institution" elemId={institutionId} {isSelf} />
+        <Breadcrumb type="organization" elemId={organizationId} {isSelf} />
       </ExtendableText>
     </td>
   </tr>

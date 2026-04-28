@@ -18,7 +18,7 @@ import type {
   Tag,
 } from '@type'
 
-type EntityWithInstitution = MainEntityMap['folder' | 'dataset' | 'variable']
+type EntityWithOrganization = MainEntityMap['folder' | 'dataset' | 'variable']
 
 export default class Column {
   static id(): ColumnType {
@@ -306,39 +306,39 @@ export default class Column {
   }
   static owner(): ColumnType {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
-      ? (data, type, row: EntityWithInstitution) =>
+      ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`institution/${row.ownerId}`, escapeHtml(row.ownerName)),
+            link(`organization/${row.ownerId}`, escapeHtml(row.ownerName)),
           )
-      : (data, type, row: EntityWithInstitution) => {
+      : (data, type, row: EntityWithOrganization) => {
           if (!row.ownerId) return ''
-          return Render.withParentsFromId('institution', row.ownerId, type)
+          return Render.withParentsFromId('organization', row.ownerId, type)
         }
     return {
       data: 'ownerName',
-      title: Render.icon('institution') + entityNames.owner,
+      title: Render.icon('organization') + entityNames.owner,
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Institution propriétaire',
+      tooltip: 'Organisation propriétaire',
       render,
     }
   }
   static manager(): ColumnType {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
-      ? (data, type, row: EntityWithInstitution) =>
+      ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`institution/${row.managerId}`, escapeHtml(row.managerName)),
+            link(`organization/${row.managerId}`, escapeHtml(row.managerName)),
           )
-      : (data, type, row: EntityWithInstitution) => {
+      : (data, type, row: EntityWithOrganization) => {
           if (!row.managerId) return ''
-          return Render.withParentsFromId('institution', row.managerId, type)
+          return Render.withParentsFromId('organization', row.managerId, type)
         }
     return {
       data: 'managerName',
-      title: Render.icon('institution') + entityNames.manager,
+      title: Render.icon('organization') + entityNames.manager,
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Institution gestionnaire',
+      tooltip: 'Organisation gestionnaire',
       render,
     }
   }
@@ -722,7 +722,7 @@ export default class Column {
       render: (
         data: unknown[],
         type,
-        row: MainEntityMap['institution' | 'folder' | 'dataset'],
+        row: MainEntityMap['organization' | 'folder' | 'dataset'],
       ) => {
         if (!data.length) return ''
         if (type !== 'display') return data.length

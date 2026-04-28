@@ -4,7 +4,7 @@
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
   import IdInfo from '@info-table/IdInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import LastUpdateInfo from '@info-table/LastUpdateInfo.svelte'
   import NextUpdateInfo from '@info-table/NextUpdateInfo.svelte'
@@ -31,8 +31,8 @@
   {#if folder.parentId}
     <FolderInfo folderId={folder.id} isSelf={true} />
   {/if}
-  <InstitutionInfo type="owner" institutionId={folder.ownerId} />
-  <InstitutionInfo type="manager" institutionId={folder.managerId} />
+  <OrganizationInfo type="owner" organizationId={folder.ownerId} />
+  <OrganizationInfo type="manager" organizationId={folder.managerId} />
   <TypeInfo type={folder.typeClean} />
   <DataSizeInfo dataSize={folder.dataSizeRecursive} />
   {#if folder.lastUpdateDate}

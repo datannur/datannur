@@ -32,7 +32,7 @@ function mermaidAddEntities(code: string) {
 
     let entityName = entity
     if (entity === 'manager' || entity === 'owner') {
-      entityName = 'institution'
+      entityName = 'organization'
     }
     const icon = Render.icon(entityName)
 

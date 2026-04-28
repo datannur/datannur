@@ -80,8 +80,8 @@
       <HeaderDropdown
         title="Organisation"
         pages={[
-          'institution',
-          'institutions',
+          'organization',
+          'organizations',
           'folder',
           'folders',
           'tag',
@@ -91,9 +91,15 @@
           'doc',
           'docs',
         ]}
-        ifUse={['institution', 'folder', 'tag', 'concept', 'doc']}
+        ifUse={['organization', 'folder', 'tag', 'concept', 'doc']}
       >
-        <HeaderLink standard="institution" />
+        <HeaderLink
+          href="organizations"
+          pages={['organization', 'organizations']}
+          icon="organization"
+        >
+          Organisations
+        </HeaderLink>
         <HeaderLink standard="folder" />
         <HeaderLink standard="tag" />
         <HeaderLink standard="concept" />

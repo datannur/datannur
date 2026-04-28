@@ -46,8 +46,8 @@ export function initApp(): Promise<void> {
       const dbOption = {
         filter,
         aliases: [
-          { table: 'institution', alias: 'owner' },
-          { table: 'institution', alias: 'manager' },
+          { table: 'organization', alias: 'owner' },
+          { table: 'organization', alias: 'manager' },
         ],
       }
       await db.init(dbOption)

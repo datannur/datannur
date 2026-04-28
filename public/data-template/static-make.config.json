@@ -5,10 +5,10 @@
   "outDir": "static",
   "dbMetaPath": "data/db",
   "port": 8080,
-  "entities": ["institution", "folder", "tag", "concept", "doc", "dataset"],
+  "entities": ["organization", "folder", "tag", "concept", "doc", "dataset"],
   "routes": [
     "",
-    "institutions",
+    "organizations",
     "folders",
     "tags",
     "concepts",

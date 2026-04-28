@@ -7,7 +7,7 @@
   const itemMap: { [key: string]: string } = {
     page: 'La page',
     dataset: 'Le dataset',
-    institution: "L'institution",
+    organization: "L'organisation",
     folder: 'Le dossier',
     tag: 'Le tag',
     doc: 'La doc',

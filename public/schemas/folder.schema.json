@@ -23,13 +23,13 @@
       },
       "manager_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the managing institution",
-        "x-description-fr": "Clé de l'institution gestionnaire du dossier"
+        "description": "Key of the managing organization",
+        "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
       },
       "owner_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the data provider institution",
-        "x-description-fr": "Clé de l'institution fournisseur du dossier"
+        "description": "Key of the data provider organization",
+        "x-description-fr": "Clé de l'organisation fournisseur du dossier"
       },
       "tag_ids": {
         "type": ["string", "number", "null"],

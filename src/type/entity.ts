@@ -226,7 +226,7 @@ export type Folder = BaseEntity &
     typeClean?: string
   }
 
-export type Institution = BaseEntity &
+export type Organization = BaseEntity &
   WithRecursiveParent &
   WithTags &
   WithDocs &
@@ -250,11 +250,11 @@ export type Tag = BaseEntity &
   WithFavorite & {
     // Computed fields added during processing
     entities?: { name: string; nb: number }[]
-    nbInstitution?: number
+    nbOrganization?: number
     nbFolder?: number
     nbDataset?: number
     nbVariable?: number
-    nbInstitutionRecursive?: number
+    nbOrganizationRecursive?: number
     nbFolderRecursive?: number
     nbDocRecursive?: number
     nbDatasetRecursive?: number
@@ -291,7 +291,7 @@ export type Doc = BaseEntity &
     entities?: { name: string; nb: number }[]
     entity?: string
     entityId?: string | number
-    nbInstitution?: number
+    nbOrganization?: number
     nbFolder?: number
     nbDataset?: number
     nbTag?: number
@@ -380,7 +380,7 @@ export type Evolution = WithFavorite & {
 }
 
 export type MainEntityMap = {
-  institution: Institution
+  organization: Organization
   folder: Folder
   tag: Tag
   concept: Concept
@@ -394,8 +394,8 @@ export type EntityTypeMap = MainEntityMap & {
   config: Config
   value: Value
   freq: Freq
-  owner: Institution
-  manager: Institution
+  owner: Organization
+  manager: Organization
   evolution: Evolution
   metaVariable: MetaVariable
   metaDataset: MetaDataset

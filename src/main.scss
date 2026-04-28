@@ -49,7 +49,7 @@ $color-type: var(--color-type);
 // icon color
 $icon-colors: (
   'homepage': $color-3,
-  'institution': #625d8c,
+  'organization': #625d8c,
   'folder': #b68b4c,
   'tag': #396496,
   'concept': #2b9fb3,
@@ -61,7 +61,7 @@ $icon-colors: (
   'page': $color-type,
   'tab': $color-3,
   'folderTree': $color-3,
-  'folderTreeInstitution': #625d8c,
+  'folderTreeOrganization': #625d8c,
   'folderTreeFolder': #b68b4c,
   'folderTreeTag': #396496,
   'folderTreeConcept': #2b9fb3,
@@ -170,6 +170,6 @@ $menu-mobile-limit: 1023px;
 }
 
 $entities:
-  'institution', 'folder', 'tag', 'concept', 'dataset', 'variable', 'modality',
+  'organization', 'folder', 'tag', 'concept', 'dataset', 'variable', 'modality',
   'value', 'log', 'entity', 'option', 'search', 'favorite', 'about', 'diagram',
   'compare', 'stat', 'doc', 'evolution', 'features', 'preview', 'freq';

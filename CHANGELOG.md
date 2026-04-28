@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- change: rename the institution entity, routes, components, schemas, and dataset files to organization
 - add: `folder.link`, clarify `data_path` vs `link` in dataset/folder schemas, and reuse a shared `LinkInfo` row in detail views
 - fix: multi-line `numPercent` cells (e.g. dates) collapsing to a single line after the clickable-cell change
 

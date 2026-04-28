@@ -2,7 +2,7 @@ import definition from './attributs-def'
 import type { Attribut } from './attributs-def'
 
 export const attributs = {
-  institution: ['tag', 'email', 'phone', 'level', 'name', 'description'],
+  organization: ['tag', 'email', 'phone', 'level', 'name', 'description'],
   folder: [
     'frequency',
     'lastUpdate',

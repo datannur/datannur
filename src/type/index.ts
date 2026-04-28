@@ -27,7 +27,7 @@ export type {
   Variable,
   Modality,
   Folder,
-  Institution,
+  Organization,
   Tag,
   TagWithChildren,
   Concept,

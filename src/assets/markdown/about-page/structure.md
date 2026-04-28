@@ -48,28 +48,28 @@ $folder --> $dataset
 $folder --> $modality
 );
 
-### Institution
+### Organisation
 
-Un dossier ou un dataset peut être associé à deux types de rôles incarnés par une institution :
+Un dossier ou un dataset peut être associé à deux types de rôles incarnés par une organisation :
 
 - **Fournisseur** : l’entité qui produit ou partage les données
 - **Gestionnaire** : l’entité qui les maintient et en garantit la qualité
 
-Les institutions peuvent également s’organiser de manière hiérarchique, en étant contenues les unes dans les autres.
+Les organisations peuvent également s’organiser de manière hiérarchique, en étant contenues les unes dans les autres.
 
 mermaid(
-$institution $recursive
-$institution -- manager - owner --> $folder
-$institution -- manager - owner --> $dataset
+$organization $recursive
+$organization -- manager - owner --> $folder
+$organization -- manager - owner --> $dataset
 );
 
 ### Mot clé
 
-Les mots clés servent à enrichir les institutions, dossiers, datasets, variables ou concepts avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
+Les mots clés servent à enrichir les organisations, dossiers, datasets, variables ou concepts avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
 
 mermaid(
 $tag $recursive
-$institution <--> $tag
+$organization <--> $tag
 $folder <--> $tag
 $dataset <--> $tag
 $variable <--> $tag
@@ -90,10 +90,10 @@ $concept <--> $doc
 
 ### Doc
 
-Des documentations (docs) au format Markdown ou PDF peuvent être associées à des institutions, dossiers, mots clés, concepts ou datasets. Elles permettent de décrire ou expliquer en détail ces éléments.
+Des documentations (docs) au format Markdown ou PDF peuvent être associées à des organisations, dossiers, mots clés, concepts ou datasets. Elles permettent de décrire ou expliquer en détail ces éléments.
 
 mermaid(
-$institution <--> $doc
+$organization <--> $doc
 $folder <--> $doc
 $tag <--> $doc
 $concept <--> $doc
@@ -106,12 +106,12 @@ Les concepts de datannur sont interconnectés, offrant une grande flexibilité p
 
 mermaid(
 $folder $recursive
-$institution $recursive
+$organization $recursive
 $tag $recursive
-$institution -- manager - owner --> $dataset
-$institution -- manager - owner --> $folder
-$institution <--> $tag
-$institution <--> $doc
+$organization -- manager - owner --> $dataset
+$organization -- manager - owner --> $folder
+$organization <--> $tag
+$organization <--> $doc
 $folder --> $dataset
 $folder --> $modality
 $folder <--> $tag

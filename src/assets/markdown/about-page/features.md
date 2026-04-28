@@ -4,7 +4,7 @@ L’objectif n’est pas seulement de stocker de l’information, mais de rendre
 
 ## Navigation
 
-datannur permet de parcourir le catalogue de plusieurs façons complémentaires. L’arborescence donne une vue structurée des institutions, dossiers, jeux de données, variables et documents, tandis que la recherche et les filtres permettent d’accéder rapidement à l’information pertinente.
+datannur permet de parcourir le catalogue de plusieurs façons complémentaires. L’arborescence donne une vue structurée des organisations, dossiers, jeux de données, variables et documents, tandis que la recherche et les filtres permettent d’accéder rapidement à l’information pertinente.
 
 Cette navigation multiple rend le catalogue utilisable aussi bien pour une exploration globale que pour des besoins ciblés : retrouver un jeu de données, identifier une variable, repérer un responsable ou naviguer dans un ensemble documentaire lié.
 
@@ -36,7 +36,7 @@ Les tableaux peuvent être triés en ordre ascendant ou descendant à partir de 
 
 ### Arborescence
 
-datannur s’appuie sur une structure arborescente pour organiser les institutions, les dossiers et les mots clés. Chaque élément peut contenir des sous-éléments sur plusieurs niveaux, ce qui permet de représenter fidèlement des organisations complexes.
+datannur s’appuie sur une structure arborescente pour organiser les organisations, les dossiers et les mots clés. Chaque élément peut contenir des sous-éléments sur plusieurs niveaux, ce qui permet de représenter fidèlement des organisations complexes.
 
 Chaque nœud de l’arborescence dispose de sa propre page et agit comme un sous-ensemble du catalogue. Il est ainsi possible d’explorer à la fois son contenu, son contexte, et les datasets qui lui sont rattachés. Combinée au tri et aux filtres, cette structure offre une navigation à la fois simple et puissante.
 
@@ -52,7 +52,7 @@ Intégré à l’interface, il complète les fonctions classiques de recherche, 
 
 ## Information
 
-Chaque page dédiée à un élément du catalogue comporte un onglet « À propos » qui rassemble ses principales métadonnées. On y retrouve ses attributs spécifiques — par exemple une description, une date de mise à jour ou un contact — ainsi que les éléments auxquels il est rattaché, comme ses mots clés, son dossier ou ses institutions liées.
+Chaque page dédiée à un élément du catalogue comporte un onglet « À propos » qui rassemble ses principales métadonnées. On y retrouve ses attributs spécifiques — par exemple une description, une date de mise à jour ou un contact — ainsi que les éléments auxquels il est rattaché, comme ses mots clés, son dossier ou ses organisations liées.
 
 Les autres onglets donnent accès aux éléments qu’il contient ou auxquels il est associé, comme les datasets, variables, modalités ou documents.
 

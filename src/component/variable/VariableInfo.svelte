@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import db from '@db'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
   import Link from '@layout/Link.svelte'
   import Icon from '@layout/Icon.svelte'
@@ -36,8 +36,8 @@
     </tr>
   {/if}
   {#if dataset}
-    <InstitutionInfo type="owner" institutionId={dataset.ownerId} />
-    <InstitutionInfo type="manager" institutionId={dataset.managerId} />
+    <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
+    <OrganizationInfo type="manager" organizationId={dataset.managerId} />
     <FolderInfo folderId={dataset.folderId} />
   {/if}
   <tr>

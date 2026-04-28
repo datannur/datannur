@@ -23,13 +23,13 @@
       },
       "manager_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the managing institution",
-        "x-description-fr": "Clé de l'institution gestionnaire du dataset"
+        "description": "Key of the managing organization",
+        "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
       },
       "owner_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the data provider institution",
-        "x-description-fr": "Clé de l'institution fournisseur du dataset"
+        "description": "Key of the data provider organization",
+        "x-description-fr": "Clé de l'organisation fournisseur du dataset"
       },
       "tag_ids": {
         "type": ["string", "number", "null"],

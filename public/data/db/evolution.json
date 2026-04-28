@@ -233,7 +233,7 @@
   {
     "timestamp": 1747340787,
     "type": "update",
-    "entity": "institution",
+    "entity": "organization",
     "entity_id": "dfi",
     "parent_entity_id": null,
     "variable": "start_date",
@@ -244,7 +244,7 @@
   {
     "timestamp": 1747340787,
     "type": "update",
-    "entity": "institution",
+    "entity": "organization",
     "entity_id": "dfi",
     "parent_entity_id": null,
     "variable": "end_date",
@@ -255,7 +255,7 @@
   {
     "timestamp": 1747340787,
     "type": "update",
-    "entity": "institution",
+    "entity": "organization",
     "entity_id": "dff",
     "parent_entity_id": null,
     "variable": "start_date",
@@ -266,7 +266,7 @@
   {
     "timestamp": 1747340787,
     "type": "update",
-    "entity": "institution",
+    "entity": "organization",
     "entity_id": "seco",
     "parent_entity_id": null,
     "variable": "end_date",

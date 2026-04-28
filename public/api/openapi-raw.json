@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur Raw API",
     "description": "Read-only REST API providing direct access to datannur database JSON files. Each endpoint returns a complete table as a JSON array. This is a static file-based API with no server-side processing.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -20,6 +20,28 @@
     }
   ],
   "paths": {
+    "/concept.json": {
+      "get": {
+        "summary": "Get all concept",
+        "description": "Returns the complete concept table as a JSON array",
+        "tags": ["concept"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/concept"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Table not found"
+          }
+        }
+      }
+    },
     "/config.json": {
       "get": {
         "summary": "Get all config",
@@ -152,28 +174,6 @@
         }
       }
     },
-    "/institution.json": {
-      "get": {
-        "summary": "Get all institution",
-        "description": "Returns the complete institution table as a JSON array",
-        "tags": ["institution"],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/institution"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Table not found"
-          }
-        }
-      }
-    },
     "/modality.json": {
       "get": {
         "summary": "Get all modality",
@@ -186,6 +186,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/modality"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Table not found"
+          }
+        }
+      }
+    },
+    "/organization.json": {
+      "get": {
+        "summary": "Get all organization",
+        "description": "Returns the complete organization table as a JSON array",
+        "tags": ["organization"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/organization"
                 }
               }
             }
@@ -265,6 +287,54 @@
   },
   "components": {
     "schemas": {
+      "concept": {
+        "x-db": "data",
+        "title": "concept",
+        "description": "Business glossary concepts",
+        "x-description-fr": "Concepts du glossaire métier",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id"],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Primary key of the concept",
+              "x-description-fr": "Clé primaire du concept"
+            },
+            "parent_id": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent concept (domain hierarchy)",
+              "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
+            },
+            "tag_ids": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related keywords",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "doc_ids": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "name": {
+              "type": ["string", "null"],
+              "description": "Concept name",
+              "x-description-fr": "Nom du concept"
+            },
+            "description": {
+              "type": ["string", "null"],
+              "description": "Business description of the concept",
+              "x-description-fr": "Description métier du concept"
+            }
+          }
+        }
+      },
       "config": {
         "x-db": "data",
         "title": "config",
@@ -312,13 +382,13 @@
             },
             "manager_id": {
               "type": ["string", "number", "null"],
-              "description": "Key of the managing institution",
-              "x-description-fr": "Clé de l'institution gestionnaire du dataset"
+              "description": "Key of the managing organization",
+              "x-description-fr": "Clé de l'organization gestionnaire du dataset"
             },
             "owner_id": {
               "type": ["string", "number", "null"],
-              "description": "Key of the data provider institution",
-              "x-description-fr": "Clé de l'institution fournisseur du dataset"
+              "description": "Key of the data provider organization",
+              "x-description-fr": "Clé de l'organization fournisseur du dataset"
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
@@ -346,8 +416,8 @@
             },
             "data_path": {
               "type": ["string", "null"],
-              "description": "Dataset location",
-              "x-description-fr": "Emplacement du dataset"
+              "description": "Dataset data location",
+              "x-description-fr": "Emplacement des données du dataset"
             },
             "delivery_format": {
               "type": ["string", "null"],
@@ -361,8 +431,8 @@
             },
             "link": {
               "type": ["string", "null"],
-              "description": "Link to dataset location",
-              "x-description-fr": "Lien vers l'emplacement du dataset"
+              "description": "Link to the dataset access, source, or reference",
+              "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
             },
             "localisation": {
               "type": ["string", "null"],
@@ -373,6 +443,21 @@
               "type": ["integer", "null"],
               "description": "Number of rows in the dataset",
               "x-description-fr": "Nombre de ligne dans le dataset"
+            },
+            "sample_size": {
+              "type": ["integer", "null"],
+              "description": "Number of rows sampled for frequency analysis",
+              "x-description-fr": "Nombre de lignes échantillonnées pour l'analyse de fréquences"
+            },
+            "nb_resources": {
+              "type": ["integer", "null"],
+              "description": "Number of resources (files, tables, ...) in the dataset",
+              "x-description-fr": "Nombre de ressources (fichiers, tables, ...) dans le dataset"
+            },
+            "data_size": {
+              "type": ["integer", "null"],
+              "description": "Size of the dataset in bytes",
+              "x-description-fr": "Taille du dataset en octets"
             },
             "start_date": {
               "type": ["string", "number", "null"],
@@ -488,12 +573,12 @@
               "x-description-fr": "Variable concernée par la modification"
             },
             "old_value": {
-              "type": ["string", "null"],
+              "type": ["string", "number", "null"],
               "description": "Value before modification",
               "x-description-fr": "Valeur avant modification"
             },
             "new_value": {
-              "type": ["string", "null"],
+              "type": ["string", "number", "null"],
               "description": "Value after modification",
               "x-description-fr": "Valeur après modification"
             },
@@ -528,13 +613,13 @@
             },
             "manager_id": {
               "type": ["string", "number", "null"],
-              "description": "Key of the managing institution",
-              "x-description-fr": "Clé de l'institution gestionnaire du dossier"
+              "description": "Key of the managing organization",
+              "x-description-fr": "Clé de l'organization gestionnaire du dossier"
             },
             "owner_id": {
               "type": ["string", "number", "null"],
-              "description": "Key of the data provider institution",
-              "x-description-fr": "Clé de l'institution fournisseur du dossier"
+              "description": "Key of the data provider organization",
+              "x-description-fr": "Clé de l'organization fournisseur du dossier"
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
@@ -562,13 +647,23 @@
             },
             "data_path": {
               "type": ["string", "null"],
-              "description": "Folder location",
-              "x-description-fr": "Emplacement du dossier"
+              "description": "Folder data location",
+              "x-description-fr": "Emplacement des données du dossier"
             },
             "delivery_format": {
               "type": ["string", "null"],
               "description": "Delivery format (CSV, XML, ...)",
               "x-description-fr": "Format des données livrées (CSV, XML, ...)"
+            },
+            "type": {
+              "type": ["string", "null"],
+              "description": "Folder type (useful for general filter)",
+              "x-description-fr": "Type de dossier (utile pour le filtre général)"
+            },
+            "link": {
+              "type": ["string", "null"],
+              "description": "Link to the folder access, source, or reference",
+              "x-description-fr": "Lien vers l'accès, la source ou la référence du dossier"
             },
             "git_code": {
               "type": ["string", "null"],
@@ -647,74 +742,6 @@
           }
         }
       },
-      "institution": {
-        "x-db": "data",
-        "title": "institution",
-        "description": "Institutions, they can be owners or managers of folders or datasets",
-        "x-description-fr": "Institutions, elles peuvent êtres propriétaires ou gestionnaires de dossiers ou de datasets",
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": ["id"],
-          "additionalProperties": false,
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Primary key of the institution",
-              "x-description-fr": "Clé primaire de l'institution"
-            },
-            "parent_id": {
-              "type": ["string", "number", "null"],
-              "description": "Key of the parent institution",
-              "x-description-fr": "Clé de l'institution parent"
-            },
-            "tag_ids": {
-              "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
-              "x-description-fr": "Clés des mots clés liés",
-              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": ["id1,id2,id3", "single-id", null]
-            },
-            "doc_ids": {
-              "type": ["string", "number", "null"],
-              "description": "Keys of related documents",
-              "x-description-fr": "Clés des docs liés",
-              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": ["id1,id2,id3", "single-id", null]
-            },
-            "name": {
-              "type": ["string", "null"],
-              "description": "Institution name",
-              "x-description-fr": "Nom de l'institution"
-            },
-            "description": {
-              "type": ["string", "null"],
-              "description": "Institution description",
-              "x-description-fr": "Description de l'institution"
-            },
-            "email": {
-              "type": ["string", "null"],
-              "description": "Institution email",
-              "x-description-fr": "Email de l'institution"
-            },
-            "phone": {
-              "type": ["string", "null"],
-              "description": "Institution phone number",
-              "x-description-fr": "Numéro de téléphone de l'institution"
-            },
-            "start_date": {
-              "type": ["string", "number", "null"],
-              "description": "Start of the period covered by the institution",
-              "x-description-fr": "Début de la période couverte par l'institution"
-            },
-            "end_date": {
-              "type": ["string", "number", "null"],
-              "description": "End of the period covered by the institution",
-              "x-description-fr": "Fin de la période couverte par l'institution"
-            }
-          }
-        }
-      },
       "modality": {
         "x-db": "data",
         "title": "modality",
@@ -750,6 +777,74 @@
               "type": ["string", "null"],
               "description": "Modality datatype",
               "x-description-fr": "Datatype de la modalité"
+            }
+          }
+        }
+      },
+      "organization": {
+        "x-db": "data",
+        "title": "organization",
+        "description": "Organizations, they can be owners or managers of folders or datasets",
+        "x-description-fr": "Organizations, elles peuvent êtres propriétaires ou gestionnaires de dossiers ou de datasets",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id"],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Primary key of the organization",
+              "x-description-fr": "Clé primaire de l'organization"
+            },
+            "parent_id": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent organization",
+              "x-description-fr": "Clé de l'organization parent"
+            },
+            "tag_ids": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related keywords",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "doc_ids": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "name": {
+              "type": ["string", "null"],
+              "description": "Organization name",
+              "x-description-fr": "Nom de l'organization"
+            },
+            "description": {
+              "type": ["string", "null"],
+              "description": "Organization description",
+              "x-description-fr": "Description de l'organization"
+            },
+            "email": {
+              "type": ["string", "null"],
+              "description": "Organization email",
+              "x-description-fr": "Email de l'organization"
+            },
+            "phone": {
+              "type": ["string", "null"],
+              "description": "Organization phone number",
+              "x-description-fr": "Numéro de téléphone de l'organization"
+            },
+            "start_date": {
+              "type": ["string", "number", "null"],
+              "description": "Start of the period covered by the organization",
+              "x-description-fr": "Début de la période couverte par l'organization"
+            },
+            "end_date": {
+              "type": ["string", "number", "null"],
+              "description": "End of the period covered by the organization",
+              "x-description-fr": "Fin de la période couverte par l'organization"
             }
           }
         }
@@ -909,12 +1004,47 @@
               "description": "End of the period covered by the variable",
               "x-description-fr": "Fin de la période couverte par la variable"
             },
+            "min": {
+              "type": ["number", "null"],
+              "description": "Minimum value (or minimum string length for text variables)",
+              "x-description-fr": "Valeur minimale (ou longueur minimale pour les variables texte)"
+            },
+            "max": {
+              "type": ["number", "null"],
+              "description": "Maximum value (or maximum string length for text variables)",
+              "x-description-fr": "Valeur maximale (ou longueur maximale pour les variables texte)"
+            },
+            "mean": {
+              "type": ["number", "null"],
+              "description": "Mean value (or mean string length for text variables)",
+              "x-description-fr": "Valeur moyenne (ou longueur moyenne pour les variables texte)"
+            },
+            "std": {
+              "type": ["number", "null"],
+              "description": "Standard deviation (or standard deviation of string length for text variables)",
+              "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
+            },
             "source_var_ids": {
               "type": ["string", "number", "null"],
               "description": "List of source variable keys (lineage)",
               "x-description-fr": "Liste des clés des variables sources (lineage)",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "fk_var_id": {
+              "type": ["string", "number", "null"],
+              "description": "Foreign key referencing a variable in another dataset",
+              "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
+            },
+            "is_pattern": {
+              "type": ["boolean", "integer", "null"],
+              "description": "Indicates that frequencies show value patterns instead of raw data",
+              "x-description-fr": "Indique que les fréquences affichent les patterns des valeurs plutôt que les données brutes"
+            },
+            "concept_id": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the related business concept",
+              "x-description-fr": "Clé du concept métier lié"
             }
           }
         }
@@ -922,6 +1052,10 @@
     }
   },
   "tags": [
+    {
+      "name": "concept",
+      "description": "Business glossary concepts"
+    },
     {
       "name": "config",
       "description": "General information, including descriptions of different entities"
@@ -947,12 +1081,12 @@
       "description": "Value frequencies for each variable"
     },
     {
-      "name": "institution",
-      "description": "Institutions, they can be owners or managers of folders or datasets"
-    },
-    {
       "name": "modality",
       "description": "Modalities"
+    },
+    {
+      "name": "organization",
+      "description": "Organizations, they can be owners or managers of folders or datasets"
     },
     {
       "name": "tag",

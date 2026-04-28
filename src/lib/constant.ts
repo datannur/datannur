@@ -2,7 +2,7 @@ export const locale = 'fr'
 export const isBigLimit = 5
 
 export const mainEntityNames = {
-  institution: 'Institution',
+  organization: 'Organisation',
   folder: 'Dossier',
   tag: 'Mot clé',
   concept: 'Concept',
@@ -22,7 +22,7 @@ export const entityNames = {
 } as const
 
 export const parentEntities = {
-  institution: 'parent',
+  organization: 'parent',
   folder: 'parent',
   tag: 'parent',
   concept: 'parent',
@@ -87,9 +87,9 @@ export const columnIcons = {
 export const entityToIcon = {
   md: 'md',
   github: 'github',
-  institution: 'university',
-  owner: 'university',
-  manager: 'university',
+  organization: 'building-user',
+  owner: 'building-user',
+  manager: 'building-user',
   folder: 'folder',
   tag: 'tag',
   concept: 'lightbulb',
@@ -128,7 +128,7 @@ export const entityToIcon = {
   metadataPath: 'sitemap',
   level: 'layer-group',
   folderTree: 'folder-tree',
-  folderTreeInstitution: 'folder-tree',
+  folderTreeOrganization: 'folder-tree',
   folderTreeFolder: 'folder-tree',
   folderTreeTag: 'folder-tree',
   folderTreeConcept: 'folder-tree',

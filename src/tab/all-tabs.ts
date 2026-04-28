@@ -1,4 +1,4 @@
-import Institutions from '@component/institution/Institutions.svelte'
+import Organizations from '@component/organization/Organizations.svelte'
 import Folders from '@component/folder/Folders.svelte'
 import Tags from '@component/tag/Tags.svelte'
 import Concepts from '@component/concept/Concepts.svelte'
@@ -10,7 +10,7 @@ import ModalitiesCompare from '@component/modality/ModalitiesCompare.svelte'
 import Values from '@component/modality/Values.svelte'
 import VariableValues from '@component/variable/VariableValues.svelte'
 import Freq from '@component/variable/Freq.svelte'
-import InstitutionInfo from '@component/institution/InstitutionInfo.svelte'
+import OrganizationInfo from '@component/organization/OrganizationInfo.svelte'
 import FolderInfo from '@component/folder/FolderInfo.svelte'
 import TagInfo from '@component/tag/TagInfo.svelte'
 import ConceptInfo from '@component/concept/ConceptInfo.svelte'
@@ -34,10 +34,10 @@ import { allTabsIcon } from '@lib/store'
 import type { TabConfig } from './tabs-helper'
 
 export const allTabs: Record<string, TabConfig> = {
-  institutions: {
-    name: 'Institution',
-    icon: 'institution',
-    component: Institutions,
+  organizations: {
+    name: 'Organisation',
+    icon: 'organization',
+    component: Organizations,
   },
   folders: {
     name: 'Dossier',
@@ -188,7 +188,7 @@ export const allTabs: Record<string, TabConfig> = {
 
 const infoItems = {
   aboutFile: AboutFile,
-  institution: InstitutionInfo,
+  organization: OrganizationInfo,
   folder: FolderInfo,
   tag: TagInfo,
   concept: ConceptInfo,

@@ -15,7 +15,7 @@
   import type {
     MainEntityName,
     Tag,
-    Institution,
+    Organization,
     Folder,
     Doc,
     Dataset,
@@ -30,14 +30,14 @@
   let tabs: Tab[] = $state([])
   let keyTab = $state(-1)
 
-  let institutions: Institution[] = []
+  let organizations: Organization[] = []
   let folders: Folder[] = []
   let docs: Doc[] = []
   let datasets: Dataset[] = []
   let variables: Variable[] = []
   let tags: Tag[] = []
 
-  let withInstitutions = db.getAll('institution', { tag })
+  let withOrganizations = db.getAll('organization', { tag })
   let withFolders = db.getAll('folder', { tag })
   let withDatasets = db.getAll('dataset', { tag })
   let withVariables = db.getAll('variable', { tag })
@@ -46,18 +46,18 @@
   const withTags = db.getAllChilds('tag', tag.id)
 
   for (const childTag of withTags) {
-    const childInstitutions = db.getAll('institution', { tag: childTag })
+    const childOrganizations = db.getAll('organization', { tag: childTag })
     const childFolders = db.getAll('folder', { tag: childTag })
     const childDatasets = db.getAll('dataset', { tag: childTag })
     const childVariables = db.getAll('variable', { tag: childTag })
     const childDocs = db.getAll('doc', { tag: childTag })
-    withInstitutions = withInstitutions.concat(childInstitutions)
+    withOrganizations = withOrganizations.concat(childOrganizations)
     withFolders = withFolders.concat(childFolders)
     withDatasets = withDatasets.concat(childDatasets)
     withVariables = withVariables.concat(childVariables)
     withDocs = withDocs.concat(childDocs)
   }
-  withInstitutions = removeDuplicateById(withInstitutions)
+  withOrganizations = removeDuplicateById(withOrganizations)
   withFolders = removeDuplicateById(withFolders)
   withDatasets = removeDuplicateById(withDatasets)
   withVariables = removeDuplicateById(withVariables)
@@ -84,14 +84,14 @@
 
   function loadTabs() {
     if (opposite) {
-      institutions = getOpposite('institution', withInstitutions)
+      organizations = getOpposite('organization', withOrganizations)
       folders = getOpposite('folder', withFolders)
       docs = getOpposite('doc', withDocs)
       datasets = getOpposite('dataset', withDatasets)
       variables = getOpposite('variable', withVariables)
       tags = getOpposite('tag', withTags, tag.id)
     } else {
-      institutions = withInstitutions
+      organizations = withOrganizations
       folders = withFolders
       docs = withDocs
       datasets = withDatasets
@@ -99,10 +99,10 @@
       tags = withTags
     }
 
-    makeParentsRelative(false, institutions)
+    makeParentsRelative(false, organizations)
     makeParentsRelative(false, folders)
 
-    addMinimumDeep(institutions)
+    addMinimumDeep(organizations)
     addMinimumDeep(folders)
 
     if (db.useRecursive.tag) {
@@ -113,7 +113,7 @@
     const variablesId = new Set(variables.map(item => item.id))
     const datasetsId = new Set(datasets.map(item => item.id))
     const foldersId = new Set(folders.map(item => item.id))
-    const institutionsId = new Set(institutions.map(item => item.id))
+    const organizationsId = new Set(organizations.map(item => item.id))
 
     const evolutions = db
       .getAll('evolution')
@@ -124,13 +124,13 @@
           (evo.entity === 'variable' && evo.id && variablesId.has(evo.id)) ||
           (evo.entity === 'dataset' && evo.id && datasetsId.has(evo.id)) ||
           (evo.entity === 'folder' && evo.id && foldersId.has(evo.id)) ||
-          (evo.entity === 'institution' &&
+          (evo.entity === 'organization' &&
             evo.id &&
-            institutionsId.has(evo.id)),
+            organizationsId.has(evo.id)),
       )
 
     const stat = [
-      { entity: 'institution', items: institutions },
+      { entity: 'organization', items: organizations },
       { entity: 'folder', items: folders },
       { entity: 'doc', items: docs },
       { entity: 'dataset', items: datasets },
@@ -139,7 +139,7 @@
 
     tabs = tabsHelper({
       tag,
-      institutions,
+      organizations,
       folders,
       tags,
       docs,

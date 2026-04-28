@@ -28,7 +28,7 @@ afterAll(async () => {
 
 const pageNames = [
   '',
-  'institutions',
+  'organizations',
   'folders',
   'tags',
   'datasets',
@@ -41,9 +41,9 @@ const pageNames = [
   'search/?search=folder',
   'meta',
   'metaFolder/data',
-  'metaDataset/institution',
-  'institution/dff',
-  'institution/vd-ojv',
+  'metaDataset/organization',
+  'organization/dff',
+  'organization/vd-ojv',
   'folder/bevnat',
   'folder/04-economie',
   'tag/population',

@@ -15,24 +15,25 @@
   import Title from '@layout/Title.svelte'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
-  import type { Institution } from '@type'
+  import type { Organization } from '@type'
 
-  let { institution: institutionProp }: { institution: Institution } = $props()
-  const institution = untrack(() => institutionProp)
+  let { organization: organizationProp }: { organization: Organization } =
+    $props()
+  const organization = untrack(() => organizationProp)
 
   let keyTab = $state(1)
 
-  const docs = institution.docsRecursive
+  const docs = organization.docsRecursive
 
-  const institutions = db.getAllChilds('institution', institution.id)
-  makeParentsRelative(institution.id, institutions)
-  addMinimumDeep(institutions)
+  const organizations = db.getAllChilds('organization', organization.id)
+  makeParentsRelative(organization.id, organizations)
+  addMinimumDeep(organizations)
 
-  const folders = getRecursive('institution', institution.id, 'folder')
+  const folders = getRecursive('organization', organization.id, 'folder')
   makeParentsRelative(false, folders)
   addMinimumDeep(folders)
 
-  const datasets = getRecursive('institution', institution.id, 'dataset')
+  const datasets = getRecursive('organization', organization.id, 'dataset')
   const variables = datasets.flatMap(dataset =>
     db.getAll('variable', { dataset }),
   )
@@ -40,7 +41,11 @@
   let modalities = variables.flatMap(variable => variable.modalities ?? [])
   modalities = removeDuplicateById(modalities)
 
-  const tags = Tags.getFromEntities({ institutions, folders, datasets })
+  const tags = Tags.getFromEntities({
+    organizations: organizations,
+    folders,
+    datasets,
+  })
   makeParentsRelative(false, tags)
   addMinimumDeep(tags)
 
@@ -48,14 +53,14 @@
   const variablesId = new Set(variables.map(item => item.id))
   const datasetsId = new Set(datasets.map(item => item.id))
   const foldersId = new Set(folders.map(item => item.id))
-  const institutionsId = new Set(institutions.map(item => item.id))
+  const organizationsId = new Set(organizations.map(item => item.id))
 
   const evolutions = db
     .getAll('evolution')
     .filter(
       evo =>
-        (evo.entity === 'institution' &&
-          (evo.id === institution.id || institutionsId.has(evo.id!))) ||
+        (evo.entity === 'organization' &&
+          (evo.id === organization.id || organizationsId.has(evo.id!))) ||
         (evo.entity === 'folder' && evo.id && foldersId.has(evo.id)) ||
         (evo.entity === 'dataset' && evo.id && datasetsId.has(evo.id)) ||
         (evo.entity === 'variable' && evo.id && variablesId.has(evo.id)) ||
@@ -66,7 +71,7 @@
     )
 
   const stat = [
-    { entity: 'institution', items: institutions },
+    { entity: 'organization', items: organizations },
     { entity: 'folder', items: folders },
     { entity: 'tag', items: tags },
     { entity: 'doc', items: docs },
@@ -76,8 +81,8 @@
   ]
 
   const tabs = tabsHelper({
-    institution,
-    institutions,
+    organization,
+    organizations,
     folders,
     tags,
     docs,
@@ -88,10 +93,10 @@
     stat,
   })
 
-  const nbInstitution = institutions.length
+  const nbOrganization = organizations.length
   const nbFolder = folders.length
   let showOpenAllSwitch = $derived(
-    ($tabSelected.key === 'institutions' && nbInstitution > isBigLimit) ||
+    ($tabSelected.key === 'organizations' && nbOrganization > isBigLimit) ||
       ($tabSelected.key === 'folders' && nbFolder > isBigLimit),
   )
   let showEvolutionSummarySwitch = $derived(
@@ -100,7 +105,7 @@
 </script>
 
 <section class="section">
-  <Title type="institution" name={institution.name} id={institution.id} />
+  <Title type="organization" name={organization.name} id={organization.id} />
   {#if showOpenAllSwitch}
     <OpenAllSwitch onChange={() => keyTab++} />
   {/if}

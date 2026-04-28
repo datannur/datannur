@@ -18,7 +18,7 @@
   let mounted = $state(false)
 
   let tagMax = 0
-  let institutionMax = 0
+  let organizationMax = 0
   let folderMax = 0
   let docMax = 0
   let datasetMax = 0
@@ -28,7 +28,10 @@
   for (const tag of tags) {
     if (db.useRecursive.tag) tag.pathString = getParentPath(tag)
     tagMax = Math.max(tagMax, tag.nbChildRecursive ?? 0)
-    institutionMax = Math.max(institutionMax, tag.nbInstitutionRecursive ?? 0)
+    organizationMax = Math.max(
+      organizationMax,
+      tag.nbOrganizationRecursive ?? 0,
+    )
     folderMax = Math.max(folderMax, tag.nbFolderRecursive ?? 0)
     docMax = Math.max(docMax, tag.nbDocRecursive ?? 0)
     datasetMax = Math.max(datasetMax, tag.nbDatasetRecursive ?? 0)
@@ -67,21 +70,21 @@
 
     columns = columns.concat([
       {
-        data: 'nbInstitutionRecursive',
+        data: 'nbOrganizationRecursive',
         title:
-          Render.icon('institution') +
-          "<span class='hidden'>nbInstitution</span>",
+          Render.icon('organization') +
+          "<span class='hidden'>nbOrganization</span>",
         filterType: 'input',
-        tooltip: "Nombre d'institutions",
+        tooltip: "Nombre d'organisations",
         render: (data, type, row: Tag) => {
           if (!data) return ''
           if (type !== 'display') return Number(data)
           const content = link(
-            'tag/' + row.id + '?tab=institutions',
+            'tag/' + row.id + '?tab=organizations',
             escapeHtml(data),
           )
-          const percent = getPercent(data / institutionMax)
-          return `${Render.numPercent(content, percent, 'institution', type)}`
+          const percent = getPercent(data / organizationMax)
+          return `${Render.numPercent(content, percent, 'organization', type)}`
         },
       },
       Column.nbFolderRecursive('tag', folderMax),

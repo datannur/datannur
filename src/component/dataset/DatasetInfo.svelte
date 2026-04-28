@@ -3,7 +3,7 @@
   import TableWrapper from '@info-table/TableWrapper.svelte'
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
   import IdInfo from '@info-table/IdInfo.svelte'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import RowInfo from '@info-table/RowInfo.svelte'
@@ -24,8 +24,8 @@
 
 <TableWrapper>
   <IdInfo id={dataset.id} />
-  <InstitutionInfo type="owner" institutionId={dataset.ownerId} />
-  <InstitutionInfo type="manager" institutionId={dataset.managerId} />
+  <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
+  <OrganizationInfo type="manager" organizationId={dataset.managerId} />
   <FolderInfo folderId={dataset.folderId} />
   {#if dataset.typeClean}
     <tr>

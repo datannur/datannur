@@ -3,14 +3,14 @@ import { capitalize } from '@lib/util'
 import type { Tag, EntityWithRelations } from '@type'
 
 type TagWithCounts = Tag & {
-  nbInstitution: number
+  nbOrganization: number
   nbFolder: number
   nbDataset: number
 }
 
 export default class Tags {
   static getFromEntities(entities: {
-    institutions?: EntityWithRelations[]
+    organizations?: EntityWithRelations[]
     folders?: EntityWithRelations[]
     datasets?: EntityWithRelations[]
   }) {
@@ -19,7 +19,7 @@ export default class Tags {
 
     const tags: TagWithCounts[] = tagsDb.map(tag => ({
       ...tag,
-      nbInstitution: 0,
+      nbOrganization: 0,
       nbFolder: 0,
       nbDataset: 0,
     }))
@@ -43,18 +43,18 @@ export default class Tags {
         }
       }
     }
-    incrementTagItemNb(entities.institutions, 'institution')
+    incrementTagItemNb(entities.organizations, 'organization')
     incrementTagItemNb(entities.folders, 'folder')
     incrementTagItemNb(entities.datasets, 'dataset')
 
     for (const tag of tags) {
-      tag.nbInstitution = tagsById[tag.id].nbInstitution
+      tag.nbOrganization = tagsById[tag.id].nbOrganization
       tag.nbFolder = tagsById[tag.id].nbFolder
       tag.nbDataset = tagsById[tag.id].nbDataset
     }
     return tags.filter(
       (tag: TagWithCounts) =>
-        tag.nbInstitution > 0 || tag.nbFolder > 0 || tag.nbDataset > 0,
+        tag.nbOrganization > 0 || tag.nbFolder > 0 || tag.nbDataset > 0,
     )
   }
 }

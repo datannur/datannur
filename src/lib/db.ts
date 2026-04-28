@@ -15,6 +15,7 @@ import type {
   PeriodableEntity,
   DocableEntity,
   DocableEntityName,
+  Tag,
   Variable,
   RecursiveEntity,
 } from '@type'
@@ -61,8 +62,8 @@ function buildStatsPreview(variable: Variable): string {
 function addEntities(item: EntityTypeMap['tag' | 'doc']) {
   if (!item) return
   item.entities = []
-  if (item.nbInstitution && item.nbInstitution > 0)
-    item.entities.push({ name: 'institution', nb: item.nbInstitution })
+  if (item.nbOrganization && item.nbOrganization > 0)
+    item.entities.push({ name: 'organization', nb: item.nbOrganization })
   if (item.nbFolder && item.nbFolder > 0)
     item.entities.push({ name: 'folder', nb: item.nbFolder })
   if (item.nbDataset && item.nbDataset > 0)
@@ -222,12 +223,12 @@ function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
   item.nextUpdateDate = timestampToDate(lastUpdate + diff * 1000)
 }
 
-function getInstitutionItems(
-  institutionId: string | number,
+function getOrganizationItems(
+  organizationId: string | number,
   entity: MainEntityName,
 ) {
-  const ownItems = db.getAll(entity, { owner: institutionId })
-  const manageItems = db.getAll(entity, { manager: institutionId })
+  const ownItems = db.getAll(entity, { owner: organizationId })
+  const manageItems = db.getAll(entity, { manager: organizationId })
   return removeDuplicateById([...ownItems, ...manageItems])
 }
 
@@ -252,8 +253,8 @@ export function getRecursive<T extends MainEntityName>(
   target: T,
 ): MainEntityMap[T][] {
   const get =
-    entity === 'institution'
-      ? (id: string | number) => getInstitutionItems(id, target)
+    entity === 'organization'
+      ? (id: string | number) => getOrganizationItems(id, target)
       : (id: string | number) => db.getAll(target, { [entity]: id })
   let items = get(itemId)
   const childs = db.getAllChilds(entity, itemId)
@@ -356,24 +357,25 @@ export function getFkRelatedVariables(
 }
 
 class Process {
-  static institution() {
-    db.foreach('institution', item => {
-      addEntity(item, 'institution')
+  static organization() {
+    db.foreach('organization', item => {
+      addEntity(item, 'organization')
       item.isFavorite = false
       addPeriod(item)
-      item.tags = db.getAll('tag', { institution: item.id })
-      item.parents = db.getParents('institution', item.id)
-      addDocs('institution', item)
-      item.nbChild = db.countRelated('parent', item.id, 'institution')
-      item.nbChildRecursive = db.getAllChilds('institution', item.id).length
-      item.nbFolder = getInstitutionItems(item.id, 'folder').length
-      item.nbDataset = getInstitutionItems(item.id, 'dataset').length
+      const tags: Tag[] = db.getAll('tag', { organization: item.id })
+      item.tags = tags
+      item.parents = db.getParents('organization', item.id)
+      addDocs('organization', item)
+      item.nbChild = db.countRelated('parent', item.id, 'organization')
+      item.nbChildRecursive = db.getAllChilds('organization', item.id).length
+      item.nbFolder = getOrganizationItems(item.id, 'folder').length
+      item.nbDataset = getOrganizationItems(item.id, 'dataset').length
       item.nbFolderRecursive = getRecursive(
-        'institution',
+        'organization',
         item.id,
         'folder',
       ).length
-      const datasets = getRecursive('institution', item.id, 'dataset')
+      const datasets = getRecursive('organization', item.id, 'dataset')
       item.nbDatasetRecursive = datasets.length
       item.nbVariableRecursive = datasets.reduce(
         (sum, d) => sum + db.countRelated('dataset', d.id, 'variable'),
@@ -398,9 +400,9 @@ class Process {
       addNextUpdate(folder)
       folder.typeClean = folder.type ?? ''
       if (db.use.owner)
-        folder.ownerName = getName(folder, 'institution', 'owner')
+        folder.ownerName = getName(folder, 'organization', 'owner')
       if (db.use.manager)
-        folder.managerName = getName(folder, 'institution', 'manager')
+        folder.managerName = getName(folder, 'organization', 'manager')
       addPeriod(folder)
       const datasets = getRecursive('folder', folder.id, 'dataset')
       folder.nbDatasetRecursive = datasets.length
@@ -419,7 +421,7 @@ class Process {
     db.foreach('tag', tag => {
       addEntity(tag, 'tag')
       tag.isFavorite = false
-      tag.nbInstitution = db.countRelated('tag', tag.id, 'institution')
+      tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
       tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
       tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')
       tag.nbVariable = db.countRelated('tag', tag.id, 'variable')
@@ -427,10 +429,10 @@ class Process {
       if (db.useRecursive.tag) tag.parents = db.getParents('tag', tag.id)
       tag.nbChild = db.countRelated('parent', tag.id, 'tag')
       tag.nbChildRecursive = db.getAllChilds('tag', tag.id).length
-      tag.nbInstitutionRecursive = getRecursive(
+      tag.nbOrganizationRecursive = getRecursive(
         'tag',
         tag.id,
-        'institution',
+        'organization',
       ).length
       tag.nbFolderRecursive = getRecursive('tag', tag.id, 'folder').length
       tag.nbDocRecursive = getRecursive('tag', tag.id, 'doc').length
@@ -476,9 +478,9 @@ class Process {
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
       if (db.use.owner)
-        dataset.ownerName = getName(dataset, 'institution', 'owner')
+        dataset.ownerName = getName(dataset, 'organization', 'owner')
       if (db.use.manager)
-        dataset.managerName = getName(dataset, 'institution', 'manager')
+        dataset.managerName = getName(dataset, 'organization', 'manager')
       if (db.use.folder) {
         dataset.folderName = getName(dataset, 'folder')
       } else dataset.folderName = ''
@@ -496,7 +498,7 @@ class Process {
     db.foreach('doc', doc => {
       addEntity(doc, 'doc')
       doc.isFavorite = false
-      doc.nbInstitution = db.countRelated('doc', doc.id, 'institution')
+      doc.nbOrganization = db.countRelated('doc', doc.id, 'organization')
       doc.nbFolder = db.countRelated('doc', doc.id, 'folder')
       doc.nbDataset = db.countRelated('doc', doc.id, 'dataset')
       doc.nbTag = db.countRelated('doc', doc.id, 'tag')
@@ -671,17 +673,18 @@ class Process {
 }
 
 function addDocRecursive() {
-  for (const entity of ['institution', 'folder', 'dataset', 'tag'] as const) {
+  for (const entity of ['organization', 'folder', 'dataset', 'tag'] as const) {
     db.foreach(entity, item => {
-      item.docsRecursive = []
+      const docsRecursive: (Doc & { inherited?: string })[] = []
+      item.docsRecursive = docsRecursive
       const docs: Doc[] = []
-      if (entity === 'institution') {
+      if (entity === 'organization') {
         const childs = getRecursive(entity, item.id, entity)
         for (const child of childs) {
           if (child.docs) docs.push(...child.docs)
         }
       }
-      if (entity === 'institution' || entity === 'folder') {
+      if (entity === 'organization' || entity === 'folder') {
         const folders = getRecursive(entity, item.id, 'folder')
         const datasets = getRecursive(entity, item.id, 'dataset')
         for (const folder of folders) {
@@ -693,9 +696,9 @@ function addDocRecursive() {
       }
       const uniqueDocs = docs.length > 1 ? removeDuplicateById(docs) : docs
       for (const doc of uniqueDocs) {
-        item.docsRecursive.push({ ...doc, inherited: 'hérité' })
+        docsRecursive.push({ ...doc, inherited: 'hérité' })
       }
-      if (item.docs) item.docsRecursive.push(...item.docs)
+      if (item.docs) docsRecursive.push(...item.docs)
     })
   }
 }
@@ -715,7 +718,7 @@ export function getLocalFilter() {
 }
 
 export function dbAddProcessedData() {
-  Process.institution()
+  Process.organization()
   Process.folder()
   Process.tag()
   Process.concept()

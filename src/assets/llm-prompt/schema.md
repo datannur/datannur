@@ -17,7 +17,7 @@
 - Champs clés: `id`, `name`, `parentId`, `nbDatasetRecursive`
 - Relations: `datasets[]`, `parent`, `children[]`
 
-**Institution** - Organisation propriétaire/gestionnaire
+**Organization** - Organisation propriétaire/gestionnaire
 
 - Champs clés: `id`, `name`, `email`, `nbDataset`
 - Relations: `ownedDatasets[]`, `managedDatasets[]`

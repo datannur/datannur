@@ -323,7 +323,7 @@ const getStatistics: LLMTool = {
 const navigate: LLMTool = {
   name: 'navigate',
   description:
-    'Navigate to a page in the app, optionally to a specific tab. Available tabs by entity: institution (folders, tags, docs, datasets, variables, modalities, evolutions, stat), folder (folders, tags, docs, datasets, variables, modalities, evolutions, stat), tag (tags, institutions, folders, docs, datasets, variables), dataset (docs, datasets, variables, modalities, datasetPreview, evolutions, stat), variable (variables, variableValues, freq, variablePreview, evolutions), modality (values, variables, evolutions)',
+    'Navigate to a page in the app, optionally to a specific tab. Available tabs by route: organization (folders, tags, docs, datasets, variables, modalities, evolutions, stat), folder (folders, tags, docs, datasets, variables, modalities, evolutions, stat), tag (tags, organizations, folders, docs, datasets, variables), dataset (docs, datasets, variables, modalities, datasetPreview, evolutions, stat), variable (variables, variableValues, freq, variablePreview, evolutions), modality (values, variables, evolutions)',
   descriptionFr:
     "Naviguer vers une page de l'application, optionnellement vers un onglet spécifique",
   parameters: {

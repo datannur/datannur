@@ -772,8 +772,8 @@
               &.color-value {
                 background: color('value');
               }
-              &.color-institution {
-                background: color('institution');
+              &.color-organization {
+                background: color('organization');
               }
               &.color-folder {
                 background: color('folder');
