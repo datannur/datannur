@@ -41,7 +41,7 @@
   {#if folder.nextUpdateDate}
     <NextUpdateInfo nextUpdateDate={folder.nextUpdateDate} />
   {/if}
-  <FrequencyInfo frequency={folder.updatingEach} />
+  <FrequencyInfo updateFrequency={folder.updatingEach} />
   {#if folder.period}
     <PeriodInfo period={folder.period} periodDuration={folder.periodDuration} />
   {/if}

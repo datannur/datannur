@@ -48,7 +48,7 @@
   {#if dataset.nextUpdateDate}
     <NextUpdateInfo nextUpdateDate={dataset.nextUpdateDate} />
   {/if}
-  <FrequencyInfo frequency={dataset.updatingEach} />
+  <FrequencyInfo updateFrequency={dataset.updatingEach} />
   {#if dataset.period}
     <PeriodInfo
       period={dataset.period}

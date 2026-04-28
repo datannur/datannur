@@ -560,11 +560,11 @@
         }
       }
     },
-    "/freq": {
+    "/frequency": {
       "get": {
-        "summary": "Get all freq records",
-        "description": "Returns all records from the freq table with optional filtering, pagination, and sorting",
-        "tags": ["freq"],
+        "summary": "Get all frequency records",
+        "description": "Returns all records from the frequency table with optional filtering, pagination, and sorting",
+        "tags": ["frequency"],
         "parameters": [
           {
             "name": "_limit",
@@ -608,7 +608,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/freq"
+                    "$ref": "#/components/schemas/frequency"
                   }
                 }
               }
@@ -617,11 +617,11 @@
         }
       }
     },
-    "/freq/{id}": {
+    "/frequency/{id}": {
       "get": {
-        "summary": "Get freq by ID",
-        "description": "Returns a single record from the freq table by its ID",
-        "tags": ["freq"],
+        "summary": "Get frequency by ID",
+        "description": "Returns a single record from the frequency table by its ID",
+        "tags": ["frequency"],
         "parameters": [
           {
             "name": "id",
@@ -639,7 +639,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/freq"
+                  "$ref": "#/components/schemas/frequency"
                 }
               }
             }
@@ -1487,7 +1487,7 @@
           }
         }
       },
-      "freq": {
+      "frequency": {
         "type": "object",
         "required": [],
         "additionalProperties": false,
@@ -1502,7 +1502,7 @@
             "description": "Value whose frequency is counted",
             "x-description-fr": "Valeur dont on compte la fréquence"
           },
-          "freq": {
+          "frequency": {
             "type": ["integer", "null"],
             "description": "Number of occurrences of this value in the variable",
             "x-description-fr": "Nombre d'occurrences de cette valeur dans la variable"
@@ -1809,7 +1809,7 @@
       "description": "Folders"
     },
     {
-      "name": "freq",
+      "name": "frequency",
       "description": "Value frequencies for each variable"
     },
     {

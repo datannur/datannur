@@ -133,11 +133,11 @@ export default class Render {
     let i = 0
 
     for (const freqItem of freqData) {
-      const percentDisplay = getPercent(freqItem.freq / freqItem.total)
-      const percentBackground = getPercent(freqItem.freq / freqItem.max)
+      const percentDisplay = getPercent(freqItem.frequency / freqItem.total)
+      const percentBackground = getPercent(freqItem.frequency / freqItem.max)
       const scaledFreq = freqItem.scale
-        ? Math.round(freqItem.freq * freqItem.scale)
-        : freqItem.freq
+        ? Math.round(freqItem.frequency * freqItem.scale)
+        : freqItem.frequency
       const approx = freqItem.scale ? '≈ ' : ''
       const freqNum = approx + Render.num(scaledFreq, type)
       const percentText = type === 'display' ? ` (${percentDisplay}%)` : ''
@@ -145,7 +145,7 @@ export default class Render {
       const freqContent =
         type === 'display'
           ? `<div class="freq-item-container">
-          <div class="freq-background color-freq" style="width: ${percentBackground}%"></div>
+          <div class="freq-background color-frequency" style="width: ${percentBackground}%"></div>
           <span class="freq-value">${escapeHtml(freqItem.value)}</span>
           <span class="freq-number">${freqNum}</span>
         </div>`
@@ -156,14 +156,14 @@ export default class Render {
       i += 1
     }
 
-    const totalFreqCount = db.getAll('freq', { variable: row }).length
+    const totalFreqCount = db.getAll('frequency', { variable: row }).length
     if (totalFreqCount > freqData.length) {
       const nbOtherFreq = totalFreqCount - freqData.length
       const s = nbOtherFreq > 1 ? 's' : ''
       const text = link(
-        `variable/${row.id}?tab=freq`,
+        `variable/${row.id}?tab=frequency`,
         `... ${nbOtherFreq} autre${s} fréquence${s}`,
-        'freq',
+        'frequency',
       )
       if (type === 'export') content += separator
       content += `<li><i>${text}</i></li>`

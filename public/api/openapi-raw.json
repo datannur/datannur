@@ -152,18 +152,18 @@
         }
       }
     },
-    "/freq.json": {
+    "/frequency.json": {
       "get": {
-        "summary": "Get all freq",
-        "description": "Returns the complete freq table as a JSON array",
-        "tags": ["freq"],
+        "summary": "Get all frequency",
+        "description": "Returns the complete frequency table as a JSON array",
+        "tags": ["frequency"],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/freq"
+                  "$ref": "#/components/schemas/frequency"
                 }
               }
             }
@@ -713,9 +713,9 @@
           }
         }
       },
-      "freq": {
+      "frequency": {
         "x-db": "data",
-        "title": "freq",
+        "title": "frequency",
         "description": "Value frequencies for each variable",
         "x-description-fr": "Fréquences des valeurs pour chaque variable",
         "type": "array",
@@ -734,7 +734,7 @@
               "description": "Value whose frequency is counted",
               "x-description-fr": "Valeur dont on compte la fréquence"
             },
-            "freq": {
+            "frequency": {
               "type": ["integer", "null"],
               "description": "Number of occurrences of this value in the variable",
               "x-description-fr": "Nombre d'occurrences de cette valeur dans la variable"
@@ -1077,7 +1077,7 @@
       "description": "Folders"
     },
     {
-      "name": "freq",
+      "name": "frequency",
       "description": "Value frequencies for each variable"
     },
     {

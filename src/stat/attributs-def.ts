@@ -38,7 +38,7 @@ const attributsDef: Record<string, Attribut> = {
     type: 'category',
     nonExclusive: 'tags',
   },
-  frequency: {
+  updateFrequency: {
     name: 'Fréquence',
     type: 'category',
     variable: 'updatingEach',

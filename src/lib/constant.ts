@@ -17,7 +17,7 @@ export const entityNames = {
   owner: 'Fournisseur',
   manager: 'Gestionnaire',
   value: 'Valeur',
-  freq: 'Fréquence',
+  frequency: 'Fréquence',
   log: 'Log',
 } as const
 
@@ -31,7 +31,7 @@ export const parentEntities = {
   variable: 'dataset',
   modality: 'folder',
   value: 'modality',
-  freq: 'variable',
+  frequency: 'variable',
 } as const
 
 export const varTypes = {
@@ -76,7 +76,7 @@ export const columnCleanNames = {
 } as const
 
 export const columnIcons = {
-  updatingEach: 'frequency',
+  updatingEach: 'updateFrequency',
   lastUpdate: 'lastUpdateDate',
   min: 'stat',
   max: 'stat',
@@ -107,7 +107,7 @@ export const entityToIcon = {
   type: 't',
   missing: 'circle-question',
   duplicate: 'clone',
-  frequency: 'calendar-alt',
+  updateFrequency: 'calendar-alt',
   date: 'calendar-day',
   dateRange: 'calendar-week',
   startDate: 'calendar-check',
@@ -159,5 +159,5 @@ export const entityToIcon = {
   nbSource: 'arrow-up',
   nbDerived: 'arrow-down',
   fk: 'key',
-  freq: 'chart-bar',
+  frequency: 'chart-bar',
 } as const

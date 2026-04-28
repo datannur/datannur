@@ -24,7 +24,7 @@
     - `folder`: folders, tags, docs, datasets, variables, modalities, evolutions, stat
     - `tag`: tags, organizations, folders, docs, datasets, variables
     - `dataset`: docs, datasets, variables, modalities, datasetPreview, evolutions, stat
-    - `variable`: variables, variableValues, freq, variablePreview, evolutions
+    - `variable`: variables, variableValues, frequency, variablePreview, evolutions
     - `modality`: values, variables, evolutions
   - **Important:** For organization/folder/tag, tabs show **recursive** data. To check if a tab has content, use `getEntity` and check `nbVariableRecursive`, `nbDatasetRecursive`, `nbFolderRecursive` fields (not `listEntities`).
 
@@ -39,7 +39,7 @@
 "Répartition par type" → groupBy({entity: "dataset", field: "type"})
 "Variables du dataset X" → navigate({path: "/dataset/X", tab: "variables"})
 "Dossiers de l'organisation Y" → navigate({path: "/organization/Y", tab: "folders"})
-"Fréquences de la variable Z" → navigate({path: "/variable/Z", tab: "freq"})
+"Fréquences de la variable Z" → navigate({path: "/variable/Z", tab: "frequency"})
 ```
 
 ### Critical Rules

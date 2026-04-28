@@ -9,5 +9,5 @@ $dataset --> $variable
 $variable <--> $modality
 $variable <--> $tag
 $variable <-- source - dérivé --> $variable
-$variable --> $freq
+$variable --> $frequency
 );

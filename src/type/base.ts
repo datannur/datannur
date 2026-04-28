@@ -30,10 +30,10 @@ export type Value = {
   modalityName?: string
 }
 
-export type Freq = {
+export type Frequency = {
   variableId: string | number
   value: string
-  freq: number
+  frequency: number
 }
 
 // User data entities

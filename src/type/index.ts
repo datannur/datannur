@@ -4,7 +4,7 @@ export type {
   Config,
   NullableNumber,
   Value,
-  Freq,
+  Frequency,
   Favorite,
   FilterActive,
   Option,

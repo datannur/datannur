@@ -23,7 +23,7 @@ Certaines variables sont de type catégoriel, avec des valeurs possibles défini
 mermaid(
 $concept --> $variable
 $variable <--> $modality
-$variable --> $freq
+$variable --> $frequency
 );
 
 ### Fréquence
@@ -126,6 +126,6 @@ $concept <--> $tag
 $concept <--> $doc
 $variable <--> $modality
 $variable <--> $tag
-$variable --> $freq
+$variable --> $frequency
 $modality --> $value
 );

@@ -723,8 +723,8 @@
                 border-radius: $rounded;
                 opacity: 0.2;
                 pointer-events: none;
-                &.color-freq {
-                  background: color('freq');
+                &.color-frequency {
+                  background: color('frequency');
                 }
               }
 
@@ -766,8 +766,8 @@
               &.color-duplicate {
                 background: color('duplicate');
               }
-              &.color-freq {
-                background: color('freq');
+              &.color-frequency {
+                background: color('frequency');
               }
               &.color-value {
                 background: color('value');

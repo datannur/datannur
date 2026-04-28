@@ -4,7 +4,7 @@ import type { Attribut } from './attributs-def'
 export const attributs = {
   organization: ['tag', 'email', 'phone', 'level', 'name', 'description'],
   folder: [
-    'frequency',
+    'updateFrequency',
     'lastUpdate',
     'tag',
     'localisation',
@@ -20,7 +20,7 @@ export const attributs = {
   tag: ['entity', 'level', 'name', 'description'],
   doc: ['docType', 'entity', 'docPath', 'lastUpdateDoc', 'name', 'description'],
   dataset: [
-    'frequency',
+    'updateFrequency',
     'lastUpdate',
     'tag',
     'localisation',

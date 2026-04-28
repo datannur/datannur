@@ -402,10 +402,10 @@ export default class Column {
       render: Render.nbMissing as ColumnType['render'],
     }
   }
-  static freq(): ColumnType {
+  static frequency(): ColumnType {
     return {
       data: 'freqPreview',
-      title: Render.icon('freq') + 'Fréquence',
+      title: Render.icon('frequency') + 'Fréquence',
       defaultContent: '',
       hasLongText: true,
       tooltip: 'Aperçu des données de fréquence',
@@ -523,13 +523,13 @@ export default class Column {
       },
     }
   }
-  static frequency(): ColumnType {
+  static updateFrequency(): ColumnType {
     return {
       data: 'updatingEach',
-      name: 'frequency',
+      name: 'updateFrequency',
       defaultContent: '',
       filterType: 'select',
-      title: Render.icon('frequency') + 'Fréquence',
+      title: Render.icon('updateFrequency') + 'Fréquence',
       tooltip: 'Fréquence de mise à jour',
       render: Render.shortText,
     }

@@ -1,12 +1,12 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
 
-  let { frequency }: { frequency: string | undefined } = $props()
+  let { updateFrequency }: { updateFrequency: string | undefined } = $props()
 </script>
 
-{#if frequency}
+{#if updateFrequency}
   <tr>
-    <td><Icon type="frequency" /> Fréquence</td>
-    <td>{frequency}</td>
+    <td><Icon type="updateFrequency" /> Fréquence</td>
+    <td>{updateFrequency}</td>
   </tr>
 {/if}

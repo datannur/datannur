@@ -545,18 +545,18 @@ class Process {
       addFkVar(variable)
       if (variable.key) variable.key = 'oui'
 
-      const freqData = db.getAll('freq', { variable })
+      const freqData = db.getAll('frequency', { variable })
       variable.hasFreq = freqData.length > 0
 
       if (freqData.length > 0) {
         const freqSorted = [...freqData].sort(
-          (a, b) => (b.freq || 0) - (a.freq || 0),
+          (a, b) => (b.frequency || 0) - (a.frequency || 0),
         )
         const totalFreq = freqData.reduce(
-          (sum, item) => sum + (item.freq || 0),
+          (sum, item) => sum + (item.frequency || 0),
           0,
         )
-        const maxFreq = freqSorted[0].freq || 1
+        const maxFreq = freqSorted[0].frequency || 1
         const scale =
           variable.sampleSize && variable.nbRow
             ? variable.nbRow / variable.sampleSize

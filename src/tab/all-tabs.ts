@@ -9,7 +9,7 @@ import Modalities from '@component/modality/Modalities.svelte'
 import ModalitiesCompare from '@component/modality/ModalitiesCompare.svelte'
 import Values from '@component/modality/Values.svelte'
 import VariableValues from '@component/variable/VariableValues.svelte'
-import Freq from '@component/variable/Freq.svelte'
+import Frequency from '@component/variable/Frequency.svelte'
 import OrganizationInfo from '@component/organization/OrganizationInfo.svelte'
 import FolderInfo from '@component/folder/FolderInfo.svelte'
 import TagInfo from '@component/tag/TagInfo.svelte'
@@ -85,10 +85,10 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'value',
     component: VariableValues,
   },
-  freq: {
+  frequency: {
     name: 'Fréquence',
-    icon: 'freq',
-    component: Freq,
+    icon: 'frequency',
+    component: Frequency,
   },
   allFav: {
     name: 'Favori',

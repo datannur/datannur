@@ -1,7 +1,7 @@
 import type {
   BaseEntity,
   Value,
-  Freq,
+  Frequency,
   Config,
   Favorite,
   FilterActive,
@@ -125,7 +125,7 @@ export type Dataset = BaseEntity &
     fkReferencedByDatasetIds?: Set<string | number>
   }
 
-export type FreqPreview = Freq & {
+export type FreqPreview = Frequency & {
   total: number
   max: number
   scale?: number
@@ -393,7 +393,7 @@ export type MainEntityMap = {
 export type EntityTypeMap = MainEntityMap & {
   config: Config
   value: Value
-  freq: Freq
+  frequency: Frequency
   owner: Organization
   manager: Organization
   evolution: Evolution

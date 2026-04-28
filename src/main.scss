@@ -103,7 +103,7 @@ $icon-colors: (
   'nbResources': #5e9381,
   'preview': #c6695e,
   'date': #c6695e,
-  'frequency': #c6695e,
+  'updateFrequency': #c6695e,
   'dateRange': #c6695e,
   'duplicate': #c6695e,
   'doc': #e0745c,
@@ -116,7 +116,7 @@ $icon-colors: (
   'nextUpdateDate': #579fbd,
   'nbDerived': #579fbd,
   'log': #bd7c6c,
-  'freq': #12999b,
+  'frequency': #12999b,
   'colSearch': $color-2,
   'recentSearch': $color-2,
   'features': #e0745c,
@@ -172,4 +172,4 @@ $menu-mobile-limit: 1023px;
 $entities:
   'organization', 'folder', 'tag', 'concept', 'dataset', 'variable', 'modality',
   'value', 'log', 'entity', 'option', 'search', 'favorite', 'about', 'diagram',
-  'compare', 'stat', 'doc', 'evolution', 'features', 'preview', 'freq';
+  'compare', 'stat', 'doc', 'evolution', 'features', 'preview', 'frequency';
