@@ -1,14 +1,14 @@
 datannur repose sur 8 concepts principaux, qui se répartissent en deux catégories :
 
-- Intérieur du dataset : pour les éléments directement liés aux données elles-mêmes
-- Extérieur du dataset : pour les éléments qui structurent, organisent ou enrichissent les datasets
+- Données du dataset : pour les éléments directement liés aux données elles-mêmes
+- Contexte du dataset : pour les éléments qui structurent, organisent ou enrichissent les datasets
 
 mermaid(
-$dataset -.-> intérieur
-$dataset -.-> extérieur
+$dataset -.-> donnees_dataset["Données"]
+$dataset -.-> contexte_dataset["Contexte"]
 );
 
-## Intérieur du dataset
+## Données du dataset
 
 ### Dataset
 
@@ -36,7 +36,7 @@ Une modalité regroupe un ensemble de valeurs possibles pour une ou plusieurs va
 
 mermaid( $modality --> $value );
 
-## Extérieur du dataset
+## Contexte du dataset
 
 ### Dossier
 
