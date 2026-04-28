@@ -78,7 +78,7 @@
       {/if}
 
       <HeaderDropdown
-        title="Organisation"
+        title="Contexte"
         pages={[
           'organization',
           'organizations',
@@ -93,13 +93,7 @@
         ]}
         ifUse={['organization', 'folder', 'tag', 'concept', 'doc']}
       >
-        <HeaderLink
-          href="organizations"
-          pages={['organization', 'organizations']}
-          icon="organization"
-        >
-          Organisations
-        </HeaderLink>
+        <HeaderLink standard="organization" />
         <HeaderLink standard="folder" />
         <HeaderLink standard="tag" />
         <HeaderLink standard="concept" />
@@ -107,7 +101,7 @@
       </HeaderDropdown>
 
       <HeaderDropdown
-        title="Datasets"
+        title="Données"
         pages={[
           'dataset',
           'datasets',
