@@ -107,14 +107,14 @@
           'datasets',
           'variable',
           'variables',
-          'modality',
-          'modalities',
+          'enumeration',
+          'enumerations',
         ]}
-        ifUse={['dataset', 'variable', 'modality']}
+        ifUse={['dataset', 'variable', 'enumeration']}
       >
         <HeaderLink standard="dataset" />
         <HeaderLink standard="variable" />
-        <HeaderLink standard="modality" />
+        <HeaderLink standard="enumeration" />
       </HeaderDropdown>
 
       <HeaderDropdown title="Filtre" ifUse={['filter']}>

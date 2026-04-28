@@ -5,7 +5,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import Tabs from '@tab/Tabs.svelte'
   import Title from '@layout/Title.svelte'
-  import type { Modality } from '@type'
+  import type { Enumeration } from '@type'
 
   let { id }: { id: string | number } = $props()
   const dataset = untrack(() => db.get('dataset', id))
@@ -13,14 +13,14 @@
   let variables = db.getAll('variable', { dataset })
   if (dataset) dataset.nbVariable = variables.length
 
-  let modalities: Modality[] = variables.flatMap(
-    variable => variable.modalities ?? [],
+  let enumerations: Enumeration[] = variables.flatMap(
+    variable => variable.enumerations ?? [],
   )
-  modalities = removeDuplicateById(modalities)
+  enumerations = removeDuplicateById(enumerations)
 
   let datasetPreview = dataset?.link ? dataset.id : false
 
-  const modalitiesId = new Set(modalities.map(item => item.id))
+  const enumerationsId = new Set(enumerations.map(item => item.id))
 
   const datasets = dataset
     ? [
@@ -37,18 +37,18 @@
         (evo.entity === 'dataset' && evo.id === dataset?.id) ||
         (evo.parentEntity === 'dataset' &&
           evo.parentEntityId === dataset?.id) ||
-        (evo.parentEntity === 'modality' &&
+        (evo.parentEntity === 'enumeration' &&
           evo.parentEntityId !== undefined &&
-          modalitiesId.has(evo.parentEntityId)) ||
-        (evo.entity === 'modality' &&
+          enumerationsId.has(evo.parentEntityId)) ||
+        (evo.entity === 'enumeration' &&
           evo.id !== undefined &&
-          modalitiesId.has(evo.id)),
+          enumerationsId.has(evo.id)),
     )
 
   const stat = [
     { entity: 'doc', items: dataset?.docs },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   let tabs = tabsHelper({
@@ -56,7 +56,7 @@
     docs: dataset?.docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     datasetPreview,
     evolutions,
     stat,

@@ -22,12 +22,12 @@ export type Config = {
 }
 
 export type Value = {
-  modalityId: string | number
+  enumerationId: string | number
   value: string | null
   description?: string
 
   // Computed fields added during processing
-  modalityName?: string
+  enumerationName?: string
 }
 
 export type Frequency = {

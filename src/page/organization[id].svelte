@@ -38,8 +38,8 @@
     db.getAll('variable', { dataset }),
   )
 
-  let modalities = variables.flatMap(variable => variable.modalities ?? [])
-  modalities = removeDuplicateById(modalities)
+  let enumerations = variables.flatMap(variable => variable.enumerations ?? [])
+  enumerations = removeDuplicateById(enumerations)
 
   const tags = Tags.getFromEntities({
     organizations: organizations,
@@ -49,7 +49,7 @@
   makeParentsRelative(false, tags)
   addMinimumDeep(tags)
 
-  const modalitiesId = new Set(modalities.map(item => item.id))
+  const enumerationsId = new Set(enumerations.map(item => item.id))
   const variablesId = new Set(variables.map(item => item.id))
   const datasetsId = new Set(datasets.map(item => item.id))
   const foldersId = new Set(folders.map(item => item.id))
@@ -64,10 +64,10 @@
         (evo.entity === 'folder' && evo.id && foldersId.has(evo.id)) ||
         (evo.entity === 'dataset' && evo.id && datasetsId.has(evo.id)) ||
         (evo.entity === 'variable' && evo.id && variablesId.has(evo.id)) ||
-        (evo.entity === 'modality' && evo.id && modalitiesId.has(evo.id)) ||
-        (evo.parentEntity === 'modality' &&
+        (evo.entity === 'enumeration' && evo.id && enumerationsId.has(evo.id)) ||
+        (evo.parentEntity === 'enumeration' &&
           evo.parentEntityId &&
-          modalitiesId.has(evo.parentEntityId)),
+          enumerationsId.has(evo.parentEntityId)),
     )
 
   const stat = [
@@ -77,7 +77,7 @@
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   const tabs = tabsHelper({
@@ -88,7 +88,7 @@
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
   })

@@ -32,7 +32,7 @@
     const detailEntities = [
       'dataset',
       'variable',
-      'modality',
+      'enumeration',
       'value',
       'frequency',
     ]
@@ -47,8 +47,8 @@
     'datasets',
     'variable',
     'variables',
-    'modality',
-    'modalities',
+    'enumeration',
+    'enumerations',
     'favorite',
   ]
   const filterEvolution =

@@ -16,7 +16,7 @@ export type {
 
 // Entity types (business logic)
 export type {
-  ModalitySimilitute,
+  EnumerationSimilitute,
   WithRecursiveParent,
   WithTags,
   WithDocs,
@@ -25,7 +25,7 @@ export type {
   EntityWithRelations,
   Dataset,
   Variable,
-  Modality,
+  Enumeration,
   Folder,
   Organization,
   Tag,

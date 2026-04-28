@@ -9,7 +9,7 @@ export const mainEntityNames = {
   doc: 'Doc',
   dataset: 'Dataset',
   variable: 'Variable',
-  modality: 'Modalité',
+  enumeration: 'Énumération',
 } as const
 
 export const entityNames = {
@@ -29,8 +29,8 @@ export const parentEntities = {
   doc: 'parent',
   dataset: 'folder',
   variable: 'dataset',
-  modality: 'folder',
-  value: 'modality',
+  enumeration: 'folder',
+  value: 'enumeration',
   frequency: 'variable',
 } as const
 
@@ -95,7 +95,7 @@ export const entityToIcon = {
   concept: 'lightbulb',
   dataset: 'table',
   variable: 'grip-lines-vertical',
-  modality: 'align-left',
+  enumeration: 'align-left',
   value: 'ellipsis-vertical',
   doc: 'book',
   about: 'info-circle',

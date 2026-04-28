@@ -12,7 +12,7 @@
   const docs = db.getAll('doc').filter(item => item.isFavorite)
   const datasets = db.getAll('dataset').filter(item => item.isFavorite)
   const variables = db.getAll('variable').filter(item => item.isFavorite)
-  const modalities = db.getAll('modality').filter(item => item.isFavorite)
+  const enumerations = db.getAll('enumeration').filter(item => item.isFavorite)
   const evolutions = db.getAll('evolution').filter(item => item.isFavorite)
 
   const allFav = [
@@ -22,7 +22,7 @@
     ...docs,
     ...datasets,
     ...variables,
-    ...modalities,
+    ...enumerations,
   ]
 
   makeParentsRelative(false, folders)
@@ -43,7 +43,7 @@
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   const tabs = tabsHelper({
@@ -54,7 +54,7 @@
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
     aboutFile,

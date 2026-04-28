@@ -18,7 +18,7 @@
   let concepts = db.getAll('concept')
   const datasets = db.getAll('dataset')
   const variables = db.getAll('variable')
-  const modalities = db.getAll('modality')
+  const enumerations = db.getAll('enumeration')
   const docs = db.getAll('doc')
   const evolutions = db.getAll('evolution')
 
@@ -44,7 +44,7 @@
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   let tabs = tabsHelper({
@@ -56,7 +56,7 @@
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
   })
@@ -69,7 +69,7 @@
     !db.use.doc &&
     !db.use.dataset &&
     !db.use.variable &&
-    !db.use.modality
+    !db.use.enumeration
 
   const nbOrganization = organizations.length
   const nbFolder = folders.length

@@ -17,7 +17,7 @@ import type {
   FavoritableEntity,
   FreqPreview,
   Tag,
-  Modality,
+  Enumeration,
   NullableNumber,
   Value,
   Variable,
@@ -94,7 +94,7 @@ export default class Render {
     if (!values || values.length === 0) return wrapLongText()
     if (!('values' in row) || !row.values) return wrapLongText()
     const nbValues = row.values.length
-    let entity = 'datasetId' in row ? 'variable' : 'modality'
+    let entity = 'datasetId' in row ? 'variable' : 'enumeration'
     let tab = entity === 'variable' ? 'variableValues' : 'values'
     if ('_entity' in row && row._entity === 'metaVariable') {
       entity = 'metaVariable'
@@ -225,24 +225,28 @@ export default class Render {
     const classNames = icon.startsWith('fa-brands') ? icon : `fas fa-${icon}`
     return `<span class='icon icon-${entity}'><i class='${classNames}'></i></span>`
   }
-  static modalitiesName(modalities: Modality[]) {
-    if (!modalities || modalities.length === 0) return wrapLongText()
-    const modalitiesName: string[] = []
-    for (const modality of modalities) {
-      modalitiesName.push(
-        link('modality/' + modality.id, escapeHtml(modality.name), 'modality'),
+  static enumerationsName(enumerations: Enumeration[]) {
+    if (!enumerations || enumerations.length === 0) return wrapLongText()
+    const enumerationsName: string[] = []
+    for (const enumeration of enumerations) {
+      enumerationsName.push(
+        link(
+          'enumeration/' + enumeration.id,
+          escapeHtml(enumeration.name),
+          'enumeration',
+        ),
       )
     }
-    return wrapLongText(modalitiesName.join(' | '))
+    return wrapLongText(enumerationsName.join(' | '))
   }
   static nbValues(
     data: NullableNumber,
     type: string,
-    row: EntityTypeMap['variable' | 'modality' | 'metaVariable'],
+    row: EntityTypeMap['variable' | 'enumeration' | 'metaVariable'],
     nbValueMax: number,
   ) {
     const nbValues = data
-    let entity = 'datasetId' in row ? 'variable' : 'modality'
+    let entity = 'datasetId' in row ? 'variable' : 'enumeration'
     let tab = entity === 'variable' ? 'variableValues' : 'values'
     if (row._entity === 'metaVariable') {
       entity = 'metaVariable'

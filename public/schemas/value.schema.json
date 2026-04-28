@@ -3,18 +3,18 @@
   "$id": "https://dev.datannur.com/schemas/value.schema.json",
   "x-db": "data",
   "title": "value",
-  "description": "Values and their description within a modality",
-  "x-description-fr": "Valeurs et leur description au sein d'une modalité",
+  "description": "Values and their description within a enumeration",
+  "x-description-fr": "Valeurs et leur description au sein d'une énumération",
   "type": "array",
   "items": {
     "type": "object",
     "required": [],
     "additionalProperties": false,
     "properties": {
-      "modality_id": {
+      "enumeration_id": {
         "type": ["string", "number", "null"],
-        "description": "Modality key",
-        "x-description-fr": "Clé de la modalité"
+        "description": "Enumeration key",
+        "x-description-fr": "Clé de l'énumération"
       },
       "value": {
         "type": ["string", "number", "null"],

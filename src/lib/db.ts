@@ -22,7 +22,7 @@ import type {
 
 function getNbValues(
   values: Value[],
-  row: EntityTypeMap['variable' | 'modality' | 'metaVariable'],
+  row: EntityTypeMap['variable' | 'enumeration' | 'metaVariable'],
 ) {
   if (values && values.length) return values.length
   if ('nbDistinct' in row && row.nbDistinct) return row.nbDistinct
@@ -526,13 +526,13 @@ class Process {
           variable.conceptName = concept.name
         }
       }
-      variable.modalities = []
+      variable.enumerations = []
       variable.values = []
-      const modalities = db.getAll('modality', { variable })
-      for (const modality of modalities) {
-        const values = db.getAll('value', { modality })
+      const enumerations = db.getAll('enumeration', { variable })
+      for (const enumeration of enumerations) {
+        const values = db.getAll('value', { enumeration })
         variable.values.push(...values)
-        variable.modalities.push(modality)
+        variable.enumerations.push(enumeration)
       }
       variable.valuesPreview = variable.values.slice(0, 10)
       variable.typeClean = getVariableTypeClean(variable.type)
@@ -576,28 +576,32 @@ class Process {
       if (variable.nbMissing) variable.nbDuplicate -= variable.nbMissing
     })
   }
-  static modality() {
-    db.foreach('modality', modality => {
-      addEntity(modality, 'modality')
-      modality.isFavorite = false
-      modality.nbVariable = db.countRelated('modality', modality.id, 'variable')
-      if (db.use.folder) modality.folderName = getName(modality, 'folder')
+  static enumeration() {
+    db.foreach('enumeration', enumeration => {
+      addEntity(enumeration, 'enumeration')
+      enumeration.isFavorite = false
+      enumeration.nbVariable = db.countRelated(
+        'enumeration',
+        enumeration.id,
+        'variable',
+      )
+      if (db.use.folder) enumeration.folderName = getName(enumeration, 'folder')
 
-      modality.variables = db.getAll('variable', { modality })
-      modality.values = db.getAll('value', { modality })
-      modality.nbValue = modality.values.length
-      modality.valuesPreview = modality.values.slice(0, 10)
-      for (const value of modality.values) {
-        value.modalityName = modality.name
+      enumeration.variables = db.getAll('variable', { enumeration })
+      enumeration.values = db.getAll('value', { enumeration })
+      enumeration.nbValue = enumeration.values.length
+      enumeration.valuesPreview = enumeration.values.slice(0, 10)
+      for (const value of enumeration.values) {
+        value.enumerationName = enumeration.name
         if (value.value === null) value.value = ''
         else {
           value.value = value.value.toString()
         }
       }
-      if (!modality.type && modality.variables.length > 0) {
-        modality.type = modality.variables[0].type
+      if (!enumeration.type && enumeration.variables.length > 0) {
+        enumeration.type = enumeration.variables[0].type
       }
-      modality.typeClean = getVariableTypeClean(modality.type)
+      enumeration.typeClean = getVariableTypeClean(enumeration.type)
     })
   }
   static metaVariable() {
@@ -725,7 +729,7 @@ export function dbAddProcessedData() {
   Process.dataset()
   Process.doc()
   Process.variable()
-  Process.modality()
+  Process.enumeration()
   Process.metaVariable()
   Process.metaDataset()
   Process.metaFolder()

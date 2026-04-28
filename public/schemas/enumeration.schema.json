@@ -1,10 +1,10 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/modality.schema.json",
+  "$id": "https://dev.datannur.com/schemas/enumeration.schema.json",
   "x-db": "data",
-  "title": "modality",
-  "description": "Modalities",
-  "x-description-fr": "Modalités",
+  "title": "enumeration",
+  "description": "Enumerations",
+  "x-description-fr": "Énumérations",
   "type": "array",
   "items": {
     "type": "object",
@@ -13,8 +13,8 @@
     "properties": {
       "id": {
         "type": "string",
-        "description": "Primary key of the modality",
-        "x-description-fr": "Clé primaire de la modalité"
+        "description": "Primary key of the enumeration",
+        "x-description-fr": "Clé primaire de l'énumération"
       },
       "folder_id": {
         "type": ["string", "number", "null"],
@@ -23,18 +23,18 @@
       },
       "name": {
         "type": ["string", "null"],
-        "description": "Modality name",
-        "x-description-fr": "Nom de la modalité"
+        "description": "Enumeration name",
+        "x-description-fr": "Nom de l'énumération"
       },
       "description": {
         "type": ["string", "null"],
-        "description": "Modality description",
-        "x-description-fr": "Description de la modalité"
+        "description": "Enumeration description",
+        "x-description-fr": "Description de l'énumération"
       },
       "type": {
         "type": ["string", "null"],
-        "description": "Modality datatype",
-        "x-description-fr": "Datatype de la modalité"
+        "description": "Enumeration datatype",
+        "x-description-fr": "Datatype de l'énumération"
       }
     }
   }

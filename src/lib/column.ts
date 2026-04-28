@@ -163,12 +163,12 @@ export default class Column {
   static folder(
     folderIdVar:
       | 'folderId'
-      | 'modality1FolderId'
-      | 'modality2FolderId' = 'folderId',
+      | 'enumeration1FolderId'
+      | 'enumeration2FolderId' = 'folderId',
     folderNameVar:
       | 'folderName'
-      | 'modality1FolderName'
-      | 'modality2FolderName' = 'folderName',
+      | 'enumeration1FolderName'
+      | 'enumeration2FolderName' = 'folderName',
   ): ColumnType {
     const render: ColumnType['render'] = (
       data,
@@ -342,13 +342,13 @@ export default class Column {
       render,
     }
   }
-  static modality(): ColumnType {
+  static enumeration(): ColumnType {
     return {
-      data: 'modalities',
-      title: Render.icon('modality') + 'Modalité',
+      data: 'enumerations',
+      title: Render.icon('enumeration') + 'Énumération',
       defaultContent: '',
-      tooltip: 'Modalités',
-      render: Render.modalitiesName,
+      tooltip: 'Énumérations',
+      render: Render.enumerationsName,
     }
   }
   static value(): ColumnType {

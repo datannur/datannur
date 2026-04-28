@@ -86,7 +86,7 @@
     return [
       Column.favorite(),
       ...base,
-      Column.modality(),
+      Column.enumeration(),
       ...(showDatasetColumns
         ? [
             Column.dataset(isMeta),

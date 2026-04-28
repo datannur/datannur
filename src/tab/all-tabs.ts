@@ -5,9 +5,9 @@ import Concepts from '@component/concept/Concepts.svelte'
 import Docs from '@component/doc/Docs.svelte'
 import Datasets from '@component/dataset/Datasets.svelte'
 import Variables from '@component/variable/Variables.svelte'
-import Modalities from '@component/modality/Modalities.svelte'
-import ModalitiesCompare from '@component/modality/ModalitiesCompare.svelte'
-import Values from '@component/modality/Values.svelte'
+import Enumerations from '@component/enumeration/Enumerations.svelte'
+import EnumerationsCompare from '@component/enumeration/EnumerationsCompare.svelte'
+import Values from '@component/enumeration/Values.svelte'
 import VariableValues from '@component/variable/VariableValues.svelte'
 import Frequency from '@component/variable/Frequency.svelte'
 import OrganizationInfo from '@component/organization/OrganizationInfo.svelte'
@@ -17,7 +17,7 @@ import ConceptInfo from '@component/concept/ConceptInfo.svelte'
 import DocInfo from '@component/doc/DocInfo.svelte'
 import DatasetInfo from '@component/dataset/DatasetInfo.svelte'
 import VariableInfo from '@component/variable/VariableInfo.svelte'
-import ModalityInfo from '@component/modality/ModalityInfo.svelte'
+import EnumerationInfo from '@component/enumeration/EnumerationInfo.svelte'
 import MetaFolderInfo from '@component/folder/MetaFolderInfo.svelte'
 import MetaDatasetInfo from '@component/dataset/MetaDatasetInfo.svelte'
 import MetaVariableInfo from '@component/variable/MetaVariableInfo.svelte'
@@ -64,15 +64,15 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'variable',
     component: Variables,
   },
-  modalities: {
-    name: 'Modalité',
-    icon: 'modality',
-    component: Modalities,
+  enumerations: {
+    name: 'Énumération',
+    icon: 'enumeration',
+    component: Enumerations,
   },
-  modalitiesCompare: {
+  enumerationsCompare: {
     name: 'Similitude',
     icon: 'compare',
-    component: ModalitiesCompare,
+    component: EnumerationsCompare,
     loadAsync: true,
   },
   values: {
@@ -195,7 +195,7 @@ const infoItems = {
   doc: DocInfo,
   dataset: DatasetInfo,
   variable: VariableInfo,
-  modality: ModalityInfo,
+  enumeration: EnumerationInfo,
   metaFolder: MetaFolderInfo,
   metaDataset: MetaDatasetInfo,
   metaVariable: MetaVariableInfo,

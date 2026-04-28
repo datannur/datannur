@@ -11,21 +11,21 @@ import type {
 } from './base'
 import { parentEntities, evolutionTypes } from '@lib/constant'
 
-export type ModalitySimilitute = {
-  modality1Id: string | number
-  modality2Id: string | number
-  modality1FolderId: string | number
-  modality2FolderId: string | number
-  modality1Name: string
-  modality2Name: string
-  modality1FolderName: string
-  modality2FolderName: string
-  modality1Type: string
-  modality2Type: string
-  modality1NbValue: number
-  modality2NbValue: number
-  modality1NbVariable: number
-  modality2NbVariable: number
+export type EnumerationSimilitute = {
+  enumeration1Id: string | number
+  enumeration2Id: string | number
+  enumeration1FolderId: string | number
+  enumeration2FolderId: string | number
+  enumeration1Name: string
+  enumeration2Name: string
+  enumeration1FolderName: string
+  enumeration2FolderName: string
+  enumeration1Type: string
+  enumeration2Type: string
+  enumeration1NbValue: number
+  enumeration2NbValue: number
+  enumeration1NbVariable: number
+  enumeration2NbVariable: number
   ratio: number
 }
 
@@ -137,7 +137,7 @@ export type Variable = BaseEntity &
   WithPeriod &
   WithRelations & {
     datasetId: string | number
-    modalityIds?: string
+    enumerationIds?: string
     conceptId?: string | number
     originalName?: string
     key?: string | boolean
@@ -170,7 +170,7 @@ export type Variable = BaseEntity &
     ownerName?: string
     managerId?: string | number
     managerName?: string
-    modalities?: Modality[]
+    enumerations?: Enumeration[]
     values?: Value[]
     valuesPreview?: Value[]
     nbValue?: number
@@ -181,7 +181,7 @@ export type Variable = BaseEntity &
     conceptName?: string
   }
 
-export type Modality = BaseEntity &
+export type Enumeration = BaseEntity &
   WithFavorite & {
     folderId?: string | number
     type?: string
@@ -387,7 +387,7 @@ export type MainEntityMap = {
   doc: Doc
   dataset: Dataset
   variable: Variable
-  modality: Modality
+  enumeration: Enumeration
 }
 
 export type EntityTypeMap = MainEntityMap & {

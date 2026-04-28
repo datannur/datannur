@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- change: rename `modality` to `enumeration` across entities, routes, components, schemas, API, and data files
 - change: rename `freq` to `frequency` across tabs, schemas, API routes, and data files
 - change: rename the header dropdowns to `Contexte` and `Données`
 - change: rename the institution entity, routes, components, schemas, and dataset files to organization

@@ -15,7 +15,7 @@ datannur is a client-side data catalog designed to organize and explore datasets
 
 - **Zero-config deployment** - Single entry point (index.html) that runs in any browser
 - **Portable** - Works locally, on shared drives, or cloud storage
-- **Comprehensive metadata** - Structured around 8 core concepts: Organization, Folder, Tag, Concept, Doc, Dataset, Variable, and Modality
+- **Comprehensive metadata** - Structured around 8 core concepts: Organization, Folder, Tag, Concept, Doc, Dataset, Variable, and Enumeration
 - **Browser-isolated** - No system access, inherently secure
 - **French interface** - Currently available in French, with multilingual support planned for future releases
 

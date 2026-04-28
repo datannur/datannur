@@ -30,8 +30,8 @@ export const attributs = {
     'name',
     'description',
   ],
-  variable: ['type', 'modality', 'value', 'name', 'description'],
-  modality: ['type', 'variable', 'value', 'name', 'description'],
+  variable: ['type', 'enumeration', 'value', 'name', 'description'],
+  enumeration: ['type', 'variable', 'value', 'name', 'description'],
   log: ['actionReadable', 'page', 'tab', 'search', 'timeAgo'],
 }
 

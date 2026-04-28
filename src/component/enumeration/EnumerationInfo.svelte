@@ -4,16 +4,16 @@
   import IdInfo from '@info-table/IdInfo.svelte'
   import TypeInfo from '@info-table/TypeInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
-  import type { Modality } from '@type'
+  import type { Enumeration } from '@type'
 
-  let { modality }: { modality: Modality } = $props()
+  let { enumeration }: { enumeration: Enumeration } = $props()
 </script>
 
 <TableWrapper>
-  <IdInfo id={modality.id} />
-  <TypeInfo type={modality.typeClean} />
-  <FolderInfo folderId={modality.folderId} />
+  <IdInfo id={enumeration.id} />
+  <TypeInfo type={enumeration.typeClean} />
+  <FolderInfo folderId={enumeration.folderId} />
 </TableWrapper>
-{#if modality.description}
-  <DescriptionInfo description={modality.description} />
+{#if enumeration.description}
+  <DescriptionInfo description={enumeration.description} />
 {/if}

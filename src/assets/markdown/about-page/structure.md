@@ -18,11 +18,11 @@ mermaid( $dataset --> $variable );
 
 ### Variable
 
-Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une modalité. Une variable peut être liée à plusieurs modalités, et inversement. Elle peut aussi être rattachée à un concept du glossaire métier pour préciser le sens exact de la notion mesurée. Chaque variable peut également avoir des données de fréquence associées.
+Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une énumération. Une variable peut être liée à plusieurs énumérations, et inversement. Elle peut aussi être rattachée à un concept du glossaire métier pour préciser le sens exact de la notion mesurée. Chaque variable peut également avoir des données de fréquence associées.
 
 mermaid(
 $concept --> $variable
-$variable <--> $modality
+$variable <--> $enumeration
 $variable --> $frequency
 );
 
@@ -30,22 +30,22 @@ $variable --> $frequency
 
 Les fréquences permettent de comptabiliser le nombre d'occurrences de chaque valeur spécifique au sein d'une variable. Cela offre une vue statistique de la distribution des données et aide à identifier les valeurs les plus communes ou rares. Chaque entrée de fréquence contient une valeur et son nombre d'occurrences.
 
-### Modalité
+### Énumération
 
-Une modalité regroupe un ensemble de valeurs possibles pour une ou plusieurs variables catégorielles. Chaque valeur peut être accompagnée d’une description pour en préciser le sens.
+Une énumération regroupe un ensemble de valeurs possibles pour une ou plusieurs variables catégorielles. Chaque valeur peut être accompagnée d’une description pour en préciser le sens.
 
-mermaid( $modality --> $value );
+mermaid( $enumeration --> $value );
 
 ## Contexte du dataset
 
 ### Dossier
 
-Les datasets et les modalités peuvent être organisés dans des dossiers. Les dossiers peuvent s’imbriquer les uns dans les autres, formant une arborescence hiérarchique pour structurer vos données.
+Les datasets et les énumérations peuvent être organisés dans des dossiers. Les dossiers peuvent s’imbriquer les uns dans les autres, formant une arborescence hiérarchique pour structurer vos données.
 
 mermaid(
 $folder $recursive
 $folder --> $dataset
-$folder --> $modality
+$folder --> $enumeration
 );
 
 ### Organisation
@@ -113,7 +113,7 @@ $organization -- manager - owner --> $folder
 $organization <--> $tag
 $organization <--> $doc
 $folder --> $dataset
-$folder --> $modality
+$folder --> $enumeration
 $folder <--> $tag
 $folder <--> $doc
 $tag <--> $doc
@@ -124,8 +124,8 @@ $concept $recursive
 $concept --> $variable
 $concept <--> $tag
 $concept <--> $doc
-$variable <--> $modality
+$variable <--> $enumeration
 $variable <--> $tag
 $variable --> $frequency
-$modality --> $value
+$enumeration --> $value
 );

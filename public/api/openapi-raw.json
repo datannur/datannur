@@ -174,18 +174,18 @@
         }
       }
     },
-    "/modality.json": {
+    "/enumeration.json": {
       "get": {
-        "summary": "Get all modality",
-        "description": "Returns the complete modality table as a JSON array",
-        "tags": ["modality"],
+        "summary": "Get all enumeration",
+        "description": "Returns the complete enumeration table as a JSON array",
+        "tags": ["enumeration"],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/modality"
+                  "$ref": "#/components/schemas/enumeration"
                 }
               }
             }
@@ -742,11 +742,11 @@
           }
         }
       },
-      "modality": {
+      "enumeration": {
         "x-db": "data",
-        "title": "modality",
-        "description": "Modalities",
-        "x-description-fr": "Modalités",
+        "title": "enumeration",
+        "description": "Enumerations",
+        "x-description-fr": "Énumérations",
         "type": "array",
         "items": {
           "type": "object",
@@ -755,8 +755,8 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Primary key of the modality",
-              "x-description-fr": "Clé primaire de la modalité"
+              "description": "Primary key of the enumeration",
+              "x-description-fr": "Clé primaire de l'énumération"
             },
             "folder_id": {
               "type": ["string", "number", "null"],
@@ -765,18 +765,18 @@
             },
             "name": {
               "type": ["string", "null"],
-              "description": "Modality name",
-              "x-description-fr": "Nom de la modalité"
+              "description": "Enumeration name",
+              "x-description-fr": "Nom de l'énumération"
             },
             "description": {
               "type": ["string", "null"],
-              "description": "Modality description",
-              "x-description-fr": "Description de la modalité"
+              "description": "Enumeration description",
+              "x-description-fr": "Description de l'énumération"
             },
             "type": {
               "type": ["string", "null"],
-              "description": "Modality datatype",
-              "x-description-fr": "Datatype de la modalité"
+              "description": "Enumeration datatype",
+              "x-description-fr": "Datatype de l'énumération"
             }
           }
         }
@@ -893,18 +893,18 @@
       "value": {
         "x-db": "data",
         "title": "value",
-        "description": "Values and their description within a modality",
-        "x-description-fr": "Valeurs et leur description au sein d'une modalité",
+        "description": "Values and their description within a enumeration",
+        "x-description-fr": "Valeurs et leur description au sein d'une énumération",
         "type": "array",
         "items": {
           "type": "object",
           "required": [],
           "additionalProperties": false,
           "properties": {
-            "modality_id": {
+            "enumeration_id": {
               "type": ["string", "number", "null"],
-              "description": "Modality key",
-              "x-description-fr": "Clé de la modalité"
+              "description": "Enumeration key",
+              "x-description-fr": "Clé de l'énumération"
             },
             "value": {
               "type": ["string", "number", "null"],
@@ -940,10 +940,10 @@
               "description": "Key of the dataset containing the variable",
               "x-description-fr": "Clé du dataset contenant la variable"
             },
-            "modality_ids": {
+            "enumeration_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related modalities",
-              "x-description-fr": "Clé des modalités liées",
+              "description": "Keys of related enumerations",
+              "x-description-fr": "Clé des énumérations liées",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
             },
@@ -1081,8 +1081,8 @@
       "description": "Value frequencies for each variable"
     },
     {
-      "name": "modality",
-      "description": "Modalities"
+      "name": "enumeration",
+      "description": "Enumerations"
     },
     {
       "name": "organization",
@@ -1094,7 +1094,7 @@
     },
     {
       "name": "value",
-      "description": "Values and their description within a modality"
+      "description": "Values and their description within a enumeration"
     },
     {
       "name": "variable",

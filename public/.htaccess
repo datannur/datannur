@@ -8,7 +8,7 @@ RewriteRule ^$ /static/index.html [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)$ /static/$1.html [L]
 
 RewriteRule ^variable/([a-zA-Z0-9_\-]+)$ /static/index.html#/variable/$1 [L]
-RewriteRule ^modality/([a-zA-Z0-9_\-]+)$ /static/index.html#/modality/$1 [L]
+RewriteRule ^enumeration/([a-zA-Z0-9_\-]+)$ /static/index.html#/enumeration/$1 [L]
 RewriteRule ^metaFolder/([a-zA-Z0-9_\-]+)$ /static/index.html#/metaFolder/$1 [L]
 RewriteRule ^metaDataset/([a-zA-Z0-9_\-]+)$ /static/index.html#/metaDataset/$1 [L]
 RewriteRule ^metaVariable/([a-zA-Z0-9_\-]+)$ /static/index.html#/metaVariable/$1 [L]

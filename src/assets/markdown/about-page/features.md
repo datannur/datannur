@@ -54,7 +54,7 @@ Intégré à l’interface, il complète les fonctions classiques de recherche, 
 
 Chaque page dédiée à un élément du catalogue comporte un onglet « À propos » qui rassemble ses principales métadonnées. On y retrouve ses attributs spécifiques — par exemple une description, une date de mise à jour ou un contact — ainsi que les éléments auxquels il est rattaché, comme ses mots clés, son dossier ou ses organisations liées.
 
-Les autres onglets donnent accès aux éléments qu’il contient ou auxquels il est associé, comme les datasets, variables, modalités ou documents.
+Les autres onglets donnent accès aux éléments qu’il contient ou auxquels il est associé, comme les datasets, variables, énumérations ou documents.
 
 ![Dataset Communes Suisses – Onglet à propos](assets/about-page/dataset-list-histo{darkMode}.webp?v=1)
 
@@ -92,13 +92,13 @@ Pour les jeux de données compatibles, un onglet dédié permet d’afficher un 
 
 ![Dataset Communes Suisses – Onglet aperçu](assets/about-page/dataset-histo-commune-preview{darkMode}.webp?v=1)
 
-### Modalités similaires
+### Énumérations similaires
 
-L’harmonisation des modalités entre plusieurs jeux de données peut rapidement devenir fastidieuse. Pour faciliter ce travail, datannur propose un onglet qui rapproche les modalités selon leur similarité et permet d’identifier rapidement les doublons, variantes proches ou recouvrements partiels.
+L’harmonisation des énumérations entre plusieurs jeux de données peut rapidement devenir fastidieuse. Pour faciliter ce travail, datannur propose un onglet qui rapproche les énumérations selon leur similarité et permet d’identifier rapidement les doublons, variantes proches ou recouvrements partiels.
 
 Cette vue aide à repérer les écarts de libellé, à uniformiser les valeurs et à améliorer la cohérence d’ensemble du catalogue.
 
-![Page modalités - Onglet similitudes](assets/about-page/modality-compare{darkMode}.webp?v=1)
+![Page énumérations - Onglet similitudes](assets/about-page/enumeration-compare{darkMode}.webp?v=1)
 
 ### Évolution
 

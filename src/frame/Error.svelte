@@ -12,7 +12,7 @@
     tag: 'Le tag',
     doc: 'La doc',
     variable: 'La variable',
-    modality: 'La modalité',
+    enumeration: "L'énumération",
   }
 
   const item = $derived(itemMap[type] ?? "L'élément")

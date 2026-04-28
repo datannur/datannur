@@ -20,12 +20,12 @@
 
 - `navigate` - Navigate to page with optional tab (e.g., `/dataset/123` or with `tab: "variables"`)
   - **Tabs by entity:**
-    - `organization`: folders, tags, docs, datasets, variables, modalities, evolutions, stat
-    - `folder`: folders, tags, docs, datasets, variables, modalities, evolutions, stat
+    - `organization`: folders, tags, docs, datasets, variables, enumerations, evolutions, stat
+    - `folder`: folders, tags, docs, datasets, variables, enumerations, evolutions, stat
     - `tag`: tags, organizations, folders, docs, datasets, variables
-    - `dataset`: docs, datasets, variables, modalities, datasetPreview, evolutions, stat
+    - `dataset`: docs, datasets, variables, enumerations, datasetPreview, evolutions, stat
     - `variable`: variables, variableValues, frequency, variablePreview, evolutions
-    - `modality`: values, variables, evolutions
+    - `enumeration`: values, variables, evolutions
   - **Important:** For organization/folder/tag, tabs show **recursive** data. To check if a tab has content, use `getEntity` and check `nbVariableRecursive`, `nbDatasetRecursive`, `nbFolderRecursive` fields (not `listEntities`).
 
 ### Quick Examples
