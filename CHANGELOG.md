@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: `folder.link`, clarify `data_path` vs `link` in dataset/folder schemas, and reuse a shared `LinkInfo` row in detail views
 - fix: multi-line `numPercent` cells (e.g. dates) collapsing to a single line after the clickable-cell change
 
 ## 0.20.1 (2026-04-25)

@@ -208,6 +208,7 @@ export type Folder = BaseEntity &
     deliveryFormat?: string
     gitCode?: string
     lastUpdateDate?: string
+    link?: string
     localisation?: string
     metadataPath?: string
     surveyType?: string

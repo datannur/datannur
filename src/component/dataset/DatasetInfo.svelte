@@ -13,6 +13,7 @@
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
+  import LinkInfo from '@info-table/LinkInfo.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import Render from '@lib/render'
@@ -57,16 +58,7 @@
   <LocalisationInfo localisation={dataset.localisation} />
   <DeliveryFormatInfo deliveryFormat={dataset.deliveryFormat} />
   <DataPathInfo dataPath={dataset.dataPath} />
-  {#if dataset.link}
-    <tr>
-      <td><Icon type="downloadFile" /> Données</td>
-      <td>
-        <a href={dataset.link} target="_blanck" class="break-line">
-          {dataset.link}
-        </a>
-      </td>
-    </tr>
-  {/if}
+  <LinkInfo link={dataset.link} />
   {#if dataset.tags}
     <TagsInfo tags={dataset.tags} />
   {/if}

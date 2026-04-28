@@ -12,6 +12,7 @@
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
+  import LinkInfo from '@info-table/LinkInfo.svelte'
   import CopyText from '@layout/CopyText.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
@@ -59,6 +60,7 @@
     </tr>
   {/if}
   <DataPathInfo dataPath={folder.dataPath} />
+  <LinkInfo link={folder.link} />
   {#if folder.gitCode}
     <tr>
       <td><Icon type="gitCode" /> GIT code</td>
