@@ -11,12 +11,12 @@
   let { docs: docsProp }: { docs: Doc[] } = $props()
   const docs = untrack(() => docsProp)
 
-  let institutionMax = 0
+  let organizationMax = 0
   let folderMax = 0
   let datasetMax = 0
   let tagMax = 0
   for (const doc of docs) {
-    institutionMax = Math.max(institutionMax, doc.nbInstitution ?? 0)
+    organizationMax = Math.max(organizationMax, doc.nbOrganization ?? 0)
     folderMax = Math.max(folderMax, doc.nbFolder ?? 0)
     datasetMax = Math.max(datasetMax, doc.nbDataset ?? 0)
     tagMax = Math.max(tagMax, doc.nbTag ?? 0)
@@ -60,20 +60,20 @@
     }),
     Column.inherited(),
     {
-      data: 'nbInstitution',
+      data: 'nbOrganization',
       title:
-        Render.icon('institution') +
-        "<span class='hidden'>nbInstitutions</span>",
+        Render.icon('organization') +
+        "<span class='hidden'>nbOrganizations</span>",
       filterType: 'input',
-      tooltip: "Nombre d'institutions",
+      tooltip: "Nombre d'organisations",
       render: (data, type, row: Doc) => {
         if (!data) return ''
         const content = link(
-          'doc/' + row.id + '?tab=institutions',
+          'doc/' + row.id + '?tab=organizations',
           escapeHtml(data),
         )
-        const percent = getPercent(data / institutionMax)
-        return `${Render.numPercent(content, percent, 'institution', type)}`
+        const percent = getPercent(data / organizationMax)
+        return `${Render.numPercent(content, percent, 'organization', type)}`
       },
     },
     {

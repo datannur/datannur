@@ -49,19 +49,19 @@ $color-type: var(--color-type);
 // icon color
 $icon-colors: (
   'homepage': $color-3,
-  'institution': #625d8c,
+  'organization': #625d8c,
   'folder': #b68b4c,
   'tag': #396496,
   'concept': #2b9fb3,
   'dataset': #79a487,
   'variable': #b26f52,
-  'modality': #aa4e63,
+  'enumeration': #aa4e63,
   'value': #5594bc,
   'type': $color-type,
   'page': $color-type,
   'tab': $color-3,
   'folderTree': $color-3,
-  'folderTreeInstitution': #625d8c,
+  'folderTreeOrganization': #625d8c,
   'folderTreeFolder': #b68b4c,
   'folderTreeTag': #396496,
   'folderTreeConcept': #2b9fb3,
@@ -103,7 +103,7 @@ $icon-colors: (
   'nbResources': #5e9381,
   'preview': #c6695e,
   'date': #c6695e,
-  'frequency': #c6695e,
+  'updateFrequency': #c6695e,
   'dateRange': #c6695e,
   'duplicate': #c6695e,
   'doc': #e0745c,
@@ -116,7 +116,7 @@ $icon-colors: (
   'nextUpdateDate': #579fbd,
   'nbDerived': #579fbd,
   'log': #bd7c6c,
-  'freq': #12999b,
+  'frequency': #12999b,
   'colSearch': $color-2,
   'recentSearch': $color-2,
   'features': #e0745c,
@@ -170,6 +170,7 @@ $menu-mobile-limit: 1023px;
 }
 
 $entities:
-  'institution', 'folder', 'tag', 'concept', 'dataset', 'variable', 'modality',
-  'value', 'log', 'entity', 'option', 'search', 'favorite', 'about', 'diagram',
-  'compare', 'stat', 'doc', 'evolution', 'features', 'preview', 'freq';
+  'organization', 'folder', 'tag', 'concept', 'dataset', 'variable',
+  'enumeration', 'value', 'log', 'entity', 'option', 'search', 'favorite',
+  'about', 'diagram', 'compare', 'stat', 'doc', 'evolution', 'features',
+  'preview', 'frequency';

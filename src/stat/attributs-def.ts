@@ -38,7 +38,7 @@ const attributsDef: Record<string, Attribut> = {
     type: 'category',
     nonExclusive: 'tags',
   },
-  frequency: {
+  updateFrequency: {
     name: 'Fréquence',
     type: 'category',
     variable: 'updatingEach',
@@ -69,10 +69,10 @@ const attributsDef: Record<string, Attribut> = {
     type: 'category',
     variable: 'type',
   },
-  modality: {
-    name: 'Nombre de modalités',
+  enumeration: {
+    name: "Nombre d'énumérations",
     type: 'categoryOrdered',
-    getValue: x => (Array.isArray(x.modalities) ? x.modalities.length : 0),
+    getValue: x => (Array.isArray(x.enumerations) ? x.enumerations.length : 0),
   },
   entity: {
     name: 'Entités',

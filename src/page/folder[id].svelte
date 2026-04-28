@@ -32,16 +32,16 @@
     db.getAll('variable', { dataset }),
   )
 
-  let modalities = variables.flatMap(variable => variable.modalities ?? [])
-  let directModalities = db.getAll('modality', { folder })
-  modalities = modalities.concat(directModalities)
-  modalities = removeDuplicateById(modalities)
+  let enumerations = variables.flatMap(variable => variable.enumerations ?? [])
+  let directEnumerations = db.getAll('enumeration', { folder })
+  enumerations = enumerations.concat(directEnumerations)
+  enumerations = removeDuplicateById(enumerations)
 
   const tags = Tags.getFromEntities({ folders, datasets })
   makeParentsRelative(false, tags)
   addMinimumDeep(tags)
 
-  const modalitiesId = new Set(modalities.map(item => item.id))
+  const enumerationsId = new Set(enumerations.map(item => item.id))
   const variablesId = new Set(variables.map(item => item.id))
   const datasetsId = new Set(datasets.map(item => item.id))
   const foldersId = new Set(folders.map(item => item.id))
@@ -50,10 +50,10 @@
     .getAll('evolution')
     .filter(
       evo =>
-        (evo.parentEntity === 'modality' &&
+        (evo.parentEntity === 'enumeration' &&
           evo.parentEntityId &&
-          modalitiesId.has(evo.parentEntityId)) ||
-        (evo.entity === 'modality' && evo.id && modalitiesId.has(evo.id)) ||
+          enumerationsId.has(evo.parentEntityId)) ||
+        (evo.entity === 'enumeration' && evo.id && enumerationsId.has(evo.id)) ||
         (evo.entity === 'variable' && evo.id && variablesId.has(evo.id)) ||
         (evo.entity === 'dataset' && evo.id && datasetsId.has(evo.id)) ||
         (evo.entity === 'folder' &&
@@ -66,7 +66,7 @@
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   const tabs = tabsHelper({
@@ -76,7 +76,7 @@
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
   })

@@ -104,7 +104,7 @@
       change={updateOpenAllRecursive}
       treeSwitch={true}
     >
-      Afficher les éléments imbriqués (institutions et dossiers)
+      Afficher les éléments imbriqués (organisations et dossiers)
     </Switch>
     <Switch
       bind:value={evolutionSummary}

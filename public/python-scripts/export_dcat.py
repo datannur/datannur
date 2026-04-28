@@ -45,7 +45,7 @@ class DCATExporter:
         self._bind_namespaces()
 
         self.datasets = []
-        self.institutions = {}
+        self.organizations = {}
         self.folders = {}
         self.tags = {}
         self.docs = {}
@@ -67,9 +67,9 @@ class DCATExporter:
         with open(db_dir / "dataset.json", "r", encoding="utf-8") as f:
             self.datasets = json.load(f)
 
-        with open(db_dir / "institution.json", "r", encoding="utf-8") as f:
-            institutions = json.load(f)
-            self.institutions = {inst["id"]: inst for inst in institutions}
+        with open(db_dir / "organization.json", "r", encoding="utf-8") as f:
+            organizations = json.load(f)
+            self.organizations = {inst["id"]: inst for inst in organizations}
 
         with open(db_dir / "folder.json", "r", encoding="utf-8") as f:
             folders = json.load(f)
@@ -211,7 +211,7 @@ class DCATExporter:
                     )
                 )
 
-            # Mandatory: publisher (institution)
+            # Mandatory: publisher (organization)
             if dataset.get("owner_id"):
                 self._add_publisher(dataset_uri, dataset["owner_id"])
 
@@ -306,46 +306,46 @@ class DCATExporter:
             if dataset.get("link"):
                 self._create_distribution(dataset_uri, dataset)
 
-    def _add_publisher(self, dataset_uri: URIRef, institution_id: str):
+    def _add_publisher(self, dataset_uri: URIRef, organization_id: str):
         """Add publisher information (foaf:Agent)"""
-        if institution_id not in self.institutions:
+        if organization_id not in self.organizations:
             return
 
-        institution = self.institutions[institution_id]
+        organization = self.organizations[organization_id]
         publisher_uri = URIRef(
-            f"{self.config.get('base_uri', 'https://example.org/')}publisher/{institution_id}"
+            f"{self.config.get('base_uri', 'https://example.org/')}publisher/{organization_id}"
         )
 
         self.graph.add((dataset_uri, DCTERMS.publisher, publisher_uri))
         self.graph.add((publisher_uri, RDF.type, FOAF.Agent))
 
-        if institution.get("name"):
+        if organization.get("name"):
             self.graph.add(
                 (
                     publisher_uri,
                     FOAF.name,
-                    self._get_language_literal(institution["name"]),
+                    self._get_language_literal(organization["name"]),
                 )
             )
 
-    def _add_contact_point(self, dataset_uri: URIRef, institution_id: str):
+    def _add_contact_point(self, dataset_uri: URIRef, organization_id: str):
         """Add contact point information (vcard:Kind)"""
-        if institution_id not in self.institutions:
+        if organization_id not in self.organizations:
             return
 
-        institution = self.institutions[institution_id]
+        organization = self.organizations[organization_id]
         contact_uri = URIRef(
-            f"{self.config.get('base_uri', 'https://example.org/')}contact/{institution_id}"
+            f"{self.config.get('base_uri', 'https://example.org/')}contact/{organization_id}"
         )
 
         self.graph.add((dataset_uri, DCAT.contactPoint, contact_uri))
         self.graph.add((contact_uri, RDF.type, VCARD.Organization))
 
-        if institution.get("name"):
-            self.graph.add((contact_uri, VCARD.fn, Literal(institution["name"])))
+        if organization.get("name"):
+            self.graph.add((contact_uri, VCARD.fn, Literal(organization["name"])))
 
-        if institution.get("email"):
-            email_uri = URIRef(f"mailto:{institution['email']}")
+        if organization.get("email"):
+            email_uri = URIRef(f"mailto:{organization['email']}")
             self.graph.add((contact_uri, VCARD.hasEmail, email_uri))
 
     def _create_distribution(self, dataset_uri: URIRef, dataset: Dict):
@@ -523,7 +523,7 @@ def main():
     print("Loading data...")
     exporter.load_data()
     print(f"  ✓ {len(exporter.datasets)} datasets")
-    print(f"  ✓ {len(exporter.institutions)} institutions")
+    print(f"  ✓ {len(exporter.organizations)} organizations")
     print(f"  ✓ {len(exporter.tags)} tags")
     print()
 

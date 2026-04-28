@@ -27,16 +27,16 @@
     const columns: ColumnType[] = []
     if (!isMeta) {
       columns.push({
-        data: 'modalityName',
-        title: Render.icon('modality') + 'modalité',
-        tooltip: 'Modalité',
+        data: 'enumerationName',
+        title: Render.icon('enumeration') + 'Énumération',
+        tooltip: 'Énumération',
         render: (data, type, row: Value) => {
           if (!data) return ''
           if (type !== 'display') return String(data)
           return link(
-            'modality/' + row.modalityId,
+            'enumeration/' + row.enumerationId,
             escapeHtml(data),
-            'modality',
+            'enumeration',
           )
         },
       })

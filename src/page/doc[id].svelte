@@ -10,16 +10,16 @@
   let { doc: docProp }: { doc: Doc } = $props()
   const doc = untrack(() => docProp)
 
-  const institutions = db.getAll('institution', { doc })
+  const organizations = db.getAll('organization', { doc })
   const folders = db.getAll('folder', { doc })
   const tags = db.getAll('tag', { doc })
   const datasets = db.getAll('dataset', { doc })
 
-  makeParentsRelative(false, institutions)
+  makeParentsRelative(false, organizations)
   makeParentsRelative(false, folders)
   makeParentsRelative(false, tags)
 
-  addMinimumDeep(institutions)
+  addMinimumDeep(organizations)
   addMinimumDeep(folders)
   addMinimumDeep(tags)
 
@@ -29,7 +29,7 @@
 
   let tabs = tabsHelper({
     doc,
-    institutions,
+    organizations,
     folders,
     tags,
     datasets,

@@ -30,7 +30,7 @@
     if (relation.includes('manager')) otherOne = 'owner'
     else if (relation.includes('owner')) otherOne = 'manager'
     if (otherOne) {
-      relation = ['institution', otherOne, ...relation]
+      relation = ['organization', otherOne, ...relation]
     }
     return relation
   })

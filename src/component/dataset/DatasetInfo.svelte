@@ -3,7 +3,7 @@
   import TableWrapper from '@info-table/TableWrapper.svelte'
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
   import IdInfo from '@info-table/IdInfo.svelte'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import RowInfo from '@info-table/RowInfo.svelte'
@@ -13,6 +13,7 @@
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
+  import LinkInfo from '@info-table/LinkInfo.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import Render from '@lib/render'
@@ -23,8 +24,8 @@
 
 <TableWrapper>
   <IdInfo id={dataset.id} />
-  <InstitutionInfo type="owner" institutionId={dataset.ownerId} />
-  <InstitutionInfo type="manager" institutionId={dataset.managerId} />
+  <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
+  <OrganizationInfo type="manager" organizationId={dataset.managerId} />
   <FolderInfo folderId={dataset.folderId} />
   {#if dataset.typeClean}
     <tr>
@@ -47,7 +48,7 @@
   {#if dataset.nextUpdateDate}
     <NextUpdateInfo nextUpdateDate={dataset.nextUpdateDate} />
   {/if}
-  <FrequencyInfo frequency={dataset.updatingEach} />
+  <FrequencyInfo updateFrequency={dataset.updatingEach} />
   {#if dataset.period}
     <PeriodInfo
       period={dataset.period}
@@ -57,16 +58,7 @@
   <LocalisationInfo localisation={dataset.localisation} />
   <DeliveryFormatInfo deliveryFormat={dataset.deliveryFormat} />
   <DataPathInfo dataPath={dataset.dataPath} />
-  {#if dataset.link}
-    <tr>
-      <td><Icon type="downloadFile" /> Données</td>
-      <td>
-        <a href={dataset.link} target="_blanck" class="break-line">
-          {dataset.link}
-        </a>
-      </td>
-    </tr>
-  {/if}
+  <LinkInfo link={dataset.link} />
   {#if dataset.tags}
     <TagsInfo tags={dataset.tags} />
   {/if}

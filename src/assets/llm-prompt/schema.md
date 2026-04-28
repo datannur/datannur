@@ -10,14 +10,14 @@
 **Variable** - Colonne dans un dataset
 
 - Champs clés: `id`, `name`, `description`, `type`, `datasetId`, `nbDistinct`, `nbMissing`
-- Relations: `dataset`, `modalities[]`, `tags[]`, `values[]`
+- Relations: `dataset`, `enumerations[]`, `tags[]`, `values[]`
 
 **Folder** - Dossier hiérarchique
 
 - Champs clés: `id`, `name`, `parentId`, `nbDatasetRecursive`
 - Relations: `datasets[]`, `parent`, `children[]`
 
-**Institution** - Organisation propriétaire/gestionnaire
+**Organization** - Organisation propriétaire/gestionnaire
 
 - Champs clés: `id`, `name`, `email`, `nbDataset`
 - Relations: `ownedDatasets[]`, `managedDatasets[]`
@@ -27,7 +27,7 @@
 - Champs clés: `id`, `name`, `parentId`, `nbDataset`, `nbVariable`
 - Relations: `datasets[]`, `variables[]`
 
-**Modality** - Nomenclature pour variables catégorielles
+**Enumeration** - Nomenclature pour variables catégorielles
 
 - Champs clés: `id`, `name`, `description`, `nbVariable`
 - Relations: `variables[]`, `values[]`

@@ -1,14 +1,14 @@
 datannur repose sur 8 concepts principaux, qui se répartissent en deux catégories :
 
-- Intérieur du dataset : pour les éléments directement liés aux données elles-mêmes
-- Extérieur du dataset : pour les éléments qui structurent, organisent ou enrichissent les datasets
+- Données du dataset : pour les éléments directement liés aux données elles-mêmes
+- Contexte du dataset : pour les éléments qui structurent, organisent ou enrichissent les datasets
 
 mermaid(
-$dataset -.-> intérieur
-$dataset -.-> extérieur
+$dataset -.-> donnees_dataset["Données"]
+$dataset -.-> contexte_dataset["Contexte"]
 );
 
-## Intérieur du dataset
+## Données du dataset
 
 ### Dataset
 
@@ -18,58 +18,58 @@ mermaid( $dataset --> $variable );
 
 ### Variable
 
-Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une modalité. Une variable peut être liée à plusieurs modalités, et inversement. Elle peut aussi être rattachée à un concept du glossaire métier pour préciser le sens exact de la notion mesurée. Chaque variable peut également avoir des données de fréquence associées.
+Certaines variables sont de type catégoriel, avec des valeurs possibles définies par une énumération. Une variable peut être liée à plusieurs énumérations, et inversement. Elle peut aussi être rattachée à un concept du glossaire métier pour préciser le sens exact de la notion mesurée. Chaque variable peut également avoir des données de fréquence associées.
 
 mermaid(
 $concept --> $variable
-$variable <--> $modality
-$variable --> $freq
+$variable <--> $enumeration
+$variable --> $frequency
 );
 
 ### Fréquence
 
 Les fréquences permettent de comptabiliser le nombre d'occurrences de chaque valeur spécifique au sein d'une variable. Cela offre une vue statistique de la distribution des données et aide à identifier les valeurs les plus communes ou rares. Chaque entrée de fréquence contient une valeur et son nombre d'occurrences.
 
-### Modalité
+### Énumération
 
-Une modalité regroupe un ensemble de valeurs possibles pour une ou plusieurs variables catégorielles. Chaque valeur peut être accompagnée d’une description pour en préciser le sens.
+Une énumération regroupe un ensemble de valeurs possibles pour une ou plusieurs variables catégorielles. Chaque valeur peut être accompagnée d’une description pour en préciser le sens.
 
-mermaid( $modality --> $value );
+mermaid( $enumeration --> $value );
 
-## Extérieur du dataset
+## Contexte du dataset
 
 ### Dossier
 
-Les datasets et les modalités peuvent être organisés dans des dossiers. Les dossiers peuvent s’imbriquer les uns dans les autres, formant une arborescence hiérarchique pour structurer vos données.
+Les datasets et les énumérations peuvent être organisés dans des dossiers. Les dossiers peuvent s’imbriquer les uns dans les autres, formant une arborescence hiérarchique pour structurer vos données.
 
 mermaid(
 $folder $recursive
 $folder --> $dataset
-$folder --> $modality
+$folder --> $enumeration
 );
 
-### Institution
+### Organisation
 
-Un dossier ou un dataset peut être associé à deux types de rôles incarnés par une institution :
+Un dossier ou un dataset peut être associé à deux types de rôles incarnés par une organisation :
 
 - **Fournisseur** : l’entité qui produit ou partage les données
 - **Gestionnaire** : l’entité qui les maintient et en garantit la qualité
 
-Les institutions peuvent également s’organiser de manière hiérarchique, en étant contenues les unes dans les autres.
+Les organisations peuvent également s’organiser de manière hiérarchique, en étant contenues les unes dans les autres.
 
 mermaid(
-$institution $recursive
-$institution -- manager - owner --> $folder
-$institution -- manager - owner --> $dataset
+$organization $recursive
+$organization -- manager - owner --> $folder
+$organization -- manager - owner --> $dataset
 );
 
 ### Mot clé
 
-Les mots clés servent à enrichir les institutions, dossiers, datasets, variables ou concepts avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
+Les mots clés servent à enrichir les organisations, dossiers, datasets, variables ou concepts avec des thématiques ou des catégories transversales. Un mot clé peut être lié à une multitude d’éléments et peut aussi être organisé en hiérarchie.
 
 mermaid(
 $tag $recursive
-$institution <--> $tag
+$organization <--> $tag
 $folder <--> $tag
 $dataset <--> $tag
 $variable <--> $tag
@@ -90,10 +90,10 @@ $concept <--> $doc
 
 ### Doc
 
-Des documentations (docs) au format Markdown ou PDF peuvent être associées à des institutions, dossiers, mots clés, concepts ou datasets. Elles permettent de décrire ou expliquer en détail ces éléments.
+Des documentations (docs) au format Markdown ou PDF peuvent être associées à des organisations, dossiers, mots clés, concepts ou datasets. Elles permettent de décrire ou expliquer en détail ces éléments.
 
 mermaid(
-$institution <--> $doc
+$organization <--> $doc
 $folder <--> $doc
 $tag <--> $doc
 $concept <--> $doc
@@ -106,14 +106,14 @@ Les concepts de datannur sont interconnectés, offrant une grande flexibilité p
 
 mermaid(
 $folder $recursive
-$institution $recursive
+$organization $recursive
 $tag $recursive
-$institution -- manager - owner --> $dataset
-$institution -- manager - owner --> $folder
-$institution <--> $tag
-$institution <--> $doc
+$organization -- manager - owner --> $dataset
+$organization -- manager - owner --> $folder
+$organization <--> $tag
+$organization <--> $doc
 $folder --> $dataset
-$folder --> $modality
+$folder --> $enumeration
 $folder <--> $tag
 $folder <--> $doc
 $tag <--> $doc
@@ -124,8 +124,8 @@ $concept $recursive
 $concept --> $variable
 $concept <--> $tag
 $concept <--> $doc
-$variable <--> $modality
+$variable <--> $enumeration
 $variable <--> $tag
-$variable --> $freq
-$modality --> $value
+$variable --> $frequency
+$enumeration --> $value
 );

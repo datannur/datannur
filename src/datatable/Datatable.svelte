@@ -674,11 +674,17 @@
             }
             .num-percent-value {
               position: absolute;
-              inset: 0;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+              top: 50%;
+              left: 0;
+              right: 0;
+              transform: translateY(-50%);
               text-align: center;
+              &:has(> a) {
+                top: 0;
+                bottom: 0;
+                transform: none;
+                display: flex;
+              }
               & > a {
                 display: flex;
                 align-items: center;
@@ -717,8 +723,8 @@
                 border-radius: $rounded;
                 opacity: 0.2;
                 pointer-events: none;
-                &.color-freq {
-                  background: color('freq');
+                &.color-frequency {
+                  background: color('frequency');
                 }
               }
 
@@ -760,14 +766,14 @@
               &.color-duplicate {
                 background: color('duplicate');
               }
-              &.color-freq {
-                background: color('freq');
+              &.color-frequency {
+                background: color('frequency');
               }
               &.color-value {
                 background: color('value');
               }
-              &.color-institution {
-                background: color('institution');
+              &.color-organization {
+                background: color('organization');
               }
               &.color-folder {
                 background: color('folder');

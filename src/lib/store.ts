@@ -1,12 +1,11 @@
 import { writable, type Writable } from 'svelte/store'
-import type { ModalitySimilitute } from '@type'
+import type { EnumerationSimilitute } from '@type'
 import type { Tab } from '@tab/tabs-helper'
 
 export const headerOpen = writable(false)
 export const footerVisible = writable(true)
-export const modalitiesSimilitutes: Writable<ModalitySimilitute[]> = writable(
-  [],
-)
+export const enumerationsSimilitutes: Writable<EnumerationSimilitute[]> =
+  writable([])
 export const nbFavorite = writable(0)
 export const allTabsIcon = writable({})
 export const allTabs: Writable<{ [key: string]: Tab }> = writable({})

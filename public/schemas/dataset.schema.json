@@ -23,13 +23,13 @@
       },
       "manager_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the managing institution",
-        "x-description-fr": "Clé de l'institution gestionnaire du dataset"
+        "description": "Key of the managing organization",
+        "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
       },
       "owner_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the data provider institution",
-        "x-description-fr": "Clé de l'institution fournisseur du dataset"
+        "description": "Key of the data provider organization",
+        "x-description-fr": "Clé de l'organisation fournisseur du dataset"
       },
       "tag_ids": {
         "type": ["string", "number", "null"],
@@ -57,8 +57,8 @@
       },
       "data_path": {
         "type": ["string", "null"],
-        "description": "Dataset location",
-        "x-description-fr": "Emplacement du dataset"
+        "description": "Dataset data location",
+        "x-description-fr": "Emplacement des données du dataset"
       },
       "delivery_format": {
         "type": ["string", "null"],
@@ -72,8 +72,8 @@
       },
       "link": {
         "type": ["string", "null"],
-        "description": "Link to dataset location",
-        "x-description-fr": "Lien vers l'emplacement du dataset"
+        "description": "Link to the dataset access, source, or reference",
+        "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
       },
       "localisation": {
         "type": ["string", "null"],

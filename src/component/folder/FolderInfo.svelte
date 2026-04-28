@@ -4,7 +4,7 @@
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
   import IdInfo from '@info-table/IdInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import LastUpdateInfo from '@info-table/LastUpdateInfo.svelte'
   import NextUpdateInfo from '@info-table/NextUpdateInfo.svelte'
@@ -12,6 +12,7 @@
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
+  import LinkInfo from '@info-table/LinkInfo.svelte'
   import CopyText from '@layout/CopyText.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
@@ -30,8 +31,8 @@
   {#if folder.parentId}
     <FolderInfo folderId={folder.id} isSelf={true} />
   {/if}
-  <InstitutionInfo type="owner" institutionId={folder.ownerId} />
-  <InstitutionInfo type="manager" institutionId={folder.managerId} />
+  <OrganizationInfo type="owner" organizationId={folder.ownerId} />
+  <OrganizationInfo type="manager" organizationId={folder.managerId} />
   <TypeInfo type={folder.typeClean} />
   <DataSizeInfo dataSize={folder.dataSizeRecursive} />
   {#if folder.lastUpdateDate}
@@ -40,7 +41,7 @@
   {#if folder.nextUpdateDate}
     <NextUpdateInfo nextUpdateDate={folder.nextUpdateDate} />
   {/if}
-  <FrequencyInfo frequency={folder.updatingEach} />
+  <FrequencyInfo updateFrequency={folder.updatingEach} />
   {#if folder.period}
     <PeriodInfo period={folder.period} periodDuration={folder.periodDuration} />
   {/if}
@@ -59,6 +60,7 @@
     </tr>
   {/if}
   <DataPathInfo dataPath={folder.dataPath} />
+  <LinkInfo link={folder.link} />
   {#if folder.gitCode}
     <tr>
       <td><Icon type="gitCode" /> GIT code</td>

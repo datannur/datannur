@@ -29,7 +29,13 @@
 
   function filterEvolutions(toFilter: Evolution[]) {
     if (toFilter.length === 0) return []
-    const detailEntities = ['dataset', 'variable', 'modality', 'value', 'freq']
+    const detailEntities = [
+      'dataset',
+      'variable',
+      'enumeration',
+      'value',
+      'frequency',
+    ]
     const mainRows = toFilter.filter(
       evo => !detailEntities.includes(evo.entity),
     )
@@ -41,8 +47,8 @@
     'datasets',
     'variable',
     'variables',
-    'modality',
-    'modalities',
+    'enumeration',
+    'enumerations',
     'favorite',
   ]
   const filterEvolution =

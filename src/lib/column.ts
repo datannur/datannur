@@ -18,7 +18,7 @@ import type {
   Tag,
 } from '@type'
 
-type EntityWithInstitution = MainEntityMap['folder' | 'dataset' | 'variable']
+type EntityWithOrganization = MainEntityMap['folder' | 'dataset' | 'variable']
 
 export default class Column {
   static id(): ColumnType {
@@ -163,12 +163,12 @@ export default class Column {
   static folder(
     folderIdVar:
       | 'folderId'
-      | 'modality1FolderId'
-      | 'modality2FolderId' = 'folderId',
+      | 'enumeration1FolderId'
+      | 'enumeration2FolderId' = 'folderId',
     folderNameVar:
       | 'folderName'
-      | 'modality1FolderName'
-      | 'modality2FolderName' = 'folderName',
+      | 'enumeration1FolderName'
+      | 'enumeration2FolderName' = 'folderName',
   ): ColumnType {
     const render: ColumnType['render'] = (
       data,
@@ -306,49 +306,49 @@ export default class Column {
   }
   static owner(): ColumnType {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
-      ? (data, type, row: EntityWithInstitution) =>
+      ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`institution/${row.ownerId}`, escapeHtml(row.ownerName)),
+            link(`organization/${row.ownerId}`, escapeHtml(row.ownerName)),
           )
-      : (data, type, row: EntityWithInstitution) => {
+      : (data, type, row: EntityWithOrganization) => {
           if (!row.ownerId) return ''
-          return Render.withParentsFromId('institution', row.ownerId, type)
+          return Render.withParentsFromId('organization', row.ownerId, type)
         }
     return {
       data: 'ownerName',
-      title: Render.icon('institution') + entityNames.owner,
+      title: Render.icon('organization') + entityNames.owner,
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Institution propriétaire',
+      tooltip: 'Organisation propriétaire',
       render,
     }
   }
   static manager(): ColumnType {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
-      ? (data, type, row: EntityWithInstitution) =>
+      ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`institution/${row.managerId}`, escapeHtml(row.managerName)),
+            link(`organization/${row.managerId}`, escapeHtml(row.managerName)),
           )
-      : (data, type, row: EntityWithInstitution) => {
+      : (data, type, row: EntityWithOrganization) => {
           if (!row.managerId) return ''
-          return Render.withParentsFromId('institution', row.managerId, type)
+          return Render.withParentsFromId('organization', row.managerId, type)
         }
     return {
       data: 'managerName',
-      title: Render.icon('institution') + entityNames.manager,
+      title: Render.icon('organization') + entityNames.manager,
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Institution gestionnaire',
+      tooltip: 'Organisation gestionnaire',
       render,
     }
   }
-  static modality(): ColumnType {
+  static enumeration(): ColumnType {
     return {
-      data: 'modalities',
-      title: Render.icon('modality') + 'Modalité',
+      data: 'enumerations',
+      title: Render.icon('enumeration') + 'Énumération',
       defaultContent: '',
-      tooltip: 'Modalités',
-      render: Render.modalitiesName,
+      tooltip: 'Énumérations',
+      render: Render.enumerationsName,
     }
   }
   static value(): ColumnType {
@@ -402,10 +402,10 @@ export default class Column {
       render: Render.nbMissing as ColumnType['render'],
     }
   }
-  static freq(): ColumnType {
+  static frequency(): ColumnType {
     return {
       data: 'freqPreview',
-      title: Render.icon('freq') + 'Fréquence',
+      title: Render.icon('frequency') + 'Fréquence',
       defaultContent: '',
       hasLongText: true,
       tooltip: 'Aperçu des données de fréquence',
@@ -523,13 +523,13 @@ export default class Column {
       },
     }
   }
-  static frequency(): ColumnType {
+  static updateFrequency(): ColumnType {
     return {
       data: 'updatingEach',
-      name: 'frequency',
+      name: 'updateFrequency',
       defaultContent: '',
       filterType: 'select',
-      title: Render.icon('frequency') + 'Fréquence',
+      title: Render.icon('updateFrequency') + 'Fréquence',
       tooltip: 'Fréquence de mise à jour',
       render: Render.shortText,
     }
@@ -722,7 +722,7 @@ export default class Column {
       render: (
         data: unknown[],
         type,
-        row: MainEntityMap['institution' | 'folder' | 'dataset'],
+        row: MainEntityMap['organization' | 'folder' | 'dataset'],
       ) => {
         if (!data.length) return ''
         if (type !== 'display') return data.length

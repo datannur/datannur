@@ -4,18 +4,23 @@
   import Datatable from '@datatable/Datatable.svelte'
   import { getPercent } from '@lib/util'
   import escapeHtml from 'escape-html'
-  import type { Freq, Column as ColumnType } from '@type'
+  import type { Frequency, Column as ColumnType } from '@type'
 
   let {
-    freq: freqProp,
+    frequency: freqProp,
     scale,
     isPattern = false,
-  }: { freq: Freq[]; scale?: number; isPattern?: boolean } = $props()
-  const freq = untrack(() => freqProp)
+  }: { frequency: Frequency[]; scale?: number; isPattern?: boolean } = $props()
+  const frequency = untrack(() => freqProp)
 
-  const freqSorted = [...freq].sort((a, b) => (b.freq || 0) - (a.freq || 0))
-  const totalFreq = freq.reduce((sum, item) => sum + (item.freq || 0), 0)
-  const maxFreq = freqSorted.length > 0 ? freqSorted[0].freq : 1
+  const freqSorted = [...frequency].sort(
+    (a, b) => (b.frequency || 0) - (a.frequency || 0),
+  )
+  const totalFreq = frequency.reduce(
+    (sum, item) => sum + (item.frequency || 0),
+    0,
+  )
+  const maxFreq = freqSorted.length > 0 ? freqSorted[0].frequency : 1
 
   function defineColumns() {
     const columns: ColumnType[] = []
@@ -28,8 +33,8 @@
     })
 
     columns.push({
-      data: 'freq',
-      title: Render.icon('freq') + 'Fréquence',
+      data: 'frequency',
+      title: Render.icon('frequency') + 'Fréquence',
       tooltip: "Nombre d'occurrences avec pourcentage",
       filterType: 'input',
       className: 'text-right',
@@ -44,13 +49,19 @@
           const freqNum = approx + Render.num(scaledFreq, type)
           return `
           <div class="freq-item-container">
-            <div class="freq-background color-freq" style="width: ${percentBackground}%"></div>
+            <div class="freq-background color-frequency" style="width: ${percentBackground}%"></div>
             <span class="freq-number">${escapeHtml(freqNum)}</span>
             <span class="freq-percent">${percentDisplay}%</span>
           </div>`
         }
 
-        return Render.numPercent(scaledFreq, percentDisplay, 'freq', type, true)
+        return Render.numPercent(
+          scaledFreq,
+          percentDisplay,
+          'frequency',
+          type,
+          true,
+        )
       },
     })
 
@@ -60,4 +71,4 @@
   const columns = defineColumns()
 </script>
 
-<Datatable entity="freq" data={freqSorted} {columns} keepAllCols={true} />
+<Datatable entity="frequency" data={freqSorted} {columns} keepAllCols={true} />

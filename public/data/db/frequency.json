@@ -2,121 +2,121 @@
   {
     "variable_id": "pop_region__population_totale",
     "value": "value",
-    "freq": 50
+    "frequency": 50
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_1",
-    "freq": 600
+    "frequency": 600
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_2",
-    "freq": 100
+    "frequency": 100
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_3",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_4",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_5",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_6",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_7",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_8",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_9",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_10",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_11",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_12",
-    "freq": 20
+    "frequency": 20
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_13",
-    "freq": 4
+    "frequency": 4
   },
   {
     "variable_id": "pop_region__population_totale",
     "value": "value_14",
-    "freq": 1
+    "frequency": 1
   },
   {
     "variable_id": "pop_region__type_region",
     "value": "urbaine",
-    "freq": 9432
+    "frequency": 9432
   },
   {
     "variable_id": "pop_region__type_region",
     "value": "périurbaine",
-    "freq": 43
+    "frequency": 43
   },
   {
     "variable_id": "pop_region__type_region",
     "value": "rurale",
-    "freq": 3434
+    "frequency": 3434
   },
   {
     "variable_id": "pop_region__type_region",
     "value": "montagne",
-    "freq": 9481
+    "frequency": 9481
   },
   {
     "variable_id": "emploi_jeunes__nationalite",
     "value": "aaaaaa",
-    "freq": 21
+    "frequency": 21
   },
   {
     "variable_id": "emploi_jeunes__nationalite",
     "value": "aaaaaaaaa",
-    "freq": 75
+    "frequency": 75
   },
   {
     "variable_id": "emploi_jeunes__nationalite",
     "value": "aaa-aaaaaa",
-    "freq": 43
+    "frequency": 43
   },
   {
     "variable_id": "emploi_jeunes__nationalite",
     "value": "aaa-aaaaaa-999999999-9999999999-999999999",
-    "freq": 44
+    "frequency": 44
   },
   {
     "variable_id": "emploi_jeunes__nationalite",
     "value": "aaaaaaaaa9999999999999999999aaaaaaaaaaa9999999999aaaaa9999",
-    "freq": 45
+    "frequency": 46
   }
 ]

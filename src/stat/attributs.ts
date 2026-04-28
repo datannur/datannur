@@ -2,9 +2,9 @@ import definition from './attributs-def'
 import type { Attribut } from './attributs-def'
 
 export const attributs = {
-  institution: ['tag', 'email', 'phone', 'level', 'name', 'description'],
+  organization: ['tag', 'email', 'phone', 'level', 'name', 'description'],
   folder: [
-    'frequency',
+    'updateFrequency',
     'lastUpdate',
     'tag',
     'localisation',
@@ -20,7 +20,7 @@ export const attributs = {
   tag: ['entity', 'level', 'name', 'description'],
   doc: ['docType', 'entity', 'docPath', 'lastUpdateDoc', 'name', 'description'],
   dataset: [
-    'frequency',
+    'updateFrequency',
     'lastUpdate',
     'tag',
     'localisation',
@@ -30,8 +30,8 @@ export const attributs = {
     'name',
     'description',
   ],
-  variable: ['type', 'modality', 'value', 'name', 'description'],
-  modality: ['type', 'variable', 'value', 'name', 'description'],
+  variable: ['type', 'enumeration', 'value', 'name', 'description'],
+  enumeration: ['type', 'variable', 'value', 'name', 'description'],
   log: ['actionReadable', 'page', 'tab', 'search', 'timeAgo'],
 }
 

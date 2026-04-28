@@ -71,7 +71,7 @@
       Column.nbMissing(),
       Column.nbDuplicates(),
       Column.nbValues(nbValueMax),
-      Column.freq(),
+      Column.frequency(),
       Column.valuesPreview(),
     ]
     if (isMeta) {
@@ -86,7 +86,7 @@
     return [
       Column.favorite(),
       ...base,
-      Column.modality(),
+      Column.enumeration(),
       ...(showDatasetColumns
         ? [
             Column.dataset(isMeta),

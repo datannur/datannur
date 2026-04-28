@@ -8,15 +8,15 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
-  import aboutFile from '@markdown/about-institution.md?raw'
+  import aboutFile from '@markdown/about-organization.md?raw'
 
   let keyTab = $state(1)
 
-  const institutions = db.getAll('institution')
-  makeParentsRelative(false, institutions)
-  addMinimumDeep(institutions)
+  const organizations = db.getAll('organization')
+  makeParentsRelative(false, organizations)
+  addMinimumDeep(organizations)
 
-  const tags = db.getAll('tag').filter(tag => !!tag.nbInstitution)
+  const tags = db.getAll('tag').filter(tag => !!tag.nbOrganization)
   if (db.useRecursive.tag) {
     makeParentsRelative(false, tags)
     addMinimumDeep(tags, true, true)
@@ -24,20 +24,20 @@
 
   const evolutions = db
     .getAll('evolution')
-    .filter(evo => evo.entity === 'institution')
+    .filter(evo => evo.entity === 'organization')
 
   const tabs = tabsHelper({
-    institutions,
+    organizations,
     tags,
     evolutions,
-    stat: [{ entity: 'institution', items: institutions }],
+    stat: [{ entity: 'organization', items: organizations }],
     aboutFile,
   })
 
-  const nbInstitution = institutions.length
+  const nbOrganization = organizations.length
 
   let showOpenAllSwitch = $derived(
-    $tabSelected.key === 'institutions' && nbInstitution > isBigLimit,
+    $tabSelected.key === 'organizations' && nbOrganization > isBigLimit,
   )
   let showEvolutionSummarySwitch = $derived(
     $tabSelected.key === 'evolutions' && evolutions.length > isBigLimit,
@@ -45,7 +45,7 @@
 </script>
 
 <section class="section">
-  <Title type="institution" name="Institutions" mode="mainTitle" />
+  <Title type="organization" name="Organisations" mode="mainTitle" />
   {#if showOpenAllSwitch}
     <OpenAllSwitch onChange={() => keyTab++} />
   {/if}

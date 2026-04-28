@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import db from '@db'
-  import InstitutionInfo from '@info-table/InstitutionInfo.svelte'
+  import OrganizationInfo from '@info-table/OrganizationInfo.svelte'
   import FolderInfo from '@info-table/FolderInfo.svelte'
   import Link from '@layout/Link.svelte'
   import Icon from '@layout/Icon.svelte'
@@ -36,8 +36,8 @@
     </tr>
   {/if}
   {#if dataset}
-    <InstitutionInfo type="owner" institutionId={dataset.ownerId} />
-    <InstitutionInfo type="manager" institutionId={dataset.managerId} />
+    <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
+    <OrganizationInfo type="manager" organizationId={dataset.managerId} />
     <FolderInfo folderId={dataset.folderId} />
   {/if}
   <tr>
@@ -155,19 +155,19 @@
       </td>
     </tr>
   {/if}
-  {#if variable.modalities?.length}
+  {#if variable.enumerations?.length}
     <tr>
       <td>
-        <Icon type="modality" />
-        Modalités
+        <Icon type="enumeration" />
+        Énumérations
       </td>
       <td>
         <nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
           <ul>
-            {#each variable.modalities as modality (modality.id)}
+            {#each variable.enumerations as enumeration (enumeration.id)}
               <li>
-                <Link href="modality/{modality.id}" entity="modality">
-                  {modality.name}
+                <Link href="enumeration/{enumeration.id}" entity="enumeration">
+                  {enumeration.name}
                 </Link>
               </li>
             {/each}

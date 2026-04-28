@@ -1,10 +1,10 @@
 [
   {
-    "id": "modality_1",
+    "id": "enumeration_1",
     "folder_id": "13-protec-social",
-    "name": "modality 1",
+    "name": "enumeration 1",
     "type": "integer",
-    "description": "description of modality 1"
+    "description": "description of enumeration 1"
   },
   {
     "id": "a_or_b",
@@ -39,7 +39,7 @@
     "folder_id": "00-base",
     "name": "Sigle des langues",
     "type": "string",
-    "description": "Liste des 3 principales langues suisses et leur sigle"
+    "description": "Liste des 3 principales langues suisses et leurs sigles"
   },
   {
     "id": "oui_non",

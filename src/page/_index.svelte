@@ -12,19 +12,19 @@
 
   let keyTab = $state(1)
 
-  let institutions = db.getAll('institution')
+  let organizations = db.getAll('organization')
   let folders = db.getAll('folder')
   let tags = db.getAll('tag')
   let concepts = db.getAll('concept')
   const datasets = db.getAll('dataset')
   const variables = db.getAll('variable')
-  const modalities = db.getAll('modality')
+  const enumerations = db.getAll('enumeration')
   const docs = db.getAll('doc')
   const evolutions = db.getAll('evolution')
 
-  makeParentsRelative(false, institutions)
+  makeParentsRelative(false, organizations)
   makeParentsRelative(false, folders)
-  addMinimumDeep(institutions)
+  addMinimumDeep(organizations)
   addMinimumDeep(folders)
 
   if (db.useRecursive.tag) {
@@ -37,47 +37,47 @@
   }
 
   const stat = [
-    { entity: 'institution', items: institutions },
+    { entity: 'organization', items: organizations },
     { entity: 'folder', items: folders },
     { entity: 'tag', items: tags },
     { entity: 'concept', items: concepts },
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   let tabs = tabsHelper({
     aboutFile: getAboutMain(),
-    institutions,
+    organizations,
     folders,
     tags,
     concepts,
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
   })
 
   const allEmpty =
-    !db.use.institution &&
+    !db.use.organization &&
     !db.use.folder &&
     !db.use.tag &&
     !db.use.concept &&
     !db.use.doc &&
     !db.use.dataset &&
     !db.use.variable &&
-    !db.use.modality
+    !db.use.enumeration
 
-  const nbInstitution = institutions.length
+  const nbOrganization = organizations.length
   const nbFolder = folders.length
   const nbTag = tags.length
   const nbConcept = concepts.length
 
   let showOpenAllSwitch = $derived(
-    ($tabSelected.key === 'institutions' && nbInstitution > isBigLimit) ||
+    ($tabSelected.key === 'organizations' && nbOrganization > isBigLimit) ||
       ($tabSelected.key === 'folders' && nbFolder > isBigLimit) ||
       ($tabSelected.key === 'tags' && nbTag > isBigLimit) ||
       ($tabSelected.key === 'concepts' && nbConcept > isBigLimit),

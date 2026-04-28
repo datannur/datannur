@@ -1,7 +1,7 @@
 import type {
   BaseEntity,
   Value,
-  Freq,
+  Frequency,
   Config,
   Favorite,
   FilterActive,
@@ -11,21 +11,21 @@ import type {
 } from './base'
 import { parentEntities, evolutionTypes } from '@lib/constant'
 
-export type ModalitySimilitute = {
-  modality1Id: string | number
-  modality2Id: string | number
-  modality1FolderId: string | number
-  modality2FolderId: string | number
-  modality1Name: string
-  modality2Name: string
-  modality1FolderName: string
-  modality2FolderName: string
-  modality1Type: string
-  modality2Type: string
-  modality1NbValue: number
-  modality2NbValue: number
-  modality1NbVariable: number
-  modality2NbVariable: number
+export type EnumerationSimilitute = {
+  enumeration1Id: string | number
+  enumeration2Id: string | number
+  enumeration1FolderId: string | number
+  enumeration2FolderId: string | number
+  enumeration1Name: string
+  enumeration2Name: string
+  enumeration1FolderName: string
+  enumeration2FolderName: string
+  enumeration1Type: string
+  enumeration2Type: string
+  enumeration1NbValue: number
+  enumeration2NbValue: number
+  enumeration1NbVariable: number
+  enumeration2NbVariable: number
   ratio: number
 }
 
@@ -125,7 +125,7 @@ export type Dataset = BaseEntity &
     fkReferencedByDatasetIds?: Set<string | number>
   }
 
-export type FreqPreview = Freq & {
+export type FreqPreview = Frequency & {
   total: number
   max: number
   scale?: number
@@ -137,7 +137,7 @@ export type Variable = BaseEntity &
   WithPeriod &
   WithRelations & {
     datasetId: string | number
-    modalityIds?: string
+    enumerationIds?: string
     conceptId?: string | number
     originalName?: string
     key?: string | boolean
@@ -170,7 +170,7 @@ export type Variable = BaseEntity &
     ownerName?: string
     managerId?: string | number
     managerName?: string
-    modalities?: Modality[]
+    enumerations?: Enumeration[]
     values?: Value[]
     valuesPreview?: Value[]
     nbValue?: number
@@ -181,7 +181,7 @@ export type Variable = BaseEntity &
     conceptName?: string
   }
 
-export type Modality = BaseEntity &
+export type Enumeration = BaseEntity &
   WithFavorite & {
     folderId?: string | number
     type?: string
@@ -208,6 +208,7 @@ export type Folder = BaseEntity &
     deliveryFormat?: string
     gitCode?: string
     lastUpdateDate?: string
+    link?: string
     localisation?: string
     metadataPath?: string
     surveyType?: string
@@ -225,7 +226,7 @@ export type Folder = BaseEntity &
     typeClean?: string
   }
 
-export type Institution = BaseEntity &
+export type Organization = BaseEntity &
   WithRecursiveParent &
   WithTags &
   WithDocs &
@@ -249,11 +250,11 @@ export type Tag = BaseEntity &
   WithFavorite & {
     // Computed fields added during processing
     entities?: { name: string; nb: number }[]
-    nbInstitution?: number
+    nbOrganization?: number
     nbFolder?: number
     nbDataset?: number
     nbVariable?: number
-    nbInstitutionRecursive?: number
+    nbOrganizationRecursive?: number
     nbFolderRecursive?: number
     nbDocRecursive?: number
     nbDatasetRecursive?: number
@@ -290,7 +291,7 @@ export type Doc = BaseEntity &
     entities?: { name: string; nb: number }[]
     entity?: string
     entityId?: string | number
-    nbInstitution?: number
+    nbOrganization?: number
     nbFolder?: number
     nbDataset?: number
     nbTag?: number
@@ -379,22 +380,22 @@ export type Evolution = WithFavorite & {
 }
 
 export type MainEntityMap = {
-  institution: Institution
+  organization: Organization
   folder: Folder
   tag: Tag
   concept: Concept
   doc: Doc
   dataset: Dataset
   variable: Variable
-  modality: Modality
+  enumeration: Enumeration
 }
 
 export type EntityTypeMap = MainEntityMap & {
   config: Config
   value: Value
-  freq: Freq
-  owner: Institution
-  manager: Institution
+  frequency: Frequency
+  owner: Organization
+  manager: Organization
   evolution: Evolution
   metaVariable: MetaVariable
   metaDataset: MetaDataset

@@ -6,29 +6,29 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-favorite.md?raw'
 
-  const institutions = db.getAll('institution').filter(item => item.isFavorite)
+  const organizations = db.getAll('organization').filter(item => item.isFavorite)
   const folders = db.getAll('folder').filter(item => item.isFavorite)
   const tags = db.getAll('tag').filter(item => item.isFavorite)
   const docs = db.getAll('doc').filter(item => item.isFavorite)
   const datasets = db.getAll('dataset').filter(item => item.isFavorite)
   const variables = db.getAll('variable').filter(item => item.isFavorite)
-  const modalities = db.getAll('modality').filter(item => item.isFavorite)
+  const enumerations = db.getAll('enumeration').filter(item => item.isFavorite)
   const evolutions = db.getAll('evolution').filter(item => item.isFavorite)
 
   const allFav = [
-    ...institutions,
+    ...organizations,
     ...folders,
     ...tags,
     ...docs,
     ...datasets,
     ...variables,
-    ...modalities,
+    ...enumerations,
   ]
 
   makeParentsRelative(false, folders)
-  makeParentsRelative(false, institutions)
+  makeParentsRelative(false, organizations)
 
-  addMinimumDeep(institutions, true, true)
+  addMinimumDeep(organizations, true, true)
   addMinimumDeep(folders, true, true)
 
   if (db.useRecursive.tag) {
@@ -37,24 +37,24 @@
   }
 
   const stat = [
-    { entity: 'institution', items: institutions },
+    { entity: 'organization', items: organizations },
     { entity: 'folder', items: folders },
     { entity: 'tag', items: tags },
     { entity: 'doc', items: docs },
     { entity: 'dataset', items: datasets },
     { entity: 'variable', items: variables },
-    { entity: 'modality', items: modalities },
+    { entity: 'enumeration', items: enumerations },
   ]
 
   const tabs = tabsHelper({
     allFav,
-    institutions,
+    organizations,
     folders,
     tags,
     docs,
     datasets,
     variables,
-    modalities,
+    enumerations,
     evolutions,
     stat,
     aboutFile,

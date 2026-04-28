@@ -120,7 +120,11 @@ function getFolderId(
     return entityData.folderId
   } else if (entity === 'variable' && parentItem && 'folderId' in parentItem) {
     return parentItem.folderId
-  } else if (entity === 'modality' && entityData && 'folderId' in entityData) {
+  } else if (
+    entity === 'enumeration' &&
+    entityData &&
+    'folderId' in entityData
+  ) {
     return entityData.folderId
   } else if (entity === 'value' && parentItem && 'folderId' in parentItem) {
     return parentItem.folderId

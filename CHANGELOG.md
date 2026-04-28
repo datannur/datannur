@@ -1,5 +1,11 @@
 # datannur
 
+## 0.21.0 (2026-04-28)
+
+- change: align app terminology by renaming `institution` to `organization`, `modality` to `enumeration`, `freq` to `frequency`, and the header dropdowns to `Contexte` / `Données`
+- add: `folder.link`, clarify `data_path` vs `link` in dataset/folder schemas, and reuse a shared `LinkInfo` row in detail views
+- fix: multi-line `numPercent` cells (e.g. dates) collapsing to a single line after the clickable-cell change
+
 ## 0.20.1 (2026-04-25)
 
 - perf: speed up `db.ts` data preparation (O(n) dedup, fewer intermediate arrays)

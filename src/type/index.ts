@@ -4,7 +4,7 @@ export type {
   Config,
   NullableNumber,
   Value,
-  Freq,
+  Frequency,
   Favorite,
   FilterActive,
   Option,
@@ -16,7 +16,7 @@ export type {
 
 // Entity types (business logic)
 export type {
-  ModalitySimilitute,
+  EnumerationSimilitute,
   WithRecursiveParent,
   WithTags,
   WithDocs,
@@ -25,9 +25,9 @@ export type {
   EntityWithRelations,
   Dataset,
   Variable,
-  Modality,
+  Enumeration,
   Folder,
-  Institution,
+  Organization,
   Tag,
   TagWithChildren,
   Concept,

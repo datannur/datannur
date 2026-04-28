@@ -28,12 +28,12 @@ afterAll(async () => {
 
 const pageNames = [
   '',
-  'institutions',
+  'organizations',
   'folders',
   'tags',
   'datasets',
   'variables',
-  'modalities',
+  'enumerations',
   'favorite',
   'options',
   'about',
@@ -41,9 +41,9 @@ const pageNames = [
   'search/?search=folder',
   'meta',
   'metaFolder/data',
-  'metaDataset/institution',
-  'institution/dff',
-  'institution/vd-ojv',
+  'metaDataset/organization',
+  'organization/dff',
+  'organization/vd-ojv',
   'folder/bevnat',
   'folder/04-economie',
   'tag/population',
@@ -51,7 +51,7 @@ const pageNames = [
   'dataset/dep_sante',
   'variable/pollution_air__source_donnee',
   'variable/exportations__certification_requise',
-  'modality/canton_sigle',
+  'enumeration/canton_sigle',
   '?tab=stat',
 ]
 

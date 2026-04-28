@@ -2,14 +2,14 @@ export const locale = 'fr'
 export const isBigLimit = 5
 
 export const mainEntityNames = {
-  institution: 'Institution',
+  organization: 'Organisation',
   folder: 'Dossier',
   tag: 'Mot clé',
   concept: 'Concept',
   doc: 'Doc',
   dataset: 'Dataset',
   variable: 'Variable',
-  modality: 'Modalité',
+  enumeration: 'Énumération',
 } as const
 
 export const entityNames = {
@@ -17,21 +17,21 @@ export const entityNames = {
   owner: 'Fournisseur',
   manager: 'Gestionnaire',
   value: 'Valeur',
-  freq: 'Fréquence',
+  frequency: 'Fréquence',
   log: 'Log',
 } as const
 
 export const parentEntities = {
-  institution: 'parent',
+  organization: 'parent',
   folder: 'parent',
   tag: 'parent',
   concept: 'parent',
   doc: 'parent',
   dataset: 'folder',
   variable: 'dataset',
-  modality: 'folder',
-  value: 'modality',
-  freq: 'variable',
+  enumeration: 'folder',
+  value: 'enumeration',
+  frequency: 'variable',
 } as const
 
 export const varTypes = {
@@ -76,7 +76,7 @@ export const columnCleanNames = {
 } as const
 
 export const columnIcons = {
-  updatingEach: 'frequency',
+  updatingEach: 'updateFrequency',
   lastUpdate: 'lastUpdateDate',
   min: 'stat',
   max: 'stat',
@@ -87,15 +87,15 @@ export const columnIcons = {
 export const entityToIcon = {
   md: 'md',
   github: 'github',
-  institution: 'university',
-  owner: 'university',
-  manager: 'university',
+  organization: 'building-user',
+  owner: 'building-user',
+  manager: 'building-user',
   folder: 'folder',
   tag: 'tag',
   concept: 'lightbulb',
   dataset: 'table',
   variable: 'grip-lines-vertical',
-  modality: 'align-left',
+  enumeration: 'align-left',
   value: 'ellipsis-vertical',
   doc: 'book',
   about: 'info-circle',
@@ -107,7 +107,7 @@ export const entityToIcon = {
   type: 't',
   missing: 'circle-question',
   duplicate: 'clone',
-  frequency: 'calendar-alt',
+  updateFrequency: 'calendar-alt',
   date: 'calendar-day',
   dateRange: 'calendar-week',
   startDate: 'calendar-check',
@@ -128,7 +128,7 @@ export const entityToIcon = {
   metadataPath: 'sitemap',
   level: 'layer-group',
   folderTree: 'folder-tree',
-  folderTreeInstitution: 'folder-tree',
+  folderTreeOrganization: 'folder-tree',
   folderTreeFolder: 'folder-tree',
   folderTreeTag: 'folder-tree',
   folderTreeConcept: 'folder-tree',
@@ -159,5 +159,5 @@ export const entityToIcon = {
   nbSource: 'arrow-up',
   nbDerived: 'arrow-down',
   fk: 'key',
-  freq: 'chart-bar',
+  frequency: 'chart-bar',
 } as const

@@ -23,13 +23,13 @@
       },
       "manager_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the managing institution",
-        "x-description-fr": "Clé de l'institution gestionnaire du dossier"
+        "description": "Key of the managing organization",
+        "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
       },
       "owner_id": {
         "type": ["string", "number", "null"],
-        "description": "Key of the data provider institution",
-        "x-description-fr": "Clé de l'institution fournisseur du dossier"
+        "description": "Key of the data provider organization",
+        "x-description-fr": "Clé de l'organisation fournisseur du dossier"
       },
       "tag_ids": {
         "type": ["string", "number", "null"],
@@ -57,8 +57,8 @@
       },
       "data_path": {
         "type": ["string", "null"],
-        "description": "Folder location",
-        "x-description-fr": "Emplacement du dossier"
+        "description": "Folder data location",
+        "x-description-fr": "Emplacement des données du dossier"
       },
       "delivery_format": {
         "type": ["string", "null"],
@@ -69,6 +69,11 @@
         "type": ["string", "null"],
         "description": "Folder type (useful for general filter)",
         "x-description-fr": "Type de dossier (utile pour le filtre général)"
+      },
+      "link": {
+        "type": ["string", "null"],
+        "description": "Link to the folder access, source, or reference",
+        "x-description-fr": "Lien vers l'accès, la source ou la référence du dossier"
       },
       "git_code": {
         "type": ["string", "null"],

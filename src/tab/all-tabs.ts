@@ -1,23 +1,23 @@
-import Institutions from '@component/institution/Institutions.svelte'
+import Organizations from '@component/organization/Organizations.svelte'
 import Folders from '@component/folder/Folders.svelte'
 import Tags from '@component/tag/Tags.svelte'
 import Concepts from '@component/concept/Concepts.svelte'
 import Docs from '@component/doc/Docs.svelte'
 import Datasets from '@component/dataset/Datasets.svelte'
 import Variables from '@component/variable/Variables.svelte'
-import Modalities from '@component/modality/Modalities.svelte'
-import ModalitiesCompare from '@component/modality/ModalitiesCompare.svelte'
-import Values from '@component/modality/Values.svelte'
+import Enumerations from '@component/enumeration/Enumerations.svelte'
+import EnumerationsCompare from '@component/enumeration/EnumerationsCompare.svelte'
+import Values from '@component/enumeration/Values.svelte'
 import VariableValues from '@component/variable/VariableValues.svelte'
-import Freq from '@component/variable/Freq.svelte'
-import InstitutionInfo from '@component/institution/InstitutionInfo.svelte'
+import Frequency from '@component/variable/Frequency.svelte'
+import OrganizationInfo from '@component/organization/OrganizationInfo.svelte'
 import FolderInfo from '@component/folder/FolderInfo.svelte'
 import TagInfo from '@component/tag/TagInfo.svelte'
 import ConceptInfo from '@component/concept/ConceptInfo.svelte'
 import DocInfo from '@component/doc/DocInfo.svelte'
 import DatasetInfo from '@component/dataset/DatasetInfo.svelte'
 import VariableInfo from '@component/variable/VariableInfo.svelte'
-import ModalityInfo from '@component/modality/ModalityInfo.svelte'
+import EnumerationInfo from '@component/enumeration/EnumerationInfo.svelte'
 import MetaFolderInfo from '@component/folder/MetaFolderInfo.svelte'
 import MetaDatasetInfo from '@component/dataset/MetaDatasetInfo.svelte'
 import MetaVariableInfo from '@component/variable/MetaVariableInfo.svelte'
@@ -34,10 +34,10 @@ import { allTabsIcon } from '@lib/store'
 import type { TabConfig } from './tabs-helper'
 
 export const allTabs: Record<string, TabConfig> = {
-  institutions: {
-    name: 'Institution',
-    icon: 'institution',
-    component: Institutions,
+  organizations: {
+    name: 'Organisation',
+    icon: 'organization',
+    component: Organizations,
   },
   folders: {
     name: 'Dossier',
@@ -64,15 +64,15 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'variable',
     component: Variables,
   },
-  modalities: {
-    name: 'Modalité',
-    icon: 'modality',
-    component: Modalities,
+  enumerations: {
+    name: 'Énumération',
+    icon: 'enumeration',
+    component: Enumerations,
   },
-  modalitiesCompare: {
+  enumerationsCompare: {
     name: 'Similitude',
     icon: 'compare',
-    component: ModalitiesCompare,
+    component: EnumerationsCompare,
     loadAsync: true,
   },
   values: {
@@ -85,10 +85,10 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'value',
     component: VariableValues,
   },
-  freq: {
+  frequency: {
     name: 'Fréquence',
-    icon: 'freq',
-    component: Freq,
+    icon: 'frequency',
+    component: Frequency,
   },
   allFav: {
     name: 'Favori',
@@ -188,14 +188,14 @@ export const allTabs: Record<string, TabConfig> = {
 
 const infoItems = {
   aboutFile: AboutFile,
-  institution: InstitutionInfo,
+  organization: OrganizationInfo,
   folder: FolderInfo,
   tag: TagInfo,
   concept: ConceptInfo,
   doc: DocInfo,
   dataset: DatasetInfo,
   variable: VariableInfo,
-  modality: ModalityInfo,
+  enumeration: EnumerationInfo,
   metaFolder: MetaFolderInfo,
   metaDataset: MetaDatasetInfo,
   metaVariable: MetaVariableInfo,

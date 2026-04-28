@@ -29,23 +29,23 @@
     .getAll('evolution')
     .filter(evo => evo.entity === 'variable' && evo.id === variable.id)
 
-  const freqData = db.getAll('freq', { variable })
+  const freqData = db.getAll('frequency', { variable })
 
   let tabs = tabsHelper({
     variable,
     variables,
     variableValues: variable.values,
-    freq: freqData,
+    frequency: freqData,
     variablePreview,
     evolutions,
   })
 
   if (variable.isPattern) {
-    const freqTab = tabs.find(t => t.key === 'freq')
+    const freqTab = tabs.find(t => t.key === 'frequency')
     if (freqTab) freqTab.props.isPattern = true
   }
   if (variable.sampleSize && variable.nbRow) {
-    const freqTab = tabs.find(t => t.key === 'freq')
+    const freqTab = tabs.find(t => t.key === 'frequency')
     if (freqTab) freqTab.props.scale = variable.nbRow / variable.sampleSize
   }
 </script>

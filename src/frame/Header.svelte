@@ -78,10 +78,10 @@
       {/if}
 
       <HeaderDropdown
-        title="Organisation"
+        title="Contexte"
         pages={[
-          'institution',
-          'institutions',
+          'organization',
+          'organizations',
           'folder',
           'folders',
           'tag',
@@ -91,9 +91,9 @@
           'doc',
           'docs',
         ]}
-        ifUse={['institution', 'folder', 'tag', 'concept', 'doc']}
+        ifUse={['organization', 'folder', 'tag', 'concept', 'doc']}
       >
-        <HeaderLink standard="institution" />
+        <HeaderLink standard="organization" />
         <HeaderLink standard="folder" />
         <HeaderLink standard="tag" />
         <HeaderLink standard="concept" />
@@ -101,20 +101,20 @@
       </HeaderDropdown>
 
       <HeaderDropdown
-        title="Datasets"
+        title="Données"
         pages={[
           'dataset',
           'datasets',
           'variable',
           'variables',
-          'modality',
-          'modalities',
+          'enumeration',
+          'enumerations',
         ]}
-        ifUse={['dataset', 'variable', 'modality']}
+        ifUse={['dataset', 'variable', 'enumeration']}
       >
         <HeaderLink standard="dataset" />
         <HeaderLink standard="variable" />
-        <HeaderLink standard="modality" />
+        <HeaderLink standard="enumeration" />
       </HeaderDropdown>
 
       <HeaderDropdown title="Filtre" ifUse={['filter']}>

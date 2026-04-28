@@ -20,13 +20,13 @@
 
 - `navigate` - Navigate to page with optional tab (e.g., `/dataset/123` or with `tab: "variables"`)
   - **Tabs by entity:**
-    - `institution`: folders, tags, docs, datasets, variables, modalities, evolutions, stat
-    - `folder`: folders, tags, docs, datasets, variables, modalities, evolutions, stat
-    - `tag`: tags, institutions, folders, docs, datasets, variables
-    - `dataset`: docs, datasets, variables, modalities, datasetPreview, evolutions, stat
-    - `variable`: variables, variableValues, freq, variablePreview, evolutions
-    - `modality`: values, variables, evolutions
-  - **Important:** For institution/folder/tag, tabs show **recursive** data. To check if a tab has content, use `getEntity` and check `nbVariableRecursive`, `nbDatasetRecursive`, `nbFolderRecursive` fields (not `listEntities`).
+    - `organization`: folders, tags, docs, datasets, variables, enumerations, evolutions, stat
+    - `folder`: folders, tags, docs, datasets, variables, enumerations, evolutions, stat
+    - `tag`: tags, organizations, folders, docs, datasets, variables
+    - `dataset`: docs, datasets, variables, enumerations, datasetPreview, evolutions, stat
+    - `variable`: variables, variableValues, frequency, variablePreview, evolutions
+    - `enumeration`: values, variables, evolutions
+  - **Important:** For organization/folder/tag, tabs show **recursive** data. To check if a tab has content, use `getEntity` and check `nbVariableRecursive`, `nbDatasetRecursive`, `nbFolderRecursive` fields (not `listEntities`).
 
 ### Quick Examples
 
@@ -38,8 +38,8 @@
 "Taille moyenne des datasets" → getStatistics({entity: "dataset", field: "nbRow"})
 "Répartition par type" → groupBy({entity: "dataset", field: "type"})
 "Variables du dataset X" → navigate({path: "/dataset/X", tab: "variables"})
-"Dossiers de l'institution Y" → navigate({path: "/institution/Y", tab: "folders"})
-"Fréquences de la variable Z" → navigate({path: "/variable/Z", tab: "freq"})
+"Dossiers de l'organisation Y" → navigate({path: "/organization/Y", tab: "folders"})
+"Fréquences de la variable Z" → navigate({path: "/variable/Z", tab: "frequency"})
 ```
 
 ### Critical Rules

@@ -21,10 +21,10 @@
         "description": "Key of the dataset containing the variable",
         "x-description-fr": "Clé du dataset contenant la variable"
       },
-      "modality_ids": {
+      "enumeration_ids": {
         "type": ["string", "number", "null"],
-        "description": "Keys of related modalities",
-        "x-description-fr": "Clé des modalités liées",
+        "description": "Keys of related enumerations",
+        "x-description-fr": "Clé des énumérations liées",
         "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
         "examples": ["id1,id2,id3", "single-id", null]
       },

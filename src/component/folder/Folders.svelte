@@ -95,7 +95,7 @@
       Column.tag(),
       Column.lastUpdate(),
       Column.nextUpdate(),
-      Column.frequency(),
+      Column.updateFrequency(),
       Column.startDate(),
       Column.endDate(),
       Column.parents('folder'),

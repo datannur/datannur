@@ -22,18 +22,18 @@ export type Config = {
 }
 
 export type Value = {
-  modalityId: string | number
+  enumerationId: string | number
   value: string | null
   description?: string
 
   // Computed fields added during processing
-  modalityName?: string
+  enumerationName?: string
 }
 
-export type Freq = {
+export type Frequency = {
   variableId: string | number
   value: string
-  freq: number
+  frequency: number
 }
 
 // User data entities
