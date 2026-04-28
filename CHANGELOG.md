@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: multi-line `numPercent` cells (e.g. dates) collapsing to a single line after the clickable-cell change
+
 ## 0.20.1 (2026-04-25)
 
 - perf: speed up `db.ts` data preparation (O(n) dedup, fewer intermediate arrays)

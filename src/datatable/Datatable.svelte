@@ -674,11 +674,17 @@
             }
             .num-percent-value {
               position: absolute;
-              inset: 0;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+              top: 50%;
+              left: 0;
+              right: 0;
+              transform: translateY(-50%);
               text-align: center;
+              &:has(> a) {
+                top: 0;
+                bottom: 0;
+                transform: none;
+                display: flex;
+              }
               & > a {
                 display: flex;
                 align-items: center;
