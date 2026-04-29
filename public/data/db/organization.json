@@ -19,7 +19,7 @@
     "email": "contact@poste.ge.ch",
     "phone": "+41 79 235 74 51",
     "start_date": "2007",
-    "end_date": "2010",
+    "end_date": 2030,
     "tag_ids": "anonymous_data, edifices, armee",
     "doc_ids": null
   },
@@ -43,7 +43,7 @@
     "email": "secretariat@dfi.ge.ch",
     "phone": "+41 77 860 70 18",
     "start_date": "1976/09",
-    "end_date": "2018/08",
+    "end_date": "2028/08",
     "tag_ids": "culture, pseudonymous_data, population, agriculture, images_aeriennes_2, images_aeriennes",
     "doc_ids": null
   },
@@ -271,7 +271,7 @@
     "email": "communication@ofssysform.zh.ch",
     "phone": "+41 44 656 19 12",
     "start_date": "2023/09",
-    "end_date": "2025",
+    "end_date": "2029/10",
     "tag_ids": "limites_pol_admin, communication, agriculture",
     "doc_ids": null
   },
