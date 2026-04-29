@@ -62,6 +62,15 @@
 
   sortEvolutions(evolutionsSorted)
 
+  function getInitialScrollRow(toScroll: Evolution[]) {
+    const currentIndex = toScroll.findIndex(
+      evolution => evolution.timestamp <= Date.now(),
+    )
+    return currentIndex > 0 ? currentIndex : undefined
+  }
+
+  const initialScrollRow = getInitialScrollRow(evolutionsSorted)
+
   function defineColumns(): ColumnType[] {
     return [
       Column.favorite(),
@@ -185,4 +194,9 @@
   const columns = defineColumns()
 </script>
 
-<Datatable entity="evolution" data={evolutionsSorted} {columns} />
+<Datatable
+  entity="evolution"
+  data={evolutionsSorted}
+  {columns}
+  {initialScrollRow}
+/>

@@ -3980,5 +3980,104 @@
     "old_value": "Liste des 3 principales langues suisses et leur sigle",
     "new_value": "Liste des 3 principales langues suisses et leurs sigles",
     "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "01-pop",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": null,
+    "new_value": "2028/03",
+    "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "02-espace",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": "2025",
+    "new_value": "2028",
+    "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "02-espace",
+    "parent_entity_id": null,
+    "variable": "last_update_date",
+    "old_value": "2020/03/25",
+    "new_value": "2026/03/25",
+    "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "06-industrie",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": "2023/09",
+    "new_value": "2029/09",
+    "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "12-monnaie",
+    "parent_entity_id": null,
+    "variable": "last_update_date",
+    "old_value": "2011/03/02",
+    "new_value": "2026/04/25",
+    "name": null
+  },
+  {
+    "timestamp": 1777490030,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "14-sante",
+    "parent_entity_id": null,
+    "variable": "last_update_date",
+    "old_value": null,
+    "new_value": "2026/04/20",
+    "name": null
+  },
+  {
+    "timestamp": 1777490074,
+    "type": "update",
+    "entity": "organization",
+    "entity_id": "poste",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": "2010",
+    "new_value": 2030,
+    "name": null
+  },
+  {
+    "timestamp": 1777490074,
+    "type": "update",
+    "entity": "organization",
+    "entity_id": "dfi",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": "2018/08",
+    "new_value": "2028/08",
+    "name": null
+  },
+  {
+    "timestamp": 1777490074,
+    "type": "update",
+    "entity": "organization",
+    "entity_id": "ofs-sys-form",
+    "parent_entity_id": null,
+    "variable": "end_date",
+    "old_value": "2025",
+    "new_value": "2029/10",
+    "name": null
   }
 ]
