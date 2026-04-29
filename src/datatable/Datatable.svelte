@@ -49,6 +49,7 @@
     keepAllCols: keepAllColsProp = false,
     metaPath: metaPathProp = undefined,
     isRecursive: isRecursiveProp = false,
+    initialScrollRow: initialScrollRowProp = undefined,
     initied = () => {},
   }: {
     entity: string
@@ -58,6 +59,7 @@
     keepAllCols?: boolean
     metaPath?: string
     isRecursive?: boolean
+    initialScrollRow?: number
     initied?: () => void
   } = $props()
 
@@ -68,6 +70,7 @@
   const keepAllCols = untrack(() => keepAllColsProp)
   const metaPath = untrack(() => metaPathProp)
   const isRecursive = untrack(() => isRecursiveProp)
+  const initialScrollRow = untrack(() => initialScrollRowProp)
 
   let loading = $state(true)
   let shortTable = $state(false)
@@ -132,6 +135,39 @@
     )
   }
 
+  function scrollToInitialRow(dt: Api) {
+    if (
+      !isBig ||
+      initialScrollRow === undefined ||
+      initialScrollRow < 0 ||
+      initialScrollRow >= cleanData.length
+    ) {
+      return
+    }
+
+    const displayIndexes = dt
+      .rows({ order: 'applied', search: 'applied' })
+      .indexes()
+      .toArray()
+    const displayIndex = displayIndexes.indexOf(initialScrollRow)
+
+    if (displayIndex < 0) return
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        dt.scroller.measure(false)
+        const page = dt.scroller.page()
+        const visibleRows = Math.max(page.end - page.start + 1, 1)
+        const targetRow = Math.max(
+          displayIndex - Math.floor(visibleRows / 2),
+          0,
+        )
+
+        dt.scroller.toPosition(targetRow, false)
+      })
+    })
+  }
+
   onMount(() => {
     setTimeout(() => {
       datatable = new DataTable('table#' + tableId, {
@@ -168,7 +204,9 @@
         } as ConfigLanguage,
         initComplete: function () {
           if (!isBig) return
-          filter.init(this.api())
+          const api = this.api()
+          filter.init(api)
+          scrollToInitialRow(api)
         },
       } as Config)
       datatable.on('search.dt', () => {

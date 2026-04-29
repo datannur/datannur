@@ -1,5 +1,9 @@
 # datannur
 
+# unreleased
+
+- change: evolution tables now open around the current date, at the boundary between future and past entries
+
 ## 0.21.0 (2026-04-28)
 
 - change: align app terminology by renaming `institution` to `organization`, `modality` to `enumeration`, `freq` to `frequency`, and the header dropdowns to `Contexte` / `Données`
