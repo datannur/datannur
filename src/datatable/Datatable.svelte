@@ -746,7 +746,7 @@
               .freq-percent {
                 position: relative;
                 z-index: 1;
-                margin-left: auto;
+                margin-left: 10px;
               }
             }
             .num-percent {
