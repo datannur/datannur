@@ -132,6 +132,11 @@ const attributsDef: Record<string, Attribut> = {
     type: 'category',
     variable: 'deliveryFormat',
   },
+  license: {
+    name: 'Licence',
+    type: 'category',
+    variable: 'license',
+  },
   metadataPath: {
     name: 'Metadonnées',
     type: 'string',

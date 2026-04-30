@@ -124,6 +124,7 @@ export const entityToIcon = {
   diagram: 'diagram-project',
   email: 'envelope',
   deliveryFormat: 'laptop-file',
+  license: 'scale-balanced',
   surveyType: 'database',
   metadataPath: 'sitemap',
   level: 'layer-group',

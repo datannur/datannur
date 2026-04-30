@@ -65,6 +65,11 @@
         "description": "Delivery format (CSV, XML, ...)",
         "x-description-fr": "Format des données livrées (CSV, XML, ...)"
       },
+      "license": {
+        "type": ["string", "null"],
+        "description": "Folder license",
+        "x-description-fr": "Licence du dossier"
+      },
       "type": {
         "type": ["string", "null"],
         "description": "Folder type (useful for general filter)",
