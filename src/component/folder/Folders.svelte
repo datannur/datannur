@@ -110,6 +110,7 @@
         render: Render.shortText,
       },
       Column.deliveryFormat(),
+      Column.license(),
       {
         data: 'metadataPath',
         title: Render.icon('metadataPath') + 'Metadonnées',

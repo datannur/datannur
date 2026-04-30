@@ -65,6 +65,11 @@
         "description": "Delivery format (CSV, XML, ...)",
         "x-description-fr": "Format du dataset livrées (CSV, XML, ...)"
       },
+      "license": {
+        "type": ["string", "null"],
+        "description": "Dataset license",
+        "x-description-fr": "Licence du dataset"
+      },
       "type": {
         "type": ["string", "null"],
         "description": "Dataset type (useful for general filter)",

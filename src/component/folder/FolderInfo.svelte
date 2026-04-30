@@ -15,6 +15,7 @@
   import LinkInfo from '@info-table/LinkInfo.svelte'
   import CopyText from '@layout/CopyText.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
+  import LicenseInfo from '@info-table/LicenseInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import TypeInfo from '@info-table/TypeInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
@@ -53,6 +54,7 @@
     </tr>
   {/if}
   <DeliveryFormatInfo deliveryFormat={folder.deliveryFormat} />
+  <LicenseInfo license={folder.license} />
   {#if folder.metadataPath}
     <tr>
       <td><Icon type="metadataPath" /> Metadonnées</td>

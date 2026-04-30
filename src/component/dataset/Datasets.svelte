@@ -100,6 +100,7 @@
       Column.manager(),
       Column.localisation(),
       Column.deliveryFormat(),
+      Column.license(),
       Column.dataPath(),
     ]
   }

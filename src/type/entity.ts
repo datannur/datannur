@@ -103,6 +103,7 @@ export type Dataset = BaseEntity &
     ownerId?: string | number
     dataPath?: string
     deliveryFormat?: string
+    license?: string
     type?: string
     link?: string
     localisation?: string
@@ -206,6 +207,7 @@ export type Folder = BaseEntity &
     ownerId?: string | number
     dataPath?: string
     deliveryFormat?: string
+    license?: string
     gitCode?: string
     lastUpdateDate?: string
     link?: string

@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur API",
     "description": "RESTful API for the datannur data catalog. Provides read-only access to database tables with filtering, pagination, and sorting capabilities.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -380,6 +380,96 @@
         }
       }
     },
+    "/enumeration": {
+      "get": {
+        "summary": "Get all enumeration records",
+        "description": "Returns all records from the enumeration table with optional filtering, pagination, and sorting",
+        "tags": ["enumeration"],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Limit number of results"
+          },
+          {
+            "name": "_offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Offset for pagination"
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Field to sort by"
+          },
+          {
+            "name": "_order",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"]
+            },
+            "description": "Sort order (asc or desc)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/enumeration"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enumeration/{id}": {
+      "get": {
+        "summary": "Get enumeration by ID",
+        "description": "Returns a single record from the enumeration table by its ID",
+        "tags": ["enumeration"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/enumeration"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Record not found"
+          }
+        }
+      }
+    },
     "/evolution": {
       "get": {
         "summary": "Get all evolution records",
@@ -640,96 +730,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/frequency"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Record not found"
-          }
-        }
-      }
-    },
-    "/enumeration": {
-      "get": {
-        "summary": "Get all enumeration records",
-        "description": "Returns all records from the enumeration table with optional filtering, pagination, and sorting",
-        "tags": ["enumeration"],
-        "parameters": [
-          {
-            "name": "_limit",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Limit number of results"
-          },
-          {
-            "name": "_offset",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Offset for pagination"
-          },
-          {
-            "name": "_sort",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Field to sort by"
-          },
-          {
-            "name": "_order",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "enum": ["asc", "desc"]
-            },
-            "description": "Sort order (asc or desc)"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/enumeration"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/enumeration/{id}": {
-      "get": {
-        "summary": "Get enumeration by ID",
-        "description": "Returns a single record from the enumeration table by its ID",
-        "tags": ["enumeration"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Record ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/enumeration"
                 }
               }
             }
@@ -1179,12 +1179,12 @@
           "manager_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the managing organization",
-            "x-description-fr": "Clé de l'organization gestionnaire du dataset"
+            "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
           },
           "owner_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the data provider organization",
-            "x-description-fr": "Clé de l'organization fournisseur du dataset"
+            "x-description-fr": "Clé de l'organisation fournisseur du dataset"
           },
           "tag_ids": {
             "type": ["string", "number", "null"],
@@ -1219,6 +1219,11 @@
             "type": ["string", "null"],
             "description": "Delivery format (CSV, XML, ...)",
             "x-description-fr": "Format du dataset livrées (CSV, XML, ...)"
+          },
+          "license": {
+            "type": ["string", "null"],
+            "description": "Dataset license",
+            "x-description-fr": "Licence du dataset"
           },
           "type": {
             "type": ["string", "null"],
@@ -1319,6 +1324,38 @@
           }
         }
       },
+      "enumeration": {
+        "type": "object",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Primary key of the enumeration",
+            "x-description-fr": "Clé primaire de l'énumération"
+          },
+          "folder_id": {
+            "type": ["string", "number", "null"],
+            "description": "Folder key",
+            "x-description-fr": "Clé du dossier"
+          },
+          "name": {
+            "type": ["string", "null"],
+            "description": "Enumeration name",
+            "x-description-fr": "Nom de l'énumération"
+          },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Enumeration description",
+            "x-description-fr": "Description de l'énumération"
+          },
+          "type": {
+            "type": ["string", "null"],
+            "description": "Enumeration datatype",
+            "x-description-fr": "Datatype de l'énumération"
+          }
+        }
+      },
       "evolution": {
         "type": "object",
         "required": [],
@@ -1389,12 +1426,12 @@
           "manager_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the managing organization",
-            "x-description-fr": "Clé de l'organization gestionnaire du dossier"
+            "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
           },
           "owner_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the data provider organization",
-            "x-description-fr": "Clé de l'organization fournisseur du dossier"
+            "x-description-fr": "Clé de l'organisation fournisseur du dossier"
           },
           "tag_ids": {
             "type": ["string", "number", "null"],
@@ -1429,6 +1466,11 @@
             "type": ["string", "null"],
             "description": "Delivery format (CSV, XML, ...)",
             "x-description-fr": "Format des données livrées (CSV, XML, ...)"
+          },
+          "license": {
+            "type": ["string", "null"],
+            "description": "Folder license",
+            "x-description-fr": "Licence du dossier"
           },
           "type": {
             "type": ["string", "null"],
@@ -1509,38 +1551,6 @@
           }
         }
       },
-      "enumeration": {
-        "type": "object",
-        "required": ["id"],
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Primary key of the enumeration",
-            "x-description-fr": "Clé primaire de l'énumération"
-          },
-          "folder_id": {
-            "type": ["string", "number", "null"],
-            "description": "Folder key",
-            "x-description-fr": "Clé du dossier"
-          },
-          "name": {
-            "type": ["string", "null"],
-            "description": "Enumeration name",
-            "x-description-fr": "Nom de l'énumération"
-          },
-          "description": {
-            "type": ["string", "null"],
-            "description": "Enumeration description",
-            "x-description-fr": "Description de l'énumération"
-          },
-          "type": {
-            "type": ["string", "null"],
-            "description": "Enumeration datatype",
-            "x-description-fr": "Datatype de l'énumération"
-          }
-        }
-      },
       "organization": {
         "type": "object",
         "required": ["id"],
@@ -1549,12 +1559,12 @@
           "id": {
             "type": "string",
             "description": "Primary key of the organization",
-            "x-description-fr": "Clé primaire de l'organization"
+            "x-description-fr": "Clé primaire de l'organisation"
           },
           "parent_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the parent organization",
-            "x-description-fr": "Clé de l'organization parent"
+            "x-description-fr": "Clé de l'organisation parent"
           },
           "tag_ids": {
             "type": ["string", "number", "null"],
@@ -1573,32 +1583,32 @@
           "name": {
             "type": ["string", "null"],
             "description": "Organization name",
-            "x-description-fr": "Nom de l'organization"
+            "x-description-fr": "Nom de l'organisation"
           },
           "description": {
             "type": ["string", "null"],
             "description": "Organization description",
-            "x-description-fr": "Description de l'organization"
+            "x-description-fr": "Description de l'organisation"
           },
           "email": {
             "type": ["string", "null"],
             "description": "Organization email",
-            "x-description-fr": "Email de l'organization"
+            "x-description-fr": "Email de l'organisation"
           },
           "phone": {
             "type": ["string", "null"],
             "description": "Organization phone number",
-            "x-description-fr": "Numéro de téléphone de l'organization"
+            "x-description-fr": "Numéro de téléphone de l'organisation"
           },
           "start_date": {
             "type": ["string", "number", "null"],
             "description": "Start of the period covered by the organization",
-            "x-description-fr": "Début de la période couverte par l'organization"
+            "x-description-fr": "Début de la période couverte par l'organisation"
           },
           "end_date": {
             "type": ["string", "number", "null"],
             "description": "End of the period covered by the organization",
-            "x-description-fr": "Fin de la période couverte par l'organization"
+            "x-description-fr": "Fin de la période couverte par l'organisation"
           }
         }
       },
@@ -1801,6 +1811,10 @@
       "description": "Documentation (pdf, md) attached to an element"
     },
     {
+      "name": "enumeration",
+      "description": "Enumerations"
+    },
+    {
       "name": "evolution",
       "description": "History of metadata changes"
     },
@@ -1811,10 +1825,6 @@
     {
       "name": "frequency",
       "description": "Value frequencies for each variable"
-    },
-    {
-      "name": "enumeration",
-      "description": "Enumerations"
     },
     {
       "name": "organization",

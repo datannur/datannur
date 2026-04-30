@@ -4055,7 +4055,7 @@
     "parent_entity_id": null,
     "variable": "end_date",
     "old_value": "2010",
-    "new_value": 2030,
+    "new_value": "2030",
     "name": null
   },
   {
@@ -4078,6 +4078,94 @@
     "variable": "end_date",
     "old_value": "2025",
     "new_value": "2029/10",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "ser_pub_loc",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "CC-BY-4.0",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "temperature_moy",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "https://creativecommons.org/licenses/by/4.0/",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "transport_pub",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "CC-BY-4.0 - attribution requise",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "vente_voitures",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "CC-BY-4.0 - attribution requise",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "01-pop",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "Licence Ouverte / Open Licence v2.0",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "05-prix",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "https://creativecommons.org/licenses/by/4.0/",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "14-sante",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "Licence Ouverte / Open Licence v2.0",
+    "name": null
+  },
+  {
+    "timestamp": 1777543505,
+    "type": "update",
+    "entity": "folder",
+    "entity_id": "19-criminalite",
+    "parent_entity_id": null,
+    "variable": "license",
+    "old_value": null,
+    "new_value": "https://creativecommons.org/licenses/by/4.0/",
     "name": null
   }
 ]

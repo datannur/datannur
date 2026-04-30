@@ -15,6 +15,7 @@
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
   import LinkInfo from '@info-table/LinkInfo.svelte'
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
+  import LicenseInfo from '@info-table/LicenseInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import Render from '@lib/render'
   import type { Dataset } from '@type'
@@ -57,6 +58,7 @@
   {/if}
   <LocalisationInfo localisation={dataset.localisation} />
   <DeliveryFormatInfo deliveryFormat={dataset.deliveryFormat} />
+  <LicenseInfo license={dataset.license} />
   <DataPathInfo dataPath={dataset.dataPath} />
   <LinkInfo link={dataset.link} />
   {#if dataset.tags}

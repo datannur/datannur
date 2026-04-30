@@ -3,6 +3,7 @@
 # unreleased
 
 - change: evolution tables now open around the current date, at the boundary between future and past entries
+- add: free-text `license` fields on folders and datasets, exposed in tables/detail views and populated with varied demo values
 
 ## 0.21.0 (2026-04-28)
 

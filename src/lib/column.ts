@@ -609,6 +609,16 @@ export default class Column {
       render: Render.shortText,
     }
   }
+  static license(): ColumnType {
+    return {
+      data: 'license',
+      title: Render.icon('license') + 'Licence',
+      defaultContent: '',
+      hasLongText: true,
+      tooltip: 'Licence',
+      render: Render.longText,
+    }
+  }
   static period(): ColumnType {
     return {
       data: 'period',
