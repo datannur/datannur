@@ -58,10 +58,25 @@
   const sttEngines = sttEnginesConfig as SelectableItem[]
   let selectedSTT = $state(sttEngines[0])
 
+  function resolveSavedModel(savedModelId: string): SelectableItem | undefined {
+    const model = models.find(m => m.id === savedModelId)
+
+    if (model) {
+      return model
+    }
+
+    const defaultModel = models[0]
+    if (defaultModel) {
+      Options.set('llmModel', defaultModel.id)
+    }
+
+    return defaultModel
+  }
+
   Options.loaded.then(() => {
     const savedModelId = Options.get('llmModel') as string | undefined
     if (savedModelId) {
-      const model = models.find(m => m.id === savedModelId)
+      const model = resolveSavedModel(savedModelId)
       if (model) selectedModel = model
     }
 
