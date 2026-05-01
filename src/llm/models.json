@@ -1,32 +1,20 @@
 [
   {
-    "id": "qwen3",
-    "name": "Qwen3",
-    "description": "Le plus puissant - Polyvalent",
+    "id": "Qwen/Qwen3.5-122B-A10B-FP8",
+    "name": "Qwen 3.5 122B",
+    "description": "Par defaut - Polyvalent et performant",
     "category": "chat_large"
   },
   {
-    "id": "llama3",
-    "name": "Llama 3.3",
-    "description": "Conversations et raisonnement",
-    "category": "chat_large"
-  },
-  {
-    "id": "mistral24b",
-    "name": "Mistral Small 24B",
-    "description": "Vision et analyse d'images",
-    "category": "vision_medium"
-  },
-  {
-    "id": "gemma3n",
-    "name": "Gemma 3n",
-    "description": "Léger et rapide",
+    "id": "google/gemma-4-31B-it",
+    "name": "Gemma 4 31B",
+    "description": "Bon compromis entre rapidite et qualite",
     "category": "omni_small"
   },
   {
-    "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
-    "name": "Qwen3 Coder",
-    "description": "Code, SQL et appels de fonctions",
-    "category": "code_large"
+    "id": "mistralai/Ministral-3-14B-Instruct-2512",
+    "name": "Ministral 3 14B",
+    "description": "Rapide et efficace pour les taches courantes",
+    "category": "chat_small"
   }
 ]

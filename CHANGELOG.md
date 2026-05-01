@@ -2,8 +2,11 @@
 
 # unreleased
 
+## 0.21.1 (2026-05-01)
+
 - change: evolution tables now open around the current date, at the boundary between future and past entries
 - add: free-text `license` fields on folders and datasets, exposed in tables/detail views and populated with varied demo values
+- change: refresh the bundled Infomaniak LLM model list, make `Qwen/Qwen3.5-122B-A10B-FP8` the default, and fall back unsupported saved model ids to that default
 
 ## 0.21.0 (2026-04-28)
 

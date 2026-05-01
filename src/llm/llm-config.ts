@@ -58,7 +58,7 @@ export const defaultLLMConfig: LLMConfig = {
   proxyURL: getProxyURL(),
   isLocalProxy: isLocalhost && !isFileProtocol,
   models: {
-    text: 'qwen3',
+    text: 'Qwen/Qwen3.5-122B-A10B-FP8',
     speech: 'whisper',
   },
   maxTokens: 8192,
