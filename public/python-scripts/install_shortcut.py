@@ -65,7 +65,8 @@ def install_linux() -> Path:
         f"Exec={browser} --app={file_url}\n"
         f"Icon={icon_dst if icon_dst.exists() else 'text-html'}\n"
         "Terminal=false\n"
-        "Categories=Office;Database;\n"
+        "Categories=Office;Database;\n",
+        encoding="utf-8",
     )
     desktop.chmod(0o644)
 
