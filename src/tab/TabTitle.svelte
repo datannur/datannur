@@ -3,8 +3,6 @@
   import Icon from '@layout/Icon.svelte'
   import Loading from '@frame/Loading.svelte'
   import Number from '@layout/Number.svelte'
-  import { onMount } from 'svelte'
-  import { chatWidth, appWidth } from '@lib/viewport-manager'
   import type { Tab } from './tabs-helper'
 
   let {
@@ -14,8 +12,6 @@
   }: { tab: Tab; activeTab: string; selectTab: (tab: Tab) => void } = $props()
 
   let tabNb = $derived(tab.nb)
-  let minWidth = $state(0)
-  let initialMinWidth = $state(0)
 
   function toPercent(value: string) {
     const separator = '|'
@@ -23,35 +19,6 @@
     if (splited.length === 1) return 0
     return parseFloat(splited[1].split('%')[0]) || 0
   }
-
-  onMount(() => {
-    const selector = `.tab-li-${tab.key}`
-    const elem = document.querySelector(selector) as HTMLLIElement
-    const width = elem.offsetWidth
-    initialMinWidth = width > 500 ? 0 : width
-    minWidth = initialMinWidth
-  })
-
-  $effect(() => {
-    if (
-      $chatWidth !== undefined &&
-      activeTab !== tab.key &&
-      initialMinWidth > 0 &&
-      $appWidth > 780
-    ) {
-      minWidth = initialMinWidth
-    } else if ($appWidth <= 780 && activeTab !== tab.key) {
-      minWidth = 0
-    }
-  })
-
-  $effect(() => {
-    if (activeTab === tab.key && tabNb !== '...') {
-      setTimeout(() => {
-        minWidth = 0
-      }, 300)
-    }
-  })
 
   $effect(() => {
     if (activeTab === tab.key) tabNb = $allTabs[tab.icon].nb
@@ -62,7 +29,6 @@
   class="tab-li-{tab.key} tab-entity-{tab.icon} shadow-{$tabSelected.icon}"
   class:is-active={activeTab === tab.key}
   class:not-active={activeTab !== tab.key}
-  style="min-width: {minWidth}px;"
 >
   <div class="rounded-wrapper left">
     <div class="rounded left"></div>
