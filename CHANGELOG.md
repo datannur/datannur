@@ -2,6 +2,9 @@
 
 # unreleased
 
+- fix: enable gzip compression for JSON files served by Apache, with `Vary: Accept-Encoding`
+- fix: remove obsolete tab title `min-width` logic inherited from the old single-line loading layout
+
 ## 0.21.1 (2026-05-01)
 
 - change: evolution tables now open around the current date, at the boundary between future and past entries

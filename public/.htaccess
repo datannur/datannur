@@ -23,6 +23,8 @@ ErrorDocument 404 /static/_error.html
 </FilesMatch>
 
 # CORS and Security Headers for API
+AddType application/json .json
+
 <FilesMatch "\.json$">
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
@@ -30,6 +32,16 @@ ErrorDocument 404 /static/_error.html
   Header set Content-Type "application/json; charset=utf-8"
   Header set X-Content-Type-Options "nosniff"
 </FilesMatch>
+
+<IfModule mod_deflate.c>
+  <FilesMatch "\.json$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header merge Vary Accept-Encoding
+</IfModule>
 
 # Cache Control
 ExpiresActive On
