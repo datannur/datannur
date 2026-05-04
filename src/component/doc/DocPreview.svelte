@@ -68,14 +68,14 @@
     }
   }
 
-  :global(body.mobile) {
+  @include viewport-mobile {
     .doc-content-wrapper {
       display: block;
       width: 100%;
       padding-top: 0;
     }
   }
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .doc-content-wrapper {
       padding: 10px;
     }

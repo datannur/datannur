@@ -49,7 +49,7 @@
 </script>
 
 {#if $footerVisible || menuMobile}
-  <footer class="footer">
+  <footer class="footer" class:main-footer={!menuMobile}>
     <div class="footer-content">
       <div>
         <a href="https://datannur.com" target="_blanck">
@@ -139,10 +139,16 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .footer {
       padding-left: 0.75rem;
       padding-right: 0.75rem;
+    }
+  }
+
+  @include viewport-mobile {
+    .main-footer {
+      display: none;
     }
   }
 </style>

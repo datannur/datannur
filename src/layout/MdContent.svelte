@@ -29,7 +29,7 @@
     padding: 3.5rem 3.75rem;
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     div.main {
       padding: 1.5rem 1.75rem;
     }

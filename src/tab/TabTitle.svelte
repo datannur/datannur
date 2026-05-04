@@ -257,7 +257,7 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .tab-name {
       display: none;
     }

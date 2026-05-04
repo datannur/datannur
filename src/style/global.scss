@@ -375,13 +375,13 @@ html.dark-mode {
   }
 }
 
-body:not(.small-mobile) {
+@mixin default-section-layout {
   .section {
     padding: 0 3rem;
   }
 }
 
-body.small-mobile {
+@mixin small-mobile-section-layout {
   .section {
     padding: 0;
   }
@@ -396,5 +396,25 @@ body.small-mobile {
     &.big {
       font-size: 1.2rem;
     }
+  }
+}
+
+body.viewport-managed:not(.small-mobile) {
+  @include default-section-layout;
+}
+
+body.viewport-managed.small-mobile {
+  @include small-mobile-section-layout;
+}
+
+@media (min-width: ($small-mobile-limit + 1px)) {
+  body:not(.viewport-managed) {
+    @include default-section-layout;
+  }
+}
+
+@media (max-width: $small-mobile-limit) {
+  body:not(.viewport-managed) {
+    @include small-mobile-section-layout;
   }
 }

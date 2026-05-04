@@ -26,13 +26,16 @@
 </div>
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .evolution-summary-wrapper {
     position: absolute;
     top: 135px;
     right: 0px;
     z-index: 2;
   }
-  :global(body.small-mobile) {
+
+  @include viewport-small-mobile {
     .evolution-summary-wrapper {
       top: 40px;
       left: 5px;

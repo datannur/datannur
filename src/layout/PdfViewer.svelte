@@ -53,7 +53,7 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .frame {
       height: 100%;
       position: absolute;

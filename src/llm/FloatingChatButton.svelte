@@ -56,7 +56,7 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .floating-chat-btn {
       bottom: 12px;
       right: 12px;

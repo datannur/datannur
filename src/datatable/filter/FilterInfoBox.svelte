@@ -54,7 +54,10 @@
         opacity: 1;
       }
     }
-    :global(body.small-mobile) {
+  }
+
+  @include viewport-small-mobile {
+    .filter-info-box {
       position: fixed;
       top: 5px;
       left: calc(50% - 20px);

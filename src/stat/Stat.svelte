@@ -229,7 +229,7 @@
     }
   }
 
-  :global(body.small-mobile .btns) {
+  @mixin small-mobile-stat-btns-layout {
     padding-left: 10px;
     .button {
       padding-left: 0;
@@ -239,6 +239,16 @@
       .btn-select-entity-name {
         display: none;
       }
+    }
+  }
+
+  :global(body.viewport-managed.small-mobile .btns) {
+    @include small-mobile-stat-btns-layout;
+  }
+
+  @media (max-width: $small-mobile-limit) {
+    :global(body:not(.viewport-managed) .btns) {
+      @include small-mobile-stat-btns-layout;
     }
   }
 </style>

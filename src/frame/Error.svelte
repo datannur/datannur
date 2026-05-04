@@ -201,7 +201,7 @@
     background-color: var(--error-page-color);
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     ._error {
       transform: scale(0.5);
     }

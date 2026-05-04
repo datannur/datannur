@@ -87,13 +87,13 @@
     }
   }
 
-  :global(body.mobile) {
+  @include viewport-mobile {
     .about-file-wrapper.homepage {
       max-height: max(calc(100vh - 175px), 80px);
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .content {
       padding: 1.5rem 1.75rem;
     }

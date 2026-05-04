@@ -242,14 +242,14 @@
     font-size: 0.875em;
   }
 
-  :global(body.mobile) {
+  @include viewport-mobile {
     .side-panels {
       display: block;
       width: 100%;
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .side-panels {
       .concept-content {
         padding-top: 0;

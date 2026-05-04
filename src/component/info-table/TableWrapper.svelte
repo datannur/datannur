@@ -61,7 +61,7 @@
     }
   }
 
-  :global(body.mobile) {
+  @include viewport-mobile {
     .table-wrapper {
       display: block;
       width: 100%;
@@ -71,7 +71,7 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .table-wrapper {
       max-height: none;
       overflow-y: auto;
