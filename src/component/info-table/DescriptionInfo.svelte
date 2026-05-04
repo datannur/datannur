@@ -47,6 +47,8 @@
 {/if}
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .description-wrapper {
     width: calc(50% - 3px);
     padding: 1em 0.75em;
@@ -64,14 +66,14 @@
       width: 100%;
     }
   }
-  :global(body.mobile) {
+  @include viewport-mobile {
     .description-wrapper {
       display: block;
       width: 100%;
       padding-top: 0;
     }
   }
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .description-wrapper {
       .content {
         padding-top: 0px;

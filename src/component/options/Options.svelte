@@ -168,7 +168,7 @@
     text-align: center;
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .flex-cols {
       padding: 10px;
     }

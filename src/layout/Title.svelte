@@ -88,6 +88,8 @@
 </div>
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .fitty-wrapper {
     box-sizing: border-box;
     width: 100%;
@@ -110,7 +112,7 @@
     font-size: 1.5rem;
   }
 
-  :global(body.small-mobile) {
+  @include viewport-small-mobile {
     .fitty-wrapper {
       padding-left: 20px;
       padding-right: 20px;

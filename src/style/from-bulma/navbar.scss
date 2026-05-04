@@ -1,3 +1,5 @@
+@use 'main.scss' as *;
+
 .navbar.is-fixed-top {
   position: fixed;
   top: 0;
@@ -6,8 +8,14 @@
   z-index: 30;
 }
 
-body.window-small-mobile .navbar.is-fixed-top {
+body.viewport-managed.window-small-mobile .navbar.is-fixed-top {
   right: 0;
+}
+
+@media (max-width: $small-mobile-limit) {
+  body:not(.viewport-managed) .navbar.is-fixed-top {
+    right: 0;
+  }
 }
 
 .navbar-brand {
@@ -131,7 +139,7 @@ a.navbar-item,
   padding-right: 1.5rem;
 }
 
-body.desktop {
+@mixin desktop-navbar-layout {
   .navbar,
   .navbar-menu,
   .navbar-start,
@@ -191,7 +199,7 @@ body.desktop {
   }
 }
 
-body.mobile {
+@mixin mobile-navbar-layout {
   .navbar-brand .navbar-item,
   .navbar-tabs .navbar-item {
     align-items: center;
@@ -208,5 +216,25 @@ body.mobile {
   }
   .navbar-menu.is-active {
     display: block;
+  }
+}
+
+body.viewport-managed.desktop {
+  @include desktop-navbar-layout;
+}
+
+body.viewport-managed.mobile {
+  @include mobile-navbar-layout;
+}
+
+@media (min-width: ($menu-mobile-limit + 1px)) {
+  body:not(.viewport-managed) {
+    @include desktop-navbar-layout;
+  }
+}
+
+@media (max-width: $menu-mobile-limit) {
+  body:not(.viewport-managed) {
+    @include mobile-navbar-layout;
   }
 }

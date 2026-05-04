@@ -25,13 +25,16 @@
 </div>
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .open-all-wrapper {
     position: absolute;
     top: 135px;
     right: 0px;
     z-index: 2;
   }
-  :global(body.small-mobile) {
+
+  @include viewport-small-mobile {
     .open-all-wrapper {
       top: 40px;
       left: 5px;

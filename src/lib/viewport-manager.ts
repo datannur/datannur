@@ -1,4 +1,5 @@
 import { writable, derived, get } from 'svelte/store'
+import { isSsgRendering, isStaticMode } from 'svelte-fileapp'
 
 export const chatPanelWidth = 420
 
@@ -58,6 +59,7 @@ class ViewportManager {
 
   constructor() {
     if (typeof window === 'undefined') return
+    if (isSsgRendering || isStaticGenerationRender()) return
 
     this.unsubscribe = this.appWidth.subscribe(($appWidth: number) => {
       const $chatWidth = get(this._chatWidth)
@@ -97,6 +99,7 @@ class ViewportManager {
         'window-small-mobile',
         $windowWidth <= windowBreakpoints.smallMobile,
       )
+      document.body.classList.add('viewport-managed')
       document.body.classList.toggle('chat-open', $chatWidth > 0)
 
       document.body.dataset.appWidth = String($appWidth)
@@ -118,6 +121,12 @@ class ViewportManager {
   setChatWidth(width: number) {
     this._chatWidth.set(width)
   }
+}
+
+function isStaticGenerationRender() {
+  const app = document.getElementById('app')
+
+  return isStaticMode && (app?.children.length ?? 0) === 0
 }
 
 export const viewportManager = new ViewportManager()

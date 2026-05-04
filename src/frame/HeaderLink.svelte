@@ -80,7 +80,7 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
-  :global(body.mobile) {
+  @include viewport-mobile {
     .fix-on-mobile {
       padding-left: 0.25em;
       padding-right: 0.75em;

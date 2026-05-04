@@ -162,9 +162,36 @@ $rounded-bottom: 0 0 $rounded-size $rounded-size;
 $rounded-top: $rounded-size $rounded-size 0 0;
 
 $menu-mobile-limit: 1023px;
+$small-mobile-limit: 780px;
+$tiny-mobile-limit: 600px;
+
+@mixin viewport-mobile {
+  :global(body.viewport-managed.mobile) {
+    @content;
+  }
+
+  @media (max-width: $menu-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @content;
+    }
+  }
+}
+
+@mixin viewport-small-mobile {
+  :global(body.viewport-managed.small-mobile) {
+    @content;
+  }
+
+  @media (max-width: $small-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @content;
+    }
+  }
+}
 
 // Viewport manager custom properties
 :root {
+  --chat-panel-width: 420px;
   --chat-width: 0px;
   --app-width: 100vw;
 }

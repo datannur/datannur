@@ -1,7 +1,8 @@
 # datannur
 
-# unreleased
+## 0.21.2 (2026-05-04)
 
+- fix: prevent static-rendered mobile pages from using desktop viewport layout before hydration
 - fix: enable gzip compression for JSON files served by Apache, with `Vary: Accept-Encoding`
 - fix: remove obsolete tab title `min-width` logic inherited from the old single-line loading layout
 

@@ -29,6 +29,7 @@ AddType application/json .json
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
   Header set Access-Control-Allow-Headers "Content-Type"
+  Header set Cache-Control "public, max-age=31536000, immutable"
   Header set Content-Type "application/json; charset=utf-8"
   Header set X-Content-Type-Options "nosniff"
 </FilesMatch>

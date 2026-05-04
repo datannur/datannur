@@ -17,6 +17,8 @@
 </div>
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .extendable {
     display: -webkit-box;
     flex-direction: column;
@@ -41,7 +43,8 @@
       overflow-y: auto;
     }
   }
-  :global(body.small-mobile) {
+
+  @include viewport-small-mobile {
     .extendable {
       max-width: calc(var(--app-width) - 50px);
     }

@@ -223,7 +223,7 @@
     }
   }
 
-  :global(body.small-mobile) {
+  @mixin small-mobile-header-layout {
     .navbar .navbar-brand {
       padding-left: 15px;
       padding-right: 0;
@@ -239,10 +239,24 @@
     }
   }
 
-  :global(body.mobile) {
+  @mixin mobile-header-layout {
     .visible-on-mobile {
       display: initial;
     }
+  }
+
+  :global(body.viewport-managed.small-mobile) {
+    @include small-mobile-header-layout;
+  }
+
+  @media (max-width: $small-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @include small-mobile-header-layout;
+    }
+  }
+
+  @include viewport-mobile {
+    @include mobile-header-layout;
   }
 
   .visible-on-mobile {

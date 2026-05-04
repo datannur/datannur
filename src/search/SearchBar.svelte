@@ -317,10 +317,14 @@
     right: calc(3em + var(--chat-width));
   }
 
-  :global(body.window-small-mobile) {
+  @mixin window-small-mobile-search-layout {
     .header-search-item .search-bar-container {
       right: 3em;
     }
+  }
+
+  :global(body.viewport-managed.window-small-mobile) {
+    @include window-small-mobile-search-layout;
   }
 
   :global(html.roundedDesign) {
@@ -337,7 +341,7 @@
     }
   }
 
-  :global(body.mobile:not(.small-mobile)) {
+  @mixin mobile-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       left: 200px;
       right: calc(50px + var(--chat-width));
@@ -347,13 +351,13 @@
     }
   }
 
-  :global(body.mobile:not(.small-mobile).window-small-mobile) {
+  @mixin mobile-window-small-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       right: 50px;
     }
   }
 
-  :global(body.small-mobile:not(.tiny-mobile)) {
+  @mixin small-mobile-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       left: 200px;
       right: calc(50px + var(--chat-width));
@@ -363,13 +367,13 @@
     }
   }
 
-  :global(body.small-mobile:not(.tiny-mobile).window-small-mobile) {
+  @mixin small-mobile-window-small-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       right: 50px;
     }
   }
 
-  :global(body.tiny-mobile) {
+  @mixin tiny-mobile-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       left: 10px;
       right: calc(50px + var(--chat-width));
@@ -379,19 +383,19 @@
     }
   }
 
-  :global(body.tiny-mobile.window-small-mobile) {
+  @mixin tiny-mobile-window-small-search-layout {
     .header-search-item .search-bar-container:not(.homepage):not(.page-search) {
       right: 50px;
     }
   }
 
-  :global(body.mobile) {
+  @mixin mobile-homepage-search-layout {
     .header-search-item .search-bar-container.homepage {
       left: 50px;
     }
   }
 
-  :global(body.small-mobile) {
+  @mixin small-mobile-homepage-search-layout {
     .header-search-item .search-bar-container.homepage,
     .header-search-item .search-bar-container.page-search {
       left: 10px;
@@ -400,10 +404,80 @@
     }
   }
 
-  :global(body.small-mobile.window-small-mobile) {
+  @mixin small-mobile-window-small-homepage-search-layout {
     .header-search-item .search-bar-container.homepage,
     .header-search-item .search-bar-container.page-search {
       right: 10px;
+    }
+  }
+
+  :global(body.viewport-managed.mobile:not(.small-mobile)) {
+    @include mobile-search-layout;
+  }
+
+  :global(body.viewport-managed.mobile:not(.small-mobile).window-small-mobile) {
+    @include mobile-window-small-search-layout;
+  }
+
+  :global(body.viewport-managed.small-mobile:not(.tiny-mobile)) {
+    @include small-mobile-search-layout;
+  }
+
+  :global(
+    body.viewport-managed.small-mobile:not(.tiny-mobile).window-small-mobile
+  ) {
+    @include small-mobile-window-small-search-layout;
+  }
+
+  :global(body.viewport-managed.tiny-mobile) {
+    @include tiny-mobile-search-layout;
+  }
+
+  :global(body.viewport-managed.tiny-mobile.window-small-mobile) {
+    @include tiny-mobile-window-small-search-layout;
+  }
+
+  :global(body.viewport-managed.mobile) {
+    @include mobile-homepage-search-layout;
+  }
+
+  :global(body.viewport-managed.small-mobile) {
+    @include small-mobile-homepage-search-layout;
+  }
+
+  :global(body.viewport-managed.small-mobile.window-small-mobile) {
+    @include small-mobile-window-small-homepage-search-layout;
+  }
+
+  @media (min-width: ($small-mobile-limit + 1px)) and (max-width: $menu-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @include mobile-search-layout;
+      @include mobile-homepage-search-layout;
+    }
+  }
+
+  @media (max-width: $small-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @include window-small-mobile-search-layout;
+      @include small-mobile-window-small-homepage-search-layout;
+    }
+  }
+
+  @media (min-width: ($tiny-mobile-limit + 1px)) and (max-width: $small-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @include small-mobile-search-layout;
+      @include small-mobile-window-small-search-layout;
+      @include mobile-homepage-search-layout;
+      @include small-mobile-homepage-search-layout;
+    }
+  }
+
+  @media (max-width: $tiny-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @include tiny-mobile-search-layout;
+      @include tiny-mobile-window-small-search-layout;
+      @include mobile-homepage-search-layout;
+      @include small-mobile-homepage-search-layout;
     }
   }
 
