@@ -36,6 +36,13 @@ export function splitOnLastSeparator(str: string, separator: string) {
     : [str.slice(0, lastIndex), str.slice(lastIndex + separator.length)]
 }
 
+export function isHttpUrl(value: string) {
+  const trimmedValue = value.trim()
+  return (
+    trimmedValue.startsWith('http://') || trimmedValue.startsWith('https://')
+  )
+}
+
 export function addIndend(text: string, indent: number) {
   const style = `padding-left: ${indent * 7}px;`
   return `<div class="indented-text" style="${style}">${text}</div>`

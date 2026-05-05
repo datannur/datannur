@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import { link } from 'svelte-fileapp'
-  import { wrapLongText, getPercent } from '@lib/util'
+  import { wrapLongText, getPercent, isHttpUrl } from '@lib/util'
   import { getParentPath } from '@lib/db'
   import Column from '@lib/column'
   import Render from '@lib/render'
@@ -116,10 +116,17 @@
         title: Render.icon('metadataPath') + 'Metadonnées',
         defaultContent: '',
         tooltip: 'Emplacement des métadonnées',
-        render: (data, type) => {
+        render: (data: string, type) => {
           if (!data) return ''
           if (type !== 'display') return String(data)
-          return Render.copyCell(escapeHtml(data), type)
+          const escapedData = escapeHtml(data)
+          if (isHttpUrl(data)) {
+            const href = escapeHtml(data.trim())
+            return wrapLongText(
+              `<a href="${href}" target="_blank" rel="noreferrer">${escapedData}</a>`,
+            )
+          }
+          return Render.copyCell(escapedData, type)
         },
       },
       Column.dataPath(),
