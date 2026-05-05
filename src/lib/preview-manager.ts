@@ -4,6 +4,13 @@ import escapeHtml from 'escape-html'
 import type { Row, Column } from '@type'
 
 export default class PreviewManager {
+  static hasPreview(value: unknown): boolean {
+    if (typeof value === 'boolean') return value
+    if (typeof value === 'number') return value === 1
+    if (typeof value !== 'string') return false
+
+    return ['1', 'true', 'oui', 'yes'].includes(value.trim().toLowerCase())
+  }
   static cleanKey(data: string) {
     return data.replaceAll('.', '_')
   }
@@ -20,7 +27,7 @@ export default class PreviewManager {
   }
   static getColumns(data: Row[]): Column[] {
     const cols: Column[] = []
-    for (const [key, value] of Object.entries(data[0])) {
+    for (const [key, value] of Object.entries(data[0] ?? {})) {
       const render: Column['render'] =
         typeof value === 'number'
           ? (data: unknown) => Render.num(escapeHtml(String(data)))

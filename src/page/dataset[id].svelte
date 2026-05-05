@@ -2,6 +2,7 @@
   import { untrack } from 'svelte'
   import db from '@db'
   import { removeDuplicateById, getRelated, getFkRelated } from '@lib/db'
+  import PreviewManager from '@lib/preview-manager'
   import { tabsHelper } from '@tab/tabs-helper'
   import Tabs from '@tab/Tabs.svelte'
   import Title from '@layout/Title.svelte'
@@ -18,7 +19,9 @@
   )
   enumerations = removeDuplicateById(enumerations)
 
-  let datasetPreview = dataset?.link ? dataset.id : false
+  let datasetPreview = PreviewManager.hasPreview(dataset?.hasPreview)
+    ? String(dataset?.id)
+    : false
 
   const enumerationsId = new Set(enumerations.map(item => item.id))
 

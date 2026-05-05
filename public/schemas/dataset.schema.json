@@ -80,6 +80,11 @@
         "description": "Link to the dataset access, source, or reference",
         "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
       },
+      "has_preview": {
+        "type": ["boolean", "integer", "string", "null"],
+        "description": "Whether a preview is available at data/db/preview/<dataset_id>",
+        "x-description-fr": "Indique si un aperçu est disponible dans data/db/preview/<dataset_id>"
+      },
       "localisation": {
         "type": ["string", "null"],
         "description": "Geographic area covered by the dataset",
