@@ -106,6 +106,7 @@ export type Dataset = BaseEntity &
     license?: string
     type?: string
     link?: string
+    hasPreview?: boolean | number | string
     localisation?: string
     nbRow?: number
     sampleSize?: number

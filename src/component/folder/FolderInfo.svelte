@@ -19,6 +19,7 @@
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import TypeInfo from '@info-table/TypeInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
+  import { isHttpUrl } from '@lib/util'
   import type { Folder } from '@type'
 
   let { folder }: { folder: Folder } = $props()
@@ -58,7 +59,20 @@
   {#if folder.metadataPath}
     <tr>
       <td><Icon type="metadataPath" /> Metadonnées</td>
-      <td><CopyText text={folder.metadataPath} /></td>
+      <td>
+        {#if isHttpUrl(folder.metadataPath)}
+          <a
+            href={folder.metadataPath.trim()}
+            target="_blank"
+            rel="noreferrer"
+            class="break-line"
+          >
+            {folder.metadataPath}
+          </a>
+        {:else}
+          <CopyText text={folder.metadataPath} />
+        {/if}
+      </td>
     </tr>
   {/if}
   <DataPathInfo dataPath={folder.dataPath} />

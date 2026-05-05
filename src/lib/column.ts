@@ -2,7 +2,13 @@ import escapeHtml from 'escape-html'
 import { link } from 'svelte-fileapp'
 import { get } from 'svelte/store'
 import { viewportManager } from '@lib/viewport-manager'
-import { wrapLongText, getPercent, pluralize, capitalize } from '@lib/util'
+import {
+  wrapLongText,
+  getPercent,
+  pluralize,
+  capitalize,
+  isHttpUrl,
+} from '@lib/util'
 import { getTimeAgo, getDatetime, dateToTimestamp } from '@lib/time'
 import { entityNames, entityToIcon } from '@lib/constant'
 import Render from '@lib/render'
@@ -694,8 +700,14 @@ export default class Column {
       render: (data: string, type) => {
         if (!data) return ''
         if (type !== 'display') return data
-        data = escapeHtml(data)
-        return Render.copyCell(data, type)
+        const escapedData = escapeHtml(data)
+        if (isHttpUrl(data)) {
+          const href = escapeHtml(data.trim())
+          return wrapLongText(
+            `<a href="${href}" target="_blank" rel="noreferrer">${escapedData}</a>`,
+          )
+        }
+        return Render.copyCell(escapedData, type)
       },
     }
   }

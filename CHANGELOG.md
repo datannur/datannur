@@ -1,5 +1,10 @@
 # datannur
 
+## 0.21.3 (2026-05-05)
+
+- fix: base dataset and variable preview availability on `has_preview`, and align the `accident_route` preview data with its variable metadata
+- change: make HTTP(S) `data_path` and `metadata_path` values clickable while keeping other paths copyable
+
 ## 0.21.2 (2026-05-04)
 
 - fix: prevent static-rendered mobile pages from using desktop viewport layout before hydration

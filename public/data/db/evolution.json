@@ -4167,5 +4167,16 @@
     "old_value": null,
     "new_value": "https://creativecommons.org/licenses/by/4.0/",
     "name": null
+  },
+  {
+    "timestamp": 1778003321,
+    "type": "update",
+    "entity": "dataset",
+    "entity_id": "eau_potable",
+    "parent_entity_id": null,
+    "variable": "nb_row",
+    "old_value": 34444,
+    "new_value": 33444,
+    "name": null
   }
 ]

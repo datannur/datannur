@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import db from '@db'
+  import PreviewManager from '@lib/preview-manager'
   import { tabsHelper } from '@tab/tabs-helper'
   import { getRelated, getFkRelatedVariables } from '@lib/db'
   import Title from '@layout/Title.svelte'
@@ -11,11 +12,11 @@
   const variable = untrack(() => variableProp)
 
   const dataset = db.get('dataset', variable.datasetId)
-  let variablePreview: false | object = false
-  if (dataset?.link) {
+  let variablePreview: false | { variable: string; datasetId: string } = false
+  if (dataset && PreviewManager.hasPreview(dataset.hasPreview)) {
     variablePreview = {
-      variable: variable.name,
-      datasetId: dataset.link ? dataset.id : false,
+      variable: variable.originalName ?? variable.name,
+      datasetId: String(dataset.id),
     }
   }
 
