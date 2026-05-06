@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: preserve raw preview column names when loading dataset previews with `jsonjsdb` 0.8.11, and fall back from empty variable `original_name` values to `name`
+
 ## 0.21.3 (2026-05-05)
 
 - fix: base dataset and variable preview availability on `has_preview`, and align the `accident_route` preview data with its variable metadata

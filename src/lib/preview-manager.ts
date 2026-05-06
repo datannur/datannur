@@ -48,6 +48,9 @@ export default class PreviewManager {
     return variableData
   }
   static async load(datasetId: string) {
-    return (await db.load('preview', datasetId, false)) as Row[]
+    return (await db.load('preview', datasetId, {
+      shouldStandardizeIds: false,
+      shouldTransformKeys: false,
+    })) as Row[]
   }
 }
