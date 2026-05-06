@@ -15,7 +15,7 @@
   let variablePreview: false | { variable: string; datasetId: string } = false
   if (dataset && PreviewManager.hasPreview(dataset.hasPreview)) {
     variablePreview = {
-      variable: variable.originalName ?? variable.name,
+      variable: variable.originalName || variable.name,
       datasetId: String(dataset.id),
     }
   }
