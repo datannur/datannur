@@ -21,7 +21,7 @@
     "data/localhost-ports.config.json",
     "data/deploy.config.json",
     "data/static-make.config.json",
-    "data/update_app.json",
+    "data/update-app.json",
     "tsconfig.json"
   ],
   "syncOption": {
