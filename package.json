@@ -22,6 +22,7 @@
     "test": "npm run test:unit && npm run test:ui",
     "test:no-build": "vitest run",
     "node:ts": "node --experimental-strip-types --disable-warning=ExperimentalWarning",
+    "screenshots": "node --experimental-strip-types --disable-warning=ExperimentalWarning node-scripts/capture-screenshots.ts",
     "static-make": "vite build && npm run node:ts app/node-scripts/static-make.ts",
     "deploy": "npm run node:ts app/node-scripts/deploy.ts",
     "static-deploy": "npm run static-make && npm run deploy",

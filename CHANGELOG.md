@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: config-driven screenshot capture suite for about-page assets
 - fix: preserve raw preview column names when loading dataset previews with `jsonjsdb` 0.8.11, and fall back from empty variable `original_name` values to `name`
 
 ## 0.21.3 (2026-05-05)
