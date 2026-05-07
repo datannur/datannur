@@ -32,6 +32,8 @@
 </button>
 
 <style lang="scss">
+  @use 'main.scss' as *;
+
   .share-link {
     margin-left: 5px;
     margin-right: 10px;
@@ -51,6 +53,12 @@
       opacity: 1;
       color: var(--success-color, #48c774);
       transform: scale(1.1);
+    }
+  }
+
+  @include viewport-tiny-mobile {
+    .share-link {
+      display: none;
     }
   }
 </style>

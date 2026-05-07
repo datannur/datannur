@@ -189,6 +189,18 @@ $tiny-mobile-limit: 600px;
   }
 }
 
+@mixin viewport-tiny-mobile {
+  :global(body.viewport-managed.tiny-mobile) {
+    @content;
+  }
+
+  @media (max-width: $tiny-mobile-limit) {
+    :global(body:not(.viewport-managed)) {
+      @content;
+    }
+  }
+}
+
 // Viewport manager custom properties
 :root {
   --chat-panel-width: 420px;

@@ -9,7 +9,6 @@
   import SearchHistory from '@search/search-history'
   import Options from '@lib/options'
   import icon from '@img/icon.png'
-  import iconDark from '@img/icon-dark.png'
   import { DarkMode, darkModeTheme } from '@dark-mode/dark-mode'
   import { copyTextListenClick } from '@lib/copy-text'
   import { initTooltips, initColumnStatBtn } from '@lib/tooltip-events'
@@ -55,7 +54,6 @@
   }
 
   const isDark = $darkModeTheme === 'dark'
-  const favicon = isDark ? iconDark : icon
 
   initTooltips()
   initColumnStatBtn((entity, attribut) => {
@@ -123,9 +121,9 @@
 </script>
 
 <svelte:head>
-  <link href={favicon} rel="shortcut icon" type="image/png" />
+  <link href={icon} rel="shortcut icon" type="image/png" />
   {#if isHttp}
-    <link href="manifest.json?v=6" rel="manifest" />
+    <link href="manifest.json?v=7" rel="manifest" />
   {/if}
 </svelte:head>
 

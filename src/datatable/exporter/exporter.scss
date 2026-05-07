@@ -70,4 +70,10 @@
       }
     }
   }
+
+  @media (max-width: 380px) {
+    button.button:has(.fa-magnifying-glass-plus) {
+      display: none;
+    }
+  }
 }
