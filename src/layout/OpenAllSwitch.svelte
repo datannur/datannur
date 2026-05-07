@@ -37,8 +37,14 @@
   @include viewport-small-mobile {
     .open-all-wrapper {
       top: 40px;
-      left: 5px;
+      left: 15px;
       right: auto;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .open-all-wrapper {
+      display: none;
     }
   }
 </style>
