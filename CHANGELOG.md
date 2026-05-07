@@ -1,6 +1,6 @@
 # datannur
 
-## Unreleased
+## 0.21.4 (2026-05-07)
 
 - add: config-driven screenshot capture suite for about-page assets
 - change: use logo icon with background
