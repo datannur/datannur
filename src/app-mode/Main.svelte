@@ -8,7 +8,6 @@
   import Logs from '@lib/logs'
   import SearchHistory from '@search/search-history'
   import Options from '@lib/options'
-  import icon from '@img/icon.png'
   import { DarkMode, darkModeTheme } from '@dark-mode/dark-mode'
   import { copyTextListenClick } from '@lib/copy-text'
   import { initTooltips, initColumnStatBtn } from '@lib/tooltip-events'
@@ -121,7 +120,6 @@
 </script>
 
 <svelte:head>
-  <link href={icon} rel="shortcut icon" type="image/png" />
   {#if isHttp}
     <link href="manifest.json?v=7" rel="manifest" />
   {/if}
