@@ -16,15 +16,14 @@ export default defineConfig({
       'link',
       {
         rel: 'icon',
-        type: 'image/png',
-        sizes: '32x32',
-        href: '/app/favicon-32.png',
+        type: 'image/x-icon',
+        href: '/app/icon.ico',
       },
     ],
   ],
 
   themeConfig: {
-    logo: '/logo.png',
+    logo: '/icon.svg',
 
     nav: [
       { text: 'Website', link: 'https://datannur.com' },
