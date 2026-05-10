@@ -71,8 +71,8 @@
       Column.nbMissing(),
       Column.nbDuplicates(),
       Column.nbValues(nbValueMax),
-      Column.frequency(),
       Column.valuesPreview(),
+      Column.frequency(),
     ]
     if (isMeta) {
       return [
