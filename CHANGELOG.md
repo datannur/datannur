@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- change: rename the values count column to `Nb val.`
+
 ## 0.21.4 (2026-05-07)
 
 - add: config-driven screenshot capture suite for about-page assets

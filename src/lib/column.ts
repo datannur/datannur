@@ -371,10 +371,10 @@ export default class Column {
     return {
       data: 'nbValue',
       name: 'value',
-      title: Render.icon('value') + 'Nb',
+      title: Render.icon('value') + 'Nb val.',
       defaultContent: '',
       filterType: 'input',
-      tooltip: 'Nombre de valeurs',
+      tooltip: 'Nombre de valeurs distinctes',
       render: (data, type, row) => Render.nbValues(data, type, row, nbValueMax),
     }
   }
