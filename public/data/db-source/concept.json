@@ -1,0 +1,187 @@
+[
+  {
+    "id": "revenu",
+    "name": "Revenu",
+    "description": "Ensemble des ressources monétaires perçues par une personne, un ménage ou une unité économique sur une période donnée."
+  },
+  {
+    "id": "population",
+    "name": "Population",
+    "description": "Ensemble des personnes résidant dans un territoire ou appartenant à un groupe observé."
+  },
+  {
+    "id": "temperature",
+    "name": "Température",
+    "description": "Grandeur physique mesurant le niveau thermique observé dans un lieu ou un milieu."
+  },
+  {
+    "id": "coordonnee_geographique",
+    "name": "Coordonnée géographique",
+    "description": "Valeur de position permettant de localiser un objet ou un lieu dans un système de référence spatial."
+  },
+  {
+    "id": "accident",
+    "name": "Accident",
+    "description": "Événement non intentionnel provoquant un dommage, une blessure ou une perturbation d'activité."
+  },
+  {
+    "id": "emploi",
+    "name": "Emploi",
+    "description": "Situation ou caractéristiques liées à l'exercice d'une activité professionnelle ou à la relation d'emploi."
+  },
+  {
+    "id": "cout",
+    "name": "Coût",
+    "description": "Montant engagé ou supporté au titre d'une dépense, d'un investissement ou d'une charge."
+  },
+  {
+    "id": "revenu_total_brut",
+    "parent_id": "revenu",
+    "name": "Revenu total brut",
+    "description": "Montant total des revenus avant déductions, impôts et autres charges obligatoires."
+  },
+  {
+    "id": "revenu_total_net",
+    "parent_id": "revenu",
+    "name": "Revenu total net",
+    "description": "Montant total des revenus après déductions, impôts et charges obligatoires."
+  },
+  {
+    "id": "revenu_par_personne",
+    "parent_id": "revenu",
+    "name": "Revenu par personne",
+    "description": "Montant du revenu total rapporté au nombre de personnes composant le ménage ou le groupe observé."
+  },
+  {
+    "id": "revenu_median",
+    "parent_id": "revenu",
+    "name": "Revenu médian",
+    "description": "Niveau de revenu qui partage la population observée en deux parts égales : 50 % en dessous, 50 % au-dessus."
+  },
+  {
+    "id": "revenu_du_travail",
+    "parent_id": "revenu",
+    "name": "Revenus du travail",
+    "description": "Part des revenus provenant directement d'une activité professionnelle salariée ou indépendante."
+  },
+  {
+    "id": "revenu_du_capital",
+    "parent_id": "revenu",
+    "name": "Revenus du capital",
+    "description": "Part des revenus provenant du patrimoine financier ou immobilier."
+  },
+  {
+    "id": "prestation_sociale",
+    "parent_id": "revenu",
+    "name": "Prestations sociales",
+    "description": "Transferts monétaires ou en nature versés au titre de la protection sociale, tels que rentes, allocations ou indemnités."
+  },
+  {
+    "id": "population_totale",
+    "parent_id": "population",
+    "name": "Population totale",
+    "description": "Nombre total de personnes résidant dans le territoire observé."
+  },
+  {
+    "id": "population_suisse",
+    "parent_id": "population",
+    "name": "Population suisse",
+    "description": "Nombre de personnes de nationalité suisse dans le territoire observé."
+  },
+  {
+    "id": "population_etrangere",
+    "parent_id": "population",
+    "name": "Population étrangère",
+    "description": "Nombre de personnes de nationalité étrangère dans le territoire observé."
+  },
+  {
+    "id": "densite_population",
+    "parent_id": "population",
+    "name": "Densité de population",
+    "description": "Rapport entre le nombre d'habitants et la surface du territoire, généralement exprimé en habitants par kilomètre carré."
+  },
+  {
+    "id": "nombre_beneficiaires",
+    "parent_id": "population",
+    "name": "Nombre de bénéficiaires",
+    "description": "Nombre de personnes bénéficiant effectivement d'un service, d'une prestation ou d'un dispositif."
+  },
+  {
+    "id": "temperature_moyenne",
+    "parent_id": "temperature",
+    "name": "Température moyenne",
+    "description": "Valeur moyenne de la température observée sur la période de référence."
+  },
+  {
+    "id": "temperature_minimale",
+    "parent_id": "temperature",
+    "name": "Température minimale",
+    "description": "Valeur minimale de la température observée sur la période de référence."
+  },
+  {
+    "id": "temperature_maximale",
+    "parent_id": "temperature",
+    "name": "Température maximale",
+    "description": "Valeur maximale de la température observée sur la période de référence."
+  },
+  {
+    "id": "coordonnee_x_lv95",
+    "parent_id": "coordonnee_geographique",
+    "name": "Coordonnée X LV95",
+    "description": "Valeur de position sur l'axe est-ouest dans le système de coordonnées suisses CH1903+ / LV95."
+  },
+  {
+    "id": "coordonnee_y_lv95",
+    "parent_id": "coordonnee_geographique",
+    "name": "Coordonnée Y LV95",
+    "description": "Valeur de position sur l'axe nord-sud dans le système de coordonnées suisses CH1903+ / LV95."
+  },
+  {
+    "id": "type_accident",
+    "parent_id": "accident",
+    "name": "Type d'accident",
+    "description": "Catégorie décrivant la nature de l'accident, par exemple collision, chute ou coupure."
+  },
+  {
+    "id": "gravite_accident",
+    "parent_id": "accident",
+    "name": "Gravité d'accident",
+    "description": "Niveau de sévérité attribué à un accident selon ses conséquences humaines ou matérielles."
+  },
+  {
+    "id": "nombre_employes",
+    "parent_id": "emploi",
+    "name": "Nombre d'employés",
+    "description": "Nombre total de personnes employées dans l'entité, le service ou le secteur observé."
+  },
+  {
+    "id": "nombre_entreprises",
+    "parent_id": "emploi",
+    "name": "Nombre d'entreprises",
+    "description": "Nombre total d'entreprises recensées dans le périmètre observé."
+  },
+  {
+    "id": "niveau_formation",
+    "parent_id": "emploi",
+    "name": "Niveau de formation",
+    "description": "Niveau de formation atteint ou requis, exprimé selon une typologie telle que CFC, Bachelor, Master ou Doctorat."
+  },
+  {
+    "id": "type_contrat",
+    "parent_id": "emploi",
+    "name": "Type de contrat",
+    "description": "Catégorie de contrat de travail liant une personne à un employeur, par exemple CDI, CDD ou apprentissage."
+  },
+  {
+    "id": "statut_emploi",
+    "parent_id": "emploi",
+    "name": "Statut d'emploi",
+    "description": "Situation d'une personne au regard de l'emploi, par exemple temps plein, temps partiel, chômage ou inactivité."
+  },
+  {
+    "id": "cout_investissement",
+    "parent_id": "cout",
+    "name": "Coût d'investissement",
+    "description": "Montant engagé pour financer un investissement ou une dépense d'équipement durable."
+  }
+]

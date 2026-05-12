@@ -1,72 +1,72 @@
 [
   {
-    "DATE_ACCIDENT": "2023-01-12T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-01-12",
     "TYPE_ACCIDENT": "Collision",
     "GRAVITE": "Léger",
-    "NB_BLESSES": 1,
+    "NB_BLESSES": "1",
     "CAUSE_PRESUMEE": "Vitesse"
   },
   {
-    "DATE_ACCIDENT": "2023-02-03T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-02-03",
     "TYPE_ACCIDENT": "Sortie de route",
     "GRAVITE": "Grave",
-    "NB_BLESSES": 2,
+    "NB_BLESSES": "2",
     "CAUSE_PRESUMEE": "Météo"
   },
   {
-    "DATE_ACCIDENT": "2023-02-27T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-02-27",
     "TYPE_ACCIDENT": "Choc avec piéton",
     "GRAVITE": "Léger",
-    "NB_BLESSES": null,
+    "NB_BLESSES": "",
     "CAUSE_PRESUMEE": "Distraction"
   },
   {
-    "DATE_ACCIDENT": "2023-03-18T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-03-18",
     "TYPE_ACCIDENT": "Collision",
     "GRAVITE": "Mortel",
-    "NB_BLESSES": 0,
+    "NB_BLESSES": "0",
     "CAUSE_PRESUMEE": "Alcool"
   },
   {
-    "DATE_ACCIDENT": "2023-04-09T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-04-09",
     "TYPE_ACCIDENT": "Accident avec cycliste",
     "GRAVITE": "Grave",
-    "NB_BLESSES": 3,
+    "NB_BLESSES": "3",
     "CAUSE_PRESUMEE": "Priorité non respectée"
   },
   {
-    "DATE_ACCIDENT": "2023-05-21T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-05-21",
     "TYPE_ACCIDENT": "Sortie de route",
     "GRAVITE": "Léger",
-    "NB_BLESSES": 1,
+    "NB_BLESSES": "1",
     "CAUSE_PRESUMEE": "Vitesse"
   },
   {
-    "DATE_ACCIDENT": "2023-06-14T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-06-14",
     "TYPE_ACCIDENT": "Collision",
     "GRAVITE": "Grave",
-    "NB_BLESSES": null,
+    "NB_BLESSES": "",
     "CAUSE_PRESUMEE": "Météo"
   },
   {
-    "DATE_ACCIDENT": "2023-07-02T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-07-02",
     "TYPE_ACCIDENT": "Choc avec piéton",
     "GRAVITE": "Léger",
-    "NB_BLESSES": 2,
+    "NB_BLESSES": "2",
     "CAUSE_PRESUMEE": "Distraction"
   },
   {
-    "DATE_ACCIDENT": "2023-08-25T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-08-25",
     "TYPE_ACCIDENT": "Accident avec cycliste",
     "GRAVITE": "Léger",
-    "NB_BLESSES": 0,
+    "NB_BLESSES": "0",
     "CAUSE_PRESUMEE": "Alcool"
   },
   {
-    "DATE_ACCIDENT": "2023-09-11T00:00:00.000Z",
+    "DATE_ACCIDENT": "2023-09-11",
     "TYPE_ACCIDENT": "Collision",
     "GRAVITE": "Grave",
-    "NB_BLESSES": 3,
+    "NB_BLESSES": "3",
     "CAUSE_PRESUMEE": "Priorité non respectée"
   }
 ]

@@ -11,6 +11,5 @@ For a more integrated experience (Start Menu / Dock shortcut, local server auto-
 
 You can populate your own catalog in several ways:
 
-- **Edit Excel sources** — maintain your metadata in `/data/db-source/` as Excel files and sync to `/data/db/` with either `npm run sync-db` (Node.js) or [datannurpy](https://github.com/datannur/datannurpy) (Python). See [Managing Your Data](/data).
-- **Use the datannur builder** — [datannurpy](https://github.com/datannur/datannurpy) can also auto-extract metadata by scanning databases and files, writing directly to `/data/db/`.
+- **Edit source files** — maintain your metadata in `/data/db-source/` as JSON files, Markdown documents, and CSV previews, then run `python3 python-scripts/build_db_source.py` to rebuild `/data/db/`. See [Managing Your Data](/data).
 - **Any other workflow** — as long as the output matches the schemas in `/public/schemas/`, you can generate `/data/db/` with any tool or script of your choice.

@@ -4,15 +4,15 @@
     "value": "contact@datannur.com"
   },
   {
+    "id": "more_info",
+    "value": "Cette version utilise des données fictives à des fins de démonstration."
+  },
+  {
     "id": "filter_1",
     "value": "open_data : Open Data"
   },
   {
     "id": "filter_2",
     "value": "closed_data : Closed Data"
-  },
-  {
-    "id": "more_info",
-    "value": "Cette version utilise des données fictives à des fins de démonstration."
   }
 ]

@@ -122,17 +122,16 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 
 ### API & Schema Management
 
-| Command                          | Purpose                                           |
-| -------------------------------- | ------------------------------------------------- |
-| `npm run validate-schemas`       | Validate all schemas and data files               |
-| `npm run schema:generate`        | Generate schemas from data                        |
-| `npm run schema:generate:strict` | Generate schemas (strict mode)                    |
-| `npm run schema:update`          | Update schemas with new fields                    |
-| `npm run schema:update:strict`   | Update schemas (strict mode)                      |
-| `npm run schema:reset`           | Reset schemas to default                          |
-| `npm run schema:build`           | Validate schemas + generate OpenAPI               |
-| `npm run api:generate`           | Generate OpenAPI specs from schemas               |
-| `npm run api:dev`                | Start Node.js API dev server (default port 61293) |
+| Command                                             | Purpose                                           |
+| --------------------------------------------------- | ------------------------------------------------- |
+| `python3 public/python-scripts/validate_schemas.py` | Validate all schemas and data files               |
+| `npm run schema:generate`                           | Generate schemas from data                        |
+| `npm run schema:generate:strict`                    | Generate schemas (strict mode)                    |
+| `npm run schema:update`                             | Update schemas with new fields                    |
+| `npm run schema:update:strict`                      | Update schemas (strict mode)                      |
+| `npm run schema:reset`                              | Reset schemas to default                          |
+| `npm run api:generate`                              | Generate OpenAPI specs from schemas               |
+| `npm run api:dev`                                   | Start Node.js API dev server (default port 61293) |
 
 ## Guidelines
 
@@ -215,7 +214,8 @@ datannur provides two API implementations accessing the same JSON database:
 **Schema-driven:**
 
 - OpenAPI specs auto-generated from JSON schemas in `public/schemas/`
-- Run `npm run schema:build` (from `public/`) to validate and regenerate
+- Run `python3 python-scripts/validate_schemas.py` (from `public/`) to validate schemas and data
+- Run `npm run api:generate` (from `public/`) to regenerate OpenAPI specs
 - API version auto-increments when schemas change
 
 ## Releases & Maintenance

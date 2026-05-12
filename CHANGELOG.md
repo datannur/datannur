@@ -1,9 +1,11 @@
 # datannur
 
-## Unreleased
+## 0.22.0 (2026-05-12)
 
-- add: local edit server overlay patch endpoint for schema-driven metadata updates, with lock, atomic write, and audit log
-- add: prepare localhost edit runtime with edit server config, Python runtime helpers, local service startup, CORS-aware status checks, and frontend status detection
+- add: `python-scripts/build_db_source.py` to compile editable `data/db-source` JSON, Markdown, and CSV files into generated jsonjsdb files in `data/db`
+- change: replace demo database Excel sources with editable `data/db-source` JSON/Markdown/CSV source files
+- remove: `jsonjsdb-builder`, `sync-db`, `schema:build`, and the Node schema validation script from the development workflow
+- add: local edit runtime with status detection and schema-driven overlay patch endpoint
 - fix: restrict local LLM proxy requests to the configured localhost app origin
 - change: rename the values count column to `Nb val.`
 

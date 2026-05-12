@@ -17,7 +17,7 @@ datannur uses a client-side relational database powered by [jsonjsdb](https://gi
 
 Each table is stored in two formats:
 
-**`.json` files** - Standard JSON format (source of truth, editable):
+**`.json` files** - Standard JSON format:
 
 ```json
 [
@@ -44,7 +44,7 @@ jsonjs.data['dataset'] = [
 ]
 ```
 
-> **💡 Note:** Both files are generated automatically by jsonjsdb-builder. Edit only the `.json` files - the `.json.js` files are derived for optimal browser performance
+> **💡 Note:** The demo database is generated from `/data/db-source/` with `python3 python-scripts/build_db_source.py`. Edit the source files there, then rebuild `/data/db/`; the `.json.js` files are derived for optimal browser performance.
 
 ### Table Registry
 
@@ -121,11 +121,15 @@ The "About" content (both homepage tab and dedicated page) is composed of three 
 - **body**: Custom main content
 - **more_info**: Custom additional information
 
-## Excel to jsonjsdb format
+## Source files to jsonjsdb format
 
-- Use the script `node-scripts/sync-db.ts` to convert Excel files to both `.json` and `.json.js` formats
-- Run with:
+- Maintain editable source files in `/data/db-source/`:
+  - top-level `*.json` files for metadata tables
+  - `md/*.md` files for Markdown documents
+  - `dataset/*.csv` files for dataset previews
+- Use the script `python-scripts/build_db_source.py` to compile source files to both `.json` and `.json.js` formats in `/data/db/`
+- Run from the application folder with:
   ```bash
-  npm run sync-db
+  python3 python-scripts/build_db_source.py
   ```
-- The script supports watch mode: any changes to your Excel files are automatically detected and converted, keeping your metadata up to date in real time
+- Re-run the script after changing source files to update the generated database.

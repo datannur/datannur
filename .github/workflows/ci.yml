@@ -78,9 +78,6 @@ jobs:
       - name: Svelte
         run: npm run svelte-check
 
-      - name: Validate schemas
-        run: npm run validate-schemas
-
   tests:
     runs-on: ubuntu-24.04-arm
     name: Tests
