@@ -1,8 +1,12 @@
+import errno
 import json
-from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+import sys
+from typing import Any, Callable, TypeAlias
 from urllib.parse import urlparse
+
+RequestHandlerFactory: TypeAlias = Callable[..., BaseHTTPRequestHandler]
 
 APP_DIR = Path(__file__).resolve().parent.parent
 LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
@@ -52,3 +56,19 @@ class JsonRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(payload)))
         self.end_headers()
         self.wfile.write(payload)
+
+
+def create_local_http_server(
+    port: int,
+    handler: RequestHandlerFactory,
+    label: str,
+) -> ThreadingHTTPServer:
+    try:
+        return ThreadingHTTPServer(("127.0.0.1", port), handler)
+    except OSError as error:
+        if error.errno == errno.EADDRINUSE:
+            sys.exit(
+                f"ERROR: {label} port {port} is already in use. "
+                "Stop the existing service or update data/localhost-ports.config.json."
+            )
+        raise

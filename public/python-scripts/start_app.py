@@ -10,10 +10,10 @@ import os
 import subprocess
 import sys
 import webbrowser
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from http.server import SimpleHTTPRequestHandler
 from pathlib import Path
 
-from _local_runtime import get_local_port
+from _local_runtime import create_local_http_server, get_local_port
 
 APP_DIR = Path(__file__).parent.parent
 DEFAULT_APP_PORT = 61291
@@ -66,14 +66,14 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
 def main():
     processes = []
     app_port = get_local_port("appPort", DEFAULT_APP_PORT)
+    handler = functools.partial(SafeHTTPHandler, directory=str(APP_DIR))
+
+    server = create_local_http_server(app_port, handler, "app")
 
     for script_name in LOCAL_SERVICE_SCRIPTS:
         service_script = Path(__file__).parent / script_name
         if service_script.exists():
             processes.append(subprocess.Popen([sys.executable, str(service_script)]))
-
-    handler = functools.partial(SafeHTTPHandler, directory=str(APP_DIR))
-    server = ThreadingHTTPServer(("127.0.0.1", app_port), handler)
 
     print(f"\n  App: http://localhost:{app_port}")
     print("  Press Ctrl+C to stop\n")

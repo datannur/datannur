@@ -4,9 +4,11 @@ Datannur local edit server.
 Provides the local editing runtime API for the browser app.
 """
 
-from http.server import HTTPServer
-
-from _local_runtime import JsonRequestHandler, get_local_port
+from _local_runtime import (
+    JsonRequestHandler,
+    create_local_http_server,
+    get_local_port,
+)
 
 DEFAULT_EDIT_SERVER_PORT = 61294
 
@@ -28,7 +30,8 @@ class EditHandler(JsonRequestHandler):
 
 if __name__ == "__main__":
     port = get_local_port("editServerPort", DEFAULT_EDIT_SERVER_PORT)
-    server = HTTPServer(("127.0.0.1", port), EditHandler)
+    server = create_local_http_server(port, EditHandler, "edit server")
+
     print(f"✓ Edit server running on http://127.0.0.1:{port}")
     print("✓ Endpoints:")
     print("  - GET /api/status - Check edit runtime status")

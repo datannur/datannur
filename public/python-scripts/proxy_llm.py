@@ -6,7 +6,7 @@ No external dependencies required - uses only Python standard library
 API credentials are stored in user config file
 """
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler
 import json
 import http.client
 import ssl
@@ -20,7 +20,12 @@ import random
 from pathlib import Path
 from typing import Optional
 
-from _local_runtime import get_local_app_origin, get_local_port, is_local_app_origin
+from _local_runtime import (
+    create_local_http_server,
+    get_local_app_origin,
+    get_local_port,
+    is_local_app_origin,
+)
 
 REPO_PATH = Path(__file__).parent.parent
 UPDATE_APP_CONFIG = REPO_PATH / "data" / "update-app.json"
@@ -511,7 +516,8 @@ if __name__ == "__main__":
     else:
         print("✓ No HTTP proxy configured (direct connection)")
 
-    server = HTTPServer(("localhost", port), ProxyHandler)
+    server = create_local_http_server(port, ProxyHandler, "LLM proxy")
+
     print(f"✓ LLM Proxy running on http://localhost:{port}")
     print("✓ Endpoints:")
     print("  - POST /set_keys - Configure API credentials")

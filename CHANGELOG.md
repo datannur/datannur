@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: local edit frontend status client and app startup status check for the local edit server
 - change: make the local app launcher start optional local service scripts, including the future edit server
 - add: reserve local edit server port in localhost port config and share Python local runtime helpers
 - fix: restrict local LLM proxy requests to the configured localhost app origin
