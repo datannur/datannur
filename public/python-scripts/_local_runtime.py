@@ -3,17 +3,17 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import sys
-from typing import Any, Callable, TypeAlias
+from typing import Any, Callable, Optional
 from urllib.parse import urlparse
 
-RequestHandlerFactory: TypeAlias = Callable[..., BaseHTTPRequestHandler]
+RequestHandlerFactory = Callable[..., BaseHTTPRequestHandler]
 
 APP_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = APP_DIR / "data"
 LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
 
 
-def find_data_db_dir(base_dir: Path = APP_DIR) -> Path | None:
+def find_data_db_dir(base_dir: Path = APP_DIR) -> Optional[Path]:
     db_dir = base_dir / "data" / "db"
     if not db_dir.exists():
         return None
@@ -81,7 +81,7 @@ class JsonRequestHandler(BaseHTTPRequestHandler):
         self,
         status_code: int,
         data: dict[str, Any],
-        headers: dict[str, str] | None = None,
+        headers: Optional[dict[str, str]] = None,
     ) -> None:
         payload = json.dumps(data).encode("utf-8")
         self.send_response(status_code)

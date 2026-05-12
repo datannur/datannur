@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- add: prepare localhost edit mode with edit server config, Python runtime helpers, local service startup, CORS-aware status checks, and frontend status detection
+- add: local edit server overlay patch endpoint for schema-driven metadata updates, with lock, atomic write, and audit log
+- add: prepare localhost edit runtime with edit server config, Python runtime helpers, local service startup, CORS-aware status checks, and frontend status detection
 - fix: restrict local LLM proxy requests to the configured localhost app origin
 - change: rename the values count column to `Nb val.`
 

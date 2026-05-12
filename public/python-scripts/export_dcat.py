@@ -139,7 +139,7 @@ class DCATExporter:
         base_uri = self.config.get("base_uri", "https://example.org/")
         return URIRef(f"{base_uri}dataset/{dataset_id}/distribution/{dist_id}")
 
-    def _parse_date(self, date_value) -> Literal | None:
+    def _parse_date(self, date_value) -> Optional[Literal]:
         """Parse date from various formats to appropriate xsd datatype"""
         if not date_value:
             return None

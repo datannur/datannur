@@ -5,6 +5,7 @@ import json
 import sys
 from collections import defaultdict
 from pathlib import Path
+from typing import Optional
 
 from _local_runtime import find_data_db_dir
 
@@ -19,7 +20,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-def find_schemas_dir(base_dir: Path) -> Path | None:
+def find_schemas_dir(base_dir: Path) -> Optional[Path]:
     """Find schemas directory."""
     schemas_dir = base_dir / "schemas"
     if schemas_dir.exists() and list(schemas_dir.glob("*.schema.json")):
