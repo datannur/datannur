@@ -1,1 +1,1 @@
-jsonjs.data['config'] = [["id","value"],["contact_email","contact@datannur.com"],["more_info","Cette version utilise des données fictives à des fins de démonstration."],["filter_1","open_data : Open Data"],["filter_2","closed_data : Closed Data"]]
+jsonjs.data['config'] = [["id","value"],["contact_email","contact@datannur.com"],["filter_1","open_data : Open Data"],["filter_2","closed_data : Closed Data"],["more_info","Cette version utilise des données fictives à des fins de démonstration."]]

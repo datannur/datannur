@@ -1,10 +1,8 @@
 import autoprefixer from 'autoprefixer'
 import alias from '@rollup/plugin-alias'
-import FullReload from 'vite-plugin-full-reload'
 import { defineConfig } from 'vitest/config'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { svelte, type Options } from '@sveltejs/vite-plugin-svelte'
-import { initJsonjsdbBuilder } from 'jsonjsdb-builder'
 import svelteConfig from './svelte.config.js'
 import {
   bundleSchemas,
@@ -17,7 +15,6 @@ import {
 
 const outDir = 'app'
 const dbName = process.env.DB ?? 'db'
-const isDefaultDb = dbName === 'db'
 
 const { appVersion, aliases } = await initBuildConfig()
 
@@ -31,19 +28,6 @@ await copyPaths([
     'public/assets/external/flexsearch.js',
   ],
 ])
-
-const builder = isDefaultDb
-  ? await initJsonjsdbBuilder(
-      {
-        dbPath: `public/data/${dbName}`,
-        dbSourcePath: 'public/data/db-source',
-        previewPath: 'public/data/dataset',
-        mdPath: 'public/data/md',
-        configPath: 'public/data/jsonjsdb-config.html',
-      },
-      { isDevelopment: process.env.NODE_ENV === 'development' },
-    )
-  : null
 
 export default defineConfig({
   base: '',
@@ -71,13 +55,12 @@ export default defineConfig({
   },
   plugins: [
     bundleSchemas('public/schemas', 'src/assets/db-schema.json'),
-    builder?.getVitePlugins(FullReload),
     updateRouterIndex('src/page'),
     alias({ entries: aliases }),
     svelte(svelteConfig as Options),
     spaHtmlOptimizations(),
     copyFilesToOutDir(outDir, ['LICENSE', 'CHANGELOG.md', 'README.md']),
-    !isDefaultDb && {
+    {
       name: 'inject-jsonjsdb-config',
       transformIndexHtml(html) {
         const config = `<div id="jsonjsdb-config" style="display:none" data-app-name="datannur-app-v2" data-path="data/${dbName}"></div>`

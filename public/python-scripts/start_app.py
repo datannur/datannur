@@ -1,38 +1,23 @@
 #!/usr/bin/env python3
 """
-Start datannur app with LLM proxy
-Launches both the HTTP server for index.html and the LLM proxy in parallel
+Start datannur app with optional local services
+Launches the HTTP server for index.html and available local service scripts in parallel
 No external dependencies required - uses only Python standard library
 """
 
 import functools
-import json
 import os
 import subprocess
 import sys
 import webbrowser
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from http.server import SimpleHTTPRequestHandler
 from pathlib import Path
 
+from _local_runtime import create_local_http_server, get_local_port
+
 APP_DIR = Path(__file__).parent.parent
-LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
 DEFAULT_APP_PORT = 61291
-
-
-def get_app_port() -> int:
-    """Get app server port from local config file."""
-    if not LOCAL_PORTS_CONFIG.exists():
-        return DEFAULT_APP_PORT
-
-    try:
-        config = json.loads(LOCAL_PORTS_CONFIG.read_text(encoding="utf-8"))
-        port = config.get("appPort")
-        if isinstance(port, int) and port > 0:
-            return port
-    except (json.JSONDecodeError, OSError):
-        pass
-
-    return DEFAULT_APP_PORT
+LOCAL_SERVICE_SCRIPTS = ("proxy_llm.py", "edit_server.py")
 
 
 class SafeHTTPHandler(SimpleHTTPRequestHandler):
@@ -79,15 +64,16 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
 
 
 def main():
-    proxy_script = Path(__file__).parent / "proxy_llm.py"
     processes = []
-    app_port = get_app_port()
-
-    if proxy_script.exists():
-        processes.append(subprocess.Popen([sys.executable, str(proxy_script)]))
-
+    app_port = get_local_port("appPort", DEFAULT_APP_PORT)
     handler = functools.partial(SafeHTTPHandler, directory=str(APP_DIR))
-    server = ThreadingHTTPServer(("127.0.0.1", app_port), handler)
+
+    server = create_local_http_server(app_port, handler, "app")
+
+    for script_name in LOCAL_SERVICE_SCRIPTS:
+        service_script = Path(__file__).parent / script_name
+        if service_script.exists():
+            processes.append(subprocess.Popen([sys.executable, str(service_script)]))
 
     print(f"\n  App: http://localhost:{app_port}")
     print("  Press Ctrl+C to stop\n")

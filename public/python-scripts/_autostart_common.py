@@ -13,7 +13,6 @@ systemd --user on Linux. Logs land in a user-writable location.
 
 from __future__ import annotations
 
-import json
 import os
 import platform
 import shutil
@@ -24,8 +23,9 @@ import time
 import webbrowser
 from pathlib import Path
 
+from _local_runtime import get_local_port
+
 APP_DIR = Path(__file__).resolve().parent.parent
-CONFIG_JSON = APP_DIR / "data" / "localhost-ports.config.json"
 PROXY_SCRIPT = APP_DIR / "python-scripts" / "proxy_llm.py"
 
 TARGETS = {
@@ -39,19 +39,6 @@ def logs_dir() -> Path:
         return Path.home() / "Library" / "Logs" / "datannur"
     base = os.environ.get("XDG_STATE_HOME") or str(Path.home() / ".local" / "state")
     return Path(base) / "datannur" / "logs"
-
-
-def get_port(key: str, default: int) -> int:
-    if not CONFIG_JSON.exists():
-        return default
-    try:
-        cfg = json.loads(CONFIG_JSON.read_text(encoding="utf-8"))
-        v = cfg.get(key)
-        if isinstance(v, int) and v > 0:
-            return v
-    except (json.JSONDecodeError, OSError):
-        pass
-    return default
 
 
 def open_url(url: str) -> None:
@@ -75,7 +62,7 @@ def build_argv(target: str) -> list[str]:
     """Command line to run the service (python + args)."""
     python_bin = sys.executable or shutil.which("python3") or "python3"
     if target == "app":
-        port = get_port("appPort", 61291)
+        port = get_local_port("appPort", 61291)
         return [
             python_bin,
             "-m",
@@ -222,7 +209,7 @@ def install(target: str) -> None:
         sys.exit(f"ERROR: unsupported OS: {system}")
 
     time.sleep(1)
-    port = get_port(cfg["port_key"], cfg["default_port"])
+    port = get_local_port(cfg["port_key"], cfg["default_port"])
     if target == "app":
         url = f"http://localhost:{port}"
         print(f"    opening {url}")

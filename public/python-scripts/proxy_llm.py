@@ -6,14 +6,13 @@ No external dependencies required - uses only Python standard library
 API credentials are stored in user config file
 """
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler
 import json
 import http.client
 import ssl
 import traceback
 import urllib.request
 import urllib.error
-from urllib.parse import urlparse
 import os
 import sys
 import time
@@ -21,9 +20,16 @@ import random
 from pathlib import Path
 from typing import Optional
 
+from _local_runtime import (
+    create_local_http_server,
+    get_local_app_origin,
+    get_local_port,
+    is_local_app_origin,
+)
+
 REPO_PATH = Path(__file__).parent.parent
 UPDATE_APP_CONFIG = REPO_PATH / "data" / "update-app.json"
-LOCAL_PORTS_CONFIG = REPO_PATH / "data" / "localhost-ports.config.json"
+DEFAULT_APP_PORT = 61291
 DEFAULT_LLM_PROXY_PORT = 61292
 
 
@@ -36,20 +42,6 @@ def get_proxy_url() -> Optional[str]:
         return config.get("proxyUrl")
     except (json.JSONDecodeError, OSError):
         return None
-
-
-def get_llm_proxy_port() -> int:
-    """Get LLM proxy port from local config file."""
-    if not LOCAL_PORTS_CONFIG.exists():
-        return DEFAULT_LLM_PROXY_PORT
-    try:
-        config = json.loads(LOCAL_PORTS_CONFIG.read_text(encoding="utf-8"))
-        port = config.get("llmProxyPort")
-        if isinstance(port, int) and port > 0:
-            return port
-    except (json.JSONDecodeError, OSError):
-        pass
-    return DEFAULT_LLM_PROXY_PORT
 
 
 def get_config_dir():
@@ -121,20 +113,16 @@ class ProxyHandler(BaseHTTPRequestHandler):
         print(f"{self.address_string()} - {format % args}")
 
     def _is_allowed_origin(self, origin: str) -> bool:
-        """Check if origin is an allowed localhost or file:// origin"""
-        if not origin or origin == "null":
+        """Check if origin is the configured localhost app origin"""
+        return is_local_app_origin(origin, DEFAULT_APP_PORT)
+
+    def _is_allowed_cors_origin(self, origin: str) -> bool:
+        if not origin:
             return True
-        try:
-            parsed = urlparse(origin)
-            return parsed.scheme in ("http", "https") and parsed.hostname in (
-                "localhost",
-                "127.0.0.1",
-            )
-        except Exception:
-            return False
+        return self._is_allowed_origin(origin)
 
     def _check_origin(self):
-        """Verify request comes from localhost or file://, reject otherwise"""
+        """Verify request comes from localhost, reject otherwise"""
         origin = self.headers.get("Origin", "")
         if not self._is_allowed_origin(origin):
             self._send_json_response(403, {"error": "Forbidden origin"})
@@ -144,9 +132,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
     def _get_cors_origin(self) -> str:
         """Get validated origin for CORS headers"""
         origin = self.headers.get("Origin", "")
-        if origin and self._is_allowed_origin(origin):
+        if origin and self._is_allowed_cors_origin(origin):
             return origin
-        return "http://localhost:5173"
+        return get_local_app_origin(DEFAULT_APP_PORT)
 
     def _send_json_response(self, status_code, data):
         """Send JSON response"""
@@ -513,7 +501,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = get_llm_proxy_port()
+    port = get_local_port("llmProxyPort", DEFAULT_LLM_PROXY_PORT)
 
     config = load_config()
     if config:
@@ -528,7 +516,8 @@ if __name__ == "__main__":
     else:
         print("✓ No HTTP proxy configured (direct connection)")
 
-    server = HTTPServer(("localhost", port), ProxyHandler)
+    server = create_local_http_server(port, ProxyHandler, "LLM proxy")
+
     print(f"✓ LLM Proxy running on http://localhost:{port}")
     print("✓ Endpoints:")
     print("  - POST /set_keys - Configure API credentials")

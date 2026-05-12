@@ -1,6 +1,7 @@
 import { writable, type Writable } from 'svelte/store'
 import type { EnumerationSimilitute } from '@type'
 import type { Tab } from '@tab/tabs-helper'
+import type { LocalEditStatus } from '@src/local-edit/local-edit-config'
 
 export const headerOpen = writable(false)
 export const footerVisible = writable(true)
@@ -11,6 +12,9 @@ export const allTabsIcon = writable({})
 export const allTabs: Writable<{ [key: string]: Tab }> = writable({})
 export const allTablesLoaded = writable(false)
 export const searchValue = writable('')
+export const localEditStatus = writable<LocalEditStatus>({
+  available: false,
+})
 export const whenAppReady: Writable<Promise<void>> = writable(
   new Promise(() => {}),
 )

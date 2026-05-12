@@ -1,122 +1,122 @@
 [
   {
-    "variable_id": "pop_region__population_totale",
-    "value": "value",
-    "frequency": 50
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_1",
-    "frequency": 600
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_2",
-    "frequency": 100
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_3",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_4",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_5",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_6",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_7",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_8",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_9",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_10",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_11",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_12",
-    "frequency": 20
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_13",
-    "frequency": 4
-  },
-  {
-    "variable_id": "pop_region__population_totale",
-    "value": "value_14",
-    "frequency": 1
-  },
-  {
-    "variable_id": "pop_region__type_region",
-    "value": "urbaine",
-    "frequency": 9432
-  },
-  {
-    "variable_id": "pop_region__type_region",
-    "value": "périurbaine",
-    "frequency": 43
-  },
-  {
-    "variable_id": "pop_region__type_region",
-    "value": "rurale",
-    "frequency": 3434
-  },
-  {
-    "variable_id": "pop_region__type_region",
-    "value": "montagne",
-    "frequency": 9481
-  },
-  {
-    "variable_id": "emploi_jeunes__nationalite",
-    "value": "aaaaaa",
-    "frequency": 21
-  },
-  {
-    "variable_id": "emploi_jeunes__nationalite",
-    "value": "aaaaaaaaa",
-    "frequency": 75
-  },
-  {
-    "variable_id": "emploi_jeunes__nationalite",
+    "frequency": 43,
     "value": "aaa-aaaaaa",
-    "frequency": 43
+    "variable_id": "emploi_jeunes__nationalite"
   },
   {
-    "variable_id": "emploi_jeunes__nationalite",
+    "frequency": 44,
     "value": "aaa-aaaaaa-999999999-9999999999-999999999",
-    "frequency": 44
+    "variable_id": "emploi_jeunes__nationalite"
   },
   {
-    "variable_id": "emploi_jeunes__nationalite",
+    "frequency": 21,
+    "value": "aaaaaa",
+    "variable_id": "emploi_jeunes__nationalite"
+  },
+  {
+    "frequency": 75,
+    "value": "aaaaaaaaa",
+    "variable_id": "emploi_jeunes__nationalite"
+  },
+  {
+    "frequency": 46,
     "value": "aaaaaaaaa9999999999999999999aaaaaaaaaaa9999999999aaaaa9999",
-    "frequency": 46
+    "variable_id": "emploi_jeunes__nationalite"
+  },
+  {
+    "frequency": 50,
+    "value": "value",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 600,
+    "value": "value_1",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_10",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_11",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_12",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 4,
+    "value": "value_13",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 1,
+    "value": "value_14",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 100,
+    "value": "value_2",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_3",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_4",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_5",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_6",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_7",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_8",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 20,
+    "value": "value_9",
+    "variable_id": "pop_region__population_totale"
+  },
+  {
+    "frequency": 9481,
+    "value": "montagne",
+    "variable_id": "pop_region__type_region"
+  },
+  {
+    "frequency": 43,
+    "value": "périurbaine",
+    "variable_id": "pop_region__type_region"
+  },
+  {
+    "frequency": 3434,
+    "value": "rurale",
+    "variable_id": "pop_region__type_region"
+  },
+  {
+    "frequency": 9432,
+    "value": "urbaine",
+    "variable_id": "pop_region__type_region"
   }
 ]

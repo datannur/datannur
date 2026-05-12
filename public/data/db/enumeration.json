@@ -1,58 +1,58 @@
 [
   {
-    "id": "enumeration_1",
-    "folder_id": "13-protec-social",
-    "name": "enumeration 1",
-    "type": "integer",
-    "description": "description of enumeration 1"
-  },
-  {
+    "description": "contains \"a\" or \"b\"",
+    "folder_id": "00-base",
     "id": "a_or_b",
-    "folder_id": "00-base",
     "name": "a or b",
-    "type": "string",
-    "description": "contains \"a\" or \"b\""
+    "type": "string"
   },
   {
+    "description": "contains \"a\" or \"b\" or \"c\"",
+    "folder_id": "00-base",
     "id": "a_or_b_or_c",
-    "folder_id": "00-base",
     "name": "a or b or c",
-    "type": "string",
-    "description": "contains \"a\" or \"b\" or \"c\""
+    "type": "string"
   },
   {
-    "id": "only_zero",
+    "description": "Liste des 26 cantons suisses et leur sigle",
     "folder_id": "00-base",
-    "name": "only zero",
-    "type": "integer",
-    "description": "contains only a 0 value"
-  },
-  {
     "id": "canton_sigle",
-    "folder_id": "00-base",
     "name": "Sigle des cantons",
-    "type": "string",
-    "description": "Liste des 26 cantons suisses et leur sigle"
+    "type": "string"
   },
   {
+    "description": "description of enumeration 1",
+    "folder_id": "13-protec-social",
+    "id": "enumeration_1",
+    "name": "enumeration 1",
+    "type": "integer"
+  },
+  {
+    "description": "Liste des 3 principales langues suisses et leurs sigles",
+    "folder_id": "00-base",
     "id": "langue_sigle",
-    "folder_id": "00-base",
     "name": "Sigle des langues",
-    "type": "string",
-    "description": "Liste des 3 principales langues suisses et leurs sigles"
+    "type": "string"
   },
   {
+    "description": "contains only a 0 value",
+    "folder_id": "00-base",
+    "id": "only_zero",
+    "name": "only zero",
+    "type": "integer"
+  },
+  {
+    "description": "Oui ou non codé en 0 ou 1",
+    "folder_id": "00-base",
     "id": "oui_non",
-    "folder_id": "00-base",
     "name": "Oui ou non",
-    "type": "integer",
-    "description": "Oui ou non codé en 0 ou 1"
+    "type": "integer"
   },
   {
-    "id": "vide",
+    "description": "Valeur vide ou manquante",
     "folder_id": "00-base",
+    "id": "vide",
     "name": "vide / manquant",
-    "type": "integer",
-    "description": "Valeur vide ou manquante"
+    "type": "integer"
   }
 ]

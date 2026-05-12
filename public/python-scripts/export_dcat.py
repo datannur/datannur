@@ -10,6 +10,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, TYPE_CHECKING
 
+from _local_runtime import find_data_db_dir
+
 try:
     from rdflib import Graph, Namespace, Literal, URIRef, BNode
     from rdflib.namespace import RDF, RDFS, DCTERMS, FOAF, XSD
@@ -62,7 +64,11 @@ class DCATExporter:
 
     def load_data(self):
         """Load JSON data from database files"""
-        db_dir = self.data_dir / "db"
+        db_dir = find_data_db_dir(self.data_dir.parent)
+        if db_dir is None:
+            raise FileNotFoundError(
+                "Data directory not found (no JSON files in data/db/)"
+            )
 
         with open(db_dir / "dataset.json", "r", encoding="utf-8") as f:
             self.datasets = json.load(f)
@@ -133,7 +139,7 @@ class DCATExporter:
         base_uri = self.config.get("base_uri", "https://example.org/")
         return URIRef(f"{base_uri}dataset/{dataset_id}/distribution/{dist_id}")
 
-    def _parse_date(self, date_value) -> Literal | None:
+    def _parse_date(self, date_value) -> Optional[Literal]:
         """Parse date from various formats to appropriate xsd datatype"""
         if not date_value:
             return None

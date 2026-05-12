@@ -8,6 +8,8 @@ import Logs from '@lib/logs'
 import Favorites from '@favorite/favorites'
 import SearchHistory from '@search/search-history'
 import dbSchema from '@src/assets/db-schema.json'
+import { checkLocalEditStatus } from '@src/local-edit/local-edit-config'
+import { localEditStatus } from '@lib/store'
 import type { SearchHistoryEntry } from '@search/search-history'
 import type { Favorite } from '@favorite/favorites'
 import type { Log } from '@src/type'
@@ -69,6 +71,20 @@ export function initApp(): Promise<void> {
       SearchHistory.init(userData.searchHistory as SearchHistoryEntry[], {
         limit: 100,
       })
+
+      checkLocalEditStatus()
+        .then(status => {
+          localEditStatus.set(status)
+          console.log('local edit status:', status)
+        })
+        .catch(error => {
+          const status = {
+            available: false,
+            error: `Cannot check local edit server status: ${error}`,
+          } as const
+          localEditStatus.set(status)
+          console.log('local edit status:', status)
+        })
 
       console.log('init total', Math.round(performance.now() - timer) + ' ms')
     } catch (error) {
