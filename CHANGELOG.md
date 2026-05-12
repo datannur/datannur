@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- add: reserve local edit server port in localhost port config and share Python local port loading helper
+- change: make the local app launcher start optional local service scripts, including the future edit server
+- add: reserve local edit server port in localhost port config and share Python local runtime helpers
+- fix: restrict local LLM proxy requests to the configured localhost app origin
 - change: rename the values count column to `Nb val.`
 
 ## 0.21.4 (2026-05-07)

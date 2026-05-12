@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Start datannur app with LLM proxy
-Launches both the HTTP server for index.html and the LLM proxy in parallel
+Start datannur app with optional local services
+Launches the HTTP server for index.html and available local service scripts in parallel
 No external dependencies required - uses only Python standard library
 """
 
@@ -13,10 +13,11 @@ import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from _local_config import get_local_port
+from _local_runtime import get_local_port
 
 APP_DIR = Path(__file__).parent.parent
 DEFAULT_APP_PORT = 61291
+LOCAL_SERVICE_SCRIPTS = ("proxy_llm.py", "edit_server.py")
 
 
 class SafeHTTPHandler(SimpleHTTPRequestHandler):
@@ -63,12 +64,13 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
 
 
 def main():
-    proxy_script = Path(__file__).parent / "proxy_llm.py"
     processes = []
     app_port = get_local_port("appPort", DEFAULT_APP_PORT)
 
-    if proxy_script.exists():
-        processes.append(subprocess.Popen([sys.executable, str(proxy_script)]))
+    for script_name in LOCAL_SERVICE_SCRIPTS:
+        service_script = Path(__file__).parent / script_name
+        if service_script.exists():
+            processes.append(subprocess.Popen([sys.executable, str(service_script)]))
 
     handler = functools.partial(SafeHTTPHandler, directory=str(APP_DIR))
     server = ThreadingHTTPServer(("127.0.0.1", app_port), handler)

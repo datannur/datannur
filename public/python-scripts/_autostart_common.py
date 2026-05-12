@@ -23,7 +23,7 @@ import time
 import webbrowser
 from pathlib import Path
 
-from _local_config import get_local_port
+from _local_runtime import get_local_port
 
 APP_DIR = Path(__file__).resolve().parent.parent
 PROXY_SCRIPT = APP_DIR / "python-scripts" / "proxy_llm.py"

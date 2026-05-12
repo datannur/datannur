@@ -13,7 +13,6 @@ import ssl
 import traceback
 import urllib.request
 import urllib.error
-from urllib.parse import urlparse
 import os
 import sys
 import time
@@ -21,10 +20,11 @@ import random
 from pathlib import Path
 from typing import Optional
 
-from _local_config import get_local_port
+from _local_runtime import get_local_app_origin, get_local_port, is_local_app_origin
 
 REPO_PATH = Path(__file__).parent.parent
 UPDATE_APP_CONFIG = REPO_PATH / "data" / "update-app.json"
+DEFAULT_APP_PORT = 61291
 DEFAULT_LLM_PROXY_PORT = 61292
 
 
@@ -108,20 +108,16 @@ class ProxyHandler(BaseHTTPRequestHandler):
         print(f"{self.address_string()} - {format % args}")
 
     def _is_allowed_origin(self, origin: str) -> bool:
-        """Check if origin is an allowed localhost or file:// origin"""
-        if not origin or origin == "null":
+        """Check if origin is the configured localhost app origin"""
+        return is_local_app_origin(origin, DEFAULT_APP_PORT)
+
+    def _is_allowed_cors_origin(self, origin: str) -> bool:
+        if not origin:
             return True
-        try:
-            parsed = urlparse(origin)
-            return parsed.scheme in ("http", "https") and parsed.hostname in (
-                "localhost",
-                "127.0.0.1",
-            )
-        except Exception:
-            return False
+        return self._is_allowed_origin(origin)
 
     def _check_origin(self):
-        """Verify request comes from localhost or file://, reject otherwise"""
+        """Verify request comes from localhost, reject otherwise"""
         origin = self.headers.get("Origin", "")
         if not self._is_allowed_origin(origin):
             self._send_json_response(403, {"error": "Forbidden origin"})
@@ -131,9 +127,9 @@ class ProxyHandler(BaseHTTPRequestHandler):
     def _get_cors_origin(self) -> str:
         """Get validated origin for CORS headers"""
         origin = self.headers.get("Origin", "")
-        if origin and self._is_allowed_origin(origin):
+        if origin and self._is_allowed_cors_origin(origin):
             return origin
-        return "http://localhost:5173"
+        return get_local_app_origin(DEFAULT_APP_PORT)
 
     def _send_json_response(self, status_code, data):
         """Send JSON response"""
