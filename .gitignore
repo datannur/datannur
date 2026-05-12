@@ -3,6 +3,7 @@
 .venv
 .claude
 bundle-view.html
+todo/
 /**/node_modules/
 /app/
 /public/assets/external/*.js

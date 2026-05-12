@@ -6,6 +6,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from _local_runtime import find_data_db_dir
+
 try:
     from jsonschema import Draft7Validator
     from referencing import Registry, Resource
@@ -15,28 +17,6 @@ except ImportError as e:
     print(f"❌ Missing dependency: {missing}")
     print("   Install with: pip install jsonschema referencing")
     sys.exit(1)
-
-
-def find_data_dir(base_dir: Path) -> Path | None:
-    """Find data directory: either db/ with JSON files or first subdirectory containing them."""
-    db_dir = base_dir / "data" / "db"
-    if not db_dir.exists():
-        return None
-
-    # Check if JSON files exist directly in db/
-    if list(db_dir.glob("*.json")):
-        return db_dir
-
-    # Otherwise find first subdirectory with JSON files
-    for subdir in db_dir.iterdir():
-        if (
-            subdir.is_dir()
-            and not subdir.name.startswith(".")
-            and list(subdir.glob("*.json"))
-        ):
-            return subdir
-
-    return None
 
 
 def find_schemas_dir(base_dir: Path) -> Path | None:
@@ -90,7 +70,7 @@ if not schemas_dir:
     print("❌ Schemas directory not found")
     sys.exit(1)
 
-data_dir = find_data_dir(public_dir)
+data_dir = find_data_db_dir(public_dir)
 if not data_dir:
     print("❌ Data directory not found (no JSON files in data/db/)")
     sys.exit(1)

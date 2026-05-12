@@ -14,8 +14,6 @@ export const allTablesLoaded = writable(false)
 export const searchValue = writable('')
 export const localEditStatus = writable<LocalEditStatus>({
   available: false,
-  mode: 'readonly',
-  capabilities: [],
 })
 export const whenAppReady: Writable<Promise<void>> = writable(
   new Promise(() => {}),

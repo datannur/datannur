@@ -9,7 +9,27 @@ from urllib.parse import urlparse
 RequestHandlerFactory: TypeAlias = Callable[..., BaseHTTPRequestHandler]
 
 APP_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = APP_DIR / "data"
 LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
+
+
+def find_data_db_dir(base_dir: Path = APP_DIR) -> Path | None:
+    db_dir = base_dir / "data" / "db"
+    if not db_dir.exists():
+        return None
+
+    if list(db_dir.glob("*.json")):
+        return db_dir
+
+    for subdir in db_dir.iterdir():
+        if (
+            subdir.is_dir()
+            and not subdir.name.startswith(".")
+            and list(subdir.glob("*.json"))
+        ):
+            return subdir
+
+    return None
 
 
 def get_local_port(key: str, default: int) -> int:
