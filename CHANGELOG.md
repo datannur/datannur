@@ -2,9 +2,7 @@
 
 ## Unreleased
 
-- add: local edit frontend status client and app startup status check for the local edit server
-- change: make the local app launcher start optional local service scripts, including the future edit server
-- add: reserve local edit server port in localhost port config and share Python local runtime helpers
+- add: prepare localhost edit mode with edit server config, Python runtime helpers, local service startup, CORS-aware status checks, and frontend status detection
 - fix: restrict local LLM proxy requests to the configured localhost app origin
 - change: rename the values count column to `Nb val.`
 

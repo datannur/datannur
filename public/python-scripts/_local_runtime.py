@@ -13,18 +13,26 @@ LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
 
 
 def get_local_port(key: str, default: int) -> int:
+    config = get_local_runtime_config()
+    port = config.get(key)
+    if isinstance(port, int) and port > 0:
+        return port
+
+    return default
+
+
+def get_local_runtime_config() -> dict[str, Any]:
     if not LOCAL_PORTS_CONFIG.exists():
-        return default
+        return {}
 
     try:
         config = json.loads(LOCAL_PORTS_CONFIG.read_text(encoding="utf-8"))
-        port = config.get(key)
-        if isinstance(port, int) and port > 0:
-            return port
+        if isinstance(config, dict):
+            return config
     except (json.JSONDecodeError, OSError):
         pass
 
-    return default
+    return {}
 
 
 def get_local_app_origin(default_port: int) -> str:
@@ -49,11 +57,18 @@ def is_local_app_origin(origin: str, default_port: int) -> bool:
 
 
 class JsonRequestHandler(BaseHTTPRequestHandler):
-    def send_json_response(self, status_code: int, data: dict[str, Any]) -> None:
+    def send_json_response(
+        self,
+        status_code: int,
+        data: dict[str, Any],
+        headers: dict[str, str] | None = None,
+    ) -> None:
         payload = json.dumps(data).encode("utf-8")
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(payload)))
+        for key, value in (headers or {}).items():
+            self.send_header(key, value)
         self.end_headers()
         self.wfile.write(payload)
 

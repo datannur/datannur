@@ -8,6 +8,7 @@ export type LocalEditConfig = {
 export type LocalEditStatus = {
   available: boolean
   mode: LocalEditMode
+  capabilities: readonly string[]
   error?: string
 }
 
@@ -94,6 +95,7 @@ export async function checkLocalEditStatus(): Promise<LocalEditStatus> {
     return {
       available: false,
       mode: 'readonly',
+      capabilities: [],
       error: 'Local edit server URL not configured',
     }
   }
@@ -105,6 +107,7 @@ export async function checkLocalEditStatus(): Promise<LocalEditStatus> {
       return {
         available: false,
         mode: 'readonly',
+        capabilities: [],
         error: `Local edit server not available (${response.status})`,
       }
     }
@@ -112,16 +115,19 @@ export async function checkLocalEditStatus(): Promise<LocalEditStatus> {
     const result = (await response.json()) as {
       available?: boolean
       mode?: LocalEditMode
+      capabilities?: string[]
     }
 
     return {
       available: result.available ?? false,
       mode: result.mode ?? 'readonly',
+      capabilities: result.capabilities ?? [],
     }
   } catch {
     return {
       available: false,
       mode: 'readonly',
+      capabilities: [],
       error: 'Cannot connect to local edit server',
     }
   }

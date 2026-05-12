@@ -8,17 +8,19 @@ For local app serving and optional local APIs, you can define ports in `data/loc
 {
   "appPort": 61291,
   "llmProxyPort": 61292,
-  "nodeApiPort": 61293
+  "nodeApiPort": 61293,
+  "editServerPort": 61294
 }
 ```
 
 - `appPort`: local static app server used by `python-scripts/start_app.py`
 - `llmProxyPort`: local Python LLM proxy port
 - `nodeApiPort`: optional Node.js REST API dev server port
+- `editServerPort`: local Python edit server port
 
 If the file is missing or invalid, built-in defaults are used.
 
-When the app runs on `localhost`, `127.0.0.1`, or `::1`, the frontend LLM client automatically reads this file to find the local proxy port. On a deployed web server it uses `/api/llm`, and on `file://` it does not use a local proxy.
+When the app runs on `localhost`, `127.0.0.1`, or `::1`, the frontend LLM and local edit clients automatically read this file to find their local server ports. On a deployed web server it uses `/api/llm`, and on `file://` it does not use local proxy or edit servers.
 
 ## DB Configuration
 

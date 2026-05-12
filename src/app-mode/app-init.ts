@@ -81,6 +81,7 @@ export function initApp(): Promise<void> {
           const status = {
             available: false,
             mode: 'readonly',
+            capabilities: [],
             error: `Cannot check local edit server status: ${error}`,
           } as const
           localEditStatus.set(status)
