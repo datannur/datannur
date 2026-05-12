@@ -6,7 +6,6 @@ No external dependencies required - uses only Python standard library
 """
 
 import functools
-import json
 import os
 import subprocess
 import sys
@@ -14,25 +13,10 @@ import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from _local_config import get_local_port
+
 APP_DIR = Path(__file__).parent.parent
-LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
 DEFAULT_APP_PORT = 61291
-
-
-def get_app_port() -> int:
-    """Get app server port from local config file."""
-    if not LOCAL_PORTS_CONFIG.exists():
-        return DEFAULT_APP_PORT
-
-    try:
-        config = json.loads(LOCAL_PORTS_CONFIG.read_text(encoding="utf-8"))
-        port = config.get("appPort")
-        if isinstance(port, int) and port > 0:
-            return port
-    except (json.JSONDecodeError, OSError):
-        pass
-
-    return DEFAULT_APP_PORT
 
 
 class SafeHTTPHandler(SimpleHTTPRequestHandler):
@@ -81,7 +65,7 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
 def main():
     proxy_script = Path(__file__).parent / "proxy_llm.py"
     processes = []
-    app_port = get_app_port()
+    app_port = get_local_port("appPort", DEFAULT_APP_PORT)
 
     if proxy_script.exists():
         processes.append(subprocess.Popen([sys.executable, str(proxy_script)]))
