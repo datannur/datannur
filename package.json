@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
+    "@mermaid-js/tiny": "^11.15.0",
     "datatables.net": "^2.3.7",
     "datatables.net-bm": "^2.3.7",
     "datatables.net-buttons": "^3.2.6",
@@ -100,7 +101,6 @@
     "jsonjsdb": "^0.8.11",
     "jszip": "^3.10.1",
     "marked": "^17.0.5",
-    "mermaid": "^11.13.0",
     "minimasonry": "^1.3.2",
     "svelte-fileapp": "^0.0.19"
   },

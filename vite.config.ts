@@ -20,8 +20,8 @@ const { appVersion, aliases } = await initBuildConfig()
 
 await copyPaths([
   [
-    'node_modules/mermaid/dist/mermaid.min.js',
-    'public/assets/external/mermaid.min.js',
+    'node_modules/@mermaid-js/tiny/dist/mermaid.tiny.js',
+    'public/assets/external/mermaid.tiny.js',
   ],
   [
     'node_modules/flexsearch/dist/flexsearch.bundle.min.js',
