@@ -131,5 +131,5 @@ export function ensureScriptLoaded(scriptPath: string) {
   })
 }
 export function ensureMermaidLoaded() {
-  return ensureScriptLoaded('assets/external/mermaid.min.js')
+  return ensureScriptLoaded('assets/external/mermaid.tiny.js')
 }

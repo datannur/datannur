@@ -3,6 +3,7 @@
 ## Unreleased
 
 - add: npm `min-release-age` project config to avoid installing packages published less than 3 days ago
+- fix: replace the full Mermaid browser bundle with `@mermaid-js/tiny` and refresh npm audit fixes
 
 ## 0.22.0 (2026-05-12)
 
