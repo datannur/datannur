@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- add: npm `min-release-age` project config to avoid installing packages published less than 3 days ago
+
 ## 0.22.0 (2026-05-12)
 
 - add: `python-scripts/build_db_source.py` to compile editable `data/db-source` JSON, Markdown, and CSV files into generated jsonjsdb files in `data/db`
