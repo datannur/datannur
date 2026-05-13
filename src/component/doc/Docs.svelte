@@ -2,7 +2,7 @@
   import { untrack } from 'svelte'
   import Column from '@lib/column'
   import Render from '@lib/render'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import { getPercent } from '@lib/util'
   import Datatable from '@datatable/Datatable.svelte'
   import escapeHtml from 'escape-html'

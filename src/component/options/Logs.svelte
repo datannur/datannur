@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import { wrapLongText } from '@lib/util'
   import Datatable from '@datatable/Datatable.svelte'
   import Render from '@lib/render'

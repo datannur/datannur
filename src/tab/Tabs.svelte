@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte'
   import { tabSelected, footerVisible, allTabs } from '@lib/store'
-  import { UrlParam, getIsMobile } from 'svelte-fileapp'
+  import { getIsMobile } from '@lib/browser-utils'
+  import { UrlParam } from '@lib/url'
   import { isBigLimit } from '@lib/constant'
   import ScrollableRow from '@layout/ScrollableRow.svelte'
   import Logs from '@lib/logs'

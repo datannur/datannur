@@ -1,19 +1,20 @@
 import autoprefixer from 'autoprefixer'
-import alias from '@rollup/plugin-alias'
 import { defineConfig } from 'vitest/config'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { svelte, type Options } from '@sveltejs/vite-plugin-svelte'
 import svelteConfig from './svelte.config.js'
 import {
   bundleSchemas,
-  updateRouterIndex,
-  spaHtmlOptimizations,
-  initBuildConfig,
   copyFilesToOutDir,
   copyPaths,
-} from 'svelte-fileapp/vite'
+  injectJsonjsdbConfig,
+  initBuildConfig,
+  spaHtmlOptimizations,
+  updateRouterIndex,
+} from './node-scripts/vite-helpers.ts'
 
 const outDir = 'app'
+const appName = 'datannur-app-v2'
 const dbName = process.env.DB ?? 'db'
 
 const { appVersion, aliases } = await initBuildConfig()
@@ -35,6 +36,7 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
+  resolve: { alias: aliases },
   test: { include: ['test/**/*.test.ts'], alias: aliases },
   css: {
     postcss: { plugins: [autoprefixer] },
@@ -56,16 +58,9 @@ export default defineConfig({
   plugins: [
     bundleSchemas('public/schemas', 'src/assets/db-schema.json'),
     updateRouterIndex('src/page'),
-    alias({ entries: aliases }),
     svelte(svelteConfig as Options),
     spaHtmlOptimizations(),
     copyFilesToOutDir(outDir, ['LICENSE', 'CHANGELOG.md', 'README.md']),
-    {
-      name: 'inject-jsonjsdb-config',
-      transformIndexHtml(html) {
-        const config = `<div id="jsonjsdb-config" style="display:none" data-app-name="datannur-app-v2" data-path="data/${dbName}"></div>`
-        return html.replace('</body>', `${config}</body>`)
-      },
-    },
+    injectJsonjsdbConfig(appName, dbName),
   ],
 })

@@ -3,7 +3,7 @@
   import { enumerationsSimilitutes, tabSelected } from '@lib/store'
   import Column from '@lib/column'
   import Render from '@lib/render'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import { worker } from '@lib/util'
   import { enumerationCompareWorker } from '@lib/enumeration-compare-worker'
   import Datatable from '@datatable/Datatable.svelte'

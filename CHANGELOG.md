@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- change: integrate the former `svelte-fileapp` runtime, router, static generation, and Vite helpers locally; remove the external dependency and expose URL, browser, and router modules under project-owned paths
 - add: npm `min-release-age` project config to avoid installing packages published less than 3 days ago
 - fix: replace the full Mermaid browser bundle with `@mermaid-js/tiny` and refresh npm audit fixes
 

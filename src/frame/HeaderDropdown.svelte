@@ -1,6 +1,6 @@
 <script lang="ts">
   import db from '@db'
-  import { page } from 'svelte-fileapp'
+  import { page } from '@router/router-store'
   import { whenAppReady } from '@lib/store'
   import type { Snippet } from 'svelte'
 

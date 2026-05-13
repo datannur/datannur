@@ -1,5 +1,5 @@
 import { marked } from 'marked'
-import { getBaseLinkUrl } from 'svelte-fileapp'
+import { getBaseLinkUrl } from '@lib/url'
 
 const renderer = new marked.Renderer()
 renderer.link = ({ href, title, text }) => {

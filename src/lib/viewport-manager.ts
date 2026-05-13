@@ -1,5 +1,5 @@
 import { writable, derived, get } from 'svelte/store'
-import { isSsgRendering, isStaticMode } from 'svelte-fileapp'
+import { isSsgRendering, isStaticMode } from '@lib/url'
 
 export const chatPanelWidth = 420
 

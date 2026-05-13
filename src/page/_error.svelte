@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { pageContentLoaded } from 'svelte-fileapp'
+  import { pageContentLoaded } from '@router/router-store'
   import { footerVisible } from '@lib/store'
   import Error from '@frame/Error.svelte'
 

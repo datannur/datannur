@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import MdContent from '@layout/MdContent.svelte'
-  import { onPageHomepage, pageContentLoaded } from 'svelte-fileapp'
+  import { onPageHomepage, pageContentLoaded } from '@router/router-store'
   import { darkModeTheme } from '@dark-mode/dark-mode'
   import Loading from '@frame/Loading.svelte'
   import { ensureMermaidLoaded } from '@lib/util'

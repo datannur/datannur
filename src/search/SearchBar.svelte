@@ -1,13 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import search from '@search/search'
-  import {
-    router,
-    page,
-    onPageSearch,
-    onPageHomepage,
-    isSmallMenu,
-  } from 'svelte-fileapp'
+  import { page, onPageSearch, onPageHomepage } from '@router/router-store'
+  import { router } from '@router/router.svelte'
+  import { isSmallMenu } from '@lib/browser-utils'
   import { whenAppReady, searchValue, headerOpen } from '@lib/store'
   import { clickOutside, debounce } from '@lib/util'
   import Logs from '@lib/logs'

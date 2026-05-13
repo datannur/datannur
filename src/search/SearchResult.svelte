@@ -1,6 +1,6 @@
 <script lang="ts">
   import jQuery from 'jquery'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import { wrapLongText } from '@lib/util'
   import Render from '@lib/render'
   import SearchHistory from './search-history'

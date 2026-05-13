@@ -1,5 +1,5 @@
 import { entityNames } from '@lib/constant'
-import { link } from 'svelte-fileapp'
+import { link } from '@lib/url'
 import { statExists } from '@stat/stat'
 import type { Row, Column as ColumnType } from '@type'
 

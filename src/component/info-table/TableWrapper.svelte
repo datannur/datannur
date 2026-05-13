@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte'
-  import { pageContentLoaded } from 'svelte-fileapp'
+  import { pageContentLoaded } from '@router/router-store'
 
   let {
     noMaxHeight = true,

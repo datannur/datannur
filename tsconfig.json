@@ -30,6 +30,7 @@
       "@llm-prompt/*": ["src/assets/llm-prompt/*"],
       "@markdown/*": ["src/assets/markdown/*"],
       "@page/*": ["src/page/*"],
+      "@router/*": ["src/router/*"],
       "@search/*": ["src/search/*"],
       "@stat/*": ["src/stat/*"],
       "@tab/*": ["src/tab/*"],
