@@ -2,7 +2,7 @@
   import { untrack } from 'svelte'
   import { onMount } from 'svelte'
   import db from '@db'
-  import { page } from 'svelte-fileapp'
+  import { page } from '@router/router-store'
   import { getParentPath } from '@lib/db'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'

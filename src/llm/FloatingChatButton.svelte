@@ -1,6 +1,6 @@
 <script lang="ts">
   import LLMChatPanel from '@llm/LLMChatPanel.svelte'
-  import { isHttp } from 'svelte-fileapp'
+  import { isHttp } from '@lib/url'
 
   let isOpen = $state(false)
   let isProxyUp = $state(false)

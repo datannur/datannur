@@ -3,7 +3,7 @@
   import Render from '@lib/render'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import escapeHtml from 'escape-html'
   import type { Value, Column as ColumnType } from '@type'
 

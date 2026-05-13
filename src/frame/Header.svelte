@@ -1,6 +1,8 @@
 <script lang="ts">
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
-  import { onPageHomepage, isSsgRendering, router } from 'svelte-fileapp'
+  import { isSsgRendering } from '@lib/url'
+  import { router } from '@router/router.svelte'
+  import { onPageHomepage } from '@router/router-store'
   import { isMobile } from '@lib/viewport-manager'
   import logo from '@img/logo.png'
   import logoDark from '@img/logo-dark.png'

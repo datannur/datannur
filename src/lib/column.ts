@@ -1,5 +1,5 @@
 import escapeHtml from 'escape-html'
-import { link } from 'svelte-fileapp'
+import { link } from '@lib/url'
 import { get } from 'svelte/store'
 import { viewportManager } from '@lib/viewport-manager'
 import {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte'
-  import { hasTouchScreen } from 'svelte-fileapp'
+  import { hasTouchScreen } from '@lib/browser-utils'
   import Loading from '@frame/Loading.svelte'
 
   let { pdf: pdfProp }: { pdf: string } = $props()

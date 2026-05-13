@@ -1,4 +1,4 @@
-import { UrlHash } from 'svelte-fileapp'
+import { UrlHash } from '@lib/url'
 import { get } from 'svelte/store'
 import { viewportManager } from '@lib/viewport-manager'
 import Options from '@lib/options'

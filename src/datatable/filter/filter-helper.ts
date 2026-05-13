@@ -2,7 +2,7 @@ import jQuery from 'jquery'
 import escapeHtml from 'escape-html'
 import type { Api, ApiColumnMethods, InternalSettings } from 'datatables.net'
 import type { Column } from '@type'
-import { UrlParam } from 'svelte-fileapp'
+import { UrlParam } from '@lib/url'
 import { dateToTimestamp } from '@lib/time'
 
 interface ButtonInfo {

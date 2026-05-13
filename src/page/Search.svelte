@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { searchValue } from '@lib/store'
-  import { pageContentLoaded, UrlParam } from 'svelte-fileapp'
+  import { UrlParam } from '@lib/url'
+  import { pageContentLoaded } from '@router/router-store'
   import search from '@search/search'
   import Head from '@frame/Head.svelte'
   import Tabs from '@tab/Tabs.svelte'

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte'
-  import { link } from 'svelte-fileapp'
+  import { link } from '@lib/url'
   import { wrapLongText, getPercent, isHttpUrl } from '@lib/util'
   import { getParentPath } from '@lib/db'
   import Column from '@lib/column'

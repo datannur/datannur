@@ -9,7 +9,7 @@
  */
 
 import db from '@db'
-import { router } from 'svelte-fileapp'
+import { router } from '@router/router.svelte'
 import Search from '@search/search'
 import type { EntityName, MainEntity, MainEntityName } from '@type'
 import { mainEntityNames } from '@lib/constant'

@@ -1,4 +1,4 @@
-import { pageContentLoaded, pageLoadedRoute } from 'svelte-fileapp'
+import { pageContentLoaded, pageLoadedRoute } from '@router/router-store'
 
 export default class DatatablesTimer {
   static nbLoading = 0

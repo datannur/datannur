@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onPageHomepage } from 'svelte-fileapp'
+  import { onPageHomepage } from '@router/router-store'
   import { whenAppReady } from '@lib/store'
   import { appWidth } from '@lib/viewport-manager'
   import { debounce } from '@lib/util'

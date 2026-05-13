@@ -1,9 +1,10 @@
 <script lang="ts">
   import db from '@db'
   import { whenAppReady, footerVisible } from '@lib/store'
-  import { UrlParam, UrlHash, hasTouchScreen, isHttp } from 'svelte-fileapp'
+  import { hasTouchScreen } from '@lib/browser-utils'
+  import { UrlParam, UrlHash, isHttp } from '@lib/url'
   import { isMobile } from '@lib/viewport-manager'
-  import GenericRouter from 'svelte-fileapp/GenericRouter.svelte'
+  import GenericRouter from '@router/GenericRouter.svelte'
   import routerIndex from '@page/.router-index'
   import Logs from '@lib/logs'
   import SearchHistory from '@search/search-history'

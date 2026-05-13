@@ -73,7 +73,7 @@ jobs:
         run: npm run type-check
 
       - name: Generate router index
-        run: node -e "import('svelte-fileapp/vite').then(m => m.updateRouterIndex('src/page').buildStart())"
+        run: node --experimental-strip-types --disable-warning=ExperimentalWarning -e "import('./node-scripts/vite-helpers.ts').then(m => m.updateRouterIndex('src/page').buildStart())"
 
       - name: Svelte
         run: npm run svelte-check
