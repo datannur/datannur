@@ -33,6 +33,8 @@
     "api:dev": "npm run node:ts api/nodejs/server.ts"
   },
   "dependencies": {
-    "svelte-fileapp": "^0.0.19"
+    "playwright": "^1.58.2",
+    "sirv": "^3.0.2",
+    "sitemap": "^9.0.1"
   }
 }
