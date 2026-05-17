@@ -16,10 +16,23 @@
     "description": "Les données personnelles sont toute information permettant d'identifier directement ou indirectement une personne physique, comme le nom, l'adresse, l'email ou des données sensibles telles que l'orientation sexuelle ou les données biométriques. Elles sont protégées par des lois visant à garantir leur confidentialité et leur sécurité."
   },
   {
+    "id": "contact_info",
+    "name": "Informations de contact",
+    "description": "Les informations de contact regroupent les moyens permettant de joindre une personne ou une organisation, comme une adresse email, un numéro de téléphone ou une adresse postale.",
+    "implied_tag_ids": "personal_data, confidentiality_risk"
+  },
+  {
+    "id": "confidentiality_risk",
+    "name": "Risque de confidentialité",
+    "description": "Un risque de confidentialité indique que les données doivent être manipulées avec attention afin d'éviter une divulgation non souhaitée ou un accès non autorisé.",
+    "implied_tag_ids": "data_protection"
+  },
+  {
     "id": "sensible_data",
     "parent_id": "data_protection",
     "name": "Données sensibles",
-    "description": "Les données 2 sensibles sont des catégories particulières de données personnelles qui révèlent des informations hautement confidentielles, comme l'origine raciale ou ethnique, les opinions politiques, les croyances religieuses, la santé, la vie sexuelle, ou les données biométriques. Leur traitement est soumis à des règles strictes pour éviter toute discrimination ou atteinte à la vie privée."
+    "description": "Les données 2 sensibles sont des catégories particulières de données personnelles qui révèlent des informations hautement confidentielles, comme l'origine raciale ou ethnique, les opinions politiques, les croyances religieuses, la santé, la vie sexuelle, ou les données biométriques. Leur traitement est soumis à des règles strictes pour éviter toute discrimination ou atteinte à la vie privée.",
+    "implied_tag_ids": "confidentiality_risk"
   },
   {
     "id": "pseudonymous_data",
@@ -129,6 +142,7 @@
     "parent_id": "theme_iso",
     "name": "Santé",
     "description": "La santé est « un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité ». Dans cette définition par l'Organisation mondiale de la santé, OMS, depuis 1946, la santé représente « l'un des droits fondamentaux de tout être humain, quelles que soient sa race, sa religion, ses opinions politiques, sa condition économique ou sociale »,. Elle implique la satisfaction de tous les besoins fondamentaux de la personne, qu'ils soient affectifs, sanitaires, nutritionnels, sociaux ou culturels.. Mais cette définition confond les notions de santé et de bien-être.\nPar ailleurs, « la santé résulte d'une interaction constante entre l'individu et son milieu » et représente donc « cette « capacité physique, psychique et sociale des personnes d'agir dans leur milieu et d'accomplir les rôles qu'elles entendent assumer d'une manière acceptable pour elles-mêmes et pour les groupes dont elles font partie ». \nRené Dubos présente en 1973 la santé comme « la situation dans laquelle l'organisme réagit par une adaptation tout en préservant son intégrité individuelle. C'est l'état physique et mental relativement exempt de gênes et de souffrances qui permet à l'individu de fonctionner aussi longtemps que possible dans le milieu où le hasard ou le choix l'ont placé. »,Pour René Leriche en 1936, « la santé c'est la vie dans le silence des organes. »,",
+    "implied_tag_ids": "sensible_data",
     "doc_ids": "pdf-wiki"
   },
   {
@@ -195,7 +209,7 @@
     "id": "communication",
     "parent_id": "theme_iso",
     "name": "Communication",
-    "description": "Communications est une revue scientifique semestrielle publiée par le Centre Edgar-Morin, qui relève de l'École des hautes études en sciences sociales. Elle est éditée par Le Seuil."
+    "description": "La communication regroupe les données relatives aux moyens d'échange et de transmission d'informations, comme les réseaux, les services de télécommunication, les canaux de diffusion ou les infrastructures permettant de communiquer."
   },
   {
     "id": "armee",
@@ -219,7 +233,7 @@
     "id": "localisation",
     "parent_id": "theme_iso",
     "name": "Localisation",
-    "description": "En algèbre, la localisation est une des opérations de base de l'algèbre commutative. C'est une méthode qui construit à partir d'un anneau commutatif un nouvel anneau. La construction du corps des fractions est un cas particulier de la localisation.",
+    "description": "La localisation regroupe les données permettant de situer un objet, un lieu, un équipement ou un phénomène dans l'espace, par exemple au moyen de coordonnées, d'adresses, de limites administratives ou de références géographiques.",
     "doc_ids": "tourisme-exemple"
   },
   {
@@ -233,7 +247,8 @@
     "id": "cartes_reference",
     "parent_id": "theme_iso",
     "name": "Cartes de référence",
-    "description": "L'expression jeu de cartes désigne à la fois :\nl'ensemble matériel complet des cartes nécessaires pour pratiquer un jeu de société, par exemple un jeu de 32 ou 52 cartes (54 avec les jokers), un jeu de tarot ou un jeu de cartes italien.\nle jeu de société lui-même, s'il utilise comme matériel exclusif, ou pratiquement exclusif, des cartes à jouer traditionnelles ou spécifiques à ce jeu.Dans d'autres domaines, un jeu de cartes peut également désigner un ensemble de cartes géographiques ou un ensemble de cartes perforées pour le traitement mécanographique."
+    "description": "Les cartes de référence fournissent un fond cartographique ou un repère spatial commun pour lire, comparer et contextualiser d'autres données géographiques.",
+    "implied_tag_ids": "localisation"
   },
   {
     "id": "couverture_sol",

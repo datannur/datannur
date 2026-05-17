@@ -251,7 +251,10 @@ export type Tag = BaseEntity &
   WithRecursiveParent &
   WithDocs &
   WithFavorite & {
+    impliedTagIds?: string
+
     // Computed fields added during processing
+    impliedTags?: Tag[]
     entities?: { name: string; nb: number }[]
     nbOrganization?: number
     nbFolder?: number
