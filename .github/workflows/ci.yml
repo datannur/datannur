@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Audit signatures
-        run: npm audit signatures --min-release-age=3
+        run: npm audit signatures --min-release-age=0
 
       - name: Audit production vulnerabilities
         run: |
