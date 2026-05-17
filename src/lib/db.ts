@@ -18,6 +18,7 @@ import type {
   Tag,
   Variable,
   RecursiveEntity,
+  TaguableEntity,
 } from '@type'
 
 function getNbValues(
@@ -108,6 +109,88 @@ function addDocs(entity: DocableEntityName, item: DocableEntity) {
   for (const doc of item.docs) {
     doc.entity = entity
     doc.entityId = item.id
+  }
+}
+
+function parseIds(ids: string | number | null | undefined): string[] {
+  if (ids === null || ids === undefined) return []
+  return String(ids)
+    .split(',')
+    .map(id => id.trim())
+    .filter(id => id !== '')
+}
+
+function hasTagIds(item: unknown): item is TaguableEntity {
+  return typeof item === 'object' && item !== null && 'tagIds' in item
+}
+
+function isEntityName(tableName: string): tableName is keyof EntityTypeMap {
+  return tableName in db.tables
+}
+
+function buildImpliedTags(): { [id: string]: Tag[] } {
+  const impliedTagsById: { [id: string]: Tag[] } = {}
+  const visiting = new Set<string>()
+
+  function resolve(tag: Tag): Tag[] {
+    const tagId = String(tag.id)
+    if (impliedTagsById[tagId]) return impliedTagsById[tagId]
+    if (visiting.has(tagId)) return []
+
+    visiting.add(tagId)
+    const impliedTags: Tag[] = []
+    const seen = new Set<string | number>()
+
+    for (const impliedTagId of parseIds(tag.impliedTagIds)) {
+      const impliedTag = db.get('tag', impliedTagId)
+      if (!impliedTag || impliedTag.id === tag.id || seen.has(impliedTag.id)) {
+        continue
+      }
+      seen.add(impliedTag.id)
+      impliedTags.push(impliedTag)
+      for (const nestedTag of resolve(impliedTag)) {
+        if (nestedTag.id === tag.id || seen.has(nestedTag.id)) continue
+        seen.add(nestedTag.id)
+        impliedTags.push(nestedTag)
+      }
+    }
+
+    visiting.delete(tagId)
+    impliedTagsById[tagId] = impliedTags
+    return impliedTags
+  }
+
+  for (const tag of db.getAll('tag')) resolve(tag)
+  return impliedTagsById
+}
+
+function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
+  for (const [tableName, table] of Object.entries(db.tables)) {
+    if (!isEntityName(tableName)) continue
+    for (const item of table ?? []) {
+      if (!hasTagIds(item)) continue
+      if (item.id === undefined || item.id === null) continue
+
+      const tagIds = parseIds(item.tagIds)
+      if (tagIds.length === 0) continue
+
+      const impliedTagIds: (string | number)[] = []
+      const seen = new Set(tagIds)
+
+      for (const tagId of tagIds) {
+        for (const impliedTag of impliedTagsById[tagId] ?? []) {
+          const impliedTagId = String(impliedTag.id)
+          if (seen.has(impliedTagId)) continue
+          seen.add(impliedTagId)
+          impliedTagIds.push(impliedTag.id)
+        }
+      }
+
+      if (impliedTagIds.length === 0) continue
+      db.addRelations(tableName, item.id, 'tagIds', impliedTagIds, {
+        ifExists: 'ignore',
+      })
+    }
   }
 }
 
@@ -357,13 +440,47 @@ export function getFkRelatedVariables(
 }
 
 class Process {
+  static tag() {
+    const impliedTagsById = buildImpliedTags()
+    expandTagIdsWithImplied(impliedTagsById)
+
+    db.foreach('tag', tag => {
+      addEntity(tag, 'tag')
+      tag.isFavorite = false
+      tag.impliedTags = impliedTagsById[String(tag.id)] ?? []
+      tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
+      tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
+      tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')
+      tag.nbVariable = db.countRelated('tag', tag.id, 'variable')
+      addDocs('tag', tag)
+      if (db.useRecursive.tag) tag.parents = db.getParents('tag', tag.id)
+      tag.nbChild = db.countRelated('parent', tag.id, 'tag')
+      tag.nbChildRecursive = db.getAllChilds('tag', tag.id).length
+      tag.nbOrganizationRecursive = getRecursive(
+        'tag',
+        tag.id,
+        'organization',
+      ).length
+      tag.nbFolderRecursive = getRecursive('tag', tag.id, 'folder').length
+      tag.nbDocRecursive = getRecursive('tag', tag.id, 'doc').length
+      const datasets = getRecursive('tag', tag.id, 'dataset')
+      tag.nbDatasetRecursive = datasets.length
+      tag.nbVariableRecursive = getRecursive('tag', tag.id, 'variable').length
+      tag.dataSizeRecursive =
+        datasets.reduce(
+          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
+          0,
+        ) || undefined
+      addEntities(tag)
+    })
+  }
+
   static organization() {
     db.foreach('organization', item => {
       addEntity(item, 'organization')
       item.isFavorite = false
       addPeriod(item)
-      const tags: Tag[] = db.getAll('tag', { organization: item.id })
-      item.tags = tags
+      item.tags = db.getAll('tag', { organization: item.id })
       item.parents = db.getParents('organization', item.id)
       addDocs('organization', item)
       item.nbChild = db.countRelated('parent', item.id, 'organization')
@@ -415,36 +532,6 @@ class Process {
           (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
           0,
         ) || undefined
-    })
-  }
-  static tag() {
-    db.foreach('tag', tag => {
-      addEntity(tag, 'tag')
-      tag.isFavorite = false
-      tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
-      tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
-      tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')
-      tag.nbVariable = db.countRelated('tag', tag.id, 'variable')
-      addDocs('tag', tag)
-      if (db.useRecursive.tag) tag.parents = db.getParents('tag', tag.id)
-      tag.nbChild = db.countRelated('parent', tag.id, 'tag')
-      tag.nbChildRecursive = db.getAllChilds('tag', tag.id).length
-      tag.nbOrganizationRecursive = getRecursive(
-        'tag',
-        tag.id,
-        'organization',
-      ).length
-      tag.nbFolderRecursive = getRecursive('tag', tag.id, 'folder').length
-      tag.nbDocRecursive = getRecursive('tag', tag.id, 'doc').length
-      const datasets = getRecursive('tag', tag.id, 'dataset')
-      tag.nbDatasetRecursive = datasets.length
-      tag.nbVariableRecursive = getRecursive('tag', tag.id, 'variable').length
-      tag.dataSizeRecursive =
-        datasets.reduce(
-          (sum, d) => sum + (d.dataSize ?? 0) * (d.nbResources || 1),
-          0,
-        ) || undefined
-      addEntities(tag)
     })
   }
   static concept() {
@@ -722,9 +809,9 @@ export function getLocalFilter() {
 }
 
 export function dbAddProcessedData() {
+  Process.tag()
   Process.organization()
   Process.folder()
-  Process.tag()
   Process.concept()
   Process.dataset()
   Process.doc()

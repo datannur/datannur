@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur Raw API",
     "description": "Read-only REST API providing direct access to datannur database JSON files. Each endpoint returns a complete table as a JSON array. This is a static file-based API with no server-side processing.",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -310,7 +310,7 @@
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
+              "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
@@ -392,7 +392,7 @@
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
+              "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
@@ -438,6 +438,11 @@
               "type": ["string", "null"],
               "description": "Link to the dataset access, source, or reference",
               "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
+            },
+            "has_preview": {
+              "type": ["boolean", "integer", "string", "null"],
+              "description": "Whether a preview is available at data/db/preview/<dataset_id>",
+              "x-description-fr": "Indique si un aperçu est disponible dans data/db/preview/<dataset_id>"
             },
             "localisation": {
               "type": ["string", "null"],
@@ -667,7 +672,7 @@
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
+              "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
@@ -814,7 +819,7 @@
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
+              "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
@@ -862,7 +867,7 @@
       "tag": {
         "x-db": "data",
         "title": "tag",
-        "description": "Keywords",
+        "description": "Tags",
         "x-description-fr": "Mots clés",
         "type": "array",
         "items": {
@@ -872,12 +877,12 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Primary key of the keyword",
+              "description": "Primary key of the tag",
               "x-description-fr": "Clé primaire du mot clé"
             },
             "parent_id": {
               "type": ["string", "number", "null"],
-              "description": "Key of the parent keyword",
+              "description": "Key of the parent tag",
               "x-description-fr": "Clé du mot clé parent"
             },
             "doc_ids": {
@@ -887,14 +892,21 @@
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
             },
+            "implied_tag_ids": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of tags also applied when this tag is used",
+              "x-description-fr": "Clés des mots clés aussi appliqués quand ce mot clé est utilisé",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
             "name": {
               "type": ["string", "null"],
-              "description": "Keyword name",
+              "description": "Tag name",
               "x-description-fr": "Nom du mot clé"
             },
             "description": {
               "type": ["string", "null"],
-              "description": "Keyword description",
+              "description": "Tag description",
               "x-description-fr": "Description du mot clé"
             }
           }
@@ -959,7 +971,7 @@
             },
             "tag_ids": {
               "type": ["string", "number", "null"],
-              "description": "Keys of related keywords",
+              "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
@@ -1100,7 +1112,7 @@
     },
     {
       "name": "tag",
-      "description": "Keywords"
+      "description": "Tags"
     },
     {
       "name": "value",

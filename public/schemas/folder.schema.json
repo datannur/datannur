@@ -33,7 +33,7 @@
       },
       "tag_ids": {
         "type": ["string", "number", "null"],
-        "description": "Keys of related keywords",
+        "description": "Keys of related tags",
         "x-description-fr": "Clés des mots clés liés",
         "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
         "examples": ["id1,id2,id3", "single-id", null]

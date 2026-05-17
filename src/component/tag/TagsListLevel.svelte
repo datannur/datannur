@@ -51,11 +51,15 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
-  .tag-list-level-wrapper {
+  .tag-list-level-wrapper,
+  .tag-last-level {
     background: #{color('tag')}22;
     border-radius: 20px;
     padding: 5px 15px;
     margin: 2.5px;
+  }
+
+  .tag-list-level-wrapper {
     font-weight: bold;
   }
   .main-tag-list-wrapper {
@@ -72,9 +76,5 @@
   .tag-last-level {
     font-weight: normal;
     font-style: italic;
-    padding-right: 20px;
-    &:last-child {
-      padding-right: 0;
-    }
   }
 </style>

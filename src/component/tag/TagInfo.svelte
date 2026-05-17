@@ -4,6 +4,7 @@
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
   import IdInfo from '@info-table/IdInfo.svelte'
   import TagInfo from '@info-table/TagInfo.svelte'
+  import TagsInfo from '@info-table/TagsInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import type { Tag } from '@type'
@@ -22,6 +23,7 @@
     {/if}
   {/if}
   <DataSizeInfo dataSize={tag.dataSizeRecursive} />
+  <TagsInfo tags={tag.impliedTags ?? []} label="Implique aussi" />
 </TableWrapper>
 {#if tag.description}
   <DescriptionInfo description={tag.description} />
