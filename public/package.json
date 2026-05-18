@@ -33,7 +33,7 @@
     "api:dev": "npm run node:ts api/nodejs/server.ts"
   },
   "dependencies": {
-    "playwright": "^1.58.2",
+    "playwright": "^1.60.0",
     "sirv": "^3.0.2",
     "sitemap": "^9.0.1"
   }

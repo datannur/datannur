@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- add: distinguish direct and recursive implied tags, show reverse implied-by tags on tag detail pages, and add a compact implied-by count column to the tags table
+- add: improve implied tag handling and display, including direct, recursive, and reverse relationships
+- change: refresh core frontend/tooling dependencies and migrate the project to TypeScript 6 without `jiti`
 
 ## 0.22.1 (2026-05-18)
 
