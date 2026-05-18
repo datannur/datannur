@@ -293,6 +293,17 @@ export default class Column {
       render: Render.tags,
     }
   }
+  static propagateToParents(): ColumnType {
+    return {
+      data: 'propagateToParents',
+      title: Render.icon('propagateToParents') + 'Remonte',
+      defaultContent: '',
+      filterType: 'select',
+      tooltip: 'Remonte automatiquement vers les entités parentes',
+      name: 'propagateToParents',
+      render: data => (data ? 'vrai' : ''),
+    }
+  }
   static nbImpliedByTag(): ColumnType {
     return {
       data: 'impliedByTags',

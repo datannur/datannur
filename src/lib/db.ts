@@ -215,6 +215,35 @@ function expandTagIdsWithImplied(impliedTagsRecursiveById: {
   }
 }
 
+function getPropagatedTagIds(item: TaguableEntity): (string | number)[] {
+  const tagIds: (string | number)[] = []
+  for (const tagId of parseIds(item.tagIds)) {
+    const tag = db.get('tag', tagId)
+    if (tag?.propagateToParents) tagIds.push(tag.id)
+  }
+  return tagIds
+}
+
+function propagateTagIdsToParents() {
+  for (const variable of db.getAll('variable')) {
+    if (!variable.datasetId) continue
+    const tagIds = getPropagatedTagIds(variable)
+    if (tagIds.length === 0) continue
+    db.addRelations('dataset', variable.datasetId, 'tagIds', tagIds, {
+      ifExists: 'ignore',
+    })
+  }
+
+  for (const dataset of db.getAll('dataset')) {
+    if (!dataset.folderId) continue
+    const tagIds = getPropagatedTagIds(dataset)
+    if (tagIds.length === 0) continue
+    db.addRelations('folder', dataset.folderId, 'tagIds', tagIds, {
+      ifExists: 'ignore',
+    })
+  }
+}
+
 function variableAddDatasetInfo(variable: Variable) {
   const dataset = db.get('dataset', variable.datasetId)
   if (!dataset) return
@@ -506,6 +535,7 @@ class Process {
   static tag() {
     const impliedTagsRecursiveById = buildImpliedTagsRecursive()
     expandTagIdsWithImplied(impliedTagsRecursiveById)
+    propagateTagIdsToParents()
 
     db.foreach('tag', tag => {
       addEntity(tag, 'tag')
@@ -519,9 +549,6 @@ class Process {
       for (const impliedTag of tag.impliedTags ?? []) {
         impliedTag.impliedByTags?.push(tag)
       }
-    })
-
-    db.foreach('tag', tag => {
       tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
       tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
       tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')

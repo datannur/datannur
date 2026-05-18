@@ -35,6 +35,11 @@
         "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
         "examples": ["id1,id2,id3", "single-id", null]
       },
+      "propagate_to_parents": {
+        "type": ["boolean", "null"],
+        "description": "Whether this tag should be propagated to parent business entities",
+        "x-description-fr": "Indique si ce mot clé doit être propagé aux entités métiers parentes"
+      },
       "name": {
         "type": ["string", "null"],
         "description": "Tag name",

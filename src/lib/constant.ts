@@ -148,6 +148,7 @@ export const entityToIcon = {
   dataSize: 'weight-hanging',
   link: 'link',
   recursive: 'rotate-left',
+  propagateToParents: 'arrow-up',
   features: 'screwdriver-wrench',
   preview: 'eye',
   relation: 'arrows-left-right',

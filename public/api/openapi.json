@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur API",
     "description": "RESTful API for the datannur data catalog. Provides read-only access to database tables with filtering, pagination, and sorting capabilities.",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -1645,6 +1645,11 @@
             "x-description-fr": "Clés des mots clés aussi appliqués quand ce mot clé est utilisé",
             "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
             "examples": ["id1,id2,id3", "single-id", null]
+          },
+          "propagate_to_parents": {
+            "type": ["boolean", "null"],
+            "description": "Whether this tag should be propagated to parent business entities",
+            "x-description-fr": "Indique si ce mot clé doit être propagé aux entités métiers parentes"
           },
           "name": {
             "type": ["string", "null"],

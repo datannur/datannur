@@ -68,6 +68,7 @@
     columns = columns.concat([
       Column.impliedTag(),
       Column.nbImpliedByTag(),
+      Column.propagateToParents(),
       Column.nbOrganizationRecursive('tag', organizationMax),
       Column.nbFolderRecursive('tag', folderMax),
       Column.nbChildRecursive('tag', tagMax),
