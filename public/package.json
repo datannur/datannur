@@ -14,8 +14,8 @@
   "datannur": {
     "dbPath": "data/db",
     "schemasPath": "schemas",
-    "apiVersion": "1.0.4",
-    "schemasHash": "272088ac",
+    "apiVersion": "1.0.5",
+    "schemasHash": "36eb02f4",
     "openApiVersion": "3.1.0"
   },
   "scripts": {

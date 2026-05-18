@@ -12,7 +12,8 @@
     "start_date": "2001/11/08",
     "end_date": "2002/04/15",
     "tag_ids": "cartes_reference, dangers_naturels, transport, systemes_reference, activites_economiques, images_aeriennes",
-    "key": 1
+    "key": 1,
+    "business_key": 1
   },
   {
     "id": "ser_pub_loc__annee",
@@ -27,7 +28,8 @@
     "start_date": "2023/10",
     "end_date": "2009/04",
     "tag_ids": "personal_data, data_protection, couverture_sol",
-    "key": 2
+    "key": 2,
+    "business_key": 2
   },
   {
     "id": "ser_pub_loc__type_service",
@@ -42,7 +44,8 @@
     "start_date": "2013",
     "end_date": "2024/04/06",
     "tag_ids": "images_aeriennes, approvisionnement, agriculture",
-    "key": 3
+    "key": 3,
+    "business_key": 3
   },
   {
     "id": "ser_pub_loc__nb_employes",
@@ -396,7 +399,8 @@
     "end_date": "1999/04/22",
     "fk_var_id": "pop_region__canton",
     "tag_ids": "approvisionnement",
-    "key": 1
+    "key": 1,
+    "business_key": 1
   },
   {
     "id": "dep_sante__type_depense",
@@ -413,6 +417,7 @@
     "enumeration_ids": "a_or_b_or_c",
     "tag_ids": "securite, culture",
     "key": 2,
+    "business_key": 2,
     "source_var_ids": "accidents_travail__gravite"
   },
   {
@@ -572,7 +577,8 @@
     "description": "Année de mesure des températures.",
     "start_date": "1999/03/01",
     "end_date": "2001",
-    "enumeration_ids": "a_or_b_or_c"
+    "enumeration_ids": "a_or_b_or_c",
+    "business_key": 1
   },
   {
     "id": "temperature_moy__mois",
@@ -588,6 +594,7 @@
     "end_date": "2015/01/11",
     "enumeration_ids": "vide",
     "tag_ids": "personal_data, activites_economiques, infrastructures, armee, altimetrie, dangers_naturels",
+    "business_key": 2,
     "source_var_ids": "ser_pub_loc__budget_annuel, emplois_tech__region"
   },
   {
@@ -601,7 +608,8 @@
     "nb_missing": 5,
     "description": "Station météorologique concernée.",
     "start_date": "2021/10",
-    "end_date": "2016"
+    "end_date": "2016",
+    "business_key": 3
   },
   {
     "id": "temperature_moy__altitude_station",

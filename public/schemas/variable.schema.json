@@ -55,6 +55,11 @@
         "description": "Is or is part of a unique key",
         "x-description-fr": "Est ou fait parti d'une clé unique"
       },
+      "business_key": {
+        "type": ["integer", "null"],
+        "description": "Is or is part of a business key",
+        "x-description-fr": "Est ou fait partie d'une clé métier"
+      },
       "nb_distinct": {
         "type": ["integer", "null"],
         "description": "Number of distinct values in the variable",

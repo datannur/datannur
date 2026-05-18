@@ -6,6 +6,7 @@
 - add: inherit missing dataset owner, manager, and update frequency from the parent folder during database processing
 - add: fill missing folder start, end, and last update dates from direct child dataset dates during database processing
 - add: allow selected tags to propagate from variables to datasets and from datasets to folders during database processing
+- add: support variable business keys in schemas, demo data, variable tables, and dataset/variable detail views
 - change: use separate temporary localhost ports for Python APIs during Vite development
 - change: refresh core frontend/tooling dependencies and migrate the project to TypeScript 6 without `jiti`
 

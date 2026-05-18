@@ -1009,6 +1009,20 @@ export default class Column {
       },
     }
   }
+  static isBusinessKey(): ColumnType {
+    return {
+      data: 'businessKey',
+      title: Render.icon('businessKey') + 'Clé métier',
+      defaultContent: '',
+      filterType: 'select',
+      tooltip: 'Clé métier ou partie de clé métier',
+      render: (data: string | boolean, type) => {
+        if (!data) return ''
+        if (type !== 'display') return data
+        return `<span class="icon icon-businessKey"><i class="fas fa-id-card"></i></span>`
+      },
+    }
+  }
   static fkVar(): ColumnType {
     return {
       data: 'fkVarName',

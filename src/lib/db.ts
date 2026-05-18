@@ -734,6 +734,7 @@ class Process {
       addSourceVar(variable)
       addFkVar(variable)
       if (variable.key) variable.key = 'oui'
+      if (variable.businessKey) variable.businessKey = 'oui'
 
       const freqData = db.getAll('frequency', { variable })
       variable.hasFreq = freqData.length > 0

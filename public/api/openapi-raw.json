@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur Raw API",
     "description": "Read-only REST API providing direct access to datannur database JSON files. Each endpoint returns a complete table as a JSON array. This is a static file-based API with no server-side processing.",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -1000,6 +1000,11 @@
               "type": ["integer", "null"],
               "description": "Is or is part of a unique key",
               "x-description-fr": "Est ou fait parti d'une clé unique"
+            },
+            "business_key": {
+              "type": ["integer", "null"],
+              "description": "Is or is part of a business key",
+              "x-description-fr": "Est ou fait partie d'une clé métier"
             },
             "nb_distinct": {
               "type": ["integer", "null"],

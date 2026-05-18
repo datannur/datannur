@@ -12,7 +12,13 @@
   const dataset = untrack(() => db.get('dataset', id))
 
   let variables = db.getAll('variable', { dataset })
-  if (dataset) dataset.nbVariable = variables.length
+  if (dataset) {
+    dataset.nbVariable = variables.length
+    dataset.keyVariables = variables.filter(variable => variable.key)
+    dataset.businessKeyVariables = variables.filter(
+      variable => variable.businessKey,
+    )
+  }
 
   let enumerations: Enumeration[] = variables.flatMap(
     variable => variable.enumerations ?? [],

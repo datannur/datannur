@@ -107,6 +107,7 @@ export const entityToIcon = {
   type: 't',
   missing: 'circle-question',
   duplicate: 'clone',
+  businessKey: 'id-card',
   updateFrequency: 'calendar-alt',
   date: 'calendar-day',
   dateRange: 'calendar-week',

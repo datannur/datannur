@@ -62,6 +62,7 @@
       Column.datatype(),
       Column.relationType(),
       Column.isKey(),
+      Column.isBusinessKey(),
       Column.fkVar(),
       Column.nbFkRefVar(nbFkRefMax),
       Column.nbSources(nbSourcesMax, 'variable'),
