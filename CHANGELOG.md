@@ -3,6 +3,7 @@
 ## Unreleased
 
 - add: improve implied tag handling and display, including direct, recursive, and reverse relationships
+- add: inherit missing dataset owner, manager, and update frequency from the parent folder during database processing
 - change: use separate temporary localhost ports for Python APIs during Vite development
 - change: refresh core frontend/tooling dependencies and migrate the project to TypeScript 6 without `jiti`
 

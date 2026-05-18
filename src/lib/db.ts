@@ -323,6 +323,16 @@ function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
   item.nextUpdateDate = timestampToDate(lastUpdate + diff * 1000)
 }
 
+function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
+  if (!dataset.folderId) return
+  const folder = db.get('folder', dataset.folderId)
+  if (!folder) return
+
+  dataset.ownerId ??= folder.ownerId
+  dataset.managerId ??= folder.managerId
+  dataset.updatingEach ??= folder.updatingEach
+}
+
 function getOrganizationItems(
   organizationId: string | number,
   entity: MainEntityName,
@@ -590,6 +600,7 @@ class Process {
     db.foreach('dataset', dataset => {
       addEntity(dataset, 'dataset')
       dataset.isFavorite = false
+      addDatasetInheritedInfo(dataset)
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
       if (db.use.owner)
