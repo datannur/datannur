@@ -3,7 +3,7 @@
   "info": {
     "title": "datannur Raw API",
     "description": "Read-only REST API providing direct access to datannur database JSON files. Each endpoint returns a complete table as a JSON array. This is a static file-based API with no server-side processing.",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -899,6 +899,11 @@
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
             },
+            "propagate_to_parents": {
+              "type": ["boolean", "null"],
+              "description": "Whether this tag should be propagated to parent business entities",
+              "x-description-fr": "Indique si ce mot clé doit être propagé aux entités métiers parentes"
+            },
             "name": {
               "type": ["string", "null"],
               "description": "Tag name",
@@ -995,6 +1000,11 @@
               "type": ["integer", "null"],
               "description": "Is or is part of a unique key",
               "x-description-fr": "Est ou fait parti d'une clé unique"
+            },
+            "business_key": {
+              "type": ["integer", "null"],
+              "description": "Is or is part of a business key",
+              "x-description-fr": "Est ou fait partie d'une clé métier"
             },
             "nb_distinct": {
               "type": ["integer", "null"],

@@ -17,6 +17,7 @@
   import DeliveryFormatInfo from '@info-table/DeliveryFormatInfo.svelte'
   import LicenseInfo from '@info-table/LicenseInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
+  import VariablesInfo from '@info-table/VariablesInfo.svelte'
   import Render from '@lib/render'
   import type { Dataset } from '@type'
 
@@ -42,6 +43,12 @@
     </tr>
   {/if}
   <DataSizeInfo dataSize={dataset.dataSize} />
+  <VariablesInfo variables={dataset.keyVariables} label="Clé" icon="key" />
+  <VariablesInfo
+    variables={dataset.businessKeyVariables}
+    label="Clé métier"
+    icon="businessKey"
+  />
   {#if dataset.lastUpdateDate}
     <LastUpdateInfo lastUpdateDate={dataset.lastUpdateDate} />
   {/if}

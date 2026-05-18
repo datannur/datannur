@@ -282,6 +282,45 @@ export default class Column {
       render: Render.tags,
     }
   }
+  static impliedTag(): ColumnType {
+    return {
+      data: 'impliedTags',
+      title: Render.icon('tag') + 'Implique aussi',
+      defaultContent: '',
+      hasLongText: true,
+      tooltip: 'Mots clés impliqués par ce mot clé',
+      name: 'impliedTag',
+      render: Render.tags,
+    }
+  }
+  static propagateToParents(): ColumnType {
+    return {
+      data: 'propagateToParents',
+      title: Render.icon('propagateToParents') + 'Remonte',
+      defaultContent: '',
+      filterType: 'select',
+      tooltip: 'Remonte automatiquement vers les entités parentes',
+      name: 'propagateToParents',
+      render: data => (data ? 'vrai' : ''),
+    }
+  }
+  static nbImpliedByTag(): ColumnType {
+    return {
+      data: 'impliedByTags',
+      title: Render.icon('tag') + 'Impl.',
+      defaultContent: '',
+      filterType: 'input',
+      fromLength: true,
+      tooltip: 'Nombre de mots clés qui impliquent ce mot clé',
+      name: 'impliedByTag',
+      render: (data: Tag[], type, row: Tag) => {
+        if (!data?.length) return ''
+        if (type !== 'display') return data.length
+        const content = link(`tag/${row.id}`, String(data.length), 'tag')
+        return Render.numPercent(content, 100, 'tag', type)
+      },
+    }
+  }
   static concept(): ColumnType {
     return {
       data: 'conceptName',
@@ -825,6 +864,29 @@ export default class Column {
       },
     }
   }
+  static nbOrganizationRecursive(
+    entity: keyof typeof entityNames,
+    total: number,
+  ): ColumnType {
+    return {
+      data: 'nbOrganizationRecursive',
+      title:
+        Render.icon('organization') +
+        "<span class='hidden'>nbOrganizations</span>",
+      filterType: 'input',
+      tooltip: "Nombre d'organisations",
+      render: (data: number, type, row: RecursiveEntity) => {
+        if (!data) return ''
+        if (type !== 'display') return data
+        const content = link(
+          `${entity}/${row.id}?tab=organizations`,
+          escapeHtml(String(data)),
+        )
+        const percent = getPercent(data / total)
+        return `${Render.numPercent(content, percent, 'organization', type)}`
+      },
+    }
+  }
   static nbDatasetRecursive(
     entity: keyof typeof entityNames,
     total: number,
@@ -944,6 +1006,20 @@ export default class Column {
         if (!data) return ''
         if (type !== 'display') return data
         return `<span class="icon icon-key"><i class="fas fa-key"></i></span>`
+      },
+    }
+  }
+  static isBusinessKey(): ColumnType {
+    return {
+      data: 'businessKey',
+      title: Render.icon('businessKey') + 'Clé métier',
+      defaultContent: '',
+      filterType: 'select',
+      tooltip: 'Clé métier ou partie de clé métier',
+      render: (data: string | boolean, type) => {
+        if (!data) return ''
+        if (type !== 'display') return data
+        return `<span class="icon icon-businessKey"><i class="fas fa-id-card"></i></span>`
       },
     }
   }

@@ -13,6 +13,10 @@ type LocalPortsConfig = {
 }
 
 const defaultEditServerPort = 61294
+const devEditServerPort = 62294
+const defaultLocalEditServerPort = import.meta.env.DEV
+  ? devEditServerPort
+  : defaultEditServerPort
 
 const isFileProtocol =
   typeof window !== 'undefined' && window.location.protocol === 'file:'
@@ -23,7 +27,7 @@ const isLocalhost =
 export const defaultLocalEditConfig: LocalEditConfig = {
   serverURL:
     isLocalhost && !isFileProtocol
-      ? `http://localhost:${defaultEditServerPort}`
+      ? `http://localhost:${defaultLocalEditServerPort}`
       : undefined,
   isLocalServer: isLocalhost && !isFileProtocol,
 }
@@ -41,7 +45,7 @@ function buildServerURL(port: number): string | undefined {
 }
 
 async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
-  if (!isLocalhost || isFileProtocol) {
+  if (!isLocalhost || isFileProtocol || import.meta.env.DEV) {
     return null
   }
 
@@ -63,7 +67,7 @@ export async function initializeLocalEditConfig(): Promise<void> {
     const localPortsConfig = await loadLocalPortsConfig()
     const editServerPort = isValidPort(localPortsConfig?.editServerPort)
       ? localPortsConfig.editServerPort
-      : defaultEditServerPort
+      : defaultLocalEditServerPort
 
     localEditConfig = {
       ...defaultLocalEditConfig,

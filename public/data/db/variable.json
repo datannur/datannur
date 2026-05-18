@@ -1,5 +1,6 @@
 [
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accident_route",
     "description": "Cause probable de l'accident (alcool, vitesse, distraction, météo, etc.).",
@@ -24,6 +25,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accident_route",
     "description": "Date exacte à laquelle l'accident s'est produit.",
@@ -48,6 +50,7 @@
     "type": "date"
   },
   {
+    "business_key": null,
     "concept_id": "gravite_accident",
     "dataset_id": "accident_route",
     "description": "Niveau de gravité : léger, grave, mortel.",
@@ -72,6 +75,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accident_route",
     "description": "Nombre total de personnes blessées lors de l'accident.",
@@ -96,6 +100,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "type_accident",
     "dataset_id": "accident_route",
     "description": "Type d'accident (collision, sortie de route, choc avec piéton, etc.).",
@@ -120,6 +125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Âge au moment de l'accident.",
@@ -144,6 +150,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Nombre d'années dans le poste.",
@@ -168,6 +175,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Année de survenue de l'accident de travail.",
@@ -192,6 +200,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Coût estimé pour l'assurance (CHF).",
@@ -216,6 +225,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Coût total direct et indirect (CHF).",
@@ -240,6 +250,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Fonction professionnelle au moment de l'accident.",
@@ -264,6 +275,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Indique si la personne avait reçu une formation récente.",
@@ -288,6 +300,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": "gravite_accident",
     "dataset_id": "accidents_travail",
     "description": "Gravité : léger, grave, très grave, mortel.",
@@ -312,6 +325,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Heure approximative de l'événement.",
@@ -336,6 +350,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Jour, nuit, équipes, temps partiel.",
@@ -360,6 +375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Indice de risque calculé pour chaque cas.",
@@ -384,6 +400,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Atelier, chantier, bureau, laboratoire…",
@@ -408,6 +425,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Mesures déjà en place : EPI, balisage, procédures.",
@@ -432,6 +450,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Actions correctives mises en œuvre.",
@@ -456,6 +475,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Nationalité de la victime.",
@@ -480,6 +500,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Durée de l'arrêt consécutif à l'accident.",
@@ -504,6 +525,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Nombre de témoins déclarés.",
@@ -528,6 +550,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Indique si les EPI étaient portés.",
@@ -552,6 +575,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Indique si des témoins ont assisté à l'accident.",
@@ -576,6 +600,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Présence d'un rapport médical détaillé.",
@@ -600,6 +625,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Indique si une responsabilité est clairement attribuée.",
@@ -624,6 +650,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Secteur économique (construction, industrie, santé…).",
@@ -648,6 +675,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Sexe : homme, femme, autre/NSP.",
@@ -672,6 +700,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Origine de la donnée (SUVA, OFS, entreprises).",
@@ -696,6 +725,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Sous-catégorie du secteur principal.",
@@ -720,6 +750,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Statut administratif : ouvert, en cours, clos, classé.",
@@ -744,6 +775,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Taux d'incidents par secteur (%).",
@@ -768,6 +800,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Durée estimée de récupération (jours).",
@@ -792,6 +825,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "type_accident",
     "dataset_id": "accidents_travail",
     "description": "Nature de l'accident (chute, coupure, collision…).",
@@ -816,6 +850,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "type_contrat",
     "dataset_id": "accidents_travail",
     "description": "CDI, CDD, apprentissage, temporaire, autre.",
@@ -840,6 +875,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "accidents_travail",
     "description": "Victime, employeur, tiers, matériel, environnement.",
@@ -864,6 +900,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Année de référence des données énergétiques.",
@@ -888,6 +925,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Consommation moyenne d'énergie par employé.",
@@ -912,6 +950,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Consommation totale d'énergie en MWh.",
@@ -936,6 +975,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Émissions de CO₂ en tonnes équivalent CO₂.",
@@ -960,6 +1000,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Ratio énergie consommée / valeur ajoutée.",
@@ -984,6 +1025,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_employes",
     "dataset_id": "conso_energie",
     "description": "Taille du secteur ou sous-secteur en effectifs.",
@@ -1008,6 +1050,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Part d'énergie issue de sources renouvelables.",
@@ -1032,6 +1075,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Région économique (CH01–CH07).",
@@ -1056,6 +1100,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Secteur : industrie, services, agriculture, ménages, etc.",
@@ -1080,6 +1125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Origine : OFEN, OFS, administrations cantonales.",
@@ -1104,6 +1150,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Sous-catégorie du secteur principal.",
@@ -1128,6 +1175,7 @@
     "type": "test"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "conso_energie",
     "description": "Électricité, gaz, mazout, renouvelables, etc.",
@@ -1152,6 +1200,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Année de référence des dépenses publiques en santé.",
@@ -1176,6 +1225,7 @@
     "type": "integer"
   },
   {
+    "business_key": 1,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Canton concerné par la dépense publique.",
@@ -1200,6 +1250,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Dépenses liées au fonctionnement courant des services de santé.",
@@ -1224,6 +1275,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "cout_investissement",
     "dataset_id": "dep_sante",
     "description": "Dépenses d'investissement en infrastructures et équipements.",
@@ -1248,6 +1300,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Acteur public responsable de la dépense.",
@@ -1272,6 +1325,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Financement : communal, cantonal, fédéral, assurances, etc.",
@@ -1296,6 +1350,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Montant annuel par habitant (CHF).",
@@ -1320,6 +1375,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Montant total des dépenses (CHF).",
@@ -1344,6 +1400,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_beneficiaires",
     "dataset_id": "dep_sante",
     "description": "Nombre de personnes bénéficiant de la prestation correspondante.",
@@ -1368,6 +1425,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Groupe concerné (adultes, personnes âgées, enfants, etc.).",
@@ -1392,6 +1450,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Région sanitaire utilisée dans le découpage analytique.",
@@ -1416,6 +1475,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Variation annuelle des dépenses publiques en santé (%).",
@@ -1440,6 +1500,7 @@
     "type": "float"
   },
   {
+    "business_key": 2,
     "concept_id": null,
     "dataset_id": "dep_sante",
     "description": "Catégorie de dépense (hôpitaux, soins ambulatoires, prévention, etc.).",
@@ -1464,6 +1525,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Année de référence de l'analyse de la qualité de l'eau.",
@@ -1488,6 +1550,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Nombre de colonies de bactéries par 100 mL d'eau.",
@@ -1512,6 +1575,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Indication de conformité aux normes suisses : conforme, à surveiller, non conforme.",
@@ -1536,6 +1600,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Concentration en nitrates (mg par litre).",
@@ -1560,6 +1625,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Concentration totale de pesticides mesurés (microgrammes/L).",
@@ -1584,6 +1650,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Valeur du pH mesurée pour l'échantillon d'eau potable.",
@@ -1608,6 +1675,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Région géographique où l'échantillon d'eau potable a été prélevé.",
@@ -1632,6 +1700,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "eau_potable",
     "description": "Type de source : réseau communal, nappe phréatique, captage de montagne, etc.",
@@ -1656,6 +1725,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Âge de la personne (18 à 36 ans).",
@@ -1680,6 +1750,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Nombre d'années à ce poste.",
@@ -1704,6 +1775,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Année de référence de l'enquête.",
@@ -1728,6 +1800,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Canton de résidence.",
@@ -1752,6 +1825,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Niveau d'exigence, stress, flexibilité, etc.",
@@ -1776,6 +1850,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Indique si la personne occupe un second emploi.",
@@ -1800,6 +1875,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Durée en mois du précédent épisode de chômage.",
@@ -1824,6 +1900,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Participation à une formation continue.",
@@ -1848,6 +1925,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Indique si la personne a changé de poste dans l'année.",
@@ -1872,6 +1950,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Présentiel, télétravail, hybride.",
@@ -1896,6 +1975,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Nationalité déclarée de la personne.",
@@ -1920,6 +2000,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Heures hebdomadaires du second emploi.",
@@ -1944,6 +2025,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Nombre d'heures de travail hebdomadaires.",
@@ -1968,6 +2050,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "niveau_formation",
     "dataset_id": "emploi_jeunes",
     "description": "CFC, maturité, Bachelor, Master, etc.",
@@ -1992,6 +2075,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Titre professionnel déclaré.",
@@ -2016,6 +2100,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Grande région économique.",
@@ -2040,6 +2125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Salaire mensuel déclaré.",
@@ -2064,6 +2150,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Score subjectif (0–10).",
@@ -2088,6 +2175,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Secteur économique (services, industrie, santé, tech…).",
@@ -2112,6 +2200,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Homme, femme, autre/NSP.",
@@ -2136,6 +2225,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Origine des données : OFS, enquêtes, employeurs.",
@@ -2160,6 +2250,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "statut_emploi",
     "dataset_id": "emploi_jeunes",
     "description": "Temps plein, temps partiel, chômage, inactif, étudiant.",
@@ -2184,6 +2275,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Évolution annuelle estimée du salaire.",
@@ -2208,6 +2300,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Taux contractuel d'activité.",
@@ -2232,6 +2325,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Durée moyenne quotidienne du trajet domicile–travail.",
@@ -2256,6 +2350,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "type_contrat",
     "dataset_id": "emploi_jeunes",
     "description": "CDI, CDD, apprentissage, temporaire.",
@@ -2280,6 +2375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emploi_jeunes",
     "description": "Train, bus, voiture, vélo, marche, etc.",
@@ -2304,6 +2400,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech2",
     "description": "Année de référence de la statistique.",
@@ -2328,6 +2425,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_employes",
     "dataset_id": "emplois_tech2",
     "description": "Nombre total d'employés recensés dans le secteur.",
@@ -2352,6 +2450,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_entreprises",
     "dataset_id": "emplois_tech2",
     "description": "Nombre d'entreprises actives dans le secteur technologique.",
@@ -2376,6 +2475,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech2",
     "description": "Région économique (CH01–CH07).",
@@ -2400,6 +2500,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech2",
     "description": "IA, cybersécurité, software, hardware, biotech, etc.",
@@ -2424,6 +2525,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech2",
     "description": "Origine : OFS, SECO, registres cantonaux.",
@@ -2448,6 +2550,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech2",
     "description": "Croissance annuelle estimée du nombre d'emplois.",
@@ -2472,6 +2575,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Année de référence de l'analyse des emplois technologiques.",
@@ -2496,6 +2600,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_employes",
     "dataset_id": "emplois_tech",
     "description": "Nombre total d'employés dans ces entreprises.",
@@ -2520,6 +2625,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_entreprises",
     "dataset_id": "emplois_tech",
     "description": "Nombre d'entreprises actives dans le secteur technologique.",
@@ -2544,6 +2650,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Nombre total d'offres publiées dans l'année.",
@@ -2568,6 +2675,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "niveau_formation",
     "dataset_id": "emplois_tech",
     "description": "Niveau de formation requis (CFC, Bachelor, Master, Doctorat…).",
@@ -2592,6 +2700,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Région ou zone économique (CH01–CH07).",
@@ -2616,6 +2725,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Salaire médian (CHF) des employés du secteur technologique.",
@@ -2640,6 +2750,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Secteur concerné : IA, cybersécurité, software, hardware, biotech…",
@@ -2664,6 +2775,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Principale source de données : OFS, SECO, plateformes d'emploi.",
@@ -2688,6 +2800,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Variation annuelle du nombre d'emplois (%).",
@@ -2712,6 +2825,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "emplois_tech",
     "description": "Taux de postes vacants (%) dans le secteur technologique.",
@@ -2736,6 +2850,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Année de référence des exportations.",
@@ -2760,6 +2875,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Indique si l'exportation était assurée.",
@@ -2784,6 +2900,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Canton d'exportation.",
@@ -2808,6 +2925,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Certification nécessaire selon le produit.",
@@ -2832,6 +2950,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Code du Système harmonisé (HS).",
@@ -2856,6 +2975,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Continent du pays destinataire.",
@@ -2880,6 +3000,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Délai moyen jusqu'à la destination.",
@@ -2904,6 +3025,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Délai contractuel de paiement (jours).",
@@ -2928,6 +3050,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "CHF, EUR, USD, GBP…",
@@ -2952,6 +3075,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Nom ou identifiant de l'entreprise.",
@@ -2976,6 +3100,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Terme commercial (FOB, CIF, EXW, etc.).",
@@ -3000,6 +3125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Mois de l'enregistrement.",
@@ -3024,6 +3150,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Quantité unitaire exportée.",
@@ -3048,6 +3175,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Pays destinataire de l'exportation.",
@@ -3072,6 +3200,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Poids total exporté en kilogrammes.",
@@ -3096,6 +3225,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Région économique (CH01–CH07).",
@@ -3120,6 +3250,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Indication de satisfaction ou incidents.",
@@ -3144,6 +3275,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Indice de risque macroéconomique du pays.",
@@ -3168,6 +3300,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Secteur exportateur : pharma, machines, horlogerie…",
@@ -3192,6 +3325,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Origine des données (OCE, OFS, douanes).",
@@ -3216,6 +3350,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Sous-catégorie économique précise.",
@@ -3240,6 +3375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Taux appliqué pour la facturation.",
@@ -3264,6 +3400,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Taux de croissance annuel du secteur économique.",
@@ -3288,6 +3425,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Catégorie du produit exporté.",
@@ -3312,6 +3450,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Rail, route, air, maritime…",
@@ -3336,6 +3475,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Valeur totale exportée en francs.",
@@ -3360,6 +3500,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Conversion de la valeur exportée en euros.",
@@ -3384,6 +3525,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Conversion de la valeur exportée en dollars.",
@@ -3408,6 +3550,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "exportations",
     "description": "Historique des volumes exportés par région.",
@@ -3432,6 +3575,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Année de construction du bâtiment.",
@@ -3456,6 +3600,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Ensembles des charges annuelles du bien.",
@@ -3480,6 +3625,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Neuf, rénové, bon, à rénover, vétuste.",
@@ -3504,6 +3650,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Score basé sur localisation, services, mobilité, etc.",
@@ -3528,6 +3675,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Nombre de jours entre la mise en vente et la transaction.",
@@ -3552,6 +3700,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Nombre de pièces du logement.",
@@ -3576,6 +3725,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Prix ramené au mètre carré.",
@@ -3600,6 +3750,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Prix réel de transaction.",
@@ -3624,6 +3775,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Quartier ou zone statistique de la ville.",
@@ -3648,6 +3800,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Origine de la donnée : registres fonciers, plateformes immobilières, offices cantonaux.",
@@ -3672,6 +3825,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Surface habitable du bien (m²).",
@@ -3696,6 +3850,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Surface du terrain associé (m²).",
@@ -3720,6 +3875,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Appartement, maison, bureau, commerce, etc.",
@@ -3744,6 +3900,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Vente privée, enchère, promotion, vente institutionnelle.",
@@ -3768,6 +3925,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "immobilier_prix",
     "description": "Ville concernée par la transaction immobilière.",
@@ -3792,6 +3950,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Concentration du polluant (µg/m³).",
@@ -3816,6 +3975,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Synthèse météo : clair, nuageux, pluie, brouillard…",
@@ -3840,6 +4000,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Date du relevé de pollution.",
@@ -3864,6 +4025,7 @@
     "type": "date"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Heure locale de la mesure.",
@@ -3888,6 +4050,7 @@
     "type": "datetime"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Humidité de l'air (%).",
@@ -3912,6 +4075,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Indice global basé sur les normes suisses.",
@@ -3936,6 +4100,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Niveau d'alerte : normal, modéré, élevé, très élevé.",
@@ -3960,6 +4125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Niveau sonore en dB.",
@@ -3984,6 +4150,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Type de polluant analysé (PM2.5, PM10, NO2, O3…).",
@@ -4008,6 +4175,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Quantité de précipitations (mm).",
@@ -4032,6 +4200,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Pression atmosphérique (hPa).",
@@ -4056,6 +4225,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Origine des données (OFEV, stations cantonales…).",
@@ -4080,6 +4250,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Contribution estimée des véhicules.",
@@ -4104,6 +4275,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Contribution estimée des sources fixes (industries…).",
@@ -4128,6 +4300,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Station urbaine ayant effectué la mesure.",
@@ -4152,6 +4325,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Température ambiante lors du relevé (°C).",
@@ -4176,6 +4350,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Indice estimant l'intensité du trafic local.",
@@ -4200,6 +4375,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Unité de mesure (µg/m³).",
@@ -4224,6 +4400,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Direction dominante du vent (N, NE, E…).",
@@ -4248,6 +4425,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Vitesse du vent (km/h).",
@@ -4272,6 +4450,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pollution_air",
     "description": "Quartier ou zone urbaine concernée.",
@@ -4296,6 +4475,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Âge médian de la population dans la région.",
@@ -4320,6 +4500,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Altitude moyenne de la région (m).",
@@ -4344,6 +4525,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Année de référence des données démographiques.",
@@ -4368,6 +4550,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Canton auquel la région est rattachée.",
@@ -4392,6 +4575,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "coordonnee_x_lv95",
     "dataset_id": "pop_region",
     "description": "Coordonnée géographique projetée (CH1903+ / LV95).",
@@ -4416,6 +4600,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "coordonnee_y_lv95",
     "dataset_id": "pop_region",
     "description": "Coordonnée géographique projetée (CH1903+ / LV95).",
@@ -4440,6 +4625,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "densite_population",
     "dataset_id": "pop_region",
     "description": "Nombre d'habitants par km².",
@@ -4464,6 +4650,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Proportion de la population âgée de 0 à 14 ans (%).",
@@ -4488,6 +4675,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Proportion de la population âgée de 65 ans ou plus (%).",
@@ -4512,6 +4700,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "population_etrangere",
     "dataset_id": "pop_region",
     "description": "Personnes de nationalité étrangère dans la région.",
@@ -4536,6 +4725,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "population_suisse",
     "dataset_id": "pop_region",
     "description": "Personnes de nationalité suisse dans la région.",
@@ -4560,6 +4750,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "population_totale",
     "dataset_id": "pop_region",
     "description": "Population totale résidente dans la région.",
@@ -4584,6 +4775,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Région administrative ou statistique.",
@@ -4608,6 +4800,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Origine des données (OS, communes, registres).",
@@ -4632,6 +4825,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Surface totale de la région en km².",
@@ -4656,6 +4850,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Variation annuelle de la population (%).",
@@ -4680,6 +4875,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "pop_region",
     "description": "Typologie : urbaine, périurbaine, rurale, montagne, etc.",
@@ -4704,6 +4900,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Âge de la personne de référence.",
@@ -4728,6 +4925,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Année de référence des données.",
@@ -4752,6 +4950,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Canton du ménage.",
@@ -4776,6 +4975,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Alimentation et boissons.",
@@ -4800,6 +5000,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Garderie, parascolaire, nounou.",
@@ -4824,6 +5025,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Loyer, hypothèque, chauffage, etc.",
@@ -4848,6 +5050,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Primes maladie, soins, médicaments.",
@@ -4872,6 +5075,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Dépenses liées à la mobilité.",
@@ -4896,6 +5100,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Coût annuel des assurances pour le ménage.",
@@ -4920,6 +5125,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Montant épargné en moyenne par mois.",
@@ -4944,6 +5150,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Montant annuel des impôts acquittés.",
@@ -4968,6 +5175,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Indice composite de vulnérabilité économique.",
@@ -4992,6 +5200,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Échelle de satisfaction subjective (0–10).",
@@ -5016,6 +5225,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Nationalité du ménage ou de la personne de référence.",
@@ -5040,6 +5250,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Nombre d'enfants dans le ménage.",
@@ -5064,6 +5275,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Heures travaillées par semaine par la personne de référence.",
@@ -5088,6 +5300,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Nombre de personnes actives dans le ménage.",
@@ -5112,6 +5325,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Nombre total d'individus dans le ménage.",
@@ -5136,6 +5350,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "niveau_formation",
     "dataset_id": "revenus_menages",
     "description": "CFC, maturité, Bachelor, Master, Doctorat.",
@@ -5160,6 +5375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Valeur immobilière détenue.",
@@ -5184,6 +5400,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Valeur estimée du patrimoine du ménage.",
@@ -5208,6 +5425,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Ménage comprenant au moins une personne en situation de handicap.",
@@ -5232,6 +5450,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Indique si le ménage reçoit une aide sociale.",
@@ -5256,6 +5475,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Grande région économique.",
@@ -5280,6 +5500,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_median",
     "dataset_id": "revenus_menages",
     "description": "Mesure du revenu médian du ménage.",
@@ -5304,6 +5525,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_par_personne",
     "dataset_id": "revenus_menages",
     "description": "Revenu total divisé par le nombre de personnes.",
@@ -5328,6 +5550,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_total_brut",
     "dataset_id": "revenus_menages",
     "description": "Total des revenus bruts (CHF).",
@@ -5352,6 +5575,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_total_net",
     "dataset_id": "revenus_menages",
     "description": "Revenu après déductions et charges obligatoires.",
@@ -5376,6 +5600,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_du_capital",
     "dataset_id": "revenus_menages",
     "description": "Revenus du patrimoine financier et immobilier.",
@@ -5400,6 +5625,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "prestation_sociale",
     "dataset_id": "revenus_menages",
     "description": "Rentes, allocations, indemnités, etc.",
@@ -5424,6 +5650,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "revenu_du_travail",
     "dataset_id": "revenus_menages",
     "description": "Revenus provenant d'activités professionnelles.",
@@ -5448,6 +5675,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Salaire horaire moyen du ménage.",
@@ -5472,6 +5700,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Sexe : homme, femme, autre/NSP.",
@@ -5496,6 +5725,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Employé, indépendant, retraité, étudiant, au foyer…",
@@ -5520,6 +5750,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Origine des données : OFS, fiscalité cantonale, enquêtes.",
@@ -5544,6 +5775,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "statut_emploi",
     "dataset_id": "revenus_menages",
     "description": "Temps plein, temps partiel, chômage, inactif.",
@@ -5568,6 +5800,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Proportion du revenu consacrée au logement (%).",
@@ -5592,6 +5825,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Proportion d'endettement par rapport aux revenus.",
@@ -5616,6 +5850,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "revenus_menages",
     "description": "Famille, personne seule, couple sans enfants, etc.",
@@ -5640,6 +5875,7 @@
     "type": "string"
   },
   {
+    "business_key": 2,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Année de référence des données.",
@@ -5664,6 +5900,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Budget total annuel consacré au service (CHF).",
@@ -5688,6 +5925,7 @@
     "type": "float"
   },
   {
+    "business_key": 1,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Nom de la commune où le service public est offert.",
@@ -5712,6 +5950,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "cout_investissement",
     "dataset_id": "ser_pub_loc",
     "description": "Montants d'investissement dans le service (CHF).",
@@ -5736,6 +5975,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Montant dépensé par habitant pour ce service (CHF).",
@@ -5760,6 +6000,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Délai moyen (jours) pour traiter une demande.",
@@ -5784,6 +6025,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Gestion communale, intercommunale ou privée.",
@@ -5808,6 +6050,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_beneficiaires",
     "dataset_id": "ser_pub_loc",
     "description": "Nombre de personnes bénéficiant du service.",
@@ -5832,6 +6075,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": "nombre_employes",
     "dataset_id": "ser_pub_loc",
     "description": "Effectif du personnel du service public.",
@@ -5856,6 +6100,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Interventions réalisées par le service.",
@@ -5880,6 +6125,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Nombre de points d'accueil (guichets, bureaux, etc.).",
@@ -5904,6 +6150,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Niveau d'accessibilité (PMR, transports, horaires).",
@@ -5928,6 +6175,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Quartier ou unité territoriale infra-communale.",
@@ -5952,6 +6200,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Région administrative de rattachement.",
@@ -5976,6 +6225,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Indice de satisfaction (0–100).",
@@ -6000,6 +6250,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Source principale : communal, cantonal, fédéral ou privé.",
@@ -6024,6 +6275,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Surface totale de l'infrastructure (m²).",
@@ -6048,6 +6300,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Proportion de la population couverte (%)",
@@ -6072,6 +6325,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Type principal d'infrastructure (bâtiment, réseau, équipement).",
@@ -6096,6 +6350,7 @@
     "type": "string"
   },
   {
+    "business_key": 3,
     "concept_id": null,
     "dataset_id": "ser_pub_loc",
     "description": "Catégorie du service (administration, transport, santé, etc.).",
@@ -6120,6 +6375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Altitude en mètres de la station de mesure.",
@@ -6144,6 +6400,7 @@
     "type": "integer"
   },
   {
+    "business_key": 1,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Année de mesure des températures.",
@@ -6168,6 +6425,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Différence par rapport à la normale climatique (°C).",
@@ -6192,6 +6450,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Direction dominante du vent (N, NE, E, etc.).",
@@ -6216,6 +6475,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Durée totale d'ensoleillement (heures).",
@@ -6240,6 +6500,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Humidité relative moyenne du mois (%).",
@@ -6264,6 +6525,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Indice combinant température et humidité.",
@@ -6288,6 +6550,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Indice combinant température, vent et humidité.",
@@ -6312,6 +6575,7 @@
     "type": "float"
   },
   {
+    "business_key": 2,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Mois de l'année (janvier–décembre).",
@@ -6336,6 +6600,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Nombre de jours avec température ≥ 25°C.",
@@ -6360,6 +6625,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Nombre de jours avec température < 0°C.",
@@ -6384,6 +6650,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Nombre de jours ≥ 30°C.",
@@ -6408,6 +6675,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Total mensuel des précipitations (mm).",
@@ -6432,6 +6700,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Pression atmosphérique moyenne (hPa).",
@@ -6456,6 +6725,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Rayonnement solaire reçu (MJ/m²).",
@@ -6480,6 +6750,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Origine de la série (MétéoSuisse, station locale, etc.).",
@@ -6504,6 +6775,7 @@
     "type": "string"
   },
   {
+    "business_key": 3,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Station météorologique concernée.",
@@ -6528,6 +6800,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "temperature_maximale",
     "dataset_id": "temperature_moy",
     "description": "Température maximale du mois (°C).",
@@ -6552,6 +6825,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "temperature_minimale",
     "dataset_id": "temperature_moy",
     "description": "Température minimale du mois (°C).",
@@ -6576,6 +6850,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "temperature_moyenne",
     "dataset_id": "temperature_moy",
     "description": "Température moyenne mensuelle (°C).",
@@ -6600,6 +6875,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Rafale maximale enregistrée (km/h).",
@@ -6624,6 +6900,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "temperature_moy",
     "description": "Vitesse moyenne du vent (km/h).",
@@ -6648,6 +6925,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Altitude de l'établissement (m).",
@@ -6672,6 +6950,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Année de référence des statistiques touristiques.",
@@ -6696,6 +6975,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Canton où se situe l'établissement touristique.",
@@ -6720,6 +7000,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Classification officielle 1–5 étoiles.",
@@ -6744,6 +7025,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Label ou catégorie attribuée par l'office du tourisme.",
@@ -6768,6 +7050,7 @@
     "type": null
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Continent de provenance des touristes.",
@@ -6792,6 +7075,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": "coordonnee_x_lv95",
     "dataset_id": "tourisme_annu",
     "description": "Coordonnée LV95.",
@@ -6816,6 +7100,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": "coordonnee_y_lv95",
     "dataset_id": "tourisme_annu",
     "description": "Coordonnée LV95.",
@@ -6840,6 +7125,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre moyen de nuits par séjour.",
@@ -6864,6 +7150,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Gestion familiale, chaîne hôtelière, coopérative, etc.",
@@ -6888,6 +7175,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Indice de satisfaction de la clientèle (0–100).",
@@ -6912,6 +7200,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Mois de l'année.",
@@ -6936,6 +7225,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre de clients enregistrés à l'arrivée.",
@@ -6960,6 +7250,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre de chambres disponibles dans l'établissement.",
@@ -6984,6 +7275,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre d'événements ayant potentiellement influencé la fréquentation.",
@@ -7008,6 +7300,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre total de lits.",
@@ -7032,6 +7325,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre total de nuitées effectuées.",
@@ -7056,6 +7350,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nombre de collaborateurs équivalents plein-temps.",
@@ -7080,6 +7375,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Indique si l'établissement possède un service de restauration.",
@@ -7104,6 +7400,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Présence d'infrastructures wellness/spa.",
@@ -7128,6 +7425,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Nationalité principale des clients.",
@@ -7152,6 +7450,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Indique si une part significative de familles est accueillie.",
@@ -7176,6 +7475,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Indique si la clientèle comprend un volume notable de groupes.",
@@ -7200,6 +7500,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Prix moyen facturé pour une nuit (CHF).",
@@ -7224,6 +7525,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Région touristique définie dans la statistique officielle.",
@@ -7248,6 +7550,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Saison touristique : hiver, été, intersaison…",
@@ -7272,6 +7575,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Origine de la donnée (OFS, canton, association hôtelière…).",
@@ -7296,6 +7600,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Variation annuelle des nuitées (%).",
@@ -7320,6 +7625,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Proportion moyenne d'occupation des chambres (%).",
@@ -7344,6 +7650,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Proportion moyenne d'occupation des lits (%).",
@@ -7368,6 +7675,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Clientèle dominante (affaires, loisirs, familles…).",
@@ -7392,6 +7700,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "tourisme_annu",
     "description": "Hôtel, auberge, camping, résidence, etc.",
@@ -7416,6 +7725,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "transport_pub",
     "description": "Fréquence moyenne des passages en minutes (pondérée sur toutes les lignes).",
@@ -7440,6 +7750,7 @@
     "type": null
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "transport_pub",
     "description": "Ville ou village desservi par le réseau de transports publics.",
@@ -7464,6 +7775,7 @@
     "type": null
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "transport_pub",
     "description": "Nombre total de lignes (bus, tram, train, etc.) desservant la localité.",
@@ -7488,6 +7800,7 @@
     "type": null
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Indique si la personne a effectué des achats en ligne.",
@@ -7512,6 +7825,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Année de référence de l'enquête d'utilisation d'internet.",
@@ -7536,6 +7850,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Indice de compétence numérique (0–100).",
@@ -7560,6 +7875,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Niveau de confiance dans l'utilisation d'internet (0–100).",
@@ -7584,6 +7900,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Indique si le ménage dispose d'une connexion internet.",
@@ -7608,6 +7925,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Accès internet via réseau mobile.",
@@ -7632,6 +7950,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Appareil utilisé : smartphone, PC, tablette, etc.",
@@ -7656,6 +7975,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Fréquence d'usage : quotidienne, hebdomadaire, rare, etc.",
@@ -7680,6 +8000,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Nombre total d'applications utilisées régulièrement.",
@@ -7704,6 +8025,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Nombre d'heures d'utilisation par semaine.",
@@ -7728,6 +8050,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Région ou grand-région (CH05, CH07…).",
@@ -7752,6 +8075,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Indique si l'utilisateur fréquente des réseaux sociaux.",
@@ -7776,6 +8100,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Sexe des répondants : homme, femme, autre/NSP.",
@@ -7800,6 +8125,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Origine des données (OFFT, OFS, partenaires…).",
@@ -7824,6 +8150,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Utilisation de services de streaming vidéo.",
@@ -7848,6 +8175,7 @@
     "type": "boolean"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Tranche d'âge des répondants (15–24, 25–34, etc.).",
@@ -7872,6 +8200,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "usage_internet",
     "description": "Activité principale réalisée en ligne (réseaux sociaux, nouvelles, achats…).",
@@ -7896,6 +8225,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Année de référence de la statistique.",
@@ -7920,6 +8250,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Essence, diesel, hybride, électrique, GPL…",
@@ -7944,6 +8275,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Catégorie : compacte, SUV, berline, utilitaire…",
@@ -7968,6 +8300,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Émissions de CO₂ (g/km).",
@@ -7992,6 +8325,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Marque du véhicule vendu.",
@@ -8016,6 +8350,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Modèle précis du véhicule.",
@@ -8040,6 +8375,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Mois de vente.",
@@ -8064,6 +8400,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Nombre de sièges homologués.",
@@ -8088,6 +8425,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Prix moyen des véhicules vendus (CHF).",
@@ -8112,6 +8450,7 @@
     "type": "float"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Puissance du moteur en chevaux (HP).",
@@ -8136,6 +8475,7 @@
     "type": "integer"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Région administrative ou économique.",
@@ -8160,6 +8500,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Origine des données : importateurs, OFROU, concessionnaires.",
@@ -8184,6 +8525,7 @@
     "type": "string"
   },
   {
+    "business_key": null,
     "concept_id": null,
     "dataset_id": "vente_voitures",
     "description": "Automatique, manuelle, semi-automatique, CVT.",

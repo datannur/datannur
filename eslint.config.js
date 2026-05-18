@@ -1,7 +1,7 @@
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import svelte from 'eslint-plugin-svelte'
-import { browser } from 'globals'
+import globalsPackage from 'globals'
 
 const allowedProps = ['__APP_VERSION__', 'FlexSearch', 'ADD_TAGS', 'ADD_ATTR']
 
@@ -70,7 +70,7 @@ const namingConventionRules = {
 }
 
 const globals = {
-  ...browser,
+  ...globalsPackage.browser,
   __APP_VERSION__: 'readonly',
 }
 
@@ -82,7 +82,7 @@ const strictTypeScriptRules = {
   '@typescript-eslint/no-unsafe-member-access': 'error',
   '@typescript-eslint/no-inferrable-types': 'off',
   'init-declarations': ['error', 'always'],
-} as const
+}
 
 export default [
   js.configs.recommended,
@@ -101,7 +101,7 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.svelte.ts'],
-    ignores: ['eslint.config.ts'],
+    ignores: ['eslint.config.js'],
     languageOptions: {
       globals,
       parser: tseslint.parser,

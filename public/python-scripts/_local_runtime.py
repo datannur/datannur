@@ -11,6 +11,11 @@ RequestHandlerFactory = Callable[..., BaseHTTPRequestHandler]
 APP_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = APP_DIR / "data"
 LOCAL_PORTS_CONFIG = APP_DIR / "data" / "localhost-ports.config.json"
+DEV_LOCAL_PORTS = {
+    "appPort": 8080,
+    "llmProxyPort": 62292,
+    "editServerPort": 62294,
+}
 
 
 def find_data_db_dir(base_dir: Path = APP_DIR) -> Optional[Path]:
@@ -33,6 +38,9 @@ def find_data_db_dir(base_dir: Path = APP_DIR) -> Optional[Path]:
 
 
 def get_local_port(key: str, default: int) -> int:
+    if is_source_public_runtime() and key in DEV_LOCAL_PORTS:
+        return DEV_LOCAL_PORTS[key]
+
     config = get_local_runtime_config()
     port = config.get(key)
     if isinstance(port, int) and port > 0:
@@ -58,6 +66,10 @@ def get_local_runtime_config() -> dict[str, Any]:
 def get_local_app_origin(default_port: int) -> str:
     app_port = get_local_port("appPort", default_port)
     return f"http://localhost:{app_port}"
+
+
+def is_source_public_runtime() -> bool:
+    return APP_DIR.name == "public" and (APP_DIR.parent / "src").is_dir()
 
 
 def is_local_app_origin(origin: str, default_port: int) -> bool:

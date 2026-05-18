@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import type Index from 'flexsearch'
 
 type MermaidRenderResult = {

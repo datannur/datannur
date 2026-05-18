@@ -7,6 +7,7 @@
   import TagsInfo from '@info-table/TagsInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
+  import Icon from '@layout/Icon.svelte'
   import type { Tag } from '@type'
 
   let { tag }: { tag: Tag } = $props()
@@ -23,7 +24,14 @@
     {/if}
   {/if}
   <DataSizeInfo dataSize={tag.dataSizeRecursive} />
+  {#if tag.propagateToParents}
+    <tr>
+      <td><Icon type="propagateToParents" /> Remonte</td>
+      <td>Vers les datasets et dossiers parents</td>
+    </tr>
+  {/if}
   <TagsInfo tags={tag.impliedTags ?? []} label="Implique aussi" />
+  <TagsInfo tags={tag.impliedByTags ?? []} label="Est impliqué par" />
 </TableWrapper>
 {#if tag.description}
   <DescriptionInfo description={tag.description} />

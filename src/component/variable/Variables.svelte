@@ -62,6 +62,7 @@
       Column.datatype(),
       Column.relationType(),
       Column.isKey(),
+      Column.isBusinessKey(),
       Column.fkVar(),
       Column.nbFkRefVar(nbFkRefMax),
       Column.nbSources(nbSourcesMax, 'variable'),
@@ -87,6 +88,7 @@
       Column.favorite(),
       ...base,
       Column.enumeration(),
+      Column.tag(),
       ...(showDatasetColumns
         ? [
             Column.dataset(isMeta),
@@ -95,7 +97,6 @@
             Column.manager(),
           ]
         : []),
-      Column.tag(),
       Column.startDate(),
       Column.endDate(),
     ]

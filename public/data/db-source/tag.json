@@ -19,7 +19,8 @@
     "id": "contact_info",
     "name": "Informations de contact",
     "description": "Les informations de contact regroupent les moyens permettant de joindre une personne ou une organisation, comme une adresse email, un numéro de téléphone ou une adresse postale.",
-    "implied_tag_ids": "personal_data, confidentiality_risk"
+    "implied_tag_ids": "personal_data, confidentiality_risk",
+    "propagate_to_parents": true
   },
   {
     "id": "confidentiality_risk",
@@ -32,7 +33,8 @@
     "parent_id": "data_protection",
     "name": "Données sensibles",
     "description": "Les données 2 sensibles sont des catégories particulières de données personnelles qui révèlent des informations hautement confidentielles, comme l'origine raciale ou ethnique, les opinions politiques, les croyances religieuses, la santé, la vie sexuelle, ou les données biométriques. Leur traitement est soumis à des règles strictes pour éviter toute discrimination ou atteinte à la vie privée.",
-    "implied_tag_ids": "confidentiality_risk"
+    "implied_tag_ids": "confidentiality_risk",
+    "propagate_to_parents": true
   },
   {
     "id": "pseudonymous_data",

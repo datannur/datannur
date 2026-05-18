@@ -58,9 +58,16 @@
         <Icon type="key" />
         Clé
       </td>
+      <td> Oui </td>
+    </tr>
+  {/if}
+  {#if variable.businessKey}
+    <tr>
       <td>
-        {variable.key}
+        <Icon type="businessKey" />
+        Clé métier
       </td>
+      <td> Oui </td>
     </tr>
   {/if}
   {#if variable.fkVarId}

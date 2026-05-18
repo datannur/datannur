@@ -123,6 +123,8 @@ export type Dataset = BaseEntity &
     managerName?: string
     nbVariable?: number
     nextUpdateDate?: string
+    keyVariables?: Variable[]
+    businessKeyVariables?: Variable[]
     fkDatasetIds?: Set<string | number>
     fkReferencedByDatasetIds?: Set<string | number>
   }
@@ -143,6 +145,7 @@ export type Variable = BaseEntity &
     conceptId?: string | number
     originalName?: string
     key?: string | boolean
+    businessKey?: string | boolean
     nbDistinct?: number
     nbDuplicate?: number
     nbMissing?: number
@@ -252,9 +255,12 @@ export type Tag = BaseEntity &
   WithDocs &
   WithFavorite & {
     impliedTagIds?: string
+    propagateToParents?: boolean
 
     // Computed fields added during processing
     impliedTags?: Tag[]
+    impliedByTags?: Tag[]
+    impliedTagsRecursive?: Tag[]
     entities?: { name: string; nb: number }[]
     nbOrganization?: number
     nbFolder?: number
@@ -330,6 +336,7 @@ export type MetaVariable = Omit<BaseEntity, 'id'> & {
   folderName?: string
   metaLocalisation?: string
   key?: string
+  businessKey?: string
 }
 
 export type MetaDataset = Omit<BaseEntity, 'id' | 'description'> & {

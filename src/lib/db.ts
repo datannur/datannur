@@ -120,6 +120,10 @@ function parseIds(ids: string | number | null | undefined): string[] {
     .filter(id => id !== '')
 }
 
+function isMissing(value: unknown): boolean {
+  return value === null || value === undefined || value === ''
+}
+
 function hasTagIds(item: unknown): item is TaguableEntity {
   return typeof item === 'object' && item !== null && 'tagIds' in item
 }
@@ -128,13 +132,13 @@ function isEntityName(tableName: string): tableName is keyof EntityTypeMap {
   return tableName in db.tables
 }
 
-function buildImpliedTags(): { [id: string]: Tag[] } {
-  const impliedTagsById: { [id: string]: Tag[] } = {}
+function buildImpliedTagsRecursive(): { [id: string]: Tag[] } {
+  const impliedTagsRecursiveById: { [id: string]: Tag[] } = {}
   const visiting = new Set<string>()
 
   function resolve(tag: Tag): Tag[] {
     const tagId = String(tag.id)
-    if (impliedTagsById[tagId]) return impliedTagsById[tagId]
+    if (impliedTagsRecursiveById[tagId]) return impliedTagsRecursiveById[tagId]
     if (visiting.has(tagId)) return []
 
     visiting.add(tagId)
@@ -156,15 +160,32 @@ function buildImpliedTags(): { [id: string]: Tag[] } {
     }
 
     visiting.delete(tagId)
-    impliedTagsById[tagId] = impliedTags
+    impliedTagsRecursiveById[tagId] = impliedTags
     return impliedTags
   }
 
   for (const tag of db.getAll('tag')) resolve(tag)
-  return impliedTagsById
+  return impliedTagsRecursiveById
 }
 
-function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
+function getImpliedTags(tag: Tag): Tag[] {
+  const impliedTags: Tag[] = []
+  const seen = new Set<string>()
+  for (const impliedTagId of parseIds(tag.impliedTagIds)) {
+    const impliedTag = db.get('tag', impliedTagId)
+    const impliedTagKey = String(impliedTag?.id)
+    if (!impliedTag || impliedTag.id === tag.id || seen.has(impliedTagKey)) {
+      continue
+    }
+    seen.add(impliedTagKey)
+    impliedTags.push(impliedTag)
+  }
+  return impliedTags
+}
+
+function expandTagIdsWithImplied(impliedTagsRecursiveById: {
+  [id: string]: Tag[]
+}) {
   for (const [tableName, table] of Object.entries(db.tables)) {
     if (!isEntityName(tableName)) continue
     for (const item of table ?? []) {
@@ -178,7 +199,7 @@ function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
       const seen = new Set(tagIds)
 
       for (const tagId of tagIds) {
-        for (const impliedTag of impliedTagsById[tagId] ?? []) {
+        for (const impliedTag of impliedTagsRecursiveById[tagId] ?? []) {
           const impliedTagId = String(impliedTag.id)
           if (seen.has(impliedTagId)) continue
           seen.add(impliedTagId)
@@ -191,6 +212,35 @@ function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
         ifExists: 'ignore',
       })
     }
+  }
+}
+
+function getPropagatedTagIds(item: TaguableEntity): (string | number)[] {
+  const tagIds: (string | number)[] = []
+  for (const tagId of parseIds(item.tagIds)) {
+    const tag = db.get('tag', tagId)
+    if (tag?.propagateToParents) tagIds.push(tag.id)
+  }
+  return tagIds
+}
+
+function propagateTagIdsToParents() {
+  for (const variable of db.getAll('variable')) {
+    if (!variable.datasetId) continue
+    const tagIds = getPropagatedTagIds(variable)
+    if (tagIds.length === 0) continue
+    db.addRelations('dataset', variable.datasetId, 'tagIds', tagIds, {
+      ifExists: 'ignore',
+    })
+  }
+
+  for (const dataset of db.getAll('dataset')) {
+    if (!dataset.folderId) continue
+    const tagIds = getPropagatedTagIds(dataset)
+    if (tagIds.length === 0) continue
+    db.addRelations('folder', dataset.folderId, 'tagIds', tagIds, {
+      ifExists: 'ignore',
+    })
   }
 }
 
@@ -304,6 +354,48 @@ function addNextUpdate(item: EntityTypeMap['dataset' | 'folder']) {
   const diff = days * 24 * 3600
   const lastUpdate = dateToTimestamp(item.lastUpdateDate)
   item.nextUpdateDate = timestampToDate(lastUpdate + diff * 1000)
+}
+
+function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
+  if (!dataset.folderId) return
+  const folder = db.get('folder', dataset.folderId)
+  if (!folder) return
+
+  if (isMissing(dataset.ownerId)) dataset.ownerId = folder.ownerId
+  if (isMissing(dataset.managerId)) dataset.managerId = folder.managerId
+  if (isMissing(dataset.updatingEach))
+    dataset.updatingEach = folder.updatingEach
+}
+
+function addFolderDatasetDates(folder: EntityTypeMap['folder']) {
+  const needsStartDate = isMissing(folder.startDate)
+  const needsEndDate = isMissing(folder.endDate)
+  const needsLastUpdateDate = isMissing(folder.lastUpdateDate)
+  if (!needsStartDate && !needsEndDate && !needsLastUpdateDate) return
+
+  const datasets = db.getAll('dataset', { folder })
+  if (datasets.length === 0) return
+
+  for (const dataset of datasets) {
+    if (
+      needsStartDate &&
+      dataset.startDate &&
+      (!folder.startDate || dataset.startDate < folder.startDate)
+    )
+      folder.startDate = dataset.startDate
+    if (
+      needsEndDate &&
+      dataset.endDate &&
+      dataset.endDate > (folder.endDate || '')
+    )
+      folder.endDate = dataset.endDate
+    if (
+      needsLastUpdateDate &&
+      dataset.lastUpdateDate &&
+      dataset.lastUpdateDate > (folder.lastUpdateDate || '')
+    )
+      folder.lastUpdateDate = dataset.lastUpdateDate
+  }
 }
 
 function getOrganizationItems(
@@ -441,13 +533,22 @@ export function getFkRelatedVariables(
 
 class Process {
   static tag() {
-    const impliedTagsById = buildImpliedTags()
-    expandTagIdsWithImplied(impliedTagsById)
+    const impliedTagsRecursiveById = buildImpliedTagsRecursive()
+    expandTagIdsWithImplied(impliedTagsRecursiveById)
+    propagateTagIdsToParents()
 
     db.foreach('tag', tag => {
       addEntity(tag, 'tag')
       tag.isFavorite = false
-      tag.impliedTags = impliedTagsById[String(tag.id)] ?? []
+      tag.impliedTags = getImpliedTags(tag)
+      tag.impliedByTags = []
+      tag.impliedTagsRecursive = impliedTagsRecursiveById[String(tag.id)] ?? []
+    })
+
+    db.foreach('tag', tag => {
+      for (const impliedTag of tag.impliedTags ?? []) {
+        impliedTag.impliedByTags?.push(tag)
+      }
       tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
       tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
       tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')
@@ -514,6 +615,7 @@ class Process {
       addDocs('folder', folder)
       folder.nbChild = db.countRelated('parent', folder.id, 'folder')
       folder.nbChildRecursive = db.getAllChilds('folder', folder.id).length
+      addFolderDatasetDates(folder)
       addNextUpdate(folder)
       folder.typeClean = folder.type ?? ''
       if (db.use.owner)
@@ -562,6 +664,7 @@ class Process {
     db.foreach('dataset', dataset => {
       addEntity(dataset, 'dataset')
       dataset.isFavorite = false
+      addDatasetInheritedInfo(dataset)
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
       if (db.use.owner)
@@ -631,6 +734,7 @@ class Process {
       addSourceVar(variable)
       addFkVar(variable)
       if (variable.key) variable.key = 'oui'
+      if (variable.businessKey) variable.businessKey = 'oui'
 
       const freqData = db.getAll('frequency', { variable })
       variable.hasFreq = freqData.length > 0

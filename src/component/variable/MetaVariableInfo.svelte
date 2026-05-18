@@ -33,9 +33,16 @@
         <Icon type="key" />
         Clé
       </td>
+      <td> Oui </td>
+    </tr>
+  {/if}
+  {#if metaVariable.businessKey}
+    <tr>
       <td>
-        {metaVariable.key}
+        <Icon type="businessKey" />
+        Clé métier
       </td>
+      <td> Oui </td>
     </tr>
   {/if}
   <tr>

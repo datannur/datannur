@@ -32,6 +32,10 @@ type LocalPortsConfig = {
 }
 
 const defaultLLMProxyPort = 61292
+const devLLMProxyPort = 62292
+const defaultLocalLLMProxyPort = import.meta.env.DEV
+  ? devLLMProxyPort
+  : defaultLLMProxyPort
 
 // Detect environment
 const isFileProtocol =
@@ -46,7 +50,7 @@ const isLocalhost =
 // - web server: PHP proxy
 function getProxyURL(): string | undefined {
   if (isFileProtocol) return undefined
-  if (isLocalhost) return `http://localhost:${defaultLLMProxyPort}`
+  if (isLocalhost) return `http://localhost:${defaultLocalLLMProxyPort}`
   return '/api/llm'
 }
 
@@ -79,7 +83,7 @@ function buildProxyURL(port: number): string | undefined {
 }
 
 async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
-  if (!isLocalhost || isFileProtocol) {
+  if (!isLocalhost || isFileProtocol || import.meta.env.DEV) {
     return null
   }
 
@@ -101,7 +105,7 @@ export async function initializeLLMConfig(): Promise<void> {
     const localPortsConfig = await loadLocalPortsConfig()
     const llmProxyPort = isValidPort(localPortsConfig?.llmProxyPort)
       ? localPortsConfig.llmProxyPort
-      : defaultLLMProxyPort
+      : defaultLocalLLMProxyPort
 
     llmConfig = {
       ...defaultLLMConfig,
