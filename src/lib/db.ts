@@ -120,6 +120,10 @@ function parseIds(ids: string | number | null | undefined): string[] {
     .filter(id => id !== '')
 }
 
+function isMissing(value: unknown): boolean {
+  return value === null || value === undefined || value === ''
+}
+
 function hasTagIds(item: unknown): item is TaguableEntity {
   return typeof item === 'object' && item !== null && 'tagIds' in item
 }
@@ -328,9 +332,41 @@ function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
   const folder = db.get('folder', dataset.folderId)
   if (!folder) return
 
-  dataset.ownerId ??= folder.ownerId
-  dataset.managerId ??= folder.managerId
-  dataset.updatingEach ??= folder.updatingEach
+  if (isMissing(dataset.ownerId)) dataset.ownerId = folder.ownerId
+  if (isMissing(dataset.managerId)) dataset.managerId = folder.managerId
+  if (isMissing(dataset.updatingEach))
+    dataset.updatingEach = folder.updatingEach
+}
+
+function addFolderDatasetDates(folder: EntityTypeMap['folder']) {
+  const needsStartDate = isMissing(folder.startDate)
+  const needsEndDate = isMissing(folder.endDate)
+  const needsLastUpdateDate = isMissing(folder.lastUpdateDate)
+  if (!needsStartDate && !needsEndDate && !needsLastUpdateDate) return
+
+  const datasets = db.getAll('dataset', { folder })
+  if (datasets.length === 0) return
+
+  for (const dataset of datasets) {
+    if (
+      needsStartDate &&
+      dataset.startDate &&
+      (!folder.startDate || dataset.startDate < folder.startDate)
+    )
+      folder.startDate = dataset.startDate
+    if (
+      needsEndDate &&
+      dataset.endDate &&
+      dataset.endDate > (folder.endDate || '')
+    )
+      folder.endDate = dataset.endDate
+    if (
+      needsLastUpdateDate &&
+      dataset.lastUpdateDate &&
+      dataset.lastUpdateDate > (folder.lastUpdateDate || '')
+    )
+      folder.lastUpdateDate = dataset.lastUpdateDate
+  }
 }
 
 function getOrganizationItems(
@@ -552,6 +588,7 @@ class Process {
       addDocs('folder', folder)
       folder.nbChild = db.countRelated('parent', folder.id, 'folder')
       folder.nbChildRecursive = db.getAllChilds('folder', folder.id).length
+      addFolderDatasetDates(folder)
       addNextUpdate(folder)
       folder.typeClean = folder.type ?? ''
       if (db.use.owner)
