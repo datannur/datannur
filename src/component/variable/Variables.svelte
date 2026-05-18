@@ -87,6 +87,7 @@
       Column.favorite(),
       ...base,
       Column.enumeration(),
+      Column.tag(),
       ...(showDatasetColumns
         ? [
             Column.dataset(isMeta),
@@ -95,7 +96,6 @@
             Column.manager(),
           ]
         : []),
-      Column.tag(),
       Column.startDate(),
       Column.endDate(),
     ]
