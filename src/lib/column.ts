@@ -282,6 +282,34 @@ export default class Column {
       render: Render.tags,
     }
   }
+  static impliedTag(): ColumnType {
+    return {
+      data: 'impliedTags',
+      title: Render.icon('tag') + 'Implique aussi',
+      defaultContent: '',
+      hasLongText: true,
+      tooltip: 'Mots clés impliqués par ce mot clé',
+      name: 'impliedTag',
+      render: Render.tags,
+    }
+  }
+  static nbImpliedByTag(): ColumnType {
+    return {
+      data: 'impliedByTags',
+      title: Render.icon('tag') + 'Impl.',
+      defaultContent: '',
+      filterType: 'input',
+      fromLength: true,
+      tooltip: 'Nombre de mots clés qui impliquent ce mot clé',
+      name: 'impliedByTag',
+      render: (data: Tag[], type, row: Tag) => {
+        if (!data?.length) return ''
+        if (type !== 'display') return data.length
+        const content = link(`tag/${row.id}`, String(data.length), 'tag')
+        return Render.numPercent(content, 100, 'tag', type)
+      },
+    }
+  }
   static concept(): ColumnType {
     return {
       data: 'conceptName',
@@ -822,6 +850,29 @@ export default class Column {
         )
         const percent = getPercent(data / total)
         return `${Render.numPercent(content, percent, 'folder', type)}`
+      },
+    }
+  }
+  static nbOrganizationRecursive(
+    entity: keyof typeof entityNames,
+    total: number,
+  ): ColumnType {
+    return {
+      data: 'nbOrganizationRecursive',
+      title:
+        Render.icon('organization') +
+        "<span class='hidden'>nbOrganizations</span>",
+      filterType: 'input',
+      tooltip: "Nombre d'organisations",
+      render: (data: number, type, row: RecursiveEntity) => {
+        if (!data) return ''
+        if (type !== 'display') return data
+        const content = link(
+          `${entity}/${row.id}?tab=organizations`,
+          escapeHtml(String(data)),
+        )
+        const percent = getPercent(data / total)
+        return `${Render.numPercent(content, percent, 'organization', type)}`
       },
     }
   }

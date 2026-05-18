@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- add: distinguish direct and recursive implied tags, show reverse implied-by tags on tag detail pages, and add a compact implied-by count column to the tags table
+
 ## 0.22.1 (2026-05-18)
 
 - change: integrate the former `svelte-fileapp` runtime, router, static generation, and Vite helpers locally; remove the external dependency and expose URL, browser, and router modules under project-owned paths

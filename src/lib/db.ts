@@ -128,13 +128,13 @@ function isEntityName(tableName: string): tableName is keyof EntityTypeMap {
   return tableName in db.tables
 }
 
-function buildImpliedTags(): { [id: string]: Tag[] } {
-  const impliedTagsById: { [id: string]: Tag[] } = {}
+function buildImpliedTagsRecursive(): { [id: string]: Tag[] } {
+  const impliedTagsRecursiveById: { [id: string]: Tag[] } = {}
   const visiting = new Set<string>()
 
   function resolve(tag: Tag): Tag[] {
     const tagId = String(tag.id)
-    if (impliedTagsById[tagId]) return impliedTagsById[tagId]
+    if (impliedTagsRecursiveById[tagId]) return impliedTagsRecursiveById[tagId]
     if (visiting.has(tagId)) return []
 
     visiting.add(tagId)
@@ -156,15 +156,32 @@ function buildImpliedTags(): { [id: string]: Tag[] } {
     }
 
     visiting.delete(tagId)
-    impliedTagsById[tagId] = impliedTags
+    impliedTagsRecursiveById[tagId] = impliedTags
     return impliedTags
   }
 
   for (const tag of db.getAll('tag')) resolve(tag)
-  return impliedTagsById
+  return impliedTagsRecursiveById
 }
 
-function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
+function getImpliedTags(tag: Tag): Tag[] {
+  const impliedTags: Tag[] = []
+  const seen = new Set<string>()
+  for (const impliedTagId of parseIds(tag.impliedTagIds)) {
+    const impliedTag = db.get('tag', impliedTagId)
+    const impliedTagKey = String(impliedTag?.id)
+    if (!impliedTag || impliedTag.id === tag.id || seen.has(impliedTagKey)) {
+      continue
+    }
+    seen.add(impliedTagKey)
+    impliedTags.push(impliedTag)
+  }
+  return impliedTags
+}
+
+function expandTagIdsWithImplied(impliedTagsRecursiveById: {
+  [id: string]: Tag[]
+}) {
   for (const [tableName, table] of Object.entries(db.tables)) {
     if (!isEntityName(tableName)) continue
     for (const item of table ?? []) {
@@ -178,7 +195,7 @@ function expandTagIdsWithImplied(impliedTagsById: { [id: string]: Tag[] }) {
       const seen = new Set(tagIds)
 
       for (const tagId of tagIds) {
-        for (const impliedTag of impliedTagsById[tagId] ?? []) {
+        for (const impliedTag of impliedTagsRecursiveById[tagId] ?? []) {
           const impliedTagId = String(impliedTag.id)
           if (seen.has(impliedTagId)) continue
           seen.add(impliedTagId)
@@ -441,13 +458,24 @@ export function getFkRelatedVariables(
 
 class Process {
   static tag() {
-    const impliedTagsById = buildImpliedTags()
-    expandTagIdsWithImplied(impliedTagsById)
+    const impliedTagsRecursiveById = buildImpliedTagsRecursive()
+    expandTagIdsWithImplied(impliedTagsRecursiveById)
 
     db.foreach('tag', tag => {
       addEntity(tag, 'tag')
       tag.isFavorite = false
-      tag.impliedTags = impliedTagsById[String(tag.id)] ?? []
+      tag.impliedTags = getImpliedTags(tag)
+      tag.impliedByTags = []
+      tag.impliedTagsRecursive = impliedTagsRecursiveById[String(tag.id)] ?? []
+    })
+
+    db.foreach('tag', tag => {
+      for (const impliedTag of tag.impliedTags ?? []) {
+        impliedTag.impliedByTags?.push(tag)
+      }
+    })
+
+    db.foreach('tag', tag => {
       tag.nbOrganization = db.countRelated('tag', tag.id, 'organization')
       tag.nbFolder = db.countRelated('tag', tag.id, 'folder')
       tag.nbDataset = db.countRelated('tag', tag.id, 'dataset')

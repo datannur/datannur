@@ -255,6 +255,8 @@ export type Tag = BaseEntity &
 
     // Computed fields added during processing
     impliedTags?: Tag[]
+    impliedByTags?: Tag[]
+    impliedTagsRecursive?: Tag[]
     entities?: { name: string; nb: number }[]
     nbOrganization?: number
     nbFolder?: number

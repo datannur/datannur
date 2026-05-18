@@ -2,14 +2,10 @@
   import { untrack } from 'svelte'
   import { onMount } from 'svelte'
   import db from '@db'
-  import { link } from '@lib/url'
   import { page } from '@router/router-store'
   import { getParentPath } from '@lib/db'
-  import { getPercent } from '@lib/util'
   import Column from '@lib/column'
-  import Render from '@lib/render'
   import Datatable from '@datatable/Datatable.svelte'
-  import escapeHtml from 'escape-html'
   import type { Tag, Column as ColumnType } from '@type'
 
   let { tags: tagsProp }: { tags: Tag[] } = $props()
@@ -70,24 +66,9 @@
     }
 
     columns = columns.concat([
-      {
-        data: 'nbOrganizationRecursive',
-        title:
-          Render.icon('organization') +
-          "<span class='hidden'>nbOrganization</span>",
-        filterType: 'input',
-        tooltip: "Nombre d'organisations",
-        render: (data, type, row: Tag) => {
-          if (!data) return ''
-          if (type !== 'display') return Number(data)
-          const content = link(
-            'tag/' + row.id + '?tab=organizations',
-            escapeHtml(data),
-          )
-          const percent = getPercent(data / organizationMax)
-          return `${Render.numPercent(content, percent, 'organization', type)}`
-        },
-      },
+      Column.impliedTag(),
+      Column.nbImpliedByTag(),
+      Column.nbOrganizationRecursive('tag', organizationMax),
       Column.nbFolderRecursive('tag', folderMax),
       Column.nbChildRecursive('tag', tagMax),
       Column.nbDocRecursive('tag', docMax),

@@ -24,6 +24,7 @@
   {/if}
   <DataSizeInfo dataSize={tag.dataSizeRecursive} />
   <TagsInfo tags={tag.impliedTags ?? []} label="Implique aussi" />
+  <TagsInfo tags={tag.impliedByTags ?? []} label="Est impliqué par" />
 </TableWrapper>
 {#if tag.description}
   <DescriptionInfo description={tag.description} />
