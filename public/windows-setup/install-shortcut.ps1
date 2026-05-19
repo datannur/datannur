@@ -42,11 +42,12 @@ if (Test-Path $iconSrc) {
 
 # --- Create shortcut ---------------------------------------------------------
 $fileUrl = 'file:///' + ($indexPath -replace '\\', '/')
+$appUrl = $fileUrl + '?datannur_shell=desktop_app'
 
 $WshShell = New-Object -ComObject WScript.Shell
 $shortcut = $WshShell.CreateShortcut($lnkPath)
 $shortcut.TargetPath       = $browser
-$shortcut.Arguments        = "--app=`"$fileUrl`""
+$shortcut.Arguments        = "--app=`"$appUrl`""
 $shortcut.WorkingDirectory = Split-Path -Parent $browser
 $shortcut.Description      = 'datannur (file:// mode)'
 if (Test-Path $iconDst) { $shortcut.IconLocation = $iconDst }
@@ -55,7 +56,7 @@ $shortcut.Save()
 Write-Host "==> datannur shortcut installed" -ForegroundColor Cyan
 Write-Host "    $lnkPath"
 Write-Host "    browser: $browser"
-Write-Host "    target : $fileUrl"
+Write-Host "    target : $appUrl"
 Write-Host ""
 Write-Host "Launch via Start menu, or search 'datannur'." -ForegroundColor Green
 Write-Host "To uninstall: Start menu > right-click 'datannur' > Remove." -ForegroundColor Green
