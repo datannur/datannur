@@ -39,14 +39,14 @@ class Router {
             if ($params !== false) {
                 $result = call_user_func_array($route['callback'], $params);
                 if (is_array($result)) {
-                    echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                    echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 }
                 return;
             }
         }
 
         http_response_code(404);
-        echo json_encode(['error' => 'Not Found'], JSON_PRETTY_PRINT);
+        echo json_encode(['error' => 'Not Found'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     private function matchRoute($pattern, $path) {

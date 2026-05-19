@@ -120,18 +120,13 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 | `npm run docs:preview` | Preview built docs                    |
 | `npm run docs:deploy`  | Deploy docs to docs.datannur.com/app/ |
 
-### API & Schema Management
+### API & Schema Tools
 
-| Command                                             | Purpose                                           |
-| --------------------------------------------------- | ------------------------------------------------- |
-| `python3 public/python-scripts/validate_schemas.py` | Validate all schemas and data files               |
-| `npm run schema:generate`                           | Generate schemas from data                        |
-| `npm run schema:generate:strict`                    | Generate schemas (strict mode)                    |
-| `npm run schema:update`                             | Update schemas with new fields                    |
-| `npm run schema:update:strict`                      | Update schemas (strict mode)                      |
-| `npm run schema:reset`                              | Reset schemas to default                          |
-| `npm run api:generate`                              | Generate OpenAPI specs from schemas               |
-| `npm run api:dev`                                   | Start Node.js API dev server (default port 61293) |
+| Command                                             | Purpose                                 |
+| --------------------------------------------------- | --------------------------------------- |
+| `python3 public/python-scripts/validate_schemas.py` | Validate all schemas and data files     |
+| `python3 public/python-scripts/generate_openapi.py` | Generate catalog-specific OpenAPI files |
+| `python3 public/python-scripts/api_server.py`       | Start the local Python REST API server  |
 
 ## Guidelines
 
@@ -177,8 +172,8 @@ User-facing documentation lives in `docs/` (VitePress) and is published to [docs
 - `public/data/` - User data (only folder users modify)
 - `public/data/db/` - Database files (.json.js format)
 - `public/schemas/` - JSON schemas for data validation
-- `public/api/` - API endpoints (PHP and Node.js implementations)
-- `public/node-scripts/` - Utility scripts (deploy, static generation, schema management)
+- `public/api/` - Web API endpoints and adapters
+- `public/node-scripts/` - Utility scripts (deploy, static generation)
 
 ### API Architecture
 
@@ -188,35 +183,29 @@ datannur provides two API implementations accessing the same JSON database:
 
 - Direct file access to `/data/db/*.json` files
 - No server-side processing required
-- OpenAPI spec: `public/api/openapi-raw.json`
+- OpenAPI spec: `public/data/api/openapi-raw.json`
 
 **RESTful API:**
 
 - Query-based with filtering, pagination, sorting
 - Two implementations:
-  - `public/api/php/` - PHP 7.4+ (production-ready)
-  - `public/api/nodejs/` - Node.js (development server)
-- OpenAPI spec: `public/api/openapi.json`
+  - `public/api/rest/` - PHP 7.4+ REST adapter (production-ready)
+  - `public/python-scripts/api_server.py` - Python 3.9+ local development server
+- OpenAPI spec: `public/data/api/openapi.json`
 
 **Configuration:**
 
-- API settings in `public/package.json` under `datannur` field:
-  - `dbPath`: Database location (relative to `public/`)
-  - `schemasPath`: Schemas location (relative to `public/`)
-  - `apiVersion`: API version (auto-incremented on schema changes)
-  - `schemasHash`: Schema checksum (auto-managed)
-  - `openApiVersion`: OpenAPI specification version
 - Local server ports in `public/data/localhost-ports.config.json`:
   - `appPort`: Local static app server used by `start_app.py`
   - `llmProxyPort`: Local Python LLM proxy port
-  - `nodeApiPort`: Optional Node.js REST API dev server port
+  - `apiPort`: Optional local REST API dev server port
 
 **Schema-driven:**
 
-- OpenAPI specs auto-generated from JSON schemas in `public/schemas/`
+- OpenAPI specs are generated for the current catalog instance from `public/data/db` and official schemas in `public/schemas/`
 - Run `python3 python-scripts/validate_schemas.py` (from `public/`) to validate schemas and data
-- Run `npm run api:generate` (from `public/`) to regenerate OpenAPI specs
-- API version auto-increments when schemas change
+- Run `python3 python-scripts/generate_openapi.py` (from `public/`) to regenerate catalog-specific OpenAPI specs in `public/data/api`
+- Run `python3 python-scripts/api_server.py` (from `public/`) to start the local REST API server
 
 ## Releases & Maintenance
 

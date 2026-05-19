@@ -121,6 +121,7 @@ export const entityToIcon = {
   downloadClose: 'cloud-arrow-down fa-rotate-180',
   pdf: 'file-pdf',
   compare: 'object-ungroup',
+  back: 'arrow-left',
   option: 'gear',
   diagram: 'diagram-project',
   email: 'envelope',

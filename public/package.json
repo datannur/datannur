@@ -11,26 +11,11 @@
   "engines": {
     "node": ">=22.6.0"
   },
-  "datannur": {
-    "dbPath": "data/db",
-    "schemasPath": "schemas",
-    "apiVersion": "1.0.5",
-    "schemasHash": "36eb02f4",
-    "openApiVersion": "3.1.0"
-  },
   "scripts": {
     "node:ts": "node --experimental-strip-types --disable-warning=ExperimentalWarning",
     "static-make": "npm run node:ts node-scripts/static-make.ts",
     "deploy": "npm run node:ts node-scripts/deploy.ts",
-    "static-deploy": "npm run static-make && npm run deploy",
-    "schema:generate": "npm run node:ts node-scripts/manage-schemas.ts generate",
-    "schema:generate:strict": "npm run node:ts node-scripts/manage-schemas.ts generate --strict",
-    "schema:update": "npm run node:ts node-scripts/manage-schemas.ts update",
-    "schema:update:strict": "npm run node:ts node-scripts/manage-schemas.ts update --strict",
-    "schema:reset": "npm run node:ts node-scripts/manage-schemas.ts reset",
-    "api:generate": "npm run node:ts node-scripts/generate-api.ts",
-    "api:generate:dev": "NODE_ENV=development npm run node:ts node-scripts/generate-api.ts",
-    "api:dev": "npm run node:ts api/nodejs/server.ts"
+    "static-deploy": "npm run static-make && npm run deploy"
   },
   "dependencies": {
     "playwright": "^1.60.0",

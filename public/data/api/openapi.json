@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "datannur API",
-    "description": "RESTful API for the datannur data catalog. Provides read-only access to database tables with filtering, pagination, and sorting capabilities.",
-    "version": "1.0.5",
+    "description": "RESTful API for this datannur data catalog, with read-only access to observed catalog tables and fields.",
+    "version": "1.0.0",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": ".",
+      "url": "/api",
       "description": "API Server"
     }
   ],
@@ -23,7 +23,7 @@
     "/concept": {
       "get": {
         "summary": "Get all concept records",
-        "description": "Returns all records from the concept table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the concept table with optional filtering, pagination, and sorting",
         "tags": ["concept"],
         "parameters": [
           {
@@ -57,7 +57,37 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent concept (domain hierarchy)",
+              "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
+            },
+            "description": "Filter by parent_id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Concept name",
+              "x-description-fr": "Nom du concept"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Business description of the concept",
+              "x-description-fr": "Description métier du concept"
+            },
+            "description": "Filter by description"
           }
         ],
         "responses": {
@@ -113,7 +143,7 @@
     "/config": {
       "get": {
         "summary": "Get all config records",
-        "description": "Returns all records from the config table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the config table with optional filtering, pagination, and sorting",
         "tags": ["config"],
         "parameters": [
           {
@@ -147,7 +177,17 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Value of the app configuration element",
+              "x-description-fr": "Valeur de l'élément de configuration de l'app"
+            },
+            "description": "Filter by value"
           }
         ],
         "responses": {
@@ -203,7 +243,7 @@
     "/dataset": {
       "get": {
         "summary": "Get all dataset records",
-        "description": "Returns all records from the dataset table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the dataset table with optional filtering, pagination, and sorting",
         "tags": ["dataset"],
         "parameters": [
           {
@@ -237,7 +277,241 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "folder_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the folder containing the dataset",
+              "x-description-fr": "Clé du dossier contenant le dataset"
+            },
+            "description": "Filter by folder_id"
+          },
+          {
+            "name": "manager_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the managing organization",
+              "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
+            },
+            "description": "Filter by manager_id"
+          },
+          {
+            "name": "owner_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the data provider organization",
+              "x-description-fr": "Clé de l'organisation fournisseur du dataset"
+            },
+            "description": "Filter by owner_id"
+          },
+          {
+            "name": "tag_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related tags",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by tag_ids"
+          },
+          {
+            "name": "doc_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by doc_ids"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset name",
+              "x-description-fr": "Nom du dataset"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset description",
+              "x-description-fr": "Description du dataset"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "data_path",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset data location",
+              "x-description-fr": "Emplacement des données du dataset"
+            },
+            "description": "Filter by data_path"
+          },
+          {
+            "name": "delivery_format",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Delivery format (CSV, XML, ...)",
+              "x-description-fr": "Format du dataset livrées (CSV, XML, ...)"
+            },
+            "description": "Filter by delivery_format"
+          },
+          {
+            "name": "license",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset license",
+              "x-description-fr": "Licence du dataset"
+            },
+            "description": "Filter by license"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset type (useful for general filter)",
+              "x-description-fr": "Type de dataset (utile pour le filtre générale)"
+            },
+            "description": "Filter by type"
+          },
+          {
+            "name": "link",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Link to the dataset access, source, or reference",
+              "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
+            },
+            "description": "Filter by link"
+          },
+          {
+            "name": "has_preview",
+            "in": "query",
+            "schema": {
+              "type": ["boolean", "integer", "string", "null"],
+              "description": "Whether a preview is available at data/db/preview/<dataset_id>",
+              "x-description-fr": "Indique si un aperçu est disponible dans data/db/preview/<dataset_id>"
+            },
+            "description": "Filter by has_preview"
+          },
+          {
+            "name": "localisation",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Geographic area covered by the dataset",
+              "x-description-fr": "Zone géographique concernée par le dataset"
+            },
+            "description": "Filter by localisation"
+          },
+          {
+            "name": "nb_row",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of rows in the dataset",
+              "x-description-fr": "Nombre de ligne dans le dataset"
+            },
+            "description": "Filter by nb_row"
+          },
+          {
+            "name": "sample_size",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of rows sampled for frequency analysis",
+              "x-description-fr": "Nombre de lignes échantillonnées pour l'analyse de fréquences"
+            },
+            "description": "Filter by sample_size"
+          },
+          {
+            "name": "nb_resources",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of resources (files, tables, ...) in the dataset",
+              "x-description-fr": "Nombre de ressources (fichiers, tables, ...) dans le dataset"
+            },
+            "description": "Filter by nb_resources"
+          },
+          {
+            "name": "data_size",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Size of the dataset in bytes",
+              "x-description-fr": "Taille du dataset en octets"
+            },
+            "description": "Filter by data_size"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Start of the period covered by the dataset",
+              "x-description-fr": "Début de la période couverte par le dataset"
+            },
+            "description": "Filter by start_date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "End of the period covered by the dataset",
+              "x-description-fr": "Fin de la période couverte par le dataset"
+            },
+            "description": "Filter by end_date"
+          },
+          {
+            "name": "last_update_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Last update date of the dataset",
+              "x-description-fr": "Date de denière mise à jour du dataset"
+            },
+            "description": "Filter by last_update_date"
+          },
+          {
+            "name": "updating_each",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Dataset update frequency",
+              "x-description-fr": "Fréquence de mise à jour du dataset"
+            },
+            "description": "Filter by updating_each"
+          },
+          {
+            "name": "no_more_update",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Dataset is no longer updated and has no next update date",
+              "x-description-fr": "Le dataset n'est plus mis à jour et n'a donc pas de date de prochaine mise à jour"
+            },
+            "description": "Filter by no_more_update"
           }
         ],
         "responses": {
@@ -293,7 +567,7 @@
     "/doc": {
       "get": {
         "summary": "Get all doc records",
-        "description": "Returns all records from the doc table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the doc table with optional filtering, pagination, and sorting",
         "tags": ["doc"],
         "parameters": [
           {
@@ -327,7 +601,57 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Document name",
+              "x-description-fr": "Nom du document"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Document description",
+              "x-description-fr": "Description du doc"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Document location",
+              "x-description-fr": "Emplacement du document"
+            },
+            "description": "Filter by path"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Document type (pdf, md)",
+              "x-description-fr": "Type de document (pdf, md)"
+            },
+            "description": "Filter by type"
+          },
+          {
+            "name": "last_update",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Unix timestamp of the last modification",
+              "x-description-fr": "Timestamp unix de la dernière modification"
+            },
+            "description": "Filter by last_update"
           }
         ],
         "responses": {
@@ -383,7 +707,7 @@
     "/enumeration": {
       "get": {
         "summary": "Get all enumeration records",
-        "description": "Returns all records from the enumeration table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the enumeration table with optional filtering, pagination, and sorting",
         "tags": ["enumeration"],
         "parameters": [
           {
@@ -417,7 +741,47 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "folder_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Folder key",
+              "x-description-fr": "Clé du dossier"
+            },
+            "description": "Filter by folder_id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Enumeration name",
+              "x-description-fr": "Nom de l'énumération"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Enumeration description",
+              "x-description-fr": "Description de l'énumération"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Enumeration datatype",
+              "x-description-fr": "Datatype de l'énumération"
+            },
+            "description": "Filter by type"
           }
         ],
         "responses": {
@@ -473,7 +837,7 @@
     "/evolution": {
       "get": {
         "summary": "Get all evolution records",
-        "description": "Returns all records from the evolution table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the evolution table with optional filtering, pagination, and sorting",
         "tags": ["evolution"],
         "parameters": [
           {
@@ -507,7 +871,97 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Type of change (addition, deletion or modification)",
+              "x-description-fr": "Type de changement (ajout, suppression ou modification)"
+            },
+            "description": "Filter by type"
+          },
+          {
+            "name": "entity",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Name of the entity affected by the change",
+              "x-description-fr": "Nom de l'entité concernée par le changement"
+            },
+            "description": "Filter by entity"
+          },
+          {
+            "name": "entity_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the element affected by the change",
+              "x-description-fr": "Clé de l'élement concernée par le changement"
+            },
+            "description": "Filter by entity_id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Element name (filled in case of deletion)",
+              "x-description-fr": "Nom de l'élément (rempli en cas de suppression)"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "parent_entity_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent element (filled in case of deletion)",
+              "x-description-fr": "Clé de l'élément parent (rempli en cas de suppression)"
+            },
+            "description": "Filter by parent_entity_id"
+          },
+          {
+            "name": "variable",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Variable affected by the modification",
+              "x-description-fr": "Variable concernée par la modification"
+            },
+            "description": "Filter by variable"
+          },
+          {
+            "name": "old_value",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Value before modification",
+              "x-description-fr": "Valeur avant modification"
+            },
+            "description": "Filter by old_value"
+          },
+          {
+            "name": "new_value",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Value after modification",
+              "x-description-fr": "Valeur après modification"
+            },
+            "description": "Filter by new_value"
+          },
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Unix timestamp of the change",
+              "x-description-fr": "Timestamp unix du changement"
+            },
+            "description": "Filter by timestamp"
           }
         ],
         "responses": {
@@ -563,7 +1017,7 @@
     "/folder": {
       "get": {
         "summary": "Get all folder records",
-        "description": "Returns all records from the folder table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the folder table with optional filtering, pagination, and sorting",
         "tags": ["folder"],
         "parameters": [
           {
@@ -597,7 +1051,211 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent folder",
+              "x-description-fr": "Clé du dossier contenant le dossier"
+            },
+            "description": "Filter by parent_id"
+          },
+          {
+            "name": "manager_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the managing organization",
+              "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
+            },
+            "description": "Filter by manager_id"
+          },
+          {
+            "name": "owner_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the data provider organization",
+              "x-description-fr": "Clé de l'organisation fournisseur du dossier"
+            },
+            "description": "Filter by owner_id"
+          },
+          {
+            "name": "tag_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related tags",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by tag_ids"
+          },
+          {
+            "name": "doc_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by doc_ids"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder name",
+              "x-description-fr": "Nom du dossier"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder description",
+              "x-description-fr": "Description du dossier"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "data_path",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder data location",
+              "x-description-fr": "Emplacement des données du dossier"
+            },
+            "description": "Filter by data_path"
+          },
+          {
+            "name": "delivery_format",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Delivery format (CSV, XML, ...)",
+              "x-description-fr": "Format des données livrées (CSV, XML, ...)"
+            },
+            "description": "Filter by delivery_format"
+          },
+          {
+            "name": "license",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder license",
+              "x-description-fr": "Licence du dossier"
+            },
+            "description": "Filter by license"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder type (useful for general filter)",
+              "x-description-fr": "Type de dossier (utile pour le filtre général)"
+            },
+            "description": "Filter by type"
+          },
+          {
+            "name": "git_code",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Code location on a GIT repo",
+              "x-description-fr": "Emplacement du code sur un repo GIT"
+            },
+            "description": "Filter by git_code"
+          },
+          {
+            "name": "last_update_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Last update date of the folder",
+              "x-description-fr": "Date de denière mise à jour du dossier"
+            },
+            "description": "Filter by last_update_date"
+          },
+          {
+            "name": "localisation",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Geographic area covered by the folder",
+              "x-description-fr": "Zone géographique concernée par le dossier"
+            },
+            "description": "Filter by localisation"
+          },
+          {
+            "name": "metadata_path",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder metadata location",
+              "x-description-fr": "Emplacement des métadonnées du dossier"
+            },
+            "description": "Filter by metadata_path"
+          },
+          {
+            "name": "survey_type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Source type (sample, registry, ...)",
+              "x-description-fr": "Type de source (échantillon, registre, ...)"
+            },
+            "description": "Filter by survey_type"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Start of the period covered by the folder",
+              "x-description-fr": "Début de la période couverte par le dossier"
+            },
+            "description": "Filter by start_date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "End of the period covered by the folder",
+              "x-description-fr": "Fin de la période couverte par le dossier"
+            },
+            "description": "Filter by end_date"
+          },
+          {
+            "name": "updating_each",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Folder update frequency",
+              "x-description-fr": "Fréquence de mise à jour du dossier"
+            },
+            "description": "Filter by updating_each"
+          },
+          {
+            "name": "no_more_update",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Folder is no longer updated and has no next update date",
+              "x-description-fr": "Le dossier n'est plus mis à jour et n'a donc pas de date de prochaine mise à jour"
+            },
+            "description": "Filter by no_more_update"
           }
         ],
         "responses": {
@@ -653,7 +1311,7 @@
     "/frequency": {
       "get": {
         "summary": "Get all frequency records",
-        "description": "Returns all records from the frequency table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the frequency table with optional filtering, pagination, and sorting",
         "tags": ["frequency"],
         "parameters": [
           {
@@ -687,7 +1345,37 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "variable_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the related variable",
+              "x-description-fr": "Clé de la variable concernée"
+            },
+            "description": "Filter by variable_id"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Value whose frequency is counted",
+              "x-description-fr": "Valeur dont on compte la fréquence"
+            },
+            "description": "Filter by value"
+          },
+          {
+            "name": "frequency",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of occurrences of this value in the variable",
+              "x-description-fr": "Nombre d'occurrences de cette valeur dans la variable"
+            },
+            "description": "Filter by frequency"
           }
         ],
         "responses": {
@@ -743,7 +1431,7 @@
     "/organization": {
       "get": {
         "summary": "Get all organization records",
-        "description": "Returns all records from the organization table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the organization table with optional filtering, pagination, and sorting",
         "tags": ["organization"],
         "parameters": [
           {
@@ -777,7 +1465,101 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent organization",
+              "x-description-fr": "Clé de l'organisation parent"
+            },
+            "description": "Filter by parent_id"
+          },
+          {
+            "name": "tag_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related tags",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by tag_ids"
+          },
+          {
+            "name": "doc_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by doc_ids"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Organization name",
+              "x-description-fr": "Nom de l'organisation"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Organization description",
+              "x-description-fr": "Description de l'organisation"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Organization email",
+              "x-description-fr": "Email de l'organisation"
+            },
+            "description": "Filter by email"
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Organization phone number",
+              "x-description-fr": "Numéro de téléphone de l'organisation"
+            },
+            "description": "Filter by phone"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Start of the period covered by the organization",
+              "x-description-fr": "Début de la période couverte par l'organisation"
+            },
+            "description": "Filter by start_date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "End of the period covered by the organization",
+              "x-description-fr": "Fin de la période couverte par l'organisation"
+            },
+            "description": "Filter by end_date"
           }
         ],
         "responses": {
@@ -833,7 +1615,7 @@
     "/tag": {
       "get": {
         "summary": "Get all tag records",
-        "description": "Returns all records from the tag table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the tag table with optional filtering, pagination, and sorting",
         "tags": ["tag"],
         "parameters": [
           {
@@ -867,7 +1649,71 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the parent tag",
+              "x-description-fr": "Clé du mot clé parent"
+            },
+            "description": "Filter by parent_id"
+          },
+          {
+            "name": "doc_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related documents",
+              "x-description-fr": "Clés des docs liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by doc_ids"
+          },
+          {
+            "name": "implied_tag_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of tags also applied when this tag is used",
+              "x-description-fr": "Clés des mots clés aussi appliqués quand ce mot clé est utilisé",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by implied_tag_ids"
+          },
+          {
+            "name": "propagate_to_parents",
+            "in": "query",
+            "schema": {
+              "type": ["boolean", "null"],
+              "description": "Whether this tag should be propagated to parent business entities",
+              "x-description-fr": "Indique si ce mot clé doit être propagé aux entités métiers parentes"
+            },
+            "description": "Filter by propagate_to_parents"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Tag name",
+              "x-description-fr": "Nom du mot clé"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Tag description",
+              "x-description-fr": "Description du mot clé"
+            },
+            "description": "Filter by description"
           }
         ],
         "responses": {
@@ -923,7 +1769,7 @@
     "/value": {
       "get": {
         "summary": "Get all value records",
-        "description": "Returns all records from the value table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the value table with optional filtering, pagination, and sorting",
         "tags": ["value"],
         "parameters": [
           {
@@ -957,7 +1803,37 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "enumeration_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Enumeration key",
+              "x-description-fr": "Clé de l'énumération"
+            },
+            "description": "Filter by enumeration_id"
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Value",
+              "x-description-fr": "Valeur"
+            },
+            "description": "Filter by value"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Value description",
+              "x-description-fr": "Description de valeur"
+            },
+            "description": "Filter by description"
           }
         ],
         "responses": {
@@ -1013,7 +1889,7 @@
     "/variable": {
       "get": {
         "summary": "Get all variable records",
-        "description": "Returns all records from the variable table with optional filtering, pagination, and sorting",
+        "description": "Returns records from the variable table with optional filtering, pagination, and sorting",
         "tags": ["variable"],
         "parameters": [
           {
@@ -1047,7 +1923,233 @@
               "type": "string",
               "enum": ["asc", "desc"]
             },
-            "description": "Sort order (asc or desc)"
+            "description": "Sort order"
+          },
+          {
+            "name": "dataset_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the dataset containing the variable",
+              "x-description-fr": "Clé du dataset contenant la variable"
+            },
+            "description": "Filter by dataset_id"
+          },
+          {
+            "name": "enumeration_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related enumerations",
+              "x-description-fr": "Clé des énumérations liées",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by enumeration_ids"
+          },
+          {
+            "name": "tag_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Keys of related tags",
+              "x-description-fr": "Clés des mots clés liés",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by tag_ids"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Variable name",
+              "x-description-fr": "Nom de la variable"
+            },
+            "description": "Filter by name"
+          },
+          {
+            "name": "original_name",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Original variable name",
+              "x-description-fr": "Nom d'origine de la variable"
+            },
+            "description": "Filter by original_name"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Variable description",
+              "x-description-fr": "Description de la variable"
+            },
+            "description": "Filter by description"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Is or is part of a unique key",
+              "x-description-fr": "Est ou fait parti d'une clé unique"
+            },
+            "description": "Filter by key"
+          },
+          {
+            "name": "business_key",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Is or is part of a business key",
+              "x-description-fr": "Est ou fait partie d'une clé métier"
+            },
+            "description": "Filter by business_key"
+          },
+          {
+            "name": "nb_distinct",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of distinct values in the variable",
+              "x-description-fr": "Nombre de valeurs distinctes contenues dans la variable"
+            },
+            "description": "Filter by nb_distinct"
+          },
+          {
+            "name": "nb_duplicate",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of repeated values in the variable",
+              "x-description-fr": "Nombre de valeurs répétées contenues dans la variable"
+            },
+            "description": "Filter by nb_duplicate"
+          },
+          {
+            "name": "nb_missing",
+            "in": "query",
+            "schema": {
+              "type": ["integer", "null"],
+              "description": "Number of missing values in the variable",
+              "x-description-fr": "Nombre de valeurs manquantes contenues dans la variable"
+            },
+            "description": "Filter by nb_missing"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": ["string", "null"],
+              "description": "Variable datatype",
+              "x-description-fr": "Datatype de la variable"
+            },
+            "description": "Filter by type"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Start of the period covered by the variable",
+              "x-description-fr": "Début de la période couverte par la variable"
+            },
+            "description": "Filter by start_date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "End of the period covered by the variable",
+              "x-description-fr": "Fin de la période couverte par la variable"
+            },
+            "description": "Filter by end_date"
+          },
+          {
+            "name": "min",
+            "in": "query",
+            "schema": {
+              "type": ["number", "null"],
+              "description": "Minimum value (or minimum string length for text variables)",
+              "x-description-fr": "Valeur minimale (ou longueur minimale pour les variables texte)"
+            },
+            "description": "Filter by min"
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "schema": {
+              "type": ["number", "null"],
+              "description": "Maximum value (or maximum string length for text variables)",
+              "x-description-fr": "Valeur maximale (ou longueur maximale pour les variables texte)"
+            },
+            "description": "Filter by max"
+          },
+          {
+            "name": "mean",
+            "in": "query",
+            "schema": {
+              "type": ["number", "null"],
+              "description": "Mean value (or mean string length for text variables)",
+              "x-description-fr": "Valeur moyenne (ou longueur moyenne pour les variables texte)"
+            },
+            "description": "Filter by mean"
+          },
+          {
+            "name": "std",
+            "in": "query",
+            "schema": {
+              "type": ["number", "null"],
+              "description": "Standard deviation (or standard deviation of string length for text variables)",
+              "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
+            },
+            "description": "Filter by std"
+          },
+          {
+            "name": "source_var_ids",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "List of source variable keys (lineage)",
+              "x-description-fr": "Liste des clés des variables sources (lineage)",
+              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
+              "examples": ["id1,id2,id3", "single-id", null]
+            },
+            "description": "Filter by source_var_ids"
+          },
+          {
+            "name": "fk_var_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Foreign key referencing a variable in another dataset",
+              "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
+            },
+            "description": "Filter by fk_var_id"
+          },
+          {
+            "name": "is_pattern",
+            "in": "query",
+            "schema": {
+              "type": ["boolean", "integer", "null"],
+              "description": "Indicates that frequencies show value patterns instead of raw data",
+              "x-description-fr": "Indique que les fréquences affichent les patterns des valeurs plutôt que les données brutes"
+            },
+            "description": "Filter by is_pattern"
+          },
+          {
+            "name": "concept_id",
+            "in": "query",
+            "schema": {
+              "type": ["string", "number", "null"],
+              "description": "Key of the related business concept",
+              "x-description-fr": "Clé du concept métier lié"
+            },
+            "description": "Filter by concept_id"
           }
         ],
         "responses": {
@@ -1117,20 +2219,6 @@
             "type": ["string", "number", "null"],
             "description": "Key of the parent concept (domain hierarchy)",
             "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
-          },
-          "tag_ids": {
-            "type": ["string", "number", "null"],
-            "description": "Keys of related tags",
-            "x-description-fr": "Clés des mots clés liés",
-            "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-            "examples": ["id1,id2,id3", "single-id", null]
-          },
-          "doc_ids": {
-            "type": ["string", "number", "null"],
-            "description": "Keys of related documents",
-            "x-description-fr": "Clés des docs liés",
-            "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-            "examples": ["id1,id2,id3", "single-id", null]
           },
           "name": {
             "type": ["string", "null"],
@@ -1481,11 +2569,6 @@
             "type": ["string", "null"],
             "description": "Folder type (useful for general filter)",
             "x-description-fr": "Type de dossier (utile pour le filtre général)"
-          },
-          "link": {
-            "type": ["string", "null"],
-            "description": "Link to the folder access, source, or reference",
-            "x-description-fr": "Lien vers l'accès, la source ou la référence du dossier"
           },
           "git_code": {
             "type": ["string", "null"],

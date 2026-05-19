@@ -1,7 +1,7 @@
 <script lang="ts">
   import { entityNames } from '@lib/constant'
   import Icon from '@layout/Icon.svelte'
-  import Breadcrumb from '@component/Breadcrumb.svelte'
+  import ParentTree from '@component/ParentTree.svelte'
   import ExtendableText from '@layout/ExtendableText.svelte'
 
   let {
@@ -23,7 +23,7 @@
     <td><Icon type={icon} /> {name}</td>
     <td>
       <ExtendableText>
-        <Breadcrumb type="organization" elemId={organizationId} {isSelf} />
+        <ParentTree type="organization" elemId={organizationId} {isSelf} />
       </ExtendableText>
     </td>
   </tr>

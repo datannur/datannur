@@ -8,6 +8,7 @@
   import logoDark from '@img/logo-dark.png'
   import Loading from '@frame/Loading.svelte'
   import MainFilter from '@component/MainFilter.svelte'
+  import HeaderBackButton from './HeaderBackButton.svelte'
   import HeaderDropdown from './HeaderDropdown.svelte'
   import HeaderLink from './HeaderLink.svelte'
   import Link from '@layout/Link.svelte'
@@ -41,6 +42,8 @@
 </script>
 
 <svelte:window bind:scrollY />
+
+<HeaderBackButton />
 
 <nav
   class="navbar is-fixed-top"

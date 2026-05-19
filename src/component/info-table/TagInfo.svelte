@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
-  import Breadcrumb from '@component/Breadcrumb.svelte'
+  import ParentTree from '@component/ParentTree.svelte'
   import ExtendableText from '@layout/ExtendableText.svelte'
 
   let { tagId }: { tagId: string | number | undefined } = $props()
@@ -14,7 +14,7 @@
     <td><Icon type={icon} /> {name}</td>
     <td>
       <ExtendableText>
-        <Breadcrumb type="tag" elemId={tagId} isSelf={true} />
+        <ParentTree type="tag" elemId={tagId} isSelf={true} />
       </ExtendableText>
     </td>
   </tr>

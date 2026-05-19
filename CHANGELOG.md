@@ -1,14 +1,18 @@
 # datannur
 
-## Unreleased
+## 0.23.0 (2026-05-19)
 
+- add: show a title breadcrumb popover for entity detail pages
 - add: improve implied tag handling and display, including direct, recursive, and reverse relationships
 - add: inherit missing dataset owner, manager, and update frequency from the parent folder during database processing
 - add: fill missing folder start, end, and last update dates from direct child dataset dates during database processing
 - add: allow selected tags to propagate from variables to datasets and from datasets to folders during database processing
 - add: support variable business keys in schemas, demo data, variable tables, and dataset/variable detail views
+- add: show a desktop back button in chromeless Windows shortcut and fullscreen app contexts
 - change: use separate temporary localhost ports for Python APIs during Vite development
 - change: refresh core frontend/tooling dependencies and migrate the project to TypeScript 6 without `jiti`
+- remove: obsolete schema generation scripts and documentation references
+- change: move OpenAPI generation and local REST API serving to Python standard-library tools
 
 ## 0.22.1 (2026-05-18)
 

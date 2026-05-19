@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "datannur Raw API",
-    "description": "Read-only REST API providing direct access to datannur database JSON files. Each endpoint returns a complete table as a JSON array. This is a static file-based API with no server-side processing.",
-    "version": "1.0.5",
+    "description": "Read-only API providing direct access to this datannur catalog's JSON database files.",
+    "version": "1.0.0",
     "contact": {
       "name": "datannur",
       "url": "https://datannur.com"
@@ -307,20 +307,6 @@
               "type": ["string", "number", "null"],
               "description": "Key of the parent concept (domain hierarchy)",
               "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
-            },
-            "tag_ids": {
-              "type": ["string", "number", "null"],
-              "description": "Keys of related tags",
-              "x-description-fr": "Clés des mots clés liés",
-              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": ["id1,id2,id3", "single-id", null]
-            },
-            "doc_ids": {
-              "type": ["string", "number", "null"],
-              "description": "Keys of related documents",
-              "x-description-fr": "Clés des docs liés",
-              "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": ["id1,id2,id3", "single-id", null]
             },
             "name": {
               "type": ["string", "null"],
@@ -713,11 +699,6 @@
               "type": ["string", "null"],
               "description": "Folder type (useful for general filter)",
               "x-description-fr": "Type de dossier (utile pour le filtre général)"
-            },
-            "link": {
-              "type": ["string", "null"],
-              "description": "Link to the folder access, source, or reference",
-              "x-description-fr": "Lien vers l'accès, la source ou la référence du dossier"
             },
             "git_code": {
               "type": ["string", "null"],

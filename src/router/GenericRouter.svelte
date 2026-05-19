@@ -9,11 +9,11 @@
     getInitialComponent,
     updateRouteComponent,
   } from './router-helpers'
-  import { UrlHash, isStaticMode, isSsgRendering } from '@lib/url'
+  import { isStaticMode, isSsgRendering } from '@lib/url'
   import {
+    currentRoute,
     page,
     pageContentLoaded,
-    pageHash,
     pageLoadedRoute,
   } from './router-store'
 
@@ -81,7 +81,7 @@
     )
 
     page.set(entity)
-    setTimeout(() => pageHash.set(UrlHash.getLevel1()), 1)
+    currentRoute.set(entityId ? `${entity}___${entityId}` : entity)
 
     setTimeout(() => {
       const route = window.location.hash

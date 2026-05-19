@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Breadcrumb from '@component/Breadcrumb.svelte'
+  import ParentTree from '@component/ParentTree.svelte'
   import Icon from '@layout/Icon.svelte'
   import ExtendableText from '@layout/ExtendableText.svelte'
   import Link from '@layout/Link.svelte'
@@ -26,7 +26,7 @@
         <Link href="metaFolder/{folderId}">{folderId}</Link>
       {:else}
         <ExtendableText>
-          <Breadcrumb type="folder" elemId={folderId} {isSelf} />
+          <ParentTree type="folder" elemId={folderId} {isSelf} />
         </ExtendableText>
       {/if}
     </td>
