@@ -11,8 +11,8 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Route REST API requests to PHP
-RewriteRule ^(.*)$ php/index.php [QSA,L]
+# Route REST API requests to the PHP adapter
+RewriteRule ^(.*)$ rest/index.php [QSA,L]
 
 # CORS headers
 Header set Access-Control-Allow-Origin "*"

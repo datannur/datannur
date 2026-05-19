@@ -34,7 +34,7 @@ set_exception_handler(function($e) {
 $publicDir = __DIR__ . '/../..';
 $dataPath = realpath($publicDir . '/data/db');
 
-// Detect base path from SCRIPT_NAME (/api/php/index.php -> /api)
+// Detect base path from SCRIPT_NAME (/api/rest/index.php -> /api)
 $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
 $basePath = dirname($scriptPath);
 

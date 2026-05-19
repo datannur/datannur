@@ -172,7 +172,7 @@ User-facing documentation lives in `docs/` (VitePress) and is published to [docs
 - `public/data/` - User data (only folder users modify)
 - `public/data/db/` - Database files (.json.js format)
 - `public/schemas/` - JSON schemas for data validation
-- `public/api/` - API endpoints (PHP and Node.js implementations)
+- `public/api/` - Web API endpoints and adapters
 - `public/node-scripts/` - Utility scripts (deploy, static generation)
 
 ### API Architecture
@@ -189,7 +189,7 @@ datannur provides two API implementations accessing the same JSON database:
 
 - Query-based with filtering, pagination, sorting
 - Two implementations:
-  - `public/api/php/` - PHP 7.4+ (production-ready)
+  - `public/api/rest/` - PHP 7.4+ REST adapter (production-ready)
   - `public/python-scripts/api_server.py` - Python 3.9+ local development server
 - OpenAPI spec: `public/data/api/openapi.json`
 
