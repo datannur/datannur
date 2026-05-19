@@ -6,7 +6,6 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -39,30 +38,7 @@ def read_json(path: Path) -> Any:
 def write_json(path: Path, data: JsonObject) -> str:
     content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     path.write_text(content, encoding="utf-8")
-    format_with_prettier(path)
     return get_file_hash(path)
-
-
-def format_with_prettier(path: Path) -> None:
-    prettier = APP_DIR / "node_modules" / ".bin" / "prettier"
-    if not prettier.exists():
-        return
-
-    try:
-        subprocess.run(
-            [str(prettier), "--write", str(path)],
-            cwd=APP_DIR,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=True,
-            timeout=10,
-        )
-    except (
-        FileNotFoundError,
-        subprocess.CalledProcessError,
-        subprocess.TimeoutExpired,
-    ):
-        pass
 
 
 def get_file_hash(path: Path) -> str:
@@ -101,7 +77,6 @@ def write_html(path: Path, title: str, spec_file: str, spec_hash: str) -> None:
 </html>
 """
     path.write_text(content, encoding="utf-8")
-    format_with_prettier(path)
 
 
 def convert_json_schema_to_openapi(schema: Any) -> Any:
