@@ -1,8 +1,8 @@
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises'
 import { createHash } from 'crypto'
+import { execSync } from 'child_process'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { formatWithPrettier } from './util.ts'
 
 export type JsonSchema = {
   $id?: string
@@ -74,6 +74,14 @@ const publicDir = join(dirname(fileURLToPath(import.meta.url)), '..')
 const apiDir = join(publicDir, 'api')
 const packageJsonFile = join(publicDir, 'package.json')
 const ignoreFiles = ['__meta__.schema.json', '__table__.schema.json']
+
+function formatWithPrettier(filePath: string): void {
+  try {
+    execSync(`npx prettier --write "${filePath}"`, { stdio: 'ignore' })
+  } catch {
+    // Prettier is optional for generated API artifacts.
+  }
+}
 
 async function getConfig() {
   const packageJson = JSON.parse(

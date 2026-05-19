@@ -120,16 +120,11 @@ Then use `git cleanup` to automatically switch to main, pull changes, and delete
 | `npm run docs:preview` | Preview built docs                    |
 | `npm run docs:deploy`  | Deploy docs to docs.datannur.com/app/ |
 
-### API & Schema Management
+### API & Schema Validation
 
 | Command                                             | Purpose                                           |
 | --------------------------------------------------- | ------------------------------------------------- |
 | `python3 public/python-scripts/validate_schemas.py` | Validate all schemas and data files               |
-| `npm run schema:generate`                           | Generate schemas from data                        |
-| `npm run schema:generate:strict`                    | Generate schemas (strict mode)                    |
-| `npm run schema:update`                             | Update schemas with new fields                    |
-| `npm run schema:update:strict`                      | Update schemas (strict mode)                      |
-| `npm run schema:reset`                              | Reset schemas to default                          |
 | `npm run api:generate`                              | Generate OpenAPI specs from schemas               |
 | `npm run api:dev`                                   | Start Node.js API dev server (default port 61293) |
 

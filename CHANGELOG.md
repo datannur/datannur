@@ -11,6 +11,7 @@
 - add: show a desktop back button in chromeless Windows shortcut and fullscreen app contexts
 - change: use separate temporary localhost ports for Python APIs during Vite development
 - change: refresh core frontend/tooling dependencies and migrate the project to TypeScript 6 without `jiti`
+- remove: obsolete schema generation scripts and documentation references
 
 ## 0.22.1 (2026-05-18)
 
