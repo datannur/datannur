@@ -1,6 +1,7 @@
 # Generated database files
 **/*.json.js
 public/data/db/**/*.json
+public/data/api/**/*
 app/data/db/**/*.json
 
 .claude
