@@ -4,9 +4,9 @@ datannur exposes your catalog data through programmatic APIs and standardized ex
 
 ## REST API
 
-datannur provides two read-only API endpoints for programmatic access to your catalog data. Both APIs are automatically generated from your database schemas.
+datannur provides two read-only API endpoints for programmatic access to your catalog data. Their OpenAPI documentation can be generated for the current catalog instance from the data present in `data/db` and the official schemas shipped with the app.
 
-**API documentation:** Available at `/api/api-docs.html` (RESTful) and `/api/api-docs-raw.html` (Raw) in your deployed catalog.
+**API documentation:** Available at `/api/` (RESTful) and `/api/raw` (Raw) in your deployed catalog after generating the OpenAPI files.
 
 ### Raw API
 
@@ -24,12 +24,12 @@ Returns the complete table as a JSON array.
 
 ### RESTful API
 
-Query-based API with filtering, pagination, and sorting capabilities. Requires a server-side implementation (PHP or Node.js).
+Query-based API with filtering, pagination, and sorting capabilities. Requires a server-side implementation, typically PHP on shared hosting or the local Python development server.
 
 **Endpoint patterns:**
 
-- `GET /api/php/{table}` - Get all records (with optional query parameters)
-- `GET /api/php/{table}/{id}` - Get single record by ID
+- `GET /api/{table}` - Get all records (with optional query parameters)
+- `GET /api/{table}/{id}` - Get single record by ID
 
 **Query parameters:**
 
@@ -42,12 +42,20 @@ Query-based API with filtering, pagination, and sorting capabilities. Requires a
 **Examples:**
 
 ```
-GET /api/php/dataset?_limit=10&_sort=name&_order=asc
-GET /api/php/dataset/123
-GET /api/php/dataset?folder_id=5
+GET /api/dataset?_limit=10&_sort=name&_order=asc
+GET /api/dataset/123
+GET /api/dataset?folder_id=5
 ```
 
-> **Server requirement:** The RESTful API requires either PHP 7.4+ or Node.js to run. The Raw API works with any static file server.
+Generate catalog-specific OpenAPI files with:
+
+```bash
+python3 python-scripts/generate_openapi.py
+```
+
+The generated files are written to `data/api` so they stay with your catalog data across app updates.
+
+> **Server requirement:** The RESTful API requires PHP 7.4+ to run on shared hosting. For local development, run `python3 python-scripts/api_server.py`. The Raw API works with any static file server.
 
 ## DCAT-AP-CH Export
 

@@ -4,18 +4,6 @@
 require_once __DIR__ . '/Router.php';
 require_once __DIR__ . '/JsonDatabase.php';
 
-// Load configuration from package.json
-$packageFile = __DIR__ . '/../../package.json';
-$package = json_decode(file_get_contents($packageFile), true);
-
-if (!isset($package['datannur'])) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Missing "datannur" configuration in package.json']);
-    exit;
-}
-
-$config = $package['datannur'];
-
 // Error handling
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
@@ -39,12 +27,12 @@ set_exception_handler(function($e) {
     echo json_encode([
         'error' => 'Internal Server Error',
         'message' => $e->getMessage()
-    ], JSON_PRETTY_PRINT);
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 });
 
 // Initialize router and database
 $publicDir = __DIR__ . '/../..';
-$dataPath = realpath($publicDir . '/' . $config['dbPath']);
+$dataPath = realpath($publicDir . '/data/db');
 
 // Detect base path from SCRIPT_NAME (/api/php/index.php -> /api)
 $scriptPath = dirname($_SERVER['SCRIPT_NAME']);

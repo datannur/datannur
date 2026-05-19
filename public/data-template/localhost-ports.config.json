@@ -2,6 +2,6 @@
   "_comment": "Optional local development ports for the app server and auxiliary local APIs",
   "appPort": 61291,
   "llmProxyPort": 61292,
-  "nodeApiPort": 61293,
+  "apiPort": 61293,
   "editServerPort": 61294
 }

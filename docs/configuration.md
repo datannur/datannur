@@ -8,14 +8,14 @@ For local app serving and optional local APIs, you can define ports in `data/loc
 {
   "appPort": 61291,
   "llmProxyPort": 61292,
-  "nodeApiPort": 61293,
+  "apiPort": 61293,
   "editServerPort": 61294
 }
 ```
 
 - `appPort`: local static app server used by `python-scripts/start_app.py`
 - `llmProxyPort`: local Python LLM proxy port
-- `nodeApiPort`: optional Node.js REST API dev server port
+- `apiPort`: optional local REST API dev server port
 - `editServerPort`: local Python edit server port
 
 If the file is missing or invalid, built-in defaults are used.
