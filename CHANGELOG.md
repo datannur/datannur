@@ -1,6 +1,6 @@
 # datannur
 
-## Unreleased
+## 0.23.0 (2026-05-19)
 
 - add: show a title breadcrumb popover for entity detail pages
 - add: improve implied tag handling and display, including direct, recursive, and reverse relationships
