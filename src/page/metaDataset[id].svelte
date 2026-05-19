@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import db from '@db'
+  import { getMetaDatasetBreadcrumbItems } from '@lib/breadcrumb'
   import { filterKeys } from '@lib/db'
   import { getUserData } from '@lib/user-data'
   import { tabsHelper } from '@tab/tabs-helper'
@@ -12,6 +13,9 @@
   const metaDataset = untrack(() => metaDatasetProp)
 
   let metaVariables = db.getAll('metaVariable', { metaDataset })
+  const breadcrumbItems = getMetaDatasetBreadcrumbItems(
+    metaDataset.metaFolderId,
+  )
 
   let datasetPreview: Row[] = []
   if (metaDataset.metaFolderId === 'data') {
@@ -31,6 +35,6 @@
 </script>
 
 <section class="section">
-  <Title type="dataset" name={metaDataset.name} />
+  <Title type="dataset" name={metaDataset.name} {breadcrumbItems} />
   <Tabs {tabs} />
 </section>

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: show a title breadcrumb popover for entity detail pages
 - add: improve implied tag handling and display, including direct, recursive, and reverse relationships
 - add: inherit missing dataset owner, manager, and update frequency from the parent folder during database processing
 - add: fill missing folder start, end, and last update dates from direct child dataset dates during database processing
