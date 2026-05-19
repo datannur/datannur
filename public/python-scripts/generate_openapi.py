@@ -44,15 +44,24 @@ def write_json(path: Path, data: JsonObject) -> str:
 
 
 def format_with_prettier(path: Path) -> None:
+    prettier = APP_DIR / "node_modules" / ".bin" / "prettier"
+    if not prettier.exists():
+        return
+
     try:
         subprocess.run(
-            ["npx", "prettier", "--write", str(path)],
+            [str(prettier), "--write", str(path)],
             cwd=APP_DIR,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             check=True,
+            timeout=10,
         )
-    except (FileNotFoundError, subprocess.CalledProcessError):
+    except (
+        FileNotFoundError,
+        subprocess.CalledProcessError,
+        subprocess.TimeoutExpired,
+    ):
         pass
 
 
