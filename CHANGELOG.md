@@ -3,6 +3,7 @@
 ## unreleased
 
 - fix: remove reverse from getRecursiveItems to maintain original order of parent items
+- add: interoperability section in features.md and remove some repetitive content wording
 
 ## 0.23.0 (2026-05-19)
 
