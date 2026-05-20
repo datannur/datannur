@@ -1,10 +1,10 @@
-datannur réunit dans une même interface les fonctions essentielles d’un catalogue de données : navigation, documentation, exploration et exploitation des métadonnées. L’outil permet de retrouver rapidement les jeux de données, de comprendre leur structure, d’explorer leurs dépendances et d’en suivre l’évolution dans le temps.
+datannur réunit dans une même interface les fonctions essentielles d’un catalogue de données : navigation, documentation, exploration et exploitation des métadonnées. L’outil permet de retrouver les jeux de données, de comprendre leur structure, d’explorer leurs dépendances et d’en suivre l’évolution dans le temps.
 
-L’objectif n’est pas seulement de stocker de l’information, mais de rendre les données plus lisibles, plus exploitables et plus faciles à gouverner au quotidien.
+L’objectif n’est pas seulement de stocker de l’information, mais de rendre les données plus lisibles, plus exploitables et plus simples à gouverner au quotidien.
 
 ## Navigation
 
-datannur permet de parcourir le catalogue de plusieurs façons complémentaires. L’arborescence donne une vue structurée des organisations, dossiers, jeux de données, variables et documents, tandis que la recherche et les filtres permettent d’accéder rapidement à l’information pertinente.
+datannur permet de parcourir le catalogue de plusieurs façons complémentaires. L’arborescence donne une vue structurée des organisations, dossiers, jeux de données, variables et documents, tandis que la recherche et les filtres donnent un accès direct à l’information pertinente.
 
 Cette navigation multiple rend le catalogue utilisable aussi bien pour une exploration globale que pour des besoins ciblés : retrouver un jeu de données, identifier une variable, repérer un responsable ou naviguer dans un ensemble documentaire lié.
 
@@ -20,7 +20,7 @@ La barre de recherche permet de retrouver rapidement les éléments les plus per
 
 ### Filtre
 
-Chaque tableau propose des filtres par colonne pour affiner les résultats de façon plus précise que par la recherche globale. Plusieurs filtres peuvent être combinés pour isoler rapidement un sous-ensemble pertinent. Les filtres prennent en charge différents types de conditions selon la nature des colonnes.
+Chaque tableau propose des filtres par colonne pour affiner les résultats de façon plus précise que par la recherche globale. Plusieurs filtres peuvent être combinés pour isoler un sous-ensemble pertinent en quelques gestes. Les filtres prennent en charge différents types de conditions selon la nature des colonnes.
 
 ![Onglet datasets avec deux filtres actifs](assets/about-page/datasets-tab-filter{darkMode}.webp?v=1)
 
@@ -82,19 +82,19 @@ Ces relations rendent visibles les chaînes de transformation au sein du catalog
 
 L’onglet « Stat » propose une synthèse visuelle des informations disponibles dans le catalogue. Selon le type d’élément, il peut afficher aussi bien des résumés agrégés — par exemple le nombre de variables par dataset ou les mots clés associés à un dossier — que des statistiques descriptives plus fines au niveau des variables.
 
-Pour les variables, datannur peut notamment présenter la fréquence des valeurs ainsi que des indicateurs statistiques comme le minimum, le maximum, la moyenne ou l’écart-type. Ces informations facilitent l’exploration, le contrôle de cohérence et la compréhension rapide du contenu des données.
+Pour les variables, datannur peut notamment présenter la fréquence des valeurs ainsi que des indicateurs statistiques comme le minimum, le maximum, la moyenne ou l’écart-type. Ces informations soutiennent l’exploration, le contrôle de cohérence et la compréhension rapide du contenu des données.
 
 ![Homepage – Onglet stat](assets/about-page/stat-tab{darkMode}.jpg?v=1)
 
 ### Aperçu des données
 
-Pour les jeux de données compatibles, un onglet dédié permet d’afficher un aperçu tabulaire du contenu. Cet aperçu facilite une première lecture des données et s’appuie sur les fonctions intégrées de tri et de filtrage pour explorer rapidement les enregistrements.
+Pour les jeux de données compatibles, un onglet dédié permet d’afficher un aperçu tabulaire du contenu. Cet aperçu donne une première lecture des données et s’appuie sur les fonctions intégrées de tri et de filtrage pour parcourir les enregistrements plus efficacement.
 
 ![Dataset – Onglet aperçu](assets/about-page/dataset-preview{darkMode}.jpg?v=1)
 
 ### Énumérations similaires
 
-L’harmonisation des énumérations entre plusieurs jeux de données peut rapidement devenir fastidieuse. Pour faciliter ce travail, datannur propose un onglet qui rapproche les énumérations selon leur similarité et permet d’identifier rapidement les doublons, variantes proches ou recouvrements partiels.
+L’harmonisation des énumérations entre plusieurs jeux de données peut vite devenir fastidieuse. Pour simplifier ce travail, datannur propose un onglet qui rapproche les énumérations selon leur similarité et permet d’identifier les doublons, variantes proches ou recouvrements partiels.
 
 Cette vue aide à repérer les écarts de libellé, à uniformiser les valeurs et à améliorer la cohérence d’ensemble du catalogue.
 
@@ -104,7 +104,7 @@ Cette vue aide à repérer les écarts de libellé, à uniformiser les valeurs e
 
 L’onglet « Évolution » permet de suivre dans le temps les changements apportés aux éléments du catalogue. Il met en évidence les ajouts, suppressions et modifications, avec leur horodatage, pour rendre l’historique des métadonnées plus lisible.
 
-Cette vue facilite le suivi des changements, le contrôle de cohérence et la compréhension de l’évolution d’un dataset, d’une variable ou d’un autre élément du catalogue.
+Cette vue aide à suivre les changements, contrôler la cohérence et comprendre l’évolution d’un dataset, d’une variable ou d’un autre élément du catalogue.
 
 ![Onglet évolution](assets/about-page/evolution-tab{darkMode}.webp?v=1)
 
@@ -116,7 +116,7 @@ Ces éléments peuvent être exportés et importés à tout moment, ce qui facil
 
 ### Mise en favoris
 
-Tous les éléments du catalogue peuvent être ajoutés aux favoris en un clic. Une page dédiée permet ensuite de les retrouver facilement, avec des onglets distincts selon le type d’élément.
+Tous les éléments du catalogue peuvent être ajoutés aux favoris en un clic. Une page dédiée permet ensuite de les retrouver en un même endroit, avec des onglets distincts selon le type d’élément.
 
 ![Onglet dossier – ajout d’un élément en favoris](assets/tuto/add-favorite{darkMode}.gif?v=2)
 
@@ -138,8 +138,12 @@ Les tableaux du catalogue peuvent également être exportés facilement, soit pa
 
 ![Page datasets - téléchargement](assets/tuto/datasets-download{darkMode}.gif?v=1)
 
+### Interopérabilité
+
+datannur peut exposer les métadonnées du catalogue via une API REST et produire un export DCAT. Ces mécanismes permettent d’intégrer le catalogue à d’autres outils, d’alimenter des portails open data ou de réutiliser les métadonnées dans des chaînes de traitement existantes.
+
 ### Vue interne
 
 datannur intègre une vue interne qui permet d’explorer directement la structure de ses propres métadonnées. Le catalogue devient ainsi lisible de l’intérieur : on peut voir comment l’information est organisée, reliée et stockée.
 
-Cette transparence facilite la compréhension du fonctionnement de l’outil, le contrôle des structures internes et l’appropriation du catalogue par ses utilisateurs les plus avancés.
+Cette transparence aide à comprendre le fonctionnement de l’outil, à contrôler les structures internes et à s’approprier le catalogue dans les usages les plus avancés.

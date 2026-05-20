@@ -27,7 +27,7 @@ function getRecursiveItems(
   id: string | number,
   includeSelf = false,
 ): BreadcrumbItem[] {
-  const items = db.getParents(type, id).reverse()
+  const items = db.getParents(type, id)
   if (includeSelf) {
     const current = db.get(type, id)
     if (current) items.push(current)
