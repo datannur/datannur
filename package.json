@@ -31,7 +31,7 @@
     "svelte-check": "svelte-check --workspace src",
     "format": "prettier --write . '!**/*.json.js'",
     "format:check": "prettier --check . '!**/*.json.js'",
-    "ncu": "ncu -u && ncu -u --packageFile public/package.json",
+    "ncu": "ncu -u",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
