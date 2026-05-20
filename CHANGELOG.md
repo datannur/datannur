@@ -1,5 +1,9 @@
 # datannur
 
+## unreleased
+
+- fix: remove reverse from getRecursiveItems to maintain original order of parent items
+
 ## 0.23.0 (2026-05-19)
 
 - add: show a title breadcrumb popover for entity detail pages
