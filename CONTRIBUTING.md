@@ -173,7 +173,7 @@ User-facing documentation lives in `docs/` (VitePress) and is published to [docs
 - `public/data/db/` - Database files (.json.js format)
 - `public/schemas/` - JSON schemas for data validation
 - `public/api/` - Web API endpoints and adapters
-- `public/node-scripts/` - Utility scripts (deploy, static generation)
+- `public/python-scripts/` - Utility scripts (deploy, static generation, local services)
 
 ### API Architecture
 

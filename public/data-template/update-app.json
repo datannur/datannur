@@ -4,7 +4,6 @@
     "api",
     "assets",
     "data-template",
-    "node-scripts",
     "python-scripts",
     "windows-setup",
     "schemas",
@@ -13,10 +12,7 @@
     "README.md",
     "CHANGELOG.md",
     ".htaccess",
-    ".npmrc",
     ".nojekyll",
-    "manifest.json",
-    "package.json",
-    "tsconfig.json"
+    "manifest.json"
   ]
 }

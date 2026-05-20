@@ -7,13 +7,13 @@ For public web deployment with SEO optimization and clean URLs:
 Generate SEO-friendly static pages:
 
 ```bash
-npm run static-make
+python3 datannur.py static
 ```
 
 To generate static pages and deploy in one step:
 
 ```bash
-npm run static-deploy
+python3 datannur.py static-deploy
 ```
 
 **Configuration** in `data/static-make.config.json`:
@@ -27,12 +27,12 @@ npm run static-deploy
 
 ## Deployment
 
-The deployment script `node-scripts/deploy.ts` automates the process of publishing your app to a remote server using `rsync` over SSH.
+The deployment script `python-scripts/deploy.py` automates the process of publishing your app to a remote server using `rsync` over SSH.
 
 **Usage:**
 
 ```bash
-npm run deploy
+python3 datannur.py deploy
 ```
 
 **How it works:**

@@ -5,10 +5,9 @@
 bundle-view.html
 todo/
 __pycache__/
-/**/node_modules/
+/node_modules/
 /app/
 /public/assets/external/*.js
-/public/node_modules/
 /public/data/db-semantic/
 /public/data/deploy.config.json
 /public/data/llm-web.config.json

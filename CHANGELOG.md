@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- change: replace public Node deploy and static generation scripts with Python tooling and a `datannur.py` command launcher
 - fix: remove reverse from getRecursiveItems to maintain original order of parent items
 - add: interoperability section in features.md and remove some repetitive content wording
 
