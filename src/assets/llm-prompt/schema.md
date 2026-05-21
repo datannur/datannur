@@ -4,7 +4,7 @@
 
 **Dataset** - Collection de données tabulaires
 
-- Champs clés: `id`, `name`, `description`, `type`, `folderId`, `ownerId`, `nbRow`, `startDate`, `endDate`
+- Champs clés: `id`, `name`, `description`, `type`, `folderId`, `ownerOrganizationId`, `nbRow`, `startDate`, `endDate`
 - Relations: `variables[]`, `tags[]`, `docs[]`, `folder`, `owner`, `manager`
 
 **Variable** - Colonne dans un dataset

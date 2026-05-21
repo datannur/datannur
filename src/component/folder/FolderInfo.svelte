@@ -33,8 +33,11 @@
   {#if folder.parentId}
     <FolderInfo folderId={folder.id} isSelf={true} />
   {/if}
-  <OrganizationInfo type="owner" organizationId={folder.ownerId} />
-  <OrganizationInfo type="manager" organizationId={folder.managerId} />
+  <OrganizationInfo type="owner" organizationId={folder.ownerOrganizationId} />
+  <OrganizationInfo
+    type="manager"
+    organizationId={folder.managerOrganizationId}
+  />
   <TypeInfo type={folder.typeClean} />
   <DataSizeInfo dataSize={folder.dataSizeRecursive} />
   {#if folder.lastUpdateDate}

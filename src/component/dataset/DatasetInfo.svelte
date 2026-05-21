@@ -26,8 +26,11 @@
 
 <TableWrapper>
   <IdInfo id={dataset.id} />
-  <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
-  <OrganizationInfo type="manager" organizationId={dataset.managerId} />
+  <OrganizationInfo type="owner" organizationId={dataset.ownerOrganizationId} />
+  <OrganizationInfo
+    type="manager"
+    organizationId={dataset.managerOrganizationId}
+  />
   <FolderInfo folderId={dataset.folderId} />
   {#if dataset.typeClean}
     <tr>

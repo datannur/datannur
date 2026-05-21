@@ -2,14 +2,9 @@
   import db from '@db'
   import Icon from '@layout/Icon.svelte'
   import Link from '@layout/Link.svelte'
+  import { entityNames } from '@lib/constant'
 
   let { datasetId }: { datasetId: string } = $props()
-
-  interface Alias {
-    alias: string
-    name: string
-    entity: string
-  }
 
   interface RelationType {
     name: 'oneToOne' | 'oneToMany' | 'manyToMany'
@@ -19,7 +14,17 @@
 
   interface RelationGroup {
     type: RelationType
-    relations: [string, string][]
+    relations: RelationDisplay[]
+  }
+
+  interface RelationDisplay {
+    from: RelationEntity
+    to: RelationEntity
+  }
+
+  interface RelationEntity {
+    entity: string
+    label: string
   }
 
   const schema = db.getSchema()
@@ -34,50 +39,72 @@
     },
   ]
 
-  const aliases: Alias[] = []
-  for (const relation of schema.oneToOne) {
-    for (const alias of schema.aliases) {
-      if (relation[0] === alias) {
-        aliases.push({
-          alias: relation[0],
-          name: relation[1] + ` (${relation[0]})`,
-          entity: relation[1],
-        })
-      }
-    }
+  const relationRoleNames = {
+    owner: entityNames.owner,
+    manager: entityNames.manager,
+  } as const
+  const hiddenRelationRoles = ['source', 'fk']
+
+  function capitalize(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1)
   }
 
-  let datasetHasAlias = aliases.some(alias => alias.entity === datasetId)
+  function getRelationEntity(relationKey: string): RelationEntity {
+    if (relationKey in entityNames) {
+      return {
+        entity: relationKey,
+        label: entityNames[relationKey as keyof typeof entityNames],
+      }
+    }
+    for (const entity of Object.keys(entityNames)) {
+      const entitySuffix = capitalize(entity)
+      if (!relationKey.endsWith(entitySuffix)) continue
+
+      const role = relationKey.slice(0, -entitySuffix.length)
+      if (!role) break
+      if (!(role in relationRoleNames)) break
+      return {
+        entity,
+        label: `${entityNames[entity as keyof typeof entityNames]} (${relationRoleNames[role as keyof typeof relationRoleNames]})`,
+      }
+    }
+    return { entity: relationKey, label: relationKey }
+  }
+
+  function getRelationRole(relationKey: string): string | null {
+    for (const entity of Object.keys(entityNames)) {
+      const entitySuffix = capitalize(entity)
+      if (!relationKey.endsWith(entitySuffix)) continue
+
+      const role = relationKey.slice(0, -entitySuffix.length)
+      return role || null
+    }
+    return null
+  }
+
+  function getRelationDisplay(relation: string[]): RelationDisplay {
+    return {
+      from: getRelationEntity(relation[0]),
+      to: getRelationEntity(relation[relation.length - 1]),
+    }
+  }
 
   const relations: RelationGroup[] = relationTypes.map(type => ({
     type,
-    relations: schema[type.name].filter(relation => {
-      if (datasetHasAlias) {
-        if (type.name === 'oneToOne' && relation.includes(datasetId))
-          return false
-
-        for (const alias of aliases) {
-          if (relation.includes(alias.alias)) {
-            return true
-          }
-        }
-      }
-      if (relation.includes(datasetId)) return true
-      return false
-    }) as [string, string][],
+    relations: schema[type.name]
+      .filter(
+        relation =>
+          !relation.some(relationKey =>
+            hiddenRelationRoles.includes(getRelationRole(relationKey) ?? ''),
+          ),
+      )
+      .map(relation => getRelationDisplay(relation))
+      .filter(
+        relation =>
+          relation.from.entity === datasetId ||
+          relation.to.entity === datasetId,
+      ),
   }))
-
-  for (const relationType of relations) {
-    for (const relation of relationType.relations) {
-      for (const alias of aliases) {
-        if (relation[0] === alias.alias) {
-          relation[0] = alias.name
-        } else if (relation[1] === alias.alias) {
-          relation[1] = alias.name
-        }
-      }
-    }
-  }
 
   const hasRelation = relations.some(
     relationType => relationType.relations.length > 0,
@@ -91,16 +118,16 @@
       {#each relations as relationType (relationType.type.name)}
         {#if relationType.relations.length}
           <ul>
-            {#each relationType.relations as relation (relation)}
+            {#each relationType.relations as relation (relation.from.label + relation.to.label)}
               <li>
-                <Link href={`metaDataset/${relation[0].split(' (')[0]}`}
-                  >{relation[0]}</Link
+                <Link href={`metaDataset/${relation.from.entity}`}
+                  >{relation.from.label}</Link
                 >
                 <span class="use-tooltip" title={relationType.type.tooltip}>
                   <Icon type={relationType.type.symbol} marginRight={false} />
                 </span>
-                <Link href={`metaDataset/${relation[1].split(' (')[0]}`}
-                  >{relation[1]}</Link
+                <Link href={`metaDataset/${relation.to.entity}`}
+                  >{relation.to.label}</Link
                 >
               </li>
             {/each}

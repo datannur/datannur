@@ -21,12 +21,12 @@
         "description": "Key of the folder containing the dataset",
         "x-description-fr": "Clé du dossier contenant le dataset"
       },
-      "manager_id": {
+      "manager_organization_id": {
         "type": ["string", "number", "null"],
         "description": "Key of the managing organization",
         "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
       },
-      "owner_id": {
+      "owner_organization_id": {
         "type": ["string", "number", "null"],
         "description": "Key of the data provider organization",
         "x-description-fr": "Clé de l'organisation fournisseur du dataset"

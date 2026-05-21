@@ -353,11 +353,18 @@ export default class Column {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
       ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`organization/${row.ownerId}`, escapeHtml(row.ownerName)),
+            link(
+              `organization/${row.ownerOrganizationId}`,
+              escapeHtml(row.ownerName),
+            ),
           )
       : (data, type, row: EntityWithOrganization) => {
-          if (!row.ownerId) return ''
-          return Render.withParentsFromId('organization', row.ownerId, type)
+          if (!row.ownerOrganizationId) return ''
+          return Render.withParentsFromId(
+            'organization',
+            row.ownerOrganizationId,
+            type,
+          )
         }
     return {
       data: 'ownerName',
@@ -372,11 +379,18 @@ export default class Column {
     const render: ColumnType['render'] = get(viewportManager.isMobile)
       ? (data, type, row: EntityWithOrganization) =>
           wrapLongText(
-            link(`organization/${row.managerId}`, escapeHtml(row.managerName)),
+            link(
+              `organization/${row.managerOrganizationId}`,
+              escapeHtml(row.managerName),
+            ),
           )
       : (data, type, row: EntityWithOrganization) => {
-          if (!row.managerId) return ''
-          return Render.withParentsFromId('organization', row.managerId, type)
+          if (!row.managerOrganizationId) return ''
+          return Render.withParentsFromId(
+            'organization',
+            row.managerOrganizationId,
+            type,
+          )
         }
     return {
       data: 'managerName',
@@ -1023,18 +1037,18 @@ export default class Column {
       },
     }
   }
-  static fkVar(): ColumnType {
+  static fkVariable(): ColumnType {
     return {
-      data: 'fkVarName',
+      data: 'fkVariableName',
       title: Render.icon('fk') + 'Clé étrangère',
       defaultContent: '',
       tooltip: 'Variable référencée dans un autre dataset',
       render: (data: string, type, row: EntityTypeMap['variable']) => {
-        if (!row.fkVarId) return ''
-        if (!data) return escapeHtml(String(row.fkVarId))
+        if (!row.fkVariableId) return ''
+        if (!data) return escapeHtml(String(row.fkVariableId))
         if (type !== 'display') return data
         const varLink = link(
-          'variable/' + row.fkVarId,
+          'variable/' + row.fkVariableId,
           escapeHtml(data),
           'variable',
         )
@@ -1092,7 +1106,7 @@ export default class Column {
   }
   static nbFkRefVar(nbFkRefMax: number): ColumnType {
     return {
-      data: 'fkReferencedByVarIds',
+      data: 'fkReferencedByVariableIds',
       title: Render.icon('fk') + 'FK ←',
       filterType: 'input',
       defaultContent: '',

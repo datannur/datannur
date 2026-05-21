@@ -45,14 +45,7 @@ export function initApp(): Promise<void> {
       )
 
       stepTimer = performance.now()
-      const dbOption = {
-        filter,
-        aliases: [
-          { table: 'organization', alias: 'owner' },
-          { table: 'organization', alias: 'manager' },
-        ],
-      }
-      await db.init(dbOption)
+      await db.init({ filter })
       console.log('load db', Math.round(performance.now() - stepTimer) + ' ms')
 
       stepTimer = performance.now()

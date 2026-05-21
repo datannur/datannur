@@ -75,7 +75,7 @@
     "start_date": "2018/05",
     "end_date": "1999/01/04",
     "tag_ids": "geologie, securite",
-    "source_var_ids": "emplois_tech__annee, pollution_air__unite, emploi_jeunes__secteur_activite"
+    "source_variable_ids": "emplois_tech__annee, pollution_air__unite, emploi_jeunes__secteur_activite"
   },
   {
     "id": "ser_pub_loc__cout_par_habitant",
@@ -132,7 +132,7 @@
     "description": "Région administrative de rattachement.",
     "start_date": "2019",
     "end_date": "1998/04",
-    "fk_var_id": "pop_region__regionfake",
+    "fk_variable_id": "pop_region__regionfake",
     "enumeration_ids": "enumeration_1",
     "tag_ids": "armee, agriculture, population, communication, images_aeriennes_2, flore"
   },
@@ -220,7 +220,7 @@
     "start_date": "1998/02/26",
     "end_date": "2005/08/06",
     "tag_ids": "infrastructures, systemes_reference, developpement_territorial, ouvrages, anonymous_data",
-    "source_var_ids": "immobilier_prix__source_donnee, revenus_menages__niveau_formation, temperature_moy__vitesse_vent_moy"
+    "source_variable_ids": "immobilier_prix__source_donnee, revenus_menages__niveau_formation, temperature_moy__vitesse_vent_moy"
   },
   {
     "id": "ser_pub_loc__cout_investissement",
@@ -356,7 +356,7 @@
     "start_date": "2017/08",
     "end_date": "2016",
     "tag_ids": "culture, images_aeriennes_1, activites_economiques, climatologie",
-    "source_var_ids": "tourisme_annu__prix_moy_nuit"
+    "source_variable_ids": "tourisme_annu__prix_moy_nuit"
   },
   {
     "id": "accident_route__cause_presumee",
@@ -397,7 +397,7 @@
     "description": "Canton concerné par la dépense publique.",
     "start_date": "2022/09",
     "end_date": "1999/04/22",
-    "fk_var_id": "pop_region__canton",
+    "fk_variable_id": "pop_region__canton",
     "tag_ids": "approvisionnement",
     "key": 1,
     "business_key": 1
@@ -418,7 +418,7 @@
     "tag_ids": "securite, culture",
     "key": 2,
     "business_key": 2,
-    "source_var_ids": "accidents_travail__gravite"
+    "source_variable_ids": "accidents_travail__gravite"
   },
   {
     "id": "dep_sante__montant_total",
@@ -433,7 +433,7 @@
     "start_date": "2001/01",
     "end_date": "2013/05",
     "tag_ids": "hydrographie",
-    "source_var_ids": "exportations__delai_paiement, pollution_air__unite, exportations__delai_livraison, exportations__pays_destination"
+    "source_variable_ids": "exportations__delai_paiement, pollution_air__unite, exportations__delai_livraison, exportations__pays_destination"
   },
   {
     "id": "dep_sante__montant_par_habitant",
@@ -461,7 +461,7 @@
     "description": "Groupe concerné (adultes, personnes âgées, enfants, etc.).",
     "start_date": "2005",
     "tag_ids": "climatologie, transport, cartes_reference, sols",
-    "source_var_ids": "revenus_menages__revenu_total_brut"
+    "source_variable_ids": "revenus_menages__revenu_total_brut"
   },
   {
     "id": "dep_sante__mode_financement",
@@ -535,7 +535,7 @@
     "enumeration_ids": "langue_sigle",
     "tag_ids": "foret, localisation, elimination, infrastructures, hydrographie, protection_env_nature",
     "concept_id": "nombre_beneficiaires",
-    "source_var_ids": "accident_route__type_accident, pop_region__type_region"
+    "source_variable_ids": "accident_route__type_accident, pop_region__type_region"
   },
   {
     "id": "dep_sante__taux_croissance",
@@ -549,7 +549,7 @@
     "description": "Variation annuelle des dépenses publiques en santé (%).",
     "start_date": "2018/12/08",
     "end_date": "2021/03",
-    "source_var_ids": "temperature_moy__source_donnee, dep_sante__cout_investissement, pop_region__population_etrangere, eau_potable__ph"
+    "source_variable_ids": "temperature_moy__source_donnee, dep_sante__cout_investissement, pop_region__population_etrangere, eau_potable__ph"
   },
   {
     "id": "dep_sante__region_sanitaire",
@@ -595,7 +595,7 @@
     "enumeration_ids": "vide",
     "tag_ids": "personal_data, activites_economiques, infrastructures, armee, altimetrie, dangers_naturels",
     "business_key": 2,
-    "source_var_ids": "ser_pub_loc__budget_annuel, emplois_tech__region"
+    "source_variable_ids": "ser_pub_loc__budget_annuel, emplois_tech__region"
   },
   {
     "id": "temperature_moy__station",
@@ -639,7 +639,7 @@
     "end_date": "2014/04",
     "tag_ids": "sensible_data, edifices, communication, images_aeriennes_1, limites_pol_admin, elimination",
     "concept_id": "temperature_moyenne",
-    "source_var_ids": "ser_pub_loc__nb_points_service, eau_potable__conformite"
+    "source_variable_ids": "ser_pub_loc__nb_points_service, eau_potable__conformite"
   },
   {
     "id": "temperature_moy__temp_min",
@@ -654,7 +654,7 @@
     "start_date": "2024",
     "tag_ids": "securite, couverture_sol, agriculture, activites_economiques",
     "concept_id": "temperature_minimale",
-    "source_var_ids": "ser_pub_loc__delai_moyen_traitement"
+    "source_variable_ids": "ser_pub_loc__delai_moyen_traitement"
   },
   {
     "id": "temperature_moy__temp_max",
@@ -670,7 +670,7 @@
     "end_date": "2001/07",
     "tag_ids": "sols, armee, anonymous_data, theme_iso",
     "concept_id": "temperature_maximale",
-    "source_var_ids": "accident_route__date_accident, tourisme_annu__nb_nuitees"
+    "source_variable_ids": "accident_route__date_accident, tourisme_annu__nb_nuitees"
   },
   {
     "id": "temperature_moy__dev_normale",
@@ -699,7 +699,7 @@
     "start_date": "2001",
     "end_date": "2013/01",
     "tag_ids": "images_aeriennes_2, communication",
-    "source_var_ids": "emplois_tech__nb_offres_emploi"
+    "source_variable_ids": "emplois_tech__nb_offres_emploi"
   },
   {
     "id": "temperature_moy__nb_jours_gel",
@@ -715,7 +715,7 @@
     "end_date": "2007/08",
     "enumeration_ids": "langue_sigle",
     "tag_ids": "systemes_reference",
-    "source_var_ids": "dep_sante__institution_responsable"
+    "source_variable_ids": "dep_sante__institution_responsable"
   },
   {
     "id": "temperature_moy__nb_jours_ete",
@@ -913,7 +913,7 @@
     "end_date": "1995/08",
     "enumeration_ids": "canton_sigle",
     "tag_ids": "atmosphere, edifices, data_protection, activites_economiques, climatologie",
-    "source_var_ids": "ser_pub_loc__nb_beneficiaires, revenus_menages__epargne_mensuelle"
+    "source_variable_ids": "ser_pub_loc__nb_beneficiaires, revenus_menages__epargne_mensuelle"
   },
   {
     "id": "pop_region__canton",
@@ -988,7 +988,7 @@
     "end_date": "2010",
     "tag_ids": "foret, activites_economiques, images_aeriennes, communication, infrastructures",
     "concept_id": "densite_population",
-    "source_var_ids": "vente_voitures__modele, ser_pub_loc__niveau_accessibilite, revenus_menages__epargne_mensuelle"
+    "source_variable_ids": "vente_voitures__modele, ser_pub_loc__niveau_accessibilite, revenus_menages__epargne_mensuelle"
   },
   {
     "id": "pop_region__age_median",
@@ -1017,7 +1017,7 @@
     "start_date": "2021",
     "end_date": "2017/03/04",
     "tag_ids": "developpement_territorial",
-    "source_var_ids": "exportations__incoterm, emploi_jeunes__formation_continue"
+    "source_variable_ids": "exportations__incoterm, emploi_jeunes__formation_continue"
   },
   {
     "id": "pop_region__part_0_14",
@@ -1216,7 +1216,7 @@
     "description": "Nombre de colonies de bactéries par 100 mL d'eau.",
     "start_date": "2022",
     "tag_ids": "activites_economiques, ouvrages, climatologie, sensible_data, transport, culture",
-    "source_var_ids": "revenus_menages__patrimoine_total, temperature_moy__nb_jours_ete, immobilier_prix__charges_annuelles"
+    "source_variable_ids": "revenus_menages__patrimoine_total, temperature_moy__nb_jours_ete, immobilier_prix__charges_annuelles"
   },
   {
     "id": "eau_potable__conformite",
@@ -1287,7 +1287,7 @@
     "description": "Canton où se situe l'établissement touristique.",
     "start_date": "2018/01",
     "end_date": "2004",
-    "source_var_ids": "ser_pub_loc__mode_gestion, pollution_air__sources_stationnaires, revenus_menages__statut_emploi, transport_pub__nb_lignes"
+    "source_variable_ids": "ser_pub_loc__mode_gestion, pollution_air__sources_stationnaires, revenus_menages__statut_emploi, transport_pub__nb_lignes"
   },
   {
     "id": "tourisme_annu__region_touristique",
@@ -1424,7 +1424,7 @@
     "start_date": "1997/01",
     "end_date": "2021",
     "tag_ids": "agriculture, sensible_data, atmosphere, approvisionnement, sols, securite",
-    "source_var_ids": "emplois_tech__region"
+    "source_variable_ids": "emplois_tech__region"
   },
   {
     "id": "tourisme_annu__taux_occupation_lits",
@@ -1452,7 +1452,7 @@
     "description": "Nombre moyen de nuits par séjour.",
     "start_date": "2013/06",
     "end_date": "2018/05/24",
-    "source_var_ids": "revenus_menages__nb_personnes"
+    "source_variable_ids": "revenus_menages__nb_personnes"
   },
   {
     "id": "tourisme_annu__nb_personnel",
@@ -1481,7 +1481,7 @@
     "start_date": "2007/08",
     "end_date": "2009",
     "tag_ids": "anonymous_data, limites_pol_admin, societe, population",
-    "source_var_ids": "emplois_tech__taux_croissance, accidents_travail__sexe_victime"
+    "source_variable_ids": "emplois_tech__taux_croissance, accidents_travail__sexe_victime"
   },
   {
     "id": "tourisme_annu__presence_groupes",
@@ -1496,7 +1496,7 @@
     "start_date": "2021/05",
     "end_date": "1997/01/27",
     "tag_ids": "climatologie",
-    "source_var_ids": "ser_pub_loc__delai_moyen_traitement"
+    "source_variable_ids": "ser_pub_loc__delai_moyen_traitement"
   },
   {
     "id": "tourisme_annu__offre_wellness",
@@ -1539,7 +1539,7 @@
     "start_date": "2010",
     "end_date": "2003/01",
     "tag_ids": "sensible_data, pseudonymous_data, data_protection",
-    "source_var_ids": "emploi_jeunes__sexe, revenus_menages__indice_satisfaction_vie, exportations__valeur_eur"
+    "source_variable_ids": "emploi_jeunes__sexe, revenus_menages__indice_satisfaction_vie, exportations__valeur_eur"
   },
   {
     "id": "tourisme_annu__indice_satisfaction",
@@ -1554,7 +1554,7 @@
     "start_date": "1997/01/12",
     "end_date": "2019/08/10",
     "tag_ids": "personal_data, images_aeriennes_1, population, pseudonymous_data",
-    "source_var_ids": "revenus_menages__nb_heures_travail, immobilier_prix__etat_bien"
+    "source_variable_ids": "revenus_menages__nb_heures_travail, immobilier_prix__etat_bien"
   },
   {
     "id": "tourisme_annu__altitude",
@@ -1584,7 +1584,7 @@
     "end_date": "1997",
     "tag_ids": "cadastre_foncier, agriculture, altimetrie, elimination",
     "concept_id": "coordonnee_x_lv95",
-    "source_var_ids": "accidents_travail__cout_assurance, emplois_tech2__source_donnee, usage_internet__connexion_domicile, vente_voitures__source_donnee"
+    "source_variable_ids": "accidents_travail__cout_assurance, emplois_tech2__source_donnee, usage_internet__connexion_domicile, vente_voitures__source_donnee"
   },
   {
     "id": "tourisme_annu__coord_y",
@@ -1680,7 +1680,7 @@
     "description": "Nombre d'événements ayant potentiellement influencé la fréquentation.",
     "start_date": "2020/08/18",
     "tag_ids": "geologie, securite, images_aeriennes_2, developpement_territorial, dangers_naturels, altimetrie",
-    "source_var_ids": "conso_energie__type_energie, exportations__certification_requise, pollution_air__pression_atm"
+    "source_variable_ids": "conso_energie__type_energie, exportations__certification_requise, pollution_air__pression_atm"
   },
   {
     "id": "tourisme_annu__taux_croissance_nuitees",
@@ -1724,7 +1724,7 @@
     "description": "Heure locale de la mesure.",
     "start_date": "1995",
     "tag_ids": "atmosphere, personal_data, geologie, approvisionnement, culture, edifices",
-    "source_var_ids": "accidents_travail__taux_accidents_secteur, emploi_jeunes__formation_continue"
+    "source_variable_ids": "accidents_travail__taux_accidents_secteur, emploi_jeunes__formation_continue"
   },
   {
     "id": "pollution_air__station",
@@ -1775,7 +1775,7 @@
     "nb_missing": 0,
     "description": "Unité de mesure (µg/m³).",
     "start_date": "2020",
-    "source_var_ids": "exportations__secteur, pop_region__population_etrangere"
+    "source_variable_ids": "exportations__secteur, pop_region__population_etrangere"
   },
   {
     "id": "pollution_air__temperature",
@@ -1816,7 +1816,7 @@
     "description": "Vitesse du vent (km/h).",
     "start_date": "2017",
     "tag_ids": "pseudonymous_data",
-    "source_var_ids": "accidents_travail__presence_temoins, usage_internet__sexe, emploi_jeunes__salaire_mensuel"
+    "source_variable_ids": "accidents_travail__presence_temoins, usage_internet__sexe, emploi_jeunes__salaire_mensuel"
   },
   {
     "id": "pollution_air__vent_direction",
@@ -1923,7 +1923,7 @@
     "description": "Contribution estimée des sources fixes (industries…).",
     "start_date": "1999/06",
     "tag_ids": "activites_economiques, infrastructures",
-    "source_var_ids": "emploi_jeunes__nb_heures_second_emploi, emploi_jeunes__anciennete_poste, tourisme_annu__classification_officielle, revenus_menages__charges_garde"
+    "source_variable_ids": "emploi_jeunes__nb_heures_second_emploi, emploi_jeunes__anciennete_poste, tourisme_annu__classification_officielle, revenus_menages__charges_garde"
   },
   {
     "id": "pollution_air__sources_mobiles",
@@ -1964,7 +1964,7 @@
     "description": "Niveau sonore en dB.",
     "start_date": "2002/02/28",
     "tag_ids": "data_protection, cadastre_foncier",
-    "source_var_ids": "exportations__continent, vente_voitures__source_donnee"
+    "source_variable_ids": "exportations__continent, vente_voitures__source_donnee"
   },
   {
     "id": "pollution_air__source_donnee",
@@ -1990,7 +1990,7 @@
     "nb_missing": 0,
     "description": "Ville ou village desservi par le réseau de transports publics.",
     "start_date": "2011/03",
-    "source_var_ids": "tourisme_annu__presence_familles, pop_region__source_donnee, exportations__type_produit"
+    "source_variable_ids": "tourisme_annu__presence_familles, pop_region__source_donnee, exportations__type_produit"
   },
   {
     "id": "transport_pub__nb_lignes",
@@ -2003,7 +2003,7 @@
     "description": "Nombre total de lignes (bus, tram, train, etc.) desservant la localité.",
     "start_date": "2022/10/05",
     "tag_ids": "developpement_territorial, foret, population, approvisionnement, transport, data_protection",
-    "source_var_ids": "emplois_tech__annee, revenus_menages__region, revenus_menages__charges_sante"
+    "source_variable_ids": "emplois_tech__annee, revenus_menages__region, revenus_menages__charges_sante"
   },
   {
     "id": "transport_pub__frequence_moyenne",
@@ -2016,7 +2016,7 @@
     "description": "Fréquence moyenne des passages en minutes (pondérée sur toutes les lignes).",
     "start_date": "2020/07/09",
     "tag_ids": "limites_pol_admin, data_protection, personal_data, approvisionnement, pseudonymous_data",
-    "source_var_ids": "temperature_moy__altitude_station, pollution_air__temperature"
+    "source_variable_ids": "temperature_moy__altitude_station, pollution_air__temperature"
   },
   {
     "id": "usage_internet__annee",
@@ -2043,7 +2043,7 @@
     "description": "Tranche d'âge des répondants (15–24, 25–34, etc.).",
     "start_date": "2020",
     "tag_ids": "faune",
-    "source_var_ids": "temperature_moy__nb_jours_ete, accidents_travail__responsabilite_identifiee, pop_region__coord_x"
+    "source_variable_ids": "temperature_moy__nb_jours_ete, accidents_travail__responsabilite_identifiee, pop_region__coord_x"
   },
   {
     "id": "usage_internet__sexe",
@@ -2148,7 +2148,7 @@
     "description": "Accès internet via réseau mobile.",
     "start_date": "2008",
     "tag_ids": "sensible_data, infrastructures, theme_iso, atmosphere, pseudonymous_data, developpement_territorial",
-    "source_var_ids": "accidents_travail__rapport_medical, conso_energie__emissions_co2_tonnes, temperature_moy__indice_chaleur, temperature_moy__nb_jours_ete"
+    "source_variable_ids": "accidents_travail__rapport_medical, conso_energie__emissions_co2_tonnes, temperature_moy__indice_chaleur, temperature_moy__nb_jours_ete"
   },
   {
     "id": "usage_internet__competence_numerique",
@@ -2162,7 +2162,7 @@
     "description": "Indice de compétence numérique (0–100).",
     "start_date": "2009",
     "tag_ids": "images_aeriennes_1, population",
-    "source_var_ids": "accidents_travail__type_contrat"
+    "source_variable_ids": "accidents_travail__type_contrat"
   },
   {
     "id": "usage_internet__nb_applications_utilisees",
@@ -2187,7 +2187,7 @@
     "description": "Indique si la personne a effectué des achats en ligne.",
     "start_date": "2010",
     "tag_ids": "images_aeriennes_2, flore, culture, pseudonymous_data, elimination, systemes_reference",
-    "source_var_ids": "temperature_moy__nb_jours_ete, revenus_menages__nb_membres_actifs, vente_voitures__co2_g_km, revenus_menages__presence_handicap"
+    "source_variable_ids": "temperature_moy__nb_jours_ete, revenus_menages__nb_membres_actifs, vente_voitures__co2_g_km, revenus_menages__presence_handicap"
   },
   {
     "id": "usage_internet__streaming_video",
@@ -2214,7 +2214,7 @@
     "description": "Indique si l'utilisateur fréquente des réseaux sociaux.",
     "start_date": "2024/07",
     "tag_ids": "anonymous_data, data_protection, images_aeriennes_2, population, dangers_naturels, agriculture",
-    "source_var_ids": "accidents_travail__mesures_prevention_post, ser_pub_loc__type_infrastructure, tourisme_annu__source_donnee, accidents_travail__annee"
+    "source_variable_ids": "accidents_travail__mesures_prevention_post, ser_pub_loc__type_infrastructure, tourisme_annu__source_donnee, accidents_travail__annee"
   },
   {
     "id": "usage_internet__confiance_internet",
@@ -2229,7 +2229,7 @@
     "start_date": "2020/05",
     "enumeration_ids": "canton_sigle",
     "tag_ids": "personal_data, foret, infrastructures, atmosphere",
-    "source_var_ids": "vente_voitures__categorie, ser_pub_loc__quartier"
+    "source_variable_ids": "vente_voitures__categorie, ser_pub_loc__quartier"
   },
   {
     "id": "usage_internet__source_donnee",
@@ -2355,7 +2355,7 @@
     "end_date": "2022/03",
     "tag_ids": "theme_iso, data_protection, couverture_sol, culture",
     "concept_id": "niveau_formation",
-    "source_var_ids": "pop_region__annee"
+    "source_variable_ids": "pop_region__annee"
   },
   {
     "id": "emplois_tech__taux_vacance",
@@ -2384,7 +2384,7 @@
     "start_date": "2006",
     "end_date": "2009/05",
     "tag_ids": "protection_env_nature, securite",
-    "source_var_ids": "accidents_travail__cout_assurance"
+    "source_variable_ids": "accidents_travail__cout_assurance"
   },
   {
     "id": "emplois_tech__source_donnee",
@@ -2456,7 +2456,7 @@
     "start_date": "2003/10",
     "end_date": "2012",
     "concept_id": "type_accident",
-    "source_var_ids": "revenus_menages__sexe_chef_menage"
+    "source_variable_ids": "revenus_menages__sexe_chef_menage"
   },
   {
     "id": "accidents_travail__gravite",
@@ -2501,7 +2501,7 @@
     "start_date": "2019/09/04",
     "end_date": "2011",
     "tag_ids": "climatologie, altimetrie, atmosphere, couverture_sol",
-    "source_var_ids": "eau_potable__bacteries_colonie_100ml"
+    "source_variable_ids": "eau_potable__bacteries_colonie_100ml"
   },
   {
     "id": "accidents_travail__nationalite",
@@ -2515,7 +2515,7 @@
     "description": "Nationalité de la victime.",
     "start_date": "2004/08",
     "end_date": "2007/03",
-    "source_var_ids": "usage_internet__streaming_video, pop_region__coord_x, pollution_air__date, emploi_jeunes__mobilite_professionnelle"
+    "source_variable_ids": "usage_internet__streaming_video, pop_region__coord_x, pollution_air__date, emploi_jeunes__mobilite_professionnelle"
   },
   {
     "id": "accidents_travail__fonction",
@@ -2641,7 +2641,7 @@
     "description": "Durée de l'arrêt consécutif à l'accident.",
     "start_date": "2023/12/09",
     "end_date": "2017",
-    "source_var_ids": "temperature_moy__temp_moy, emploi_jeunes__canton, tourisme_annu__type_etablissement"
+    "source_variable_ids": "temperature_moy__temp_moy, emploi_jeunes__canton, tourisme_annu__type_etablissement"
   },
   {
     "id": "accidents_travail__cout_assurance",
@@ -2767,7 +2767,7 @@
     "description": "Statut administratif : ouvert, en cours, clos, classé.",
     "start_date": "2012/09/10",
     "end_date": "2024",
-    "source_var_ids": "temperature_moy__station"
+    "source_variable_ids": "temperature_moy__station"
   },
   {
     "id": "accidents_travail__responsabilite_identifiee",
@@ -2810,7 +2810,7 @@
     "start_date": "2004/11",
     "end_date": "2014/02/04",
     "tag_ids": "limites_pol_admin, cartes_reference, securite, hydrographie, population",
-    "source_var_ids": "emploi_jeunes__formation_continue, usage_internet__nb_applications_utilisees, pollution_air__zone_urbaine"
+    "source_variable_ids": "emploi_jeunes__formation_continue, usage_internet__nb_applications_utilisees, pollution_air__zone_urbaine"
   },
   {
     "id": "accidents_travail__indice_risque",
@@ -2852,7 +2852,7 @@
     "start_date": "2013/01",
     "tag_ids": "data_protection",
     "key": 1,
-    "source_var_ids": "revenus_menages__salaire_horaire"
+    "source_variable_ids": "revenus_menages__salaire_horaire"
   },
   {
     "id": "vente_voitures__mois",
@@ -2908,7 +2908,7 @@
     "description": "Modèle précis du véhicule.",
     "start_date": "2021",
     "tag_ids": "cartes_reference",
-    "source_var_ids": "pop_region__region"
+    "source_variable_ids": "pop_region__region"
   },
   {
     "id": "vente_voitures__categorie",
@@ -2965,7 +2965,7 @@
     "description": "Puissance du moteur en chevaux (HP).",
     "end_date": "2023/03/13",
     "tag_ids": "flore",
-    "source_var_ids": "ser_pub_loc__mode_gestion, emplois_tech2__region, emploi_jeunes__secteur_activite, conso_energie__conso_totale_mwh"
+    "source_variable_ids": "ser_pub_loc__mode_gestion, emplois_tech2__region, emploi_jeunes__secteur_activite, conso_energie__conso_totale_mwh"
   },
   {
     "id": "vente_voitures__co2_g_km",
@@ -3006,7 +3006,7 @@
     "start_date": "2022",
     "end_date": "1996/04/22",
     "tag_ids": "faune, theme_iso, activites_economiques",
-    "source_var_ids": "emplois_tech__taux_vacance, emplois_tech__salaire_median, temperature_moy__nb_jours_ete"
+    "source_variable_ids": "emplois_tech__taux_vacance, emplois_tech__salaire_median, temperature_moy__nb_jours_ete"
   },
   {
     "id": "vente_voitures__source_donnee",
@@ -3036,7 +3036,7 @@
     "start_date": "2000/05/16",
     "end_date": "2011/08/28",
     "tag_ids": "cadastre_foncier, cartes_reference, sensible_data, culture, images_aeriennes_2",
-    "source_var_ids": "accidents_travail__mesures_prevention_existantes, emplois_tech2__taux_croissance, accidents_travail__formation_securite"
+    "source_variable_ids": "accidents_travail__mesures_prevention_existantes, emplois_tech2__taux_croissance, accidents_travail__formation_securite"
   },
   {
     "id": "exportations__mois",
@@ -3051,7 +3051,7 @@
     "start_date": "2016/12/05",
     "end_date": "2023/05/27",
     "tag_ids": "agriculture, geologie, sante, personal_data, edifices",
-    "source_var_ids": "exportations__taux_croissance_secteur, emplois_tech__source_donnee"
+    "source_variable_ids": "exportations__taux_croissance_secteur, emplois_tech__source_donnee"
   },
   {
     "id": "exportations__secteur",
@@ -3067,7 +3067,7 @@
     "end_date": "2014/09",
     "enumeration_ids": "oui_non",
     "tag_ids": "faune",
-    "source_var_ids": "exportations__nb_unites"
+    "source_variable_ids": "exportations__nb_unites"
   },
   {
     "id": "exportations__sous_secteur",
@@ -3083,7 +3083,7 @@
     "end_date": "1999/01/26",
     "enumeration_ids": "a_or_b, oui_non",
     "tag_ids": "limites_pol_admin, communication",
-    "source_var_ids": "pollution_air__pression_atm"
+    "source_variable_ids": "pollution_air__pression_atm"
   },
   {
     "id": "exportations__pays_destination",
@@ -3098,7 +3098,7 @@
     "start_date": "2011/01/21",
     "end_date": "2022/02/03",
     "tag_ids": "transport",
-    "source_var_ids": "exportations__type_produit, accidents_travail__horaire_travail, tourisme_annu__offre_wellness"
+    "source_variable_ids": "exportations__type_produit, accidents_travail__horaire_travail, tourisme_annu__offre_wellness"
   },
   {
     "id": "exportations__continent",
@@ -3156,7 +3156,7 @@
     "end_date": "2011",
     "enumeration_ids": "canton_sigle",
     "tag_ids": "limites_pol_admin, foret, agriculture, protection_env_nature, sensible_data",
-    "source_var_ids": "usage_internet__frequence_utilisation, emploi_jeunes__taux_croissance_salaire, tourisme_annu__type_etablissement"
+    "source_variable_ids": "usage_internet__frequence_utilisation, emploi_jeunes__taux_croissance_salaire, tourisme_annu__type_etablissement"
   },
   {
     "id": "exportations__classification_hs",
@@ -3240,7 +3240,7 @@
     "start_date": "1995/12",
     "end_date": "2006",
     "tag_ids": "images_aeriennes",
-    "source_var_ids": "revenus_menages__nb_enfants, temperature_moy__vitesse_vent_max"
+    "source_variable_ids": "revenus_menages__nb_enfants, temperature_moy__vitesse_vent_max"
   },
   {
     "id": "exportations__delai_livraison",
@@ -3255,7 +3255,7 @@
     "start_date": "2010",
     "end_date": "2003",
     "tag_ids": "images_aeriennes_1, systemes_reference, altimetrie, hydrographie, climatologie",
-    "source_var_ids": "exportations__pays_destination, usage_internet__nb_heures_semaine"
+    "source_variable_ids": "exportations__pays_destination, usage_internet__nb_heures_semaine"
   },
   {
     "id": "exportations__assurance_transport",
@@ -3311,7 +3311,7 @@
     "start_date": "2024/05/23",
     "end_date": "2011",
     "tag_ids": "sensible_data, armee, protection_env_nature",
-    "source_var_ids": "temperature_moy__station"
+    "source_variable_ids": "temperature_moy__station"
   },
   {
     "id": "exportations__valeur_usd",
@@ -3325,7 +3325,7 @@
     "description": "Conversion de la valeur exportée en dollars.",
     "start_date": "2018/01",
     "end_date": "2012/02/14",
-    "source_var_ids": "usage_internet__nb_heures_semaine, pop_region__canton, immobilier_prix__annee_construction, dep_sante__region_sanitaire"
+    "source_variable_ids": "usage_internet__nb_heures_semaine, pop_region__canton, immobilier_prix__annee_construction, dep_sante__region_sanitaire"
   },
   {
     "id": "exportations__valeur_eur",
@@ -3382,7 +3382,7 @@
     "start_date": "2003/01",
     "end_date": "2016/09/17",
     "tag_ids": "climatologie, infrastructures, protection_env_nature",
-    "source_var_ids": "tourisme_annu__type_clientele, emploi_jeunes__contrat_secondaire, ser_pub_loc__surface_infrastructure"
+    "source_variable_ids": "tourisme_annu__type_clientele, emploi_jeunes__contrat_secondaire, ser_pub_loc__surface_infrastructure"
   },
   {
     "id": "exportations__delai_paiement",
@@ -3411,7 +3411,7 @@
     "start_date": "2000/05/05",
     "end_date": "2022/10/08",
     "tag_ids": "infrastructures, protection_env_nature, couverture_sol",
-    "source_var_ids": "temperature_moy__nb_jours_tres_chaud, revenus_menages__revenu_median, emploi_jeunes__formation_continue"
+    "source_variable_ids": "temperature_moy__nb_jours_tres_chaud, revenus_menages__revenu_median, emploi_jeunes__formation_continue"
   },
   {
     "id": "exportations__volume_historique_region",
@@ -3440,7 +3440,7 @@
     "start_date": "2015/10/19",
     "end_date": "1996/09",
     "tag_ids": "atmosphere",
-    "source_var_ids": "revenus_menages__taux_endettement, vente_voitures__prix_moyen"
+    "source_variable_ids": "revenus_menages__taux_endettement, vente_voitures__prix_moyen"
   },
   {
     "id": "immobilier_prix__ville",
@@ -3553,7 +3553,7 @@
     "description": "Neuf, rénové, bon, à rénover, vétuste.",
     "start_date": "1997/12",
     "end_date": "2021",
-    "source_var_ids": "emploi_jeunes__source_donnee"
+    "source_variable_ids": "emploi_jeunes__source_donnee"
   },
   {
     "id": "immobilier_prix__prix_vente_chf",
@@ -3718,7 +3718,7 @@
     "start_date": "2022",
     "end_date": "2006/02",
     "tag_ids": "hydrographie",
-    "source_var_ids": "emploi_jeunes__source_donnee, pop_region__canton, accidents_travail__age_victime, tourisme_annu__categorie_etoiles"
+    "source_variable_ids": "emploi_jeunes__source_donnee, pop_region__canton, accidents_travail__age_victime, tourisme_annu__categorie_etoiles"
   },
   {
     "id": "conso_energie__conso_par_employe",
@@ -3749,7 +3749,7 @@
     "end_date": "2018/03/28",
     "enumeration_ids": "only_zero",
     "concept_id": "nombre_employes",
-    "source_var_ids": "revenus_menages__nb_enfants, immobilier_prix__type_vente, dep_sante__type_depense, temperature_moy__nb_jours_ete"
+    "source_variable_ids": "revenus_menages__nb_enfants, immobilier_prix__type_vente, dep_sante__type_depense, temperature_moy__nb_jours_ete"
   },
   {
     "id": "conso_energie__part_renouvelable",
@@ -3764,7 +3764,7 @@
     "start_date": "2005",
     "end_date": "2004/06",
     "tag_ids": "developpement_territorial, flore",
-    "source_var_ids": "dep_sante__population_cible"
+    "source_variable_ids": "dep_sante__population_cible"
   },
   {
     "id": "conso_energie__emissions_co2_tonnes",
@@ -3807,7 +3807,7 @@
     "start_date": "2016/04/08",
     "end_date": "2015/08/20",
     "tag_ids": "securite, edifices, systemes_reference, altimetrie, couverture_sol, sante",
-    "source_var_ids": "accidents_travail__heure_accident, tourisme_annu__mois, dep_sante__type_depense, accident_route__nb_blesses"
+    "source_variable_ids": "accidents_travail__heure_accident, tourisme_annu__mois, dep_sante__type_depense, accident_route__nb_blesses"
   },
   {
     "id": "conso_energie__source_donnee",
@@ -3880,7 +3880,7 @@
     "start_date": "2004",
     "end_date": "1996/02",
     "tag_ids": "theme_iso, data_protection, sols, altimetrie",
-    "source_var_ids": "accidents_travail__annee, pollution_air__niveau_alerte, revenus_menages__nb_heures_travail"
+    "source_variable_ids": "accidents_travail__annee, pollution_air__niveau_alerte, revenus_menages__nb_heures_travail"
   },
   {
     "id": "revenus_menages__nb_personnes",
@@ -3936,7 +3936,7 @@
     "start_date": "2003",
     "end_date": "2007/05",
     "tag_ids": "approvisionnement, anonymous_data, cadastre_foncier, sensible_data, images_aeriennes",
-    "source_var_ids": "immobilier_prix__type_bien, emploi_jeunes__profession, revenus_menages__age_chef_menage, exportations__retour_client"
+    "source_variable_ids": "immobilier_prix__type_bien, emploi_jeunes__profession, revenus_menages__age_chef_menage, exportations__retour_client"
   },
   {
     "id": "revenus_menages__nationalite",
@@ -3993,7 +3993,7 @@
     "start_date": "2020/08/17",
     "end_date": "2017/06",
     "concept_id": "revenu_par_personne",
-    "source_var_ids": "dep_sante__canton"
+    "source_variable_ids": "dep_sante__canton"
   },
   {
     "id": "revenus_menages__revenu_median",
@@ -4138,7 +4138,7 @@
     "start_date": "2017/10",
     "end_date": "2005/06/14",
     "tag_ids": "geologie, personal_data",
-    "source_var_ids": "tourisme_annu__mois, exportations__mois"
+    "source_variable_ids": "tourisme_annu__mois, exportations__mois"
   },
   {
     "id": "revenus_menages__patrimoine_total",
@@ -4166,7 +4166,7 @@
     "description": "Valeur immobilière détenue.",
     "start_date": "2001",
     "end_date": "2006/01/05",
-    "source_var_ids": "accidents_travail__formation_securite"
+    "source_variable_ids": "accidents_travail__formation_securite"
   },
   {
     "id": "revenus_menages__taux_effort_logement",
@@ -4196,7 +4196,7 @@
     "end_date": "1995",
     "tag_ids": "developpement_territorial, elimination",
     "concept_id": "niveau_formation",
-    "source_var_ids": "emploi_jeunes__nb_heures_travail, ser_pub_loc__cout_investissement, usage_internet__source_donnee, vente_voitures__co2_g_km"
+    "source_variable_ids": "emploi_jeunes__nb_heures_travail, ser_pub_loc__cout_investissement, usage_internet__source_donnee, vente_voitures__co2_g_km"
   },
   {
     "id": "revenus_menages__situation_professionnelle",
@@ -4304,7 +4304,7 @@
     "start_date": "1999/05/22",
     "end_date": "1999/01/23",
     "tag_ids": "geologie, population",
-    "source_var_ids": "ser_pub_loc__nb_points_service, vente_voitures__nb_places"
+    "source_variable_ids": "ser_pub_loc__nb_points_service, vente_voitures__nb_places"
   },
   {
     "id": "revenus_menages__recours_aides_sociales",
@@ -4432,7 +4432,7 @@
     "start_date": "2013/02/15",
     "end_date": "2024",
     "tag_ids": "sensible_data, population, theme_iso",
-    "source_var_ids": "revenus_menages__charges_logement, temperature_moy__temp_min",
+    "source_variable_ids": "revenus_menages__charges_logement, temperature_moy__temp_min",
     "is_pattern": 1
   },
   {
@@ -4478,7 +4478,7 @@
     "end_date": "2002",
     "tag_ids": "hydrographie, climatologie, pseudonymous_data, images_aeriennes, culture, data_protection",
     "concept_id": "niveau_formation",
-    "source_var_ids": "vente_voitures__transmission, accidents_travail__nationalite"
+    "source_variable_ids": "vente_voitures__transmission, accidents_travail__nationalite"
   },
   {
     "id": "emploi_jeunes__statut_emploi",
@@ -4494,7 +4494,7 @@
     "end_date": "2000/06/15",
     "tag_ids": "flore",
     "concept_id": "statut_emploi",
-    "source_var_ids": "exportations__type_produit"
+    "source_variable_ids": "exportations__type_produit"
   },
   {
     "id": "emploi_jeunes__secteur_activite",
@@ -4536,7 +4536,7 @@
     "end_date": "2011/08/17",
     "tag_ids": "data_protection, societe, images_aeriennes",
     "concept_id": "type_contrat",
-    "source_var_ids": "accidents_travail__cout_total, tourisme_annu__classification_officielle, conso_energie__conso_totale_mwh, vente_voitures__nb_places"
+    "source_variable_ids": "accidents_travail__cout_total, tourisme_annu__classification_officielle, conso_energie__conso_totale_mwh, vente_voitures__nb_places"
   },
   {
     "id": "emploi_jeunes__taux_occupation",
@@ -4592,7 +4592,7 @@
     "end_date": "1999/12",
     "enumeration_ids": "a_or_b_or_c, oui_non",
     "tag_ids": "hydrographie, limites_pol_admin, approvisionnement, culture, securite, images_aeriennes_1",
-    "source_var_ids": "pop_region__type_region"
+    "source_variable_ids": "pop_region__type_region"
   },
   {
     "id": "emploi_jeunes__mode_travail",
@@ -4607,7 +4607,7 @@
     "start_date": "1999",
     "end_date": "1996/06/09",
     "tag_ids": "localisation, couverture_sol, communication, developpement_territorial, protection_env_nature, pseudonymous_data",
-    "source_var_ids": "dep_sante__montant_par_habitant, pollution_air__concentration, emploi_jeunes__nationalite, pop_region__coord_y"
+    "source_variable_ids": "dep_sante__montant_par_habitant, pollution_air__concentration, emploi_jeunes__nationalite, pop_region__coord_y"
   },
   {
     "id": "emploi_jeunes__duree_chomage_precedent",
@@ -4622,7 +4622,7 @@
     "start_date": "2003/08",
     "end_date": "1995/09",
     "tag_ids": "edifices, population, cartes_reference",
-    "source_var_ids": "tourisme_annu__region_touristique, ser_pub_loc__satisfaction_usagers, emplois_tech2__source_donnee"
+    "source_variable_ids": "tourisme_annu__region_touristique, ser_pub_loc__satisfaction_usagers, emplois_tech2__source_donnee"
   },
   {
     "id": "emploi_jeunes__satisfaction_emploi",
@@ -4636,7 +4636,7 @@
     "description": "Score subjectif (0–10).",
     "start_date": "2000/01",
     "tag_ids": "data_protection, cartes_reference, infrastructures, developpement_territorial, societe",
-    "source_var_ids": "tourisme_annu__duree_moyenne_sejour, accidents_travail__formation_securite"
+    "source_variable_ids": "tourisme_annu__duree_moyenne_sejour, accidents_travail__formation_securite"
   },
   {
     "id": "emploi_jeunes__mobilite_professionnelle",
@@ -4649,7 +4649,7 @@
     "nb_missing": 92,
     "description": "Indique si la personne a changé de poste dans l'année.",
     "tag_ids": "transport",
-    "source_var_ids": "exportations__certification_requise, dep_sante__type_depense, emploi_jeunes__contrat_secondaire, accidents_travail__presence_equipements"
+    "source_variable_ids": "exportations__certification_requise, dep_sante__type_depense, emploi_jeunes__contrat_secondaire, accidents_travail__presence_equipements"
   },
   {
     "id": "emploi_jeunes__formation_continue",
@@ -4664,7 +4664,7 @@
     "start_date": "2008/11/09",
     "end_date": "1998/06/02",
     "tag_ids": "couverture_sol",
-    "source_var_ids": "revenus_menages__presence_handicap, pollution_air__source_donnee, emplois_tech2__taux_croissance, revenus_menages__nb_personnes"
+    "source_variable_ids": "revenus_menages__presence_handicap, pollution_air__source_donnee, emplois_tech2__taux_croissance, revenus_menages__nb_personnes"
   },
   {
     "id": "emploi_jeunes__temps_transport",
@@ -4707,7 +4707,7 @@
     "start_date": "2023",
     "end_date": "2001",
     "tag_ids": "population",
-    "source_var_ids": "temperature_moy__temp_moy, accidents_travail__mesures_prevention_existantes"
+    "source_variable_ids": "temperature_moy__temp_moy, accidents_travail__mesures_prevention_existantes"
   },
   {
     "id": "emploi_jeunes__contrat_secondaire",
@@ -4791,7 +4791,7 @@
     "start_date": "2008/06/01",
     "end_date": "2005/10",
     "tag_ids": "cartes_reference, images_aeriennes, theme_iso, atmosphere, personal_data, systemes_reference",
-    "source_var_ids": "exportations__nb_unites, vente_voitures__source_donnee, conso_energie__conso_totale_mwh"
+    "source_variable_ids": "exportations__nb_unites, vente_voitures__source_donnee, conso_energie__conso_totale_mwh"
   },
   {
     "id": "emplois_tech2__nb_entreprises",
@@ -4822,7 +4822,7 @@
     "end_date": "2015/02/06",
     "tag_ids": "atmosphere",
     "concept_id": "nombre_employes",
-    "source_var_ids": "conso_energie__conso_totale_mwh, exportations__canton, accidents_travail__statut_enquete, vente_voitures__prix_moyen"
+    "source_variable_ids": "conso_energie__conso_totale_mwh, exportations__canton, accidents_travail__statut_enquete, vente_voitures__prix_moyen"
   },
   {
     "id": "emplois_tech2__taux_croissance",
@@ -4865,6 +4865,6 @@
     "start_date": "2000/07/19",
     "end_date": "1999/05",
     "tag_ids": "sensible_data, pseudonymous_data, approvisionnement",
-    "source_var_ids": "exportations__secteur"
+    "source_variable_ids": "exportations__secteur"
   }
 ]
