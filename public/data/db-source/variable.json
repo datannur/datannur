@@ -132,7 +132,7 @@
     "description": "Région administrative de rattachement.",
     "start_date": "2019",
     "end_date": "1998/04",
-    "fk_variable_id": "pop_region__regionfake",
+    "fk_variable_id": "pop_region__region",
     "enumeration_ids": "enumeration_1",
     "tag_ids": "armee, agriculture, population, communication, images_aeriennes_2, flore"
   },

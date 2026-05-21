@@ -6206,7 +6206,7 @@
     "description": "Région administrative de rattachement.",
     "end_date": "1998/04",
     "enumeration_ids": "enumeration_1",
-    "fk_variable_id": "pop_region__regionfake",
+    "fk_variable_id": "pop_region__region",
     "id": "ser_pub_loc__region",
     "is_pattern": null,
     "key": null,
