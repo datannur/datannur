@@ -7,7 +7,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Optional
 
-from _local_runtime import find_data_db_dir
+from _local_runtime import require_data_db_dir
 
 try:
     from jsonschema import Draft7Validator
@@ -71,10 +71,7 @@ if not schemas_dir:
     print("❌ Schemas directory not found")
     sys.exit(1)
 
-data_dir = find_data_db_dir(public_dir)
-if not data_dir:
-    print("❌ Data directory not found (no JSON files in data/db/)")
-    sys.exit(1)
+data_dir = require_data_db_dir(public_dir)
 
 print(f"📁 Data: {data_dir.relative_to(public_dir)}")
 

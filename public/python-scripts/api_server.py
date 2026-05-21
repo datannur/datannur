@@ -14,8 +14,8 @@ from urllib.parse import parse_qs, unquote, urlparse
 from _local_runtime import (
     APP_DIR,
     create_local_http_server,
-    find_data_db_dir,
     get_local_port,
+    require_data_db_dir,
 )
 
 DEFAULT_API_PORT = 61293
@@ -35,9 +35,7 @@ def load_tables() -> list[str]:
     )
 
 
-DATA_DIR = find_data_db_dir(APP_DIR)
-if DATA_DIR is None:
-    sys.exit("ERROR: Data directory not found (no JSON files in data/db/)")
+DATA_DIR = require_data_db_dir(APP_DIR)
 
 TABLES = load_tables()
 TABLE_SET = set(TABLES)

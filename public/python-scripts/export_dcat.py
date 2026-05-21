@@ -8,9 +8,9 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional, TYPE_CHECKING
+from typing import Dict, List, Optional
 
-from _local_runtime import find_data_db_dir
+from _local_runtime import require_data_db_dir
 
 try:
     from rdflib import Graph, Namespace, Literal, URIRef, BNode
@@ -21,15 +21,12 @@ except ImportError as e:
     print("   Install with: pip install rdflib")
     sys.exit(1)
 
-if TYPE_CHECKING:
-    from pyshacl import validate
-
 try:
-    from pyshacl import validate
-
-    SHACL_AVAILABLE = True
+    from pyshacl import validate as validate_shacl
 except ImportError:
-    SHACL_AVAILABLE = False
+    validate_shacl = None
+    print("⚠️  pyshacl not available, SHACL validation will be skipped")
+    print("   Install with: pip install pyshacl")
 
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
@@ -64,11 +61,7 @@ class DCATExporter:
 
     def load_data(self):
         """Load JSON data from database files"""
-        db_dir = find_data_db_dir(self.data_dir.parent)
-        if db_dir is None:
-            raise FileNotFoundError(
-                "Data directory not found (no JSON files in data/db/)"
-            )
+        db_dir = require_data_db_dir(self.data_dir.parent)
 
         with open(db_dir / "dataset.json", "r", encoding="utf-8") as f:
             self.datasets = json.load(f)
@@ -449,8 +442,7 @@ class DCATExporter:
 
     def validate(self, shacl_file: Path) -> bool:
         """Validate exported RDF against DCAT-AP SHACL shapes"""
-        if not SHACL_AVAILABLE:
-            print("⚠️  pyshacl not available, skipping validation")
+        if validate_shacl is None:
             return True
 
         if not shacl_file.exists():
@@ -460,7 +452,7 @@ class DCATExporter:
         print()
         print("Validating against DCAT-AP SHACL shapes...")
 
-        conforms, results_graph, results_text = validate(
+        conforms, results_graph, results_text = validate_shacl(
             self.graph,
             shacl_graph=str(shacl_file),
             inference="rdfs",

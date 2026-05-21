@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from _local_runtime import APP_DIR, find_data_db_dir
+from _local_runtime import APP_DIR, require_data_db_dir
 
 OPENAPI_VERSION = "3.1.0"
 API_VERSION = "1.0.0"
@@ -395,9 +395,7 @@ def build_openapi(
 
 
 def generate_openapi() -> None:
-    data_dir = find_data_db_dir(APP_DIR)
-    if data_dir is None:
-        sys.exit("ERROR: Data directory not found (no JSON files in data/db/)")
+    data_dir = require_data_db_dir(APP_DIR)
 
     official_schemas = load_official_schemas()
     samples_by_table = load_table_samples(data_dir)

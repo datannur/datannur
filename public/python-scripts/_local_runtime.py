@@ -37,6 +37,14 @@ def find_data_db_dir(base_dir: Path = APP_DIR) -> Optional[Path]:
     return None
 
 
+def require_data_db_dir(base_dir: Path = APP_DIR) -> Path:
+    data_dir = find_data_db_dir(base_dir)
+    if data_dir is not None:
+        return data_dir
+
+    sys.exit("ERROR: Data directory not found (no JSON files in data/db/)")
+
+
 def get_local_port(key: str, default: int) -> int:
     if is_source_public_runtime() and key in DEV_LOCAL_PORTS:
         return DEV_LOCAL_PORTS[key]
