@@ -218,14 +218,14 @@ class DCATExporter:
                 )
 
             # Mandatory: publisher (organization)
-            if dataset.get("owner_id"):
-                self._add_publisher(dataset_uri, dataset["owner_id"])
+            if dataset.get("owner_organization_id"):
+                self._add_publisher(dataset_uri, dataset["owner_organization_id"])
 
             # Mandatory: contact point
-            if dataset.get("manager_id"):
-                self._add_contact_point(dataset_uri, dataset["manager_id"])
-            elif dataset.get("owner_id"):
-                self._add_contact_point(dataset_uri, dataset["owner_id"])
+            if dataset.get("manager_organization_id"):
+                self._add_contact_point(dataset_uri, dataset["manager_organization_id"])
+            elif dataset.get("owner_organization_id"):
+                self._add_contact_point(dataset_uri, dataset["owner_organization_id"])
 
             # Conditional: issued date
             if dataset.get("start_date"):

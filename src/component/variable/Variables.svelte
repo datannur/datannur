@@ -50,7 +50,10 @@
       nbSourcesMax = Math.max(nbSourcesMax, variable.sourceIds?.size ?? 0)
       nbDerivedMax = Math.max(nbDerivedMax, variable.derivedIds?.size ?? 0)
     }
-    nbFkRefMax = Math.max(nbFkRefMax, variable.fkReferencedByVarIds?.size ?? 0)
+    nbFkRefMax = Math.max(
+      nbFkRefMax,
+      variable.fkReferencedByVariableIds?.size ?? 0,
+    )
   }
 
   function defineColumns() {
@@ -63,7 +66,7 @@
       Column.relationType(),
       Column.isKey(),
       Column.isBusinessKey(),
-      Column.fkVar(),
+      Column.fkVariable(),
       Column.nbFkRefVar(nbFkRefMax),
       Column.nbSources(nbSourcesMax, 'variable'),
       Column.nbDerived(nbDerivedMax, 'variable'),

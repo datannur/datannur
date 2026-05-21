@@ -36,8 +36,14 @@
     </tr>
   {/if}
   {#if dataset}
-    <OrganizationInfo type="owner" organizationId={dataset.ownerId} />
-    <OrganizationInfo type="manager" organizationId={dataset.managerId} />
+    <OrganizationInfo
+      type="owner"
+      organizationId={dataset.ownerOrganizationId}
+    />
+    <OrganizationInfo
+      type="manager"
+      organizationId={dataset.managerOrganizationId}
+    />
     <FolderInfo folderId={dataset.folderId} />
   {/if}
   <tr>
@@ -70,22 +76,22 @@
       <td> Oui </td>
     </tr>
   {/if}
-  {#if variable.fkVarId}
+  {#if variable.fkVariableId}
     <tr>
       <td>
         <Icon type="fk" />
         Clé étrangère
       </td>
       <td>
-        {#if variable.fkVarName}
+        {#if variable.fkVariableName}
           <Link href="dataset/{variable.fkDatasetId}" entity="dataset"
             >{variable.fkDatasetName}</Link
           >&ensp;→&ensp;<Link
-            href="variable/{variable.fkVarId}"
-            entity="variable">{variable.fkVarName}</Link
+            href="variable/{variable.fkVariableId}"
+            entity="variable">{variable.fkVariableName}</Link
           >
         {:else}
-          {variable.fkVarId}
+          {variable.fkVariableId}
         {/if}
       </td>
     </tr>

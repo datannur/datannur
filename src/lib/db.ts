@@ -256,14 +256,10 @@ function variableAddDatasetInfo(variable: Variable) {
     variable.folderId = dataset.folderId
     variable.folderName = dataset.folderName
   }
-  if (db.use.owner) {
-    variable.ownerId = dataset.ownerId
-    variable.ownerName = dataset.ownerName
-  }
-  if (db.use.manager) {
-    variable.managerId = dataset.managerId
-    variable.managerName = dataset.managerName
-  }
+  variable.ownerOrganizationId = dataset.ownerOrganizationId
+  variable.ownerName = dataset.ownerName
+  variable.managerOrganizationId = dataset.managerOrganizationId
+  variable.managerName = dataset.managerName
 }
 
 function addEntity(item: MainEntity, entity: MainEntityName) {
@@ -271,25 +267,25 @@ function addEntity(item: MainEntity, entity: MainEntityName) {
   item._entityClean = entityNames[entity]
 }
 
-function addSourceVar(variable: Variable) {
-  if (!variable.sourceVarIds) return
+function addSourceVariable(variable: Variable) {
+  if (!variable.sourceVariableIds) return
   variable.sourceIds = new Set()
   const dataset = db.get('dataset', variable.datasetId)
-  for (const sourceVarIdRaw of variable.sourceVarIds.split(',')) {
-    const sourceVarId = sourceVarIdRaw.trim()
-    const sourceVar = db.get('variable', sourceVarId.trim())
-    if (!sourceVar) continue
-    variable.sourceIds.add(sourceVarId)
-    if (!sourceVar.derivedIds) sourceVar.derivedIds = new Set()
-    sourceVar.derivedIds.add(variable.id)
+  for (const sourceVariableIdRaw of variable.sourceVariableIds.split(',')) {
+    const sourceVariableId = sourceVariableIdRaw.trim()
+    const sourceVariable = db.get('variable', sourceVariableId.trim())
+    if (!sourceVariable) continue
+    variable.sourceIds.add(sourceVariableId)
+    if (!sourceVariable.derivedIds) sourceVariable.derivedIds = new Set()
+    sourceVariable.derivedIds.add(variable.id)
 
     if (dataset) {
       if (!dataset.sourceIds) dataset.sourceIds = new Set()
-      if (dataset.id !== sourceVar.datasetId) {
-        dataset.sourceIds.add(sourceVar.datasetId)
+      if (dataset.id !== sourceVariable.datasetId) {
+        dataset.sourceIds.add(sourceVariable.datasetId)
       }
     }
-    const sourceDataset = db.get('dataset', sourceVar.datasetId)
+    const sourceDataset = db.get('dataset', sourceVariable.datasetId)
     if (sourceDataset) {
       if (!sourceDataset.derivedIds) sourceDataset.derivedIds = new Set()
       if (dataset && sourceDataset.id !== dataset.id) {
@@ -299,16 +295,17 @@ function addSourceVar(variable: Variable) {
   }
 }
 
-function addFkVar(variable: Variable) {
-  if (!variable.fkVarId) return
-  const fkVar = db.get('variable', variable.fkVarId)
-  if (!fkVar) return
-  variable.fkVarName = fkVar.name
-  variable.fkDatasetId = fkVar.datasetId
-  const fkDataset = db.get('dataset', fkVar.datasetId)
+function addFkVariable(variable: Variable) {
+  if (!variable.fkVariableId) return
+  const fkVariable = db.get('variable', variable.fkVariableId)
+  if (!fkVariable) return
+  variable.fkVariableName = fkVariable.name
+  variable.fkDatasetId = fkVariable.datasetId
+  const fkDataset = db.get('dataset', fkVariable.datasetId)
   variable.fkDatasetName = fkDataset?.name
-  if (!fkVar.fkReferencedByVarIds) fkVar.fkReferencedByVarIds = new Set()
-  fkVar.fkReferencedByVarIds.add(variable.id)
+  if (!fkVariable.fkReferencedByVariableIds)
+    fkVariable.fkReferencedByVariableIds = new Set()
+  fkVariable.fkReferencedByVariableIds.add(variable.id)
   const dataset = db.get('dataset', variable.datasetId)
   if (dataset && fkDataset && dataset.id !== fkDataset.id) {
     if (!dataset.fkDatasetIds) dataset.fkDatasetIds = new Set()
@@ -361,8 +358,10 @@ function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
   const folder = db.get('folder', dataset.folderId)
   if (!folder) return
 
-  if (isMissing(dataset.ownerId)) dataset.ownerId = folder.ownerId
-  if (isMissing(dataset.managerId)) dataset.managerId = folder.managerId
+  if (isMissing(dataset.ownerOrganizationId))
+    dataset.ownerOrganizationId = folder.ownerOrganizationId
+  if (isMissing(dataset.managerOrganizationId))
+    dataset.managerOrganizationId = folder.managerOrganizationId
   if (isMissing(dataset.updatingEach))
     dataset.updatingEach = folder.updatingEach
 }
@@ -402,8 +401,8 @@ function getOrganizationItems(
   organizationId: string | number,
   entity: MainEntityName,
 ) {
-  const ownItems = db.getAll(entity, { owner: organizationId })
-  const manageItems = db.getAll(entity, { manager: organizationId })
+  const ownItems = db.getAll(entity, { ownerOrganization: organizationId })
+  const manageItems = db.getAll(entity, { managerOrganization: organizationId })
   return removeDuplicateById([...ownItems, ...manageItems])
 }
 
@@ -521,8 +520,8 @@ export function getFkRelatedVariables(
   variable: EntityTypeMap['variable'],
 ): (EntityTypeMap['variable'] & { relationType: string })[] {
   const result: (EntityTypeMap['variable'] & { relationType: string })[] = []
-  if (variable.fkReferencedByVarIds) {
-    for (const id of variable.fkReferencedByVarIds) {
+  if (variable.fkReferencedByVariableIds) {
+    for (const id of variable.fkReferencedByVariableIds) {
       const item = db.get('variable', id)
       if (!item) continue
       result.push({ ...item, relationType: 'fk-ref' })
@@ -618,10 +617,14 @@ class Process {
       addFolderDatasetDates(folder)
       addNextUpdate(folder)
       folder.typeClean = folder.type ?? ''
-      if (db.use.owner)
-        folder.ownerName = getName(folder, 'organization', 'owner')
-      if (db.use.manager)
-        folder.managerName = getName(folder, 'organization', 'manager')
+      if (db.use.organization)
+        folder.ownerName = getName(folder, 'organization', 'ownerOrganization')
+      if (db.use.organization)
+        folder.managerName = getName(
+          folder,
+          'organization',
+          'managerOrganization',
+        )
       addPeriod(folder)
       const datasets = getRecursive('folder', folder.id, 'dataset')
       folder.nbDatasetRecursive = datasets.length
@@ -667,10 +670,18 @@ class Process {
       addDatasetInheritedInfo(dataset)
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
-      if (db.use.owner)
-        dataset.ownerName = getName(dataset, 'organization', 'owner')
-      if (db.use.manager)
-        dataset.managerName = getName(dataset, 'organization', 'manager')
+      if (db.use.organization)
+        dataset.ownerName = getName(
+          dataset,
+          'organization',
+          'ownerOrganization',
+        )
+      if (db.use.organization)
+        dataset.managerName = getName(
+          dataset,
+          'organization',
+          'managerOrganization',
+        )
       if (db.use.folder) {
         dataset.folderName = getName(dataset, 'folder')
       } else dataset.folderName = ''
@@ -731,8 +742,8 @@ class Process {
       const nbValues = getNbValues(variable.values, variable)
       variable.nbDistinct = nbValues
       variable.nbValue = nbValues
-      addSourceVar(variable)
-      addFkVar(variable)
+      addSourceVariable(variable)
+      addFkVariable(variable)
       if (variable.key) variable.key = 'oui'
       if (variable.businessKey) variable.businessKey = 'oui'
 

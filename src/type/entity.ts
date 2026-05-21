@@ -99,8 +99,8 @@ export type Dataset = BaseEntity &
   WithPeriod &
   WithRelations & {
     folderId?: string | number
-    managerId?: string | number
-    ownerId?: string | number
+    managerOrganizationId?: string | number
+    ownerOrganizationId?: string | number
     dataPath?: string
     deliveryFormat?: string
     license?: string
@@ -154,16 +154,16 @@ export type Variable = BaseEntity &
     mean?: number | null
     std?: number | null
     type?: string
-    sourceVarIds?: string
-    fkVarId?: string | number
+    sourceVariableIds?: string
+    fkVariableId?: string | number
     isPattern?: boolean
 
     // Computed fields added during processing
     typeClean?: string
-    fkVarName?: string
+    fkVariableName?: string
     fkDatasetId?: string | number
     fkDatasetName?: string
-    fkReferencedByVarIds?: Set<string | number>
+    fkReferencedByVariableIds?: Set<string | number>
     num?: number
     nbRow?: number
     sampleSize?: number
@@ -171,9 +171,9 @@ export type Variable = BaseEntity &
     datasetType?: string
     folderId?: string | number
     folderName?: string
-    ownerId?: string | number
+    ownerOrganizationId?: string | number
     ownerName?: string
-    managerId?: string | number
+    managerOrganizationId?: string | number
     managerName?: string
     enumerations?: Enumeration[]
     values?: Value[]
@@ -207,8 +207,8 @@ export type Folder = BaseEntity &
   WithDocs &
   WithFavorite &
   WithPeriod & {
-    managerId?: string | number
-    ownerId?: string | number
+    managerOrganizationId?: string | number
+    ownerOrganizationId?: string | number
     dataPath?: string
     deliveryFormat?: string
     license?: string

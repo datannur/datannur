@@ -110,14 +110,14 @@
         "description": "Standard deviation (or standard deviation of string length for text variables)",
         "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
       },
-      "source_var_ids": {
+      "source_variable_ids": {
         "type": ["string", "number", "null"],
         "description": "List of source variable keys (lineage)",
         "x-description-fr": "Liste des clés des variables sources (lineage)",
         "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
         "examples": ["id1,id2,id3", "single-id", null]
       },
-      "fk_var_id": {
+      "fk_variable_id": {
         "type": ["string", "number", "null"],
         "description": "Foreign key referencing a variable in another dataset",
         "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"

@@ -17,6 +17,11 @@
 
   const direction = isMobile ? 'TB' : 'LR'
   let diagrammDefinition = `flowchart ${direction}\n`
+  const relationRoleNames = {
+    owner: entityNames.owner,
+    manager: entityNames.manager,
+  } as const
+  const hiddenDiagramRelationRoles = ['source', 'fk']
 
   function compareNameDesc(a: string[] | string, b: string[] | string): number {
     const aName = Array.isArray(a) ? a[0] : a
@@ -26,12 +31,62 @@
     return 0
   }
 
+  function capitalize(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+
+  function normalizeRelationKey(relationKey: string): string[] {
+    if (relationKey in entityNames) return [relationKey]
+    for (const entity of Object.keys(entityNames)) {
+      const entitySuffix = capitalize(entity)
+      if (!relationKey.endsWith(entitySuffix)) continue
+
+      const role = relationKey.slice(0, -entitySuffix.length)
+      if (!role) break
+      if (!(role in relationRoleNames)) break
+      return [entity, role]
+    }
+    return [relationKey]
+  }
+
+  function getRelationRole(relationKey: string): string | null {
+    for (const entity of Object.keys(entityNames)) {
+      const entitySuffix = capitalize(entity)
+      if (!relationKey.endsWith(entitySuffix)) continue
+
+      const role = relationKey.slice(0, -entitySuffix.length)
+      return role || null
+    }
+    return null
+  }
+
+  function getEntityCleanName(entity: string): string {
+    return (
+      entityNames[entity as keyof typeof entityNames] ??
+      relationRoleNames[entity as keyof typeof relationRoleNames] ??
+      entity
+    )
+  }
+
+  schema.oneToMany = schema.oneToMany.filter(
+    relation =>
+      !relation.some(relationKey =>
+        hiddenDiagramRelationRoles.includes(getRelationRole(relationKey) ?? ''),
+      ),
+  )
+
   schema.oneToMany = schema.oneToMany.map((relation: string[]) => {
+    relation = relation.flatMap(relationKey =>
+      normalizeRelationKey(relationKey),
+    )
     let otherOne: string | null = null
     if (relation.includes('manager')) otherOne = 'owner'
     else if (relation.includes('owner')) otherOne = 'manager'
     if (otherOne) {
       relation = ['organization', otherOne, ...relation]
+    }
+    if (relation[0] === 'organization' && relation[2] === 'organization') {
+      relation.splice(2, 1)
     }
     return relation
   })
@@ -43,7 +98,7 @@
   ] as EntityName[][]
   for (const tableRelation of allTables) {
     for (const table of tableRelation) {
-      if (table === 'manager' || table === 'owner') {
+      if (table in relationRoleNames) {
         continue
       }
       if (!schemaAlone.includes(table)) {
@@ -65,11 +120,11 @@
     if (['metaFolder', 'metaDataset', 'metaVariable', 'alias'].includes(table))
       continue
     let entityName = table
-    if (table === 'manager' || table === 'owner') continue
+    if (table in relationRoleNames) continue
 
     let icon = Render.icon(entityName)
     if (table === 'config') icon = ''
-    const entityCleanName = entityNames[table as keyof typeof entityNames]
+    const entityCleanName = getEntityCleanName(table)
 
     let recursiveIcon = ''
     if (recursiveEntities.includes(table))
@@ -90,11 +145,8 @@
       for (let i = 0; i < link.length - 1; i++) {
         if (i === 0) continue
         if (i === link.length - 1) continue
-        if (linkCleanName === '')
-          linkCleanName += entityNames[link[i] as keyof typeof entityNames]
-        else
-          linkCleanName +=
-            separator + entityNames[link[i] as keyof typeof entityNames]
+        if (linkCleanName === '') linkCleanName += getEntityCleanName(link[i])
+        else linkCleanName += separator + getEntityCleanName(link[i])
       }
 
       let reverseName = linkCleanName.split(separator).reverse().join(separator)

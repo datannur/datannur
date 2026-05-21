@@ -290,24 +290,24 @@
             "description": "Filter by folder_id"
           },
           {
-            "name": "manager_id",
+            "name": "manager_organization_id",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
               "description": "Key of the managing organization",
               "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
             },
-            "description": "Filter by manager_id"
+            "description": "Filter by manager_organization_id"
           },
           {
-            "name": "owner_id",
+            "name": "owner_organization_id",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
               "description": "Key of the data provider organization",
               "x-description-fr": "Clé de l'organisation fournisseur du dataset"
             },
-            "description": "Filter by owner_id"
+            "description": "Filter by owner_organization_id"
           },
           {
             "name": "tag_ids",
@@ -1064,24 +1064,24 @@
             "description": "Filter by parent_id"
           },
           {
-            "name": "manager_id",
+            "name": "manager_organization_id",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
               "description": "Key of the managing organization",
               "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
             },
-            "description": "Filter by manager_id"
+            "description": "Filter by manager_organization_id"
           },
           {
-            "name": "owner_id",
+            "name": "owner_organization_id",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
               "description": "Key of the data provider organization",
               "x-description-fr": "Clé de l'organisation fournisseur du dossier"
             },
-            "description": "Filter by owner_id"
+            "description": "Filter by owner_organization_id"
           },
           {
             "name": "tag_ids",
@@ -2110,7 +2110,7 @@
             "description": "Filter by std"
           },
           {
-            "name": "source_var_ids",
+            "name": "source_variable_ids",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
@@ -2119,17 +2119,17 @@
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
               "examples": ["id1,id2,id3", "single-id", null]
             },
-            "description": "Filter by source_var_ids"
+            "description": "Filter by source_variable_ids"
           },
           {
-            "name": "fk_var_id",
+            "name": "fk_variable_id",
             "in": "query",
             "schema": {
               "type": ["string", "number", "null"],
               "description": "Foreign key referencing a variable in another dataset",
               "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
             },
-            "description": "Filter by fk_var_id"
+            "description": "Filter by fk_variable_id"
           },
           {
             "name": "is_pattern",
@@ -2264,12 +2264,12 @@
             "description": "Key of the folder containing the dataset",
             "x-description-fr": "Clé du dossier contenant le dataset"
           },
-          "manager_id": {
+          "manager_organization_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the managing organization",
             "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
           },
-          "owner_id": {
+          "owner_organization_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the data provider organization",
             "x-description-fr": "Clé de l'organisation fournisseur du dataset"
@@ -2516,12 +2516,12 @@
             "description": "Key of the parent folder",
             "x-description-fr": "Clé du dossier contenant le dossier"
           },
-          "manager_id": {
+          "manager_organization_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the managing organization",
             "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
           },
-          "owner_id": {
+          "owner_organization_id": {
             "type": ["string", "number", "null"],
             "description": "Key of the data provider organization",
             "x-description-fr": "Clé de l'organisation fournisseur du dossier"
@@ -2872,14 +2872,14 @@
             "description": "Standard deviation (or standard deviation of string length for text variables)",
             "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
           },
-          "source_var_ids": {
+          "source_variable_ids": {
             "type": ["string", "number", "null"],
             "description": "List of source variable keys (lineage)",
             "x-description-fr": "Liste des clés des variables sources (lineage)",
             "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
             "examples": ["id1,id2,id3", "single-id", null]
           },
-          "fk_var_id": {
+          "fk_variable_id": {
             "type": ["string", "number", "null"],
             "description": "Foreign key referencing a variable in another dataset",
             "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"

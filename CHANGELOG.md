@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- change: update jsonjsdb to 0.10.1 and migrate owner/manager organization relations to the explicit relation key model
+- change: rename variable lineage and foreign-key relation fields to `source_variable_ids` and `fk_variable_id`
 - change: replace public Node deploy and static generation scripts with Python tooling and a `datannur.py` command launcher
 - fix: remove reverse from getRecursiveItems to maintain original order of parent items
 - add: interoperability section in features.md and remove some repetitive content wording
@@ -125,7 +127,7 @@
 - change: rename header menu "Structure" to "Organisation"
 - fix: mermaid diagram entity colors broken since mermaid v11.14, restore colored node borders, hover and arrows
 - fix: update jsonjsdb-builder to 0.6.10 (fix **table**.json rewritten on every startup)
-- add: foreign key support (fk_var_id) for variables with bidirectional relations
+- add: foreign key support (fk_variable_id) for variables with bidirectional relations
 - add: FK columns in datasets table (FK → outgoing, FK ← incoming) with percent bars
 - add: FK referenced-by column in variables table (FK ←) with percent bar
 - change: rename lineageType to relationType, getLineage to getRelated, WithLineage to WithRelations
