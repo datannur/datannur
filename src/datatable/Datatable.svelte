@@ -34,11 +34,13 @@
   import { safeHtml } from '@lib/html-sanitizer'
   import Filter from './filter/Filter.svelte'
   import FilterInfoBox from './filter/FilterInfoBox.svelte'
+  import FilterSelectPopup from './filter/FilterSelectPopup.svelte'
   import Popup from '@layout/Popup.svelte'
   import SearchOptionInfo from './filter/SearchOptionInfo.svelte'
   import LoadingDot from '@layout/LoadingDot.svelte'
   import { entityNames } from '@lib/constant'
   import type { Api } from 'datatables.net'
+  import type { FilterSelectPopupRequest } from './filter/filter-select-popup'
   import type { Row, Column } from '@type'
 
   let {
@@ -77,6 +79,7 @@
   let datatableUpdateDraw = $state(0)
   let nbActiveFilter = $state(0)
   let isPopupSearchOptionOpen = $state(false)
+  let filterSelectPopupRequest = $state<FilterSelectPopupRequest | undefined>()
 
   DataTable.Buttons.jszip(JSZip)
 
@@ -93,9 +96,16 @@
 
   const tableId = getTableId(entity)
   const exporter = new Exporter(tableId)
-  const filter = new FilterHelper(tableId, entity, currentNb => {
-    nbActiveFilter = currentNb
-  })
+  const filter = new FilterHelper(
+    tableId,
+    entity,
+    currentNb => {
+      nbActiveFilter = currentNb
+    },
+    request => {
+      filterSelectPopupRequest = request
+    },
+  )
 
   const cleanData = getCleanData(data, sortByName, isRecursive, isBig)
   const nbRowLoading = Math.min(cleanData.length, 50)
@@ -304,6 +314,13 @@
 <Popup bind:isOpen={isPopupSearchOptionOpen}>
   <SearchOptionInfo />
 </Popup>
+
+<FilterSelectPopup
+  request={filterSelectPopupRequest}
+  onClose={() => {
+    filterSelectPopupRequest = undefined
+  }}
+/>
 
 {#if loading}
   <div class="datatable-main-wrapper dt-loading">

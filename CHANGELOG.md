@@ -2,6 +2,7 @@
 
 ## unreleased
 
+- change: show desktop datatable select filters in an app-styled popup while preserving native mobile selects
 - change: update jsonjsdb to 0.10.1 and migrate owner/manager organization relations to the explicit relation key model
 - change: rename variable lineage and foreign-key relation fields to `source_variable_ids` and `fk_variable_id`
 - change: replace public Node deploy and static generation scripts with Python tooling and a `datannur.py` command launcher

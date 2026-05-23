@@ -4,6 +4,7 @@ import type { Api, ApiColumnMethods, InternalSettings } from 'datatables.net'
 import type { Column } from '@type'
 import { UrlParam } from '@lib/url'
 import { dateToTimestamp } from '@lib/time'
+import type { FilterSelectPopupRequest } from './filter-select-popup'
 
 interface ButtonInfo {
   text: string
@@ -16,16 +17,19 @@ export default class FilterHelper {
   filters: Record<number, number>
   filterTableId: string
   onUpdateFilterCount: (count: number) => void
+  openFilterSelectPopup?: (request: FilterSelectPopupRequest) => void
   datatable?: Api
   constructor(
     tableId: string,
     entity: string,
     onUpdateFilterCount: (count: number) => void,
+    openFilterSelectPopup?: (request: FilterSelectPopupRequest) => void,
   ) {
     this.tableId = tableId
     this.filters = {}
     this.filterTableId = 'tab_' + entity
     this.onUpdateFilterCount = onUpdateFilterCount
+    this.openFilterSelectPopup = openFilterSelectPopup
   }
   init(datatable: Api) {
     this.datatable = datatable
@@ -65,7 +69,7 @@ export default class FilterHelper {
 
         for (let val of values) {
           if (val === '') {
-            options += '<option value="__empty__"></option>'
+            options += '<option value="__empty__">(vide)</option>'
           } else {
             if (val === true) val = 'vrai'
             else if (val === false) val = 'faux'
@@ -78,25 +82,32 @@ export default class FilterHelper {
           }
         }
       }
-      const select = jQuery(
-        `<select required name="${id}" id="${id}">${options}</select>`,
-      )
+      const selectElem = document.createElement('select')
+      selectElem.required = true
+      selectElem.name = id
+      selectElem.id = id
+      selectElem.innerHTML = options
+      const select = jQuery(selectElem)
       filterContainer.html('')
       const selectWrap = jQuery('<div class="select"></div>')
       selectWrap.appendTo(filterContainer)
       select.appendTo(selectWrap)
-      select.on('change', event => {
-        const elem = jQuery(event.target)
-        let val = String(elem.val())
-        if (val === 'true') val = 'vrai'
-        if (val === 'false') val = 'faux'
-
+      this.initSelectPopup(select)
+      const searchSelectValue = (val: string) => {
         if (val === '__empty__') {
           column.search('^$', true, false).draw()
         } else {
           const escaped = jQuery.fn.dataTable.util.escapeRegex(val)
           column.search(val ? '^' + escaped + '$' : '', true, false).draw()
         }
+      }
+      select.on('change', event => {
+        const elem = jQuery(event.target)
+        let val = String(elem.val())
+        if (val === 'true') val = 'vrai'
+        if (val === 'false') val = 'faux'
+
+        searchSelectValue(val)
         this.updateFilterUrl(columnNum, val)
         this.updateFilterCount()
       })
@@ -105,8 +116,7 @@ export default class FilterHelper {
 
       if (colFilterUrl) {
         select.val(colFilterUrl)
-        const escaped = jQuery.fn.dataTable.util.escapeRegex(colFilterUrl)
-        column.search('^' + escaped + '$', true, false).draw()
+        searchSelectValue(colFilterUrl)
         this.updateFilterCount()
       } else if (column.search() !== '') {
         const rawVal = column
@@ -174,6 +184,35 @@ export default class FilterHelper {
         filterElem.val(column.search()).trigger('keyup')
       }
     }
+  }
+  initSelectPopup(select: JQuery<HTMLSelectElement>) {
+    if (!this.openFilterSelectPopup) return
+
+    select.on('pointerdown', event => {
+      if (!window.matchMedia('(pointer: fine)').matches) return
+
+      event.preventDefault()
+    })
+
+    select.on('click', event => {
+      if (!window.matchMedia('(pointer: fine)').matches) return
+
+      event.preventDefault()
+      const selectElem = event.currentTarget
+      const options = Array.from(selectElem.options).map(option => ({
+        value: option.value,
+        label: option.textContent ?? '',
+      }))
+
+      this.openFilterSelectPopup?.({
+        options,
+        value: selectElem.value,
+        onSelect: value => {
+          selectElem.value = value
+          selectElem.dispatchEvent(new Event('change', { bubbles: true }))
+        },
+      })
+    })
   }
   cleanString(value: unknown) {
     return String(value).trim().toLowerCase()
