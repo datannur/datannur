@@ -1,7 +1,7 @@
 <script lang="ts">
   import db from '@db'
   import { isMobile } from '@lib/browser-utils'
-  import { urlPrefix } from '@lib/url'
+  import { getLinkUrl } from '@lib/url'
   import { ensureMermaidLoaded } from '@lib/util'
   import { entityNames } from '@lib/constant'
   import Render from '@lib/render'
@@ -131,7 +131,7 @@
       recursiveIcon = ' ' + Render.icon('recursive')
 
     diagrammDefinition += `${table}(${icon}<span>${entityCleanName}</span>${recursiveIcon})\n`
-    diagrammDefinition += `click ${table} href "${urlPrefix}/metaDataset/${table}";\n`
+    diagrammDefinition += `click ${table} href "${getLinkUrl(`metaDataset/${table}`)}";\n`
   }
 
   const otherLinks: string[] = []

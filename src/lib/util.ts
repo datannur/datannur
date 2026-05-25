@@ -130,6 +130,7 @@ export function ensureScriptLoaded(scriptPath: string) {
     document.head.appendChild(script)
   })
 }
+
 export function ensureMermaidLoaded() {
-  return ensureScriptLoaded('assets/external/mermaid.tiny.js')
+  return ensureScriptLoaded('app/assets/external/mermaid.tiny.js')
 }

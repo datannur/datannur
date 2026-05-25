@@ -82,7 +82,7 @@ class Search {
   }
   async init() {
     this.loading = (async () => {
-      await ensureScriptLoaded('assets/external/flexsearch.js')
+      await ensureScriptLoaded('app/assets/external/flexsearch.js')
       const variables: VariableName[] = ['name', 'description']
       for (const variable of variables) {
         const entitiesData: EntityData[] = []
