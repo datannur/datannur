@@ -75,7 +75,9 @@ export function devServerBaseHref() {
     name: 'dev-server-base-href',
     apply: 'serve' as const,
     transformIndexHtml(html: string) {
-      return html.replace('<base href="" />', '<base href="/" />')
+      return html
+        .replace('<head>', '<head><meta app-routing="clean" />')
+        .replace('<base href="" />', '<base href="/" />')
     },
   }
 }

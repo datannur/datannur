@@ -19,6 +19,7 @@ from _local_runtime import PACKAGE_DIR, create_local_http_server, get_local_port
 DEFAULT_APP_PORT = 61291
 LOCAL_SERVICE_SCRIPTS = ("proxy_llm.py", "edit_server.py")
 LOCAL_BASE_TAG = '<base href="/" />'
+LOCAL_ROUTING_META = '<meta app-routing="clean" />'
 
 
 class SafeHTTPHandler(SimpleHTTPRequestHandler):
@@ -81,6 +82,7 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
             self.send_error(404, "File not found")
             return None
 
+        html = html.replace("<head>", f"<head>{LOCAL_ROUTING_META}", 1)
         html = html.replace('<base href="" />', LOCAL_BASE_TAG, 1)
 
         payload = html.encode("utf-8")

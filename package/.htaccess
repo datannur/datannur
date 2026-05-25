@@ -20,9 +20,11 @@ RewriteRule ^(.+/)?data/(.+)$ data/$2 [L]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/index.html -f
 RewriteRule ^$ data/static/index.html [L]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/index.html !-f
-RewriteRule ^$ index.html [L]
+RewriteRule ^$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1.html -f
 RewriteRule ^([a-zA-Z0-9_\-]+)$ data/static/$1.html [L]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1.html !-f
+RewriteRule ^(about|concepts|datasets|docs|enumerations|favorite|folders|meta|options|organizations|search|tags|variables)$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1 -d
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html -f
@@ -33,9 +35,11 @@ RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html !-f
 RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ - [R=404,L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1 !-d
-RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ index.html [L]
+RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L]
 
 ErrorDocument 404 /data/static/_error.html
+
+Header always set Set-Cookie "datannur-routing=clean; Path=/; SameSite=Lax" "expr=%{env:DATANNUR_CLEAN_ROUTING} == '1' || %{env:REDIRECT_DATANNUR_CLEAN_ROUTING} == '1'"
 
 # Block access to sensitive config files
 <FilesMatch "(llm-web\.config\.json|deploy\.config\.json)$">
