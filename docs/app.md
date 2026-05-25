@@ -1,10 +1,10 @@
 # Managing the App
 
-## Project Structure
+## Package Structure
 
-> **📁 Context:** This structure represents the **distributed package**. For development structure, see the full repository.
+This page describes the **distributed package** you download, copy, update, or deploy. Development sources live in the Git repository; end users normally work only inside the distributed package.
 
-Inside the `app/` runtime folder:
+Inside the package, the `app/` folder contains application-owned runtime files:
 
 ```
 ├── assets/                     # Static assets (JS, images, etc.)
@@ -19,7 +19,7 @@ Inside the `app/` runtime folder:
 ├── README.md                   # Application documentation
 ```
 
-At the package root:
+At the package root, next to `app/`:
 
 ```
 ├── app/                        # Application files, not user-edited
@@ -31,6 +31,8 @@ At the package root:
 ```
 
 > **⚠️ Important:** Only the `/data/` folder should be modified by the user (adding/modifying your metadata). All other files constitute the application and should not be edited, except in exceptional cases or for advanced configuration.
+
+When the package is served over HTTP, datannur uses clean URLs such as `/dataset/accident_route`. When `index.html` is opened directly as a local file, datannur uses hash URLs such as `#/dataset/accident_route` because there is no web server to rewrite clean paths.
 
 ## Updating the App
 

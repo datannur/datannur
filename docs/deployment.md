@@ -36,7 +36,7 @@ Apache deployment provides:
 - Public API entry points under `/api/`, including Raw API docs and REST API routes
 - PHP LLM proxy endpoints under `/api/llm/` when LLM web integration is enabled
 
-For subfolder installs, upload the package contents into the target directory (for example `datannur/`) and keep the included `.htaccess` file next to `index.html`.
+For subfolder installs, upload the package contents into the target directory (for example `datannur/`) and keep the included `.htaccess` file next to `index.html`. Links and assets are resolved relative to that install path, so the same package can be installed at the domain root or in a subfolder.
 
 ## Deployment
 

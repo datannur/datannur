@@ -84,6 +84,31 @@ function getContentType(filePath: string): string | undefined {
   return contentTypes[path.extname(filePath)]
 }
 
+function isInsidePath(childPath: string, parentPath: string): boolean {
+  const relativePath = path.relative(parentPath, childPath)
+  return (
+    relativePath === '' ||
+    (relativePath !== '..' &&
+      !relativePath.startsWith(`..${path.sep}`) &&
+      !path.isAbsolute(relativePath))
+  )
+}
+
+async function getServedFilePath(
+  sourcePath: string,
+  suffix: string,
+): Promise<string | undefined> {
+  const resolvedSourcePath = path.resolve(sourcePath)
+  const sourceStat = await fs.stat(resolvedSourcePath)
+
+  if (sourceStat.isFile()) return suffix === '' ? resolvedSourcePath : undefined
+
+  const filePath = path.resolve(resolvedSourcePath, suffix)
+  if (!isInsidePath(filePath, resolvedSourcePath)) return undefined
+
+  return filePath
+}
+
 const contentTypes: { [extension: string]: string } = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -116,8 +141,15 @@ export function servePublicPaths(
 
         const [urlPath, sourcePath] = servedPath
         const suffix = url.slice(urlPath.length).replace(/^\//, '')
-        const filePath = path.join(sourcePath, decodeURIComponent(suffix))
         try {
+          const filePath = await getServedFilePath(
+            sourcePath,
+            decodeURIComponent(suffix),
+          )
+          if (!filePath) {
+            next()
+            return
+          }
           const stat = await fs.stat(filePath)
           if (!stat.isFile()) {
             next()

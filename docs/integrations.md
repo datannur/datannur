@@ -6,7 +6,7 @@ datannur exposes your catalog data through programmatic APIs and standardized ex
 
 datannur provides two read-only API endpoints for programmatic access to your catalog data. Their OpenAPI documentation can be generated for the current catalog instance from the data present in `data/db` and the official schemas shipped with the app.
 
-**API documentation:** Available at `/api/` (RESTful) and `/api/raw` (Raw) in your deployed catalog after generating the OpenAPI files.
+**API documentation:** Available at `/api/` (RESTful) and `/api/raw` (Raw) in your deployed catalog after generating the OpenAPI files. In the app, an **API** tab appears in Options only when the REST API is actually available.
 
 ### Raw API
 
@@ -55,7 +55,7 @@ python3 datannur.py openapi
 
 The generated files are written to `data/api` so they stay with your catalog data across app updates.
 
-> **Server requirement:** The RESTful API requires PHP 7.4+ to run on shared hosting. For local development, run `python3 datannur.py api`. The Raw API works with any static file server.
+> **Server requirement:** The RESTful API requires PHP 7.4+ to run on shared hosting. For local use, run `python3 datannur.py api` alongside the local app server. The Raw API works with any static file server. When opening `index.html` directly with `file://`, the app remains usable but the HTTP API is not active.
 
 ## DCAT-AP-CH Export
 
