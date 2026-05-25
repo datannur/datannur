@@ -1,6 +1,6 @@
 <script lang="ts">
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
-  import { isSsgRendering } from '@lib/url'
+  import { getLinkUrl, isSsgRendering } from '@lib/url'
   import { router } from '@router/router.svelte'
   import { onPageHomepage } from '@router/router-store'
   import { isMobile } from '@lib/viewport-manager'
@@ -23,7 +23,9 @@
   function clickOnMainLogo() {
     closeMenu()
     if (!$onPageHomepage) {
+      const url = getLinkUrl('')
       router.navigate('/')
+      if (url) window.history.replaceState(null, '', url)
       return
     }
     const elem: HTMLElement | null = document.querySelector(

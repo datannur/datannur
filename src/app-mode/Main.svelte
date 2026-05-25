@@ -2,7 +2,7 @@
   import db from '@db'
   import { whenAppReady, footerVisible } from '@lib/store'
   import { hasTouchScreen } from '@lib/browser-utils'
-  import { UrlParam, UrlHash, isHttp } from '@lib/url'
+  import { UrlParam, isHttp } from '@lib/url'
   import { isMobile } from '@lib/viewport-manager'
   import GenericRouter from '@router/GenericRouter.svelte'
   import routerIndex from '@page/.router-index'
@@ -70,7 +70,8 @@
       ? (db.getConfig('banner') as string)
       : defaultBanner
     bannerSrc = bannerSrc?.split('(')[1]?.split(')')[0]
-    mainBanner.src = bannerSrc?.replaceAll('{darkMode}', isDark ? '-dark' : '')
+    mainBanner.src =
+      bannerSrc?.replaceAll('{darkMode}', isDark ? '-dark' : '') ?? ''
     mainBanner.onload = () => {
       const cssVarStyle = document.documentElement.style
       cssVarStyle.setProperty(
@@ -99,7 +100,7 @@
     setTimeout(() => {
       const fromSearch = UrlParam.get('from_search')
       if (fromSearch) {
-        const entityId = UrlHash.getLevel2()
+        const { entityId } = ctx
         if (entityId) {
           SearchHistory.add(ctx.entity as MainEntityName, entityId)
           Logs.add('searchBar', { entity: ctx.entity, entityId })
@@ -122,7 +123,7 @@
 
 <svelte:head>
   {#if isHttp}
-    <link href="manifest.json?v=7" rel="manifest" />
+    <link href="app/manifest.json?v=7" rel="manifest" />
   {/if}
 </svelte:head>
 

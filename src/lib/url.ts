@@ -5,6 +5,7 @@ const appModeParam = 'app_mode'
 const staticMetaSelector = 'meta[app-mode="static"]'
 const hashPrefix = '#/'
 const defaultHash = 'homepage'
+const indexPage = '_index'
 
 export class UrlParam {
   static getAppMode() {
@@ -34,11 +35,7 @@ export class UrlParam {
 
   static reset() {
     const loc = window.location
-    let hash = loc.hash.split('?')[0]
-    if (hash === '') {
-      hash = hashPrefix
-      if (appMode === staticRender) hash = ''
-    }
+    const hash = this.computeHash(loc, new URLSearchParams())
     const url = loc.protocol + '//' + loc.host + loc.pathname + hash
     window.history.replaceState(null, '', url)
   }
@@ -62,7 +59,7 @@ export class UrlParam {
   }
 
   private static computeHash(loc: Location, params: URLSearchParams): string {
-    if (appMode === staticRender) return ''
+    if (appMode === staticRender || isHttp) return ''
     let hash = loc.hash.split('?')[0]
     if (hash === '' && params.toString() !== '') {
       hash = hashPrefix
@@ -132,34 +129,90 @@ export const isSsgRendering =
   new URLSearchParams(window.location.search).get(appModeParam) === staticRender
 
 export const isStaticMode = Boolean(document.querySelector(staticMetaSelector))
+const staticAssetBasePath = isHttp ? computeAssetBasePath() : undefined
+let currentAppBasePath = computeAppBasePath()
 
-function getSubFolder() {
-  const url = new URL(window.location.href)
-  const pathname = url.pathname.split('/').filter(Boolean)
-  return pathname.length > 0 ? pathname[0] : ''
+export const appBasePath = currentAppBasePath
+
+export function getAppBasePath() {
+  return currentAppBasePath
 }
 
-const subfolder = getSubFolder()
+export function setAppBasePathForPage(pageName: string) {
+  const pageBasePath = computePageBasePath(pageName)
+  if (pageBasePath) currentAppBasePath = pageBasePath
+}
 
-export const urlPrefix = (() => {
+export function setAppBasePathForRoutes(routeNames: string[]) {
+  const routeBasePath = computeRouteBasePath(routeNames)
+  if (routeBasePath) currentAppBasePath = routeBasePath
+}
+
+function computeAppBasePath(pageName = document.body.getAttribute('page')) {
+  if (!isHttp) return '/'
+
+  return (
+    computePageBasePath(pageName) ??
+    staticAssetBasePath ??
+    getDirectoryBasePath()
+  )
+}
+
+function computePageBasePath(pageName: string | null) {
+  if (!pageName || pageName === indexPage) return undefined
+  return computeRouteBasePath([pageName])
+}
+
+function computeRouteBasePath(routeNames: string[]) {
+  const segments = window.location.pathname.split('/').filter(Boolean)
+  const routeIndex = segments.findIndex(segment => routeNames.includes(segment))
+  if (routeIndex < 0) return undefined
+
+  const baseSegments = segments.slice(0, routeIndex)
+  return baseSegments.length === 0 ? '/' : '/' + baseSegments.join('/') + '/'
+}
+
+function getDirectoryBasePath() {
+  return window.location.pathname.endsWith('/') ? window.location.pathname : '/'
+}
+
+function computeAssetBasePath() {
+  const asset = document.querySelector<HTMLScriptElement | HTMLLinkElement>(
+    'script[src*="/app/assets/"], link[rel="stylesheet"][href*="/app/assets/"]',
+  )
+  const assetUrl = asset instanceof HTMLScriptElement ? asset.src : asset?.href
+  if (!assetUrl) return undefined
+
+  const assetPath = new URL(assetUrl, window.location.href).pathname
+  const assetPathStart = assetPath.indexOf('/app/assets/')
+  return assetPathStart < 0 ? undefined : assetPath.slice(0, assetPathStart + 1)
+}
+
+const urlPrefix = (() => {
   if (appMode === staticRender) return ''
-  else if (isHttp && subfolder) return '/' + subfolder + '/#'
   return '#'
 })()
 
-export function getBaseLinkUrl() {
-  if (appMode === staticRender) return '/'
-  return hashPrefix
+export function getLinkUrl(href: string) {
+  const cleanHref = href.replace(/^\/+/, '')
+  if (appMode === staticRender) {
+    if (!isHttp || isSsgRendering) return href
+    return getAppBasePath() + cleanHref
+  }
+
+  if (isHttp) return getAppBasePath() + cleanHref
+  if (!href || href === '/') return ''
+  return `${urlPrefix}/${cleanHref}`
 }
 
 export function link(href: string, content: string, entity = '') {
-  const base = getBaseLinkUrl()
+  const url = getLinkUrl(href)
   const onclick = `window.goToHref(event, '${href}')`
   let specialClass = ''
   if (entity) {
     specialClass = `class="color-entity-${entity}"`
   }
-  return `<a href="${base}${href}" onclick="${onclick}" ${specialClass}>${content}</a>`
+  return `<a href="${url}" onclick="${onclick}" ${specialClass}>${content}</a>`
 }
 
 export function isSpaHomepage() {

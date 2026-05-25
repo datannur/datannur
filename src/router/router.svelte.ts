@@ -1,13 +1,12 @@
 import Navigo from 'navigo'
-import { UrlParam } from '@lib/url'
+import { appBasePath, isHttp } from '@lib/url'
 import { page } from './router-store'
 
-const staticRender = 'static_render'
 const httpProtocol = 'http'
 const mailtoProtocol = 'mailto'
 
-export const router = new Navigo('/', {
-  hash: UrlParam.getAppMode() !== staticRender,
+export const router = new Navigo(appBasePath, {
+  hash: !isHttp,
 }) as Navigo & { incrementReload?: () => void }
 
 let pageValue = ''

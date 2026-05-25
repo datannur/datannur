@@ -1,6 +1,6 @@
 import { entityToIcon, entityNames } from '@lib/constant'
 import Render from '@lib/render'
-import { urlPrefix } from '@lib/url'
+import { getLinkUrl } from '@lib/url'
 import markdownRender from '@lib/markdown'
 
 function mermaidAddEntities(code: string) {
@@ -44,7 +44,7 @@ function mermaidAddEntities(code: string) {
     }
 
     let entityDefinition = `${entity}(${icon}<span>${entityCleanName}</span>${recursiveIcon})\n`
-    entityDefinition += `click ${entity} href "${urlPrefix}/metaDataset/${entity}";\n`
+    entityDefinition += `click ${entity} href "${getLinkUrl(`metaDataset/${entity}`)}";\n`
     code = code.replaceAll('$' + entity, entity)
     code = entityDefinition + code
   }

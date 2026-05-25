@@ -1,7 +1,7 @@
 import type Navigo from 'navigo'
 import type { Component } from 'svelte'
 import type { Match } from 'navigo'
-import { isSpaHomepage } from '@lib/url'
+import { isSpaHomepage, isStaticMode } from '@lib/url'
 
 export type RouteHandler = (ctx?: Match) => Promise<void> | void
 
@@ -46,6 +46,20 @@ export function registerRoutes(
   }
 
   // Start router
-  if (isSpaHomepage()) router.resolve('/')
+  const cleanSpaRoute = getCleanSpaRoute(routerIndex)
+  if (cleanSpaRoute) router.resolve(cleanSpaRoute)
+  else if (isSpaHomepage()) router.resolve('/')
   else router.resolve()
+}
+
+function getCleanSpaRoute(routerIndex: RouterIndex): string {
+  if (isStaticMode) return ''
+  if (!window.location.protocol.startsWith('http')) return ''
+  if (window.location.hash) return ''
+
+  const segments = window.location.pathname.split('/').filter(Boolean)
+  const routeStart = segments.findIndex(segment => segment in routerIndex)
+  if (routeStart === -1) return ''
+
+  return '/' + segments.slice(routeStart).join('/')
 }
