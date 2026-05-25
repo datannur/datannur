@@ -7,6 +7,8 @@
 - change: update jsonjsdb to 0.10.1 and migrate owner/manager organization relations to the explicit relation key model
 - change: rename variable lineage and foreign-key relation fields to `source_variable_ids` and `fk_variable_id`
 - change: replace public Node deploy and static generation scripts with Python tooling and a `datannur.py` command launcher
+- add: show a dedicated API tab and header shortcut when the REST API is available
+- fix: serve the app favicon from the local Python API documentation pages
 - fix: remove reverse from getRecursiveItems to maintain original order of parent items
 - add: interoperability section in features.md and remove some repetitive content wording
 

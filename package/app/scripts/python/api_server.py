@@ -24,6 +24,7 @@ from _local_runtime import (
 DEFAULT_API_PORT = 61293
 IGNORE_SCHEMAS = {"__meta__.schema.json", "__table__.schema.json"}
 OPENAPI_DIR = PACKAGE_DATA_DIR / "api"
+ICON_PATH = APP_DIR / "assets" / "icon" / "icon.ico"
 
 
 def load_tables() -> list[str]:
@@ -155,8 +156,11 @@ class ApiHandler(BaseHTTPRequestHandler):
             if values
         }
 
-        if segments == ["favicon.ico"]:
-            send_empty(self, 204)
+        if segments in (
+            ["favicon.ico"],
+            ["app", "assets", "icon", "icon.ico"],
+        ):
+            send_file(self, ICON_PATH, "image/vnd.microsoft.icon")
             return
 
         if segments in ([], ["api"]):

@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
   import { getLinkUrl, isSsgRendering } from '@lib/url'
+  import { checkApiAvailability } from '@lib/api-availability'
   import { router } from '@router/router.svelte'
   import { onPageHomepage } from '@router/router-store'
   import { isMobile } from '@lib/viewport-manager'
@@ -12,10 +14,13 @@
   import HeaderDropdown from './HeaderDropdown.svelte'
   import HeaderLink from './HeaderLink.svelte'
   import Link from '@layout/Link.svelte'
+  import Icon from '@layout/Icon.svelte'
   import Footer from '@frame/Footer.svelte'
+  import type { ApiAvailability } from '@lib/api-availability'
 
   let scrollY = $state(0)
   let loading = $state(true)
+  let apiAvailability = $state<ApiAvailability>({ available: false })
 
   const toggleHeader = () => ($headerOpen = !$headerOpen)
   const closeMenu = () => ($headerOpen = false)
@@ -38,6 +43,12 @@
     if (!$isMobile && $headerOpen) {
       closeMenu()
     }
+  })
+
+  onMount(() => {
+    checkApiAvailability().then(availability => {
+      apiAvailability = availability
+    })
   })
 
   $whenAppReady.then(() => (loading = false))
@@ -141,6 +152,22 @@
       <HeaderLink href="about" pages={['about']} icon="about" info="A propos">
         <span class="visible-on-mobile">A propos</span>
       </HeaderLink>
+
+      {#if apiAvailability.available}
+        <a
+          class="navbar-item"
+          href={apiAvailability.docsUrl}
+          target="_blank"
+          rel="noreferrer"
+          title="API"
+          onclick={closeMenu}
+        >
+          <span class="break-line use-tooltip fix-on-mobile" title="API">
+            <Icon type="database" />
+          </span>
+          <span class="visible-on-mobile">API</span>
+        </a>
+      {/if}
 
       <HeaderLink
         href="options"
