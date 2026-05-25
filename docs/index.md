@@ -11,5 +11,5 @@ For a more integrated experience (Start Menu / Dock shortcut, local server auto-
 
 You can populate your own catalog in several ways:
 
-- **Edit source files** — maintain your metadata in `/data/db-source/` as JSON files, Markdown documents, and CSV previews, then run `python3 python-scripts/build_db_source.py` to rebuild `/data/db/`. See [Managing Your Data](/data).
-- **Any other workflow** — as long as the output matches the schemas in `/public/schemas/`, you can generate `/data/db/` with any tool or script of your choice.
+- **Edit source files** — maintain your metadata in `/data/db-source/` as JSON files, Markdown documents, and CSV previews, then run `python3 datannur.py build-db-source` to rebuild `/data/db/`. See [Managing Your Data](/data).
+- **Any other workflow** — as long as the output matches the schemas in `/app/schemas/`, you can generate `/data/db/` with any tool or script of your choice.

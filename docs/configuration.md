@@ -13,7 +13,7 @@ For local app serving and optional local APIs, you can define ports in `data/loc
 }
 ```
 
-- `appPort`: local static app server used by `python-scripts/start_app.py`
+- `appPort`: local static app server used by `python3 datannur.py start`
 - `llmProxyPort`: local Python LLM proxy port
 - `apiPort`: optional local REST API dev server port
 - `editServerPort`: local Python edit server port
@@ -37,7 +37,7 @@ The app uses a configuration automatically embedded in `index.html`:
 
 > **💡 Best Practice:** Instead of editing `index.html` directly, modify the configuration in `/data/jsonjsdb-config.html` and then:
 >
-> - Run `python3 python-scripts/update_app.py` to automatically apply the configuration, OR
+> - Run `python3 datannur.py update` to automatically apply the configuration, OR
 > - Manually copy the configuration block from `/data/jsonjsdb-config.html` to `index.html`
 >
 > This approach ensures your configuration is preserved during application updates.
@@ -52,10 +52,10 @@ The `data-app-name` parameter is an application identifier used as a namespace f
 
 ### path
 
-The `data-path` parameter defines the path to your database folder (default: `"data/db"`).
+The `data-path` parameter defines the path to your database folder from the root `index.html` entry point (default: `"data/db"`).
 
 - Can be a relative path from the `index.html` location
-- Examples: `"data/db"`, `"my-catalog/database"`, `"../shared-data/db"`
+- Examples: `"data/db"`, `"shared-data/db"`
 
 ### db-key (Optional)
 

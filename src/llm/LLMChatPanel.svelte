@@ -27,6 +27,7 @@
   import LLMDropdownSelector from '@llm/LLMDropdownSelector.svelte'
   import LLMChatMessages from '@llm/LLMChatMessages.svelte'
   import LLMChatInput from '@llm/LLMChatInput.svelte'
+  import { page } from '@router/router-store'
 
   let {
     isOpen = $bindable(false),
@@ -88,6 +89,7 @@
   })
 
   $effect(() => {
+    if (!$page) return
     checkConfiguration().catch(console.error)
   })
 

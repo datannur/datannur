@@ -1,0 +1,28 @@
+{
+  "domain": "https://example.com",
+  "indexSeo": false,
+  "appPath": ".",
+  "outDir": "data/static",
+  "dbMetaPath": "data/db",
+  "port": 8080,
+  "firstPageTimeoutMs": 10000,
+  "routeTimeoutMs": 3000,
+  "entities": ["organization", "folder", "tag", "concept", "doc", "dataset"],
+  "routes": [
+    "",
+    "organizations",
+    "folders",
+    "tags",
+    "concepts",
+    "docs",
+    "datasets",
+    "variables",
+    "enumerations",
+    "favorite",
+    "options",
+    "about",
+    "search",
+    "meta",
+    "_error"
+  ]
+}

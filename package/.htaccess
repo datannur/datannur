@@ -1,0 +1,75 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^(\[::1\]|localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteRule ^(.+/)?app/assets/(.+)$ app/assets/$2 [L]
+RewriteRule ^(.+/)?app/api/(.+)$ app/api/$2 [L]
+RewriteCond %{THE_REQUEST} \s([^\s?]*/api)[?\s] [NC]
+RewriteRule ^api$ %1/ [R=301,L,NE]
+RewriteCond %{THE_REQUEST} \s([^\s?]*/api/raw)/[?\s] [NC]
+RewriteRule ^(.+/)?api/raw/$ %1 [R=301,L,NE]
+RewriteRule ^(.+/)?api/$ data/api/api-docs.html [END]
+RewriteRule ^(.+/)?api/raw/?$ data/api/api-docs-raw.html [END]
+RewriteRule ^(.+/)?api/openapi\.json$ data/api/openapi.json [END]
+RewriteRule ^(.+/)?api/openapi-raw\.json$ data/api/openapi-raw.json [END]
+RewriteRule ^(.+/)?api/(.+)$ app/api/$2 [L]
+RewriteRule ^(.+/)?data/(.+)$ data/$2 [L]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/index.html -f
+RewriteRule ^$ data/static/index.html [L]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/index.html !-f
+RewriteRule ^$ index.html [L]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1.html -f
+RewriteRule ^([a-zA-Z0-9_\-]+)$ data/static/$1.html [L]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1 -d
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html -f
+RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ data/static/$1/$2.html [L]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1 -d
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html !-f
+RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ - [R=404,L]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1 !-d
+RewriteRule ^([a-zA-Z0-9_\-]+)/([a-zA-Z0-9_\-]+)$ index.html [L]
+
+ErrorDocument 404 /data/static/_error.html
+
+# Block access to sensitive config files
+<FilesMatch "(llm-web\.config\.json|deploy\.config\.json)$">
+  Require all denied
+</FilesMatch>
+
+# CORS and Security Headers for API
+AddType application/json .json
+
+<FilesMatch "\.json$">
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+  Header set Access-Control-Allow-Headers "Content-Type"
+  Header set Cache-Control "public, max-age=31536000, immutable"
+  Header set Content-Type "application/json; charset=utf-8"
+  Header set X-Content-Type-Options "nosniff"
+</FilesMatch>
+
+<IfModule mod_deflate.c>
+  <FilesMatch "\.json$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header merge Vary Accept-Encoding
+</IfModule>
+
+# Cache Control
+ExpiresActive On
+ExpiresByType text/javascript         "access plus 1 year"
+ExpiresByType application/javascript  "access plus 1 year"
+ExpiresByType text/css                "access plus 1 year"
+ExpiresByType image/png               "access plus 1 year"
+ExpiresByType font/woff2              "access plus 1 year"
+ExpiresByType application/font-woff2  "access plus 1 year"
+ExpiresByType application/json        "access plus 1 year"

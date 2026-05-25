@@ -1,5 +1,5 @@
 import { marked } from 'marked'
-import { getBaseLinkUrl } from '@lib/url'
+import { getLinkUrl } from '@lib/url'
 
 const renderer = new marked.Renderer()
 renderer.link = ({ href, title, text }) => {
@@ -13,8 +13,8 @@ renderer.link = ({ href, title, text }) => {
     return `<a href="${href}" target="_blank" rel="noopener" class="basic-link" title="${title}">${text}</a>`
   }
 
-  const base = getBaseLinkUrl()
-  return `<a href="${base}${href}" data-href="${href}" class="basic-link internal-link" title="${title}">${text}</a>`
+  const url = getLinkUrl(href)
+  return `<a href="${url}" data-href="${href}" class="basic-link internal-link" title="${title}">${text}</a>`
 }
 
 renderer.image = function ({ href, text }) {

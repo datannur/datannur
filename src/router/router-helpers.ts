@@ -1,4 +1,4 @@
-import { isStaticMode, isSsgRendering } from '@lib/url'
+import { isSsgRendering, isStaticMode } from '@lib/url'
 import type { RouterIndex } from './router-registration'
 import type { Component } from 'svelte'
 
@@ -20,7 +20,6 @@ export function getInitialPage<T extends string>(
 
 /**
  * Get the initial component to render based on static mode and SSG rendering
- * In static mode (not SSG), start with _loading to avoid flash, then hydrate to actual page
  */
 export function getInitialComponent<T extends string>(
   routerIndex: RouterIndex,
@@ -28,9 +27,8 @@ export function getInitialComponent<T extends string>(
   loadingPageName: T,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Component<any> {
-  if (isStaticMode && !isSsgRendering) {
+  if (isStaticMode && !isSsgRendering)
     return routerIndex[loadingPageName].component
-  }
   return routerIndex[initialPage].component
 }
 

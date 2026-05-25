@@ -134,7 +134,6 @@
 
       .main-color {
         color: $color-3;
-        text-shadow: 0 0 10px;
       }
     }
   }

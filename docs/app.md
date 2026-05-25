@@ -1,27 +1,38 @@
 # Managing the App
 
-## Project Structure
+## Package Structure
 
-> **📁 Context:** This structure represents the **distributed application** (inside the `app/` folder or downloaded package). For development structure, see the full repository.
+This page describes the **distributed package** you download, copy, update, or deploy. Development sources live in the Git repository; end users normally work only inside the distributed package.
 
-Here is the top-level structure:
+Inside the package, the `app/` folder contains application-owned runtime files:
 
 ```
 ├── assets/                     # Static assets (JS, images, etc.)
-├── data/                       # ⚠️ YOUR DATA - Only folder to modify
 ├── data-template/              # Templates to copy into data/
-├── datannur.py                 # Command launcher for app scripts
-├── python-scripts/             # Python scripts (update app, deploy, static generation, etc.)
-├── .htaccess                   # Apache configuration (clean URLs, cache)
-├── .nojekyll                   # Disables Jekyll on GitHub Pages
+├── scripts/                    # Python and Windows scripts
+├── schemas/                    # JSON schemas
+├── api/                        # API adapters
 ├── CHANGELOG.md                # Application changelog
 ├── LICENSE                     # License information
-├── README.md                   # This documentation
-├── index.html                  # Application entry point
 ├── manifest.json               # PWA configuration
+├── index.html                  # Application entry point
+├── README.md                   # Application documentation
+```
+
+At the package root, next to `app/`:
+
+```
+├── app/                        # Application files, not user-edited
+├── data/                       # ⚠️ YOUR DATA - Only folder to modify
+├── datannur.py                 # Command launcher for app scripts
+├── index.html                  # Root browser entry point for clean URLs
+├── start.bat                   # Windows launcher
+├── .htaccess                   # Apache configuration (clean URLs, cache)
 ```
 
 > **⚠️ Important:** Only the `/data/` folder should be modified by the user (adding/modifying your metadata). All other files constitute the application and should not be edited, except in exceptional cases or for advanced configuration.
+
+When the package is served over HTTP, datannur uses clean URLs such as `/dataset/accident_route`. When `index.html` is opened directly as a local file, datannur uses hash URLs such as `#/dataset/accident_route` because there is no web server to rewrite clean paths.
 
 ## Updating the App
 

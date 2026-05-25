@@ -44,7 +44,7 @@ jsonjs.data['dataset'] = [
 ]
 ```
 
-> **💡 Note:** The demo database is generated from `/data/db-source/` with `python3 python-scripts/build_db_source.py`. Edit the source files there, then rebuild `/data/db/`; the `.json.js` files are derived for optimal browser performance.
+> **💡 Note:** The demo database is generated from `/data/db-source/` with `python3 datannur.py build-db-source`. Edit the source files there, then rebuild `/data/db/`; the `.json.js` files are derived for optimal browser performance.
 
 ### Table Registry
 
@@ -127,9 +127,9 @@ The "About" content (both homepage tab and dedicated page) is composed of three 
   - top-level `*.json` files for metadata tables
   - `md/*.md` files for Markdown documents
   - `dataset/*.csv` files for dataset previews
-- Use the script `python-scripts/build_db_source.py` to compile source files to both `.json` and `.json.js` formats in `/data/db/`
+- Use `python3 datannur.py build-db-source` to compile source files to both `.json` and `.json.js` formats in `/data/db/`
 - Run from the application folder with:
   ```bash
-  python3 python-scripts/build_db_source.py
+  python3 datannur.py build-db-source
   ```
 - Re-run the script after changing source files to update the generated database.

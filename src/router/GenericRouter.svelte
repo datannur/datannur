@@ -9,7 +9,13 @@
     getInitialComponent,
     updateRouteComponent,
   } from './router-helpers'
-  import { isStaticMode, isSsgRendering } from '@lib/url'
+  import {
+    isStaticMode,
+    isSsgRendering,
+    getAppBasePath,
+    setAppBasePathForPage,
+    setAppBasePathForRoutes,
+  } from '@lib/url'
   import {
     currentRoute,
     page,
@@ -42,6 +48,9 @@
   const routerIndex = untrack(() => routerIndexProp)
   const whenAppReady = untrack(() => whenAppReadyProp)
   const loadingPage = untrack(() => loadingPageProp)
+
+  setAppBasePathForRoutes(Object.keys(routerIndex))
+  router.root = getAppBasePath()
 
   let entityGlobal = $state('')
   let params = $state({})
@@ -102,6 +111,7 @@
       }
 
       window.document.body.setAttribute('page', entity)
+      setAppBasePathForPage(entity)
 
       if (!routerInitialized) {
         await whenAppReady

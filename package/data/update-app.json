@@ -1,0 +1,4 @@
+{
+  "targetVersion": "latest",
+  "include": ["app", "index.html", "datannur.py", "start.bat", ".htaccess"]
+}

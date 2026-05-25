@@ -5,34 +5,40 @@ import { svelte, type Options } from '@sveltejs/vite-plugin-svelte'
 import svelteConfig from './svelte.config.js'
 import {
   bundleSchemas,
-  copyFilesToOutDir,
   copyPaths,
+  devServerBaseHref,
   injectJsonjsdbConfig,
   initBuildConfig,
+  packageDistAfterBuild,
+  servePublicPaths,
   spaHtmlOptimizations,
   updateRouterIndex,
 } from './node-scripts/vite-helpers.ts'
 
-const outDir = 'app'
+const outDir = 'dist'
+const packageDir = 'package'
+const packageAppDir = `${packageDir}/app`
 const appName = 'datannur-app-v2'
 const dbName = process.env.DB ?? 'db'
+const dbPath = `data/${dbName}`
 
 const { appVersion, aliases } = await initBuildConfig()
 
 await copyPaths([
   [
     'node_modules/@mermaid-js/tiny/dist/mermaid.tiny.js',
-    'public/assets/external/mermaid.tiny.js',
+    `${packageAppDir}/assets/external/mermaid.tiny.js`,
   ],
   [
     'node_modules/flexsearch/dist/flexsearch.bundle.min.js',
-    'public/assets/external/flexsearch.js',
+    `${packageAppDir}/assets/external/flexsearch.js`,
   ],
 ])
 
 export default defineConfig({
   base: '',
-  server: { port: 8080, origin: '', open: true },
+  publicDir: false,
+  server: { port: 8080, origin: '', open: '/' },
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
@@ -45,6 +51,7 @@ export default defineConfig({
   },
   build: {
     outDir,
+    assetsDir: 'app/assets',
     sourcemap: true,
     modulePreload: false,
     chunkSizeWarningLimit: 1000,
@@ -56,11 +63,17 @@ export default defineConfig({
     },
   },
   plugins: [
-    bundleSchemas('public/schemas', 'src/assets/db-schema.json'),
+    bundleSchemas(`${packageAppDir}/schemas`, 'src/assets/db-schema.json'),
     updateRouterIndex('src/page'),
+    servePublicPaths([
+      [`/app/assets`, `${packageAppDir}/assets`],
+      [`/data`, `${packageDir}/data`],
+      [`/app/manifest.json`, `${packageAppDir}/manifest.json`],
+    ]),
+    devServerBaseHref(),
     svelte(svelteConfig as Options),
     spaHtmlOptimizations(),
-    copyFilesToOutDir(outDir, ['LICENSE', 'CHANGELOG.md', 'README.md']),
-    injectJsonjsdbConfig(appName, dbName),
+    injectJsonjsdbConfig(appName, dbPath),
+    packageDistAfterBuild(),
   ],
 })

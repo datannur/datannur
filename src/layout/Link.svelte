@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { getBaseLinkUrl } from '@lib/url'
+  import { getLinkUrl } from '@lib/url'
   import { router } from '@router/router.svelte'
+  import { page } from '@router/router-store'
   import type { Snippet } from 'svelte'
 
   let {
@@ -21,7 +22,11 @@
     children?: Snippet
   } = $props()
 
-  const base = $derived(href === '/' ? '' : getBaseLinkUrl())
+  const url = $derived.by(() => {
+    const currentPage = $page
+    void currentPage
+    return getLinkUrl(href)
+  })
 
   const entityClass = $derived(entity ? `color-entity-${entity}` : '')
 
@@ -42,7 +47,7 @@
 </script>
 
 <a
-  href="{base}{href}"
+  href={url}
   class="{className} {entityClass}"
   class:is-active={isActive()}
   onclick={onClickEvent}

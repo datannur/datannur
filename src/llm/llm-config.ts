@@ -3,6 +3,8 @@
  * Settings for Infomaniak API and model selection
  */
 
+import { getAppBasePath } from '@lib/url'
+
 export type LLMConfig = {
   baseURL: string
   proxyURL?: string
@@ -28,9 +30,11 @@ export type LLMStatus = {
 }
 
 type LocalPortsConfig = {
+  appPort?: number
   llmProxyPort?: number
 }
 
+const defaultAppPort = 61291
 const defaultLLMProxyPort = 61292
 const devLLMProxyPort = 62292
 const defaultLocalLLMProxyPort = import.meta.env.DEV
@@ -43,15 +47,28 @@ const isFileProtocol =
 const isLocalhost =
   typeof window !== 'undefined' &&
   ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
+const currentPort =
+  typeof window !== 'undefined' ? Number(window.location.port) : undefined
+
+function getPhpProxyURL(): string {
+  return `${getAppBasePath()}api/llm`
+}
+
+function shouldUseLocalProxy(appPort = defaultAppPort): boolean {
+  if (isFileProtocol || !isLocalhost) return false
+  if (import.meta.env.DEV) return true
+  return currentPort === appPort
+}
 
 // Determine proxy URL based on environment:
 // - file:// protocol: no proxy available
-// - localhost: local Python proxy
+// - local Python app: local Python proxy
 // - web server: PHP proxy
 function getProxyURL(): string | undefined {
   if (isFileProtocol) return undefined
-  if (isLocalhost) return `http://localhost:${defaultLocalLLMProxyPort}`
-  return '/api/llm'
+  if (shouldUseLocalProxy())
+    return `http://localhost:${defaultLocalLLMProxyPort}`
+  return getPhpProxyURL()
 }
 
 /**
@@ -60,7 +77,7 @@ function getProxyURL(): string | undefined {
 export const defaultLLMConfig: LLMConfig = {
   baseURL: 'https://api.infomaniak.com',
   proxyURL: getProxyURL(),
-  isLocalProxy: isLocalhost && !isFileProtocol,
+  isLocalProxy: shouldUseLocalProxy(),
   models: {
     text: 'Qwen/Qwen3.5-122B-A10B-FP8',
     speech: 'whisper',
@@ -76,10 +93,19 @@ function isValidPort(value: unknown): value is number {
   return typeof value === 'number' && Number.isInteger(value) && value > 0
 }
 
-function buildProxyURL(port: number): string | undefined {
+function buildProxyURL(
+  port: number,
+  useLocalProxy: boolean,
+): string | undefined {
   if (isFileProtocol) return undefined
-  if (isLocalhost) return `http://localhost:${port}`
-  return '/api/llm'
+  if (useLocalProxy) return `http://localhost:${port}`
+  return getPhpProxyURL()
+}
+
+function refreshPhpProxyURL(): void {
+  if (!isFileProtocol && !llmConfig.isLocalProxy) {
+    llmConfig.proxyURL = getPhpProxyURL()
+  }
 }
 
 async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
@@ -88,7 +114,7 @@ async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
   }
 
   try {
-    const response = await fetch('/data/localhost-ports.config.json', {
+    const response = await fetch('data/localhost-ports.config.json', {
       cache: 'no-store',
     })
     if (!response.ok) {
@@ -103,17 +129,23 @@ async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
 export async function initializeLLMConfig(): Promise<void> {
   llmConfigInitialization ??= (async () => {
     const localPortsConfig = await loadLocalPortsConfig()
+    const appPort = isValidPort(localPortsConfig?.appPort)
+      ? localPortsConfig.appPort
+      : defaultAppPort
     const llmProxyPort = isValidPort(localPortsConfig?.llmProxyPort)
       ? localPortsConfig.llmProxyPort
       : defaultLocalLLMProxyPort
+    const useLocalProxy = shouldUseLocalProxy(appPort)
 
     llmConfig = {
       ...defaultLLMConfig,
-      proxyURL: buildProxyURL(llmProxyPort),
+      proxyURL: buildProxyURL(llmProxyPort, useLocalProxy),
+      isLocalProxy: useLocalProxy,
     }
   })()
 
   await llmConfigInitialization
+  refreshPhpProxyURL()
 }
 
 // Session state (replaces per-request Turnstile tokens)
@@ -129,6 +161,7 @@ let turnstileTokenResolver: ((token: string) => void) | null = null
  * Get LLM config
  */
 export function getLLMConfig(): LLMConfig {
+  refreshPhpProxyURL()
   return llmConfig
 }
 
@@ -136,6 +169,7 @@ export function getLLMConfig(): LLMConfig {
  * Check if proxy is available
  */
 export function isProxyAvailable(): boolean {
+  refreshPhpProxyURL()
   return !!llmConfig.proxyURL
 }
 
@@ -179,6 +213,40 @@ export async function createSession(): Promise<boolean> {
   sessionPending = true
 
   try {
+    const statusResponse = await fetch(`${llmConfig.proxyURL}/status.php`)
+    if (!statusResponse.ok) {
+      return false
+    }
+
+    const status = (await statusResponse.json()) as {
+      enabled: boolean
+      requiresTurnstile?: boolean
+    }
+    if (!status.enabled) {
+      return false
+    }
+
+    if (status.requiresTurnstile === false) {
+      const response = await fetch(`${llmConfig.proxyURL}/session.php`, {
+        method: 'POST',
+      })
+      if (!response.ok) {
+        return false
+      }
+
+      const result = (await response.json()) as {
+        success: boolean
+        sessionToken?: string
+      }
+      if (result.success && result.sessionToken) {
+        sessionToken = result.sessionToken
+        pendingResolvers.forEach(resolve => resolve(sessionToken))
+        pendingResolvers = []
+        return true
+      }
+      return false
+    }
+
     // Step 1: Load Turnstile and get a token
     const turnstileToken = await getTurnstileTokenOnce()
     if (!turnstileToken) {
@@ -271,7 +339,11 @@ async function loadTurnstile(): Promise<boolean> {
 
     const status = (await response.json()) as {
       enabled: boolean
+      requiresTurnstile?: boolean
       siteKey?: string
+    }
+    if (status.enabled && status.requiresTurnstile === false) {
+      return true
     }
     if (!status.enabled || !status.siteKey) {
       return false

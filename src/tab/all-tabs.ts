@@ -28,6 +28,7 @@ import AboutFile from '@layout/AboutFile.svelte'
 import Stat from '@stat/Stat.svelte'
 import AllFav from '@favorite/AllFav.svelte'
 import Options from '@component/options/Options.svelte'
+import Api from '@component/options/Api.svelte'
 import Logs from '@component/options/Logs.svelte'
 import Evolution from '@component/Evolution.svelte'
 import { allTabsIcon } from '@lib/store'
@@ -152,6 +153,13 @@ export const allTabs: Record<string, TabConfig> = {
     component: Options,
     withoutNum: true,
     withoutProp: true,
+    footerVisible: true,
+  },
+  api: {
+    name: 'API',
+    icon: 'database',
+    component: Api,
+    withoutNum: true,
     footerVisible: true,
   },
   datasetPreview: {

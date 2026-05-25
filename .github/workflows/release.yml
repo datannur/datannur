@@ -79,11 +79,11 @@ jobs:
 
       - name: Remove sensitive config before packaging
         run: |
-          rm -f app/data/llm-web.config.json
-          rm -f app/data/deploy.config.json
+          rm -f dist/data/llm-web.config.json
+          rm -f dist/data/deploy.config.json
 
       - name: Create package
-        run: cd app && zip -r "../${{ steps.release.outputs.asset }}" .
+        run: cd dist && zip -r "../${{ steps.release.outputs.asset }}" .
 
       - name: Extract changelog
         id: changelog

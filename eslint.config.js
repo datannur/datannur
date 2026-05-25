@@ -92,8 +92,9 @@ export default [
     ignores: [
       '**/*.json.js',
       'app/',
+      'dist/',
       'node_modules/',
-      'public/assets/',
+      'package/app/assets/',
       'src/page/.router-index.ts',
       'docs/.vitepress/cache/',
       'docs/.vitepress/dist/',

@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f6f7f8" />
-    <link rel="icon" href="assets/icon/icon.ico" sizes="any" />
+    <link rel="icon" href="app/assets/icon/icon.ico" sizes="any" />
     <script>
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches
       const themeColor = dark ? '#0b0b0b' : '#f6f7f8'
@@ -18,7 +18,22 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      try {
+        eval('class __is_es6_class{}')
+        eval('const __is_es6_arrow = ()=>{}')
+        eval('`temp str`')
+        eval('window?.property')
+        eval('crypto.randomUUID()')
+      } catch (e) {
+        document.body.innerHTML =
+          '<div id="browser_compatibility_warning" style="text-align: center;">' +
+          '<h1 class="title">Browser Error</h1>' +
+          '<p>This app is not compatible with your browser.</p>' +
+          '<p>Please use a recent version of a browser like Chrome, Firefox or Edge.</p>' +
+          '</div>'
+      }
+    </script>
     <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/assets/browser-warning.js"></script>
   </body>
 </html>
