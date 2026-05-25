@@ -20,6 +20,7 @@ DEFAULT_APP_PORT = 61291
 LOCAL_SERVICE_SCRIPTS = ("proxy_llm.py", "edit_server.py")
 LOCAL_BASE_TAG = '<base href="/" />'
 LOCAL_ROUTING_META = '<meta app-routing="clean" />'
+LOCAL_ROUTING_COOKIE = "datannur-routing=clean; Path=/; SameSite=Lax"
 
 
 class SafeHTTPHandler(SimpleHTTPRequestHandler):
@@ -88,6 +89,7 @@ class SafeHTTPHandler(SimpleHTTPRequestHandler):
         payload = html.encode("utf-8")
         self.send_response(200)
         self.send_header("Content-type", "text/html; charset=utf-8")
+        self.send_header("Set-Cookie", LOCAL_ROUTING_COOKIE)
         self.send_header("Content-Length", str(len(payload)))
         self.send_header("Last-Modified", self.date_time_string(modified_time))
         self.end_headers()

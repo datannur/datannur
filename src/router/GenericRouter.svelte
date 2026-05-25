@@ -12,6 +12,7 @@
   import {
     isStaticMode,
     isSsgRendering,
+    useCleanRouting,
     getAppBasePath,
     setAppBasePathForPage,
     setAppBasePathForRoutes,
@@ -50,7 +51,7 @@
   const loadingPage = untrack(() => loadingPageProp)
 
   setAppBasePathForRoutes(Object.keys(routerIndex))
-  router.root = getAppBasePath()
+  router.root = useCleanRouting ? getAppBasePath() : '/'
 
   let entityGlobal = $state('')
   let params = $state({})
