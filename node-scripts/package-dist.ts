@@ -22,11 +22,24 @@ async function removeIfExists(filePath: string): Promise<void> {
 
 async function cleanPackageOutputs(): Promise<void> {
   const packageEntries = await fs.readdir(packageDir)
-  const packageOutputPaths = packageEntries.map(entry =>
-    path.join(distDir, entry),
-  )
+  const packageOutputPaths = packageEntries
+    .map(entry => path.join(distDir, entry))
+    .filter(outputPath => outputPath !== appDir)
+  const appOutputPaths = (await fs.readdir(path.join(packageDir, 'app')))
+    .map(entry => path.join(appDir, entry))
+    .filter(outputPath => outputPath !== path.join(appDir, 'assets'))
+  const appAssetPaths = (
+    await fs.readdir(path.join(packageDir, 'app/assets'))
+  ).map(entry => path.join(appDir, 'assets', entry))
   const appDocPaths = appDocs.map(file => path.join(appDir, file))
-  await Promise.all([...packageOutputPaths, ...appDocPaths].map(removeIfExists))
+  await Promise.all(
+    [
+      ...packageOutputPaths,
+      ...appOutputPaths,
+      ...appAssetPaths,
+      ...appDocPaths,
+    ].map(removeIfExists),
+  )
 }
 
 async function mergePath(from: string, to: string): Promise<void> {
