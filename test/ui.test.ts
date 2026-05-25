@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { chromium } from 'playwright'
 import type { Browser, Page } from 'playwright'
 
-const baseUrl = new URL('../app/index.html', import.meta.url).href
+const baseUrl = new URL('../dist/index.html', import.meta.url).href
 
 let browser: Browser | undefined = undefined
 let page: Page | undefined = undefined
@@ -10,6 +10,8 @@ let page: Page | undefined = undefined
 beforeAll(async () => {
   browser = await chromium.launch({ headless: true })
   page = await browser.newPage()
+  page.setDefaultTimeout(10_000)
+  page.setDefaultNavigationTimeout(10_000)
 
   page.on('console', msg => {
     if (msg.type() === 'error') {
@@ -56,13 +58,27 @@ const pageNames = [
 ]
 
 describe('UI tests', () => {
+  it('should open hash routes directly in file mode for native new tabs', async () => {
+    await page?.goto(`${baseUrl}#/dataset/pop_region`, {
+      waitUntil: 'domcontentloaded',
+    })
+    await page?.waitForFunction(
+      `() =>
+        document.body.getAttribute('page') === 'dataset' &&
+        document.title === 'Dataset | Population par région'
+      `,
+    )
+  }, 15_000)
+
   pageNames.forEach(pageName => {
     it(`should display the main section for page: ${pageName}`, async () => {
-      await page?.goto(`${baseUrl}#/${pageName}`)
+      await page?.goto(`${baseUrl}#/${pageName}`, {
+        waitUntil: 'domcontentloaded',
+      })
       const section = await page?.waitForSelector(
         'div#wrapper > section.section',
       )
       expect(section).toBeTruthy()
-    })
+    }, 15_000)
   })
 })
