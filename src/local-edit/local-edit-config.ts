@@ -50,7 +50,7 @@ async function loadLocalPortsConfig(): Promise<LocalPortsConfig | null> {
   }
 
   try {
-    const response = await fetch('/data/localhost-ports.config.json', {
+    const response = await fetch('data/localhost-ports.config.json', {
       cache: 'no-store',
     })
     if (!response.ok) {
