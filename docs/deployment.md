@@ -36,14 +36,7 @@ Apache deployment provides:
 - Public API entry points under `/api/`, including Raw API docs and REST API routes
 - PHP LLM proxy endpoints under `/api/llm/` when LLM web integration is enabled
 
-For local validation, contributors can simulate this environment with Docker:
-
-```bash
-npm run test:apache
-npm run test:apache:subfolder
-```
-
-Use `npm run serve:apache` to start the same Apache/PHP test server manually against `dist/`.
+For subfolder installs, upload the package contents into the target directory (for example `datannur/`) and keep the included `.htaccess` file next to `index.html`.
 
 ## Deployment
 
