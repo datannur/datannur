@@ -5,7 +5,7 @@ import { page } from './router-store'
 const httpProtocol = 'http'
 const mailtoProtocol = 'mailto'
 
-export const router = new Navigo(appBasePath, {
+export const router = new Navigo(useCleanRouting ? appBasePath : '/', {
   hash: !useCleanRouting,
 }) as Navigo & { incrementReload?: () => void }
 
