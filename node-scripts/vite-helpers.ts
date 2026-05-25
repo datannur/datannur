@@ -1,7 +1,14 @@
-import { readdirSync, writeFileSync, readFileSync, statSync } from 'fs'
+import {
+  mkdirSync,
+  readdirSync,
+  writeFileSync,
+  readFileSync,
+  statSync,
+} from 'fs'
 import fs from 'fs/promises'
 import path, { join } from 'path'
 import type { Plugin } from 'vite'
+import { packageDist } from './package-dist.ts'
 
 interface TsConfig {
   compilerOptions: { paths: { [key: string]: string[] } }
@@ -63,11 +70,83 @@ export function spaHtmlOptimizations() {
   ])
 }
 
-export function injectJsonjsdbConfig(appName: string, dbName: string): Plugin {
+export function devServerBaseHref() {
+  return {
+    name: 'dev-server-base-href',
+    apply: 'serve' as const,
+    transformIndexHtml(html: string) {
+      return html.replace('<base href="" />', '<base href="/" />')
+    },
+  }
+}
+
+function getContentType(filePath: string): string | undefined {
+  return contentTypes[path.extname(filePath)]
+}
+
+const contentTypes: { [extension: string]: string } = {
+  '.css': 'text/css; charset=utf-8',
+  '.html': 'text/html; charset=utf-8',
+  '.ico': 'image/x-icon',
+  '.jpeg': 'image/jpeg',
+  '.jpg': 'image/jpeg',
+  '.js': 'text/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.pdf': 'application/pdf',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+}
+
+export function servePublicPaths(
+  servedPaths: [urlPath: string, sourcePath: string][],
+): Plugin {
+  return {
+    name: 'serve-package-paths',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use(async (request, response, next) => {
+        const url = request.url?.split('?')[0] ?? ''
+        const servedPath = servedPaths.find(
+          ([urlPath]) => url === urlPath || url.startsWith(`${urlPath}/`),
+        )
+        if (!servedPath) {
+          next()
+          return
+        }
+
+        const [urlPath, sourcePath] = servedPath
+        const suffix = url.slice(urlPath.length).replace(/^\//, '')
+        const filePath = path.join(sourcePath, decodeURIComponent(suffix))
+        try {
+          const stat = await fs.stat(filePath)
+          if (!stat.isFile()) {
+            next()
+            return
+          }
+          const contentType = getContentType(filePath)
+          if (contentType) response.setHeader('Content-Type', contentType)
+          response.end(await fs.readFile(filePath))
+        } catch {
+          next()
+        }
+      })
+    },
+  }
+}
+
+export function packageDistAfterBuild(): Plugin {
+  return {
+    name: 'package-dist-after-build',
+    apply: 'build' as const,
+    closeBundle: packageDist,
+  }
+}
+
+export function injectJsonjsdbConfig(appName: string, dbPath: string): Plugin {
   return {
     name: 'inject-jsonjsdb-config',
     transformIndexHtml(html) {
-      const config = `<div id="jsonjsdb-config" style="display:none" data-app-name="${appName}" data-path="data/${dbName}"></div>`
+      const config = `<div id="jsonjsdb-config" style="display:none" data-app-name="${appName}" data-path="${dbPath}"></div>`
       return html.replace('</body>', `${config}</body>`)
     },
   }
@@ -124,26 +203,6 @@ export async function getAppVersion(): Promise<string> {
   return version || '0.0.0'
 }
 
-export function copyFilesToOutDir(outDir: string, files: string[]) {
-  return {
-    name: 'copyFilesToOutDir',
-    apply: 'build' as const,
-    closeBundle: async () => {
-      await Promise.all(
-        files.map(file => fs.copyFile(file, `${outDir}/${file}`)),
-      )
-    },
-  }
-}
-
-export function afterBuild(callback: () => void | Promise<void>) {
-  return {
-    name: 'afterBuild',
-    apply: 'build' as const,
-    closeBundle: callback,
-  }
-}
-
 interface BuildConfigOptions {
   tsconfigPath?: string
 }
@@ -158,5 +217,10 @@ export async function initBuildConfig(options: BuildConfigOptions = {}) {
 }
 
 export async function copyPaths(pairs: [string, string][]) {
-  return Promise.all(pairs.map(([from, to]) => fs.copyFile(from, to)))
+  return Promise.all(
+    pairs.map(([from, to]) => {
+      mkdirSync(path.dirname(to), { recursive: true })
+      return fs.copyFile(from, to)
+    }),
+  )
 }
