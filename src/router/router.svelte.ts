@@ -1,12 +1,12 @@
 import Navigo from 'navigo'
-import { appBasePath, isHttp } from '@lib/url'
+import { appBasePath, useCleanRouting } from '@lib/url'
 import { page } from './router-store'
 
 const httpProtocol = 'http'
 const mailtoProtocol = 'mailto'
 
 export const router = new Navigo(appBasePath, {
-  hash: !isHttp,
+  hash: !useCleanRouting,
 }) as Navigo & { incrementReload?: () => void }
 
 let pageValue = ''

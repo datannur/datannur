@@ -3,6 +3,8 @@ const checkDb = 'check_db'
 const spa = 'spa'
 const appModeParam = 'app_mode'
 const staticMetaSelector = 'meta[app-mode="static"]'
+const cleanRoutingMetaSelector = 'meta[app-routing="clean"]'
+const cleanRoutingCookie = 'datannur-routing=clean'
 const hashPrefix = '#/'
 const defaultHash = 'homepage'
 const indexPage = '_index'
@@ -59,7 +61,7 @@ export class UrlParam {
   }
 
   private static computeHash(loc: Location, params: URLSearchParams): string {
-    if (appMode === staticRender || isHttp) return ''
+    if (appMode === staticRender || useCleanRouting) return ''
     let hash = loc.hash.split('?')[0]
     if (hash === '' && params.toString() !== '') {
       hash = hashPrefix
@@ -124,6 +126,10 @@ if (urlAppMode === checkDb) {
 export { appMode }
 
 export const isHttp = window.location.protocol.startsWith('http')
+export const useCleanRouting =
+  appMode === staticRender ||
+  Boolean(document.querySelector(cleanRoutingMetaSelector)) ||
+  document.cookie.split('; ').includes(cleanRoutingCookie)
 
 export const isSsgRendering =
   new URLSearchParams(window.location.search).get(appModeParam) === staticRender
@@ -200,7 +206,7 @@ export function getLinkUrl(href: string) {
     return getAppBasePath() + cleanHref
   }
 
-  if (isHttp) return getAppBasePath() + cleanHref
+  if (useCleanRouting) return getAppBasePath() + cleanHref
   if (!href || href === '/') return ''
   return `${urlPrefix}/${cleanHref}`
 }

@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: use hash routing by default on static servers and keep clean URLs for runtimes that opt in explicitly
+
 ## 0.24.0 (2026-05-25)
 
 - breaking: move runtime package sources from `public/` to `package/`, build distributable files in `dist/`, and use clean URLs for HTTP runtimes while keeping hash routing for `file://`

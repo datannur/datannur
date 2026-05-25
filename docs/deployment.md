@@ -38,6 +38,12 @@ Apache deployment provides:
 
 For subfolder installs, upload the package contents into the target directory (for example `datannur/`) and keep the included `.htaccess` file next to `index.html`. Links and assets are resolved relative to that install path, so the same package can be installed at the domain root or in a subfolder.
 
+## GitHub Pages Mode
+
+GitHub Pages does not support Apache `.htaccess` rewrites. The project deployment workflow keeps the default hash routing, so internal links use URLs such as `/datannur/#/folder/example`.
+
+Pre-generated static HTML pages remain preferable for public SEO pages. Hash routing is mainly for app navigation, shared links, and direct reloads on static servers without URL rewriting.
+
 ## Deployment
 
 The deployment command `python3 datannur.py deploy` automates the process of publishing your app to a remote server using `rsync` over SSH.
