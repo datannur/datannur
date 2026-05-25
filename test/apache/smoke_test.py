@@ -148,7 +148,7 @@ def assert_spa_only_mode() -> None:
                     body_contains=spa_entry_markers(),
                 ),
                 Check("/data/db/dataset.json", 200, "application/json"),
-                Check("/app/assets/browser-warning.js", 200, "text/javascript"),
+                Check("/app/assets/icon/icon.ico", 200),
             ]
         )
     finally:
@@ -307,12 +307,7 @@ def main() -> None:
             "text/html",
             body_contains=spa_entry_markers(),
         ),
-        Check(
-            "/variable/unknown/app/assets/browser-warning.js",
-            200,
-            "text/javascript",
-            body_contains=("browser", "warning"),
-        ),
+        Check("/variable/unknown/app/assets/icon/icon.ico", 200),
         Check(
             "/variable/unknown/data/db/dataset.json",
             200,
@@ -345,12 +340,7 @@ def main() -> None:
             "application/json",
             body_contains=('"appPath"', '"outDir"'),
         ),
-        Check(
-            "/app/assets/browser-warning.js",
-            200,
-            "text/javascript",
-            body_contains=("browser", "warning"),
-        ),
+        Check("/app/assets/icon/icon.ico", 200),
         Check(
             "/api",
             301,
