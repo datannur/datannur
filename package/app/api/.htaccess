@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Documentation OpenAPI generated from the current catalog data
+RewriteRule ^$ ../../data/api/api-docs.html [END]
+RewriteRule ^raw/?$ ../../data/api/api-docs-raw.html [END]
+RewriteRule ^openapi\.json$ ../../data/api/openapi.json [END]
+RewriteRule ^openapi-raw\.json$ ../../data/api/openapi-raw.json [END]
+
+# Serve existing files/directories directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route REST API requests to the PHP adapter
+RewriteRule ^(.*)$ rest/index.php [QSA,L]
+
+# CORS headers
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type"
