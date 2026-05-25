@@ -2,23 +2,32 @@
 
 ## Project Structure
 
-> **📁 Context:** This structure represents the **distributed application** (inside the `app/` folder or downloaded package). For development structure, see the full repository.
+> **📁 Context:** This structure represents the **distributed package**. For development structure, see the full repository.
 
-Here is the top-level structure:
+Inside the `app/` runtime folder:
 
 ```
 ├── assets/                     # Static assets (JS, images, etc.)
-├── data/                       # ⚠️ YOUR DATA - Only folder to modify
 ├── data-template/              # Templates to copy into data/
-├── datannur.py                 # Command launcher for app scripts
-├── python-scripts/             # Python scripts (update app, deploy, static generation, etc.)
-├── .htaccess                   # Apache configuration (clean URLs, cache)
-├── .nojekyll                   # Disables Jekyll on GitHub Pages
+├── scripts/                    # Python and Windows scripts
+├── schemas/                    # JSON schemas
+├── api/                        # API adapters
 ├── CHANGELOG.md                # Application changelog
 ├── LICENSE                     # License information
-├── README.md                   # This documentation
-├── index.html                  # Application entry point
 ├── manifest.json               # PWA configuration
+├── index.html                  # Application entry point
+├── README.md                   # Application documentation
+```
+
+At the package root:
+
+```
+├── app/                        # Application files, not user-edited
+├── data/                       # ⚠️ YOUR DATA - Only folder to modify
+├── datannur.py                 # Command launcher for app scripts
+├── index.html                  # Root browser entry point for clean URLs
+├── start.bat                   # Windows launcher
+├── .htaccess                   # Apache configuration (clean URLs, cache)
 ```
 
 > **⚠️ Important:** Only the `/data/` folder should be modified by the user (adding/modifying your metadata). All other files constitute the application and should not be edited, except in exceptional cases or for advanced configuration.

@@ -1,5 +1,5 @@
-![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/main-banner-dark.png?raw=true#gh-dark-mode-only)
-![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/main-banner.png?raw=true#gh-light-mode-only)
+![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/main-banner-dark.png?raw=true#gh-dark-mode-only)
+![datannur logo](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/main-banner.png?raw=true#gh-light-mode-only)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub release](https://img.shields.io/github/v/release/datannur/datannur?color=blue)](https://github.com/datannur/datannur/releases)
@@ -23,8 +23,8 @@ datannur is a client-side data catalog designed to organize and explore datasets
 
 🚀 **[Try the live demo](https://dev.datannur.com/)**
 
-![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/about-page/folder-page-folder-tab-dark.jpg#gh-dark-mode-only)
-![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/public/assets/about-page/folder-page-folder-tab.jpg#gh-light-mode-only)
+![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/about-page/folder-page-folder-tab-dark.jpg#gh-dark-mode-only)
+![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/about-page/folder-page-folder-tab.jpg#gh-light-mode-only)
 
 ## Documentation
 

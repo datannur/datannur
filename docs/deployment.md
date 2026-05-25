@@ -25,9 +25,29 @@ python3 datannur.py static-deploy
 
 > **Note:** This setup requires an Apache server with mod_rewrite enabled. Static generation creates SEO-optimized HTML files while maintaining the full SPA functionality.
 
+## Apache / Shared Hosting Mode
+
+The generated package includes an `.htaccess` file for Apache deployments, including typical shared hosting environments. It supports both domain-root installs such as `https://example.org/` and subfolder installs such as `https://example.org/datannur/`.
+
+Apache deployment provides:
+
+- Clean application URLs such as `/dataset/accident_route`
+- Static HTML pages when generated, with SPA fallback when a static page is missing
+- Public API entry points under `/api/`, including Raw API docs and REST API routes
+- PHP LLM proxy endpoints under `/api/llm/` when LLM web integration is enabled
+
+For local validation, contributors can simulate this environment with Docker:
+
+```bash
+npm run test:apache
+npm run test:apache:subfolder
+```
+
+Use `npm run serve:apache` to start the same Apache/PHP test server manually against `dist/`.
+
 ## Deployment
 
-The deployment script `python-scripts/deploy.py` automates the process of publishing your app to a remote server using `rsync` over SSH.
+The deployment command `python3 datannur.py deploy` automates the process of publishing your app to a remote server using `rsync` over SSH.
 
 **Usage:**
 
@@ -37,7 +57,7 @@ python3 datannur.py deploy
 
 **How it works:**
 
-- Reads deployment settings from `deploy.config.json` (see `data-template/deploy.config.json` for an example).
+- Reads deployment settings from `deploy.config.json` (see `app/data-template/deploy.config.json` for an example).
 - Uses `rsync` to synchronize your local files to the remote server, with options for excluding files and deleting removed files.
 - Supports SSH key authentication and custom port configuration.
 - Shows progress and errors directly in the terminal.
@@ -49,7 +69,7 @@ python3 datannur.py deploy
 - `ignore`: Array of file/folder patterns to exclude
 - `syncOption.delete`: If true, files deleted locally are also deleted remotely
 
-> If no config is found, the script will prompt you to create one from the template (`data-template/deploy.config.json`).
+> If no config is found, create one from the template (`app/data-template/deploy.config.json`).
 
 ## URL Rewriting
 
