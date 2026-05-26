@@ -1,0 +1,18 @@
+[
+  {
+    "id": "open_data",
+    "name": "Open Data",
+    "entity": "dataset",
+    "field": "type",
+    "value": "open_data",
+    "is_active_default": true
+  },
+  {
+    "id": "closed_data",
+    "name": "Closed Data",
+    "entity": "dataset",
+    "field": "type",
+    "value": "closed_data",
+    "is_active_default": true
+  }
+]

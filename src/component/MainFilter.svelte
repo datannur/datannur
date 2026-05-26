@@ -3,24 +3,11 @@
   import MainFilter from '@lib/main-filter'
   import Switch from '@layout/Switch.svelte'
   import Button from '@layout/Button.svelte'
-  import type { Filter } from '@type'
+  import type { ConfigFilter } from '@type'
 
-  let filters: Filter[] = $state([])
+  let filters: ConfigFilter[] = $state([])
 
-  const savedFilters = MainFilter.get()
-  const dbFilters = getLocalFilter()
-
-  for (const dbFilter of dbFilters) {
-    const filter = dbFilter
-    filter.isActive = true
-    filters.push(filter)
-    for (const savedFilter of savedFilters) {
-      if (savedFilter.id === filter.id) {
-        filter.isActive = savedFilter.isActive
-        break
-      }
-    }
-  }
+  filters.push(...MainFilter.applySavedState(getLocalFilter()))
 
   function updateFilterState() {
     MainFilter.save(filters)

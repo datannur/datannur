@@ -4,10 +4,10 @@ import type {
   Frequency,
   Config,
   Favorite,
+  ConfigFilter,
   FilterActive,
   Option,
   SearchHistory,
-  Filter,
 } from './base'
 import { parentEntities, evolutionTypes } from '@lib/constant'
 
@@ -415,7 +415,7 @@ export type EntityTypeMap = MainEntityMap & {
   metaDataset: MetaDataset
   metaFolder: MetaFolder
   favorite: Favorite
-  filter: Filter
+  configFilter: ConfigFilter
   filterActive: FilterActive
   log: Log
   option: Option

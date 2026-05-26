@@ -12,7 +12,7 @@ import { checkLocalEditStatus } from '@src/local-edit/local-edit-config'
 import { localEditStatus } from '@lib/store'
 import type { SearchHistoryEntry } from '@search/search-history'
 import type { Favorite } from '@favorite/favorites'
-import type { Log } from '@src/type'
+import type { ConfigFilter, Log } from '@src/type'
 
 let initPromise: Promise<void> | null = null
 
@@ -34,18 +34,21 @@ export function initApp(): Promise<void> {
 
       stepTimer = performance.now()
       await MainFilter.init()
-      const filter = {
-        entity: 'dataset',
-        variable: 'type',
-        values: MainFilter.getTypeToFilter(),
-      }
       console.log(
         'init filter',
         Math.round(performance.now() - stepTimer) + ' ms',
       )
 
       stepTimer = performance.now()
-      await db.init({ filter })
+      await db.init({
+        filterBuilder: tables => {
+          const configFilters =
+            (tables.configFilter as readonly ConfigFilter[] | undefined) ?? []
+          return MainFilter.buildDbFilters(
+            MainFilter.getInactiveFilters(configFilters),
+          )
+        },
+      })
       console.log('load db', Math.round(performance.now() - stepTimer) + ' ms')
 
       stepTimer = performance.now()

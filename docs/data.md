@@ -92,14 +92,6 @@ The `config.json` file allows you to customize various application settings:
     "value": "contact@yourdomain.com"
   },
   {
-    "id": "filter_1",
-    "value": "open_data : Open Data"
-  },
-  {
-    "id": "filter_2",
-    "value": "closed_data : Closed Data"
-  },
-  {
     "id": "banner",
     "value": "![main-banner no_caption](data/img/main-banner.png)"
   }
@@ -109,7 +101,25 @@ The `config.json` file allows you to customize various application settings:
 **Available options:**
 
 - **contact_email**: Contact email displayed in the catalog interface
-- **filter_1, filter_2, ...**: Custom filter options for datasets type (format: `"key : Display Name"`)
+
+### Global Filter Rules
+
+The `configFilter.json` file defines global database filters displayed in the application header. Each rule can target any table and field:
+
+```json
+[
+  {
+    "id": "open_data",
+    "name": "Open Data",
+    "entity": "dataset",
+    "field": "type",
+    "value": "open_data",
+    "is_active_default": true
+  }
+]
+```
+
+Use one row per matched value. When a filter is disabled by the user, matching rows are removed from the in-memory database and related rows are removed through jsonjsdb relations.
 
 **About page/tab customization:**
 

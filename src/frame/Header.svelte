@@ -135,7 +135,7 @@
         <HeaderLink standard="enumeration" />
       </HeaderDropdown>
 
-      <HeaderDropdown title="Filtre" ifUse={['filter']}>
+      <HeaderDropdown title="Filtre" ifUse={['configFilter']}>
         <MainFilter />
       </HeaderDropdown>
 
