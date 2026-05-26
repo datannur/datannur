@@ -38,6 +38,12 @@
 </script>
 
 <section class="section">
-  <Title type="dataset" name={metaDataset.name} {breadcrumbItems} />
+  <Title
+    type="dataset"
+    name={metaDataset.name}
+    id={metaDataset.id}
+    transitionType="metaDataset"
+    {breadcrumbItems}
+  />
   <Tabs {tabs} />
 </section>

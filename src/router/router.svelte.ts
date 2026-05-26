@@ -1,6 +1,7 @@
 import Navigo from 'navigo'
+import { navigateWithEntityTitleTransition } from '@lib/page-transition'
 import { appBasePath, useCleanRouting } from '@lib/url'
-import { page } from './router-store'
+import { currentRoute } from './router-store'
 
 const httpProtocol = 'http'
 const mailtoProtocol = 'mailto'
@@ -9,8 +10,8 @@ export const router = new Navigo(useCleanRouting ? appBasePath : '/', {
   hash: !useCleanRouting,
 }) as Navigo & { incrementReload?: () => void }
 
-let pageValue = ''
-page.subscribe(value => (pageValue = value))
+let currentRouteValue = ''
+currentRoute.subscribe(value => (currentRouteValue = value))
 
 declare global {
   interface Window {
@@ -19,17 +20,18 @@ declare global {
 }
 
 window.goToHref = (event: MouseEvent, href: string) => {
-  if (event.ctrlKey || event.metaKey) return
-  event.preventDefault()
-
-  if (
-    !href.startsWith(httpProtocol) &&
-    !href.startsWith(mailtoProtocol) &&
-    pageValue === href.split('?')[0]
-  ) {
-    router.navigate(href)
-    router.incrementReload?.()
-  } else {
-    router.navigate(href)
+  const navigate = () => {
+    if (
+      !href.startsWith(httpProtocol) &&
+      !href.startsWith(mailtoProtocol) &&
+      currentRouteValue === href.split('?')[0].replace(/\//g, '___')
+    ) {
+      router.navigate(href)
+      router.incrementReload?.()
+    } else {
+      router.navigate(href)
+    }
   }
+
+  navigateWithEntityTitleTransition(event, href, navigate, currentRouteValue)
 }

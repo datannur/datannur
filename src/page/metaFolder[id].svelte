@@ -19,6 +19,11 @@
 </script>
 
 <section class="section">
-  <Title type="folder" name={metaFolder.name} />
+  <Title
+    type="folder"
+    name={metaFolder.name}
+    id={metaFolder.id}
+    transitionType="metaFolder"
+  />
   <Tabs {tabs} />
 </section>

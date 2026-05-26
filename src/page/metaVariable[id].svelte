@@ -40,6 +40,8 @@
   <Title
     type="variable"
     name={metaVariable.storageKey ? metaVariable.storageKey : metaVariable.name}
+    id={metaVariable.id}
+    transitionType="metaVariable"
     {breadcrumbItems}
   />
   <Tabs {tabs} />

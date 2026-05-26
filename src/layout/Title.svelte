@@ -3,6 +3,7 @@
   import db from '@db'
   import { nbFavorite } from '@lib/store'
   import { entityNames, mainEntityNames } from '@lib/constant'
+  import { getEntityTitleTransitionName } from '@lib/page-transition'
   import { getBreadcrumbItems } from '@lib/breadcrumb'
   import { appWidth } from '@lib/viewport-manager'
   import Head from '@frame/Head.svelte'
@@ -24,6 +25,7 @@
     name,
     mode = 'normal',
     id,
+    transitionType = type,
     breadcrumbItems,
     info = '',
     toggleInfo = () => {},
@@ -33,6 +35,7 @@
     name: string
     mode?: string
     id?: string | number
+    transitionType?: string
     breadcrumbItems?: BreadcrumbItem[]
     info?: string
     toggleInfo?: MouseEventHandler<HTMLButtonElement>
@@ -58,6 +61,9 @@
   )
 
   const itemPage = $derived(id ? true : false)
+  const titleTransitionName = $derived(
+    id ? getEntityTitleTransitionName(transitionType, id) : undefined,
+  )
   let fittyInstance: ReturnType<typeof fitty> | null = null
 
   onMount(() => {
@@ -94,7 +100,9 @@
           {/if}
         </span>
       {/if}
-      <span class="title-name fitty"
+      <span
+        class="title-name fitty"
+        data-entity-title-transition={titleTransitionName}
         >{name}
         {#if isFavoritePage}
           <span class="num-style big">{$nbFavorite}</span>

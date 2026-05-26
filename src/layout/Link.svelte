@@ -1,7 +1,8 @@
 <script lang="ts">
   import { getLinkUrl } from '@lib/url'
+  import { navigateWithEntityTitleTransition } from '@lib/page-transition'
   import { router } from '@router/router.svelte'
-  import { page } from '@router/router-store'
+  import { currentRoute, page } from '@router/router-store'
   import type { Snippet } from 'svelte'
 
   let {
@@ -31,13 +32,18 @@
   const entityClass = $derived(entity ? `color-entity-${entity}` : '')
 
   function goToHref(event: MouseEvent) {
-    if (event.ctrlKey || event.metaKey) return
-    event.preventDefault()
     if (alternativeAction) {
+      if (event.ctrlKey || event.metaKey) return
+      event.preventDefault()
       alternativeAction()
       return
     }
-    router.navigate(href)
+    navigateWithEntityTitleTransition(
+      event,
+      href,
+      () => router.navigate(href),
+      $currentRoute,
+    )
   }
 
   function onClickEvent(event: MouseEvent) {
