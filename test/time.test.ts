@@ -16,6 +16,17 @@ const sameDateMultipleTimes = [
   [new Date(2023, 10, 25, 23, 45, 0)],
 ]
 
+function formatLocalDateTime(timestamp: number): string {
+  const date = new Date(timestamp)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+}
+
 describe('Time', () => {
   it('should parse slash date-time values', () => {
     expect(dateToTimestamp('2026/05/26T14:32:10')).toBe(
@@ -25,7 +36,7 @@ describe('Time', () => {
 
   it('should normalize Unix timestamps in seconds', () => {
     expect(dateToTimestamp(1726403530)).toBe(1726403530000)
-    expect(formatDateTime(1726403530)).toBe('2024/09/15 14:32:10')
+    expect(formatDateTime(1726403530)).toBe(formatLocalDateTime(1726403530000))
   })
 
   it('should detect time precision', () => {
