@@ -109,6 +109,7 @@ export type Dataset = BaseEntity &
     hasPreview?: boolean | number | string
     localisation?: string
     nbRow?: number
+    schemaSignature?: string | null
     sampleSize?: number
     nbResources?: number
     dataSize?: number

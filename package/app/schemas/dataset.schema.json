@@ -95,6 +95,11 @@
         "description": "Number of rows in the dataset",
         "x-description-fr": "Nombre de ligne dans le dataset"
       },
+      "schema_signature": {
+        "type": ["string", "null"],
+        "description": "Opaque technical signature of the dataset schema, useful for detecting structural changes",
+        "x-description-fr": "Signature technique opaque du schéma du jeu de données, utile pour détecter les changements de structure"
+      },
       "sample_size": {
         "type": ["integer", "null"],
         "description": "Number of rows sampled for frequency analysis",
