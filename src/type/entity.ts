@@ -113,7 +113,7 @@ export type Dataset = BaseEntity &
     sampleSize?: number
     nbResources?: number
     dataSize?: number
-    lastUpdateDate?: string
+    lastUpdateDate?: string | number
     updatingEach?: string
     noMoreUpdate?: boolean
 
@@ -214,7 +214,7 @@ export type Folder = BaseEntity &
     deliveryFormat?: string
     license?: string
     gitCode?: string
-    lastUpdateDate?: string
+    lastUpdateDate?: string | number
     link?: string
     localisation?: string
     metadataPath?: string

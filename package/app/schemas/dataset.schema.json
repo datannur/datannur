@@ -127,8 +127,8 @@
       },
       "last_update_date": {
         "type": ["string", "number", "null"],
-        "description": "Last update date of the dataset",
-        "x-description-fr": "Date de denière mise à jour du dataset"
+        "description": "Last update date or date-time of the dataset",
+        "x-description-fr": "Date ou date-heure de dernière mise à jour du dataset"
       },
       "updating_each": {
         "type": ["string", "null"],

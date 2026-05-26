@@ -1,5 +1,5 @@
 import Render from '@lib/render'
-import { getTimeAgo } from '@lib/time'
+import { dateToTimestamp, getTimeAgo } from '@lib/time'
 import Histogram from './histogram'
 import { attributs } from './attributs'
 import type { Attribut } from './attributs-def'
@@ -105,13 +105,15 @@ function addNumeric(items: DatabaseItem[], attribut: Attribut): ValueEntry[] {
       const val = attribut.getValue(item)
       if (typeof val === 'number' || val === undefined) rawValues.push(val)
       else console.warn('addNumeric() getValue() is not a number', val)
-    } else if (
-      attribut.parseDate &&
-      attribut.variable &&
-      item[attribut.variable] &&
-      typeof item[attribut.variable] === 'string'
-    ) {
-      rawValues.push(Date.parse(item[attribut.variable] as string))
+    } else if (attribut.parseDate && attribut.variable) {
+      const value = item[attribut.variable]
+      if (typeof value === 'string' || typeof value === 'number') {
+        rawValues.push(dateToTimestamp(value))
+      } else if (value === '' || value === undefined || value === null) {
+        rawValues.push(null)
+      } else {
+        console.warn('addNumeric() parseDate value is not a date', value)
+      }
     } else if (attribut.variable) {
       let val = item[attribut.variable]
       if (val === '' || val === undefined) val = null
