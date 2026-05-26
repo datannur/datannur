@@ -31,6 +31,7 @@ export function dateToTimestamp(
   mode: 'start' | 'end' = 'start',
 ): number {
   if (typeof date === 'number') return normalizeTimestamp(date)
+  if (isUnixTimestampString(date)) return normalizeTimestamp(Number(date))
 
   let completeDate = date
   if (!completeDate) return 0
@@ -55,7 +56,12 @@ function normalizeDateTimeInput(date: string): string {
 
 export function hasTimePrecision(date: string | number): boolean {
   if (typeof date === 'number') return true
+  if (isUnixTimestampString(date)) return true
   return /(?:T| )\d{1,2}:\d{2}/.test(date)
+}
+
+function isUnixTimestampString(value: string): boolean {
+  return /^\d{10}(?:\d{3})?$/.test(value.trim())
 }
 
 function normalizeTimestamp(timestamp: number): number {
@@ -101,6 +107,8 @@ export function getDatetime(timestamp: number, withSecond = false): string {
 
 export function formatDateTime(date: string | number): string {
   if (typeof date === 'number') return getDatetime(date, true)
+
+  if (isUnixTimestampString(date)) return getDatetime(Number(date), true)
 
   const timestamp = dateToTimestamp(date)
   if (Number.isFinite(timestamp) && /(?:Z|[+-]\d{2}:?\d{2})$/.test(date)) {

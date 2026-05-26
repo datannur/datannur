@@ -36,11 +36,24 @@ describe('Time', () => {
 
   it('should normalize Unix timestamps in seconds', () => {
     expect(dateToTimestamp(1726403530)).toBe(1726403530000)
+    expect(dateToTimestamp('1726403530')).toBe(1726403530000)
     expect(formatDateTime(1726403530)).toBe(formatLocalDateTime(1726403530000))
+    expect(formatDateTime('1726403530')).toBe(
+      formatLocalDateTime(1726403530000),
+    )
+  })
+
+  it('should normalize Unix timestamps in milliseconds', () => {
+    expect(dateToTimestamp('1726403530000')).toBe(1726403530000)
+    expect(formatDateTime('1726403530000')).toBe(
+      formatLocalDateTime(1726403530000),
+    )
   })
 
   it('should detect time precision', () => {
     expect(hasTimePrecision('2026/05/26')).toBe(false)
+    expect(hasTimePrecision('2026')).toBe(false)
+    expect(hasTimePrecision('1726403530')).toBe(true)
     expect(hasTimePrecision('2026/05/26T14:32:10')).toBe(true)
     expect(hasTimePrecision('2026-05-26T14:32:10')).toBe(true)
     expect(hasTimePrecision(new Date(2026, 4, 26, 14, 32, 10).getTime())).toBe(

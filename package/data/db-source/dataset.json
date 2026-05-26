@@ -82,7 +82,7 @@
     "description": "Données démographiques et géographiques par région",
     "nb_row": 500000,
     "sample_size": 100000,
-    "last_update_date": 1726403530,
+    "last_update_date": "1726403530",
     "updating_each": "annuelle",
     "start_date": "2000",
     "end_date": "2024",
