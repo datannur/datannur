@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends string">
-  import { untrack } from 'svelte'
+  import { tick, untrack } from 'svelte'
   import type { Component } from 'svelte'
   import type { Match } from 'navigo'
   import { router } from './router.svelte'
@@ -59,6 +59,7 @@
   let reloadIncrement = $state(0)
   let pageKey = $derived(`${entityGlobal}___${entityId}___${reloadIncrement}`)
   let routerInitialized = $state(false)
+  let lastRouteKey = ''
 
   const initialPage = getInitialPage(routerIndex, loadingPage)
 
@@ -81,6 +82,9 @@
   ) {
     if (newParams) params = newParams
     pageContentLoaded.set(false)
+    const routeKey = entityId ? `${entity}___${entityId}` : entity
+    const shouldScrollToTop = lastRouteKey !== '' && lastRouteKey !== routeKey
+    lastRouteKey = routeKey
 
     route = updateRouteComponent(
       routerIndex,
@@ -91,7 +95,11 @@
     )
 
     page.set(entity)
-    currentRoute.set(entityId ? `${entity}___${entityId}` : entity)
+    currentRoute.set(routeKey)
+
+    if (shouldScrollToTop) {
+      tick().then(() => window.scrollTo({ top: 0, left: 0 }))
+    }
 
     setTimeout(() => {
       const route = window.location.hash
