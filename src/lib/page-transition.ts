@@ -45,13 +45,50 @@ function getTextSource(source: HTMLElement) {
   )
 }
 
+function getTextRect(element: HTMLElement) {
+  const range = document.createRange()
+  range.selectNodeContents(element)
+  const rect = range.getBoundingClientRect()
+  range.detach()
+  return rect.width > 0 && rect.height > 0
+    ? rect
+    : element.getBoundingClientRect()
+}
+
+function createTextClone(
+  text: string,
+  rect: DOMRect,
+  style: CSSStyleDeclaration,
+) {
+  const clone = document.createElement('span')
+  clone.textContent = text
+
+  Object.assign(clone.style, {
+    position: 'fixed',
+    left: `${rect.left}px`,
+    top: `${rect.top}px`,
+    width: 'max-content',
+    margin: '0',
+    zIndex: '10000',
+    pointerEvents: 'none',
+    transformOrigin: 'top left',
+    color: style.color,
+    font: style.font,
+    lineHeight: style.lineHeight,
+    whiteSpace: 'nowrap',
+    background: 'transparent',
+  })
+
+  return clone
+}
+
 function animateTitleClone(
   text: string,
   target: HTMLElement,
   from: DOMRect,
   sourceStyle: CSSStyleDeclaration,
 ) {
-  const to = target.getBoundingClientRect()
+  const to = getTextRect(target)
   if (
     from.width === 0 ||
     from.height === 0 ||
@@ -61,24 +98,8 @@ function animateTitleClone(
     return
 
   const targetStyle = getComputedStyle(target)
-  const clone = document.createElement('span')
-  clone.textContent = text
-
-  Object.assign(clone.style, {
-    position: 'fixed',
-    left: `${from.left}px`,
-    top: `${from.top}px`,
-    width: 'max-content',
-    margin: '0',
-    zIndex: '10000',
-    pointerEvents: 'none',
-    transformOrigin: 'top left',
-    color: sourceStyle.color,
-    font: targetStyle.font,
-    lineHeight: targetStyle.lineHeight,
-    whiteSpace: 'nowrap',
-    background: 'transparent',
-  })
+  const clone = createTextClone(text, from, targetStyle)
+  clone.style.color = sourceStyle.color
 
   document.body.append(clone)
   target.style.visibility = 'hidden'
