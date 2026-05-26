@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: animate dark/light mode changes with a view transition while preserving the switch animation
 - fix: use hash routing by default on static servers and keep clean URLs for runtimes that opt in explicitly
 
 ## 0.24.0 (2026-05-25)

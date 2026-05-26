@@ -6,8 +6,9 @@
 
   let id = window.crypto.randomUUID()
 
-  function toggle() {
-    DarkMode.toggle()
+  function toggle(event: MouseEvent) {
+    const button = event.currentTarget
+    DarkMode.toggle(button instanceof HTMLElement ? button : undefined)
     if ($darkModeTheme === 'dark') Logs.add('toggleDarkModeBtnOff')
     else Logs.add('toggleDarkModeBtnOn')
   }
@@ -53,6 +54,7 @@
     border-radius: var(--toggleHeight);
     transition: all 500ms ease-out;
     background: var(--bgColor--night);
+    view-transition-name: none;
   }
   .day {
     background: var(--bgColor--day);
@@ -101,5 +103,36 @@
   label {
     cursor: pointer;
     padding-left: 0.3rem;
+  }
+
+  :global(::view-transition-old(root)),
+  :global(::view-transition-new(root)) {
+    animation-duration: 450ms;
+    animation-timing-function: ease;
+  }
+
+  :global(::view-transition-new(root)) {
+    animation-name: dark-mode-fade-in;
+  }
+
+  @keyframes -global-dark-mode-fade-in {
+    from {
+      clip-path: circle(
+        0 at var(--dark-mode-transition-x, 100%)
+          var(--dark-mode-transition-y, 100%)
+      );
+    }
+    to {
+      clip-path: circle(
+        150% at var(--dark-mode-transition-x, 100%)
+          var(--dark-mode-transition-y, 100%)
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(::view-transition-group(*)) {
+      animation-duration: 1ms;
+    }
   }
 </style>
