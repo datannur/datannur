@@ -1,6 +1,6 @@
 # datannur
 
-## unreleased
+## 0.25.0 (2026-05-26)
 
 - add: preserve time precision for dataset `last_update_date` values and officialize optional `schema_signature` metadata
 - add: configure global database filters with the `configFilter` table
