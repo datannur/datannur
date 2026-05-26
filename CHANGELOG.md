@@ -5,6 +5,7 @@
 - add: preserve time precision when displaying dataset `last_update_date` values
 - add: officialize optional dataset `schema_signature` metadata in the schema
 - add: animate dark/light mode changes with a view transition while preserving the switch animation
+- fix: keep original column names in internal metadata previews
 - fix: scroll to the top after internal SPA route changes
 - fix: use hash routing by default on static servers and keep clean URLs for runtimes that opt in explicitly
 

@@ -2,7 +2,7 @@
   import { untrack } from 'svelte'
   import db from '@db'
   import { getMetaVariableBreadcrumbItems } from '@lib/breadcrumb'
-  import { filterKeys } from '@lib/db'
+  import { filterKeysWithLabels } from '@lib/db'
   import { getUserData } from '@lib/user-data'
   import { tabsHelper } from '@tab/tabs-helper'
   import Title from '@layout/Title.svelte'
@@ -22,7 +22,12 @@
     const userData = getUserData()
     datasetPreview = userData?.[metaDataset.name] ?? []
   }
-  const variablePreview = filterKeys(datasetPreview, [metaVariable.name])
+  const variablePreview = filterKeysWithLabels(datasetPreview, [
+    {
+      key: metaVariable.name,
+      label: metaVariable.storageKey || metaVariable.name,
+    },
+  ])
 
   let tabs = tabsHelper({
     metaVariable,

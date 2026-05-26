@@ -459,6 +459,33 @@ export function filterKeys(list: Record<string, unknown>[], keys: string[]) {
   return list.map(o => Object.fromEntries(keys.map(k => [k, o[k]])))
 }
 
+type PreviewKey = {
+  key: string
+  label: string
+}
+
+function toCamelCase(value: string) {
+  return value.replace(/_[a-z]/g, match => match[1].toUpperCase())
+}
+
+function getPreviewValue(row: Record<string, unknown>, key: string) {
+  if (key in row) return row[key]
+
+  const camelKey = toCamelCase(key)
+  return row[camelKey]
+}
+
+export function filterKeysWithLabels(
+  list: Record<string, unknown>[],
+  keys: PreviewKey[],
+) {
+  return list.map(row =>
+    Object.fromEntries(
+      keys.map(({ key, label }) => [label, getPreviewValue(row, key)]),
+    ),
+  )
+}
+
 export function addMinimumDeep(
   items: RecursiveEntity[],
   noDeep = false,
