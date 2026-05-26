@@ -9,7 +9,7 @@ export type {
   FilterActive,
   Option,
   SearchHistory,
-  Filter,
+  ConfigFilter,
   Row,
   Column,
 } from './base'

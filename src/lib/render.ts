@@ -2,7 +2,13 @@ import escapeHtml from 'escape-html'
 import db from '@db'
 import { locale } from '@lib/constant'
 import { copyTextClasses, copyTextMsg } from '@lib/copy-text'
-import { getTimeAgo, dateToTimestamp } from '@lib/time'
+import {
+  getTimeAgo,
+  dateToTimestamp,
+  formatDateTime,
+  getDateTimeSortValue,
+  hasTimePrecision,
+} from '@lib/time'
 import { link } from '@lib/url'
 import {
   wrapLongText,
@@ -318,21 +324,23 @@ export default class Render {
     )
   }
   static datetime(
-    data: string | null | undefined,
+    data: string | number | null | undefined,
     type: string,
     row: unknown,
     option: { estimation?: boolean } = {},
   ) {
     if (!data) return ''
-    if (type !== 'display') return data
+    if (type === 'sort' || type === 'type') return getDateTimeSortValue(data)
+    if (type !== 'display') return formatDateTime(data)
 
     let contentAfter = ''
     if (option.estimation) {
       contentAfter = ` <span style="font-size: 12px;">(estim.)</span>`
     }
-    const timeAgo = getTimeAgo(data, true, true)
+    const hasTime = hasTimePrecision(data)
+    const timeAgo = getTimeAgo(data, true, !hasTime)
     const timestamp = dateToTimestamp(data, 'start')
-    const content = `${timeAgo}<br>${escapeHtml(data)}${contentAfter}`
+    const content = `${timeAgo}<br>${escapeHtml(formatDateTime(data))}${contentAfter}`
     const percent = getPercent((new Date().getTime() - timestamp) / 31536000000)
     const entity = percent < 0 ? 'value' : 'doc'
     const percentAbsInversed = 100 - Math.abs(percent)

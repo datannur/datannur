@@ -1,4 +1,8 @@
 <script lang="ts">
+  import {
+    animateFavoriteRemoval,
+    animateFavoriteToHeader,
+  } from './favorite-transition'
   import Favorites from './favorites'
   import type { FavoritableEntityName } from '@type'
 
@@ -18,12 +22,14 @@
 
   let clicked = $state(false)
 
-  function toggle() {
+  function toggle(event: MouseEvent) {
     isFavorite = !isFavorite
     if (isFavorite) {
+      animateFavoriteToHeader(event.currentTarget as HTMLElement)
       Favorites.add(type, id)
       clicked = true
     } else {
+      animateFavoriteRemoval()
       Favorites.remove(type, id)
       clicked = false
     }

@@ -4,10 +4,10 @@ import type {
   Frequency,
   Config,
   Favorite,
+  ConfigFilter,
   FilterActive,
   Option,
   SearchHistory,
-  Filter,
 } from './base'
 import { parentEntities, evolutionTypes } from '@lib/constant'
 
@@ -109,10 +109,11 @@ export type Dataset = BaseEntity &
     hasPreview?: boolean | number | string
     localisation?: string
     nbRow?: number
+    schemaSignature?: string | null
     sampleSize?: number
     nbResources?: number
     dataSize?: number
-    lastUpdateDate?: string
+    lastUpdateDate?: string | number
     updatingEach?: string
     noMoreUpdate?: boolean
 
@@ -213,7 +214,7 @@ export type Folder = BaseEntity &
     deliveryFormat?: string
     license?: string
     gitCode?: string
-    lastUpdateDate?: string
+    lastUpdateDate?: string | number
     link?: string
     localisation?: string
     metadataPath?: string
@@ -414,7 +415,7 @@ export type EntityTypeMap = MainEntityMap & {
   metaDataset: MetaDataset
   metaFolder: MetaFolder
   favorite: Favorite
-  filter: Filter
+  configFilter: ConfigFilter
   filterActive: FilterActive
   log: Log
   option: Option

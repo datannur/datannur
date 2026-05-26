@@ -1,6 +1,11 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
-  import { getTimeAgo, getDatetime } from '@lib/time'
+  import {
+    getTimeAgo,
+    getDatetime,
+    hasTimePrecision,
+    formatDateTime,
+  } from '@lib/time'
 
   let {
     lastUpdateDate,
@@ -12,12 +17,13 @@
     fromTimestamp?: boolean
   } = $props()
 
+  const hasTime = $derived(intraday || hasTimePrecision(lastUpdateDate))
   const lastUpdateDateReadable = $derived(
-    fromTimestamp ? getDatetime(lastUpdateDate as number) : lastUpdateDate,
+    fromTimestamp
+      ? getDatetime(lastUpdateDate as number)
+      : formatDateTime(lastUpdateDate),
   )
-  const timeAgo = $derived(
-    getTimeAgo(lastUpdateDate, !fromTimestamp, !intraday),
-  )
+  const timeAgo = $derived(getTimeAgo(lastUpdateDate, !fromTimestamp, !hasTime))
 </script>
 
 {#if lastUpdateDate}

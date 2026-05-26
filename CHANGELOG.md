@@ -1,7 +1,14 @@
 # datannur
 
-## Unreleased
+## unreleased
 
+- add: preserve time precision for dataset `last_update_date` values and officialize optional `schema_signature` metadata
+- add: configure global database filters with the `configFilter` table
+- add: animate entity title navigation and favorite counter updates
+- add: animate dark/light mode changes with a view transition while preserving the switch animation
+- change: update jsonjsdb to 0.12.0 and apply configured filters during initialization
+- fix: keep original column names in internal metadata previews
+- fix: scroll to the top after internal SPA route changes
 - fix: use hash routing by default on static servers and keep clean URLs for runtimes that opt in explicitly
 
 ## 0.24.0 (2026-05-25)

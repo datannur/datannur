@@ -61,10 +61,14 @@ export type SearchHistory = {
   timestamp: number
 }
 
-// Filter type for local filters
-export type Filter = {
+// Filter configuration exposed in the header
+export type ConfigFilter = {
   id: string
   name: string
+  entity: string
+  field: string
+  value: string | number | boolean | null
+  isActiveDefault?: boolean
   isActive?: boolean
 }
 

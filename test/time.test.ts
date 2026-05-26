@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { getTimeAgo } from '@lib/time'
+import {
+  dateToTimestamp,
+  formatDateTime,
+  getDateTimeSortValue,
+  getTimeAgo,
+  hasTimePrecision,
+} from '@lib/time'
 
 const sameDateMultipleTimes = [
   [new Date(2023, 10, 25, 0, 30, 0)],
@@ -10,7 +16,51 @@ const sameDateMultipleTimes = [
   [new Date(2023, 10, 25, 23, 45, 0)],
 ]
 
+function formatLocalDateTime(timestamp: number): string {
+  const date = new Date(timestamp)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+}
+
 describe('Time', () => {
+  it('should parse slash date-time values', () => {
+    expect(dateToTimestamp('2026/05/26T14:32:10')).toBe(
+      new Date(2026, 4, 26, 14, 32, 10).getTime(),
+    )
+  })
+
+  it('should normalize Unix timestamps in seconds', () => {
+    expect(dateToTimestamp(1726403530)).toBe(1726403530000)
+    expect(formatDateTime(1726403530)).toBe(formatLocalDateTime(1726403530000))
+  })
+
+  it('should detect time precision', () => {
+    expect(hasTimePrecision('2026/05/26')).toBe(false)
+    expect(hasTimePrecision('2026/05/26T14:32:10')).toBe(true)
+    expect(hasTimePrecision('2026-05-26T14:32:10')).toBe(true)
+    expect(hasTimePrecision(new Date(2026, 4, 26, 14, 32, 10).getTime())).toBe(
+      true,
+    )
+  })
+
+  it('should format date-time values without losing the time', () => {
+    expect(formatDateTime('2026/05/26')).toBe('2026/05/26')
+    expect(formatDateTime('2026/05/26T14:32:10')).toBe('2026/05/26 14:32:10')
+    expect(formatDateTime('2026-05-26T14:32:10')).toBe('2026/05/26 14:32:10')
+  })
+
+  it('should sort date-times as normalized timestamps', () => {
+    expect(getDateTimeSortValue('2024/10/01T14:32:10')).toBe(
+      new Date(2024, 9, 1, 14, 32, 10).getTime(),
+    )
+    expect(getDateTimeSortValue(1726403530)).toBe(1726403530000)
+  })
+
   it.each(sameDateMultipleTimes)(
     'should work with param day = true',
     dateNow => {

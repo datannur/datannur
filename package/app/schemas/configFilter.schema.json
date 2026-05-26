@@ -1,0 +1,46 @@
+{
+  "$schema": "./__meta__.schema.json",
+  "$id": "https://dev.datannur.com/schemas/configfilter.schema.json",
+  "x-db": "data",
+  "title": "configFilter",
+  "description": "Global database filter rules exposed in the application header",
+  "x-description-fr": "Règles de filtrage global de la base affichées dans l'en-tête de l'application",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "name", "entity", "field", "value"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Primary key of the filter rule",
+        "x-description-fr": "Clé primaire de la règle de filtre"
+      },
+      "name": {
+        "type": "string",
+        "description": "Filter label displayed to users",
+        "x-description-fr": "Libellé du filtre affiché aux utilisateurs"
+      },
+      "entity": {
+        "type": "string",
+        "description": "Table filtered by the rule",
+        "x-description-fr": "Table filtrée par la règle"
+      },
+      "field": {
+        "type": "string",
+        "description": "Field filtered by the rule",
+        "x-description-fr": "Attribut filtré par la règle"
+      },
+      "value": {
+        "type": ["string", "number", "boolean", "null"],
+        "description": "Value matched by the rule",
+        "x-description-fr": "Valeur unique ciblée par la règle"
+      },
+      "is_active_default": {
+        "type": "boolean",
+        "description": "Default state before the user changes it",
+        "x-description-fr": "État par défaut avant modification par l'utilisateur"
+      }
+    }
+  }
+}

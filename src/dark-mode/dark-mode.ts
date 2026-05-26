@@ -22,6 +22,27 @@ function setThemeColor() {
     ?.setAttribute('content', themeColor)
 }
 
+function setTransitionOrigin(element?: HTMLElement) {
+  const bounds = element?.getBoundingClientRect()
+  if (!bounds) {
+    return
+  }
+
+  document.documentElement.style.setProperty(
+    '--dark-mode-transition-x',
+    `${bounds.left + bounds.width / 2}px`,
+  )
+  document.documentElement.style.setProperty(
+    '--dark-mode-transition-y',
+    `${bounds.top + bounds.height / 2}px`,
+  )
+}
+
+function clearTransitionOrigin() {
+  document.documentElement.style.removeProperty('--dark-mode-transition-x')
+  document.documentElement.style.removeProperty('--dark-mode-transition-y')
+}
+
 export class DarkMode {
   static init() {
     Options.loaded.then(() => {
@@ -42,13 +63,25 @@ export class DarkMode {
     })
   }
 
-  static toggle() {
-    document.documentElement.classList.toggle('dark-mode')
-    darkModeTheme.update(theme => {
-      const newTheme = theme === 'dark' ? 'light' : 'dark'
-      Options.set('darkMode', newTheme)
-      setThemeColor()
-      return newTheme
-    })
+  static toggle(transitionElement?: HTMLElement) {
+    const updateTheme = () => {
+      document.documentElement.classList.toggle('dark-mode')
+      darkModeTheme.update(theme => {
+        const newTheme = theme === 'dark' ? 'light' : 'dark'
+        Options.set('darkMode', newTheme)
+        setThemeColor()
+        return newTheme
+      })
+    }
+
+    if (!document.startViewTransition) {
+      updateTheme()
+      return
+    }
+
+    setTransitionOrigin(transitionElement)
+    document
+      .startViewTransition(updateTheme)
+      .finished.finally(clearTransitionOrigin)
   }
 }

@@ -95,6 +95,11 @@
         "description": "Number of rows in the dataset",
         "x-description-fr": "Nombre de ligne dans le dataset"
       },
+      "schema_signature": {
+        "type": ["string", "null"],
+        "description": "Opaque technical signature of the dataset schema, useful for detecting structural changes",
+        "x-description-fr": "Signature technique opaque du schéma du jeu de données, utile pour détecter les changements de structure"
+      },
       "sample_size": {
         "type": ["integer", "null"],
         "description": "Number of rows sampled for frequency analysis",
@@ -122,8 +127,8 @@
       },
       "last_update_date": {
         "type": ["string", "number", "null"],
-        "description": "Last update date of the dataset",
-        "x-description-fr": "Date de denière mise à jour du dataset"
+        "description": "Last update date or date-time of the dataset",
+        "x-description-fr": "Date ou date-heure de dernière mise à jour du dataset"
       },
       "updating_each": {
         "type": ["string", "null"],

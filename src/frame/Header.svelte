@@ -135,7 +135,7 @@
         <HeaderLink standard="enumeration" />
       </HeaderDropdown>
 
-      <HeaderDropdown title="Filtre" ifUse={['filter']}>
+      <HeaderDropdown title="Filtre" ifUse={['configFilter']}>
         <MainFilter />
       </HeaderDropdown>
 
@@ -145,7 +145,8 @@
         icon="favorite"
         info="Favoris"
         ><span class="visible-on-mobile">Favoris</span><span
-          class="num-style favorite-number">{$nbFavorite}</span
+          class="num-style favorite-number"
+          data-favorite-counter>{$nbFavorite}</span
         ></HeaderLink
       >
 
@@ -295,5 +296,36 @@
 
   .visible-on-mobile {
     display: none;
+  }
+
+  :global(.favorite-fly-star) {
+    color: color('favorite');
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .favorite-number {
+    display: inline-block;
+    transform-origin: center;
+  }
+
+  :global(.favorite-number.favorite-counter-hit) {
+    animation: favorite-counter-hit 260ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  :global(.favorite-number.favorite-counter-remove) {
+    animation: favorite-counter-remove 220ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  @keyframes favorite-counter-hit {
+    45% {
+      transform: scale(1.25);
+    }
+  }
+
+  @keyframes favorite-counter-remove {
+    45% {
+      opacity: 0.65;
+      transform: scale(0.82);
+    }
   }
 </style>

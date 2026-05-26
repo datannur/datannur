@@ -2,7 +2,7 @@
   import { untrack } from 'svelte'
   import db from '@db'
   import { getMetaDatasetBreadcrumbItems } from '@lib/breadcrumb'
-  import { filterKeys } from '@lib/db'
+  import { filterKeysWithLabels } from '@lib/db'
   import { getUserData } from '@lib/user-data'
   import { tabsHelper } from '@tab/tabs-helper'
   import Tabs from '@tab/Tabs.svelte'
@@ -20,8 +20,11 @@
   let datasetPreview: Row[] = []
   if (metaDataset.metaFolderId === 'data') {
     const datasetPreviewRaw = db.getAll(metaDataset.name)
-    const keysToKeep = metaVariables.map(a => a.name)
-    datasetPreview = filterKeys(datasetPreviewRaw, keysToKeep)
+    const keysToKeep = metaVariables.map(metaVariable => ({
+      key: metaVariable.name,
+      label: metaVariable.storageKey || metaVariable.name,
+    }))
+    datasetPreview = filterKeysWithLabels(datasetPreviewRaw, keysToKeep)
   } else if (metaDataset.metaFolderId === 'userData') {
     const userData = getUserData()
     datasetPreview = userData?.[metaDataset.name] ?? []
@@ -35,6 +38,12 @@
 </script>
 
 <section class="section">
-  <Title type="dataset" name={metaDataset.name} {breadcrumbItems} />
+  <Title
+    type="dataset"
+    name={metaDataset.name}
+    id={metaDataset.id}
+    transitionType="metaDataset"
+    {breadcrumbItems}
+  />
   <Tabs {tabs} />
 </section>

@@ -27,9 +27,11 @@ export function convertQuarterToFullDate(
 }
 
 export function dateToTimestamp(
-  date: string,
+  date: string | number,
   mode: 'start' | 'end' = 'start',
 ): number {
+  if (typeof date === 'number') return normalizeTimestamp(date)
+
   let completeDate = date
   if (!completeDate) return 0
   if (completeDate.length === 4) {
@@ -44,7 +46,20 @@ export function dateToTimestamp(
   if (completeDate.length === 6 && isQuarterSeparator(completeDate[4])) {
     completeDate = convertQuarterToFullDate(completeDate, mode)
   }
-  return Date.parse(completeDate)
+  return Date.parse(normalizeDateTimeInput(completeDate))
+}
+
+function normalizeDateTimeInput(date: string): string {
+  return date.replace(/^(\d{4})\/(\d{2})\/(\d{2})([T ].*)$/, '$1-$2-$3$4')
+}
+
+export function hasTimePrecision(date: string | number): boolean {
+  if (typeof date === 'number') return true
+  return /(?:T| )\d{1,2}:\d{2}/.test(date)
+}
+
+function normalizeTimestamp(timestamp: number): number {
+  return Math.abs(timestamp) < 100000000000 ? timestamp * 1000 : timestamp
 }
 
 export function timestampToDate(timestamp: number): string {
@@ -68,7 +83,7 @@ const divisions: {
 ]
 
 export function getDatetime(timestamp: number, withSecond = false): string {
-  const date = new Date(timestamp)
+  const date = new Date(normalizeTimestamp(timestamp))
 
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -84,6 +99,24 @@ export function getDatetime(timestamp: number, withSecond = false): string {
   return `${year}/${month}/${day} ${hours}:${minutes}`
 }
 
+export function formatDateTime(date: string | number): string {
+  if (typeof date === 'number') return getDatetime(date, true)
+
+  const timestamp = dateToTimestamp(date)
+  if (Number.isFinite(timestamp) && /(?:Z|[+-]\d{2}:?\d{2})$/.test(date)) {
+    return getDatetime(
+      timestamp,
+      /:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})$/.test(date),
+    )
+  }
+
+  return date.replace(/-/g, '/').replace('T', ' ')
+}
+
+export function getDateTimeSortValue(date: string | number): number {
+  return dateToTimestamp(date, 'start')
+}
+
 export function getTimeAgo(
   date: string | number,
   parse = false,
@@ -91,7 +124,8 @@ export function getTimeAgo(
   dateNow = new Date(),
 ) {
   if (!date) return ''
-  if (parse && typeof date === 'string') date = Date.parse(date)
+  if (parse && typeof date === 'string') date = dateToTimestamp(date)
+  if (typeof date === 'number') date = normalizeTimestamp(date)
   if (day) dateNow.setHours(0, 0, 0, 0)
   let duration = (Number(date) - Number(dateNow)) / 1000
   if (day && duration === 0) return "aujourd'hui"

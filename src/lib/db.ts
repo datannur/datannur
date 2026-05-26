@@ -3,10 +3,10 @@ import { getVariableTypeClean } from '@lib/util'
 import { getPeriod, dateToTimestamp, timestampToDate } from '@lib/time'
 import { entityNames, locale } from '@lib/constant'
 import { evolutionInitialSetup } from '@lib/evolution'
+import MainFilter from '@lib/main-filter'
 import type {
   Doc,
   EntityTypeMap,
-  Filter,
   Value,
   RecursiveEntityName,
   MainEntityName,
@@ -459,6 +459,33 @@ export function filterKeys(list: Record<string, unknown>[], keys: string[]) {
   return list.map(o => Object.fromEntries(keys.map(k => [k, o[k]])))
 }
 
+type PreviewKey = {
+  key: string
+  label: string
+}
+
+function toCamelCase(value: string) {
+  return value.replace(/_[a-z]/g, match => match[1].toUpperCase())
+}
+
+function getPreviewValue(row: Record<string, unknown>, key: string) {
+  if (key in row) return row[key]
+
+  const camelKey = toCamelCase(key)
+  return row[camelKey]
+}
+
+export function filterKeysWithLabels(
+  list: Record<string, unknown>[],
+  keys: PreviewKey[],
+) {
+  return list.map(row =>
+    Object.fromEntries(
+      keys.map(({ key, label }) => [label, getPreviewValue(row, key)]),
+    ),
+  )
+}
+
 export function addMinimumDeep(
   items: RecursiveEntity[],
   noDeep = false,
@@ -659,10 +686,12 @@ class Process {
   }
   static dataset() {
     const filters = getLocalFilter()
-    if (filters.length > 0) db.use.filter = true
+    if (filters.length > 0) db.use.configFilter = true
     const filterToName: { [id: string]: string } = {}
     for (const filter of filters) {
-      filterToName[filter.id] = filter.name
+      for (const value of MainFilter.getFilterValues(filter)) {
+        filterToName[String(value)] = filter.name
+      }
     }
     db.foreach('dataset', dataset => {
       addEntity(dataset, 'dataset')
@@ -910,17 +939,7 @@ function addDocRecursive() {
 }
 
 export function getLocalFilter() {
-  const dbFilters: Filter[] = []
-  for (const configRow of db.getAll('config')) {
-    if (configRow.id?.startsWith('filter_')) {
-      dbFilters.push({
-        id: configRow.value?.split(':')[0]?.trim(),
-        name: configRow.value?.split(':')[1]?.trim(),
-      })
-    }
-  }
-  if (dbFilters.length > 0) return dbFilters
-  return db.getAll('filter')
+  return db.getAll('configFilter')
 }
 
 export function dbAddProcessedData() {
