@@ -1,15 +1,10 @@
 <script lang="ts">
   import db from '@db'
   import { isMobile } from '@lib/browser-utils'
-  import { getLinkUrl } from '@lib/url'
-  import { ensureMermaidLoaded } from '@lib/util'
   import { entityNames } from '@lib/constant'
-  import Render from '@lib/render'
-  import Loading from '@frame/Loading.svelte'
   import { safeHtmlWithSvg } from '@lib/html-sanitizer'
+  import { renderSimpleDiagram } from '@lib/simple-diagram'
   import type { EntityName } from '@type'
-
-  let svgDiagramm = $state<string | null>(null)
 
   const schemaRaw = db.getSchema()
   const { oneToOne: oneToOneUnused, ...schema } = schemaRaw
@@ -75,20 +70,23 @@
       ),
   )
 
-  schema.oneToMany = schema.oneToMany.map((relation: string[]) => {
-    relation = relation.flatMap(relationKey =>
+  schema.oneToMany = schema.oneToMany.map(relation => {
+    let normalizedRelation = relation.flatMap(relationKey =>
       normalizeRelationKey(relationKey),
     )
     let otherOne: string | null = null
-    if (relation.includes('manager')) otherOne = 'owner'
-    else if (relation.includes('owner')) otherOne = 'manager'
+    if (normalizedRelation.includes('manager')) otherOne = 'owner'
+    else if (normalizedRelation.includes('owner')) otherOne = 'manager'
     if (otherOne) {
-      relation = ['organization', otherOne, ...relation]
+      normalizedRelation = ['organization', otherOne, ...normalizedRelation]
     }
-    if (relation[0] === 'organization' && relation[2] === 'organization') {
-      relation.splice(2, 1)
+    if (
+      normalizedRelation[0] === 'organization' &&
+      normalizedRelation[2] === 'organization'
+    ) {
+      normalizedRelation.splice(2, 1)
     }
-    return relation
+    return normalizedRelation
   })
 
   const schemaAlone: EntityName[] = []
@@ -122,16 +120,7 @@
     let entityName = table
     if (table in relationRoleNames) continue
 
-    let icon = Render.icon(entityName)
-    if (table === 'config') icon = ''
-    const entityCleanName = getEntityCleanName(table)
-
-    let recursiveIcon = ''
-    if (recursiveEntities.includes(table))
-      recursiveIcon = ' ' + Render.icon('recursive')
-
-    diagrammDefinition += `${table}(${icon}<span>${entityCleanName}</span>${recursiveIcon})\n`
-    diagrammDefinition += `click ${table} href "${getLinkUrl(`metaDataset/${table}`)}";\n`
+    diagrammDefinition += `$${entityName}${recursiveEntities.includes(table) ? ' $recursive' : ''}\n`
   }
 
   const otherLinks: string[] = []
@@ -164,21 +153,14 @@
     diagrammDefinition += `${link[0]} <--> ${link[1]}\n`
   }
 
-  ensureMermaidLoaded().then(async () => {
-    const { svg } = await window.mermaid.render('diagramm', diagrammDefinition)
-    svgDiagramm = svg
-  })
+  const svgDiagramm = renderSimpleDiagram(diagrammDefinition)
 </script>
 
-{#if !svgDiagramm}
-  <Loading type="tabBody" colorEntity="diagram" />
-{:else}
-  <div class="tab-inner-tab" use:safeHtmlWithSvg={svgDiagramm}></div>
-{/if}
+<div class="tab-inner-tab" use:safeHtmlWithSvg={svgDiagramm}></div>
 
 <style lang="scss">
   @use 'main.scss' as *;
-  @use '../style/mermaid.scss' as *;
+  @use '../style/simple-diagram.scss' as *;
   @use '../style/icon.scss' as *;
 
   .tab-inner-tab {
@@ -186,15 +168,8 @@
     padding: 30px;
     text-align: center;
     :global {
-      @include mermaid-style;
+      @include simple-diagram-style;
       @include icon-color;
-
-      .icon {
-        margin-right: 0;
-        &:first-child {
-          margin-right: 5px;
-        }
-      }
     }
   }
 

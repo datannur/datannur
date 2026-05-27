@@ -2,24 +2,9 @@
 
 import type Index from 'flexsearch'
 
-type MermaidRenderResult = {
-  svg: string
-  bindFunctions?: (element: Element) => void
-}
-
-type Mermaid = {
-  initialize: (config: object) => void
-  render: (
-    id: string,
-    text: string,
-    container?: Element,
-  ) => Promise<MermaidRenderResult>
-}
-
 declare global {
   interface Window {
     FlexSearch: typeof Index
-    mermaid: Mermaid
     goToHref: (event: MouseEvent, href: string) => void
     webkitSpeechRecognition: {
       new (): SpeechRecognition

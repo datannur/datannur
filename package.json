@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.25.0",
+  "version": "0.25.1",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",
@@ -14,6 +14,7 @@
     "dev:minimal": "DB=db-minimal vite",
     "dev:proxy": "python3 package/app/scripts/python/proxy_llm.py",
     "build": "vite build",
+    "build:debug": "SOURCE_MAP=true vite build",
     "build:analyze": "BUNDLE_VIEW=true vite build",
     "preview": "open-cli dist/index.html",
     "serve": "vite preview",
@@ -74,7 +75,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "@mermaid-js/tiny": "^11.15.0",
     "datatables.net": "^2.3.8",
     "datatables.net-bm": "^2.3.8",
     "datatables.net-buttons": "^3.2.6",

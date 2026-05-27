@@ -21,14 +21,11 @@ const packageAppDir = `${packageDir}/app`
 const appName = 'datannur-app-v2'
 const dbName = process.env.DB ?? 'db'
 const dbPath = `data/${dbName}`
+const sourcemap = process.env.SOURCE_MAP === 'true'
 
 const { appVersion, aliases } = await initBuildConfig()
 
 await copyPaths([
-  [
-    'node_modules/@mermaid-js/tiny/dist/mermaid.tiny.js',
-    `${packageAppDir}/assets/external/mermaid.tiny.js`,
-  ],
   [
     'node_modules/flexsearch/dist/flexsearch.bundle.min.js',
     `${packageAppDir}/assets/external/flexsearch.js`,
@@ -52,7 +49,7 @@ export default defineConfig({
   build: {
     outDir,
     assetsDir: 'app/assets',
-    sourcemap: true,
+    sourcemap,
     modulePreload: false,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {

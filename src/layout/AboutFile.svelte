@@ -3,15 +3,12 @@
   import MdContent from '@layout/MdContent.svelte'
   import { onPageHomepage, pageContentLoaded } from '@router/router-store'
   import { darkModeTheme } from '@dark-mode/dark-mode'
-  import Loading from '@frame/Loading.svelte'
-  import { ensureMermaidLoaded } from '@lib/util'
-  import { mdWithMermaidToHtml } from '@lib/mermaid'
+  import { mdWithSimpleDiagramToHtml } from '@lib/simple-diagram'
   import { safeHtmlWithSvg } from '@lib/html-sanitizer'
 
   let { aboutFile }: { aboutFile: string } = $props()
 
   let htmlContent = $state('')
-  let htmlContentLoaded = $state(false)
 
   let mdContent = $derived(
     aboutFile.replaceAll(
@@ -20,30 +17,23 @@
     ),
   )
 
-  const useMermaid = $derived(aboutFile.includes('mermaid('))
+  const useSimpleDiagram = $derived(aboutFile.includes('mermaid('))
 
   $effect(() => {
-    if (useMermaid) {
-      ensureMermaidLoaded().then(async () => {
-        if (!mdContent) return
-        htmlContent = await mdWithMermaidToHtml(mdContent)
-        htmlContentLoaded = true
-        $pageContentLoaded = true
-      })
+    if (useSimpleDiagram) {
+      htmlContent = mdWithSimpleDiagramToHtml(mdContent)
+      $pageContentLoaded = true
     }
   })
 
   onMount(() => {
-    if (!useMermaid) $pageContentLoaded = true
+    if (!useSimpleDiagram) $pageContentLoaded = true
   })
 </script>
 
 <div class="about-file-wrapper" class:homepage={$onPageHomepage}>
-  {#if useMermaid}
+  {#if useSimpleDiagram}
     <div class="content" use:safeHtmlWithSvg={htmlContent}></div>
-    {#if !htmlContentLoaded}
-      <Loading position="absolute" />
-    {/if}
   {:else}
     <MdContent content={mdContent} />
   {/if}
@@ -51,7 +41,7 @@
 
 <style lang="scss">
   @use 'main.scss' as *;
-  @use '../style/mermaid.scss' as *;
+  @use '../style/simple-diagram.scss' as *;
   @use '../style/icon.scss' as *;
 
   .about-file-wrapper {
@@ -72,17 +62,11 @@
 
     :global {
       @include icon-color;
-      @include mermaid-style;
+      @include simple-diagram-style;
 
-      .mermaid-block {
+      .simple-diagram-block {
         text-align: center;
         margin-bottom: 40px;
-        .icon {
-          margin-right: 0;
-          &:first-child {
-            margin-right: 5px;
-          }
-        }
       }
     }
   }
