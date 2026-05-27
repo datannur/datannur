@@ -1,5 +1,13 @@
 # datannur
 
+## 0.25.1 (2026-05-28)
+
+- change: replace Mermaid with a lightweight local SVG renderer for app structure diagrams, with theme-aware entity colors and no external browser requests
+- change: slim the in-app feature overview and README by removing bundled screenshot-heavy media, linking to the full website and technical documentation instead
+- change: remove packaged about-page and tutorial media assets from the runtime package to reduce distribution size
+- change: disable production source maps by default and add `npm run build:debug` for debug builds with source maps
+- fix: preserve SVG sanitization for local diagrams while restricting allowed SVG tags and attributes to the renderer needs
+
 ## 0.25.0 (2026-05-26)
 
 - add: preserve time precision for dataset `last_update_date` values and officialize optional `schema_signature` metadata

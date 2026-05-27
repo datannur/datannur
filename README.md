@@ -19,14 +19,9 @@ datannur is a client-side data catalog designed to organize and explore datasets
 - **Browser-isolated** - No system access, inherently secure
 - **French interface** - Currently available in French, with multilingual support planned for future releases
 
-## Demo
-
-🚀 **[Try the live demo](https://dev.datannur.com/)**
-
-![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/about-page/folder-page-folder-tab-dark.jpg#gh-dark-mode-only)
-![datannur interface](https://raw.githubusercontent.com/datannur/datannur/main/package/app/assets/about-page/folder-page-folder-tab.jpg#gh-light-mode-only)
-
 ## Documentation
+
+🚀 **Demo:** [dev.datannur.com](https://dev.datannur.com/)
 
 📖 **Full documentation:** [docs.datannur.com/app](https://docs.datannur.com/app/)
 

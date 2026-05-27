@@ -2,7 +2,7 @@ import DOMPurify from 'dompurify'
 
 export function sanitizeHtml(html: string): string {
   if (!html) return ''
-  return DOMPurify.sanitize(html, { ADD_ATTR: ['target'] })
+  return DOMPurify.sanitize(html, { ADD_ATTR: ['target', 'rel'] })
 }
 
 export function sanitizeHtmlWithSvg(html: string): string {
@@ -24,24 +24,37 @@ export function sanitizeHtmlWithSvg(html: string): string {
     ADD_TAGS: [
       'foreignObject',
       'svg',
-      'g',
       'path',
       'rect',
       'text',
-      'circle',
-      'line',
+      'defs',
+      'marker',
+      'a',
     ],
     ADD_ATTR: [
+      'id',
+      'class',
       'xmlns',
       'viewBox',
       'width',
       'height',
       'x',
       'y',
-      'fill',
-      'stroke',
+      'rx',
+      'ry',
       'd',
-      'transform',
+      'role',
+      'text-anchor',
+      'dominant-baseline',
+      'markerWidth',
+      'markerHeight',
+      'refX',
+      'refY',
+      'orient',
+      'marker-end',
+      'marker-start',
+      'href',
+      'data-href',
     ],
   })
 
@@ -51,7 +64,7 @@ export function sanitizeHtmlWithSvg(html: string): string {
       const content = foreignObjects[parseInt(index)] ?? ''
       return DOMPurify.sanitize(content, {
         ADD_TAGS: ['div', 'span', 'p', 'i', 'strong', 'br'],
-        ADD_ATTR: ['class', 'style', 'xmlns'],
+        ADD_ATTR: ['class', 'xmlns'],
       })
     },
   )

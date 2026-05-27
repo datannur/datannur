@@ -2,7 +2,7 @@ import type { ScreenshotSuiteConfig } from './capture-screenshots.ts'
 
 const config: ScreenshotSuiteConfig = {
   baseUrl: 'https://suisse.datannur.com/',
-  outDir: 'package/app/assets/about-page',
+  outDir: 'tmp/about-page-screenshots',
   browserChannel: 'chrome',
   format: 'jpeg',
   quality: 60,
