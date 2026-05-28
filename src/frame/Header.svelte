@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import db from '@db'
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
   import { getLinkUrl, isSsgRendering } from '@lib/url'
   import { checkApiAvailability } from '@lib/api-availability'
@@ -40,6 +41,12 @@
     elem?.click()
   }
 
+  function isSemanticExportEnabled() {
+    if (!db.exists('config', 'semantic_export_enabled')) return false
+    const value = String(db.getConfig('semantic_export_enabled')).toLowerCase()
+    return ['1', 'true', 'yes'].includes(value)
+  }
+
   $effect(() => {
     if (!$isMobile && $headerOpen) {
       closeMenu()
@@ -50,12 +57,16 @@
     checkApiAvailability().then(availability => {
       apiAvailability = availability
     })
-    checkSemanticExportAvailability().then(available => {
-      semanticExportAvailable = available
-    })
   })
 
-  $whenAppReady.then(() => (loading = false))
+  $whenAppReady.then(() => {
+    loading = false
+    if (isSemanticExportEnabled()) {
+      checkSemanticExportAvailability().then(available => {
+        semanticExportAvailable = available
+      })
+    }
+  })
 </script>
 
 <svelte:window bind:scrollY />
