@@ -233,6 +233,8 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
+  $search-layout-transition: 780ms cubic-bezier(0.33, 1, 0.68, 1);
+
   .header-search-item {
     padding: 0;
     margin-right: 0px;
@@ -252,8 +254,9 @@
       transition:
         border-color $transition-basic-1,
         box-shadow $transition-basic-1,
-        top $transition-basic-1,
-        left $transition-basic-1;
+        top $search-layout-transition,
+        left $search-layout-transition,
+        right $search-layout-transition;
       &.focus {
         border-color: $color-5;
       }
@@ -268,9 +271,10 @@
         transition:
           border-color $transition-basic-1,
           box-shadow $transition-basic-1,
-          top $transition-basic-1,
-          left $transition-basic-1,
-          z-index 0s $transition-basic-1;
+          top $search-layout-transition,
+          left $search-layout-transition,
+          right $search-layout-transition,
+          z-index 0s $search-layout-transition;
       }
     }
 
@@ -282,7 +286,10 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      transition: $transition-basic-1;
+      transition:
+        width $search-layout-transition,
+        padding $search-layout-transition,
+        color $transition-basic-1;
       &::placeholder {
         color: $color-4;
       }

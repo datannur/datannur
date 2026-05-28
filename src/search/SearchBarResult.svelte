@@ -114,6 +114,8 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
+  $search-result-transition: 780ms cubic-bezier(0.33, 1, 0.68, 1);
+
   #search-bar-result-outer {
     position: relative;
     overflow: hidden;
@@ -122,7 +124,7 @@
   #search-bar-result-wrapper {
     height: 0px;
     overflow-y: hidden;
-    transition: height $transition-basic-1;
+    transition: height $search-result-transition;
     @include scrollbar-light();
     &.is-open {
       height: var(--height);

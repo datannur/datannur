@@ -52,7 +52,7 @@
     height: var(--toggleHeight);
     width: var(--toggleWidth);
     border-radius: var(--toggleHeight);
-    transition: all 500ms ease-out;
+    transition: all 780ms cubic-bezier(0.33, 1, 0.68, 1);
     background: var(--bgColor--night);
     view-transition-name: none;
   }
@@ -63,7 +63,7 @@
     position: absolute;
     display: block;
     border-radius: 50%;
-    transition: all 400ms ease-out;
+    transition: all 780ms cubic-bezier(0.33, 1, 0.68, 1);
     top: 3em;
     left: 3em;
     transform: rotate(-75deg);
@@ -107,8 +107,8 @@
 
   :global(::view-transition-old(root)),
   :global(::view-transition-new(root)) {
-    animation-duration: 450ms;
-    animation-timing-function: ease;
+    animation-duration: 780ms;
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   :global(::view-transition-new(root)) {

@@ -1,6 +1,7 @@
 const entityRoutePattern = /^([^/?#]+)\/([^/?#]+)$/
 const transitionNamePrefix = 'entity-title'
-const animationDuration = 260
+const animationDuration = 780
+const titleBounceDistance = 8
 
 type Navigate = () => void
 type TextStyleSnapshot = {
@@ -87,12 +88,14 @@ function createTextClone(
   return clone
 }
 
-function animateTitleClone(
-  text: string,
-  target: HTMLElement,
-  from: DOMRect,
-  sourceStyle: TextStyleSnapshot,
-) {
+function getTitleBounceOffset(delta: number) {
+  if (delta === 0) return 0
+  return (
+    Math.sign(delta) * Math.min(Math.abs(delta) * 0.04, titleBounceDistance)
+  )
+}
+
+function animateTitleClone(text: string, target: HTMLElement, from: DOMRect) {
   const to = getTextRect(target)
   if (
     from.width === 0 ||
@@ -104,28 +107,35 @@ function animateTitleClone(
 
   const targetStyle = getComputedStyle(target)
   const clone = createTextClone(text, from, targetStyle)
-  clone.style.color = sourceStyle.color
 
   document.body.append(clone)
   target.style.visibility = 'hidden'
 
   const deltaX = to.left - from.left
   const deltaY = to.top - from.top
+  const bounceX = getTitleBounceOffset(deltaX)
+  const bounceY = getTitleBounceOffset(deltaY)
 
   const animation = clone.animate(
     [
       {
-        color: sourceStyle.color,
         transform: 'translate(0, 0) scale(1)',
       },
       {
-        color: targetStyle.color,
+        offset: 0.86,
+        transform: `translate(${deltaX + bounceX}px, ${deltaY + bounceY}px) scale(1)`,
+      },
+      {
+        offset: 0.94,
+        transform: `translate(${deltaX - bounceX * 0.35}px, ${deltaY - bounceY * 0.35}px) scale(1)`,
+      },
+      {
         transform: `translate(${deltaX}px, ${deltaY}px) scale(1)`,
       },
     ],
     {
       duration: animationDuration,
-      easing: 'cubic-bezier(0.2, 0, 0, 1)',
+      easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
       fill: 'forwards',
     },
   )
@@ -141,14 +151,13 @@ function animateTitleClone(
 function animateAfterNavigation(
   text: string,
   sourceBounds: DOMRect,
-  sourceStyle: TextStyleSnapshot,
   route: ReturnType<typeof getEntityRoute>,
 ) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const target = getTitleTarget(route)
       if (!target) return
-      animateTitleClone(text, target, sourceBounds, sourceStyle)
+      animateTitleClone(text, target, sourceBounds)
     })
   })
 }
@@ -177,14 +186,8 @@ export function navigateWithEntityTitleTransition(
   }
   const textSource = getTextSource(source)
   const sourceBounds = textSource.getBoundingClientRect()
-  const computedSourceStyle = getComputedStyle(textSource)
-  const sourceStyle = {
-    color: computedSourceStyle.color,
-    font: computedSourceStyle.font,
-    lineHeight: computedSourceStyle.lineHeight,
-  }
   const text = textSource.textContent?.trim() ?? ''
 
   navigate()
-  if (text) animateAfterNavigation(text, sourceBounds, sourceStyle, route)
+  if (text) animateAfterNavigation(text, sourceBounds, route)
 }
