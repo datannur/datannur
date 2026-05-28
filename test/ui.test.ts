@@ -6,6 +6,24 @@ const baseUrl = new URL('../dist/index.html', import.meta.url).href
 
 let browser: Browser | undefined = undefined
 let page: Page | undefined = undefined
+let optionalMissingDcatProbeErrors = 0
+
+function isOptionalMissingDcatProbe(url: string, errorText?: string) {
+  return (
+    errorText === 'net::ERR_FILE_NOT_FOUND' &&
+    url.endsWith('/data/db-semantic/validation.json.js')
+  )
+}
+
+function allowNextOptionalMissingDcatProbeConsoleError() {
+  optionalMissingDcatProbeErrors += 1
+  setTimeout(() => {
+    optionalMissingDcatProbeErrors = Math.max(
+      0,
+      optionalMissingDcatProbeErrors - 1,
+    )
+  }, 100)
+}
 
 beforeAll(async () => {
   browser = await chromium.launch({ headless: true })
@@ -15,7 +33,21 @@ beforeAll(async () => {
 
   page.on('console', msg => {
     if (msg.type() === 'error') {
+      if (
+        msg.text() === 'Failed to load resource: net::ERR_FILE_NOT_FOUND' &&
+        optionalMissingDcatProbeErrors > 0
+      ) {
+        optionalMissingDcatProbeErrors -= 1
+        return
+      }
       throw new Error(`Console error: ${msg.text()}`)
+    }
+  })
+
+  page.on('requestfailed', request => {
+    const failure = request.failure()
+    if (isOptionalMissingDcatProbe(request.url(), failure?.errorText)) {
+      allowNextOptionalMissingDcatProbeConsoleError()
     }
   })
 
