@@ -53,11 +53,14 @@
       },
     },
     Column.docPath(),
-    Column.timestamp({
-      varName: 'lastUpdate',
-      title: 'Mise à jour',
+    {
+      data: 'lastUpdateDate',
+      title: Render.icon('date') + 'Mise à jour',
+      defaultContent: '',
+      filterType: 'input',
       tooltip: 'Date de dernière mise à jour',
-    }),
+      render: (data, type, row) => Render.datetime(data, type, row),
+    },
     Column.inherited(),
     {
       data: 'nbOrganization',

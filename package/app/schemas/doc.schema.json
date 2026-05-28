@@ -38,8 +38,8 @@
       },
       "last_update": {
         "type": ["string", "number", "null"],
-        "description": "Unix timestamp of the last modification",
-        "x-description-fr": "Timestamp unix de la dernière modification"
+        "description": "Last modification date as YYYY/MM/DDTHH:MM:SS or legacy Unix timestamp",
+        "x-description-fr": "Date de dernière modification au format YYYY/MM/DDTHH:MM:SS ou timestamp Unix historique"
       }
     }
   }

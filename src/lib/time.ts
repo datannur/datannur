@@ -73,6 +73,24 @@ export function timestampToDate(timestamp: number): string {
   return date.toISOString().slice(0, 10).replaceAll('-', '/')
 }
 
+export function normalizeLastUpdateDate(value: string | number | null): string {
+  if (!value) return ''
+  if (typeof value === 'string' && value.includes('T')) return value
+  if (typeof value === 'string' && /^\d{4}\/\d{2}\/\d{2}$/.test(value)) {
+    return value
+  }
+
+  const numeric = Number(value)
+  if (Number.isFinite(numeric)) {
+    return new Date(normalizeTimestamp(numeric))
+      .toISOString()
+      .slice(0, 19)
+      .replaceAll('-', '/')
+  }
+
+  return String(value)
+}
+
 const formatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
 const divisions: {
   amount: number

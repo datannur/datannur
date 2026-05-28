@@ -1,5 +1,10 @@
 # datannur
 
+## Unreleased
+
+- fix: preserve second-level precision for doc update dates, including legacy Unix timestamps, and render doc/folder update date-times consistently in the front app
+- change: add folder demo data with `last_update_date` time precision and document folder update fields as date or date-time values
+
 ## 0.25.2 (2026-05-28)
 
 - change: inline FlexSearch and preload only the active main banner variant to keep the portable runtime lighter and avoid extra browser requests

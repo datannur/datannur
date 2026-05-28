@@ -340,7 +340,11 @@ export default class Render {
     const hasTime = hasTimePrecision(data)
     const timeAgo = getTimeAgo(data, true, !hasTime)
     const timestamp = dateToTimestamp(data, 'start')
-    const content = `${timeAgo}<br>${escapeHtml(formatDateTime(data))}${contentAfter}`
+    let datetime = escapeHtml(formatDateTime(data))
+    if (datetime.length > 12) {
+      datetime = `<span style="font-size: 12px;">${datetime}</span>`
+    }
+    const content = `${timeAgo}<br>${datetime}${contentAfter}`
     const percent = getPercent((new Date().getTime() - timestamp) / 31536000000)
     const entity = percent < 0 ? 'value' : 'doc'
     const percentAbsInversed = 100 - Math.abs(percent)

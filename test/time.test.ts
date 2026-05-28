@@ -5,6 +5,7 @@ import {
   getDateTimeSortValue,
   getTimeAgo,
   hasTimePrecision,
+  normalizeLastUpdateDate,
 } from '@lib/time'
 
 const sameDateMultipleTimes = [
@@ -65,6 +66,19 @@ describe('Time', () => {
     expect(formatDateTime('2026/05/26')).toBe('2026/05/26')
     expect(formatDateTime('2026/05/26T14:32:10')).toBe('2026/05/26 14:32:10')
     expect(formatDateTime('2026-05-26T14:32:10')).toBe('2026/05/26 14:32:10')
+  })
+
+  it('should normalize document last update values without losing seconds', () => {
+    expect(normalizeLastUpdateDate('2026/05/26T14:32:10')).toBe(
+      '2026/05/26T14:32:10',
+    )
+    expect(normalizeLastUpdateDate('2026/05/26')).toBe('2026/05/26')
+    expect(normalizeLastUpdateDate('1706239962.0')).toBe(
+      new Date(1706239962 * 1000)
+        .toISOString()
+        .slice(0, 19)
+        .replaceAll('-', '/'),
+    )
   })
 
   it('should sort date-times as normalized timestamps', () => {
