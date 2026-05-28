@@ -5,5 +5,6 @@
   "catalog_publisher": "datannur",
   "base_uri": "https://dev.datannur.com/",
   "organization_slug": "datannur",
+  "dcat_publication_folder_types": ["package"],
   "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open"
 }

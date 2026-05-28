@@ -22,6 +22,7 @@ import MetaFolderInfo from '@component/folder/MetaFolderInfo.svelte'
 import MetaDatasetInfo from '@component/dataset/MetaDatasetInfo.svelte'
 import MetaVariableInfo from '@component/variable/MetaVariableInfo.svelte'
 import MetaDiagramm from '@component/MetaDiagramm.svelte'
+import CheckDbFrame from '@component/CheckDbFrame.svelte'
 import DatasetPreview from '@component/preview/DatasetPreview.svelte'
 import VariablePreview from '@component/preview/VariablePreview.svelte'
 import AboutFile from '@layout/AboutFile.svelte'
@@ -138,6 +139,14 @@ export const allTabs: Record<string, TabConfig> = {
     name: 'Diagramme',
     icon: 'diagram',
     component: MetaDiagramm,
+    withoutNum: true,
+    withoutProp: true,
+    footerVisible: true,
+  },
+  checkDb: {
+    name: 'Intégrité',
+    icon: 'integrity',
+    component: CheckDbFrame,
     withoutNum: true,
     withoutProp: true,
     footerVisible: true,

@@ -3,6 +3,11 @@ const transitionNamePrefix = 'entity-title'
 const animationDuration = 260
 
 type Navigate = () => void
+type TextStyleSnapshot = {
+  color: string
+  font: string
+  lineHeight: string
+}
 
 function cleanTransitionPart(value: string | number) {
   return String(value).replace(/[^a-zA-Z0-9_-]/g, '-')
@@ -58,7 +63,7 @@ function getTextRect(element: HTMLElement) {
 function createTextClone(
   text: string,
   rect: DOMRect,
-  style: CSSStyleDeclaration,
+  style: TextStyleSnapshot,
 ) {
   const clone = document.createElement('span')
   clone.textContent = text
@@ -86,7 +91,7 @@ function animateTitleClone(
   text: string,
   target: HTMLElement,
   from: DOMRect,
-  sourceStyle: CSSStyleDeclaration,
+  sourceStyle: TextStyleSnapshot,
 ) {
   const to = getTextRect(target)
   if (
@@ -136,7 +141,7 @@ function animateTitleClone(
 function animateAfterNavigation(
   text: string,
   sourceBounds: DOMRect,
-  sourceStyle: CSSStyleDeclaration,
+  sourceStyle: TextStyleSnapshot,
   route: ReturnType<typeof getEntityRoute>,
 ) {
   requestAnimationFrame(() => {
@@ -163,8 +168,8 @@ export function navigateWithEntityTitleTransition(
 
   if (
     !route ||
-    route.route === currentPage ||
-    route.routeKey === currentPage ||
+    route?.route === currentPage ||
+    route?.routeKey === currentPage ||
     !(source instanceof HTMLElement)
   ) {
     navigate()
@@ -172,7 +177,12 @@ export function navigateWithEntityTitleTransition(
   }
   const textSource = getTextSource(source)
   const sourceBounds = textSource.getBoundingClientRect()
-  const sourceStyle = getComputedStyle(textSource)
+  const computedSourceStyle = getComputedStyle(textSource)
+  const sourceStyle = {
+    color: computedSourceStyle.color,
+    font: computedSourceStyle.font,
+    lineHeight: computedSourceStyle.lineHeight,
+  }
   const text = textSource.textContent?.trim() ?? ''
 
   navigate()
