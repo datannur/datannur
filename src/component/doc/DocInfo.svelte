@@ -24,12 +24,8 @@
       <a class="break-line" href={doc.path} target="_blanck">{doc.path}</a>
     </td>
   </tr>
-  {#if doc.lastUpdate}
-    <LastUpdateInfo
-      lastUpdateDate={doc.lastUpdate}
-      intraday={true}
-      fromTimestamp={true}
-    />
+  {#if doc.lastUpdateDate}
+    <LastUpdateInfo lastUpdateDate={doc.lastUpdateDate} intraday={true} />
   {/if}
   {#if doc.description}
     <DescriptionInfo description={doc.description} insideTable={true} />

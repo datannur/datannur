@@ -1,6 +1,11 @@
 import db from '@db'
 import { getVariableTypeClean } from '@lib/util'
-import { getPeriod, dateToTimestamp, timestampToDate } from '@lib/time'
+import {
+  getPeriod,
+  dateToTimestamp,
+  timestampToDate,
+  normalizeLastUpdateDate,
+} from '@lib/time'
 import { entityNames, locale } from '@lib/constant'
 import { evolutionInitialSetup } from '@lib/evolution'
 import MainFilter from '@lib/main-filter'
@@ -737,14 +742,8 @@ class Process {
       doc.nbFolder = db.countRelated('doc', doc.id, 'folder')
       doc.nbDataset = db.countRelated('doc', doc.id, 'dataset')
       doc.nbTag = db.countRelated('doc', doc.id, 'tag')
-      if (doc.lastUpdate) doc.lastUpdate *= 1000
-      doc.lastUpdateDate = ''
-      if (doc.lastUpdate) {
-        doc.lastUpdateDate = new Date(doc.lastUpdate)
-          .toISOString()
-          .slice(0, 10)
-          .replaceAll('-', '/')
-      }
+      doc.lastUpdateDate = normalizeLastUpdateDate(doc.lastUpdate ?? null)
+      if (typeof doc.lastUpdate === 'number') doc.lastUpdate *= 1000
       addEntities(doc)
     })
   }

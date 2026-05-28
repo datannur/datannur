@@ -297,7 +297,7 @@ export type Doc = BaseEntity &
   WithFavorite & {
     path?: string
     type?: string
-    lastUpdate?: number
+    lastUpdate?: string | number
     lastUpdateDate?: string
 
     // Computed fields added during processing
