@@ -25,21 +25,18 @@ export function initApp(): Promise<void> {
 
   initPromise = (async () => {
     try {
+      const optionsTimer = performance.now()
+      const optionsReady = Options.init().then(
+        () => performance.now() - optionsTimer,
+      )
+      const filterTimer = performance.now()
+      const filterReady = MainFilter.init().then(
+        () => performance.now() - filterTimer,
+      )
+
+      const filterMs = await filterReady
+
       let stepTimer = performance.now()
-      await Options.init()
-      console.log(
-        'init option',
-        Math.round(performance.now() - stepTimer) + ' ms',
-      )
-
-      stepTimer = performance.now()
-      await MainFilter.init()
-      console.log(
-        'init filter',
-        Math.round(performance.now() - stepTimer) + ' ms',
-      )
-
-      stepTimer = performance.now()
       await db.init({
         filterBuilder: tables => {
           const configFilters =
@@ -49,24 +46,38 @@ export function initApp(): Promise<void> {
           )
         },
       })
-      console.log('load db', Math.round(performance.now() - stepTimer) + ' ms')
+      const loadDbMs = performance.now() - stepTimer
 
       stepTimer = performance.now()
       const userData = await loadUserData()
       db.addMeta(userData, dbSchema as Record<string, unknown>[])
       dbAddProcessedData()
-      console.log(
-        'process db',
-        Math.round(performance.now() - stepTimer) + ' ms',
-      )
+      const processDbMs = performance.now() - stepTimer
+
+      const scheduleSearchInit = () => {
+        const searchTimer = performance.now()
+        search.init().then(() => {
+          console.log(
+            'search init',
+            Math.round(performance.now() - searchTimer),
+          )
+        })
+      }
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(scheduleSearchInit)
+      } else {
+        setTimeout(scheduleSearchInit, 0)
+      }
 
       stepTimer = performance.now()
-      await search.init()
       Logs.init(userData.log as Log[] | null)
       Favorites.init(userData.favorite as Favorite[])
       SearchHistory.init(userData.searchHistory as SearchHistoryEntry[], {
         limit: 100,
       })
+      const stateMs = performance.now() - stepTimer
+
+      const optionsMs = await optionsReady
 
       checkLocalEditStatus()
         .then(status => {
@@ -82,7 +93,17 @@ export function initApp(): Promise<void> {
           console.log('local edit status:', status)
         })
 
-      console.log('init total', Math.round(performance.now() - timer) + ' ms')
+      const totalMs = performance.now() - timer
+      const otherMs = totalMs - filterMs - loadDbMs - processDbMs - stateMs
+      console.log('init', {
+        optionsMs: Math.round(optionsMs),
+        filterMs: Math.round(filterMs),
+        loadDbMs: Math.round(loadDbMs),
+        processDbMs: Math.round(processDbMs),
+        stateMs: Math.round(stateMs),
+        totalMs: Math.round(totalMs),
+        otherMs: Math.round(otherMs),
+      })
     } catch (error) {
       console.error('App initialization failed:', error)
       throw error

@@ -10,6 +10,18 @@
     <script>
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches
       const themeColor = dark ? '#0b0b0b' : '#f6f7f8'
+      document.documentElement.style.setProperty(
+        '--main-banner-width',
+        dark ? '732' : '734',
+      )
+      document.documentElement.style.setProperty('--main-banner-height', '140')
+      const bannerPreload = document.createElement('link')
+      bannerPreload.rel = 'preload'
+      bannerPreload.as = 'image'
+      bannerPreload.href = dark
+        ? 'app/assets/main-banner-dark.png?v=1'
+        : 'app/assets/main-banner.png?v=1'
+      document.head.appendChild(bannerPreload)
       document
         .querySelector('meta[name="theme-color"]')
         ?.setAttribute('content', themeColor)

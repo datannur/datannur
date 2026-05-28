@@ -38,13 +38,13 @@
     height = Math.min(realHeight, windowHeight)
   }
 
-  const debouncedUpdateHeight = debounce(updateHeight, 200)
+  const debouncedUpdateHeight = debounce(updateHeight, 100)
 
   $effect(() => {
     void searchValue
     if (nbResult !== undefined) {
       debouncedUpdateHeight()
-      setTimeout(() => debouncedUpdateHeight(), 500)
+      setTimeout(() => debouncedUpdateHeight(), 200)
     }
   })
 

@@ -162,8 +162,6 @@
     reloadIncrement++
   }
 
-  console.log('init global timer', Math.round(performance.now()) + ' ms')
-
   const SvelteComponent = $derived(route)
   const useKey = $derived(routerInitialized || !isStaticMode)
 </script>

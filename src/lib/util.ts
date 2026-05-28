@@ -116,17 +116,3 @@ export async function worker<TParams, TResult>(
     workerApi.onmessage = (e: MessageEvent) => resolve(e.data as TResult)
   })
 }
-
-export function ensureScriptLoaded(scriptPath: string) {
-  return new Promise<void>(resolve => {
-    const scriptBase = scriptPath.split('?')[0]
-    if (document.querySelector(`script[src^="${scriptBase}"]`)) {
-      resolve()
-      return
-    }
-    const script = document.createElement('script')
-    script.src = `${scriptPath}?v=${__APP_VERSION__}`
-    script.onload = () => resolve()
-    document.head.appendChild(script)
-  })
-}
