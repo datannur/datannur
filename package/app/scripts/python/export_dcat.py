@@ -7,6 +7,7 @@ from collections import Counter, defaultdict
 from decimal import Decimal
 from html import escape
 import json
+import re
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -199,12 +200,22 @@ class DCATExporter:
         base_uri = self.config.get("base_uri", "https://example.org/")
         return URIRef(f"{base_uri}theme/{tag_id}")
 
-    def _parse_date(self, date_value) -> Optional[Literal]:
+    def _parse_date(self, date_value, field: str = "") -> Optional[Literal]:
         """Parse date from various formats to appropriate xsd datatype"""
         if not date_value:
             return None
 
         date_str = str(date_value).strip()
+
+        if field == "last_update_date" and self._is_unix_timestamp(date_str):
+            normalized = datetime.fromtimestamp(int(date_str), timezone.utc).replace(
+                tzinfo=None
+            )
+            return Literal(normalized.isoformat(), datatype=XSD.dateTime)
+
+        # Handle ISO datetime values, including slash-separated dates.
+        if "T" in date_str:
+            return self._date_time_literal(date_str.replace("/", "-", 2))
 
         # Handle YYYY/MM/DD
         if "/" in date_str and len(date_str) >= 10:
@@ -228,15 +239,37 @@ class DCATExporter:
         if "-" in date_str and len(date_str) == 10:
             return self._date_literal(date_str)
 
-        # Handle ISO datetime values by preserving dateTime precision
-        if "T" in date_str:
-            return self._date_time_literal(date_str)
-
         # Year only
         if date_str.isdigit() and len(date_str) == 4:
             return Literal(date_str, datatype=XSD.gYear)
 
         return None
+
+    def _parse_temporal_date(self, date_value, bound: str) -> Optional[Literal]:
+        quarter_date = self._parse_quarter_date(date_value, bound)
+        if quarter_date:
+            return quarter_date
+        return self._parse_date(date_value)
+
+    def _parse_quarter_date(self, date_value, bound: str) -> Optional[Literal]:
+        if not date_value:
+            return None
+
+        match = re.fullmatch(r"(\d{4})\s*[QqTt]([1-4])", str(date_value).strip())
+        if not match:
+            return None
+
+        year = int(match.group(1))
+        quarter = int(match.group(2))
+        month = (quarter - 1) * 3 + (1 if bound == "start" else 3)
+        day = 1 if bound == "start" else [31, 30, 30, 31][quarter - 1]
+        return Literal(f"{year:04d}-{month:02d}-{day:02d}", datatype=XSD.date)
+
+    def _is_unix_timestamp(self, date_str: str) -> bool:
+        if not re.fullmatch(r"\d{10}", date_str):
+            return False
+        timestamp = int(date_str)
+        return 946684800 <= timestamp <= 4102444800
 
     def _date_literal(self, date_str: str) -> Optional[Literal]:
         try:
@@ -259,8 +292,13 @@ class DCATExporter:
             return None
         return Literal(date_str, datatype=XSD.dateTime)
 
-    def _is_parseable_date(self, date_value) -> bool:
-        return not date_value or self._parse_date(date_value) is not None
+    def _is_parseable_date(self, date_value, field: str = "") -> bool:
+        return not date_value or self._parse_date(date_value, field) is not None
+
+    def _is_parseable_temporal_date(self, date_value, bound: str) -> bool:
+        return (
+            not date_value or self._parse_temporal_date(date_value, bound) is not None
+        )
 
     def _get_language_literal(self, text: str, lang: str = "fr") -> Literal:
         """Create a language-tagged literal"""
@@ -305,7 +343,7 @@ class DCATExporter:
                     dataset_uri, child_dataset, child_dataset["id"], folder_id
                 )
 
-            self.dcat_dataset_count = len(self._get_dcat_dataset_ids())
+        self.dcat_dataset_count = len(self._get_dcat_dataset_ids())
 
     def _add_dataset_metadata(self, dataset_uri: URIRef, item: Dict):
         self.graph.add((dataset_uri, RDF.type, DCAT.Dataset))
@@ -342,7 +380,9 @@ class DCATExporter:
                 self.graph.add((dataset_uri, DCTERMS.issued, issued_date))
 
         if item.get("last_update_date"):
-            modified_date = self._parse_date(item["last_update_date"])
+            modified_date = self._parse_date(
+                item["last_update_date"], "last_update_date"
+            )
             if modified_date:
                 self.graph.add((dataset_uri, DCTERMS.modified, modified_date))
 
@@ -373,8 +413,8 @@ class DCATExporter:
             self.graph.add((dataset_uri, DCTERMS.temporal, temporal_node))
             self.graph.add((temporal_node, RDF.type, DCTERMS.PeriodOfTime))
 
-            start = self._parse_date(item.get("start_date"))
-            end = self._parse_date(item.get("end_date"))
+            start = self._parse_temporal_date(item.get("start_date"), "start")
+            end = self._parse_temporal_date(item.get("end_date"), "end")
 
             if start:
                 self.graph.add((temporal_node, SCHEMA.startDate, start))
@@ -535,7 +575,9 @@ class DCATExporter:
 
         # Conditional: modified date
         if dataset.get("last_update_date"):
-            modified_date = self._parse_date(dataset["last_update_date"])
+            modified_date = self._parse_date(
+                dataset["last_update_date"], "last_update_date"
+            )
             if modified_date:
                 self.graph.add((dist_uri, DCTERMS.modified, modified_date))
 
@@ -554,72 +596,118 @@ class DCATExporter:
     def build_internal_validation(self) -> List[Dict]:
         """Build profile-inspired checks when official SHACL validation is unavailable."""
         checks = []
-        for dataset in self.datasets:
-            dataset_id = dataset.get("id", "")
-            dataset_name = dataset.get("name") or dataset_id
+        datasets_by_folder = self._get_datasets_by_publication_folder()
+        for item in self._get_report_items():
+            self._validate_published_dataset(item, checks)
 
-            def add_warning(code: str, message: str, field: str):
-                checks.append(
-                    {
-                        "severity": "warning",
-                        "code": code,
-                        "entityType": "dataset",
-                        "entityId": dataset_id,
-                        "entityLabel": dataset_name,
-                        "field": field,
-                        "message": message,
-                    }
-                )
-
-            if not dataset.get("name"):
-                add_warning("missing_title", "Dataset title is missing.", "name")
-            if not dataset.get("description"):
-                add_warning(
-                    "missing_description",
-                    "Dataset description is missing.",
-                    "description",
-                )
-            if not dataset.get("owner_organization_id"):
-                add_warning(
-                    "missing_publisher",
-                    "Publisher organization is missing.",
-                    "owner_organization_id",
-                )
-            if not dataset.get("link") and not dataset.get("data_path"):
-                add_warning(
-                    "missing_distribution_url",
-                    "No distribution access URL is available.",
-                    "link,data_path",
-                )
-            if not dataset.get("license"):
-                add_warning(
-                    "missing_license",
-                    "Dataset does not define a license; the configured default is used for generated distributions.",
-                    "license",
-                )
-            if not dataset.get("tag_ids"):
-                add_warning(
-                    "missing_theme", "Dataset has no theme or keyword.", "tag_ids"
-                )
-
-            delivery_format = dataset.get("delivery_format")
-            if delivery_format and delivery_format.lower() not in FILE_TYPE_URIS:
-                add_warning(
-                    "unclear_format",
-                    f"Distribution format '{delivery_format}' is not mapped to a standard EU file type.",
-                    "delivery_format",
-                )
-
-            for field in ["start_date", "end_date", "last_update_date"]:
-                if not self._is_parseable_date(dataset.get(field)):
-                    add_warning(
-                        "non_standard_date",
-                        f"Date value '{dataset.get(field)}' could not be normalized.",
-                        field,
-                    )
+        for child_datasets in datasets_by_folder.values():
+            for dataset in child_datasets:
+                self._validate_distribution(dataset, checks)
 
         self.validation_results = checks
         return checks
+
+    def _add_validation_warning(
+        self,
+        checks: List[Dict],
+        item: Dict,
+        entity_type: str,
+        code: str,
+        message: str,
+        field: str,
+    ):
+        item_id = item.get("id", "")
+        checks.append(
+            {
+                "severity": "warning",
+                "code": code,
+                "entityType": entity_type,
+                "entityId": item_id,
+                "entityLabel": item.get("name") or item_id,
+                "field": field,
+                "message": message,
+            }
+        )
+
+    def _validate_published_dataset(self, item: Dict, checks: List[Dict]):
+        def add_warning(code: str, message: str, field: str):
+            self._add_validation_warning(checks, item, "dataset", code, message, field)
+
+        if not item.get("name"):
+            add_warning("missing_title", "Dataset title is missing.", "name")
+        if not item.get("description"):
+            add_warning(
+                "missing_description",
+                "Dataset description is missing.",
+                "description",
+            )
+        if not item.get("owner_organization_id"):
+            add_warning(
+                "missing_publisher",
+                "Publisher organization is missing.",
+                "owner_organization_id",
+            )
+        if not self._has_distribution_access_url(item):
+            add_warning(
+                "missing_distribution_url",
+                "No distribution access URL is available.",
+                "link,data_path",
+            )
+        if not item.get("tag_ids"):
+            add_warning("missing_theme", "Dataset has no theme or keyword.", "tag_ids")
+
+        for field, bound in [("start_date", "start"), ("end_date", "end")]:
+            if not self._is_parseable_temporal_date(item.get(field), bound):
+                add_warning(
+                    "non_standard_date",
+                    f"Temporal value '{item.get(field)}' could not be normalized.",
+                    field,
+                )
+
+        if not self._is_parseable_date(
+            item.get("last_update_date"), "last_update_date"
+        ):
+            add_warning(
+                "non_standard_date",
+                f"Date value '{item.get('last_update_date')}' could not be normalized.",
+                "last_update_date",
+            )
+
+    def _validate_distribution(self, dataset: Dict, checks: List[Dict]):
+        def add_warning(code: str, message: str, field: str):
+            self._add_validation_warning(
+                checks, dataset, "distribution", code, message, field
+            )
+
+        if not dataset.get("link") and not dataset.get("data_path"):
+            add_warning(
+                "missing_distribution_url",
+                "Distribution access URL is missing.",
+                "link,data_path",
+            )
+        if not dataset.get("license"):
+            add_warning(
+                "missing_license",
+                "Distribution does not define a license; the configured default is used.",
+                "license",
+            )
+
+        delivery_format = dataset.get("delivery_format")
+        if delivery_format and delivery_format.lower() not in FILE_TYPE_URIS:
+            add_warning(
+                "unclear_format",
+                f"Distribution format '{delivery_format}' is not mapped to a standard EU file type.",
+                "delivery_format",
+            )
+
+        if not self._is_parseable_date(
+            dataset.get("last_update_date"), "last_update_date"
+        ):
+            add_warning(
+                "non_standard_date",
+                f"Date value '{dataset.get('last_update_date')}' could not be normalized.",
+                "last_update_date",
+            )
 
     def get_summary(self) -> Dict:
         report_items = self._get_report_items()
@@ -828,9 +916,10 @@ class DCATExporter:
         return payload
 
     def write_html_report(self, output_dir: Path, validation: Dict):
-        warnings_by_dataset = defaultdict(list)
+        warnings_by_entity = defaultdict(list)
         for result in self.validation_results:
-            warnings_by_dataset[result["entityLabel"]].append(result)
+            entity_label = f"{result['entityType']}: {result['entityLabel']}"
+            warnings_by_entity[entity_label].append(result)
 
         coverage_rows = "".join(
             f"<tr><td>{escape(item['label'])}</td><td>{item['count']} / {item['total']}</td><td>{item['percent']}%</td></tr>"
@@ -839,7 +928,7 @@ class DCATExporter:
         warning_rows = (
             "".join(
                 f"<tr><td>{escape(dataset)}</td><td>{escape(', '.join(warning['message'] for warning in warnings))}</td></tr>"
-                for dataset, warnings in warnings_by_dataset.items()
+                for dataset, warnings in warnings_by_entity.items()
             )
             or "<tr><td colspan='2'>No profile-inspired warnings were detected.</td></tr>"
         )
@@ -856,6 +945,7 @@ class DCATExporter:
             for label, filename in validation["files"].items()
             if label != "report"
         )
+        shacl_summary = self._shacl_summary_section(validation)
         shacl_text = escape(
             validation["validation"].get("message") or "No SHACL result text available."
         )
@@ -884,6 +974,8 @@ class DCATExporter:
     th {{ background: #f0f4f8; color: #334e68; }}
     code, pre {{ background: #f0f4f8; border-radius: 4px; }}
     pre {{ padding: 12px; overflow: auto; white-space: pre-wrap; }}
+        details {{ margin-top: 14px; }}
+        summary {{ cursor: pointer; color: #334e68; font-weight: 700; }}
     a {{ color: #1864ab; }}
   </style>
 </head>
@@ -902,10 +994,10 @@ class DCATExporter:
     </div>
   </section>
   <section><h2>Required fields coverage</h2><table><thead><tr><th>Field</th><th>Coverage</th><th>Percent</th></tr></thead><tbody>{coverage_rows}</tbody></table></section>
-  <section><h2>Warnings by dataset</h2><table><thead><tr><th>Dataset</th><th>Warnings</th></tr></thead><tbody>{warning_rows}</tbody></table></section>
+    <section><h2>Warnings by entity</h2><table><thead><tr><th>Entity</th><th>Warnings</th></tr></thead><tbody>{warning_rows}</tbody></table></section>
   <section><h2>Distribution table</h2><table><thead><tr><th>Dataset</th><th>Access URL</th><th>Download URL</th><th>Format</th><th>Media type</th><th>License</th></tr></thead><tbody>{distribution_rows}</tbody></table></section>
   <section><h2>Vocabulary usage</h2>{vocabulary_rows}</section>
-  <section><h2>SHACL results</h2><p>{escape(validation['validation']['message'])}</p><pre>{shacl_text}</pre></section>
+    <section><h2>SHACL results</h2>{shacl_summary}<details><summary>Full raw SHACL output</summary><pre>{shacl_text}</pre></details></section>
   <section><h2>Export files</h2><ul>{file_links}</ul></section>
 </main>
 </body>
@@ -919,6 +1011,36 @@ class DCATExporter:
             return ""
         safe_url = escape(url, quote=True)
         return f"<a href='{safe_url}'>{escape(url)}</a>"
+
+    def _shacl_summary_section(self, validation: Dict) -> str:
+        validation_info = validation["validation"]
+        message = validation_info.get("message") or ""
+        conforms = "Yes" if validation_info.get("officialConformance") else "No"
+        if not validation_info.get("shaclAvailable"):
+            return f"<p>{escape(message)}</p>"
+
+        result_blocks = re.split(r"\n(?=Constraint Violation)", message)
+        violations = [
+            block for block in result_blocks if "Constraint Violation" in block
+        ]
+        paths = sorted(set(re.findall(r"Result Path:\s*([^\n]+)", message)))
+        resources = sorted(set(re.findall(r"Focus Node:\s*([^\n]+)", message)))
+
+        def list_items(values: List[str]) -> str:
+            return "".join(f"<li><code>{escape(value)}</code></li>" for value in values)
+
+        path_content = list_items(paths) or "<li>No failing paths reported.</li>"
+        resource_content = (
+            list_items(resources) or "<li>No affected resources reported.</li>"
+        )
+        return f"""
+    <div class="grid">
+      <div class="metric"><strong>{escape(conforms)}</strong>Conforms</div>
+      <div class="metric"><strong>{len(violations)}</strong>Violations</div>
+    </div>
+    <h3>Failing paths</h3><ul>{path_content}</ul>
+    <h3>Affected resources</h3><ul>{resource_content}</ul>
+"""
 
     def _frequency_section(self, counts: Dict) -> str:
         sections = []
