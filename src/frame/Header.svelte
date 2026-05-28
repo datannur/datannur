@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import db from '@db'
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
   import { getLinkUrl, isSsgRendering } from '@lib/url'
   import { checkApiAvailability } from '@lib/api-availability'
@@ -14,13 +15,13 @@
   import HeaderDropdown from './HeaderDropdown.svelte'
   import HeaderLink from './HeaderLink.svelte'
   import Link from '@layout/Link.svelte'
-  import Icon from '@layout/Icon.svelte'
   import Footer from '@frame/Footer.svelte'
   import type { ApiAvailability } from '@lib/api-availability'
 
   let scrollY = $state(0)
   let loading = $state(true)
   let apiAvailability = $state<ApiAvailability>({ available: false })
+  let semanticExportAvailable = $state(false)
 
   const toggleHeader = () => ($headerOpen = !$headerOpen)
   const closeMenu = () => ($headerOpen = false)
@@ -39,6 +40,12 @@
     elem?.click()
   }
 
+  function isSemanticExportEnabled() {
+    if (!db.exists('config', 'semantic_export_enabled')) return false
+    const value = String(db.getConfig('semantic_export_enabled')).toLowerCase()
+    return ['1', 'true', 'yes'].includes(value)
+  }
+
   $effect(() => {
     if (!$isMobile && $headerOpen) {
       closeMenu()
@@ -51,7 +58,10 @@
     })
   })
 
-  $whenAppReady.then(() => (loading = false))
+  $whenAppReady.then(() => {
+    loading = false
+    semanticExportAvailable = isSemanticExportEnabled()
+  })
 </script>
 
 <svelte:window bind:scrollY />
@@ -109,6 +119,18 @@
           'doc',
           'docs',
         ]}
+        pageEntities={{
+          organization: 'organization',
+          organizations: 'organization',
+          folder: 'folder',
+          folders: 'folder',
+          tag: 'tag',
+          tags: 'tag',
+          concept: 'concept',
+          concepts: 'concept',
+          doc: 'doc',
+          docs: 'doc',
+        }}
         ifUse={['organization', 'folder', 'tag', 'concept', 'doc']}
       >
         <HeaderLink standard="organization" />
@@ -127,12 +149,35 @@
           'variables',
           'enumeration',
           'enumerations',
+          'openapi',
+          'dcat',
         ]}
+        pageEntities={{
+          dataset: 'dataset',
+          datasets: 'dataset',
+          variable: 'variable',
+          variables: 'variable',
+          enumeration: 'enumeration',
+          enumerations: 'enumeration',
+          openapi: 'openapi',
+          dcat: 'dcat',
+        }}
         ifUse={['dataset', 'variable', 'enumeration']}
       >
         <HeaderLink standard="dataset" />
         <HeaderLink standard="variable" />
         <HeaderLink standard="enumeration" />
+        {#if apiAvailability.available}
+          <HeaderLink href="openapi" pages={['openapi']} icon="openapi">
+            <span>OpenAPI</span>
+          </HeaderLink>
+        {/if}
+
+        {#if semanticExportAvailable}
+          <HeaderLink href="dcat" pages={['dcat']} icon="dcat">
+            <span>DCAT</span>
+          </HeaderLink>
+        {/if}
       </HeaderDropdown>
 
       <HeaderDropdown title="Filtre" ifUse={['configFilter']}>
@@ -153,22 +198,6 @@
       <HeaderLink href="about" pages={['about']} icon="about" info="A propos">
         <span class="visible-on-mobile">A propos</span>
       </HeaderLink>
-
-      {#if apiAvailability.available}
-        <a
-          class="navbar-item"
-          href={apiAvailability.docsUrl}
-          target="_blank"
-          rel="noreferrer"
-          title="API"
-          onclick={closeMenu}
-        >
-          <span class="break-line use-tooltip fix-on-mobile" title="API">
-            <Icon type="database" />
-          </span>
-          <span class="visible-on-mobile">API</span>
-        </a>
-      {/if}
 
       <HeaderLink
         href="options"

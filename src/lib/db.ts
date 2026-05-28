@@ -234,6 +234,7 @@ function propagateTagIdsToParents() {
     if (!variable.datasetId) continue
     const tagIds = getPropagatedTagIds(variable)
     if (tagIds.length === 0) continue
+    if (!db.get('dataset', variable.datasetId)) continue
     db.addRelations('dataset', variable.datasetId, 'tagIds', tagIds, {
       ifExists: 'ignore',
     })
@@ -243,6 +244,7 @@ function propagateTagIdsToParents() {
     if (!dataset.folderId) continue
     const tagIds = getPropagatedTagIds(dataset)
     if (tagIds.length === 0) continue
+    if (!db.get('folder', dataset.folderId)) continue
     db.addRelations('folder', dataset.folderId, 'tagIds', tagIds, {
       ifExists: 'ignore',
     })

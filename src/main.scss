@@ -111,11 +111,14 @@ $icon-colors: (
   'gitCode': #e0745c,
   'timeAgo': #e0745c,
   'nbSource': #e0745c,
+  'openapi': #6f83c2,
   'md': #579fbd,
   'relation': #579fbd,
   'evolution': #579fbd,
   'nextUpdateDate': #579fbd,
   'nbDerived': #579fbd,
+  'dcat': #d4a930,
+  'integrity': #167a45,
   'log': #bd7c6c,
   'frequency': #12999b,
   'colSearch': $color-2,
@@ -212,5 +215,5 @@ $tiny-mobile-limit: 600px;
 $entities:
   'organization', 'folder', 'tag', 'concept', 'dataset', 'variable',
   'enumeration', 'value', 'log', 'entity', 'option', 'search', 'favorite',
-  'about', 'diagram', 'compare', 'stat', 'doc', 'evolution', 'features',
-  'preview', 'frequency';
+  'about', 'diagram', 'compare', 'stat', 'doc', 'openapi', 'dcat', 'integrity',
+  'evolution', 'features', 'preview', 'frequency';

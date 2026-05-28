@@ -21,6 +21,7 @@
     metaDatasets,
     metaVariables,
     metaDiagramm: '',
+    checkDb: '',
     stat,
   })
 </script>

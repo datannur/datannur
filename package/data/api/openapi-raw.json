@@ -64,6 +64,28 @@
         }
       }
     },
+    "/configFilter.json": {
+      "get": {
+        "summary": "Get all configFilter",
+        "description": "Returns the complete configFilter table as a JSON array",
+        "tags": ["configFilter"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/configFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Table not found"
+          }
+        }
+      }
+    },
     "/dataset.json": {
       "get": {
         "summary": "Get all dataset",
@@ -345,6 +367,50 @@
           }
         }
       },
+      "configFilter": {
+        "x-db": "data",
+        "title": "configFilter",
+        "description": "Global database filter rules exposed in the application header",
+        "x-description-fr": "Règles de filtrage global de la base affichées dans l'en-tête de l'application",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "name", "entity", "field", "value"],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Primary key of the filter rule",
+              "x-description-fr": "Clé primaire de la règle de filtre"
+            },
+            "name": {
+              "type": "string",
+              "description": "Filter label displayed to users",
+              "x-description-fr": "Libellé du filtre affiché aux utilisateurs"
+            },
+            "entity": {
+              "type": "string",
+              "description": "Table filtered by the rule",
+              "x-description-fr": "Table filtrée par la règle"
+            },
+            "field": {
+              "type": "string",
+              "description": "Field filtered by the rule",
+              "x-description-fr": "Attribut filtré par la règle"
+            },
+            "value": {
+              "type": ["string", "number", "boolean", "null"],
+              "description": "Value matched by the rule",
+              "x-description-fr": "Valeur unique ciblée par la règle"
+            },
+            "is_active_default": {
+              "type": "boolean",
+              "description": "Default state before the user changes it",
+              "x-description-fr": "État par défaut avant modification par l'utilisateur"
+            }
+          }
+        }
+      },
       "dataset": {
         "x-db": "data",
         "title": "dataset",
@@ -467,8 +533,8 @@
             },
             "last_update_date": {
               "type": ["string", "number", "null"],
-              "description": "Last update date of the dataset",
-              "x-description-fr": "Date de denière mise à jour du dataset"
+              "description": "Last update date or date-time of the dataset",
+              "x-description-fr": "Date ou date-heure de dernière mise à jour du dataset"
             },
             "updating_each": {
               "type": ["string", "null"],
@@ -521,8 +587,8 @@
             },
             "last_update": {
               "type": ["string", "number", "null"],
-              "description": "Unix timestamp of the last modification",
-              "x-description-fr": "Timestamp unix de la dernière modification"
+              "description": "Last modification date as YYYY/MM/DDTHH:MM:SS or legacy Unix timestamp",
+              "x-description-fr": "Date de dernière modification au format YYYY/MM/DDTHH:MM:SS ou timestamp Unix historique"
             }
           }
         }
@@ -707,8 +773,8 @@
             },
             "last_update_date": {
               "type": ["string", "number", "null"],
-              "description": "Last update date of the folder",
-              "x-description-fr": "Date de denière mise à jour du dossier"
+              "description": "Last update date or date-time of the folder",
+              "x-description-fr": "Date ou date-heure de dernière mise à jour du dossier"
             },
             "localisation": {
               "type": ["string", "null"],
@@ -1072,6 +1138,10 @@
     {
       "name": "config",
       "description": "General information, including descriptions of different entities"
+    },
+    {
+      "name": "configFilter",
+      "description": "Global database filter rules exposed in the application header"
     },
     {
       "name": "dataset",
