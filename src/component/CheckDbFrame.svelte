@@ -1,7 +1,13 @@
 <script lang="ts">
+  import { SvelteURL } from 'svelte/reactivity'
   import Loading from '@frame/Loading.svelte'
 
-  const checkDbUrl = '?app_mode=check_db'
+  const checkDbUrl = (() => {
+    const url = new SvelteURL(window.location.href)
+    url.hash = ''
+    url.search = '?app_mode=check_db'
+    return url.href
+  })()
   let loading = $state(true)
 </script>
 

@@ -24,9 +24,7 @@
       "get": {
         "summary": "Get all concept",
         "description": "Returns the complete concept table as a JSON array",
-        "tags": [
-          "concept"
-        ],
+        "tags": ["concept"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -48,9 +46,7 @@
       "get": {
         "summary": "Get all config",
         "description": "Returns the complete config table as a JSON array",
-        "tags": [
-          "config"
-        ],
+        "tags": ["config"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -72,9 +68,7 @@
       "get": {
         "summary": "Get all configFilter",
         "description": "Returns the complete configFilter table as a JSON array",
-        "tags": [
-          "configFilter"
-        ],
+        "tags": ["configFilter"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -96,9 +90,7 @@
       "get": {
         "summary": "Get all dataset",
         "description": "Returns the complete dataset table as a JSON array",
-        "tags": [
-          "dataset"
-        ],
+        "tags": ["dataset"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -120,9 +112,7 @@
       "get": {
         "summary": "Get all doc",
         "description": "Returns the complete doc table as a JSON array",
-        "tags": [
-          "doc"
-        ],
+        "tags": ["doc"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -144,9 +134,7 @@
       "get": {
         "summary": "Get all enumeration",
         "description": "Returns the complete enumeration table as a JSON array",
-        "tags": [
-          "enumeration"
-        ],
+        "tags": ["enumeration"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -168,9 +156,7 @@
       "get": {
         "summary": "Get all evolution",
         "description": "Returns the complete evolution table as a JSON array",
-        "tags": [
-          "evolution"
-        ],
+        "tags": ["evolution"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -192,9 +178,7 @@
       "get": {
         "summary": "Get all folder",
         "description": "Returns the complete folder table as a JSON array",
-        "tags": [
-          "folder"
-        ],
+        "tags": ["folder"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -216,9 +200,7 @@
       "get": {
         "summary": "Get all frequency",
         "description": "Returns the complete frequency table as a JSON array",
-        "tags": [
-          "frequency"
-        ],
+        "tags": ["frequency"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -240,9 +222,7 @@
       "get": {
         "summary": "Get all organization",
         "description": "Returns the complete organization table as a JSON array",
-        "tags": [
-          "organization"
-        ],
+        "tags": ["organization"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -264,9 +244,7 @@
       "get": {
         "summary": "Get all tag",
         "description": "Returns the complete tag table as a JSON array",
-        "tags": [
-          "tag"
-        ],
+        "tags": ["tag"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -288,9 +266,7 @@
       "get": {
         "summary": "Get all value",
         "description": "Returns the complete value table as a JSON array",
-        "tags": [
-          "value"
-        ],
+        "tags": ["value"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -312,9 +288,7 @@
       "get": {
         "summary": "Get all variable",
         "description": "Returns the complete variable table as a JSON array",
-        "tags": [
-          "variable"
-        ],
+        "tags": ["variable"],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -343,9 +317,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -354,27 +326,17 @@
               "x-description-fr": "Clé primaire du concept"
             },
             "parent_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the parent concept (domain hierarchy)",
               "x-description-fr": "Clé du concept parent (hiérarchie par domaine)"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Concept name",
               "x-description-fr": "Nom du concept"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Business description of the concept",
               "x-description-fr": "Description métier du concept"
             }
@@ -389,9 +351,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -400,10 +360,7 @@
               "x-description-fr": "Clé primaire d'un élément de configuration de l'app"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Value of the app configuration element",
               "x-description-fr": "Valeur de l'élément de configuration de l'app"
             }
@@ -418,13 +375,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id",
-            "name",
-            "entity",
-            "field",
-            "value"
-          ],
+          "required": ["id", "name", "entity", "field", "value"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -448,12 +399,7 @@
               "x-description-fr": "Attribut filtré par la règle"
             },
             "value": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ],
+              "type": ["string", "number", "boolean", "null"],
               "description": "Value matched by the rule",
               "x-description-fr": "Valeur unique ciblée par la règle"
             },
@@ -473,9 +419,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -484,209 +428,121 @@
               "x-description-fr": "Clé primaire du dataset"
             },
             "folder_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the folder containing the dataset",
               "x-description-fr": "Clé du dossier contenant le dataset"
             },
             "manager_organization_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the managing organization",
               "x-description-fr": "Clé de l'organisation gestionnaire du dataset"
             },
             "owner_organization_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the data provider organization",
               "x-description-fr": "Clé de l'organisation fournisseur du dataset"
             },
             "tag_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "doc_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related documents",
               "x-description-fr": "Clés des docs liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset name",
               "x-description-fr": "Nom du dataset"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset description",
               "x-description-fr": "Description du dataset"
             },
             "data_path": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset data location",
               "x-description-fr": "Emplacement des données du dataset"
             },
             "delivery_format": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Delivery format (CSV, XML, ...)",
               "x-description-fr": "Format du dataset livrées (CSV, XML, ...)"
             },
             "license": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset license",
               "x-description-fr": "Licence du dataset"
             },
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset type (useful for general filter)",
               "x-description-fr": "Type de dataset (utile pour le filtre générale)"
             },
             "link": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Link to the dataset access, source, or reference",
               "x-description-fr": "Lien vers l'accès, la source ou la référence du dataset"
             },
             "has_preview": {
-              "type": [
-                "boolean",
-                "integer",
-                "string",
-                "null"
-              ],
+              "type": ["boolean", "integer", "string", "null"],
               "description": "Whether a preview is available at data/db/preview/<dataset_id>",
               "x-description-fr": "Indique si un aperçu est disponible dans data/db/preview/<dataset_id>"
             },
             "localisation": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Geographic area covered by the dataset",
               "x-description-fr": "Zone géographique concernée par le dataset"
             },
             "nb_row": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of rows in the dataset",
               "x-description-fr": "Nombre de ligne dans le dataset"
             },
             "sample_size": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of rows sampled for frequency analysis",
               "x-description-fr": "Nombre de lignes échantillonnées pour l'analyse de fréquences"
             },
             "nb_resources": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of resources (files, tables, ...) in the dataset",
               "x-description-fr": "Nombre de ressources (fichiers, tables, ...) dans le dataset"
             },
             "data_size": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Size of the dataset in bytes",
               "x-description-fr": "Taille du dataset en octets"
             },
             "start_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Start of the period covered by the dataset",
               "x-description-fr": "Début de la période couverte par le dataset"
             },
             "end_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "End of the period covered by the dataset",
               "x-description-fr": "Fin de la période couverte par le dataset"
             },
             "last_update_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Last update date or date-time of the dataset",
               "x-description-fr": "Date ou date-heure de dernière mise à jour du dataset"
             },
             "updating_each": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Dataset update frequency",
               "x-description-fr": "Fréquence de mise à jour du dataset"
             },
             "no_more_update": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Dataset is no longer updated and has no next update date",
               "x-description-fr": "Le dataset n'est plus mis à jour et n'a donc pas de date de prochaine mise à jour"
             }
@@ -701,9 +557,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -712,43 +566,27 @@
               "x-description-fr": "Clé primaire du document"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Document name",
               "x-description-fr": "Nom du document"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Document description",
               "x-description-fr": "Description du doc"
             },
             "path": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Document location",
               "x-description-fr": "Emplacement du document"
             },
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Document type (pdf, md)",
               "x-description-fr": "Type de document (pdf, md)"
             },
             "last_update": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Last modification date as YYYY/MM/DDTHH:MM:SS or legacy Unix timestamp",
               "x-description-fr": "Date de dernière modification au format YYYY/MM/DDTHH:MM:SS ou timestamp Unix historique"
             }
@@ -763,9 +601,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -774,35 +610,22 @@
               "x-description-fr": "Clé primaire de l'énumération"
             },
             "folder_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Folder key",
               "x-description-fr": "Clé du dossier"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Enumeration name",
               "x-description-fr": "Nom de l'énumération"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Enumeration description",
               "x-description-fr": "Description de l'énumération"
             },
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Enumeration datatype",
               "x-description-fr": "Datatype de l'énumération"
             }
@@ -821,79 +644,47 @@
           "additionalProperties": false,
           "properties": {
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Type of change (addition, deletion or modification)",
               "x-description-fr": "Type de changement (ajout, suppression ou modification)"
             },
             "entity": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Name of the entity affected by the change",
               "x-description-fr": "Nom de l'entité concernée par le changement"
             },
             "entity_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the element affected by the change",
               "x-description-fr": "Clé de l'élement concernée par le changement"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Element name (filled in case of deletion)",
               "x-description-fr": "Nom de l'élément (rempli en cas de suppression)"
             },
             "parent_entity_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the parent element (filled in case of deletion)",
               "x-description-fr": "Clé de l'élément parent (rempli en cas de suppression)"
             },
             "variable": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Variable affected by the modification",
               "x-description-fr": "Variable concernée par la modification"
             },
             "old_value": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Value before modification",
               "x-description-fr": "Valeur avant modification"
             },
             "new_value": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Value after modification",
               "x-description-fr": "Valeur après modification"
             },
             "timestamp": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Unix timestamp of the change",
               "x-description-fr": "Timestamp unix du changement"
             }
@@ -908,9 +699,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -919,183 +708,106 @@
               "x-description-fr": "Clé primaire du dossier"
             },
             "parent_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the parent folder",
               "x-description-fr": "Clé du dossier contenant le dossier"
             },
             "manager_organization_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the managing organization",
               "x-description-fr": "Clé de l'organisation gestionnaire du dossier"
             },
             "owner_organization_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the data provider organization",
               "x-description-fr": "Clé de l'organisation fournisseur du dossier"
             },
             "tag_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "doc_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related documents",
               "x-description-fr": "Clés des docs liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder name",
               "x-description-fr": "Nom du dossier"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder description",
               "x-description-fr": "Description du dossier"
             },
             "data_path": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder data location",
               "x-description-fr": "Emplacement des données du dossier"
             },
             "delivery_format": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Delivery format (CSV, XML, ...)",
               "x-description-fr": "Format des données livrées (CSV, XML, ...)"
             },
             "license": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder license",
               "x-description-fr": "Licence du dossier"
             },
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder type (useful for general filter)",
               "x-description-fr": "Type de dossier (utile pour le filtre général)"
             },
             "git_code": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Code location on a GIT repo",
               "x-description-fr": "Emplacement du code sur un repo GIT"
             },
             "last_update_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Last update date or date-time of the folder",
               "x-description-fr": "Date ou date-heure de dernière mise à jour du dossier"
             },
             "localisation": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Geographic area covered by the folder",
               "x-description-fr": "Zone géographique concernée par le dossier"
             },
             "metadata_path": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder metadata location",
               "x-description-fr": "Emplacement des métadonnées du dossier"
             },
             "survey_type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Source type (sample, registry, ...)",
               "x-description-fr": "Type de source (échantillon, registre, ...)"
             },
             "start_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Start of the period covered by the folder",
               "x-description-fr": "Début de la période couverte par le dossier"
             },
             "end_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "End of the period covered by the folder",
               "x-description-fr": "Fin de la période couverte par le dossier"
             },
             "updating_each": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Folder update frequency",
               "x-description-fr": "Fréquence de mise à jour du dossier"
             },
             "no_more_update": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Folder is no longer updated and has no next update date",
               "x-description-fr": "Le dossier n'est plus mis à jour et n'a donc pas de date de prochaine mise à jour"
             }
@@ -1114,27 +826,17 @@
           "additionalProperties": false,
           "properties": {
             "variable_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the related variable",
               "x-description-fr": "Clé de la variable concernée"
             },
             "value": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Value whose frequency is counted",
               "x-description-fr": "Valeur dont on compte la fréquence"
             },
             "frequency": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of occurrences of this value in the variable",
               "x-description-fr": "Nombre d'occurrences de cette valeur dans la variable"
             }
@@ -1149,9 +851,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -1160,91 +860,51 @@
               "x-description-fr": "Clé primaire de l'organisation"
             },
             "parent_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the parent organization",
               "x-description-fr": "Clé de l'organisation parent"
             },
             "tag_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "doc_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related documents",
               "x-description-fr": "Clés des docs liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Organization name",
               "x-description-fr": "Nom de l'organisation"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Organization description",
               "x-description-fr": "Description de l'organisation"
             },
             "email": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Organization email",
               "x-description-fr": "Email de l'organisation"
             },
             "phone": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Organization phone number",
               "x-description-fr": "Numéro de téléphone de l'organisation"
             },
             "start_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Start of the period covered by the organization",
               "x-description-fr": "Début de la période couverte par l'organisation"
             },
             "end_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "End of the period covered by the organization",
               "x-description-fr": "Fin de la période couverte par l'organisation"
             }
@@ -1259,9 +919,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -1270,65 +928,36 @@
               "x-description-fr": "Clé primaire du mot clé"
             },
             "parent_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the parent tag",
               "x-description-fr": "Clé du mot clé parent"
             },
             "doc_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related documents",
               "x-description-fr": "Clés des docs liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "implied_tag_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of tags also applied when this tag is used",
               "x-description-fr": "Clés des mots clés aussi appliqués quand ce mot clé est utilisé",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "propagate_to_parents": {
-              "type": [
-                "boolean",
-                "null"
-              ],
+              "type": ["boolean", "null"],
               "description": "Whether this tag should be propagated to parent business entities",
               "x-description-fr": "Indique si ce mot clé doit être propagé aux entités métiers parentes"
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Tag name",
               "x-description-fr": "Nom du mot clé"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Tag description",
               "x-description-fr": "Description du mot clé"
             }
@@ -1347,28 +976,17 @@
           "additionalProperties": false,
           "properties": {
             "enumeration_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Enumeration key",
               "x-description-fr": "Clé de l'énumération"
             },
             "value": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Value",
               "x-description-fr": "Valeur"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Value description",
               "x-description-fr": "Description de valeur"
             }
@@ -1383,9 +1001,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "id"
-          ],
+          "required": ["id"],
           "additionalProperties": false,
           "properties": {
             "id": {
@@ -1394,205 +1010,118 @@
               "x-description-fr": "Clé primaire de la variable"
             },
             "dataset_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the dataset containing the variable",
               "x-description-fr": "Clé du dataset contenant la variable"
             },
             "enumeration_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related enumerations",
               "x-description-fr": "Clé des énumérations liées",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "tag_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Keys of related tags",
               "x-description-fr": "Clés des mots clés liés",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Variable name",
               "x-description-fr": "Nom de la variable"
             },
             "original_name": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Original variable name",
               "x-description-fr": "Nom d'origine de la variable"
             },
             "description": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Variable description",
               "x-description-fr": "Description de la variable"
             },
             "key": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Is or is part of a unique key",
               "x-description-fr": "Est ou fait parti d'une clé unique"
             },
             "business_key": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Is or is part of a business key",
               "x-description-fr": "Est ou fait partie d'une clé métier"
             },
             "nb_distinct": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of distinct values in the variable",
               "x-description-fr": "Nombre de valeurs distinctes contenues dans la variable"
             },
             "nb_duplicate": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of repeated values in the variable",
               "x-description-fr": "Nombre de valeurs répétées contenues dans la variable"
             },
             "nb_missing": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "Number of missing values in the variable",
               "x-description-fr": "Nombre de valeurs manquantes contenues dans la variable"
             },
             "type": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "description": "Variable datatype",
               "x-description-fr": "Datatype de la variable"
             },
             "start_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Start of the period covered by the variable",
               "x-description-fr": "Début de la période couverte par la variable"
             },
             "end_date": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "End of the period covered by the variable",
               "x-description-fr": "Fin de la période couverte par la variable"
             },
             "min": {
-              "type": [
-                "number",
-                "null"
-              ],
+              "type": ["number", "null"],
               "description": "Minimum value (or minimum string length for text variables)",
               "x-description-fr": "Valeur minimale (ou longueur minimale pour les variables texte)"
             },
             "max": {
-              "type": [
-                "number",
-                "null"
-              ],
+              "type": ["number", "null"],
               "description": "Maximum value (or maximum string length for text variables)",
               "x-description-fr": "Valeur maximale (ou longueur maximale pour les variables texte)"
             },
             "mean": {
-              "type": [
-                "number",
-                "null"
-              ],
+              "type": ["number", "null"],
               "description": "Mean value (or mean string length for text variables)",
               "x-description-fr": "Valeur moyenne (ou longueur moyenne pour les variables texte)"
             },
             "std": {
-              "type": [
-                "number",
-                "null"
-              ],
+              "type": ["number", "null"],
               "description": "Standard deviation (or standard deviation of string length for text variables)",
               "x-description-fr": "Écart-type (ou écart-type de la longueur pour les variables texte)"
             },
             "source_variable_ids": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "List of source variable keys (lineage)",
               "x-description-fr": "Liste des clés des variables sources (lineage)",
               "pattern": "^([a-zA-Z0-9_-]+(, ?[a-zA-Z0-9_-]+)*)?$",
-              "examples": [
-                "id1,id2,id3",
-                "single-id",
-                null
-              ]
+              "examples": ["id1,id2,id3", "single-id", null]
             },
             "fk_variable_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Foreign key referencing a variable in another dataset",
               "x-description-fr": "Clé étrangère référençant une variable dans un autre dataset"
             },
             "is_pattern": {
-              "type": [
-                "boolean",
-                "integer",
-                "null"
-              ],
+              "type": ["boolean", "integer", "null"],
               "description": "Indicates that frequencies show value patterns instead of raw data",
               "x-description-fr": "Indique que les fréquences affichent les patterns des valeurs plutôt que les données brutes"
             },
             "concept_id": {
-              "type": [
-                "string",
-                "number",
-                "null"
-              ],
+              "type": ["string", "number", "null"],
               "description": "Key of the related business concept",
               "x-description-fr": "Clé du concept métier lié"
             }
