@@ -2,11 +2,16 @@ import db from '@db'
 import { mainEntityNames } from '@lib/constant'
 import escapeHtml from 'escape-html'
 import flexSearchScript from '../../node_modules/flexsearch/dist/flexsearch.bundle.min.js?raw'
+import { writable } from 'svelte/store'
 import type FlexSearchType from 'flexsearch'
 import type { Index } from 'flexsearch'
 import type { MainEntity, MainEntityName } from '@type'
 
 const flexSearchScriptId = 'flexsearch-legacy-bundle'
+const maxPendingAdds = 500
+const mainEntityOrder = Object.keys(mainEntityNames) as MainEntityName[]
+
+export const searchReady = writable(false)
 
 let flexSearchLoading: Promise<typeof FlexSearchType> | null = null
 
@@ -32,13 +37,18 @@ async function getFlexSearch(): Promise<typeof FlexSearchType> {
   return flexSearchLoading
 }
 
-type EntityData = {
-  name: MainEntityName
-  items: Index
-  data: unknown[]
+type VariableName = 'name' | 'description'
+
+type SearchItemRef = {
+  entity: MainEntityName
+  id: string | number
 }
 
-type VariableName = 'name' | 'description'
+type SearchFieldData = {
+  name: VariableName
+  items: Index<true>
+  refs: Map<string, SearchItemRef>
+}
 
 export type SearchResult = {
   id: string | number
@@ -97,34 +107,50 @@ export function searchHighlight(value: string, search: string | null) {
 }
 
 class Search {
-  allSearch: {
-    name: VariableName
-    entities: EntityData[]
-  }[]
+  allSearch: SearchFieldData[]
   loading: Promise<void> | null
+  ready: boolean
 
   constructor() {
     this.allSearch = []
-    this.loading = new Promise<void>(() => {})
+    this.loading = null
+    this.ready = false
   }
   async init() {
+    if (this.loading) return this.loading
+    if (this.ready) return
+
     this.loading = (async () => {
       const flexSearch = await getFlexSearch()
       const variables: VariableName[] = ['name', 'description']
-      for (const variable of variables) {
-        const entitiesData: EntityData[] = []
-        for (const entity in mainEntityNames) {
-          entitiesData.push({
-            name: entity as MainEntityName,
-            items: new flexSearch.Index({ tokenize: 'forward' }),
-            data: [],
-          })
+      const addPromises: Promise<unknown>[] = []
+      const flushPromises: Promise<void>[] = []
+      const flushAdds = async () => {
+        const pendingAdds = addPromises.splice(0)
+        await Promise.all(pendingAdds)
+      }
+      const queueAdd = (addPromise: Promise<unknown>) => {
+        addPromises.push(addPromise)
+        if (addPromises.length >= maxPendingAdds) {
+          flushPromises.push(flushAdds())
         }
-        this.allSearch.push({ name: variable, entities: entitiesData })
+      }
+      const flushAllAdds = async () => {
+        flushPromises.push(flushAdds())
+        await Promise.all(flushPromises)
+        addPromises.length = 0
+        flushPromises.length = 0
+      }
+      for (const variable of variables) {
+        this.allSearch.push({
+          name: variable,
+          items: await new flexSearch.Worker({ tokenize: 'forward' }),
+          refs: new Map(),
+        })
       }
       for (const variable of this.allSearch) {
-        for (const entity of variable.entities) {
-          db.foreach(entity.name, item => {
+        for (const entity of mainEntityOrder) {
+          db.foreach(entity, item => {
             if (!('name' in item) || item.id === undefined) return
             let name = String(item[variable.name] ?? '')
             if (
@@ -133,58 +159,72 @@ class Search {
               variable.name === 'name'
             )
               name += ` (${item.originalName})`
-            entity.items.add(item.id, removeDiacritics(name))
+            const searchId = `${entity}:${item.id}`
+            variable.refs.set(searchId, { entity, id: item.id })
+            queueAdd(variable.items.add(searchId, removeDiacritics(name)))
           })
+          await flushAllAdds()
         }
       }
+      await flushAllAdds()
+      this.ready = true
+      searchReady.set(true)
     })()
+    return this.loading
   }
   async find(toSearch: string): Promise<SearchResult[]> {
+    if (!this.loading) await this.init()
     if (this.loading) await this.loading
     const result: SearchResult[] = []
     const idsFound: Record<string, unknown[]> = {}
     for (const entity in mainEntityNames) idsFound[entity] = []
     for (const variable of this.allSearch) {
-      for (const entity of variable.entities) {
-        const itemsId = await this.getItemsId(toSearch, entity, idsFound)
-        for (const itemId of itemsId) {
-          const item = db.get(entity.name, itemId) as MainEntity & {
-            folderId?: string | number
-            folderName?: string
-            originalName?: string
-          }
-          result.push({
-            id: item.id,
-            name:
-              item.name + (item.originalName ? ` (${item.originalName})` : ''),
-            description: item.description ?? '',
-            entity: entity.name,
-            variable: variable.name,
-            isFavorite: item.isFavorite || false,
-            folderId: item.folderId ?? '',
-            folderName: item.folderName ?? '',
-            _entity: item._entity ?? '',
-            _entityClean:
-              mainEntityNames[item._entity as keyof typeof mainEntityNames] ??
-              '',
-          })
+      const itemRefs = await this.getItemsRef(toSearch, variable, idsFound)
+      for (const itemRef of itemRefs) {
+        const item = db.get(itemRef.entity, itemRef.id) as MainEntity & {
+          folderId?: string | number
+          folderName?: string
+          originalName?: string
         }
+        result.push({
+          id: item.id,
+          name:
+            item.name + (item.originalName ? ` (${item.originalName})` : ''),
+          description: item.description ?? '',
+          entity: itemRef.entity,
+          variable: variable.name,
+          isFavorite: item.isFavorite || false,
+          folderId: item.folderId ?? '',
+          folderName: item.folderName ?? '',
+          _entity: item._entity ?? '',
+          _entityClean:
+            mainEntityNames[item._entity as keyof typeof mainEntityNames] ?? '',
+        })
       }
     }
     return result
   }
-  async getItemsId(
+  async getItemsRef(
     toSearch: string,
-    entity: EntityData,
+    fieldData: SearchFieldData,
     idsFound: Record<string, unknown[]>,
   ) {
-    entity.data = []
     const normalizedSearch = removeDiacritics(toSearch)
     if (!normalizedSearch) return []
-    const result = await entity.items.search(normalizedSearch, { limit: 99999 })
-    const itemsId = result.filter(x => !idsFound[entity.name].includes(x))
-    idsFound[entity.name] = idsFound[entity.name].concat(itemsId)
-    return itemsId
+    const searchIds = await fieldData.items.search(normalizedSearch, {
+      limit: 99999,
+    })
+    const itemRefsByEntity: { [key in MainEntityName]?: SearchItemRef[] } = {}
+    searchIds.forEach(searchId => {
+      const itemRef = fieldData.refs.get(String(searchId))
+      if (!itemRef || idsFound[itemRef.entity].includes(itemRef.id)) return
+
+      idsFound[itemRef.entity].push(itemRef.id)
+      const itemRefs = itemRefsByEntity[itemRef.entity] ?? []
+      itemRefs.push(itemRef)
+      itemRefsByEntity[itemRef.entity] = itemRefs
+    })
+    return mainEntityOrder.flatMap(entity => itemRefsByEntity[entity] ?? [])
   }
 }
 

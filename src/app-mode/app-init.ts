@@ -54,14 +54,28 @@ export function initApp(): Promise<void> {
       dbAddProcessedData()
       const processDbMs = performance.now() - stepTimer
 
+      const scheduleSearchInit = () => {
+        const searchTimer = performance.now()
+        search.init().then(() => {
+          console.log(
+            'search init',
+            Math.round(performance.now() - searchTimer),
+          )
+        })
+      }
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(scheduleSearchInit)
+      } else {
+        setTimeout(scheduleSearchInit, 0)
+      }
+
       stepTimer = performance.now()
-      await search.init()
       Logs.init(userData.log as Log[] | null)
       Favorites.init(userData.favorite as Favorite[])
       SearchHistory.init(userData.searchHistory as SearchHistoryEntry[], {
         limit: 100,
       })
-      const searchStateMs = performance.now() - stepTimer
+      const stateMs = performance.now() - stepTimer
 
       const optionsMs = await optionsReady
 
@@ -80,14 +94,13 @@ export function initApp(): Promise<void> {
         })
 
       const totalMs = performance.now() - timer
-      const otherMs =
-        totalMs - filterMs - loadDbMs - processDbMs - searchStateMs
+      const otherMs = totalMs - filterMs - loadDbMs - processDbMs - stateMs
       console.log('init', {
         optionsMs: Math.round(optionsMs),
         filterMs: Math.round(filterMs),
         loadDbMs: Math.round(loadDbMs),
         processDbMs: Math.round(processDbMs),
-        searchStateMs: Math.round(searchStateMs),
+        stateMs: Math.round(stateMs),
         totalMs: Math.round(totalMs),
         otherMs: Math.round(otherMs),
       })

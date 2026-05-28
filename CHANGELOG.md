@@ -1,9 +1,11 @@
 # datannur
 
-## Unreleased
+## 0.25.2 (2026-05-28)
 
 - change: inline FlexSearch and preload only the active main banner variant to keep the portable runtime lighter and avoid extra browser requests
 - change: update `jsonjsdb` to 0.12.1 and parallelize early app initialization to reduce startup latency
+- change: build the FlexSearch indexes in background workers after startup while keeping search disabled until indexing is ready
+- fix: normalize numeric `tag.propagate_to_parents` values so tag table select filters match boolean display values
 
 ## 0.25.1 (2026-05-28)
 

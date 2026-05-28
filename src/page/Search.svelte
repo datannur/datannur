@@ -3,7 +3,7 @@
   import { searchValue } from '@lib/store'
   import { UrlParam } from '@lib/url'
   import { pageContentLoaded } from '@router/router-store'
-  import search from '@search/search'
+  import search, { searchReady } from '@search/search'
   import Head from '@frame/Head.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import SearchResult from '@search/SearchResult.svelte'
@@ -56,6 +56,7 @@
   }
 
   async function searchInputChange() {
+    if (!$searchReady) return
     const urlSearchValue = UrlParam.get('search')
     if (urlSearchValue !== $searchValue) {
       UrlParam.set('search', $searchValue)
@@ -126,6 +127,8 @@
         class="input"
         type="text"
         name="search-page-input"
+        placeholder={$searchReady ? '' : 'Recherche en préparation...'}
+        disabled={!$searchReady}
         bind:value={$searchValue}
         autocomplete="off"
         enterkeyhint="search"
@@ -160,6 +163,10 @@
       padding: 20px;
       padding-left: 3.3rem;
       box-sizing: border-box;
+      &:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
     }
   }
 </style>

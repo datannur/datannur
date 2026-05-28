@@ -559,6 +559,11 @@ export function getFkRelatedVariables(
 
 class Process {
   static tag() {
+    db.foreach('tag', tag => {
+      tag.propagateToParents =
+        tag.propagateToParents === true || tag.propagateToParents === 1
+    })
+
     const impliedTagsRecursiveById = buildImpliedTagsRecursive()
     expandTagIdsWithImplied(impliedTagsRecursiveById)
     propagateTagIdsToParents()

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import search from '@search/search'
+  import search, { searchReady } from '@search/search'
   import { page, onPageSearch, onPageHomepage } from '@router/router-store'
   import { router } from '@router/router.svelte'
   import { isSmallMenu } from '@lib/browser-utils'
@@ -25,6 +25,7 @@
   )
   let isHiddenByMobileMenu = $derived($isSmallMenu && $headerOpen)
   let routerReady = $derived($page !== '')
+  let searchDisabled = $derived(!$searchReady)
 
   const maxSearchResult = 100
   let navPosition = 0
@@ -37,6 +38,7 @@
   }
 
   async function searchInputChange() {
+    if (searchDisabled) return
     if ($onPageSearch) return
     searchValueDebounced = $searchValue
     navPosition = 0
@@ -67,6 +69,7 @@
   }
 
   function goToPageSearch() {
+    if (searchDisabled) return
     if ($onPageSearch) return
     router.navigate(`/search?search=${$searchValue}`)
     selectInput()
@@ -174,6 +177,7 @@
       class:focus={isFocusIn}
       class:homepage={$onPageHomepage}
       class:page-search={$onPageSearch}
+      class:search-disabled={searchDisabled}
     >
       <p class="control has-icons-right">
         <button
@@ -191,9 +195,12 @@
           id="header-search-input"
           class="input"
           type="text"
-          placeholder="Rechercher..."
+          placeholder={searchDisabled
+            ? 'Recherche en préparation...'
+            : 'Rechercher...'}
+          disabled={searchDisabled}
           bind:value={$searchValue}
-          oninput={debounce(searchInputChange, 200)}
+          oninput={debounce(searchInputChange, 100)}
           onkeyup={keyup}
           onkeydown={keydown}
           onfocusin={focusin}
@@ -250,6 +257,9 @@
       &.focus {
         border-color: $color-5;
       }
+      &.search-disabled {
+        opacity: 0.7;
+      }
       &.homepage,
       &.page-search {
         top: 65px;
@@ -275,6 +285,9 @@
       transition: $transition-basic-1;
       &::placeholder {
         color: $color-4;
+      }
+      &:disabled {
+        cursor: wait;
       }
     }
     .search-bar-container.homepage #header-search-input,

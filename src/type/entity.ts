@@ -256,7 +256,7 @@ export type Tag = BaseEntity &
   WithDocs &
   WithFavorite & {
     impliedTagIds?: string
-    propagateToParents?: boolean
+    propagateToParents?: boolean | 1
 
     // Computed fields added during processing
     impliedTags?: Tag[]
