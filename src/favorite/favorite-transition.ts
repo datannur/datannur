@@ -1,6 +1,6 @@
 const favoriteCounterSelector = '[data-favorite-counter]'
-const animationDuration = 520
-const removeAnimationDuration = 220
+const animationDuration = 780
+const removeAnimationDuration = 340
 
 function getFavoriteCounter() {
   return document.querySelector<HTMLElement>(favoriteCounterSelector)
@@ -67,9 +67,9 @@ export function animateFavoriteToHeader(source: HTMLElement) {
         transform: 'translate(-50%, -50%) scale(1)',
       },
       {
-        opacity: 0.95,
-        offset: 0.72,
-        transform: `translate(calc(-50% + ${to.x - from.x}px), calc(-50% + ${to.y - from.y}px)) scale(0.72)`,
+        opacity: 0.92,
+        offset: 0.78,
+        transform: `translate(calc(-50% + ${to.x - from.x}px), calc(-50% + ${to.y - from.y}px)) scale(0.78)`,
       },
       {
         opacity: 0,
@@ -78,12 +78,12 @@ export function animateFavoriteToHeader(source: HTMLElement) {
     ],
     {
       duration: animationDuration,
-      easing: 'cubic-bezier(0.2, 0, 0, 1)',
+      easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
       fill: 'forwards',
     },
   )
 
-  window.setTimeout(() => target.classList.add('favorite-counter-hit'), 360)
+  window.setTimeout(() => target.classList.add('favorite-counter-hit'), 580)
 
   void animation.finished
     .catch(() => {})
@@ -91,7 +91,7 @@ export function animateFavoriteToHeader(source: HTMLElement) {
       star.remove()
       window.setTimeout(() => {
         target.classList.remove('favorite-counter-hit')
-      }, 260)
+      }, 360)
     })
 }
 

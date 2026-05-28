@@ -334,23 +334,23 @@
   }
 
   :global(.favorite-number.favorite-counter-hit) {
-    animation: favorite-counter-hit 260ms cubic-bezier(0.2, 0, 0, 1);
+    animation: favorite-counter-hit 360ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   :global(.favorite-number.favorite-counter-remove) {
-    animation: favorite-counter-remove 220ms cubic-bezier(0.2, 0, 0, 1);
+    animation: favorite-counter-remove 320ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   @keyframes favorite-counter-hit {
     45% {
-      transform: scale(1.25);
+      transform: scale(1.18);
     }
   }
 
   @keyframes favorite-counter-remove {
     45% {
-      opacity: 0.65;
-      transform: scale(0.82);
+      opacity: 0.75;
+      transform: scale(0.9);
     }
   }
 </style>

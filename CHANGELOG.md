@@ -1,8 +1,9 @@
 # datannur
 
-## Unreleased
+## 0.25.3 (2026-05-28)
 
 - add: expose DCAT and OpenAPI from the app navigation, add an in-app OpenAPI view, and show database integrity checks as a styled internal tab with non-crashing missing-reference reporting
+- change: soften title, search bar, favorite, and dark mode transitions for smoother UI movement
 - fix: preserve second-level precision for doc update dates, including legacy Unix timestamps, and render doc/folder update date-times consistently in the front app
 - change: add folder demo data with `last_update_date` time precision and document folder update fields as date or date-time values
 
