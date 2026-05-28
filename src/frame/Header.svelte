@@ -4,7 +4,6 @@
   import { whenAppReady, nbFavorite, headerOpen } from '@lib/store'
   import { getLinkUrl, isSsgRendering } from '@lib/url'
   import { checkApiAvailability } from '@lib/api-availability'
-  import { checkSemanticExportAvailability } from '@lib/semantic-export'
   import { router } from '@router/router.svelte'
   import { onPageHomepage } from '@router/router-store'
   import { isMobile } from '@lib/viewport-manager'
@@ -61,11 +60,7 @@
 
   $whenAppReady.then(() => {
     loading = false
-    if (isSemanticExportEnabled()) {
-      checkSemanticExportAvailability().then(available => {
-        semanticExportAvailable = available
-      })
-    }
+    semanticExportAvailable = isSemanticExportEnabled()
   })
 </script>
 
