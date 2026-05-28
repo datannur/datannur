@@ -5,10 +5,14 @@ type Option = { id: string; value: Value }
 
 export default class Options {
   static loaded: Promise<void>
+  static isLoading = false
   static dbKey: string
   static options: Option[]
 
   static init(defaults?: { [key: string]: Value }) {
+    if (this.isLoading) return this.loaded
+
+    this.isLoading = true
     this.loaded = new Promise<void>(resolve => {
       this.dbKey = 'userData/option'
       this.options = []

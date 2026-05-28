@@ -12,7 +12,6 @@
   import { DarkMode, darkModeTheme } from '@dark-mode/dark-mode'
   import { copyTextListenClick } from '@lib/copy-text'
   import { initTooltips, initColumnStatBtn } from '@lib/tooltip-events'
-  import defaultBanner from '@markdown/main/banner.md?raw'
   import Header from '@frame/Header.svelte'
   import Footer from '@frame/Footer.svelte'
   import Popup from '@layout/Popup.svelte'
@@ -28,8 +27,7 @@
   let isPopupColumnStatOpen = $state(false)
   let columnStatEntity: MainEntityName | 'log' | undefined = $state()
   let columnStatAttribut: AttributWithValues | undefined = $state()
-
-  const timer = performance.now()
+  let hasCustomBanner = $state(false)
 
   Options.init({
     roundedDesign: true,
@@ -53,7 +51,7 @@
     document.documentElement.classList.toggle('has-touch-screen')
   }
 
-  const isDark = $darkModeTheme === 'dark'
+  const isDark = $derived($darkModeTheme === 'dark')
 
   initTooltips()
   initColumnStatBtn((entity, attribut) => {
@@ -64,30 +62,49 @@
 
   copyTextListenClick()
 
-  $whenAppReady.then(() => {
-    const mainBanner = new Image()
-    let bannerSrc = db.exists('config', 'banner')
-      ? (db.getConfig('banner') as string)
-      : defaultBanner
-    bannerSrc = bannerSrc?.split('(')[1]?.split(')')[0]
-    mainBanner.src =
-      bannerSrc?.replaceAll('{darkMode}', isDark ? '-dark' : '') ?? ''
-    mainBanner.onload = () => {
-      const cssVarStyle = document.documentElement.style
-      cssVarStyle.setProperty(
-        '--main-banner-width',
-        mainBanner.width.toString(),
-      )
-      cssVarStyle.setProperty(
-        '--main-banner-height',
-        mainBanner.height.toString(),
-      )
-    }
+  function getBannerSrc(bannerMarkdown: string) {
+    const bannerLines = bannerMarkdown
+      .split('\n')
+      .filter(line => line.includes('main-banner'))
+    const themedBannerLine =
+      bannerLines.find(line => line.includes('dark-mode') === isDark) ??
+      bannerLines[0] ??
+      bannerMarkdown
+    return themedBannerLine.split('(')[1]?.split(')')[0] ?? ''
+  }
 
-    console.log(
-      'init complete (with banner)',
-      Math.round(performance.now() - timer) + ' ms',
+  function getThemedBannerSrc(bannerMarkdown: string) {
+    return getBannerSrc(bannerMarkdown).replaceAll(
+      '{darkMode}',
+      isDark ? '-dark' : '',
     )
+  }
+
+  $effect(() => {
+    if (hasCustomBanner) return
+
+    const cssVarStyle = document.documentElement.style
+    cssVarStyle.setProperty('--main-banner-width', isDark ? '732' : '734')
+    cssVarStyle.setProperty('--main-banner-height', '140')
+  })
+
+  $whenAppReady.then(() => {
+    hasCustomBanner = db.exists('config', 'banner')
+    if (hasCustomBanner) {
+      const mainBanner = new Image()
+      mainBanner.src = getThemedBannerSrc(db.getConfig('banner') as string)
+      mainBanner.onload = () => {
+        const cssVarStyle = document.documentElement.style
+        cssVarStyle.setProperty(
+          '--main-banner-width',
+          mainBanner.width.toString(),
+        )
+        cssVarStyle.setProperty(
+          '--main-banner-height',
+          mainBanner.height.toString(),
+        )
+      }
+    }
 
     console.log('db (Jsonjsdb):', db)
   })

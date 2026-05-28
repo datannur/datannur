@@ -192,12 +192,6 @@ img[alt*='dark-mode'] {
 html.dark-mode img[alt*='dark-mode'] {
   display: block;
 }
-html.dark-mode img:not([alt*='dark-mode']) {
-  &[alt^='main-banner'] {
-    display: none;
-  }
-}
-
 .break-line {
   word-break: break-all;
 }

@@ -1,5 +1,10 @@
 # datannur
 
+## Unreleased
+
+- change: inline FlexSearch and preload only the active main banner variant to keep the portable runtime lighter and avoid extra browser requests
+- change: update `jsonjsdb` to 0.12.1 and parallelize early app initialization to reduce startup latency
+
 ## 0.25.1 (2026-05-28)
 
 - change: replace Mermaid with a lightweight local SVG renderer for app structure diagrams, with theme-aware entity colors and no external browser requests

@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 
-import type Index from 'flexsearch'
+import type FlexSearchType from 'flexsearch'
 
 declare global {
   interface Window {
-    FlexSearch: typeof Index
+    FlexSearch: typeof FlexSearchType
     goToHref: (event: MouseEvent, href: string) => void
     webkitSpeechRecognition: {
       new (): SpeechRecognition

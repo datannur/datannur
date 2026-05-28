@@ -1,9 +1,36 @@
 import db from '@db'
-import { ensureScriptLoaded } from '@lib/util'
 import { mainEntityNames } from '@lib/constant'
 import escapeHtml from 'escape-html'
+import flexSearchScript from '../../node_modules/flexsearch/dist/flexsearch.bundle.min.js?raw'
+import type FlexSearchType from 'flexsearch'
 import type { Index } from 'flexsearch'
 import type { MainEntity, MainEntityName } from '@type'
+
+const flexSearchScriptId = 'flexsearch-legacy-bundle'
+
+let flexSearchLoading: Promise<typeof FlexSearchType> | null = null
+
+function injectFlexSearchScript(): void {
+  if (document.getElementById(flexSearchScriptId)) return
+
+  const script = document.createElement('script')
+  script.id = flexSearchScriptId
+  script.text = flexSearchScript
+  document.head.appendChild(script)
+}
+
+async function getFlexSearch(): Promise<typeof FlexSearchType> {
+  if (window.FlexSearch) return window.FlexSearch
+
+  flexSearchLoading ??= Promise.resolve().then(() => {
+    injectFlexSearchScript()
+    if (!window.FlexSearch?.Index) {
+      throw new Error('FlexSearch loaded without exposing window.FlexSearch')
+    }
+    return window.FlexSearch
+  })
+  return flexSearchLoading
+}
 
 type EntityData = {
   name: MainEntityName
@@ -82,14 +109,14 @@ class Search {
   }
   async init() {
     this.loading = (async () => {
-      await ensureScriptLoaded('app/assets/external/flexsearch.js')
+      const flexSearch = await getFlexSearch()
       const variables: VariableName[] = ['name', 'description']
       for (const variable of variables) {
         const entitiesData: EntityData[] = []
         for (const entity in mainEntityNames) {
           entitiesData.push({
             name: entity as MainEntityName,
-            items: new window.FlexSearch.Index({ tokenize: 'forward' }),
+            items: new flexSearch.Index({ tokenize: 'forward' }),
             data: [],
           })
         }

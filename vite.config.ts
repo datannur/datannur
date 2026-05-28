@@ -5,7 +5,6 @@ import { svelte, type Options } from '@sveltejs/vite-plugin-svelte'
 import svelteConfig from './svelte.config.js'
 import {
   bundleSchemas,
-  copyPaths,
   devServerBaseHref,
   injectJsonjsdbConfig,
   initBuildConfig,
@@ -24,13 +23,6 @@ const dbPath = `data/${dbName}`
 const sourcemap = process.env.SOURCE_MAP === 'true'
 
 const { appVersion, aliases } = await initBuildConfig()
-
-await copyPaths([
-  [
-    'node_modules/flexsearch/dist/flexsearch.bundle.min.js',
-    `${packageAppDir}/assets/external/flexsearch.js`,
-  ],
-])
 
 export default defineConfig({
   base: '',
