@@ -4,27 +4,22 @@ import defaultBody from '@markdown/main/body.md?raw'
 
 function normalizeThemeBanner(banner: unknown) {
   const bannerText = String(banner)
-  if (!bannerText.includes('main-banner')) return bannerText
+  if (!bannerText.includes('main-banner{darkMode}')) return bannerText
 
-  const bannerLines = bannerText.split('\n')
-  const lightBannerLine = bannerLines.find(
-    line => line.includes('main-banner') && !line.includes('dark-mode'),
-  )
-  if (!lightBannerLine) return bannerText
+  return bannerText
+    .split('\n')
+    .flatMap(line => {
+      if (!line.includes('main-banner{darkMode}')) return line
 
-  const themeBannerLine = lightBannerLine.replace(
-    /main-banner(\.\w+)(\?[^)]*)?/,
-    'main-banner{darkMode}$1$2',
-  )
-  let themeBannerAdded = false
-  return bannerLines
-    .map(line => {
-      if (!line.includes('main-banner')) return line
-      if (themeBannerAdded) return null
-      themeBannerAdded = true
-      return themeBannerLine
+      const lightBannerLine = line.replaceAll('{darkMode}', '')
+      const darkBannerLine = line
+        .replaceAll('{darkMode}', '-dark')
+        .replace(/!\[([^\]]*)\]/, (markdownImage: string, alt: string) => {
+          const darkAlt = alt.includes('dark-mode') ? alt : `${alt} dark-mode`
+          return markdownImage.replace(alt, darkAlt)
+        })
+      return [lightBannerLine, darkBannerLine]
     })
-    .filter(line => line !== null)
     .join('\n')
 }
 
