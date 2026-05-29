@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: normalize DCAT distribution and document URIs, inherit package licenses for child distributions, and map `encolonne` exports to TXT/plain text
+
 ## 0.25.3 (2026-05-28)
 
 - add: expose DCAT and OpenAPI from the app navigation, add an in-app OpenAPI view, and show database integrity checks as a styled internal tab with non-crashing missing-reference reporting

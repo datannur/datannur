@@ -186,10 +186,15 @@ html.dark-mode img[alt$='special-main-color'] {
     hue-rotate(179deg) brightness(88%) contrast(103%);
 }
 
-img[alt*='dark-mode'] {
+img[alt^='main-banner'][alt*='dark-mode'] {
   display: none;
 }
-html.dark-mode img[alt*='dark-mode'] {
+html.dark-mode p:has(img[alt^='main-banner'][alt*='dark-mode']) {
+  img[alt^='main-banner']:not([alt*='dark-mode']) {
+    display: none;
+  }
+}
+html.dark-mode img[alt^='main-banner'][alt*='dark-mode'] {
   display: block;
 }
 .break-line {

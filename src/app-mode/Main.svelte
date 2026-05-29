@@ -81,20 +81,12 @@
   }
 
   $effect(() => {
-    if (hasCustomBanner) return
-
     const cssVarStyle = document.documentElement.style
-    cssVarStyle.setProperty('--main-banner-width', isDark ? '732' : '734')
-    cssVarStyle.setProperty('--main-banner-height', '140')
-  })
 
-  $whenAppReady.then(() => {
-    hasCustomBanner = db.exists('config', 'banner')
     if (hasCustomBanner) {
       const mainBanner = new Image()
       mainBanner.src = getThemedBannerSrc(db.getConfig('banner') as string)
       mainBanner.onload = () => {
-        const cssVarStyle = document.documentElement.style
         cssVarStyle.setProperty(
           '--main-banner-width',
           mainBanner.width.toString(),
@@ -104,7 +96,15 @@
           mainBanner.height.toString(),
         )
       }
+      return
     }
+
+    cssVarStyle.setProperty('--main-banner-width', isDark ? '732' : '734')
+    cssVarStyle.setProperty('--main-banner-height', '140')
+  })
+
+  $whenAppReady.then(() => {
+    hasCustomBanner = db.exists('config', 'banner')
 
     console.log('db (Jsonjsdb):', db)
   })
