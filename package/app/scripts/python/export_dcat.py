@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 
 from _local_runtime import SCHEMAS_DIR, require_data_db_dir
 
@@ -44,6 +44,7 @@ FILE_TYPE_URIS = {
     "parquet": "http://publications.europa.eu/resource/authority/file-type/PARQUET",
     "pdf": "http://publications.europa.eu/resource/authority/file-type/PDF",
     "sas": "http://publications.europa.eu/resource/authority/file-type/SAS",
+    "encolonne": "http://publications.europa.eu/resource/authority/file-type/TXT",
 }
 
 MEDIA_TYPES = {
@@ -54,6 +55,7 @@ MEDIA_TYPES = {
     "parquet": "application/vnd.apache.parquet",
     "pdf": "application/pdf",
     "sas": "application/x-sas-data",
+    "encolonne": "text/plain",
 }
 
 LICENSE_URIS = {
@@ -196,6 +198,33 @@ class DCATExporter:
         base_uri = self.config.get("base_uri", "https://example.org/")
         return URIRef(f"{base_uri}dataset/{dataset_id}/distribution/{dist_id}")
 
+    def _absolute_url(self, url: str) -> str:
+        base_uri = self.config.get("base_uri", "https://example.org/")
+        return urljoin(f"{base_uri.rstrip('/')}/", url)
+
+    def _encoded_uri_ref(self, uri: str) -> URIRef:
+        return URIRef(quote(uri, safe=":/?#[]@!$&'()*+,;=%"))
+
+    def _uri_ref(self, url: str) -> URIRef:
+        return self._encoded_uri_ref(self._absolute_url(url))
+
+    def _document_uri_ref(self, url: str) -> URIRef:
+        normalized_url = str(url).strip()
+        windows_path_match = re.match(r"^([A-Za-z]):[\\/](.*)$", normalized_url)
+
+        if normalized_url.startswith(("\\\\", "//")):
+            path = re.sub(r"[\\/]+", "/", normalized_url.lstrip("\\/"))
+            return self._encoded_uri_ref(f"file://{path}")
+        if windows_path_match:
+            drive = windows_path_match.group(1).upper()
+            path = re.sub(r"[\\/]+", "/", windows_path_match.group(2))
+            return self._encoded_uri_ref(f"file:///{drive}:/{path}")
+        if normalized_url.startswith("/"):
+            return self._encoded_uri_ref(f"file://{normalized_url}")
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", normalized_url):
+            return self._encoded_uri_ref(normalized_url)
+        return self._uri_ref(normalized_url)
+
     def _get_theme_uri(self, tag_id: str) -> URIRef:
         base_uri = self.config.get("base_uri", "https://example.org/")
         return URIRef(f"{base_uri}theme/{tag_id}")
@@ -313,6 +342,14 @@ class DCATExporter:
             return URIRef(normalized_license)
         return Literal(normalized_license)
 
+    def _effective_license(self, dataset: Dict, parent: Optional[Dict] = None) -> str:
+        return (
+            dataset.get("license")
+            or (parent or {}).get("license")
+            or self.config.get("default_license")
+            or ""
+        )
+
     def _split_ids(self, id_string: Optional[str]) -> List[str]:
         """Split comma-separated IDs"""
         if not id_string:
@@ -340,7 +377,7 @@ class DCATExporter:
             self._add_dataset_metadata(dataset_uri, folder)
             for child_dataset in child_datasets:
                 self._create_distribution(
-                    dataset_uri, child_dataset, child_dataset["id"], folder_id
+                    dataset_uri, child_dataset, child_dataset["id"], folder_id, folder
                 )
 
         self.dcat_dataset_count = len(self._get_dcat_dataset_ids())
@@ -451,7 +488,7 @@ class DCATExporter:
                 doc = self.docs[doc_id]
                 doc_link = doc.get("link") or doc.get("path")
                 if doc_link:
-                    doc_uri = URIRef(doc_link)
+                    doc_uri = self._document_uri_ref(doc_link)
                     self.graph.add((dataset_uri, DCTERMS.relation, doc_uri))
                     if doc.get("name"):
                         self.graph.add(
@@ -514,6 +551,7 @@ class DCATExporter:
         dataset: Dict,
         dist_id: str = "1",
         parent_id: Optional[str] = None,
+        parent: Optional[Dict] = None,
     ):
         """Create distribution for a dataset (only called if link exists)"""
         dist_uri = self._get_distribution_uri(parent_id or dataset["id"], dist_id)
@@ -525,14 +563,11 @@ class DCATExporter:
         access_url = str(dataset.get("link") or dataset.get("data_path") or "")
         if not access_url:
             return
-        if not access_url.startswith("http"):
-            access_url = (
-                f"{self.config.get('base_uri', 'https://example.org/')}{access_url}"
-            )
+        access_url = str(self._uri_ref(access_url))
         self.graph.add((dist_uri, DCAT.accessURL, URIRef(access_url)))
 
         # Optional: download URL
-        download_url = dataset.get("data_path") or access_url
+        download_url = str(self._uri_ref(dataset.get("data_path") or access_url))
         if download_url and dataset.get("delivery_format"):
             self.graph.add((dist_uri, DCAT.downloadURL, URIRef(download_url)))
 
@@ -544,10 +579,11 @@ class DCATExporter:
             self.graph.add((dist_uri, DCTERMS.issued, issued_date))
 
         # Mandatory: license
-        license_uri = dataset.get("license") or self.config.get(
-            "default_license", "http://dcat-ap.ch/vocabulary/licenses/terms_open"
-        )
-        self.graph.add((dist_uri, DCTERMS.license, self._license_value(license_uri)))
+        license_uri = self._effective_license(dataset, parent)
+        if license_uri:
+            self.graph.add(
+                (dist_uri, DCTERMS.license, self._license_value(license_uri))
+            )
 
         delivery_format = dataset.get("delivery_format")
         normalized_format = delivery_format.lower() if delivery_format else ""
@@ -602,7 +638,8 @@ class DCATExporter:
 
         for child_datasets in datasets_by_folder.values():
             for dataset in child_datasets:
-                self._validate_distribution(dataset, checks)
+                parent = self._get_publication_folder(dataset)
+                self._validate_distribution(dataset, checks, parent)
 
         self.validation_results = checks
         return checks
@@ -673,7 +710,9 @@ class DCATExporter:
                 "last_update_date",
             )
 
-    def _validate_distribution(self, dataset: Dict, checks: List[Dict]):
+    def _validate_distribution(
+        self, dataset: Dict, checks: List[Dict], parent: Optional[Dict] = None
+    ):
         def add_warning(code: str, message: str, field: str):
             self._add_validation_warning(
                 checks, dataset, "distribution", code, message, field
@@ -685,10 +724,10 @@ class DCATExporter:
                 "Distribution access URL is missing.",
                 "link,data_path",
             )
-        if not dataset.get("license"):
+        if not self._effective_license(dataset, parent):
             add_warning(
                 "missing_license",
-                "Distribution does not define a license; the configured default is used.",
+                "Distribution does not define a license and no package or default license is available.",
                 "license",
             )
 

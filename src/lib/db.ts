@@ -371,6 +371,9 @@ function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
     dataset.managerOrganizationId = folder.managerOrganizationId
   if (isMissing(dataset.updatingEach))
     dataset.updatingEach = folder.updatingEach
+  if (isMissing(dataset.license) && folder.license) {
+    dataset.license = folder.license
+  }
 }
 
 function addFolderDatasetDates(folder: EntityTypeMap['folder']) {
