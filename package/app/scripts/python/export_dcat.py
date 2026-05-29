@@ -5,7 +5,6 @@ Export datannur catalog to DCAT-AP-CH oriented interoperability artifacts.
 
 from collections import Counter, defaultdict
 from decimal import Decimal
-from html import escape
 import json
 import re
 import sys
@@ -943,7 +942,7 @@ class DCATExporter:
             },
             "counts": self.get_summary(),
             "coverage": self.get_required_field_coverage(),
-            "files": {**files, "report": "dcat-report.html"},
+            "files": files,
         }
         with open(output_dir / "validation.json", "w", encoding="utf-8") as file:
             json.dump(payload, file, ensure_ascii=False, indent=2)
@@ -953,152 +952,6 @@ class DCATExporter:
         with open(output_dir / "validation.json.js", "w", encoding="utf-8") as file:
             file.write(f"window.datannurSemanticValidation = {validation_json};\n")
         return payload
-
-    def write_html_report(self, output_dir: Path, validation: Dict):
-        warnings_by_entity = defaultdict(list)
-        for result in self.validation_results:
-            entity_label = f"{result['entityType']}: {result['entityLabel']}"
-            warnings_by_entity[entity_label].append(result)
-
-        coverage_rows = "".join(
-            f"<tr><td>{escape(item['label'])}</td><td>{item['count']} / {item['total']}</td><td>{item['percent']}%</td></tr>"
-            for item in validation["coverage"].values()
-        )
-        warning_rows = (
-            "".join(
-                f"<tr><td>{escape(dataset)}</td><td>{escape(', '.join(warning['message'] for warning in warnings))}</td></tr>"
-                for dataset, warnings in warnings_by_entity.items()
-            )
-            or "<tr><td colspan='2'>No profile-inspired warnings were detected.</td></tr>"
-        )
-        distribution_rows = (
-            "".join(
-                f"<tr><td>{escape(distribution['dataset_title'])}</td><td>{self._link(distribution['access_url'])}</td><td>{self._link(distribution['download_url'])}</td><td>{escape(distribution['format'])}</td><td>{escape(distribution['media_type'])}</td><td>{escape(distribution['license'])}</td></tr>"
-                for distribution in self.distributions
-            )
-            or "<tr><td colspan='6'>No distributions were generated.</td></tr>"
-        )
-        vocabulary_rows = self._frequency_section(validation["counts"])
-        file_links = "".join(
-            f"<li><a href='{escape(filename)}'>{escape(label)}</a></li>"
-            for label, filename in validation["files"].items()
-            if label != "report"
-        )
-        shacl_summary = self._shacl_summary_section(validation)
-        shacl_text = escape(
-            validation["validation"].get("message") or "No SHACL result text available."
-        )
-
-        html = f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DCAT interoperability report</title>
-  <style>
-    body {{ font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1f2933; margin: 0; background: #f6f8fa; }}
-    main {{ max-width: 1180px; margin: 0 auto; padding: 32px 24px 56px; }}
-    h1, h2 {{ color: #102a43; }}
-    h1 {{ margin-bottom: 4px; }}
-    section {{ background: #fff; border: 1px solid #d9e2ec; border-radius: 6px; padding: 20px; margin-top: 18px; }}
-    .meta {{ color: #52606d; margin-top: 0; }}
-    .status {{ display: inline-block; padding: 4px 10px; border-radius: 4px; background: #fff3c4; color: #8d2b0b; font-weight: 700; text-transform: uppercase; font-size: 12px; }}
-    .status.conforms {{ background: #d9f7e8; color: #0b6b3a; }}
-    .status.errors {{ background: #ffe3e3; color: #a61b1b; }}
-    .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }}
-    .metric {{ border: 1px solid #e4e7eb; border-radius: 4px; padding: 14px; }}
-    .metric strong {{ display: block; font-size: 28px; color: #102a43; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 14px; }}
-    th, td {{ border-bottom: 1px solid #e4e7eb; padding: 9px 8px; text-align: left; vertical-align: top; }}
-    th {{ background: #f0f4f8; color: #334e68; }}
-    code, pre {{ background: #f0f4f8; border-radius: 4px; }}
-    pre {{ padding: 12px; overflow: auto; white-space: pre-wrap; }}
-        details {{ margin-top: 14px; }}
-        summary {{ cursor: pointer; color: #334e68; font-weight: 700; }}
-    a {{ color: #1864ab; }}
-  </style>
-</head>
-<body>
-<main>
-  <h1>DCAT interoperability report</h1>
-  <p class="meta">Profile: {escape(validation['profile'])} · Generated: {escape(validation['generatedAt'])}</p>
-  <p><span class="status {escape(validation['validation']['status'])}">{escape(validation['validation']['status'].replace('_', ' '))}</span></p>
-  <section>
-    <h2>Overview</h2>
-    <div class="grid">
-      <div class="metric"><strong>{validation['counts']['datasets']}</strong>Datasets</div>
-      <div class="metric"><strong>{validation['counts']['distributions']}</strong>Distributions</div>
-      <div class="metric"><strong>{validation['counts']['publishers']}</strong>Publishers</div>
-      <div class="metric"><strong>{len(self.validation_results)}</strong>Warnings</div>
-    </div>
-  </section>
-  <section><h2>Required fields coverage</h2><table><thead><tr><th>Field</th><th>Coverage</th><th>Percent</th></tr></thead><tbody>{coverage_rows}</tbody></table></section>
-    <section><h2>Warnings by entity</h2><table><thead><tr><th>Entity</th><th>Warnings</th></tr></thead><tbody>{warning_rows}</tbody></table></section>
-  <section><h2>Distribution table</h2><table><thead><tr><th>Dataset</th><th>Access URL</th><th>Download URL</th><th>Format</th><th>Media type</th><th>License</th></tr></thead><tbody>{distribution_rows}</tbody></table></section>
-  <section><h2>Vocabulary usage</h2>{vocabulary_rows}</section>
-    <section><h2>SHACL results</h2>{shacl_summary}<details><summary>Full raw SHACL output</summary><pre>{shacl_text}</pre></details></section>
-  <section><h2>Export files</h2><ul>{file_links}</ul></section>
-</main>
-</body>
-</html>
-"""
-        with open(output_dir / "dcat-report.html", "w", encoding="utf-8") as file:
-            file.write(html)
-
-    def _link(self, url: str) -> str:
-        if not url:
-            return ""
-        safe_url = escape(url, quote=True)
-        return f"<a href='{safe_url}'>{escape(url)}</a>"
-
-    def _shacl_summary_section(self, validation: Dict) -> str:
-        validation_info = validation["validation"]
-        message = validation_info.get("message") or ""
-        conforms = "Yes" if validation_info.get("officialConformance") else "No"
-        if not validation_info.get("shaclAvailable"):
-            return f"<p>{escape(message)}</p>"
-
-        result_blocks = re.split(r"\n(?=Constraint Violation)", message)
-        violations = [
-            block for block in result_blocks if "Constraint Violation" in block
-        ]
-        paths = sorted(set(re.findall(r"Result Path:\s*([^\n]+)", message)))
-        resources = sorted(set(re.findall(r"Focus Node:\s*([^\n]+)", message)))
-
-        def list_items(values: List[str]) -> str:
-            return "".join(f"<li><code>{escape(value)}</code></li>" for value in values)
-
-        path_content = list_items(paths) or "<li>No failing paths reported.</li>"
-        resource_content = (
-            list_items(resources) or "<li>No affected resources reported.</li>"
-        )
-        return f"""
-    <div class="grid">
-      <div class="metric"><strong>{escape(conforms)}</strong>Conforms</div>
-      <div class="metric"><strong>{len(violations)}</strong>Violations</div>
-    </div>
-    <h3>Failing paths</h3><ul>{path_content}</ul>
-    <h3>Affected resources</h3><ul>{resource_content}</ul>
-"""
-
-    def _frequency_section(self, counts: Dict) -> str:
-        sections = []
-        for key, title in [
-            ("formats", "File types"),
-            ("licenses", "Licenses"),
-            ("themes", "Themes"),
-        ]:
-            rows = (
-                "".join(
-                    f"<tr><td>{escape(str(label))}</td><td>{count}</td></tr>"
-                    for label, count in counts[key].items()
-                )
-                or "<tr><td colspan='2'>No values</td></tr>"
-            )
-            sections.append(
-                f"<h3>{title}</h3><table><thead><tr><th>Value</th><th>Count</th></tr></thead><tbody>{rows}</tbody></table>"
-            )
-        return "".join(sections)
 
 
 def load_config(config_file: Path) -> Dict:
@@ -1131,6 +984,9 @@ def main():
 
     output_dir = data_dir / "db-semantic"
     output_dir.mkdir(exist_ok=True)
+    stale_html_report = output_dir / "dcat-report.html"
+    if stale_html_report.exists():
+        stale_html_report.unlink()
 
     # Export
     print("📊 Exporting datannur catalog to DCAT-AP-CH...")
@@ -1161,12 +1017,8 @@ def main():
     # Validate
     shacl_file = SCHEMAS_DIR / "semantic" / "dcat-ap-shacl.ttl"
     shacl_conforms, shacl_message = exporter.validate(shacl_file)
-    validation = exporter.write_validation_json(
-        output_dir, files, shacl_conforms, shacl_message
-    )
-    exporter.write_html_report(output_dir, validation)
+    exporter.write_validation_json(output_dir, files, shacl_conforms, shacl_message)
     print(f"✓ Wrote validation summary to {output_dir / 'validation.json'}")
-    print(f"✓ Wrote publication readiness report to {output_dir / 'dcat-report.html'}")
 
 
 if __name__ == "__main__":
