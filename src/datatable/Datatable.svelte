@@ -32,6 +32,7 @@
     fixColumnsWidth,
   } from './dt-util'
   import { safeHtml } from '@lib/html-sanitizer'
+  import { UrlParam } from '@lib/url'
   import Filter from './filter/Filter.svelte'
   import FilterInfoBox from './filter/FilterInfoBox.svelte'
   import FilterSelectPopup from './filter/FilterSelectPopup.svelte'
@@ -95,6 +96,16 @@
   const maxHeightLoad = `max(calc(100vh - ${maxHeightValue - 82}px), 80px)`
 
   const tableId = getTableId(entity)
+
+  function getInitialActiveFilterCount(): number {
+    const filterTableId = 'tab_' + entity
+    let activeFilterCount = 0
+    for (const key in UrlParam.getAllParams()) {
+      if (key.startsWith(filterTableId + '_')) activeFilterCount += 1
+    }
+    return activeFilterCount
+  }
+
   const exporter = new Exporter(tableId)
   const filter = new FilterHelper(
     tableId,
@@ -106,6 +117,9 @@
       filterSelectPopupRequest = request
     },
   )
+  if (isBig) {
+    nbActiveFilter = getInitialActiveFilterCount()
+  }
 
   const cleanData = getCleanData(data, sortByName, isRecursive, isBig)
   const nbRowLoading = Math.min(cleanData.length, 50)

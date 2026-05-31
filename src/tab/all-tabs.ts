@@ -27,6 +27,7 @@ import DatasetPreview from '@component/preview/DatasetPreview.svelte'
 import VariablePreview from '@component/preview/VariablePreview.svelte'
 import AboutFile from '@layout/AboutFile.svelte'
 import Stat from '@stat/Stat.svelte'
+import Dashboard from '@src/dashboard/Dashboard.svelte'
 import AllFav from '@favorite/AllFav.svelte'
 import Options from '@component/options/Options.svelte'
 import Api from '@component/options/Api.svelte'
@@ -186,6 +187,11 @@ export const allTabs: Record<string, TabConfig> = {
     icon: 'stat',
     component: Stat,
     withoutProp: true,
+  },
+  dashboard: {
+    name: 'Bilan',
+    icon: 'dashboard',
+    component: Dashboard,
   },
   aboutStructure: {
     name: 'Structure',

@@ -10,6 +10,18 @@ type TextStyleSnapshot = {
   lineHeight: string
 }
 
+type TextTransitionSnapshot = {
+  bounds: TextRectSnapshot
+  color: string
+}
+
+type TextRectSnapshot = {
+  left: number
+  top: number
+  width: number
+  height: number
+}
+
 function cleanTransitionPart(value: string | number) {
   return String(value).replace(/[^a-zA-Z0-9_-]/g, '-')
 }
@@ -61,9 +73,22 @@ function getTextRect(element: HTMLElement) {
     : element.getBoundingClientRect()
 }
 
+function toRectSnapshot(rect: DOMRect): TextRectSnapshot {
+  return {
+    left: rect.left,
+    top: rect.top,
+    width: rect.width,
+    height: rect.height,
+  }
+}
+
+function getTextColor(element: HTMLElement) {
+  return getComputedStyle(element).color
+}
+
 function createTextClone(
   text: string,
-  rect: DOMRect,
+  rect: TextRectSnapshot,
   style: TextStyleSnapshot,
 ) {
   const clone = document.createElement('span')
@@ -95,7 +120,12 @@ function getTitleBounceOffset(delta: number) {
   )
 }
 
-function animateTitleClone(text: string, target: HTMLElement, from: DOMRect) {
+function animateTitleClone(
+  text: string,
+  target: HTMLElement,
+  source: TextTransitionSnapshot,
+) {
+  const from = source.bounds
   const to = getTextRect(target)
   if (
     from.width === 0 ||
@@ -119,17 +149,21 @@ function animateTitleClone(text: string, target: HTMLElement, from: DOMRect) {
   const animation = clone.animate(
     [
       {
+        color: source.color,
         transform: 'translate(0, 0) scale(1)',
       },
       {
         offset: 0.86,
+        color: targetStyle.color,
         transform: `translate(${deltaX + bounceX}px, ${deltaY + bounceY}px) scale(1)`,
       },
       {
         offset: 0.94,
+        color: targetStyle.color,
         transform: `translate(${deltaX - bounceX * 0.35}px, ${deltaY - bounceY * 0.35}px) scale(1)`,
       },
       {
+        color: targetStyle.color,
         transform: `translate(${deltaX}px, ${deltaY}px) scale(1)`,
       },
     ],
@@ -150,14 +184,14 @@ function animateTitleClone(text: string, target: HTMLElement, from: DOMRect) {
 
 function animateAfterNavigation(
   text: string,
-  sourceBounds: DOMRect,
+  source: TextTransitionSnapshot,
   route: ReturnType<typeof getEntityRoute>,
 ) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const target = getTitleTarget(route)
       if (!target) return
-      animateTitleClone(text, target, sourceBounds)
+      animateTitleClone(text, target, source)
     })
   })
 }
@@ -185,9 +219,12 @@ export function navigateWithEntityTitleTransition(
     return
   }
   const textSource = getTextSource(source)
-  const sourceBounds = textSource.getBoundingClientRect()
+  const sourceSnapshot = {
+    bounds: toRectSnapshot(textSource.getBoundingClientRect()),
+    color: getTextColor(textSource),
+  }
   const text = textSource.textContent?.trim() ?? ''
 
   navigate()
-  if (text) animateAfterNavigation(text, sourceBounds, route)
+  if (text) animateAfterNavigation(text, sourceSnapshot, route)
 }

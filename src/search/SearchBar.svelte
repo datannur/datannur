@@ -19,6 +19,7 @@
   let allSearch: SearchResult[] = $state([])
   let dbInitied = $state(false)
   let searchValueDebounced = $state($searchValue)
+  let homepageAtTop = $state(true)
 
   let isOpen = $derived(
     isFocusIn && ($searchValue !== '' || nbResult > 0 || !dbInitied),
@@ -26,6 +27,7 @@
   let isHiddenByMobileMenu = $derived($isSmallMenu && $headerOpen)
   let routerReady = $derived($page !== '')
   let searchDisabled = $derived(!$searchReady)
+  let isHomepageSearchFullWidth = $derived($onPageHomepage && homepageAtTop)
 
   const maxSearchResult = 100
   let navPosition = 0
@@ -149,7 +151,12 @@
     }
   }
 
+  function updateHomepageAtTop() {
+    homepageAtTop = window.scrollY === 0
+  }
+
   onMount(() => {
+    updateHomepageAtTop()
     if ($onPageSearch) selectInput()
   })
 
@@ -163,7 +170,7 @@
   })
 </script>
 
-<svelte:window onkeydown={windowKeydown} />
+<svelte:window onkeydown={windowKeydown} onscroll={updateHomepageAtTop} />
 
 {#if routerReady}
   <div
@@ -175,7 +182,7 @@
       class="search-bar-container box-shadow-color shadow-search"
       class:box-shadow={isFocusIn}
       class:focus={isFocusIn}
-      class:homepage={$onPageHomepage}
+      class:homepage={isHomepageSearchFullWidth}
       class:page-search={$onPageSearch}
       class:search-disabled={searchDisabled}
     >
