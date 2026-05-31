@@ -418,7 +418,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
   const concepts = collection(entities.concepts)
   const datasets: DatasetLike[] = collection(entities.datasets)
   const variables: VariableLike[] = collection(entities.variables)
-  const enumerations = collection(entities.enumerations)
   const docs = collection(entities.docs)
   const governedItems: GovernedItem[] = [...folders, ...datasets]
   const describableItems: DescribableItem[] = [
