@@ -15,7 +15,7 @@ import type {
 } from './dashboard-types'
 import { evolutionTypes } from '@lib/constant'
 
-type MaybeString = string | number | null | undefined | false
+type MaybeValue = string | number | boolean | null | undefined
 
 type CountableItem = {
   id: string | number
@@ -74,8 +74,8 @@ type VariableLike = CountableItem & {
   max?: number | null
   mean?: number | null
   std?: number | null
-  key?: MaybeString
-  businessKey?: MaybeString
+  key?: MaybeValue
+  businessKey?: MaybeValue
   fkVariableId?: string | number
   sourceVariableIds?: string
   hasFreq?: boolean
@@ -109,7 +109,7 @@ function collection<T>(items: T[] | undefined): T[] {
   return items ?? []
 }
 
-function isFilled(value: MaybeString): boolean {
+function isFilled(value: MaybeValue): boolean {
   return (
     value !== null && value !== undefined && value !== false && value !== ''
   )
@@ -287,10 +287,7 @@ function compactGroups(
   return groups.filter(group => group !== undefined)
 }
 
-function filledCount<T>(
-  items: T[],
-  getValue: (item: T) => MaybeString,
-): number {
+function filledCount<T>(items: T[], getValue: (item: T) => MaybeValue): number {
   return items.filter(item => isFilled(getValue(item))).length
 }
 
