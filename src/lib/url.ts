@@ -72,8 +72,11 @@ export class UrlParam {
 
   static getAllParams() {
     let hash = window.location.hash
-    if (appMode === staticRender) hash = window.location.href
-    if (!hash.includes('?')) return {}
+    if (appMode === staticRender) hash = window.location.search
+    if (!hash.includes('?')) {
+      hash = window.location.search
+      if (!hash.includes('?')) return {}
+    }
     const paramsString = hash.split('?')[1]
     const urlParams = new URLSearchParams(paramsString)
     const paramsObj: Record<string, string> = {}

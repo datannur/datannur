@@ -47,8 +47,24 @@
     { entity: 'enumeration', items: enumerations },
   ]
 
+  const dashboard = {
+    scope: { type: 'catalog', label: 'Catalogue' },
+    entities: {
+      organizations,
+      folders,
+      tags,
+      concepts,
+      docs,
+      datasets,
+      variables,
+      enumerations,
+      evolutions,
+    },
+  }
+
   let tabs = tabsHelper({
     aboutFile: getAboutMain(),
+    dashboard,
     organizations,
     folders,
     tags,

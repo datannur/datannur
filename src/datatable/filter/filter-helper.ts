@@ -12,6 +12,17 @@ interface ButtonInfo {
   footer: boolean
 }
 
+export function getActiveFilterCount(entity: string): number {
+  const filterTableId = 'tab_' + entity
+  let nbActive = 0
+  for (const key in UrlParam.getAllParams()) {
+    if (key.startsWith(filterTableId + '_')) {
+      nbActive += 1
+    }
+  }
+  return nbActive
+}
+
 export default class FilterHelper {
   tableId: string
   filters: Record<number, number>
@@ -274,13 +285,11 @@ export default class FilterHelper {
     if (!value) return false
     return value
   }
+  getActiveFilterCount(): number {
+    return getActiveFilterCount(this.filterTableId.replace(/^tab_/, ''))
+  }
   updateFilterCount() {
-    let nbActive = 0
-    for (const key in UrlParam.getAllParams()) {
-      if (key.startsWith(this.filterTableId + '_')) {
-        nbActive += 1
-      }
-    }
+    const nbActive = this.getActiveFilterCount()
     this.onUpdateFilterCount(nbActive)
   }
   removeAll() {

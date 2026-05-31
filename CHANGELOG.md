@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- add: introduce the Bilan tab with catalog quality scoring, activity, and actionable improvement links
+- fix: improve dashboard filter URLs, homepage search positioning, and entity title transition color handling
 - fix: normalize DCAT distribution and document URIs, inherit package licenses for child distributions, and map `encolonne` exports to TXT/plain text
 
 ## 0.25.3 (2026-05-28)
