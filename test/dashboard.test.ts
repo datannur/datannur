@@ -2,8 +2,6 @@ import { describe, expect, it } from 'vitest'
 import { buildDashboard } from '../src/dashboard/build-dashboard'
 import type { DashboardInput } from '../src/dashboard/dashboard-types'
 
-const now = Date.now()
-
 const input: DashboardInput = {
   scope: { type: 'catalog', label: 'Catalogue' },
   entities: {
@@ -56,22 +54,6 @@ const input: DashboardInput = {
       },
     ],
     enumerations: [{ id: 'enumeration-a', name: 'Énumération A' }],
-    evolutions: [
-      {
-        entity: 'dataset',
-        entityId: 'dataset-a',
-        type: 'update',
-        timestamp: now - 1000,
-        name: 'Dataset A',
-      },
-      {
-        entity: 'dataset',
-        entityId: 'dataset-b',
-        type: 'nextUpdateDate',
-        timestamp: now + 1000,
-        name: 'Dataset B',
-      },
-    ],
   },
 }
 
@@ -94,9 +76,47 @@ describe('buildDashboard', () => {
   it('builds equal-weight score dimensions and global score', () => {
     const dashboard = buildDashboard(input)
     expect(dashboard.globalScore).toEqual({
-      label: 'Qualité du catalogue',
-      score: 31,
+      label: 'Maturité du catalogue',
+      score: 26,
     })
+    expect(dashboard.diagnostic).toEqual({
+      label: 'Catalogue en structuration',
+      description:
+        'Les fondations du catalogue sont présentes, mais les informations essentielles restent à consolider pour faciliter la compréhension et la réutilisation.',
+      strengths: [
+        { key: 'governance', label: 'Gouverné', score: 34 },
+        { key: 'protection', label: 'Maîtrisé', score: 33 },
+      ],
+      watchpoints: [
+        { key: 'understanding', label: 'Compréhensible', score: 18 },
+        { key: 'profileQuality', label: 'Réutilisable', score: 21 },
+      ],
+    })
+    expect(
+      dashboard.maturity.map(item => ({
+        key: item.key,
+        label: item.label,
+        score: item.score,
+        applicable: item.applicable,
+      })),
+    ).toEqual([
+      { key: 'inventory', label: 'Inventorié', score: 25, applicable: true },
+      {
+        key: 'understanding',
+        label: 'Compréhensible',
+        score: 18,
+        applicable: true,
+      },
+      { key: 'governance', label: 'Gouverné', score: 34, applicable: true },
+      { key: 'protection', label: 'Maîtrisé', score: 33, applicable: true },
+      {
+        key: 'profileQuality',
+        label: 'Réutilisable',
+        score: 21,
+        applicable: true,
+      },
+    ])
+
     const inventory = dashboard.maturity.find(item => item.key === 'inventory')
     const understanding = dashboard.maturity.find(
       item => item.key === 'understanding',
@@ -104,40 +124,50 @@ describe('buildDashboard', () => {
     const governance = dashboard.maturity.find(
       item => item.key === 'governance',
     )
-    const profiling = dashboard.maturity.find(item => item.key === 'profiling')
-    const dataQuality = dashboard.maturity.find(
-      item => item.key === 'dataQuality',
-    )
-    const lifecycle = dashboard.maturity.find(item => item.key === 'lifecycle')
-    const publication = dashboard.maturity.find(
-      item => item.key === 'publication',
+    const profileQuality = dashboard.maturity.find(
+      item => item.key === 'profileQuality',
     )
     const protection = dashboard.maturity.find(
       item => item.key === 'protection',
     )
 
     expect(inventory?.score).toBe(25)
-    expect(inventory?.criteria).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ key: 'datasetFolders', score: 0 }),
-        expect.objectContaining({ key: 'access', score: 50 }),
-      ]),
-    )
-    expect(understanding?.score).toBe(22)
+    expect(inventory?.criteria.map(item => item.key)).toEqual([
+      'datasetFolders',
+      'access',
+      'formats',
+      'previews',
+    ])
+    expect(understanding?.criteria.map(item => item.key)).toEqual([
+      'descriptions',
+      'tags',
+      'linkedDocs',
+      'variableDescriptions',
+      'variableConcepts',
+      'lineageRelations',
+    ])
     expect(governance?.criteria).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ key: 'owners', score: 67 }),
         expect.objectContaining({ key: 'managers', score: 0 }),
       ]),
     )
-    expect(governance?.score).toBe(39)
-    expect(profiling?.score).toBe(20)
-    expect(dataQuality?.score).toBe(0)
-    expect(lifecycle?.score).toBe(42)
-    expect(publication?.score).toBe(0)
-    expect(protection?.score).toBe(100)
-    expect(protection?.criteria).toEqual([
-      expect.objectContaining({ key: 'noSensitiveSignals', score: 100 }),
+    expect(profileQuality?.criteria.map(item => item.key)).toEqual([
+      'licenses',
+      'schemaExtracted',
+      'variableTypes',
+      'datasetStats',
+      'variableStats',
+      'enumerationsOrFrequencies',
+      'sampledDatasets',
+    ])
+    expect(governance?.score).toBe(34)
+    expect(protection?.criteria.map(item => item.key)).toEqual([
+      'lastUpdateDate',
+      'updateFrequency',
+      'periods',
+      'seriesPeriods',
+      'noSensitiveSignals',
     ])
   })
 
@@ -150,25 +180,25 @@ describe('buildDashboard', () => {
           dimensionKey: 'governance',
           count: 3,
           total: 3,
-          gainPoints: 33.3,
-          globalGainPoints: 4.2,
-          gainPerTarget: 11.1,
+          gainPoints: 50,
+          globalGainPoints: 10,
+          gainPerTarget: 16.7,
         }),
         expect.objectContaining({
-          key: 'enumerationsOrFrequencies',
-          dimensionKey: 'dataQuality',
+          key: 'previews',
+          dimensionKey: 'inventory',
           count: 2,
           total: 2,
-          gainPoints: 33.3,
-          globalGainPoints: 4.2,
-          gainPerTarget: 16.7,
+          gainPoints: 25,
+          globalGainPoints: 5,
+          gainPerTarget: 12.5,
         }),
         expect.objectContaining({
           key: 'access',
           count: 1,
           total: 2,
           gainPoints: 12.5,
-          globalGainPoints: 1.6,
+          globalGainPoints: 2.5,
           gainPerTarget: 12.5,
         }),
       ]),
@@ -191,24 +221,6 @@ describe('buildDashboard', () => {
         count: 1,
         href: 'variables?tab=variables&tab_variable_5=%3D%22%22',
       },
-    ])
-  })
-
-  it('builds recent and upcoming timeline items', () => {
-    const dashboard = buildDashboard(input)
-    expect(dashboard.timeline.recent).toEqual([
-      expect.objectContaining({
-        href: 'dataset/dataset-a',
-        label: 'Dataset A',
-        typeLabel: 'Modification',
-      }),
-    ])
-    expect(dashboard.timeline.upcoming).toEqual([
-      expect.objectContaining({
-        href: 'dataset/dataset-b',
-        label: 'Dataset B',
-        typeLabel: 'Prochaine mise à jour',
-      }),
     ])
   })
 })

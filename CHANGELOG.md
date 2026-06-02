@@ -2,7 +2,10 @@
 
 ## Unreleased
 
-- add: introduce the Bilan tab with catalog quality scoring, activity, and actionable improvement links
+## 0.26.0 (2026-06-02)
+
+- add: introduce the Bilan tab with a five-level catalog maturity pyramid, animated quality scores, diagnostics, and actionable improvement links
+- add: expose scoped Bilan views on organization, folder, tag, and dataset pages, with PDF export including the analyzed perimeter
 - fix: improve dashboard filter URLs, homepage search positioning, and entity title transition color handling
 - fix: normalize DCAT distribution and document URIs, inherit package licenses for child distributions, and map `encolonne` exports to TXT/plain text
 

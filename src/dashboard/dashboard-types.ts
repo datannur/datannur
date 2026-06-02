@@ -9,18 +9,6 @@ import type {
   Variable,
 } from '@type'
 
-export type DashboardEvolution = {
-  id?: string | number
-  entity: string
-  entityId: string | number
-  type: string
-  timestamp: number
-  name?: string
-  parentName?: string
-  typeClean?: string
-  date?: string
-}
-
 export type DashboardScopeType =
   | 'catalog'
   | 'organization'
@@ -44,7 +32,6 @@ export type DashboardEntities = {
   tags?: Tag[]
   concepts?: Concept[]
   enumerations?: Enumeration[]
-  evolutions?: DashboardEvolution[]
 }
 
 export type DashboardInput = {
@@ -67,6 +54,7 @@ export type DashboardScore = {
   score: number
   description: string
   criteria: DashboardScoreCriterion[]
+  applicable: boolean
 }
 
 export type DashboardScoreCriterion = {
@@ -80,6 +68,19 @@ export type DashboardScoreCriterion = {
 }
 
 export type DashboardGlobalScore = {
+  label: string
+  score: number
+}
+
+export type DashboardDiagnostic = {
+  label: string
+  description: string
+  strengths: DashboardDiagnosticDimension[]
+  watchpoints: DashboardDiagnosticDimension[]
+}
+
+export type DashboardDiagnosticDimension = {
+  key: string
   label: string
   score: number
 }
@@ -112,27 +113,11 @@ export type DashboardTargetGroup = {
   href: string
 }
 
-export type DashboardTimelineItem = {
-  key: string
-  label: string
-  href: string
-  entity: string
-  type: string
-  typeLabel: string
-  timestamp: number
-  date?: string
-}
-
-export type DashboardTimeline = {
-  recent: DashboardTimelineItem[]
-  upcoming: DashboardTimelineItem[]
-}
-
 export type DashboardData = {
   scope: DashboardScope
   summary: DashboardMetric[]
   globalScore: DashboardGlobalScore
+  diagnostic: DashboardDiagnostic
   maturity: DashboardScore[]
   priorities: DashboardPriority[]
-  timeline: DashboardTimeline
 }

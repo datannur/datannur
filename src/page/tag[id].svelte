@@ -137,8 +137,21 @@
       { entity: 'variable', items: variables },
     ]
 
+    const dashboard = {
+      scope: { type: 'tag', id: tag.id, label: tag.name },
+      entities: {
+        organizations,
+        folders,
+        tags: [tag, ...tags],
+        docs,
+        datasets,
+        variables,
+      },
+    }
+
     tabs = tabsHelper({
       tag,
+      dashboard,
       organizations,
       folders,
       tags,

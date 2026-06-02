@@ -1,5 +1,7 @@
 import type {
   DashboardData,
+  DashboardDiagnostic,
+  DashboardDiagnosticDimension,
   DashboardEntities,
   DashboardGlobalScore,
   DashboardInput,
@@ -10,10 +12,7 @@ import type {
   DashboardScope,
   DashboardTarget,
   DashboardTargetGroup,
-  DashboardTimeline,
-  DashboardTimelineItem,
 } from './dashboard-types'
-import { evolutionTypes } from '@lib/constant'
 
 type MaybeValue = string | number | boolean | null | undefined
 
@@ -87,8 +86,6 @@ type VariableLike = CountableItem & {
 }
 
 const priorityTargetLimit = 6
-const recentTimelineLimit = 10
-const upcomingTimelineLimit = 10
 const emptyFilterValue = `=""`
 
 type FilterColumn = {
@@ -161,6 +158,7 @@ function score(
     label,
     description,
     criteria: activeCriteria,
+    applicable: activeCriteria.length > 0,
     score:
       activeCriteria.length === 0
         ? 100
@@ -408,6 +406,14 @@ function buildSummary(entities: DashboardEntities): DashboardMetric[] {
   ].filter(metric => metric.value > 0)
 }
 
+const maturityOrder = [
+  'inventory',
+  'understanding',
+  'governance',
+  'protection',
+  'profileQuality',
+]
+
 function buildMaturity(entities: DashboardEntities): DashboardScore[] {
   const organizations = collection(entities.organizations)
   const folders = collection(entities.folders)
@@ -445,8 +451,8 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
   return [
     score(
       'inventory',
-      'Inventaire',
-      'Patrimoine présent, rattaché et accessible dans le catalogue',
+      'Inventorié',
+      'Patrimoine identifié, localisé et accessible',
       [
         criterion(
           'datasetFolders',
@@ -475,19 +481,19 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Améliore l’exploitabilité des datasets',
         ),
         criterion(
-          'seriesPeriods',
-          'Périodes des séries',
-          seriesDatasets.filter(hasPeriod).length,
-          seriesDatasets.length,
-          'Périodes de séries à préciser',
-          'Rend les séries temporelles plus lisibles',
+          'previews',
+          'Aperçus',
+          datasets.filter(dataset => !!dataset.hasPreview).length,
+          datasets.length,
+          'Aperçus à générer',
+          'Permet de consulter rapidement le contenu des datasets',
         ),
       ],
     ),
     score(
       'understanding',
-      'Compréhension',
-      'Contexte métier permettant de comprendre les actifs',
+      'Compréhensible',
+      'Contexte métier et documentation permettant d’interpréter les données',
       [
         criterion(
           'descriptions',
@@ -529,40 +535,21 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Concepts métier à relier',
           'Relie les colonnes au vocabulaire métier',
         ),
+        criterion(
+          'lineageRelations',
+          'Relations et lineage',
+          relationalVariables.length,
+          variables.length,
+          'Relations ou lineage à documenter',
+          'Relie les variables à leurs sources et références',
+        ),
       ],
     ),
     score(
-      'governance',
-      'Gouvernance',
-      'Acteurs et responsabilités autour des données lisibles',
+      'profileQuality',
+      'Réutilisable',
+      'Conditions, structure et profils permettant une réutilisation fiable',
       [
-        criterion(
-          'owners',
-          'Fournisseurs de données',
-          filledCount(governedItems, item => item.ownerOrganizationId),
-          governedItems.length,
-          'Fournisseurs de données à renseigner',
-          'Identifie l’organisation ou l’acteur qui fournit les données',
-        ),
-        criterion(
-          'managers',
-          'Gestionnaires des données',
-          filledCount(governedItems, item => item.managerOrganizationId),
-          governedItems.length,
-          'Gestionnaires des données à renseigner',
-          'Identifie l’acteur responsable du suivi des données',
-        ),
-        criterion(
-          'organizationContacts',
-          'Contacts organisation',
-          organizations.filter(
-            organization =>
-              isFilled(organization.email) || isFilled(organization.phone),
-          ).length,
-          organizations.length,
-          'Contacts organisation à compléter',
-          'Facilite l’identification des bons interlocuteurs',
-        ),
         criterion(
           'licenses',
           'Licences',
@@ -571,13 +558,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Licences à compléter',
           'Clarifie les conditions de réutilisation',
         ),
-      ],
-    ),
-    score(
-      'profiling',
-      'Profilage',
-      'Métadonnées techniques extraites automatiquement par le builder',
-      [
         criterion(
           'schemaExtracted',
           'Schéma extrait',
@@ -612,37 +592,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Mesure valeurs manquantes, cardinalités et distributions',
         ),
         criterion(
-          'previews',
-          'Aperçus',
-          datasets.filter(dataset => !!dataset.hasPreview).length,
-          datasets.length,
-          'Aperçus à générer',
-          'Permet de consulter rapidement le contenu des datasets',
-        ),
-      ],
-    ),
-    score(
-      'dataQuality',
-      'Qualité data',
-      'Signaux de qualité observés dans les données profilées',
-      [
-        criterion(
-          'variablesProfiled',
-          'Variables profilées',
-          variables.filter(hasVariableStats).length,
-          variables.length,
-          'Variables à profiler',
-          'Rend les contrôles de qualité mesurables',
-        ),
-        criterion(
-          'keyUniqueness',
-          'Clés uniques',
-          keyVariables.filter(isUniqueKey).length,
-          keyVariables.length,
-          'Clés avec doublons à vérifier',
-          'Sécurise les identifiants et clés métier',
-        ),
-        criterion(
           'enumerationsOrFrequencies',
           'Valeurs analysées',
           variables.filter(hasEnumerationOrFrequency).length,
@@ -651,19 +600,53 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Rend les distributions et modalités exploitables',
         ),
         criterion(
-          'lineageRelations',
-          'Relations et lineage',
-          relationalVariables.length,
-          variables.length,
-          'Relations ou lineage à documenter',
-          'Relie les variables à leurs sources et références',
+          'sampledDatasets',
+          'Échantillonnage explicite',
+          filledCount(datasets, dataset => dataset.sampleSize),
+          datasets.filter(hasDatasetStats).length,
+          'Échantillonnage à expliciter',
+          'Indique quand les fréquences reposent sur un échantillon',
         ),
       ],
     ),
     score(
-      'lifecycle',
-      'Cycle de vie',
-      'Fraîcheur, périodes couvertes et activité du catalogue',
+      'governance',
+      'Gouverné',
+      'Responsabilités et contacts clairement identifiés',
+      [
+        criterion(
+          'owners',
+          'Fournisseurs de données',
+          filledCount(governedItems, item => item.ownerOrganizationId),
+          governedItems.length,
+          'Fournisseurs de données à renseigner',
+          'Identifie l’organisation ou l’acteur qui fournit les données',
+        ),
+        criterion(
+          'managers',
+          'Gestionnaires des données',
+          filledCount(governedItems, item => item.managerOrganizationId),
+          governedItems.length,
+          'Gestionnaires des données à renseigner',
+          'Identifie l’acteur responsable du suivi des données',
+        ),
+        criterion(
+          'organizationContacts',
+          'Contacts organisation',
+          organizations.filter(
+            organization =>
+              isFilled(organization.email) || isFilled(organization.phone),
+          ).length,
+          organizations.length,
+          'Contacts organisation à compléter',
+          'Facilite l’identification des bons interlocuteurs',
+        ),
+      ],
+    ),
+    score(
+      'protection',
+      'Maîtrisé',
+      'Cycle de vie, qualité et risques suivis dans la durée',
       [
         criterion(
           'lastUpdateDate',
@@ -690,64 +673,21 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           'Aide à comprendre le périmètre temporel des données',
         ),
         criterion(
-          'trackedActivity',
-          'Évolutions suivies',
-          collection(entities.evolutions).length > 0 ? 1 : 0,
-          1,
-          'Suivi des évolutions à activer',
-          'Rend les changements du catalogue visibles',
-        ),
-      ],
-    ),
-    score(
-      'publication',
-      'Publication',
-      'Catalogue prêt à être partagé et réutilisé',
-      [
-        criterion(
-          'publishableDatasets',
-          'Datasets publiables',
-          datasets.filter(
-            dataset =>
-              isFilled(dataset.license) &&
-              (isFilled(dataset.link) || isFilled(dataset.dataPath)) &&
-              !!dataset.hasPreview,
-          ).length,
-          datasets.length,
-          'Datasets publiables à compléter',
-          'Réunit accès, licence et aperçu pour la réutilisation',
+          'seriesPeriods',
+          'Périodes des séries',
+          seriesDatasets.filter(hasPeriod).length,
+          seriesDatasets.length,
+          'Périodes de séries à préciser',
+          'Rend les séries temporelles plus lisibles',
         ),
         criterion(
-          'sampledDatasets',
-          'Échantillonnage explicite',
-          filledCount(datasets, dataset => dataset.sampleSize),
-          datasets.filter(hasDatasetStats).length,
-          'Échantillonnage à expliciter',
-          'Indique quand les fréquences reposent sur un échantillon',
+          'keyUniqueness',
+          'Clés uniques',
+          keyVariables.filter(isUniqueKey).length,
+          keyVariables.length,
+          'Clés avec doublons à vérifier',
+          'Sécurise les identifiants et clés métier',
         ),
-        criterion(
-          'documentedConcepts',
-          'Concepts documentés',
-          describedCount(concepts),
-          concepts.length,
-          'Concepts à documenter',
-          'Rend le glossaire métier partageable',
-        ),
-        criterion(
-          'documentedTags',
-          'Mots clés documentés',
-          describedCount(tags),
-          tags.length,
-          'Mots clés à documenter',
-          'Rend la taxonomie plus explicite',
-        ),
-      ],
-    ),
-    score(
-      'protection',
-      'Protection',
-      'Confidentialité, sensibilité et diffusion maîtrisée des données',
-      [
         ...(sensitiveVariables.length === 0
           ? [
               criterion(
@@ -798,18 +738,75 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
         ),
       ],
     ),
-  ].filter(item => item.criteria.length > 0)
+  ].sort((a, b) => maturityOrder.indexOf(a.key) - maturityOrder.indexOf(b.key))
 }
 
 function buildGlobalScore(maturity: DashboardScore[]): DashboardGlobalScore {
+  const applicableMaturity = maturity.filter(item => item.applicable)
   const scoreValue =
-    maturity.length === 0
+    applicableMaturity.length === 0
       ? 100
       : Math.round(
-          maturity.reduce((total, item) => total + item.score, 0) /
-            maturity.length,
+          applicableMaturity.reduce((total, item) => total + item.score, 0) /
+            applicableMaturity.length,
         )
-  return { label: 'Qualité du catalogue', score: scoreValue }
+  return { label: 'Maturité du catalogue', score: scoreValue }
+}
+
+function diagnosticLabel(scoreValue: number): string {
+  if (scoreValue < 40) return 'Catalogue en structuration'
+  if (scoreValue < 70) return 'Catalogue en consolidation'
+  if (scoreValue < 90) return 'Catalogue opérationnel'
+  return 'Catalogue maîtrisé'
+}
+
+function diagnosticDescription(scoreValue: number): string {
+  if (scoreValue < 40) {
+    return 'Les fondations du catalogue sont présentes, mais les informations essentielles restent à consolider pour faciliter la compréhension et la réutilisation.'
+  }
+  if (scoreValue < 70) {
+    return 'Le catalogue dispose d’une base opérationnelle. Plusieurs axes restent à renforcer pour fiabiliser son usage et son partage.'
+  }
+  if (scoreValue < 90) {
+    return 'Le catalogue présente une bonne maturité. Les principaux éléments de compréhension, de suivi et de réutilisation sont en place.'
+  }
+  return 'Le catalogue présente une maturité élevée. Les données sont bien documentées, gouvernées et exploitables.'
+}
+
+function diagnosticDimension(
+  dimension: DashboardScore,
+): DashboardDiagnosticDimension {
+  return {
+    key: dimension.key,
+    label: dimension.label,
+    score: dimension.score,
+  }
+}
+
+function buildDiagnostic(
+  globalScore: DashboardGlobalScore,
+  maturity: DashboardScore[],
+): DashboardDiagnostic {
+  const applicableMaturity = maturity.filter(item => item.applicable)
+  const byStrength = [...applicableMaturity].sort(
+    (a, b) => b.score - a.score || a.label.localeCompare(b.label),
+  )
+  const byWatchpoint = [...applicableMaturity].sort(
+    (a, b) => a.score - b.score || a.label.localeCompare(b.label),
+  )
+  const watchpoints = byWatchpoint
+    .filter(
+      item =>
+        !byStrength.slice(0, 2).some(strength => strength.key === item.key),
+    )
+    .slice(0, 2)
+
+  return {
+    label: diagnosticLabel(globalScore.score),
+    description: diagnosticDescription(globalScore.score),
+    strengths: byStrength.slice(0, 2).map(diagnosticDimension),
+    watchpoints: watchpoints.map(diagnosticDimension),
+  }
 }
 
 function buildPriorityTargets(entities: DashboardEntities): {
@@ -1503,51 +1500,15 @@ function buildPriorities(
     )
 }
 
-function buildTimelineItem(
-  evolution: NonNullable<DashboardEntities['evolutions']>[number],
-): DashboardTimelineItem {
-  const entityId = evolution.entityId
-  const entity = evolution.entity
-  return {
-    key: String(evolution.id ?? `${entity}-${entityId}-${evolution.timestamp}`),
-    label: evolution.name ?? evolution.parentName ?? String(entityId),
-    href: `${entity}/${entityId}`,
-    entity,
-    type: evolution.type,
-    typeLabel:
-      evolution.typeClean ??
-      evolutionTypes[evolution.type as keyof typeof evolutionTypes] ??
-      evolution.type,
-    timestamp: evolution.timestamp,
-    date: evolution.date,
-  }
-}
-
-function buildTimeline(entities: DashboardEntities): DashboardTimeline {
-  const evolutions = collection(entities.evolutions)
-  const now = Date.now()
-  return {
-    recent: evolutions
-      .filter(evolution => evolution.timestamp <= now)
-      .sort((a, b) => b.timestamp - a.timestamp)
-      .slice(0, recentTimelineLimit)
-      .map(buildTimelineItem),
-    upcoming: evolutions
-      .filter(evolution => evolution.timestamp > now)
-      .sort((a, b) => a.timestamp - b.timestamp)
-      .slice(0, upcomingTimelineLimit)
-      .map(buildTimelineItem),
-  }
-}
-
 export function buildDashboard(input: DashboardInput): DashboardData {
   const maturity = buildMaturity(input.entities)
+  const globalScore = buildGlobalScore(maturity)
   return {
     scope: input.scope,
     summary: buildSummary(input.entities),
-    globalScore: buildGlobalScore(maturity),
+    globalScore,
+    diagnostic: buildDiagnostic(globalScore, maturity),
     maturity,
     priorities: buildPriorities(maturity, input.scope, input.entities),
-    timeline: buildTimeline(input.entities),
   }
 }
