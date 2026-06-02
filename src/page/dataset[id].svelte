@@ -60,8 +60,19 @@
     { entity: 'enumeration', items: enumerations },
   ]
 
+  const dashboard = dataset && {
+    scope: { type: 'dataset', id: dataset.id, label: dataset.name },
+    entities: {
+      datasets: [dataset],
+      docs: dataset.docs,
+      variables,
+      enumerations,
+    },
+  }
+
   let tabs = tabsHelper({
     dataset,
+    dashboard,
     docs: dataset?.docs,
     datasets,
     variables,

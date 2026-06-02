@@ -53,7 +53,9 @@
         (evo.parentEntity === 'enumeration' &&
           evo.parentEntityId &&
           enumerationsId.has(evo.parentEntityId)) ||
-        (evo.entity === 'enumeration' && evo.id && enumerationsId.has(evo.id)) ||
+        (evo.entity === 'enumeration' &&
+          evo.id &&
+          enumerationsId.has(evo.id)) ||
         (evo.entity === 'variable' && evo.id && variablesId.has(evo.id)) ||
         (evo.entity === 'dataset' && evo.id && datasetsId.has(evo.id)) ||
         (evo.entity === 'folder' &&
@@ -69,8 +71,21 @@
     { entity: 'enumeration', items: enumerations },
   ]
 
+  const dashboard = {
+    scope: { type: 'folder', id: folder.id, label: folder.name },
+    entities: {
+      folders: [folder, ...folders],
+      tags,
+      docs,
+      datasets,
+      variables,
+      enumerations,
+    },
+  }
+
   const tabs = tabsHelper({
     folder,
+    dashboard,
     folders,
     tags,
     docs,

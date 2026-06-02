@@ -107,6 +107,7 @@ export const entityToIcon = {
   understanding: 'book-open-reader',
   discoverability: 'magnifying-glass-chart',
   governance: 'building-user',
+  profileQuality: 'chart-line',
   profiling: 'chart-line',
   dataQuality: 'chart-column',
   lifecycle: 'rotate-right',

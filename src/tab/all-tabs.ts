@@ -192,6 +192,7 @@ export const allTabs: Record<string, TabConfig> = {
     name: 'Bilan',
     icon: 'dashboard',
     component: Dashboard,
+    footerVisible: true,
   },
   aboutStructure: {
     name: 'Structure',

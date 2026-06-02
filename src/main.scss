@@ -72,12 +72,13 @@ $icon-colors: (
   'delete': #ae667a,
   'endDate': #ae667a,
   'stat': #9fb658,
-  'dashboard': #9fb658,
+  'dashboard': #2f7d68,
   'inventory': #5e9381,
   'coverage': #5e9381,
   'understanding': #579fbd,
   'discoverability': #5e9381,
   'governance': #625d8c,
+  'profileQuality': #9fb658,
   'profiling': #9fb658,
   'dataQuality': #d4a930,
   'lifecycle': #e0745c,
@@ -231,5 +232,5 @@ $entities:
   'enumeration', 'value', 'log', 'entity', 'option', 'search', 'favorite',
   'about', 'diagram', 'compare', 'stat', 'dashboard', 'doc', 'openapi', 'dcat',
   'integrity', 'evolution', 'features', 'preview', 'frequency', 'coverage',
-  'understanding', 'governance', 'profiling', 'dataQuality', 'lifecycle',
-  'publication', 'inventory', 'protection';
+  'understanding', 'governance', 'profileQuality', 'profiling', 'dataQuality',
+  'lifecycle', 'publication', 'inventory', 'protection';
