@@ -92,7 +92,7 @@ describe('Time', () => {
     'should work with param day = true',
     dateNow => {
       const dates = [
-        ['2023/11/25', "aujourd'hui"],
+        ['2023/11/25', 'aujourd’hui'],
         ['2023/11/24', 'hier'],
         ['2023/11/23', 'avant-hier'],
         ['2023/11/22', 'il y a 3 jours'],

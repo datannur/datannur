@@ -3,6 +3,7 @@
   import MainFilter from '@lib/main-filter'
   import Switch from '@layout/Switch.svelte'
   import Button from '@layout/Button.svelte'
+  import { translate } from '@i18n/i18n'
   import type { ConfigFilter } from '@type'
 
   let filters: ConfigFilter[] = $state([])
@@ -23,7 +24,9 @@
 {/each}
 
 <div class="navbar-item">
-  <Button onclick={() => window.location.reload()}>Appliquer</Button>
+  <Button onclick={() => window.location.reload()}
+    >{$translate('filter.apply')}</Button
+  >
 </div>
 
 <style lang="scss">

@@ -5,6 +5,7 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-dataset.md?raw'
+  import { translate } from '@i18n/i18n'
 
   const datasets = db.getAll('dataset')
   const tags = db.getAll('tag').filter(tag => !!tag.nbDataset)
@@ -27,6 +28,10 @@
 </script>
 
 <section class="section">
-  <Title type="dataset" name="Datasets" mode="mainTitle" />
+  <Title
+    type="dataset"
+    name={$translate('entityPlural.dataset')}
+    mode="mainTitle"
+  />
   <Tabs {tabs} />
 </section>

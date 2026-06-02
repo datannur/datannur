@@ -5,6 +5,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
+  import { translate } from '@i18n/i18n'
 
   const tabs = tabsHelper({
     aboutFile: getAboutMain(),
@@ -14,6 +15,6 @@
 </script>
 
 <section class="section">
-  <Title type="about" name="A propos" mode="mainTitle" />
+  <Title type="about" name={$translate('nav.about')} mode="mainTitle" />
   <Tabs {tabs} />
 </section>

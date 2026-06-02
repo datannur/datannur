@@ -19,6 +19,7 @@
   import SearchBar from '@search/SearchBar.svelte'
   import FloatingChatButton from '@llm/FloatingChatButton.svelte'
   import { initApp } from '@src/app-mode/app-init'
+  import { initI18n } from '@i18n/i18n'
   import type { AttributWithValues } from '@stat/stat'
   import type { MainEntityName, EntityName } from '@src/type'
 
@@ -34,8 +35,10 @@
     openAllRecursive: true,
     evolutionSummary: false,
     pageShadowColored: false,
+    language: 'auto',
   })
 
+  initI18n()
   DarkMode.init()
 
   $whenAppReady = (async () => {

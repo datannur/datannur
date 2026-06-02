@@ -12,6 +12,7 @@
   import aboutSearch from '@markdown/search/about-search.md?raw'
   import noResult from '@markdown/search/no-result.md?raw'
   import noRecentSearch from '@markdown/search/no-recent-search.md?raw'
+  import { currentLocale, translate } from '@i18n/i18n'
   import type { SearchResult as SearchResultType } from '@search/search'
   import type { Tab } from '@tab/tabs-helper'
 
@@ -32,13 +33,19 @@
       props: { aboutFile },
     }
   }
-  const aboutTab = makeTab('A propos', 'about', 'about', aboutSearch)
-  const noResultTab = makeTab('Résultat', 'search', 'noResult', noResult)
-  const noRecentSearchTab = makeTab(
-    'Recherches récentes',
-    'search',
-    'noRecentSearch',
-    noRecentSearch,
+  let aboutTab = $derived(
+    makeTab($translate('nav.about'), 'about', 'about', aboutSearch),
+  )
+  let noResultTab = $derived(
+    makeTab($translate('page.search.result'), 'search', 'noResult', noResult),
+  )
+  let noRecentSearchTab = $derived(
+    makeTab(
+      $translate('page.search.recentSearches'),
+      'search',
+      'noRecentSearch',
+      noRecentSearch,
+    ),
   )
 
   SearchHistory.onChange('searchPage', () => searchInputChange())
@@ -50,7 +57,7 @@
 
   function initSearchRecent() {
     searchResultData = SearchHistory.getRecentSearch()
-    const tabName = 'Recherches récentes'
+    const tabName = $translate('page.search.recentSearches')
     setTabs(tabName)
     isLoading = false
   }
@@ -74,7 +81,7 @@
     setTabs()
   }
 
-  function setTabs(name = 'Résultat') {
+  function setTabs(name = $translate('page.search.result')) {
     setTabKey()
     if (searchResultData.length === 0) {
       tabs = [isEmptyInput ? noRecentSearchTab : noResultTab]
@@ -111,6 +118,7 @@
 
   $effect(() => {
     void $searchValue
+    void $currentLocale
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
       searchInputChange()
@@ -118,7 +126,10 @@
   })
 </script>
 
-<Head title="Recherche" description="Page de recherche" />
+<Head
+  title={$translate('page.search.title')}
+  description={$translate('page.search.description')}
+/>
 
 <section class="section">
   <div>
@@ -127,7 +138,7 @@
         class="input"
         type="text"
         name="search-page-input"
-        placeholder={$searchReady ? '' : 'Recherche en préparation...'}
+        placeholder={$searchReady ? '' : $translate('search.preparing')}
         disabled={!$searchReady}
         bind:value={$searchValue}
         autocomplete="off"

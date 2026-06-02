@@ -3,8 +3,9 @@
   import { onMount, onDestroy, untrack } from 'svelte'
   import { documentWidth } from '@lib/viewport-manager'
   import { getColor } from '@lib/util'
-  import { entityNames } from '@lib/constant'
   import { allTabs } from '@lib/store'
+  import { translate } from '@i18n/i18n'
+  import { getEntityLabelKey } from '@i18n/entity'
   import attributs from './attributs'
   import { addValues } from './stat'
   import Icon from '@layout/Icon.svelte'
@@ -99,6 +100,12 @@
     updateLayout()
   }
 
+  function getStatEntityLabel(entity: MainEntityName | 'log') {
+    return entity === 'log'
+      ? $translate('tab.log')
+      : $translate(getEntityLabelKey(entity))
+  }
+
   const entities = stat.filter(x => x.items?.length > 0)
   entities.forEach(entity => {
     visible[entity.entity] = false
@@ -118,7 +125,7 @@
       onclick={clickShowAll}
     >
       <Icon type="entity" />
-      <span class="btn-select-entity-name">Tout</span>
+      <span class="btn-select-entity-name">{$translate('options.all')}</span>
     </button>
     {#each entities as entity (entity.entity)}
       <button
@@ -130,7 +137,7 @@
       >
         <Icon type={entity.entity} />
         <span class="btn-select-entity-name">
-          {entityNames[entity.entity]}
+          {getStatEntityLabel(entity.entity)}
         </span>
       </button>
     {/each}

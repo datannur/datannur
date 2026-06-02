@@ -9,6 +9,7 @@
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
   import aboutFile from '@markdown/about-folder.md?raw'
+  import { translate } from '@i18n/i18n'
 
   const folders = db.getAll('folder')
   makeParentsRelative(false, folders)
@@ -43,7 +44,11 @@
 </script>
 
 <section class="section">
-  <Title type="folder" name="Dossiers" mode="mainTitle" />
+  <Title
+    type="folder"
+    name={$translate('entityPlural.folder')}
+    mode="mainTitle"
+  />
   {#if showOpenAllSwitch}
     <OpenAllSwitch onChange={() => keyTab++} />
   {/if}

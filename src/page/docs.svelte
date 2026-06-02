@@ -4,6 +4,7 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-doc.md?raw'
+  import { translate } from '@i18n/i18n'
 
   const docs = db.getAll('doc')
 
@@ -18,6 +19,6 @@
 </script>
 
 <section class="section">
-  <Title type="doc" name="Docs" mode="mainTitle" />
+  <Title type="doc" name={$translate('entityPlural.doc')} mode="mainTitle" />
   <Tabs {tabs} />
 </section>

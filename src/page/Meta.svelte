@@ -2,6 +2,7 @@
   import db from '@db'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-main-meta.md?raw'
+  import { translate } from '@i18n/i18n'
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
 
@@ -27,6 +28,10 @@
 </script>
 
 <section class="section">
-  <Title type="internalView" name="Vue interne" mode="mainTitle" />
+  <Title
+    type="internalView"
+    name={$translate('nav.internal')}
+    mode="mainTitle"
+  />
   <Tabs {tabs} />
 </section>

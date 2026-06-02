@@ -4,6 +4,7 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-enumeration.md?raw'
+  import { translate } from '@i18n/i18n'
 
   const enumerations = db.getAll('enumeration')
   const evolutions = db
@@ -20,6 +21,10 @@
 </script>
 
 <section class="section">
-  <Title type="enumeration" name="Énumérations" mode="mainTitle" />
+  <Title
+    type="enumeration"
+    name={$translate('entityPlural.enumeration')}
+    mode="mainTitle"
+  />
   <Tabs {tabs} />
 </section>

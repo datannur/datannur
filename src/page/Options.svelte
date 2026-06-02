@@ -6,6 +6,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import { checkApiAvailability } from '@lib/api-availability'
   import aboutFile from '@markdown/about-options.md?raw'
+  import { translate } from '@i18n/i18n'
   import type { ApiAvailability } from '@lib/api-availability'
 
   let logs = Logs.getAll()
@@ -28,7 +29,7 @@
 </script>
 
 <section class="section">
-  <Title type="option" name="Options" mode="mainTitle" />
+  <Title type="option" name={$translate('nav.options')} mode="mainTitle" />
   {#key apiAvailability.available}
     <Tabs {tabs} />
   {/key}

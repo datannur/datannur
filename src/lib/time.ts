@@ -1,4 +1,5 @@
 import { locale } from '@lib/constant'
+import type { Locale } from '@i18n/types'
 
 function isQuarterSeparator(char: string): boolean {
   return 'tTqQ'.includes(char)
@@ -91,7 +92,6 @@ export function normalizeLastUpdateDate(value: string | number | null): string {
   return String(value)
 }
 
-const formatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
 const divisions: {
   amount: number
   name: Intl.RelativeTimeFormatUnit
@@ -148,13 +148,17 @@ export function getTimeAgo(
   parse = false,
   day = false,
   dateNow = new Date(),
+  formatLocale: Locale | string = locale,
 ) {
   if (!date) return ''
   if (parse && typeof date === 'string') date = dateToTimestamp(date)
   if (typeof date === 'number') date = normalizeTimestamp(date)
   if (day) dateNow.setHours(0, 0, 0, 0)
   let duration = (Number(date) - Number(dateNow)) / 1000
-  if (day && duration === 0) return "aujourd'hui"
+  const formatter = new Intl.RelativeTimeFormat(formatLocale, {
+    numeric: 'auto',
+  })
+  if (day && duration === 0) return formatter.format(0, 'days')
   for (const division of divisions) {
     if (Math.abs(duration) < division.amount) {
       return formatter.format(Math.round(duration), division.name)

@@ -4,6 +4,7 @@
   import { isSmallMobile } from '@lib/viewport-manager'
   import { currentRoute } from '@router/router-store'
   import Icon from '@layout/Icon.svelte'
+  import { translate } from '@i18n/i18n'
 
   let initialRoute = $state<string | null>(null)
 
@@ -30,8 +31,8 @@
 {#if shouldShow}
   <button
     class="header-back-button"
-    title="Retour"
-    aria-label="Retour"
+    title={$translate('nav.back')}
+    aria-label={$translate('nav.back')}
     onclick={goBack}
   >
     <Icon type="back" marginRight={false} />

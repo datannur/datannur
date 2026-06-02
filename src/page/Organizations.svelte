@@ -9,6 +9,7 @@
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
   import aboutFile from '@markdown/about-organization.md?raw'
+  import { translate } from '@i18n/i18n'
 
   let keyTab = $state(1)
 
@@ -45,7 +46,11 @@
 </script>
 
 <section class="section">
-  <Title type="organization" name="Organisations" mode="mainTitle" />
+  <Title
+    type="organization"
+    name={$translate('entityPlural.organization')}
+    mode="mainTitle"
+  />
   {#if showOpenAllSwitch}
     <OpenAllSwitch onChange={() => keyTab++} />
   {/if}

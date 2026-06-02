@@ -10,6 +10,7 @@
   import BtnClearInput from '@layout/BtnClearInput.svelte'
   import SearchHistory from './search-history'
   import SearchBarResult from './SearchBarResult.svelte'
+  import { translate } from '@i18n/i18n'
   import type { SearchResult } from './search'
   import type { MainEntityName } from '@src/type'
 
@@ -194,7 +195,7 @@
             isFocusIn &&
             nbResult > 0}
           onclick={goToPageSearch}
-          aria-label="Rechercher"
+          aria-label={$translate('search.ariaLabel')}
         >
           <i class="fas fa-magnifying-glass"></i>
         </button>
@@ -203,8 +204,8 @@
           class="input"
           type="text"
           placeholder={searchDisabled
-            ? 'Recherche en préparation...'
-            : 'Rechercher...'}
+            ? $translate('search.preparing')
+            : $translate('search.placeholder')}
           disabled={searchDisabled}
           bind:value={$searchValue}
           oninput={debounce(searchInputChange, 100)}

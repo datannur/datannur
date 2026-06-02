@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- add: introduce the first English/French UI translation foundation with persisted language preference
+
 ## 0.26.0 (2026-06-02)
 
 - add: introduce the Bilan tab with a five-level catalog maturity pyramid, animated quality scores, diagnostics, and actionable improvement links

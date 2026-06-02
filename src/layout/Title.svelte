@@ -2,7 +2,7 @@
   import fitty from 'fitty'
   import db from '@db'
   import { nbFavorite } from '@lib/store'
-  import { entityNames, mainEntityNames } from '@lib/constant'
+  import { mainEntityNames } from '@lib/constant'
   import { getEntityTitleTransitionName } from '@lib/page-transition'
   import { getBreadcrumbItems } from '@lib/breadcrumb'
   import { appWidth } from '@lib/viewport-manager'
@@ -11,6 +11,8 @@
   import Icon from '@layout/Icon.svelte'
   import Favorite from '@favorite/Favorite.svelte'
   import ShareLink from '@layout/ShareLink.svelte'
+  import { translate } from '@i18n/i18n'
+  import { getEntityLabelKey } from '@i18n/entity'
   import { onMount } from 'svelte'
   import type { MouseEventHandler } from 'svelte/elements'
   import type { BreadcrumbItem } from '@lib/breadcrumb'
@@ -43,7 +45,9 @@
   } = $props()
 
   const separator = ' | '
-  const entityName = $derived(entityNames[type as MainEntityName])
+  const entityName = $derived(
+    isMainEntityName(type) ? $translate(getEntityLabelKey(type)) : '',
+  )
 
   const title = $derived(
     mode !== 'mainTitle' ? entityName + separator + name : name,

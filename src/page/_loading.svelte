@@ -2,8 +2,9 @@
   import logo from '@img/logo.png'
   import logoDark from '@img/logo-dark.png'
   import Head from '@frame/Head.svelte'
+  import { translate } from '@i18n/i18n'
 
-  let title = 'Chargement...'
+  let title = $derived($translate('loading.title'))
 </script>
 
 <Head {title} />

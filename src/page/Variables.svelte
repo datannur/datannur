@@ -5,6 +5,7 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-variable.md?raw'
+  import { translate } from '@i18n/i18n'
 
   const variables = db.getAll('variable')
   const tags = db.getAll('tag').filter(tag => !!tag.nbVariable)
@@ -27,6 +28,10 @@
 </script>
 
 <section class="section">
-  <Title type="variable" name="Variables" mode="mainTitle" />
+  <Title
+    type="variable"
+    name={$translate('entityPlural.variable')}
+    mode="mainTitle"
+  />
   <Tabs {tabs} />
 </section>

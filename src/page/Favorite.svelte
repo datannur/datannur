@@ -5,8 +5,11 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFile from '@markdown/about-favorite.md?raw'
+  import { translate } from '@i18n/i18n'
 
-  const organizations = db.getAll('organization').filter(item => item.isFavorite)
+  const organizations = db
+    .getAll('organization')
+    .filter(item => item.isFavorite)
   const folders = db.getAll('folder').filter(item => item.isFavorite)
   const tags = db.getAll('tag').filter(item => item.isFavorite)
   const docs = db.getAll('doc').filter(item => item.isFavorite)
@@ -64,7 +67,7 @@
 <section class="section">
   <Title
     type="favorite"
-    name="Favoris"
+    name={$translate('nav.favorites')}
     isFavoritePage={true}
     mode="mainTitle"
   />

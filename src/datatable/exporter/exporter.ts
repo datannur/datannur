@@ -1,4 +1,7 @@
 import Logs from '@lib/logs'
+import type { TranslationKey } from '@i18n/types'
+
+type Translate = (key: TranslationKey) => string
 
 function applyToElements(selector: string, apply: (element: Element) => void) {
   document.querySelectorAll(selector).forEach(apply)
@@ -9,10 +12,10 @@ export default class Exporter {
   constructor(id: string) {
     this.id = id
   }
-  getLanguage() {
+  getLanguage(translate: Translate) {
     return {
-      copyTitle: 'Copier dans le presse-papier',
-      copySuccess: 'Tableau copié dans le presse-papier',
+      copyTitle: translate('datatable.copyTitle'),
+      copySuccess: translate('datatable.copySuccess'),
     }
   }
   getButtons() {

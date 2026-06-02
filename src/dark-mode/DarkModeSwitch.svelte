@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logs from '@lib/logs'
   import { DarkMode, darkModeTheme } from '@dark-mode/dark-mode'
+  import { translate } from '@i18n/i18n'
 
   let { label = '' }: { label?: string } = $props()
 
@@ -21,7 +22,7 @@
   id="checkbox_{id}"
   onclick={toggle}
   class="tdnn {day}"
-  aria-label="dark-mode"
+  aria-label={$translate('options.darkMode')}
 >
   <div class="moon {sun}"></div>
 </button>
