@@ -31,6 +31,33 @@ OUTPUT_DIR = DATA_DIR / "api"
 JsonObject = dict[str, Any]
 
 
+def format_json(data: Any, indent: int = 0) -> str:
+    if isinstance(data, dict):
+        if not data:
+            return "{}"
+
+        item_indent = " " * (indent + 2)
+        closing_indent = " " * indent
+        items = [
+            f"{item_indent}{json.dumps(key, ensure_ascii=False)}: {format_json(value, indent + 2)}"
+            for key, value in data.items()
+        ]
+        return "{\n" + ",\n".join(items) + f"\n{closing_indent}}}"
+
+    if isinstance(data, list):
+        if not data:
+            return "[]"
+        if all(not isinstance(item, (dict, list)) for item in data):
+            return json.dumps(data, ensure_ascii=False)
+
+        item_indent = " " * (indent + 2)
+        closing_indent = " " * indent
+        items = [f"{item_indent}{format_json(item, indent + 2)}" for item in data]
+        return "[\n" + ",\n".join(items) + f"\n{closing_indent}]"
+
+    return json.dumps(data, ensure_ascii=False)
+
+
 def read_json(path: Path) -> Any:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -41,7 +68,7 @@ def read_json(path: Path) -> Any:
 
 
 def write_json(path: Path, data: JsonObject) -> str:
-    content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    content = format_json(data) + "\n"
     path.write_text(content, encoding="utf-8")
     return get_file_hash(path)
 
@@ -52,35 +79,40 @@ def get_file_hash(path: Path) -> str:
 
 
 def write_html(path: Path, title: str, spec_file: str, spec_hash: str) -> None:
-    content = f"""<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../../app/assets/icon/icon.ico" sizes="any" />
-    <title>{title}</title>
-    <style>
-      body {{
-        margin: 0;
-        padding: 0;
-      }}
-
-            scalar-api-reference {{
-                --scalar-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            }}
-    </style>
-  </head>
-  <body>
-        <script
-            id="api-reference"
-            data-url="./{spec_file}?v={spec_hash}"
-            data-layout="modern"
-            data-theme="default"
-        ></script>
-        <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@{SCALAR_API_REFERENCE_VERSION}"></script>
-  </body>
-</html>
-"""
+    content = "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="en">',
+            "  <head>",
+            '    <meta charset="UTF-8" />',
+            '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+            '    <link rel="icon" href="../../app/assets/icon/icon.ico" sizes="any" />',
+            f"    <title>{title}</title>",
+            "    <style>",
+            "      body {",
+            "        margin: 0;",
+            "        padding: 0;",
+            "      }",
+            "",
+            "      scalar-api-reference {",
+            "        --scalar-font:",
+            "          system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;",
+            "      }",
+            "    </style>",
+            "  </head>",
+            "  <body>",
+            "    <script",
+            '      id="api-reference"',
+            f'      data-url="./{spec_file}?v={spec_hash}"',
+            '      data-layout="modern"',
+            '      data-theme="default"',
+            "    ></script>",
+            f'    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@{SCALAR_API_REFERENCE_VERSION}"></script>',
+            "  </body>",
+            "</html>",
+            "",
+        ]
+    )
     path.write_text(content, encoding="utf-8")
 
 
@@ -118,8 +150,8 @@ def load_official_schemas() -> dict[str, JsonObject]:
     return schemas
 
 
-def load_table_samples(data_dir: Path) -> dict[str, JsonObject]:
-    samples_by_table: dict[str, JsonObject] = {}
+def load_observed_fields(data_dir: Path) -> dict[str, list[str]]:
+    fields_by_table: dict[str, list[str]] = {}
 
     for data_file in sorted(data_dir.glob("*.json")):
         table_name = data_file.stem
@@ -131,17 +163,44 @@ def load_table_samples(data_dir: Path) -> dict[str, JsonObject]:
             print(f"WARNING: Skipping {data_file.name}: expected a JSON array")
             continue
 
-        first_record = next((item for item in data if isinstance(item, dict)), None)
-        if first_record:
-            samples_by_table[table_name] = first_record
+        observed_fields = sorted(
+            {field for item in data if isinstance(item, dict) for field in item.keys()}
+        )
+        if observed_fields:
+            fields_by_table[table_name] = observed_fields
         else:
             print(f"INFO: Skipping {data_file.name}: no object records")
 
-    return samples_by_table
+    return fields_by_table
 
 
-def get_observed_fields(sample: JsonObject) -> list[str]:
-    return sorted(sample.keys())
+def get_localized_base_field(field_name: str, properties: JsonObject) -> str | None:
+    base_field, separator, locale = field_name.partition(":")
+    if not separator or not base_field or not locale:
+        return None
+    if base_field not in properties:
+        return None
+    return base_field
+
+
+def get_schema_for_observed_field(
+    field_name: str,
+    properties: JsonObject,
+) -> Any:
+    field_schema = properties.get(field_name)
+    if field_schema is not None:
+        return field_schema
+
+    localized_base = get_localized_base_field(field_name, properties)
+    if localized_base is None:
+        return None
+
+    localized_schema = copy.deepcopy(properties[localized_base])
+    description = localized_schema.get("description")
+    if isinstance(description, str) and description:
+        localized_schema["description"] = f"{description} ({field_name})"
+
+    return localized_schema
 
 
 def get_schema_name(schema: JsonObject, fallback: str) -> str:
@@ -162,13 +221,17 @@ def filter_object_schema(schema: JsonObject, observed_fields: list[str]) -> Json
     if not isinstance(properties, dict):
         return filtered
 
-    observed = set(observed_fields)
-    filtered["properties"] = {
-        key: value for key, value in properties.items() if key in observed
-    }
+    filtered_properties: JsonObject = {}
+    for field in observed_fields:
+        field_schema = get_schema_for_observed_field(field, properties)
+        if field_schema is not None:
+            filtered_properties[field] = field_schema
+
+    filtered["properties"] = filtered_properties
 
     required = filtered.get("required")
     if isinstance(required, list):
+        observed = set(observed_fields)
         filtered["required"] = [field for field in required if field in observed]
 
     return filtered
@@ -185,14 +248,22 @@ def build_filtered_schema(
         print(f"WARNING: Skipping {table_name}: schema has no object properties")
         return None
 
-    unknown_fields = sorted(set(observed_fields) - set(properties.keys()))
+    unknown_fields = sorted(
+        field
+        for field in observed_fields
+        if get_schema_for_observed_field(field, properties) is None
+    )
     if unknown_fields:
         print(
             f"WARNING: {table_name}.json contains fields not in official schema: "
             + ", ".join(unknown_fields)
         )
 
-    known_fields = [field for field in observed_fields if field in properties]
+    known_fields = [
+        field
+        for field in observed_fields
+        if get_schema_for_observed_field(field, properties) is not None
+    ]
     if not known_fields:
         print(f"INFO: Skipping {table_name}: no schema-covered fields observed")
         return None
@@ -208,11 +279,11 @@ def build_filtered_schema(
 
 def build_catalog_schemas(
     official_schemas: dict[str, JsonObject],
-    samples_by_table: dict[str, JsonObject],
+    fields_by_table: dict[str, list[str]],
 ) -> dict[str, JsonObject]:
     schemas: dict[str, JsonObject] = {}
 
-    for table_name, sample in samples_by_table.items():
+    for table_name, observed_fields in fields_by_table.items():
         official_schema = official_schemas.get(table_name)
         if official_schema is None:
             print(f"WARNING: Skipping {table_name}.json: official schema not found")
@@ -221,7 +292,7 @@ def build_catalog_schemas(
         filtered_schema = build_filtered_schema(
             table_name,
             official_schema,
-            get_observed_fields(sample),
+            observed_fields,
         )
         if filtered_schema is not None:
             schemas[table_name] = filtered_schema
@@ -403,8 +474,8 @@ def generate_openapi() -> None:
     data_dir = require_data_db_dir(APP_DIR)
 
     official_schemas = load_official_schemas()
-    samples_by_table = load_table_samples(data_dir)
-    schemas = build_catalog_schemas(official_schemas, samples_by_table)
+    fields_by_table = load_observed_fields(data_dir)
+    schemas = build_catalog_schemas(official_schemas, fields_by_table)
     if not schemas:
         sys.exit("ERROR: No schema-covered catalog data found")
 
