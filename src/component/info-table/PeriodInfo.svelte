@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
 
   let {
     period,
@@ -9,7 +10,7 @@
 
 {#if period}
   <tr>
-    <td><Icon type="dateRange" /> Période</td>
+    <td><Icon type="dateRange" /> {t('column.period.title')}</td>
     <td>
       {period}
       {#if periodDuration}

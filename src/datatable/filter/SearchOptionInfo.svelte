@@ -1,35 +1,37 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import { t } from '@i18n/messages'
+</script>
 
-<h2 class="popup-title">options de recherche</h2>
+<h2 class="popup-title">{t('search.options.title')}</h2>
 <table>
   <tbody>
     <tr>
       <td>...</td>
-      <td>contient ...</td>
+      <td>{t('search.options.contains')}</td>
     </tr>
     <tr>
       <td>&gt; ...</td>
-      <td>Plus grand que ...</td>
+      <td>{t('search.options.greaterThan')}</td>
     </tr>
     <tr>
       <td>&lt; ...</td>
-      <td>Plus petit que ...</td>
+      <td>{t('search.options.lessThan')}</td>
     </tr>
     <tr>
       <td>= ...</td>
-      <td>contient exactement ...</td>
+      <td>{t('search.options.exactlyContains')}</td>
     </tr>
     <tr>
       <td>! ...</td>
-      <td>ne contient pas ...</td>
+      <td>{t('search.options.doesNotContain')}</td>
     </tr>
     <tr>
       <td>=""</td>
-      <td>ne contient rien</td>
+      <td>{t('search.options.containsNothing')}</td>
     </tr>
     <tr>
       <td>!""</td>
-      <td>ne contient pas rien</td>
+      <td>{t('search.options.containsSomething')}</td>
     </tr>
   </tbody>
 </table>

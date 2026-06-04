@@ -101,8 +101,8 @@
     "entity": "dataset",
     "entity_id": "emploi_jeunes",
     "variable": "description",
-    "old_value": "Données sur l'emploi des jeunes de 18 à 25 ans",
-    "new_value": "Données sur l'emploi des jeunes de 18 à 36 ans"
+    "old_value": "Data on employment among young people aged 18 to 25",
+    "new_value": "Data on employment among young people aged 18 to 36"
   },
   {
     "timestamp": 1747315150,
@@ -166,7 +166,7 @@
     "entity": "dataset",
     "entity_id": "eau_potable",
     "variable": "description",
-    "old_value": "Données sur l'eau potable",
-    "new_value": "Données de l'eau potable mises à jour"
+    "old_value": "Data on drinking water",
+    "new_value": "Updated drinking water data"
   }
 ]

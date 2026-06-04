@@ -6,6 +6,7 @@
   import Column from '@lib/column'
   import Render from '@lib/render'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import escapeHtml from 'escape-html'
   import type { Folder, Column as ColumnType } from '@type'
 
@@ -53,12 +54,12 @@
   function defineColumns(): ColumnType[] {
     if (isMeta) {
       return [
-        Column.name('folder', 'Dossiers'),
+        Column.name('folder', t('entityPlural.folder')),
         Column.description(),
         {
           data: 'nbDataset',
-          title: Render.icon('dataset') + 'Datasets',
-          tooltip: 'Nombre de datasets',
+          title: Render.icon('dataset') + t('column.datasets.title'),
+          tooltip: t('column.datasets.tooltip'),
           render: (data, type, row: Folder) => {
             if (!data) return ''
             const content = link(
@@ -79,7 +80,7 @@
 
     return [
       Column.favorite(),
-      Column.name('folder', 'Dossier', {
+      Column.name('folder', t('entity.folder'), {
         withIndent: true,
         linkSameEntityTab: true,
       }),
@@ -104,18 +105,20 @@
       Column.localisation(),
       {
         data: 'surveyType',
-        title: Render.icon('surveyType') + "Type d'enquête",
+        title:
+          Render.icon('surveyType') + t('column.surveyType.title'),
         defaultContent: '',
-        tooltip: "Type d'enquête",
+        tooltip: t('column.surveyType.tooltip'),
         render: Render.shortText,
       },
       Column.deliveryFormat(),
       Column.license(),
       {
         data: 'metadataPath',
-        title: Render.icon('metadataPath') + 'Metadonnées',
+        title:
+          Render.icon('metadataPath') + t('column.metadata.title'),
         defaultContent: '',
-        tooltip: 'Emplacement des métadonnées',
+        tooltip: t('column.metadata.tooltip'),
         render: (data: string, type) => {
           if (!data) return ''
           if (type !== 'display') return String(data)
@@ -134,7 +137,7 @@
         data: 'gitCode',
         title: Render.icon('gitCode') + 'GIT code',
         defaultContent: '',
-        tooltip: 'Code source des traitements',
+        tooltip: t('column.sourceCode.tooltip'),
         render: (data, type) => {
           if (!data) return ''
           if (type !== 'display') return String(data)
@@ -146,7 +149,7 @@
     ]
   }
 
-  const columns = defineColumns()
+  const columns = $derived(defineColumns())
 </script>
 
 <Datatable

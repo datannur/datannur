@@ -1,6 +1,10 @@
 import db from '@db'
-import defaultBanner from '@markdown/main/banner.md?raw'
-import defaultBody from '@markdown/main/body.md?raw'
+import defaultBannerEn from '@markdown/main/banner.en.md?raw'
+import defaultBannerFr from '@markdown/main/banner.fr.md?raw'
+import defaultBodyEn from '@markdown/main/body.en.md?raw'
+import defaultBodyFr from '@markdown/main/body.fr.md?raw'
+import { localizedField } from '@i18n/data'
+import { localizedMarkdown } from '@i18n/markdown'
 
 function normalizeThemeBanner(banner: unknown) {
   const bannerText = String(banner)
@@ -23,15 +27,31 @@ function normalizeThemeBanner(banner: unknown) {
     .join('\n')
 }
 
+function getConfigValue(id: string) {
+  const config = db.get('config', id)
+  if (!config) return ''
+  return String(localizedField(config, 'value') ?? '')
+}
+
 export function getAboutMain() {
+  const defaultBanner = localizedMarkdown({
+    en: defaultBannerEn,
+    fr: defaultBannerFr,
+  })
+  const defaultBody = localizedMarkdown({
+    en: defaultBodyEn,
+    fr: defaultBodyFr,
+  })
   const banner = db.exists('config', 'banner')
-    ? db.getConfig('banner')
+    ? getConfigValue('banner')
     : defaultBanner
 
-  const body = db.exists('config', 'body') ? db.getConfig('body') : defaultBody
+  const body = db.exists('config', 'body')
+    ? getConfigValue('body')
+    : defaultBody
 
   const moreInfo = db.exists('config', 'more_info')
-    ? '\n\n' + db.getConfig('more_info')
+    ? '\n\n' + getConfigValue('more_info')
     : ''
 
   return normalizeThemeBanner(banner) + '\n' + body + moreInfo

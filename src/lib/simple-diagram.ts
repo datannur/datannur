@@ -1,6 +1,7 @@
 import escapeHtml from 'escape-html'
 import markdownRender from '@lib/markdown'
 import Render from '@lib/render'
+import { getEntityName } from '@i18n/constant-labels'
 import { entityNames, entityToIcon } from '@lib/constant'
 import { getLinkUrl } from '@lib/url'
 
@@ -102,9 +103,12 @@ function parseNodeRef(rawValue: string): DiagramNode {
     return {
       id: entity,
       entity,
-      label: entityNames[entity as keyof typeof entityNames] ?? entity,
+      label:
+        entity in entityNames
+          ? getEntityName(entity as keyof typeof entityNames)
+          : entity,
       recursive: raw.includes('$recursive'),
-      href: getLinkUrl(`metaDataset/${entity}`),
+      href: `metaDataset/${entity}`,
     }
   }
 
@@ -134,8 +138,8 @@ function getEdge(rawLine: string): DiagramEdge | null {
 function cleanEdgeLabel(label: string | undefined): string | undefined {
   if (!label) return undefined
   return label
-    .replaceAll('manager', entityNames.manager)
-    .replaceAll('owner', entityNames.owner)
+    .replaceAll('manager', getEntityName('manager'))
+    .replaceAll('owner', getEntityName('owner'))
 }
 
 export function parseSimpleDiagram(code: string): Diagram {
@@ -567,7 +571,9 @@ export function renderSimpleDiagram(code: string): string {
       const content = nodeHtml(node)
       const nodeContent = `<foreignObject x="${node.x}" y="${node.y}" width="${node.width}" height="${node.height}"><div xmlns="http://www.w3.org/1999/xhtml" class="simple-diagram-node simple-diagram-node-${color} simple-diagram-node-id-${nodeIdClass(node)}">${content}</div></foreignObject>`
       if (!node.href) return nodeContent
-      return `<a class="internal-link" data-href="${escapeHtml(node.href)}" href="${escapeHtml(node.href)}">${nodeContent}</a>`
+      const href = escapeHtml(node.href)
+      const url = escapeHtml(getLinkUrl(node.href))
+      return `<a class="internal-link" data-href="${href}" href="${url}">${nodeContent}</a>`
     })
     .join('')
 

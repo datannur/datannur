@@ -5,6 +5,9 @@
   import Loading from '@frame/Loading.svelte'
   import Icon from '@layout/Icon.svelte'
   import DarkModeSwitch from '@dark-mode/DarkModeSwitch.svelte'
+  import LanguageSelect from '@i18n/LanguageSelect.svelte'
+  import { getCurrentLocale } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import HeaderLink from '@frame/HeaderLink.svelte'
 
   let { menuMobile = false }: { menuMobile?: boolean } = $props()
@@ -16,16 +19,21 @@
     absolute: '',
   })
   const year = new Date().getFullYear()
+  const locale = getCurrentLocale()
 
   let currentInterval: ReturnType<typeof setInterval> | undefined = undefined
   let interval = 1000
   function updateLastModif() {
-    lastUpdate.relative = getTimeAgo(lastUpdate.value * 1000) ?? ''
-    if (
-      interval === 1000 &&
-      !lastUpdate.relative.includes('seconde') &&
-      !lastUpdate.relative.includes('maintenant')
-    ) {
+    const timestamp = lastUpdate.value * 1000
+    lastUpdate.relative = getTimeAgo(
+      timestamp,
+      false,
+      false,
+      new Date(),
+      locale,
+    )
+    const secondsAgo = Math.abs(Date.now() - timestamp) / 1000
+    if (interval === 1000 && secondsAgo >= 60) {
       clearInterval(currentInterval)
       interval = 60000
       currentInterval = setInterval(updateLastModif, interval)
@@ -39,7 +47,13 @@
     if (lastModifTimestamp) lastUpdate.value = lastModifTimestamp
     if (lastUpdate.value) {
       const timestamp = lastUpdate.value * 1000
-      lastUpdate.relative = getTimeAgo(timestamp) ?? ''
+      lastUpdate.relative = getTimeAgo(
+        timestamp,
+        false,
+        false,
+        new Date(),
+        locale,
+      )
       lastUpdate.absolute = getDatetime(timestamp)
       currentInterval = setInterval(updateLastModif, interval)
     } else {
@@ -67,8 +81,13 @@
         </div>
       {/if}
       <div>
-        <a href="https://github.com/datannur/datannur" target="_blanck">
-          <Icon type="github" marginRight={false} /> github
+        <a
+          href="https://github.com/datannur/datannur"
+          target="_blanck"
+          aria-label="GitHub"
+          title="GitHub"
+        >
+          <Icon type="github" marginRight={false} />
         </a>
       </div>
       <div>
@@ -78,11 +97,14 @@
           className=""
         >
           <Icon type="internalView" marginRight={false} />
-          vue interne
+          {t('nav.internal')}
         </HeaderLink>
       </div>
       <div>
         <DarkModeSwitch />
+      </div>
+      <div>
+        <LanguageSelect />
       </div>
       {#if lastUpdate.state === 'loading'}
         <div>
@@ -94,7 +116,8 @@
             class="break-line use-tooltip tooltip-top"
             title={lastUpdate.absolute}
           >
-            actualisé {lastUpdate.relative}
+            {t('footer.updated')}
+            {lastUpdate.relative}
           </span>
         </div>
       {/if}

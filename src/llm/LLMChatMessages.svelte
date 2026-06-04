@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { t } from '@i18n/messages'
   import markdownRender from '@lib/markdown'
   import type { ChatMessage } from '@llm/llm-client'
   import LLMChatMessage from '@llm/LLMChatMessage.svelte'
@@ -142,7 +143,7 @@
         <div class="message assistant">
           <div class="tool-indicator">
             <i class="fa-solid fa-database"></i>
-            <span>Interrogation de la base de données...</span>
+            <span>{t('llm.chat.queryingDatabase')}</span>
           </div>
         </div>
       {/if}

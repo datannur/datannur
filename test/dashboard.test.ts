@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { buildDashboard } from '../src/dashboard/build-dashboard'
+import { currentLocale } from '../src/i18n/state'
 import type { DashboardInput } from '../src/dashboard/dashboard-types'
 
 const input: DashboardInput = {
@@ -58,6 +59,48 @@ const input: DashboardInput = {
 }
 
 describe('buildDashboard', () => {
+  beforeEach(() => {
+    currentLocale.set('en')
+  })
+
+  it('builds representative dashboard labels in french', () => {
+    currentLocale.set('fr')
+
+    const dashboard = buildDashboard(input)
+    expect(dashboard.globalScore).toEqual({
+      label: 'Maturité du catalogue',
+      score: 26,
+    })
+    expect(dashboard.diagnostic).toEqual(
+      expect.objectContaining({
+        label: 'Catalogue en structuration',
+        strengths: [
+          expect.objectContaining({ key: 'governance', label: 'Gouverné' }),
+          expect.objectContaining({ key: 'protection', label: 'Maîtrisé' }),
+        ],
+        watchpoints: [
+          expect.objectContaining({
+            key: 'understanding',
+            label: 'Compréhensible',
+          }),
+          expect.objectContaining({
+            key: 'profileQuality',
+            label: 'Réutilisable',
+          }),
+        ],
+      }),
+    )
+    expect(
+      dashboard.priorities.find(item => item.key === 'variableTypes')
+        ?.targetGroups,
+    ).toEqual([
+      expect.objectContaining({
+        entity: 'variable',
+        label: 'Variables',
+      }),
+    ])
+  })
+
   it('builds summary metrics from scoped collections', () => {
     const dashboard = buildDashboard(input)
     expect(dashboard.scope).toEqual(input.scope)
@@ -76,20 +119,20 @@ describe('buildDashboard', () => {
   it('builds equal-weight score dimensions and global score', () => {
     const dashboard = buildDashboard(input)
     expect(dashboard.globalScore).toEqual({
-      label: 'Maturité du catalogue',
+      label: 'Catalog maturity',
       score: 26,
     })
     expect(dashboard.diagnostic).toEqual({
-      label: 'Catalogue en structuration',
+      label: 'Catalog under structuring',
       description:
-        'Les fondations du catalogue sont présentes, mais les informations essentielles restent à consolider pour faciliter la compréhension et la réutilisation.',
+        'The catalog foundations are present, but essential information still needs consolidation to improve understanding and reuse.',
       strengths: [
-        { key: 'governance', label: 'Gouverné', score: 34 },
-        { key: 'protection', label: 'Maîtrisé', score: 33 },
+        { key: 'governance', label: 'Governed', score: 34 },
+        { key: 'protection', label: 'Controlled', score: 33 },
       ],
       watchpoints: [
-        { key: 'understanding', label: 'Compréhensible', score: 18 },
-        { key: 'profileQuality', label: 'Réutilisable', score: 21 },
+        { key: 'understanding', label: 'Understandable', score: 18 },
+        { key: 'profileQuality', label: 'Reusable', score: 21 },
       ],
     })
     expect(
@@ -100,18 +143,18 @@ describe('buildDashboard', () => {
         applicable: item.applicable,
       })),
     ).toEqual([
-      { key: 'inventory', label: 'Inventorié', score: 25, applicable: true },
+      { key: 'inventory', label: 'Inventoried', score: 25, applicable: true },
       {
         key: 'understanding',
-        label: 'Compréhensible',
+        label: 'Understandable',
         score: 18,
         applicable: true,
       },
-      { key: 'governance', label: 'Gouverné', score: 34, applicable: true },
-      { key: 'protection', label: 'Maîtrisé', score: 33, applicable: true },
+      { key: 'governance', label: 'Governed', score: 34, applicable: true },
+      { key: 'protection', label: 'Controlled', score: 33, applicable: true },
       {
         key: 'profileQuality',
-        label: 'Réutilisable',
+        label: 'Reusable',
         score: 21,
         applicable: true,
       },

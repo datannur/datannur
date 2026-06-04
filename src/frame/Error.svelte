@@ -1,25 +1,32 @@
 <script lang="ts">
+  import { untrack } from 'svelte'
   import Head from '@frame/Head.svelte'
   import Link from '@layout/Link.svelte'
+  import { t } from '@i18n/messages'
+  import type { TranslationKey } from '@i18n/types'
 
   let { type = 'page' }: { type?: string } = $props()
+  const initialType = untrack(() => type)
 
-  const itemMap: { [key: string]: string } = {
-    page: 'La page',
-    dataset: 'Le dataset',
-    organization: "L'organisation",
-    folder: 'Le dossier',
-    tag: 'Le tag',
-    doc: 'La doc',
-    variable: 'La variable',
-    enumeration: "L'énumération",
+  const itemMap: { [key: string]: TranslationKey } = {
+    page: 'error.item.page',
+    dataset: 'error.item.dataset',
+    organization: 'error.item.organization',
+    folder: 'error.item.folder',
+    tag: 'error.item.tag',
+    doc: 'error.item.doc',
+    variable: 'error.item.variable',
+    enumeration: 'error.item.enumeration',
   }
 
-  const item = $derived(itemMap[type] ?? "L'élément")
-  const title = $derived(item + " n'existe pas")
-  const description = $derived(
-    'Oops. ' + item + " que vous cherchez n'existe pas.",
-  )
+  const item = t(itemMap[initialType] ?? 'error.item.element')
+  const title = item + ' ' + t('error.missingSuffix')
+  const description =
+    t('error.descriptionPrefix') +
+    ' ' +
+    item +
+    ' ' +
+    t('error.descriptionMiddle')
 </script>
 
 <Head {title} {description} />
@@ -46,7 +53,7 @@
     <div class="_number">4</div>
   </div>
   <div class="_text">{description}</div>
-  <Link href="" className="button">Page d'accueil</Link>
+  <Link href="" className="button">{t('error.homeLink')}</Link>
 </div>
 
 <style lang="scss">

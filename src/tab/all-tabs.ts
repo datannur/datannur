@@ -35,109 +35,112 @@ import Logs from '@component/options/Logs.svelte'
 import Evolution from '@component/Evolution.svelte'
 import { allTabsIcon } from '@lib/store'
 import type { TabConfig } from './tabs-helper'
+import type { TranslationKey } from '@i18n/types'
 
-export const allTabs: Record<string, TabConfig> = {
+type StaticTabConfig = TabConfig & { nameKey: TranslationKey }
+
+export const allTabs: Record<string, StaticTabConfig> = {
   organizations: {
-    name: 'Organisation',
+    nameKey: 'entity.organization',
     icon: 'organization',
     component: Organizations,
   },
   folders: {
-    name: 'Dossier',
+    nameKey: 'entity.folder',
     icon: 'folder',
     component: Folders,
   },
   tags: {
-    name: 'Mot clé',
+    nameKey: 'entity.tag',
     icon: 'tag',
     component: Tags,
   },
   concepts: {
-    name: 'Concept',
+    nameKey: 'entity.concept',
     icon: 'concept',
     component: Concepts,
   },
   datasets: {
-    name: 'Dataset',
+    nameKey: 'entity.dataset',
     icon: 'dataset',
     component: Datasets,
   },
   variables: {
-    name: 'Variable',
+    nameKey: 'entity.variable',
     icon: 'variable',
     component: Variables,
   },
   enumerations: {
-    name: 'Énumération',
+    nameKey: 'entity.enumeration',
     icon: 'enumeration',
     component: Enumerations,
   },
   enumerationsCompare: {
-    name: 'Similitude',
+    nameKey: 'tab.similarity',
     icon: 'compare',
     component: EnumerationsCompare,
     loadAsync: true,
   },
   values: {
-    name: 'Valeur',
+    nameKey: 'tab.value',
     icon: 'value',
     component: Values,
   },
   variableValues: {
-    name: 'Valeur',
+    nameKey: 'tab.value',
     icon: 'value',
     component: VariableValues,
   },
   frequency: {
-    name: 'Fréquence',
+    nameKey: 'tab.frequency',
     icon: 'frequency',
     component: Frequency,
   },
   allFav: {
-    name: 'Favori',
+    nameKey: 'tab.favorite',
     icon: 'favorite',
     component: AllFav,
   },
   logs: {
-    name: 'Log',
+    nameKey: 'tab.log',
     icon: 'log',
     component: Logs,
   },
   evolutions: {
-    name: 'Evolution',
+    nameKey: 'tab.evolution',
     icon: 'evolution',
     component: Evolution,
   },
   metaFolders: {
-    name: 'Dossier',
+    nameKey: 'entity.folder',
     icon: 'folder',
     component: Folders,
     isMeta: true,
     metaKey: 'folders',
   },
   metaDatasets: {
-    name: 'Dataset',
+    nameKey: 'entity.dataset',
     icon: 'dataset',
     component: Datasets,
     isMeta: true,
     metaKey: 'datasets',
   },
   metaVariables: {
-    name: 'Variable',
+    nameKey: 'entity.variable',
     icon: 'variable',
     component: Variables,
     isMeta: true,
     metaKey: 'variables',
   },
   variableMetaValues: {
-    name: 'Valeur',
+    nameKey: 'tab.value',
     icon: 'value',
     component: VariableValues,
     isMeta: true,
     metaKey: 'variableValues',
   },
   metaDiagramm: {
-    name: 'Diagramme',
+    nameKey: 'tab.diagram',
     icon: 'diagram',
     component: MetaDiagramm,
     withoutNum: true,
@@ -145,7 +148,7 @@ export const allTabs: Record<string, TabConfig> = {
     footerVisible: true,
   },
   checkDb: {
-    name: 'Intégrité',
+    nameKey: 'tab.integrity',
     icon: 'integrity',
     component: CheckDbFrame,
     withoutNum: true,
@@ -153,12 +156,12 @@ export const allTabs: Record<string, TabConfig> = {
     footerVisible: true,
   },
   docs: {
-    name: 'Doc',
+    nameKey: 'entity.doc',
     icon: 'doc',
     component: Docs,
   },
   options: {
-    name: 'Option',
+    nameKey: 'tab.option',
     icon: 'option',
     component: Options,
     withoutNum: true,
@@ -166,43 +169,43 @@ export const allTabs: Record<string, TabConfig> = {
     footerVisible: true,
   },
   api: {
-    name: 'API',
+    nameKey: 'tab.api',
     icon: 'database',
     component: Api,
     withoutNum: true,
     footerVisible: true,
   },
   datasetPreview: {
-    name: 'Aperçu',
+    nameKey: 'tab.preview',
     icon: 'preview',
     component: DatasetPreview,
   },
   variablePreview: {
-    name: 'Aperçu',
+    nameKey: 'tab.preview',
     icon: 'preview',
     component: VariablePreview,
   },
   stat: {
-    name: 'Stat',
+    nameKey: 'tab.stat',
     icon: 'stat',
     component: Stat,
     withoutProp: true,
   },
   dashboard: {
-    name: 'Bilan',
+    nameKey: 'tab.dashboard',
     icon: 'dashboard',
     component: Dashboard,
     footerVisible: true,
   },
   aboutStructure: {
-    name: 'Structure',
+    nameKey: 'tab.structure',
     icon: 'diagram',
     component: AboutFile,
     footerVisible: true,
     useAboutFile: true,
   },
   aboutFeatures: {
-    name: 'Fonctionnalités',
+    nameKey: 'tab.features',
     icon: 'features',
     component: AboutFile,
     footerVisible: true,
@@ -226,7 +229,7 @@ const infoItems = {
 }
 for (const [key, value] of Object.entries(infoItems)) {
   allTabs[key] = {
-    name: 'A propos',
+    nameKey: 'tab.about',
     icon: 'about',
     component: value,
     footerVisible: true,

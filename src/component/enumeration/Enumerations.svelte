@@ -2,6 +2,7 @@
   import { untrack } from 'svelte'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import type { Enumeration } from '@type'
 
   let { enumerations: enumerationsProp }: { enumerations: Enumeration[] } =
@@ -15,16 +16,16 @@
     nbVariableMax = Math.max(nbVariableMax, enumeration.nbVariable ?? 0)
   }
 
-  const columns = [
+  const columns = $derived([
     Column.favorite(),
-    Column.name('enumeration', 'Énumération'),
+    Column.name('enumeration', t('entity.enumeration')),
     Column.description(),
     Column.datatype(),
     Column.nbVariable('enumeration', nbVariableMax, { showTitle: true }),
     Column.nbValues(nbValueMax),
     Column.valuesPreview(),
     Column.folder(),
-  ]
+  ])
 </script>
 
 <Datatable

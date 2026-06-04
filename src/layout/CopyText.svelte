@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { copyTextClasses, copyTextMsg } from '@lib/copy-text'
+  import { copyTextClasses, getCopyTextMsg } from '@lib/copy-text'
 
   let { text }: { text: string | number | undefined } = $props()
 </script>
 
-<span class={copyTextClasses} title={copyTextMsg}>{text}</span>
+<span class={copyTextClasses} title={getCopyTextMsg()}>{text}</span>

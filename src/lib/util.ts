@@ -1,4 +1,5 @@
-import { varTypes, entityToIcon } from '@lib/constant'
+import { getVariableTypeName } from '@i18n/constant-labels'
+import { entityToIcon, varTypes } from '@lib/constant'
 
 export function capitalize(str: string) {
   if (!str || str.length === 0) return str
@@ -11,7 +12,7 @@ export function getPercent(value: number) {
 
 export function getVariableTypeClean(type: string | undefined) {
   if (!type || !(type in varTypes)) return undefined
-  return varTypes[type as keyof typeof varTypes]
+  return getVariableTypeName(type as keyof typeof varTypes)
 }
 
 export function entityToIconName(type: string) {

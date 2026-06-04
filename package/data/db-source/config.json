@@ -5,6 +5,7 @@
   },
   {
     "id": "more_info",
-    "value": "Cette version utilise des données fictives à des fins de démonstration."
+    "value": "This version uses fictional data for demonstration purposes.",
+    "value:fr": "Cette version utilise des données fictives à des fins de démonstration."
   }
 ]

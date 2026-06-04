@@ -1,7 +1,10 @@
 import { entityNames } from '@lib/constant'
 import { link } from '@lib/url'
 import { statExists } from '@stat/stat'
+import type { TranslationKey } from '@i18n/types'
 import type { Row, Column as ColumnType } from '@type'
+
+type Translate = (key: TranslationKey) => string
 
 function filterEmptyColumns(columns: ColumnType[], items: Row[]) {
   const hasProp: Record<string, boolean> = {}
@@ -41,6 +44,7 @@ export function defineColumns(
   keepAllCols: boolean,
   metaPath: string | undefined,
   nbRowLoading = 50,
+  translate: Translate,
 ) {
   let columnsCopy = columns.map(obj => ({ ...obj })) as ColumnType[]
 
@@ -49,7 +53,7 @@ export function defineColumns(
       data: '_rowNum',
       name: '_rowNum',
       title: '#',
-      tooltip: 'Numéro de ligne',
+      tooltip: translate('column.rowNumber.tooltip'),
       filterType: 'input',
       width: '20px',
     }

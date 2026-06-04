@@ -1,4 +1,7 @@
 import Logs from '@lib/logs'
+import type { TranslationKey } from '@i18n/types'
+
+type Translate = (key: TranslationKey) => string
 
 function applyToElements(selector: string, apply: (element: Element) => void) {
   document.querySelectorAll(selector).forEach(apply)
@@ -9,13 +12,13 @@ export default class Exporter {
   constructor(id: string) {
     this.id = id
   }
-  getLanguage() {
+  getLanguage(translate: Translate) {
     return {
-      copyTitle: 'Copier dans le presse-papier',
-      copySuccess: 'Tableau copié dans le presse-papier',
+      copyTitle: translate('datatable.copyTitle'),
+      copySuccess: translate('datatable.copySuccess'),
     }
   }
-  getButtons() {
+  getButtons(translate: Translate) {
     const filename = this.id
     return [
       {
@@ -24,7 +27,7 @@ export default class Exporter {
         footer: false,
       },
       {
-        text: '<span class="icon icon-download"><i class="fas fa-copy"></i></span>copie',
+        text: `<span class="icon icon-download"><i class="fas fa-copy"></i></span>${translate('datatable.export.copy')}`,
         className: 'download-button',
         extend: 'copy',
         title: '',
@@ -32,7 +35,7 @@ export default class Exporter {
         footer: false,
       },
       {
-        text: '<span class="icon icon-download"><i class="fas fa-file-csv"></i></span>csv',
+        text: `<span class="icon icon-download"><i class="fas fa-file-csv"></i></span>${translate('datatable.export.csv')}`,
         className: 'download-button',
         extend: 'csvHtml5',
         fieldSeparator: ';',
@@ -43,7 +46,7 @@ export default class Exporter {
         footer: false,
       },
       {
-        text: '<span class="icon icon-download"><i class="fas fa-file-excel"></i></span>excel',
+        text: `<span class="icon icon-download"><i class="fas fa-file-excel"></i></span>${translate('datatable.export.excel')}`,
         className: 'download-button',
         extend: 'excelHtml5',
         filename,

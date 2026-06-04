@@ -1,4 +1,5 @@
 import Render from '@lib/render'
+import { t } from '@i18n/messages'
 import { dateToTimestamp, getTimeAgo } from '@lib/time'
 import Histogram from './histogram'
 import { attributs } from './attributs'
@@ -30,7 +31,7 @@ function getValueReadable(start: ValueType, end: ValueType | undefined) {
 function addReadableValues(values: ValueEntry[], type: string) {
   for (const value of values) {
     if (value.start === '__empty__') {
-      value.readable = 'vide / manquant'
+      value.readable = t('column.emptyValue')
       continue
     }
     if (!['numeric', 'string'].includes(type)) {
@@ -39,8 +40,8 @@ function addReadableValues(values: ValueEntry[], type: string) {
     }
     value.readable = getValueReadable(value.start, value.end)
     if (type === 'string') {
-      value.readable +=
-        ' caractère' + (parseInt(value.start as string) > 1 ? 's' : '')
+      const length = parseInt(value.start as string)
+      value.readable += ` ${t(length > 1 ? 'column.characters' : 'column.character')}`
     }
   }
   return values

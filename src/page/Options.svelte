@@ -5,7 +5,10 @@
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
   import { checkApiAvailability } from '@lib/api-availability'
-  import aboutFile from '@markdown/about-options.md?raw'
+  import aboutFileEn from '@markdown/about-options.en.md?raw'
+  import aboutFileFr from '@markdown/about-options.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
   import type { ApiAvailability } from '@lib/api-availability'
 
   let logs = Logs.getAll()
@@ -16,7 +19,7 @@
       api: apiAvailability.available ? apiAvailability : false,
       logs,
       stat: [{ entity: 'log', items: logs }],
-      aboutFile,
+      aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
     }),
   )
 
@@ -28,7 +31,7 @@
 </script>
 
 <section class="section">
-  <Title type="option" name="Options" mode="mainTitle" />
+  <Title type="option" name={t('nav.options')} mode="mainTitle" />
   {#key apiAvailability.available}
     <Tabs {tabs} />
   {/key}

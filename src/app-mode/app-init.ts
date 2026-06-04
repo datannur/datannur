@@ -3,6 +3,7 @@ import Options from '@lib/options'
 import MainFilter from '@lib/main-filter'
 import { loadUserData } from '@lib/user-data'
 import { dbAddProcessedData } from '@lib/db'
+import { initI18n } from '@i18n/i18n'
 import search from '@search/search'
 import Logs from '@lib/logs'
 import Favorites from '@favorite/favorites'
@@ -29,6 +30,8 @@ export function initApp(): Promise<void> {
       const optionsReady = Options.init().then(
         () => performance.now() - optionsTimer,
       )
+      await initI18n()
+
       const filterTimer = performance.now()
       const filterReady = MainFilter.init().then(
         () => performance.now() - filterTimer,

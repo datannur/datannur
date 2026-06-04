@@ -43,7 +43,7 @@ export default defineConfig({
     assetsDir: 'app/assets',
     sourcemap,
     modulePreload: false,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1500,
     rollupOptions: {
       plugins: [
         process.env.BUNDLE_VIEW === 'true' &&

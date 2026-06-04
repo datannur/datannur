@@ -6,7 +6,9 @@ import {
   timestampToDate,
   normalizeLastUpdateDate,
 } from '@lib/time'
-import { entityNames, locale } from '@lib/constant'
+import { getCurrentLocale, t } from '@i18n/messages'
+import { getEntityName } from '@i18n/constant-labels'
+import { localizedField } from '@i18n/data'
 import { evolutionInitialSetup } from '@lib/evolution'
 import MainFilter from '@lib/main-filter'
 import type {
@@ -35,13 +37,20 @@ function getNbValues(
   return 0
 }
 
+function localizeDataFields(item: { [key: string]: unknown }) {
+  if ('name' in item) item.name = localizedField(item, 'name')
+  if ('description' in item) {
+    item.description = localizedField(item, 'description')
+  }
+}
+
 function formatStat(value: number | null | undefined): string {
   if (value === null || value === undefined) return ''
-  return value.toLocaleString(locale, { maximumFractionDigits: 1 })
+  return value.toLocaleString(getCurrentLocale(), { maximumFractionDigits: 1 })
 }
 
 function formatDate(timestamp: number): string {
-  return new Date(timestamp * 1000).toLocaleDateString(locale)
+  return new Date(timestamp * 1000).toLocaleDateString(getCurrentLocale())
 }
 
 function buildStatsPreview(variable: Variable): string {
@@ -50,7 +59,7 @@ function buildStatsPreview(variable: Variable): string {
   const fmt = isDate ? formatDate : formatStat
   const minStr = variable.min != null ? fmt(variable.min) : ''
   const maxStr = variable.max != null ? fmt(variable.max) : ''
-  const suffix = variable.type === 'string' ? ' car.' : ''
+  const suffix = variable.type === 'string' ? ` ${t('column.characters')}` : ''
   const sameMinMax = minStr && maxStr && minStr === maxStr
   const line1 = sameMinMax
     ? `${minStr}${suffix}`
@@ -60,9 +69,9 @@ function buildStatsPreview(variable: Variable): string {
   let stdStr = ''
   if (variable.std != null) {
     const std = isDate ? Math.round(variable.std / 86400) : variable.std
-    stdStr = ` ±${formatStat(std)}${isDate ? ' j' : ''}`
+    stdStr = ` ±${formatStat(std)}${isDate ? ` ${t('column.dayAbbr')}` : ''}`
   }
-  return `${line1}<br>moy. ${meanStr}${stdStr}`
+  return `${line1}<br>${t('column.meanAbbr')} ${meanStr}${stdStr}`
 }
 
 function addEntities(item: EntityTypeMap['tag' | 'doc']) {
@@ -105,8 +114,11 @@ function addPeriod(item: PeriodableEntity) {
   else if (item.startDate && item.endDate) {
     item.periodDuration = getPeriod(item.startDate, item.endDate, true)
     item.period = `${item.startDate} - ${item.endDate}`
-  } else if (item.startDate) item.period = `dès ${item.startDate}`
-  else if (item.endDate) item.period = `jusqu'à ${item.endDate}`
+  } else if (item.startDate) {
+    item.period = `${t('column.periodFrom')} ${item.startDate}`
+  } else if (item.endDate) {
+    item.period = `${t('column.periodUntil')} ${item.endDate}`
+  }
 }
 
 function addDocs(entity: DocableEntityName, item: DocableEntity) {
@@ -271,7 +283,7 @@ function variableAddDatasetInfo(variable: Variable) {
 
 function addEntity(item: MainEntity, entity: MainEntityName) {
   item._entity = entity
-  item._entityClean = entityNames[entity]
+  item._entityClean = getEntityName(entity)
 }
 
 function addSourceVariable(variable: Variable) {
@@ -568,6 +580,14 @@ export function getFkRelatedVariables(
 }
 
 class Process {
+  static localize() {
+    for (const table of Object.values(db.tables)) {
+      for (const item of table ?? []) {
+        localizeDataFields(item as { [key: string]: unknown })
+      }
+    }
+  }
+
   static tag() {
     db.foreach('tag', tag => {
       tag.propagateToParents =
@@ -782,8 +802,8 @@ class Process {
       variable.nbValue = nbValues
       addSourceVariable(variable)
       addFkVariable(variable)
-      if (variable.key) variable.key = 'oui'
-      if (variable.businessKey) variable.businessKey = 'oui'
+      if (variable.key) variable.key = t('column.trueValue')
+      if (variable.businessKey) variable.businessKey = t('column.trueValue')
 
       const freqData = db.getAll('frequency', { variable })
       variable.hasFreq = freqData.length > 0
@@ -854,16 +874,16 @@ class Process {
         metaVariable,
       )
 
-      if (locale === 'fr' && metaVariable.descriptionFr) {
+      if (getCurrentLocale() === 'fr' && metaVariable.descriptionFr) {
         metaVariable.description = metaVariable.descriptionFr
       }
 
-      if (metaVariable.name === 'id') metaVariable.key = 'oui'
+      if (metaVariable.name === 'id') metaVariable.key = t('column.trueValue')
       metaVariable.metaLocalisation = ''
       if (metaVariable.isInMeta && !metaVariable.isInData)
-        metaVariable.metaLocalisation = 'schéma'
+        metaVariable.metaLocalisation = t('column.metaLocation.schema')
       if (!metaVariable.isInMeta && metaVariable.isInData)
-        metaVariable.metaLocalisation = 'données'
+        metaVariable.metaLocalisation = t('column.metaLocation.data')
 
       const metaDataset = db.get('metaDataset', metaVariable.metaDatasetId)
       if (!metaDataset) return
@@ -880,7 +900,7 @@ class Process {
       metaDataset.isMeta = true
       metaDataset.folder = { id: metaDataset.metaFolderId }
       metaDataset.folderName = metaDataset.metaFolderId as string
-      if (locale === 'fr' && metaDataset.descriptionFr) {
+      if (getCurrentLocale() === 'fr' && metaDataset.descriptionFr) {
         metaDataset.description = metaDataset.descriptionFr
       }
       addVariableNum(metaDataset, 'metaDataset', 'metaVariable')
@@ -890,16 +910,16 @@ class Process {
         metaDataset.lastUpdateTimestamp *= 1000
       metaDataset.metaLocalisation = ''
       if (metaDataset.isInMeta && !metaDataset.isInData)
-        metaDataset.metaLocalisation = 'schéma'
+        metaDataset.metaLocalisation = t('column.metaLocation.schema')
       if (!metaDataset.isInMeta && metaDataset.isInData)
-        metaDataset.metaLocalisation = 'données'
+        metaDataset.metaLocalisation = t('column.metaLocation.data')
     })
   }
   static metaFolder() {
     db.foreach('metaFolder', metaFolder => {
       metaFolder._entity = 'metaFolder'
       metaFolder.isMeta = true
-      if (locale === 'fr' && metaFolder.descriptionFr) {
+      if (getCurrentLocale() === 'fr' && metaFolder.descriptionFr) {
         metaFolder.description = metaFolder.descriptionFr
       }
       const metaDatasets = db.getAll('metaDataset', { metaFolder })
@@ -940,7 +960,7 @@ function addDocRecursive() {
       }
       const uniqueDocs = docs.length > 1 ? removeDuplicateById(docs) : docs
       for (const doc of uniqueDocs) {
-        docsRecursive.push({ ...doc, inherited: 'hérité' })
+        docsRecursive.push({ ...doc, inherited: t('column.inherited.title') })
       }
       if (item.docs) docsRecursive.push(...item.docs)
     })
@@ -952,6 +972,7 @@ export function getLocalFilter() {
 }
 
 export function dbAddProcessedData() {
+  Process.localize()
   Process.tag()
   Process.organization()
   Process.folder()

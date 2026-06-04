@@ -76,22 +76,22 @@
   },
   {
     "variable_id": "pop_region__type_region",
-    "value": "urbaine",
+    "value": "urban",
     "frequency": 9432
   },
   {
     "variable_id": "pop_region__type_region",
-    "value": "périurbaine",
+    "value": "peri-urban",
     "frequency": 43
   },
   {
     "variable_id": "pop_region__type_region",
-    "value": "rurale",
+    "value": "rural",
     "frequency": 3434
   },
   {
     "variable_id": "pop_region__type_region",
-    "value": "montagne",
+    "value": "mountain",
     "frequency": 9481
   },
   {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Switch from '@layout/Switch.svelte'
   import Options from '@lib/options'
+  import { t } from '@i18n/messages'
 
   let { onChange = () => {} }: { onChange: () => void } = $props()
 
@@ -13,7 +14,7 @@
 
 <div
   class="evolution-summary-wrapper use-tooltip"
-  title="Afficher les évolultions de façon résumée"
+  title={t('options.evolutionSummary')}
 >
   <Switch
     bind:value={evolutionSummary}

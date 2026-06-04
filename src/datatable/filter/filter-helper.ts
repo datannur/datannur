@@ -4,6 +4,7 @@ import type { Api, ApiColumnMethods, InternalSettings } from 'datatables.net'
 import type { Column } from '@type'
 import { UrlParam } from '@lib/url'
 import { dateToTimestamp } from '@lib/time'
+import { t } from '@i18n/messages'
 import type { FilterSelectPopupRequest } from './filter-select-popup'
 
 interface ButtonInfo {
@@ -70,7 +71,7 @@ export default class FilterHelper {
     ) {
       let options = '<option value="">- - -</option>'
       if (column.header().innerHTML.includes('icon-favorite')) {
-        for (const val of ['favoris', 'non favoris']) {
+        for (const val of [t('filter.favorite'), t('filter.notFavorite')]) {
           options += '<option value="' + val + '">' + val + '</option>'
         }
       } else {
@@ -80,10 +81,13 @@ export default class FilterHelper {
 
         for (let val of values) {
           if (val === '') {
-            options += '<option value="__empty__">(vide)</option>'
+            options +=
+              '<option value="__empty__">' +
+              t('filter.emptyOption') +
+              '</option>'
           } else {
-            if (val === true) val = 'vrai'
-            else if (val === false) val = 'faux'
+            if (val === true) val = t('column.trueValue')
+            else if (val === false) val = t('column.falseValue')
             else if (typeof val === 'string' && val.includes('span>'))
               val = val.split('span>')[1].trim()
 
@@ -115,8 +119,8 @@ export default class FilterHelper {
       select.on('change', event => {
         const elem = jQuery(event.target)
         let val = String(elem.val())
-        if (val === 'true') val = 'vrai'
-        if (val === 'false') val = 'faux'
+        if (val === 'true') val = t('column.trueValue')
+        if (val === 'false') val = t('column.falseValue')
 
         searchSelectValue(val)
         this.updateFilterUrl(columnNum, val)

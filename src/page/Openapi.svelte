@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { get } from 'svelte/store'
   import { footerVisible } from '@lib/store'
+  import { t } from '@i18n/messages'
   import {
     checkApiAvailability,
     type ApiAvailability,
@@ -27,15 +28,15 @@
 
 <section class="openapi-page">
   {#if loading}
-    <div class="notice">Chargement de la documentation OpenAPI...</div>
+    <div class="notice">{t('page.openapi.loading')}</div>
   {:else if !apiAvailability.available}
     <div class="notice warning">
-      Aucune API locale ou intégrée n'est disponible pour ce catalogue.
+      {t('page.openapi.unavailable')}
     </div>
   {:else}
     <div class="openapi-frame-shell">
       <iframe
-        title="Documentation OpenAPI"
+        title={t('page.openapi.title')}
         src={apiAvailability.docsUrl}
         loading="lazy"
       ></iframe>

@@ -2,6 +2,7 @@
   import db from '@db'
   import Icon from '@layout/Icon.svelte'
   import Link from '@layout/Link.svelte'
+  import { getEntityName } from '@i18n/constant-labels'
   import { entityNames } from '@lib/constant'
 
   let { datasetId }: { datasetId: string } = $props()
@@ -40,8 +41,8 @@
   ]
 
   const relationRoleNames = {
-    owner: entityNames.owner,
-    manager: entityNames.manager,
+    owner: getEntityName('owner'),
+    manager: getEntityName('manager'),
   } as const
   const hiddenRelationRoles = ['source', 'fk']
 
@@ -53,7 +54,7 @@
     if (relationKey in entityNames) {
       return {
         entity: relationKey,
-        label: entityNames[relationKey as keyof typeof entityNames],
+        label: getEntityName(relationKey as keyof typeof entityNames),
       }
     }
     for (const entity of Object.keys(entityNames)) {
@@ -65,7 +66,7 @@
       if (!(role in relationRoleNames)) break
       return {
         entity,
-        label: `${entityNames[entity as keyof typeof entityNames]} (${relationRoleNames[role as keyof typeof relationRoleNames]})`,
+        label: `${getEntityName(entity as keyof typeof entityNames)} (${relationRoleNames[role as keyof typeof relationRoleNames]})`,
       }
     }
     return { entity: relationKey, label: relationKey }

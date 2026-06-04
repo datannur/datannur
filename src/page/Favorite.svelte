@@ -4,9 +4,14 @@
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
-  import aboutFile from '@markdown/about-favorite.md?raw'
+  import aboutFileEn from '@markdown/about-favorite.en.md?raw'
+  import aboutFileFr from '@markdown/about-favorite.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
-  const organizations = db.getAll('organization').filter(item => item.isFavorite)
+  const organizations = db
+    .getAll('organization')
+    .filter(item => item.isFavorite)
   const folders = db.getAll('folder').filter(item => item.isFavorite)
   const tags = db.getAll('tag').filter(item => item.isFavorite)
   const docs = db.getAll('doc').filter(item => item.isFavorite)
@@ -57,14 +62,14 @@
     enumerations,
     evolutions,
     stat,
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 </script>
 
 <section class="section">
   <Title
     type="favorite"
-    name="Favoris"
+    name={t('nav.favorites')}
     isFavoritePage={true}
     mode="mainTitle"
   />

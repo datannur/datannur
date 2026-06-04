@@ -30,29 +30,37 @@
   {
     "id": "canton_sigle",
     "folder_id": "00-base",
-    "name": "Sigle des cantons",
+    "name": "Canton abbreviations",
+    "name:fr": "Sigle des cantons",
     "type": "string",
-    "description": "Liste des 26 cantons suisses et leur sigle"
+    "description": "List of the 26 Swiss cantons and their abbreviations",
+    "description:fr": "Liste des 26 cantons suisses et leur sigle"
   },
   {
     "id": "langue_sigle",
     "folder_id": "00-base",
-    "name": "Sigle des langues",
+    "name": "Language abbreviations",
+    "name:fr": "Sigle des langues",
     "type": "string",
-    "description": "Liste des 3 principales langues suisses et leurs sigles"
+    "description": "List of the 3 main Swiss languages and their abbreviations",
+    "description:fr": "Liste des 3 principales langues suisses et leurs sigles"
   },
   {
     "id": "oui_non",
     "folder_id": "00-base",
-    "name": "Oui ou non",
+    "name": "Yes or no",
+    "name:fr": "Oui ou non",
     "type": "integer",
-    "description": "Oui ou non codé en 0 ou 1"
+    "description": "Yes or no coded as 0 or 1",
+    "description:fr": "Oui ou non codé en 0 ou 1"
   },
   {
     "id": "vide",
     "folder_id": "00-base",
-    "name": "vide / manquant",
+    "name": "empty / missing",
+    "name:fr": "vide / manquant",
     "type": "integer",
-    "description": "Valeur vide ou manquante"
+    "description": "Empty or missing value",
+    "description:fr": "Valeur vide ou manquante"
   }
 ]

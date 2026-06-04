@@ -23,6 +23,7 @@
       "@frame/*": ["./src/frame/*"],
       "@info-table/*": ["./src/component/info-table/*"],
       "@img/*": ["./src/assets/img/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@lib/*": ["./src/lib/*"],
       "@layout/*": ["./src/layout/*"],
       "@llm/*": ["./src/llm/*"],

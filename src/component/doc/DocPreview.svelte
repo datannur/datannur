@@ -2,6 +2,7 @@
   import Icon from '@layout/Icon.svelte'
   import PdfViewer from '@layout/PdfViewer.svelte'
   import MdFileDynamic from '@layout/MdFileDynamic.svelte'
+  import { t } from '@i18n/messages'
   import type { Doc } from '@type'
 
   let { doc }: { doc: Doc } = $props()
@@ -13,7 +14,8 @@
   class:has-md-format={doc.type === 'md'}
 >
   <div style="font-weight: bold;">
-    <Icon type="search" /> Aperçu
+    <Icon type="search" />
+    {t('doc.preview')}
   </div>
 
   <div class="doc-content-box">
@@ -24,7 +26,7 @@
         <MdFileDynamic docId={doc.id} mode="noPadding" />
       {:else}
         <div style="text-align: center; padding-top: 20px;">
-          <p>Impossible de charger le fichier</p>
+          <p>{t('doc.loadError')}</p>
         </div>
       {/if}
     </div>

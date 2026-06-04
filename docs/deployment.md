@@ -20,10 +20,11 @@ python3 datannur.py static-deploy
 
 - **domain**: Your public domain (e.g., `"https://yourdomain.com"`) - required for sitemap generation when `indexSeo: true`
 - **indexSeo**: `true` to allow search engine indexing, `false` to add `noindex` meta tag (default: `false`)
+- **languages**: Language folders to generate, for example `["en", "fr"]`; when set, static pages are written under language-prefixed paths such as `/en/datasets` and `/fr/datasets`
 - **entities**: Which entity types to generate static pages for
 - **routes**: Which routes to pre-generate
 
-> **Note:** This setup requires an Apache server with mod_rewrite enabled. Static generation creates SEO-optimized HTML files while maintaining the full SPA functionality.
+> **Note:** This setup requires an Apache server with mod_rewrite enabled. Static generation creates SEO-optimized HTML files while maintaining the full SPA functionality. In multilingual static output, each generated page records its language so the hydrated app keeps the same interface language as the served HTML.
 
 ## Apache / Shared Hosting Mode
 
@@ -32,6 +33,7 @@ The generated package includes an `.htaccess` file for Apache deployments, inclu
 Apache deployment provides:
 
 - Clean application URLs such as `/dataset/accident_route`
+- Language-prefixed static URLs such as `/en/dataset/accident_route` and `/fr/dataset/accident_route` when multilingual static generation is enabled
 - Static HTML pages when generated, with SPA fallback when a static page is missing
 - Public API entry points under `/api/`, including Raw API docs and REST API routes
 - PHP LLM proxy endpoints under `/api/llm/` when LLM web integration is enabled

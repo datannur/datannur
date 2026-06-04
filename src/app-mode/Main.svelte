@@ -2,7 +2,7 @@
   import db from '@db'
   import { whenAppReady, footerVisible } from '@lib/store'
   import { hasTouchScreen } from '@lib/browser-utils'
-  import { UrlParam, isHttp } from '@lib/url'
+  import { UrlParam, getPackageBasePath, isHttp } from '@lib/url'
   import { isMobile } from '@lib/viewport-manager'
   import GenericRouter from '@router/GenericRouter.svelte'
   import routerIndex from '@page/.router-index'
@@ -19,6 +19,8 @@
   import SearchBar from '@search/SearchBar.svelte'
   import FloatingChatButton from '@llm/FloatingChatButton.svelte'
   import { initApp } from '@src/app-mode/app-init'
+  import { initI18n } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import type { AttributWithValues } from '@stat/stat'
   import type { MainEntityName, EntityName } from '@src/type'
 
@@ -34,12 +36,17 @@
     openAllRecursive: true,
     evolutionSummary: false,
     pageShadowColored: false,
+    language: 'auto',
   })
 
+  const i18nReady = initI18n()
   DarkMode.init()
+
+  const manifestHref = `${getPackageBasePath()}app/manifest.json?v=7`
 
   $whenAppReady = (async () => {
     try {
+      await i18nReady
       await initApp()
     } catch (e) {
       console.error(e)
@@ -140,7 +147,7 @@
 
 <svelte:head>
   {#if isHttp}
-    <link href="app/manifest.json?v=7" rel="manifest" />
+    <link href={manifestHref} rel="manifest" />
   {/if}
 </svelte:head>
 
@@ -150,10 +157,10 @@
     <div id="wrapper" class:no-footer={!$footerVisible}>
       {#if errorLoadingDb}
         <div class="error-loading-db">
-          <h2 class="title">Erreur de chargement</h2>
-          <p>Erreur durant le chargement de la base de données.</p>
-          <p>Veuillez réessayer de charger l'application plus tard.</p>
-          <p>Si le problème persiste, contactez le support.</p>
+          <h2 class="title">{t('error.loadingTitle')}</h2>
+          <p>{t('error.loadingDatabase')}</p>
+          <p>{t('error.loadingRetry')}</p>
+          <p>{t('error.loadingSupport')}</p>
         </div>
       {:else}
         <SearchBar />

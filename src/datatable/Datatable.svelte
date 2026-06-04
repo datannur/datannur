@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte'
   import jQuery from 'jquery'
+  import escapeHtml from 'escape-html'
   import DataTable from 'datatables.net-bm'
   import JSZip from 'jszip'
   import type { Config, ConfigLanguage } from 'datatables.net'
@@ -12,6 +13,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { isMobile } from '@lib/browser-utils'
   import { isBigLimit } from '@lib/constant'
+  import { t } from '@i18n/messages'
   import { tabSelected, allTablesLoaded, allTabs } from '@lib/store'
   import { appWidth } from '@lib/viewport-manager'
   import { extendable } from '@lib/extendable'
@@ -89,6 +91,8 @@
 
   let datatable: Api | undefined = undefined
   let domTable: ReturnType<typeof jQuery> | null = null
+  let initTimeout: ReturnType<typeof setTimeout> | undefined = undefined
+  let tableRenderKey = $state(0)
 
   const isBig = data.length > isBigLimit
   const maxHeightValue = 257
@@ -107,31 +111,40 @@
   }
 
   const exporter = new Exporter(tableId)
-  const filter = new FilterHelper(
-    tableId,
-    entity,
-    currentNb => {
-      nbActiveFilter = currentNb
-    },
-    request => {
-      filterSelectPopupRequest = request
-    },
-  )
+  function createFilterHelper() {
+    return new FilterHelper(
+      tableId,
+      entity,
+      currentNb => {
+        nbActiveFilter = currentNb
+      },
+      request => {
+        filterSelectPopupRequest = request
+      },
+    )
+  }
+
+  let filter = createFilterHelper()
   if (isBig) {
     nbActiveFilter = getInitialActiveFilterCount()
   }
 
   const cleanData = getCleanData(data, sortByName, isRecursive, isBig)
   const nbRowLoading = Math.min(cleanData.length, 50)
-  const columnsCopy = defineColumns(
-    columns,
-    cleanData,
-    entity as keyof typeof entityNames,
-    keepAllCols,
-    metaPath,
-    nbRowLoading,
-  )
-  let nbSticky = $state(getNbSticky(columnsCopy))
+  function getColumnsCopy() {
+    return defineColumns(
+      columns,
+      cleanData,
+      entity as keyof typeof entityNames,
+      keepAllCols,
+      metaPath,
+      nbRowLoading,
+      t,
+    )
+  }
+
+  const columnsCopy = $derived.by(getColumnsCopy)
+  const nbSticky = $derived(getNbSticky(columnsCopy))
 
   const clickableRows = ![
     'value',
@@ -142,7 +155,7 @@
   ].includes(entity)
 
   $allTablesLoaded = false
-  allTablesLoaded.subscribe(value => {
+  const allTablesLoadedUnsubscribe = allTablesLoaded.subscribe(value => {
     if (value) {
       setTimeout(() => {
         datatableUpdateDraw += 1
@@ -150,14 +163,17 @@
     }
   })
 
-  let buttons = exporter.getButtons()
-  if (isBig) {
-    buttons.push(
-      filter.getBtnInfoPopup(() => {
-        isPopupSearchOptionOpen = true
-      }),
-    )
-  }
+  const buttons = $derived.by(() => {
+    const translatedButtons = exporter.getButtons(t)
+    if (isBig) {
+      translatedButtons.push(
+        filter.getBtnInfoPopup(() => {
+          isPopupSearchOptionOpen = true
+        }),
+      )
+    }
+    return translatedButtons
+  })
 
   function scrollToInitialRow(dt: Api) {
     if (
@@ -192,8 +208,8 @@
     })
   }
 
-  onMount(() => {
-    setTimeout(() => {
+  function initDataTable() {
+    initTimeout = setTimeout(() => {
       datatable = new DataTable('table#' + tableId, {
         data: cleanData,
         columns: columnsCopy,
@@ -223,8 +239,8 @@
         buttons,
         destroy: true,
         language: {
-          zeroRecords: '<span class="no-result">Aucun résultat</span>',
-          buttons: exporter.getLanguage(),
+          zeroRecords: `<span class="no-result">${escapeHtml(t('datatable.zeroRecords'))}</span>`,
+          buttons: exporter.getLanguage(t),
         } as ConfigLanguage,
         initComplete: function () {
           if (!isBig) return
@@ -286,6 +302,24 @@
         $allTablesLoaded = true
       }
     }, 1)
+  }
+
+  function destroyDataTable() {
+    if (initTimeout) {
+      clearTimeout(initTimeout)
+      initTimeout = undefined
+    }
+    domTable?.off()
+    jQuery('table#' + tableId + '._datatables *')?.off()
+    datatable?.destroy()
+    datatable = undefined
+    domTable = null
+    filter.destroy()
+    filter = createFilterHelper()
+  }
+
+  onMount(() => {
+    initDataTable()
   })
 
   function onResize() {
@@ -294,14 +328,8 @@
 
   $effect(() => {
     void $appWidth
-    if (datatable) {
-      const newNbSticky = getNbSticky(columnsCopy)
-
-      if (newNbSticky !== nbSticky) {
-        nbSticky = newNbSticky
-        datatable.fixedColumns().left(newNbSticky)
-      }
-    }
+    datatable?.fixedColumns().left(nbSticky)
+    datatable?.columns?.adjust()
   })
 
   const tabSelectedUnsubscribe = tabSelected.subscribe(tab => {
@@ -315,11 +343,10 @@
   })
 
   onDestroy(() => {
-    if (datatable) datatable?.destroy()
+    destroyDataTable()
     tabSelectedUnsubscribe()
+    allTablesLoadedUnsubscribe()
     filter.destroy()
-    jQuery('table#' + tableId + '._datatables *')?.off()
-    domTable = null
   })
 </script>
 
@@ -336,97 +363,99 @@
   }}
 />
 
-{#if loading}
-  <div class="datatable-main-wrapper dt-loading">
-    <div class="datatables-outer visible dt-container dt-loading-outer">
-      <div class="dt-scroll" style="--max-height: {maxHeightLoad}">
+{#key tableRenderKey}
+  {#if loading}
+    <div class="datatable-main-wrapper dt-loading">
+      <div class="datatables-outer visible dt-container dt-loading-outer">
+        <div class="dt-scroll" style="--max-height: {maxHeightLoad}">
+          <table
+            class="_datatables table is-striped dataTable"
+            class:short-table={shortTable}
+          >
+            <thead>
+              <tr>
+                {#each columnsCopy as column, i (`${column.data}/${column.title}`)}
+                  <th
+                    class="sorting"
+                    class:sorting-asc={i === 0}
+                    class:first-col={i === 0}
+                    style="min-width: {column.loadingWidth}px; 
+                    width: {column.loadingMaxWidth}px;"
+                  >
+                    <span use:safeHtml={column.title ?? ''}></span>
+                    <span class="dt-column-order"></span>
+                  </th>
+                {/each}
+              </tr>
+            </thead>
+            {#if isBig}
+              <thead class="loading-filter-wrapper">
+                <Filter columns={columnsCopy} />
+              </thead>
+            {/if}
+            <tbody>
+              {#each Array(nbRowLoading).keys() as i (i)}
+                <tr>
+                  {#each columnsCopy as column, j (`${column.data}/${column.title}`)}
+                    <td class:first-col={j === 0} class:first-row={i === 0}>
+                      {#if column.data === '_rowNum'}
+                        {i + 1}
+                      {:else if column.data === 'isFavorite'}
+                        <span class="icon favorite">
+                          <i class="fas fa-star"></i>
+                        </span>
+                      {:else}
+                        <LoadingDot />
+                      {/if}
+                    </td>
+                  {/each}
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {/if}
+
+  <div class="datatable-main-wrapper">
+    {#if data.length > 0}
+      <div class="datatables-outer" class:visible={!loading}>
+        <FilterInfoBox {nbActiveFilter} click={() => filter.removeAll()} />
         <table
-          class="_datatables table is-striped dataTable"
+          id={tableId}
+          class="_datatables table is-striped"
           class:short-table={shortTable}
+          class:clickable-rows={clickableRows}
         >
           <thead>
             <tr>
               {#each columnsCopy as column, i (`${column.data}/${column.title}`)}
                 <th
-                  class="sorting"
-                  class:sorting-asc={i === 0}
+                  title={column.tooltip}
                   class:first-col={i === 0}
-                  style="min-width: {column.loadingWidth}px; 
-                    width: {column.loadingMaxWidth}px;"
-                >
-                  <span use:safeHtml={column.title ?? ''}></span>
-                  <span class="dt-column-order"></span>
-                </th>
+                  class="use-tooltip"
+                ></th>
               {/each}
             </tr>
           </thead>
+
           {#if isBig}
-            <thead class="loading-filter-wrapper">
-              <Filter columns={columnsCopy} />
+            <thead>
+              <Filter
+                columns={columnsCopy}
+                {tableId}
+                {loading}
+                {nbSticky}
+                {datatableUpdateDraw}
+              />
             </thead>
           {/if}
-          <tbody>
-            {#each Array(nbRowLoading).keys() as i (i)}
-              <tr>
-                {#each columnsCopy as column, j (`${column.data}/${column.title}`)}
-                  <td class:first-col={j === 0} class:first-row={i === 0}>
-                    {#if column.data === '_rowNum'}
-                      {i + 1}
-                    {:else if column.data === 'isFavorite'}
-                      <span class="icon favorite">
-                        <i class="fas fa-star"></i>
-                      </span>
-                    {:else}
-                      <LoadingDot />
-                    {/if}
-                  </td>
-                {/each}
-              </tr>
-            {/each}
-          </tbody>
         </table>
       </div>
-    </div>
+    {/if}
   </div>
-{/if}
-
-<div class="datatable-main-wrapper">
-  {#if data.length > 0}
-    <div class="datatables-outer" class:visible={!loading}>
-      <FilterInfoBox {nbActiveFilter} click={() => filter.removeAll()} />
-      <table
-        id={tableId}
-        class="_datatables table is-striped"
-        class:short-table={shortTable}
-        class:clickable-rows={clickableRows}
-      >
-        <thead>
-          <tr>
-            {#each columnsCopy as column, i (`${column.data}/${column.title}`)}
-              <th
-                title={column.tooltip}
-                class:first-col={i === 0}
-                class="use-tooltip"
-              ></th>
-            {/each}
-          </tr>
-        </thead>
-
-        {#if isBig}
-          <thead>
-            <Filter
-              columns={columnsCopy}
-              {tableId}
-              {loading}
-              {nbSticky}
-              {datatableUpdateDraw}
-            />
-          </thead>
-        {/if}
-      </table>
-    </div>
-  {/if}
-</div>
+{/key}
 
 <style lang="scss">
   @use 'main.scss' as *;

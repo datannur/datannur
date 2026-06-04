@@ -1,4 +1,5 @@
 import db from '@db'
+import { getMainEntityName } from '@i18n/constant-labels'
 import { mainEntityNames } from '@lib/constant'
 import escapeHtml from 'escape-html'
 import flexSearchScript from '../../node_modules/flexsearch/dist/flexsearch.bundle.min.js?raw'
@@ -198,7 +199,9 @@ class Search {
           folderName: item.folderName ?? '',
           _entity: item._entity ?? '',
           _entityClean:
-            mainEntityNames[item._entity as keyof typeof mainEntityNames] ?? '',
+            item._entity && item._entity in mainEntityNames
+              ? getMainEntityName(item._entity as keyof typeof mainEntityNames)
+              : '',
         })
       }
     }

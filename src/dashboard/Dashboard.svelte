@@ -5,7 +5,8 @@
   import Popup from '@layout/Popup.svelte'
   import { buildDashboard } from './build-dashboard'
   import Render from '@lib/render'
-  import { locale } from '@lib/constant'
+  import { getCurrentLocale } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { preserveScroll } from '@lib/preserve-scroll'
   import type {
     DashboardData,
@@ -17,6 +18,8 @@
   } from './dashboard-types'
 
   const priorityTargetVisibleLimit = 4
+  const locale = getCurrentLocale()
+  const dateLocale = locale === 'fr' ? 'fr-CH' : 'en'
   const metricNumberFormatter = new Intl.NumberFormat(locale, {
     useGrouping: true,
   })
@@ -40,11 +43,11 @@
       ? undefined
       : dashboard.priorities.find(item => item.key === selectedCriterion?.key),
   )
-  const formattedGeneratedAt = new Intl.DateTimeFormat('fr-CH', {
+  const formattedGeneratedAt = new Intl.DateTimeFormat(dateLocale, {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date())
-  const exportDate = new Intl.DateTimeFormat('fr-CH', {
+  const exportDate = new Intl.DateTimeFormat(dateLocale, {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -55,7 +58,7 @@
     formatAnalyzedScope(dashboard.scope.type, dashboard.scope.label),
   )
   const exportFilename = $derived(
-    `datannur-bilan-${dashboard.scope.type}-${exportDate}`,
+    `datannur-dashboard-${dashboard.scope.type}-${exportDate}`,
   )
   const animatedGlobalScore = $derived(
     animatedScore(dashboard.globalScore.score),
@@ -141,19 +144,19 @@
 
   function scopeTypeName(type: string): string {
     const names: { [key: string]: string } = {
-      catalog: 'Catalogue général',
-      organization: 'Organisation',
-      folder: 'Dossier',
-      dataset: 'Dataset',
-      tag: 'Mot clé',
-      concept: 'Concept',
+      catalog: t('dashboard.ui.scope.catalog'),
+      organization: t('entity.organization'),
+      folder: t('entity.folder'),
+      dataset: t('entity.dataset'),
+      tag: t('entity.tag'),
+      concept: t('entity.concept'),
     }
     return names[type] ?? type
   }
 
   function formatAnalyzedScope(type: string, label: string): string {
     return type === 'catalog'
-      ? 'Catalogue général'
+      ? t('dashboard.ui.scope.catalog')
       : `${scopeTypeName(type)} : ${label}`
   }
 
@@ -278,18 +281,20 @@
     class="print-action app-only use-tooltip tooltip-bottom"
     type="button"
     onclick={printReport}
-    title="Exporter le bilan en PDF"
-    aria-label="Exporter le bilan en PDF"
+    title={t('dashboard.ui.exportPdf')}
+    aria-label={t('dashboard.ui.exportPdf')}
   >
     <Icon type="pdf" mode="compact" />
   </button>
 
   <div class="bilan-export-area">
     <div class="print-heading">
-      <h1>Bilan du catalogue</h1>
+      <h1>{t('dashboard.ui.title')}</h1>
       <p>
-        Périmètre analysé : {analyzedScopeLabel}<br />
-        Généré le {formattedGeneratedAt}
+        {t('dashboard.ui.analyzedScope')}
+        {analyzedScopeLabel}<br />
+        {t('dashboard.ui.generatedAt')}
+        {formattedGeneratedAt}
       </p>
     </div>
 
@@ -299,7 +304,10 @@
           <div class="section-heading">
             <h3>{dashboard.globalScore.label}</h3>
           </div>
-          <div class="maturity-pyramid" aria-label="Pyramide de maturité">
+          <div
+            class="maturity-pyramid"
+            aria-label={t('dashboard.ui.maturityPyramid')}
+          >
             <svg class="pyramid-svg" viewBox="0 -96 420 316" role="img">
               <polygon
                 class="pyramid-score-background {animatedGlobalScoreLevel}"
@@ -357,7 +365,7 @@
 
         <section class="dashboard-panel diagnostic-panel">
           <div class="section-heading">
-            <h3>Diagnostic</h3>
+            <h3>{t('dashboard.ui.diagnostic')}</h3>
           </div>
           <div class="diagnostic-content">
             <strong>{dashboard.diagnostic.label}</strong>
@@ -365,7 +373,7 @@
             <div class="diagnostic-groups">
               {#if dashboard.diagnostic.strengths.length}
                 <div>
-                  <span>Forces</span>
+                  <span>{t('dashboard.ui.strengths')}</span>
                   <ul>
                     {#each dashboard.diagnostic.strengths as item (item.key)}
                       <li>
@@ -381,7 +389,7 @@
               {/if}
               {#if dashboard.diagnostic.watchpoints.length}
                 <div>
-                  <span>À consolider</span>
+                  <span>{t('dashboard.ui.watchpoints')}</span>
                   <ul>
                     {#each dashboard.diagnostic.watchpoints as item (item.key)}
                       <li>
@@ -404,9 +412,12 @@
         {#if dashboard.summary.length}
           <section class="dashboard-panel patrimony-panel">
             <div class="section-heading">
-              <h3>Patrimoine analysé</h3>
+              <h3>{t('dashboard.ui.analyzedAssets')}</h3>
             </div>
-            <div class="summary-grid" aria-label="Patrimoine analysé">
+            <div
+              class="summary-grid"
+              aria-label={t('dashboard.ui.analyzedAssets')}
+            >
               {#each dashboard.summary as metric (metric.key)}
                 <article class="metric-card">
                   <div class="metric-main">
@@ -440,7 +451,7 @@
         {#if applicableMaturity.length}
           <section class="dashboard-panel quality-dimensions">
             <div class="section-heading">
-              <h3>Dimensions</h3>
+              <h3>{t('dashboard.ui.dimensions')}</h3>
             </div>
             <div class="score-list">
               {#each applicableMaturity as item (item.key)}
@@ -513,26 +524,31 @@
       </div>
 
       <div class="criterion-popup-section">
-        <h4>Pourquoi c'est important</h4>
+        <h4>{t('dashboard.ui.whyImportant')}</h4>
         <p>{selectedCriterion.priorityImpact}</p>
       </div>
 
       <div class="criterion-popup-section">
-        <h4>Action à faire</h4>
+        <h4>{t('dashboard.ui.action')}</h4>
         <p>{selectedCriterion.priorityLabel}</p>
         {#if selectedPriority}
           <small>
-            Gain potentiel : +{gainLabel(selectedPriority.gainPoints)} point{selectedPriority.gainPoints >
-            1
-              ? 's'
-              : ''} sur la dimension.
+            {t('dashboard.ui.potentialGain')} +{gainLabel(
+              selectedPriority.gainPoints,
+            )}
+            {t(
+              selectedPriority.gainPoints > 1
+                ? 'dashboard.ui.points'
+                : 'dashboard.ui.point',
+            )}
+            {t('dashboard.ui.onDimension')}
           </small>
         {/if}
       </div>
 
       {#if selectedPriority?.targetGroups.length}
         <div class="criterion-popup-section">
-          <h4>Accès rapide</h4>
+          <h4>{t('dashboard.ui.quickAccess')}</h4>
           <div class="priority-targets popup-targets">
             {#each selectedPriority.targetGroups as target (target.href)}
               <Link
@@ -549,7 +565,7 @@
         </div>
       {:else if selectedPriority?.targets.length}
         <div class="criterion-popup-section">
-          <h4>Exemples à corriger</h4>
+          <h4>{t('dashboard.ui.examplesToFix')}</h4>
           <div class="priority-targets popup-targets">
             {#each visiblePriorityTargets(selectedPriority) as target (target.href)}
               <Link
@@ -563,11 +579,12 @@
             {/each}
             {#if remainingPriorityTargetCount(selectedPriority) > 0}
               <small class="priority-targets-more">
-                +{Render.num(remainingPriorityTargetCount(selectedPriority))} autre{remainingPriorityTargetCount(
-                  selectedPriority,
-                ) > 1
-                  ? 's'
-                  : ''}
+                +{Render.num(remainingPriorityTargetCount(selectedPriority))}
+                {t(
+                  remainingPriorityTargetCount(selectedPriority) > 1
+                    ? 'dashboard.ui.others'
+                    : 'dashboard.ui.other',
+                )}
               </small>
             {/if}
           </div>

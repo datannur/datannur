@@ -1,7 +1,9 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
   import { getColor } from '@lib/util'
-  import { entityNames } from '@lib/constant'
+  import { t } from '@i18n/messages'
+  import { getEntityLabelKey } from '@i18n/entity'
+  import { getStatAttributeLabelKey } from '@i18n/stat'
   import StatValue from './StatValue.svelte'
   import type { AttributWithValues } from './stat'
   import type { MainEntityName } from '@type'
@@ -18,6 +20,14 @@
 
   const totalValue = $derived(attribut.totalValue)
   const mainColor = $derived(getColor(entity))
+  const entityLabel = $derived(
+    entity === 'log'
+      ? t('tab.log')
+      : t(getEntityLabelKey(entity)),
+  )
+  const attributeLabel = $derived(
+    t(getStatAttributeLabelKey(attribut.key)),
+  )
 </script>
 
 <div
@@ -27,10 +37,10 @@
 >
   <h2 class="title is-6">
     <Icon type={entity} />
-    {entityNames[entity]}
+    {entityLabel}
     <span class="separator"></span>
     <Icon type={attribut.icon ?? attribut.key ?? ''} />
-    {attribut.name}
+    {attributeLabel}
   </h2>
   <div class="values-wrapper">
     <div class="values">

@@ -1,19 +1,21 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import { t } from '@i18n/messages'
+</script>
 
 <div class="empty-state">
   <i class="fa-solid fa-comment-dots"></i>
-  <p>Posez une question sur les données</p>
+  <p>{t('llm.emptyPrompt')}</p>
   <div class="privacy-note">
     <i class="fa-solid fa-shield-halved"></i>
     <span>
       <a
-        href="https://www.infomaniak.com/fr/hebergement/ai-services"
+        href={t('llm.providerUrl')}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Infomaniak Suisse
+        {t('llm.providerName')}
       </a>
-      • IA souveraine et open source
+      • {t('llm.sovereignAi')}
     </span>
   </div>
 </div>

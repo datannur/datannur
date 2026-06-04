@@ -81,6 +81,12 @@ class DCATExporter:
         self.validation_results = []
         self.distributions = []
         self.dcat_dataset_count = 0
+        self.default_language = self.config.get(
+            "default_language", self.config.get("language", "en")
+        )
+        self.languages = self.config.get("languages", ["en", "fr"])
+        if self.default_language not in self.languages:
+            self.languages = [self.default_language, *self.languages]
 
     def _bind_namespaces(self):
         """Bind RDF namespaces"""
@@ -328,9 +334,33 @@ class DCATExporter:
             not date_value or self._parse_temporal_date(date_value, bound) is not None
         )
 
-    def _get_language_literal(self, text: str, lang: str = "fr") -> Literal:
+    def _localized_field(self, item: Dict, field: str) -> str:
+        localized_value = item.get(f"{field}:{self.default_language}")
+        if localized_value is not None and localized_value != "":
+            return str(localized_value)
+        value = item.get(field)
+        return str(value) if value is not None else ""
+
+    def _localized_fields(self, item: Dict, field: str) -> Dict[str, str]:
+        values: Dict[str, str] = {}
+        base_value = item.get(field)
+        if base_value is not None and base_value != "":
+            values["en"] = str(base_value)
+        for language in self.languages:
+            localized_value = item.get(f"{field}:{language}")
+            if localized_value is not None and localized_value != "":
+                values[language] = str(localized_value)
+        return values
+
+    def _add_language_literals(self, subject, predicate, item: Dict, field: str):
+        for language, value in self._localized_fields(item, field).items():
+            self.graph.add(
+                (subject, predicate, self._get_language_literal(value, language))
+            )
+
+    def _get_language_literal(self, text: str, lang: Optional[str] = None) -> Literal:
         """Create a language-tagged literal"""
-        return Literal(text, lang=lang)
+        return Literal(text, lang=lang or self.default_language)
 
     def _license_value(self, license_value: str):
         normalized_license = license_value.strip()
@@ -388,19 +418,10 @@ class DCATExporter:
         identifier = f"{item['id']}@{org_id}"
         self.graph.add((dataset_uri, DCTERMS.identifier, Literal(identifier)))
 
-        if item.get("name"):
-            self.graph.add(
-                (dataset_uri, DCTERMS.title, self._get_language_literal(item["name"]))
-            )
-
-        if item.get("description"):
-            self.graph.add(
-                (
-                    dataset_uri,
-                    DCTERMS.description,
-                    self._get_language_literal(item["description"]),
-                )
-            )
+        self._add_language_literals(dataset_uri, DCTERMS.title, item, "name")
+        self._add_language_literals(
+            dataset_uri, DCTERMS.description, item, "description"
+        )
 
         if item.get("owner_organization_id"):
             self._add_publisher(dataset_uri, item["owner_organization_id"])
@@ -424,25 +445,26 @@ class DCATExporter:
 
         for tag_id in self._split_ids(item.get("tag_ids")):
             if tag_id in self.tags:
-                tag_name = self.tags[tag_id].get("name")
-                if tag_name:
-                    self.graph.add(
-                        (
-                            dataset_uri,
-                            DCAT.keyword,
-                            self._get_language_literal(tag_name),
-                        )
-                    )
+                tag_names = self._localized_fields(self.tags[tag_id], "name")
+                if tag_names:
                     theme_uri = self._get_theme_uri(tag_id)
                     self.graph.add((dataset_uri, DCAT.theme, theme_uri))
                     self.graph.add((theme_uri, RDF.type, SKOS.Concept))
-                    self.graph.add(
-                        (
-                            theme_uri,
-                            SKOS.prefLabel,
-                            self._get_language_literal(tag_name),
+                    for language, tag_name in tag_names.items():
+                        self.graph.add(
+                            (
+                                dataset_uri,
+                                DCAT.keyword,
+                                self._get_language_literal(tag_name, language),
+                            )
                         )
-                    )
+                        self.graph.add(
+                            (
+                                theme_uri,
+                                SKOS.prefLabel,
+                                self._get_language_literal(tag_name, language),
+                            )
+                        )
 
         if item.get("start_date") or item.get("end_date"):
             temporal_node = BNode()
@@ -489,14 +511,7 @@ class DCATExporter:
                 if doc_link:
                     doc_uri = self._document_uri_ref(doc_link)
                     self.graph.add((dataset_uri, DCTERMS.relation, doc_uri))
-                    if doc.get("name"):
-                        self.graph.add(
-                            (
-                                doc_uri,
-                                RDFS.label,
-                                self._get_language_literal(doc["name"]),
-                            )
-                        )
+                    self._add_language_literals(doc_uri, RDFS.label, doc, "name")
 
     def _add_publisher(self, dataset_uri: URIRef, organization_id: str):
         """Add publisher information (foaf:Agent)"""
@@ -511,14 +526,7 @@ class DCATExporter:
         self.graph.add((dataset_uri, DCTERMS.publisher, publisher_uri))
         self.graph.add((publisher_uri, RDF.type, FOAF.Agent))
 
-        if organization.get("name"):
-            self.graph.add(
-                (
-                    publisher_uri,
-                    FOAF.name,
-                    self._get_language_literal(organization["name"]),
-                )
-            )
+        self._add_language_literals(publisher_uri, FOAF.name, organization, "name")
 
     def _add_contact_point(self, dataset_uri: URIRef, organization_id: str):
         """Add contact point information (vcard:Kind)"""
@@ -533,8 +541,9 @@ class DCATExporter:
         self.graph.add((dataset_uri, DCAT.contactPoint, contact_uri))
         self.graph.add((contact_uri, RDF.type, VCARD.Organization))
 
-        if organization.get("name"):
-            self.graph.add((contact_uri, VCARD.fn, Literal(organization["name"])))
+        organization_name = self._localized_field(organization, "name")
+        if organization_name:
+            self.graph.add((contact_uri, VCARD.fn, Literal(organization_name)))
 
         if organization.get("email"):
             email_uri = URIRef(f"mailto:{organization['email']}")
@@ -619,7 +628,8 @@ class DCATExporter:
         self.distributions.append(
             {
                 "dataset_id": dataset.get("id", ""),
-                "dataset_title": dataset.get("name") or dataset.get("id", ""),
+                "dataset_title": self._localized_field(dataset, "name")
+                or dataset.get("id", ""),
                 "access_url": access_url,
                 "download_url": download_url if delivery_format else "",
                 "format": delivery_format or "",
@@ -653,13 +663,17 @@ class DCATExporter:
         field: str,
     ):
         item_id = item.get("id", "")
+        entity_labels = self._localized_fields(item, "name")
         checks.append(
             {
                 "severity": "warning",
                 "code": code,
                 "entityType": entity_type,
                 "entityId": item_id,
-                "entityLabel": item.get("name") or item_id,
+                "entityLabel": entity_labels.get(self.default_language)
+                or entity_labels.get("en")
+                or item_id,
+                "entityLabels": entity_labels,
                 "field": field,
                 "message": message,
             }
@@ -762,10 +776,14 @@ class DCATExporter:
             dataset.get("delivery_format") or "unknown" for dataset in self.datasets
         )
         themes = Counter()
+        theme_labels: Dict[str, Dict[str, str]] = {}
         for item in report_items:
             for tag_id in self._split_ids(item.get("tag_ids")):
                 tag = self.tags.get(tag_id, {})
-                themes[tag.get("name") or tag_id] += 1
+            tag_labels = self._localized_fields(tag, "name")
+            label = tag_labels.get(self.default_language) or tag_id
+            themes[label] += 1
+            theme_labels[label] = tag_labels
 
         return {
             "datasets": self.dcat_dataset_count or len(report_items),
@@ -774,6 +792,14 @@ class DCATExporter:
             "licenses": dict(licenses.most_common()),
             "formats": dict(formats.most_common()),
             "themes": dict(themes.most_common()),
+            "themeItems": [
+                {
+                    "label": label,
+                    "labels": theme_labels.get(label, {}),
+                    "count": count,
+                }
+                for label, count in themes.most_common()
+            ],
         }
 
     def _get_report_items(self) -> List[Dict]:
@@ -966,7 +992,8 @@ def load_config(config_file: Path) -> Dict:
         "base_uri": "https://example.org/",
         "organization_slug": "datannur",
         "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
-        "languages": ["fr", "de", "it", "en"],
+        "default_language": "en",
+        "languages": ["en", "fr", "de", "it"],
     }
 
 

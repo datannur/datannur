@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
   import type { DashboardGlobalScore, DashboardScore } from './dashboard-types'
 
   type RadarPoint = {
@@ -70,9 +71,9 @@
   }
 </script>
 
-<div class="quality-radar" aria-label="Score qualité par dimension">
+<div class="quality-radar" aria-label={t('dashboard.ui.qualityScoreByDimension')}>
   <svg class="radar-svg" viewBox="0 0 {size} {size}" role="img">
-    <title>{globalScore.label}: {globalScore.score} sur 100</title>
+    <title>{globalScore.label}: {globalScore.score} {t('dashboard.ui.outOf100')}</title>
     {#each gridPolygons as polygon, index (index)}
       <polygon class="radar-grid" points={polygon} />
     {/each}

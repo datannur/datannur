@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { t } from '@i18n/messages'
+  import type { TranslationKey } from '@i18n/types'
   import { clickOutside } from '@lib/util'
   import Options from '@lib/options'
 
@@ -6,6 +8,7 @@
     id: string
     name: string
     description: string
+    descriptionKey?: TranslationKey
   }
 
   let {
@@ -51,7 +54,11 @@
       >
         <div class="option-content">
           <span class="option-name">{item.name}</span>
-          <span class="option-description">{item.description}</span>
+          <span class="option-description">
+            {item.descriptionKey
+              ? t(item.descriptionKey)
+              : item.description}
+          </span>
         </div>
         {#if item.id === selected.id}
           <i class="fa-solid fa-check"></i>

@@ -2,8 +2,9 @@
   import logo from '@img/logo.png'
   import logoDark from '@img/logo-dark.png'
   import Head from '@frame/Head.svelte'
+  import { t } from '@i18n/messages'
 
-  let title = 'Chargement...'
+  const title = t('loading.title')
 </script>
 
 <Head {title} />

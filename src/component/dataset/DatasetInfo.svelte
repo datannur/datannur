@@ -19,6 +19,7 @@
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import VariablesInfo from '@info-table/VariablesInfo.svelte'
   import Render from '@lib/render'
+  import { t } from '@i18n/messages'
   import type { Dataset } from '@type'
 
   let { dataset }: { dataset: Dataset } = $props()
@@ -34,22 +35,27 @@
   <FolderInfo folderId={dataset.folderId} />
   {#if dataset.typeClean}
     <tr>
-      <td><Icon type="type" /> Type</td>
+      <td><Icon type="type" /> {t('column.datasetType.title')}</td>
       <td>{dataset.typeClean}</td>
     </tr>
   {/if}
   <RowInfo nbRow={dataset.nbRow} sampleSize={dataset.sampleSize} />
   {#if dataset.nbResources}
     <tr>
-      <td><Icon type="nbResources" /> Ressources</td>
+      <td><Icon type="nbResources" /> {t('column.resources.title')}</td
+      >
       <td>{Render.num(dataset.nbResources)}</td>
     </tr>
   {/if}
   <DataSizeInfo dataSize={dataset.dataSize} />
-  <VariablesInfo variables={dataset.keyVariables} label="Clé" icon="key" />
+  <VariablesInfo
+    variables={dataset.keyVariables}
+    label={t('column.key.title')}
+    icon="key"
+  />
   <VariablesInfo
     variables={dataset.businessKeyVariables}
-    label="Clé métier"
+    label={t('column.businessKey.title')}
     icon="businessKey"
   />
   {#if dataset.lastUpdateDate}

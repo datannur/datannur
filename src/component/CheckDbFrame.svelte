@@ -1,11 +1,11 @@
 <script lang="ts">
   import { SvelteURL } from 'svelte/reactivity'
-  import Loading from '@frame/Loading.svelte'
+  import { t } from '@i18n/messages'
 
   const checkDbUrl = (() => {
     const url = new SvelteURL(window.location.href)
     url.hash = ''
-    url.search = '?app_mode=check_db'
+    url.searchParams.set('app_mode', 'check_db')
     return url.href
   })()
   let loading = $state(true)
@@ -14,13 +14,12 @@
 <div class="check-db-frame">
   {#if loading}
     <div class="loading-state">
-      <Loading type="tab" position="absolute" />
-      <span>Chargement de la vérification...</span>
+      <span>{t('checkDb.frameLoading')}</span>
     </div>
   {/if}
   <iframe
     class:loaded={!loading}
-    title="Vérification d'intégrité"
+    title={t('checkDb.title')}
     src={checkDbUrl}
     onload={() => (loading = false)}
   ></iframe>

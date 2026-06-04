@@ -2,13 +2,15 @@
   {
     "id": "whisper",
     "name": "Whisper V3",
-    "description": "Infomaniak - Haute précision",
+    "description": "Infomaniak - High precision",
+    "descriptionKey": "llm.stt.whisperDescription",
     "provider": "infomaniak"
   },
   {
     "id": "chrome-native",
     "name": "Google Speech",
-    "description": "Google Cloud - Temps réel",
+    "description": "Google Cloud - Real time",
+    "descriptionKey": "llm.stt.googleDescription",
     "provider": "google"
   }
 ]

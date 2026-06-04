@@ -7,6 +7,7 @@
   import { searchHighlight } from './search'
   import Datatable from '@datatable/Datatable.svelte'
   import Column from '@lib/column'
+  import { t } from '@i18n/messages'
   import escapeHtml from 'escape-html'
   import type { Column as ColumnType, MainEntityName } from '@type'
   import type { SearchResult as SearchResultType } from '@search/search'
@@ -36,10 +37,10 @@
     Column.entity(),
     {
       data: 'name',
-      title: Render.icon('name') + 'Nom',
+      title: Render.icon('name') + t('column.name.title'),
       defaultContent: '',
       name: 'name',
-      tooltip: 'Nom',
+      tooltip: t('column.name.tooltip'),
       render: (data, type, row: SearchResultType) => {
         if (type !== 'display') return String(data)
         return wrapLongText(
@@ -55,9 +56,10 @@
     },
     {
       data: 'description',
-      title: Render.icon('description') + 'Description',
+      title:
+        Render.icon('description') + t('column.description.title'),
       defaultContent: '',
-      tooltip: 'Description',
+      tooltip: t('column.description.tooltip'),
       render: (data, type) => {
         if (type !== 'display') return String(data)
         if ([null, undefined].includes(data)) return wrapLongText()
@@ -66,9 +68,9 @@
     },
     {
       data: 'folderId',
-      title: Render.icon('folder') + 'Dossier',
+      title: Render.icon('folder') + t('column.folder.title'),
       defaultContent: '',
-      tooltip: 'Dossier',
+      tooltip: t('column.folder.tooltip'),
       render: (data, type, row: SearchResultType) => {
         if (type !== 'display') return String(data)
         if (!data) return wrapLongText()
@@ -77,7 +79,7 @@
     },
     {
       data: 'id',
-      title: "<span class='hidden'>Recent search</span>",
+      title: `<span class='hidden'>${t('page.search.recentSearches')}</span>`,
       name: 'searchRecent',
       defaultContent: '',
       filterType: 'none',

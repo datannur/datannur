@@ -3,9 +3,10 @@
   import { page } from '@router/router-store'
   import { whenAppReady, headerOpen } from '@lib/store'
   import { pluralize } from '@lib/util'
-  import { entityNames } from '@lib/constant'
   import Link from '@layout/Link.svelte'
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
+  import { getEntityPluralLabelKey } from '@i18n/entity'
   import type { Snippet } from 'svelte'
   import type { MainEntityName } from '@type'
 
@@ -34,7 +35,9 @@
   let pages = $derived(standard ? [standard, pluralize(standard)] : pagesProp)
   let icon = $derived(standard ? standard : iconProp)
   let ifUse = $derived(standard ? standard : ifUseProp)
-  let standardReadable = $derived(standard ? entityNames[standard] + 's' : '')
+  let standardReadable = $derived(
+    standard ? t(getEntityPluralLabelKey(standard)) : '',
+  )
 
   const closeMenu = () => ($headerOpen = false)
 

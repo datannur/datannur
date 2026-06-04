@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { t } from '@i18n/messages'
   import type { Snippet } from 'svelte'
 
   type Props = {
@@ -62,7 +63,7 @@
     <button
       type="button"
       class="scroll-arrow scroll-arrow-left"
-      aria-label="Défiler vers la gauche"
+      aria-label={t('scrollableRow.left')}
       onclick={() => scrollToEdge('left')}
     >
       <i class="fa-solid fa-chevron-left"></i>
@@ -72,7 +73,7 @@
     <button
       type="button"
       class="scroll-arrow scroll-arrow-right"
-      aria-label="Défiler vers la droite"
+      aria-label={t('scrollableRow.right')}
       onclick={() => scrollToEdge('right')}
     >
       <i class="fa-solid fa-chevron-right"></i>

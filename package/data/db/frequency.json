@@ -101,22 +101,22 @@
   },
   {
     "frequency": 9481,
-    "value": "montagne",
+    "value": "mountain",
     "variable_id": "pop_region__type_region"
   },
   {
     "frequency": 43,
-    "value": "périurbaine",
+    "value": "peri-urban",
     "variable_id": "pop_region__type_region"
   },
   {
     "frequency": 3434,
-    "value": "rurale",
+    "value": "rural",
     "variable_id": "pop_region__type_region"
   },
   {
     "frequency": 9432,
-    "value": "urbaine",
+    "value": "urban",
     "variable_id": "pop_region__type_region"
   }
 ]

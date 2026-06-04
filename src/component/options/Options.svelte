@@ -16,6 +16,8 @@
   import DarkModeSwitch from '@dark-mode/DarkModeSwitch.svelte'
   import BtnImport from '@layout/BtnImport.svelte'
   import Button from '@layout/Button.svelte'
+  import LanguageSelect from '@i18n/LanguageSelect.svelte'
+  import { t } from '@i18n/messages'
   import type { Row } from '@type'
 
   async function importUserData(zipFile: File) {
@@ -99,13 +101,13 @@
 
 <div class="flex-cols">
   <div class="flex-col">
-    <h5 class="title is-5">Affichage</h5>
+    <h5 class="title is-5">{t('options.display')}</h5>
     <Switch
       bind:value={openAllRecursive}
       change={updateOpenAllRecursive}
       treeSwitch={true}
     >
-      Afficher les éléments imbriqués (organisations et dossiers)
+      {t('options.openNested')}
     </Switch>
     <Switch
       bind:value={evolutionSummary}
@@ -113,46 +115,47 @@
       treeSwitch={true}
       minimize={true}
     >
-      Afficher les évolultions de façon résumée
+      {t('options.evolutionSummary')}
     </Switch>
     <Switch bind:value={openAllTab} change={updateOpenAllTab}>
-      Charger tous les onglets automatiquement
+      {t('options.openAllTabs')}
     </Switch>
     <Switch bind:value={roundedDesign} change={updateRoundedDesign}>
-      Design arrondi
+      {t('options.roundedDesign')}
     </Switch>
     <Switch bind:value={pageShadowColored} change={updatePageShadowColored}>
-      mode néon (onglets colorés)
+      {t('options.pageShadowColored')}
     </Switch>
     <div>
-      <DarkModeSwitch label="Mode sombre" />
+      <DarkModeSwitch label={t('options.darkMode')} />
     </div>
+    <LanguageSelect label={t('language.label')} />
   </div>
 
   <div class="flex-col">
-    <h5 class="title is-5">Réinitialiser</h5>
+    <h5 class="title is-5">{t('options.reset')}</h5>
     <Button onclick={clearLogs}>
-      Logs <Icon type="log" marginLeft={true} />
+      {t('options.logs')} <Icon type="log" marginLeft={true} />
     </Button>
     <Button onclick={clearFavorite}>
-      Favoris <Icon type="favorite" marginLeft={true} />
+      {t('nav.favorites')} <Icon type="favorite" marginLeft={true} />
     </Button>
     <Button onclick={resetColsSearchCache}>
-      Filtres de colonne <Icon type="colSearch" marginLeft={true} />
+      {t('options.columnFilters')} <Icon type="colSearch" marginLeft={true} />
     </Button>
     <Button onclick={clearHistorySearch}>
-      Recherches récentes <Icon type="recentSearch" marginLeft={true} />
+      {t('options.recentSearches')} <Icon type="recentSearch" marginLeft={true} />
     </Button>
-    <Button onclick={clearAll}>Tout</Button>
+    <Button onclick={clearAll}>{t('options.all')}</Button>
   </div>
 
   <div class="flex-col">
-    <h5 class="title is-5">Mes données utilisateur</h5>
+    <h5 class="title is-5">{t('options.userData')}</h5>
     <Button onclick={downloadUserData}>
-      Exporter <Icon type="download" marginLeft={true} />
+      {t('options.export')} <Icon type="download" marginLeft={true} />
     </Button>
     <BtnImport onImport={importUserData}>
-      Importer <Icon type="upload" marginLeft={true} />
+      {t('options.import')} <Icon type="upload" marginLeft={true} />
     </BtnImport>
   </div>
 </div>

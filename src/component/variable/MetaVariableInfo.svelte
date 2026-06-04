@@ -8,6 +8,7 @@
   import TypeInfo from '@info-table/TypeInfo.svelte'
   import PercentBar from '@info-table/PercentBar.svelte'
   import MetaLocalisationInfo from '@info-table/MetaLocalisationInfo.svelte'
+  import { t } from '@i18n/messages'
   import type { MetaVariable } from '@type'
 
   let { metaVariable }: { metaVariable: MetaVariable } = $props()
@@ -18,7 +19,7 @@
   <tr>
     <td>
       <Icon type="dataset" />
-      Dataset
+      {t('entity.dataset')}
     </td>
     <td>
       <Link href="metaDataset/{metaVariable.datasetId}" entity="dataset"
@@ -31,24 +32,24 @@
     <tr>
       <td>
         <Icon type="key" />
-        Clé
+        {t('column.key.title')}
       </td>
-      <td> Oui </td>
+      <td> {t('column.trueValue')} </td>
     </tr>
   {/if}
   {#if metaVariable.businessKey}
     <tr>
       <td>
         <Icon type="businessKey" />
-        Clé métier
+        {t('column.businessKey.title')}
       </td>
-      <td> Oui </td>
+      <td> {t('column.trueValue')} </td>
     </tr>
   {/if}
   <tr>
     <td>
       <Icon type="hashtag" />
-      Position
+      {t('column.position.title')}
     </td>
     <td>
       {metaVariable.num}
@@ -59,7 +60,7 @@
     <tr>
       <td>
         <Icon type="missing" />
-        Manquants
+        {t('column.missing.title')}
       </td>
       <td>
         <PercentBar
@@ -74,7 +75,7 @@
     <tr>
       <td>
         <Icon type="duplicate" />
-        Doublons
+        {t('column.duplicates.title')}
       </td>
       <td>
         <PercentBar
@@ -89,7 +90,7 @@
     <tr>
       <td>
         <Icon type="value" />
-        Valeurs
+        {t('column.values.title')}
       </td>
       <td>
         <PercentBar

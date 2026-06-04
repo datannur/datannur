@@ -1,6 +1,9 @@
 import escapeHtml from 'escape-html'
 import { link } from '@lib/url'
 import { get } from 'svelte/store'
+import { translate } from '@i18n/i18n'
+import type { TranslationKey } from '@i18n/types'
+import type { TranslationParams } from '@i18n/messages'
 import { viewportManager } from '@lib/viewport-manager'
 import {
   wrapLongText,
@@ -26,13 +29,17 @@ import type {
 
 type EntityWithOrganization = MainEntityMap['folder' | 'dataset' | 'variable']
 
+function t(key: TranslationKey, params?: TranslationParams) {
+  return get(translate)(key, params)
+}
+
 export default class Column {
   static id(): ColumnType {
     return {
       data: 'id',
-      title: Render.icon('internalId') + 'Identifiant',
+      title: Render.icon('internalId') + t('column.id.title'),
       name: 'id',
-      tooltip: 'Identifiant unique',
+      tooltip: t('column.id.tooltip'),
       filterType: 'input',
       hasLongText: true,
       render: (data, type) => {
@@ -52,13 +59,13 @@ export default class Column {
     } = {},
   ): ColumnType {
     const icon = entity || 'name'
-    const titleName = name || 'Nom'
+    const titleName = name || t('column.name.title')
     if (!('withLink' in option)) option.withLink = true
     return {
       data: 'name',
       title: Render.icon(icon) + titleName,
       name: 'name',
-      tooltip: 'Nom',
+      tooltip: t('column.name.tooltip'),
       filterType: 'input',
       hasLongText: true,
       render: (
@@ -109,10 +116,10 @@ export default class Column {
   static originalName(): ColumnType {
     return {
       data: 'originalName',
-      title: Render.icon('name') + "Nom d'origine",
+      title: Render.icon('name') + t('column.originalName.title'),
       hasLongText: true,
       filterType: 'input',
-      tooltip: "Nom d'origine avant renommage",
+      tooltip: t('column.originalName.tooltip'),
       render: Render.longText,
     }
   }
@@ -120,9 +127,9 @@ export default class Column {
     return {
       data: '_entityClean',
       name: 'entity',
-      title: Render.icon('entity') + 'Entité',
+      title: Render.icon('entity') + t('column.entity.title'),
       defaultContent: '',
-      tooltip: 'Entité',
+      tooltip: t('column.entity.tooltip'),
       filterType: 'select',
       render: (data: string, type: string, row: { _entity: string }) => {
         if (!data) return ''
@@ -142,10 +149,10 @@ export default class Column {
     return {
       data: 'parentName',
       name: 'parentEntity',
-      title: Render.icon('entity') + 'Partie de',
+      title: Render.icon('entity') + t('column.partOf.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: "Partie de l'entité",
+      tooltip: t('column.partOf.tooltip'),
       filterType: 'input',
       render: (data, type, row: Evolution) => {
         if (!data) return ''
@@ -190,20 +197,20 @@ export default class Column {
     }
     return {
       data: folderNameVar,
-      title: Render.icon('folder') + 'Dossier',
+      title: Render.icon('folder') + t('column.folder.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Dossier',
+      tooltip: t('column.folder.tooltip'),
       render,
     }
   }
   static folderSimple(): ColumnType {
     return {
       data: 'folderId',
-      title: Render.icon('folder') + 'Dossier',
+      title: Render.icon('folder') + t('column.folder.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Dossier',
+      tooltip: t('column.folder.tooltip'),
       render: (data, type, row: FavoritableEntity) => {
         if (!data || !('folderName' in row)) return ''
         if (type !== 'display') return row.folderName
@@ -217,45 +224,47 @@ export default class Column {
       : Render.parentsIndent
     return {
       data: 'parents',
-      title: Render.icon(`folderTree${capitalize(entity)}`) + 'Partie de',
+      title:
+        Render.icon(`folderTree${capitalize(entity)}`) +
+        t('column.parents.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Eléments parents',
+      tooltip: t('column.parents.tooltip'),
       render,
     }
   }
   static datasetType(): ColumnType {
     return {
       data: 'typeClean',
-      title: Render.icon('type') + 'Type',
+      title: Render.icon('type') + t('column.datasetType.title'),
       defaultContent: '',
       name: 'type',
       filterType: 'select',
-      tooltip: 'Type de dataset',
+      tooltip: t('column.datasetType.tooltip'),
       render: Render.shortText,
     }
   }
   static folderType(): ColumnType {
     return {
       data: 'typeClean',
-      title: Render.icon('type') + 'Type',
+      title: Render.icon('type') + t('column.folderType.title'),
       defaultContent: '',
       name: 'type',
       filterType: 'select',
-      tooltip: 'Type de dossier',
+      tooltip: t('column.folderType.tooltip'),
       render: Render.shortText,
     }
   }
   static datatype(): ColumnType {
     return {
       data: 'typeClean',
-      title: Render.icon('type') + 'Type',
-      defaultContent: 'vide / manquant',
+      title: Render.icon('type') + t('column.dataType.title'),
+      defaultContent: t('column.emptyValue'),
       name: 'type',
       filterType: 'select',
-      tooltip: 'Type de données',
+      tooltip: t('column.dataType.tooltip'),
       render: (data, type) => {
-        if (!data) return 'vide / manquant'
+        if (!data) return t('column.emptyValue')
         return Render.shortText(data, type)
       },
     }
@@ -264,20 +273,20 @@ export default class Column {
     return {
       data: 'description',
       defaultContent: '',
-      title: Render.icon('description') + 'Description',
+      title: Render.icon('description') + t('column.description.title'),
       hasLongText: true,
       filterType: 'input',
-      tooltip: 'Description',
+      tooltip: t('column.description.tooltip'),
       render: Render.longText,
     }
   }
   static tag(): ColumnType {
     return {
       data: 'tags',
-      title: Render.icon('tag') + 'Mots clés',
+      title: Render.icon('tag') + t('column.tags.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Mots clés directement associés',
+      tooltip: t('column.tags.tooltip'),
       name: 'tag',
       render: Render.tags,
     }
@@ -285,10 +294,10 @@ export default class Column {
   static impliedTag(): ColumnType {
     return {
       data: 'impliedTags',
-      title: Render.icon('tag') + 'Implique aussi',
+      title: Render.icon('tag') + t('column.alsoImplies.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Mots clés impliqués par ce mot clé',
+      tooltip: t('column.alsoImplies.tooltip'),
       name: 'impliedTag',
       render: Render.tags,
     }
@@ -296,22 +305,22 @@ export default class Column {
   static propagateToParents(): ColumnType {
     return {
       data: 'propagateToParents',
-      title: Render.icon('propagateToParents') + 'Remonte',
+      title: Render.icon('propagateToParents') + t('column.propagates.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Remonte automatiquement vers les entités parentes',
+      tooltip: t('column.propagates.tooltip'),
       name: 'propagateToParents',
-      render: data => (data ? 'vrai' : ''),
+      render: data => (data ? t('column.trueValue') : ''),
     }
   }
   static nbImpliedByTag(): ColumnType {
     return {
       data: 'impliedByTags',
-      title: Render.icon('tag') + 'Impl.',
+      title: Render.icon('tag') + t('column.implied.title'),
       defaultContent: '',
       filterType: 'input',
       fromLength: true,
-      tooltip: 'Nombre de mots clés qui impliquent ce mot clé',
+      tooltip: t('column.implied.tooltip'),
       name: 'impliedByTag',
       render: (data: Tag[], type, row: Tag) => {
         if (!data?.length) return ''
@@ -324,10 +333,10 @@ export default class Column {
   static concept(): ColumnType {
     return {
       data: 'conceptName',
-      title: Render.icon('concept') + 'Concept',
+      title: Render.icon('concept') + t('column.concept.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Concept métier associé',
+      tooltip: t('column.concept.tooltip'),
       name: 'concept',
       render: (data: string, type, row: { conceptId?: string | number }) => {
         if (!data || !row.conceptId) return ''
@@ -342,10 +351,10 @@ export default class Column {
     return {
       data: 'definition',
       defaultContent: '',
-      title: Render.icon('description') + 'Définition',
+      title: Render.icon('description') + t('column.definition.title'),
       hasLongText: true,
       filterType: 'input',
-      tooltip: 'Définition métier',
+      tooltip: t('column.definition.tooltip'),
       render: Render.longText,
     }
   }
@@ -368,10 +377,10 @@ export default class Column {
         }
     return {
       data: 'ownerName',
-      title: Render.icon('organization') + entityNames.owner,
+      title: Render.icon('organization') + t('column.owner.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Organisation propriétaire',
+      tooltip: t('column.owner.tooltip'),
       render,
     }
   }
@@ -394,19 +403,19 @@ export default class Column {
         }
     return {
       data: 'managerName',
-      title: Render.icon('organization') + entityNames.manager,
+      title: Render.icon('organization') + t('column.manager.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Organisation gestionnaire',
+      tooltip: t('column.manager.tooltip'),
       render,
     }
   }
   static enumeration(): ColumnType {
     return {
       data: 'enumerations',
-      title: Render.icon('enumeration') + 'Énumération',
+      title: Render.icon('enumeration') + t('column.enumeration.title'),
       defaultContent: '',
-      tooltip: 'Énumérations',
+      tooltip: t('column.enumeration.tooltip'),
       render: Render.enumerationsName,
     }
   }
@@ -414,9 +423,9 @@ export default class Column {
     return {
       data: 'value',
       defaultContent: '',
-      title: Render.icon('value') + 'Valeur',
+      title: Render.icon('value') + t('column.value.title'),
       hasLongText: true,
-      tooltip: 'Valeur',
+      tooltip: t('column.value.tooltip'),
       render: Render.longText,
     }
   }
@@ -424,20 +433,20 @@ export default class Column {
     return {
       data: 'nbValue',
       name: 'value',
-      title: Render.icon('value') + 'Nb val.',
+      title: Render.icon('value') + t('column.nbValues.title'),
       defaultContent: '',
       filterType: 'input',
-      tooltip: 'Nombre de valeurs distinctes',
+      tooltip: t('column.nbValues.tooltip'),
       render: (data, type, row) => Render.nbValues(data, type, row, nbValueMax),
     }
   }
   static valuesPreview(): ColumnType {
     return {
       data: 'valuesPreview',
-      title: Render.icon('value') + 'Valeurs',
+      title: Render.icon('value') + t('column.values.title'),
       hasLongText: true,
       defaultContent: '',
-      tooltip: 'Valeurs',
+      tooltip: t('column.values.tooltip'),
       render: Render.value,
     }
   }
@@ -446,8 +455,8 @@ export default class Column {
       data: 'nbDuplicate',
       defaultContent: '',
       filterType: 'input',
-      title: Render.icon('duplicate') + 'Doublons',
-      tooltip: 'Nombre de valeurs dupliquées',
+      title: Render.icon('duplicate') + t('column.duplicates.title'),
+      tooltip: t('column.duplicates.tooltip'),
       render: Render.nbDuplicate,
     }
   }
@@ -456,37 +465,37 @@ export default class Column {
       data: 'nbMissing',
       defaultContent: '',
       filterType: 'input',
-      title: Render.icon('missing') + 'Manquant',
-      tooltip: 'Nombre de valeurs manquantes',
+      title: Render.icon('missing') + t('column.missing.title'),
+      tooltip: t('column.missing.tooltip'),
       render: Render.nbMissing as ColumnType['render'],
     }
   }
   static frequency(): ColumnType {
     return {
       data: 'freqPreview',
-      title: Render.icon('frequency') + 'Fréquence',
+      title: Render.icon('frequency') + t('column.frequency.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Aperçu des données de fréquence',
+      tooltip: t('column.frequency.tooltip'),
       render: Render.freqPreview,
     }
   }
   static stats(): ColumnType {
     return {
       data: 'statsPreview',
-      title: Render.icon('stat') + 'Stats',
+      title: Render.icon('stat') + t('column.stats.title'),
       defaultContent: '',
-      tooltip: 'Statistiques descriptives (min, max, moyenne, écart-type)',
+      tooltip: t('column.stats.tooltip'),
       render: Render.statsPreview,
     }
   }
   static nbRow(nbRowMax: number): ColumnType {
     return {
       data: 'nbRow',
-      title: Render.icon('nbRow') + 'Lignes',
+      title: Render.icon('nbRow') + t('column.rows.title'),
       filterType: 'input',
       defaultContent: '',
-      tooltip: 'Nombre de lignes',
+      tooltip: t('column.rows.tooltip'),
       render: (data, type) => {
         if (type !== 'display') {
           return data === '' || data === null ? 0 : parseInt(data)
@@ -500,10 +509,10 @@ export default class Column {
   static nbResources(nbResourcesMax: number): ColumnType {
     return {
       data: 'nbResources',
-      title: Render.icon('nbResources') + 'Res.',
+      title: Render.icon('nbResources') + t('column.resources.title'),
       filterType: 'input',
       defaultContent: '',
-      tooltip: 'Nombre de ressources',
+      tooltip: t('column.resources.tooltip'),
       render: (data, type) => {
         if (type !== 'display') {
           return data === '' || data === null ? 0 : parseInt(data)
@@ -520,10 +529,10 @@ export default class Column {
   ): ColumnType {
     return {
       data: 'dataSize' + (option.recursive ? 'Recursive' : ''),
-      title: Render.icon('dataSize') + 'Taille',
+      title: Render.icon('dataSize') + t('column.size.title'),
       filterType: 'input',
       defaultContent: '',
-      tooltip: 'Taille des données',
+      tooltip: t('column.size.tooltip'),
       render: (data, type) => {
         if (type !== 'display') {
           return data === '' || data === null ? 0 : parseInt(data)
@@ -543,7 +552,7 @@ export default class Column {
       title: Render.icon('nbSource') + 'In',
       filterType: 'input',
       defaultContent: '',
-      tooltip: `Nombre de ${entity}s sources (en amont)`,
+      tooltip: t('column.sourceCount.tooltip', { entity }),
       render: (
         data: Set<string | number>,
         type,
@@ -567,7 +576,7 @@ export default class Column {
       title: Render.icon('nbDerived') + 'Out',
       filterType: 'input',
       defaultContent: '',
-      tooltip: `Nombre de ${entity}s dérivées (en aval)`,
+      tooltip: t('column.derivedCount.tooltip', { entity }),
       render: (
         data: Set<string | number>,
         type,
@@ -588,8 +597,8 @@ export default class Column {
       name: 'updateFrequency',
       defaultContent: '',
       filterType: 'select',
-      title: Render.icon('updateFrequency') + 'Fréquence',
-      tooltip: 'Fréquence de mise à jour',
+      title: Render.icon('updateFrequency') + t('column.updateFrequency.title'),
+      tooltip: t('column.updateFrequency.tooltip'),
       render: Render.shortText,
     }
   }
@@ -598,9 +607,9 @@ export default class Column {
       data: 'lastUpdateDate',
       name: 'lastUpdate',
       defaultContent: '',
-      title: Render.icon('date') + 'Mise à jour',
+      title: Render.icon('date') + t('column.lastUpdate.title'),
       filterType: 'input',
-      tooltip: 'Date de dernière mise à jour',
+      tooltip: t('column.lastUpdate.tooltip'),
       render: (data, type, row) => Render.datetime(data, type, row),
     }
   }
@@ -609,9 +618,9 @@ export default class Column {
       data: 'nextUpdateDate',
       name: 'nextUpdate',
       defaultContent: '',
-      title: Render.icon('date') + 'Prochaine',
+      title: Render.icon('date') + t('column.nextUpdate.title'),
       filterType: 'input',
-      tooltip: 'Date de prochaine mise à jour estimée',
+      tooltip: t('column.nextUpdate.tooltip'),
       render: (data, type, row) =>
         Render.datetime(data, type, row, { estimation: true }),
     }
@@ -619,10 +628,12 @@ export default class Column {
   static favorite(): ColumnType {
     return {
       data: 'isFavorite',
-      title: Render.icon('favorite') + "<span class='hidden'>favorite</span>",
+      title:
+        Render.icon('favorite') +
+        `<span class='hidden'>${t('column.favorites.title')}</span>`,
       name: 'isFavorite',
       width: '20px',
-      tooltip: 'Favoris',
+      tooltip: t('column.favorites.tooltip'),
       filterType: 'select',
       render: Render.favorite,
     }
@@ -640,50 +651,52 @@ export default class Column {
     }
     return {
       data: 'id',
-      title: Render.icon('level') + "<span class='hidden'>level</span>",
+      title:
+        Render.icon('level') +
+        `<span class='hidden'>${t('column.level.title')}</span>`,
       defaultContent: '',
       name: 'level',
       filterType: 'input',
       width: '20px',
-      tooltip: "Niveau de profondeur de l'arborecence",
+      tooltip: t('column.level.tooltip'),
       render,
     }
   }
   static localisation(): ColumnType {
     return {
       data: 'localisation',
-      title: Render.icon('localisation') + 'Localisation',
+      title: Render.icon('localisation') + t('column.location.title'),
       defaultContent: '',
-      tooltip: 'Localisation géographique des données',
+      tooltip: t('column.location.tooltip'),
       render: Render.shortText,
     }
   }
   static deliveryFormat(): ColumnType {
     return {
       data: 'deliveryFormat',
-      title: Render.icon('deliveryFormat') + 'Format',
+      title: Render.icon('deliveryFormat') + t('column.format.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Format des données',
+      tooltip: t('column.format.tooltip'),
       render: Render.shortText,
     }
   }
   static license(): ColumnType {
     return {
       data: 'license',
-      title: Render.icon('license') + 'Licence',
+      title: Render.icon('license') + t('column.license.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Licence',
+      tooltip: t('column.license.tooltip'),
       render: Render.longText,
     }
   }
   static period(): ColumnType {
     return {
       data: 'period',
-      title: Render.icon('dateRange') + 'Période',
+      title: Render.icon('dateRange') + t('column.period.title'),
       defaultContent: '',
-      tooltip: 'Période couverte par les données',
+      tooltip: t('column.period.tooltip'),
       render: (data: string, type, row: PeriodableEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -696,11 +709,11 @@ export default class Column {
   static startDate(): ColumnType {
     return {
       data: 'startDate',
-      title: Render.icon('dateRange') + 'Début',
+      title: Render.icon('dateRange') + t('column.start.title'),
       defaultContent: '',
       dateType: 'start',
       filterType: 'input',
-      tooltip: 'Date de début de validité',
+      tooltip: t('column.start.tooltip'),
       render: (data: string, type) => {
         if (type === 'display') return data
         if (!data) data = '1000'
@@ -711,11 +724,11 @@ export default class Column {
   static endDate(): ColumnType {
     return {
       data: 'endDate',
-      title: Render.icon('dateRange') + 'Fin',
+      title: Render.icon('dateRange') + t('column.end.title'),
       defaultContent: '',
       dateType: 'end',
       filterType: 'input',
-      tooltip: 'Date de fin de validité',
+      tooltip: t('column.end.tooltip'),
       render: (data: string, type) => {
         if (type === 'display') return data
         if (!data) data = '9999'
@@ -726,9 +739,9 @@ export default class Column {
   static dataset(isMeta: boolean): ColumnType {
     return {
       data: 'datasetName',
-      title: Render.icon('dataset') + 'Dataset',
+      title: Render.icon('dataset') + t('column.dataset.title'),
       hasLongText: true,
-      tooltip: 'Dataset',
+      tooltip: t('column.dataset.tooltip'),
       render: (
         data: string,
         type,
@@ -747,9 +760,9 @@ export default class Column {
   static dataPath(): ColumnType {
     return {
       data: 'dataPath',
-      title: Render.icon('dataPath') + 'Emplacement',
+      title: Render.icon('dataPath') + t('column.path.title'),
       defaultContent: '',
-      tooltip: 'Emplacement des données',
+      tooltip: t('column.path.tooltip'),
       render: (data: string, type) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -768,10 +781,10 @@ export default class Column {
     return {
       data: 'path',
       name: 'docPath',
-      title: Render.icon('link') + 'Lien',
+      title: Render.icon('link') + t('column.docPath.title'),
       defaultContent: '',
       hasLongText: true,
-      tooltip: 'Emplacement du doc',
+      tooltip: t('column.docPath.tooltip'),
       render: (data: string, type) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -793,7 +806,7 @@ export default class Column {
       filterType: 'input',
       defaultContent: '',
       fromLength: true,
-      tooltip: 'Nombre de docs',
+      tooltip: t('column.docs.tooltip'),
       render: (
         data: unknown[],
         type,
@@ -816,9 +829,11 @@ export default class Column {
   ): ColumnType {
     return {
       data: 'nbDocRecursive',
-      title: Render.icon('doc') + "<span class='hidden'>nbDocs</span>",
+      title:
+        Render.icon('doc') +
+        `<span class='hidden'>${t('column.docs.title')}</span>`,
       filterType: 'input',
-      tooltip: 'Nombre de docs',
+      tooltip: t('column.docs.tooltip'),
       render: (data: number, type, row: Tag) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -844,7 +859,7 @@ export default class Column {
         Render.icon(entity) +
         `<span class='hidden'>nb${capitalize(entityPlural)}</span>`,
       filterType: 'input',
-      tooltip: "Nombre d'éléments de type " + entity,
+      tooltip: t('column.children.tooltip', { entity }),
       render: (data: number, type, row: RecursiveEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -863,9 +878,11 @@ export default class Column {
   ): ColumnType {
     return {
       data: 'nbFolderRecursive',
-      title: Render.icon('folder') + "<span class='hidden'>nbFolders</span>",
+      title:
+        Render.icon('folder') +
+        `<span class='hidden'>${t('column.folders.title')}</span>`,
       filterType: 'input',
-      tooltip: 'Nombre de dossiers',
+      tooltip: t('column.folders.tooltip'),
       render: (data: number, type, row: RecursiveEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -886,9 +903,9 @@ export default class Column {
       data: 'nbOrganizationRecursive',
       title:
         Render.icon('organization') +
-        "<span class='hidden'>nbOrganizations</span>",
+        `<span class='hidden'>${t('column.organizations.title')}</span>`,
       filterType: 'input',
-      tooltip: "Nombre d'organisations",
+      tooltip: t('column.organizations.tooltip'),
       render: (data: number, type, row: RecursiveEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -907,9 +924,11 @@ export default class Column {
   ): ColumnType {
     return {
       data: 'nbDatasetRecursive',
-      title: Render.icon('dataset') + "<span class='hidden'>nbDatasets</span>",
+      title:
+        Render.icon('dataset') +
+        `<span class='hidden'>${t('column.datasets.title')}</span>`,
       filterType: 'input',
-      tooltip: 'Nombre de datasets',
+      tooltip: t('column.datasets.tooltip'),
       render: (data: number, type, row: RecursiveEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -935,8 +954,8 @@ export default class Column {
     if (!('tab' in option)) option.tab = 'variables'
     if (!('showTitle' in option)) option.showTitle = false
     const title = option.showTitle
-      ? 'Variables'
-      : `<span class='hidden'>nbVariables</span>`
+      ? t('column.variables.title')
+      : `<span class='hidden'>${t('column.variables.title')}</span>`
     const linkPath =
       'linkPath' in option && option.linkPath ? option.linkPath : entity + '/'
     return {
@@ -944,7 +963,7 @@ export default class Column {
       title: Render.icon('variable') + title,
       name: 'variable',
       filterType: 'input',
-      tooltip: 'Nombre de variables',
+      tooltip: t('column.variables.tooltip'),
       render: (data: number, type, row: MainEntity) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -960,8 +979,8 @@ export default class Column {
   static metaFolder(): ColumnType {
     return {
       data: 'metaFolderId',
-      title: Render.icon('folder') + 'Dossier',
-      tooltip: 'Dossier',
+      title: Render.icon('folder') + t('column.folder.title'),
+      tooltip: t('column.folder.tooltip'),
       render: (data: string | number, type) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -974,8 +993,8 @@ export default class Column {
     options: { varName?: string; title?: string; tooltip?: string } = {},
   ): ColumnType {
     if (!('varName' in options)) options.varName = 'timestamp'
-    if (!('title' in options)) options.title = 'Moment'
-    if (!('tooltip' in options)) options.tooltip = "moment de l'ajout"
+    if (!('title' in options)) options.title = t('column.moment.title')
+    if (!('tooltip' in options)) options.tooltip = t('column.moment.tooltip')
     return {
       data: options.varName,
       title: Render.icon('date') + options.title,
@@ -1012,10 +1031,10 @@ export default class Column {
   static isKey(): ColumnType {
     return {
       data: 'key',
-      title: Render.icon('key') + 'Clé',
+      title: Render.icon('key') + t('column.key.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Clé primaire ou partie de clé primaire',
+      tooltip: t('column.key.tooltip'),
       render: (data: string | boolean, type) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -1026,10 +1045,10 @@ export default class Column {
   static isBusinessKey(): ColumnType {
     return {
       data: 'businessKey',
-      title: Render.icon('businessKey') + 'Clé métier',
+      title: Render.icon('businessKey') + t('column.businessKey.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Clé métier ou partie de clé métier',
+      tooltip: t('column.businessKey.tooltip'),
       render: (data: string | boolean, type) => {
         if (!data) return ''
         if (type !== 'display') return data
@@ -1040,9 +1059,9 @@ export default class Column {
   static fkVariable(): ColumnType {
     return {
       data: 'fkVariableName',
-      title: Render.icon('fk') + 'Clé étrangère',
+      title: Render.icon('fk') + t('column.foreignKey.title'),
       defaultContent: '',
-      tooltip: 'Variable référencée dans un autre dataset',
+      tooltip: t('column.foreignKey.tooltip'),
       render: (data: string, type, row: EntityTypeMap['variable']) => {
         if (!row.fkVariableId) return ''
         if (!data) return escapeHtml(String(row.fkVariableId))
@@ -1067,7 +1086,7 @@ export default class Column {
       title: Render.icon('fk') + 'FK →',
       filterType: 'input',
       defaultContent: '',
-      tooltip: 'Nombre de datasets référencés par clé étrangère (sortant)',
+      tooltip: t('column.outboundFkDatasets.tooltip'),
       render: (
         data: Set<string | number>,
         type,
@@ -1088,8 +1107,7 @@ export default class Column {
       title: Render.icon('fk') + 'FK ←',
       filterType: 'input',
       defaultContent: '',
-      tooltip:
-        'Nombre de datasets qui référencent ce dataset par clé étrangère (entrant)',
+      tooltip: t('column.inboundFkDatasets.tooltip'),
       render: (
         data: Set<string | number>,
         type,
@@ -1110,8 +1128,7 @@ export default class Column {
       title: Render.icon('fk') + 'FK ←',
       filterType: 'input',
       defaultContent: '',
-      tooltip:
-        'Nombre de variables qui référencent cette variable par clé étrangère (entrant)',
+      tooltip: t('column.inboundFkVariables.tooltip'),
       render: (
         data: Set<string | number>,
         type,
@@ -1129,35 +1146,36 @@ export default class Column {
   static metaLocalisation(): ColumnType {
     return {
       data: 'metaLocalisation',
-      title: Render.icon('localisation') + 'Localisation',
+      title: Render.icon('localisation') + t('column.metaLocation.title'),
       filterType: 'select',
       defaultContent: '',
-      tooltip: 'Localisation (dans les données ou dans le schéma',
+      tooltip: t('column.metaLocation.tooltip'),
       render: Render.shortText,
     }
   }
   static inherited(): ColumnType {
     return {
       data: 'inherited',
-      title: Render.icon('diagram') + 'Hérité',
+      title: Render.icon('diagram') + t('column.inherited.title'),
       defaultContent: '',
-      tooltip: "Element direct (vide) ou hérité d'un sous-élément (hérité)",
+      tooltip: t('column.inherited.tooltip'),
       render: Render.shortText,
     }
   }
   static relationType(): ColumnType {
     return {
       data: 'relationType',
-      title: Render.icon('diagram') + 'Relation',
+      title: Render.icon('diagram') + t('column.relation.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Source (parent), dérivé (enfant) ou clé étrangère',
+      tooltip: t('column.relation.tooltip'),
       render: data => {
         if (!data) return ''
-        if (data === 'derived') return 'Dérivé'
-        if (data === 'source') return 'Source'
-        if (data === 'fk') return 'Clé étrangère'
-        if (data === 'fk-ref') return 'Référencé par FK'
+        if (data === 'derived') return t('column.relation.derived')
+        if (data === 'source') return t('column.relation.source')
+        if (data === 'fk') return t('column.relation.foreignKey')
+        if (data === 'fk-ref')
+          return t('column.relation.referencedByForeignKey')
         return ''
       },
     }

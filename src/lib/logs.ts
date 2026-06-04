@@ -2,7 +2,38 @@ import db from '@db'
 import Render from '@lib/render'
 import { allTabsIcon } from '@lib/store'
 import { entityToIcon } from '@lib/constant'
+import { t } from '@i18n/messages'
 import type { Log, EntityName } from '@type'
+import type { TranslationKey } from '@i18n/types'
+
+type ActionConfig = {
+  labelKey: TranslationKey
+  icon: string
+}
+
+const actionConfig = new Map<string, ActionConfig>([
+  ['searchBar', { labelKey: 'log.action.searchBar', icon: 'search' }],
+  ['loadPage', { labelKey: 'log.action.loadPage', icon: 'page' }],
+  ['addFav', { labelKey: 'log.action.addFav', icon: 'favorite' }],
+  ['removeFav', { labelKey: 'log.action.removeFav', icon: 'favorite' }],
+  ['selectTab', { labelKey: 'log.action.selectTab', icon: 'tab' }],
+  [
+    'toggleDarkModeBtnOn',
+    { labelKey: 'log.action.toggleDarkModeBtnOn', icon: 'moon' },
+  ],
+  [
+    'toggleDarkModeBtnOff',
+    { labelKey: 'log.action.toggleDarkModeBtnOff', icon: 'sun' },
+  ],
+  [
+    'openTableDownload',
+    { labelKey: 'log.action.openTableDownload', icon: 'download' },
+  ],
+  [
+    'closeTableDownload',
+    { labelKey: 'log.action.closeTableDownload', icon: 'downloadClose' },
+  ],
+])
 
 export default class Logs {
   static dbKey = 'userData/log'
@@ -74,27 +105,10 @@ export default class Logs {
         log.elementLink = log.entity
       }
 
-      const actionConfig = new Map([
-        ['searchBar', ['Rechercher', 'search']],
-        ['loadPage', ['Charger la page', 'page']],
-        ['addFav', ['Ajouter le favoris', 'favorite']],
-        ['removeFav', ['Supprimer le favoris', 'favorite']],
-        ['selectTab', ["Sélectionner l'onglet", 'tab']],
-        ['toggleDarkModeBtnOn', ['Activer le mode sombre', 'moon']],
-        ['toggleDarkModeBtnOff', ['Activer le mode clair', 'sun']],
-        [
-          'openTableDownload',
-          ['Ouvrir les options de téléchargement', 'download'],
-        ],
-        [
-          'closeTableDownload',
-          ['Fermer les options de téléchargement', 'downloadClose'],
-        ],
-      ])
-
       const config = actionConfig.get(log.action)
       if (config) {
-        const [text, icon] = config
+        const text = t(config.labelKey)
+        const icon = config.icon
         log.actionReadable = text
         log.actionIcon = icon
         log.action = Render.icon(icon) + text

@@ -1,8 +1,9 @@
 import { updateTooltipText } from '@lib/tooltip'
+import { t } from '@i18n/messages'
 
 export const copyTextClasses = 'copyclip break-line use-tooltip'
-export const copyTextMsg = "cliquer pour copier l'élement"
-const copyTextMsgCopied = 'copié dans le presse-papier !'
+export const getCopyTextMsg = () => t('copyText.copy')
+const getCopyTextMsgCopied = () => t('copyText.copied')
 
 export function copyTextListenClick() {
   document.addEventListener('click', async ({ target }) => {
@@ -13,7 +14,7 @@ export function copyTextListenClick() {
       return
     const text = target.textContent.trim()
     await navigator.clipboard.writeText(text)
-    updateTooltipText(copyTextMsgCopied)
-    setTimeout(() => updateTooltipText(copyTextMsg), 1000)
+    updateTooltipText(getCopyTextMsgCopied())
+    setTimeout(() => updateTooltipText(getCopyTextMsg()), 1000)
   })
 }

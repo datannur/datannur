@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- add: introduce English/French localization across the app, data exports, static routes, integrity checks, and LLM/STT flows
+- change: use English as the fallback language, with browser detection, persisted preference, `?lang=`, and adaptive LLM replies
+
 ## 0.26.0 (2026-06-02)
 
 - add: introduce the Bilan tab with a five-level catalog maturity pyramid, animated quality scores, diagnostics, and actionable improvement links

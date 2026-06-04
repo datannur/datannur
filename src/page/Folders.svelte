@@ -8,7 +8,10 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
-  import aboutFile from '@markdown/about-folder.md?raw'
+  import aboutFileEn from '@markdown/about-folder.en.md?raw'
+  import aboutFileFr from '@markdown/about-folder.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
   const folders = db.getAll('folder')
   makeParentsRelative(false, folders)
@@ -29,7 +32,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'folder', items: folders }],
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 
   const nbFolder = folders.length
@@ -43,7 +46,11 @@
 </script>
 
 <section class="section">
-  <Title type="folder" name="Dossiers" mode="mainTitle" />
+  <Title
+    type="folder"
+    name={t('entityPlural.folder')}
+    mode="mainTitle"
+  />
   {#if showOpenAllSwitch}
     <OpenAllSwitch onChange={() => keyTab++} />
   {/if}

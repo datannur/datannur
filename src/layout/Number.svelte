@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { locale } from '@lib/constant'
+  import { getCurrentLocale } from '@i18n/i18n'
 
   let { number }: { number: number } = $props()
 
+  const locale = getCurrentLocale()
   let formattedNumber = $derived(number?.toLocaleString(locale))
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { t } from '@i18n/messages'
   import { setProxyCredentials } from '@llm/llm-config'
 
   let { onConfigured }: { onConfigured: () => void } = $props()
@@ -17,12 +18,12 @@
     const result = await setProxyCredentials(apiKey, productId)
 
     if (result.success) {
-      configSuccess = result.message ?? 'Configuration enregistrée'
+      configSuccess = result.message ?? t('llm.config.saved')
       apiKey = ''
       productId = ''
       onConfigured()
     } else {
-      configError = result.error ?? 'Erreur lors de la sauvegarde'
+      configError = result.error ?? t('llm.config.saveError')
     }
   }
 </script>
@@ -30,23 +31,23 @@
 <div class="config-form">
   <div class="config-header">
     <i class="fa-solid fa-key"></i>
-    <h3>Configuration</h3>
+    <h3>{t('llm.config.title')}</h3>
   </div>
   <p>
-    Enregistrez vos clés API Infomaniak
+    {t('llm.config.intro')}
     <a
-      href="https://www.infomaniak.com/fr/hebergement/ai-services"
+      href={t('llm.providerUrl')}
       target="_blank"
       rel="noopener noreferrer"
       class="config-link"
     >
       <i class="fa-solid fa-external-link"></i>
-      Obtenir mes clés
+      {t('llm.config.getKeys')}
     </a>
   </p>
   <p class="config-note">
     <i class="fa-solid fa-info-circle"></i>
-    Les clés sont stockées de manière sécurisée sur votre machine locale
+    {t('llm.config.note')}
   </p>
 
   {#if configError}
@@ -65,24 +66,24 @@
 
   <div class="input-group">
     <label>
-      <span>Clé API</span>
+      <span>{t('llm.config.apiKey')}</span>
       <input
         id="llm-api-key"
         name="apiKey"
         type="password"
         bind:value={apiKey}
-        placeholder="Votre clé API"
+        placeholder={t('llm.config.apiKeyPlaceholder')}
       />
     </label>
 
     <label>
-      <span>Product ID</span>
+      <span>{t('llm.config.productId')}</span>
       <input
         id="llm-product-id"
         name="productId"
         type="text"
         bind:value={productId}
-        placeholder="Votre Product ID"
+        placeholder={t('llm.config.productIdPlaceholder')}
       />
     </label>
   </div>
@@ -93,7 +94,7 @@
     disabled={!apiKey || !productId}
   >
     <i class="fa-solid fa-check"></i>
-    Enregistrer
+    {t('llm.config.save')}
   </button>
 </div>
 

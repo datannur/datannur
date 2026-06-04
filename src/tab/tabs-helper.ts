@@ -3,9 +3,11 @@ import attributs from '@stat/attributs'
 import type { Attribut } from '@stat/attributs-def'
 import type { Row } from '@type'
 import type { Component } from 'svelte'
+import type { TranslationKey } from '@i18n/types'
 
 export type TabConfig = {
-  name: string
+  name?: string
+  nameKey?: TranslationKey
   icon: string
   /* eslint-disable-next-line */
   component: Component<any>

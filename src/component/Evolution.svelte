@@ -11,8 +11,10 @@
     columnIcons,
     isBigLimit,
   } from '@lib/constant'
+  import { getColumnCleanName } from '@i18n/constant-labels'
   import Options from '@lib/options'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import escapeHtml from 'escape-html'
   import { evolutionTypes } from '@lib/constant'
   import type { Evolution, Column as ColumnType } from '@type'
@@ -81,7 +83,7 @@
         name: 'evolutionType',
         width: '20px',
         filterType: 'select',
-        tooltip: 'Type de modification',
+        tooltip: t('column.evolutionType.tooltip'),
         render: (data, type, row: Evolution) => {
           if (type !== 'display') return String(data)
           data = escapeHtml(data)
@@ -98,11 +100,12 @@
       Column.parentEntity(),
       {
         data: 'variable',
-        title: Render.icon('variable') + 'Variable',
+        title:
+          Render.icon('variable') + t('column.variableName.title'),
         defaultContent: '',
         name: 'variable',
         filterType: 'input',
-        tooltip: 'Nom de la variable',
+        tooltip: t('column.variableName.tooltip'),
         render: (data, type) => {
           if (!data) return ''
 
@@ -110,8 +113,10 @@
           let columnCleanNameLine2 = ''
           let columnCleanName: string | readonly string[] | string[] = dataStr
 
-          const cleanName =
-            columnCleanNames[dataStr as keyof typeof columnCleanNames]
+          const hasCleanName = dataStr in columnCleanNames
+          const cleanName = hasCleanName
+            ? getColumnCleanName(dataStr as keyof typeof columnCleanNames)
+            : undefined
           if (cleanName) {
             columnCleanName = cleanName
           } else {
@@ -152,12 +157,12 @@
       },
       {
         data: 'type',
-        title: Render.icon('update') + 'Valeur',
+        title: Render.icon('update') + t('column.variableValue.title'),
         defaultContent: '',
         hasLongText: true,
         name: 'value',
         filterType: 'input',
-        tooltip: 'Valeur de la variable',
+        tooltip: t('column.variableValue.tooltip'),
         render: (data, type, row: Evolution) => {
           if (!row.oldValue && !row.newValue) {
             return ''
@@ -182,7 +187,7 @@
         title: Render.icon('date'),
         defaultContent: '',
         filterType: 'select',
-        tooltip: 'passé ou futur',
+        tooltip: t('column.pastOrFuture.tooltip'),
         render: (data, type) => {
           if (type !== 'display') return String(data)
           return `<span style="display: none;">${escapeHtml(data)}</span>`
@@ -191,7 +196,7 @@
       Column.timestamp(),
     ]
   }
-  const columns = defineColumns()
+  const columns = $derived(defineColumns())
 </script>
 
 <Datatable
