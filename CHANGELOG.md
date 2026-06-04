@@ -4,6 +4,7 @@
 
 - add: introduce English/French localization across the app, data exports, static routes, integrity checks, and LLM/STT flows
 - change: use English as the fallback language, with browser detection, persisted preference, `?lang=`, and adaptive LLM replies
+- fix: render labeled bidirectional self-loop edges cleanly in lightweight structure diagrams
 
 ## 0.26.0 (2026-06-02)
 

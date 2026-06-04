@@ -84,6 +84,10 @@ const entityOrder = [
   'frequency',
   'doc',
 ]
+const edgePattern =
+  /^(.+?)\s+(<--\s*(.*?)\s*-->|<-->|--\s*(.*?)\s*-->|-->|-.->)\s+(.+)$/
+const edgeSplitPattern =
+  /\s+(?:<--\s*.*?\s*-->|<-->|--\s*.*?\s*-->|-->|-.->)\s+/
 
 function unique<T>(items: T[]): T[] {
   return [...new Set(items)]
@@ -123,14 +127,16 @@ function parseNodeRef(rawValue: string): DiagramNode {
 
 function getEdge(rawLine: string): DiagramEdge | null {
   const line = rawLine.trim().replace(/;$/, '')
-  const match = line.match(/^(.+?)\s+(<-->|--\s*(.*?)\s*-->|-->|-.->)\s+(.+)$/)
+  const match = line.match(edgePattern)
   if (!match) return null
 
   const from = parseNodeRef(match[1]).id
-  const to = parseNodeRef(match[4]).id
+  const to = parseNodeRef(match[5]).id
   const operator = match[2]
-  const label = cleanEdgeLabel(match[3]?.trim())
-  if (operator === '<-->') return { from, to, type: 'bidirectional', label }
+  const label = cleanEdgeLabel((match[3] ?? match[4])?.trim())
+  if (operator === '<-->' || operator.startsWith('<--')) {
+    return { from, to, type: 'bidirectional', label }
+  }
   if (operator === '-.->') return { from, to, type: 'dotted', label }
   return { from, to, type: 'directed', label }
 }
@@ -159,7 +165,8 @@ export function parseSimpleDiagram(code: string): Diagram {
     if (edge) {
       const parts = line
         .replace(/;$/, '')
-        .split(/\s+(?:<-->|--\s*.*?\s*-->|-->|-.->)\s+/)
+        .split(edgeSplitPattern)
+        .filter(part => part !== undefined)
       for (const part of parts) {
         const node = parseNodeRef(part)
         nodesById[node.id] = { ...nodesById[node.id], ...node }
@@ -457,6 +464,14 @@ function edgePath(
   direction: Diagram['direction'],
   edges: DiagramEdge[],
 ): string {
+  const from = nodes.find(node => node.id === edge.from)
+  if (from && edge.from === edge.to) {
+    const start = { x: from.x + from.width * 0.68, y: from.y }
+    const end = { x: from.x + from.width * 0.68, y: from.y + from.height }
+    const curveX = from.x + from.width + 76
+    return `M ${start.x} ${start.y} C ${curveX} ${from.y - 30}, ${curveX} ${from.y + from.height + 30}, ${end.x} ${end.y}`
+  }
+
   const points = getEdgePoints(edge, nodes, direction, edges)
   if (!points) return ''
 
@@ -487,6 +502,9 @@ function labelPosition(
   const from = nodes.find(node => node.id === edge.from)
   const to = nodes.find(node => node.id === edge.to)
   if (!from || !to) return null
+  if (edge.from === edge.to) {
+    return [from.x + from.width + 58, from.y + from.height / 2]
+  }
   const points = getEdgePoints(edge, nodes, direction, edges)
   if (!points) return null
   const fromCenter = getNodeCenter(from)
@@ -509,9 +527,12 @@ export function renderSimpleDiagram(code: string): string {
   const layoutDirection = getLayoutDirection(diagram)
   const nodes = normalizeLayout(getLayout(diagram))
   const { nodeWidth, nodeHeight } = getLayoutSize(diagram)
+  const hasLabeledSelfLoop = diagram.edges.some(
+    edge => edge.from === edge.to && edge.label,
+  )
   const maxX = Math.max(...nodes.map(node => node.x + node.width), nodeWidth)
   const maxY = Math.max(...nodes.map(node => node.y + node.height), nodeHeight)
-  const width = maxX + padding
+  const width = maxX + padding + (hasLabeledSelfLoop ? 128 : 0)
   const height = maxY + padding
   const compactClass =
     diagram.nodes.length <= 5 ? ' simple-diagram-compact' : ''
@@ -577,7 +598,7 @@ export function renderSimpleDiagram(code: string): string {
     })
     .join('')
 
-  return `<svg class="simple-diagram${compactClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img"><defs>${markers}</defs>${edgeSvg}${nodeSvg}${labelSvg}</svg>`
+  return `<svg class="simple-diagram${compactClass}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img"><defs>${markers}</defs>${edgeSvg}${labelSvg}${nodeSvg}</svg>`
 }
 
 function splitMermaidParts(mdWithDiagram: string): string[] {
