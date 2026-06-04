@@ -44,11 +44,13 @@
         {#if tabNb === '...'}
           <Loading type="tab" colorEntity={tab.icon} />
         {:else if tabNb === (typeof tabNb === 'number' ? tabNb : parseInt(tabNb))}
-          <span class="num-style tab-visible">
+          <span class="num-style tab-visible" data-tab-transition={tab.key}>
             <Number number={tabNb} />
           </span>
         {:else}
-          <span class="num-style tab-visible">{tabNb}</span>
+          <span class="num-style tab-visible" data-tab-transition={tab.key}
+            >{tabNb}</span
+          >
         {/if}
       {/if}
     </div>

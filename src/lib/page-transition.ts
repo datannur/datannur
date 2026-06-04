@@ -13,6 +13,7 @@ type TextStyleSnapshot = {
 type TextTransitionSnapshot = {
   bounds: TextRectSnapshot
   color: string
+  targetOffsetY?: number
 }
 
 type TextRectSnapshot = {
@@ -27,15 +28,18 @@ function cleanTransitionPart(value: string | number) {
 }
 
 function getEntityRoute(href: string) {
-  const route = href.replace(/^\/+/, '').split('?')[0]
+  const cleanHref = href.replace(/^\/+/, '')
+  const route = cleanHref.split('?')[0]
   const match = route.match(entityRoutePattern)
   if (!match) return undefined
+  const params = new URLSearchParams(cleanHref.split('?')[1] ?? '')
 
   return {
     entity: match[1],
     id: match[2],
     route,
     routeKey: route.replace(/\//g, '___'),
+    tab: params.get('tab') ?? undefined,
   }
 }
 
@@ -48,14 +52,25 @@ export function getEntityTitleTransitionName(
 
 function getTitleTarget(route: ReturnType<typeof getEntityRoute>) {
   if (!route) return undefined
+  if (route.tab) {
+    const tabTarget = document.querySelector<HTMLElement>(
+      `[data-tab-transition="${route.tab}"]`,
+    )
+    if (tabTarget) return tabTarget
+  }
   const transitionName = getEntityTitleTransitionName(route.entity, route.id)
   return document.querySelector<HTMLElement>(
     `[data-entity-title-transition="${transitionName}"]`,
   )
 }
 
+function getTargetOffsetY(target: HTMLElement) {
+  return target.dataset.tabTransition ? 5 : 0
+}
+
 function getTextSource(source: HTMLElement) {
   return (
+    source.querySelector<HTMLElement>('.num-percent-value') ??
     source.querySelector<HTMLElement>('.long-text') ??
     source.querySelector<HTMLElement>('.var-main-col a') ??
     source.querySelector<HTMLElement>('a') ??
@@ -126,7 +141,8 @@ function animateTitleClone(
   source: TextTransitionSnapshot,
 ) {
   const from = source.bounds
-  const to = getTextRect(target)
+  const to = toRectSnapshot(getTextRect(target))
+  to.top += source.targetOffsetY ?? 0
   if (
     from.width === 0 ||
     from.height === 0 ||
@@ -191,7 +207,10 @@ function animateAfterNavigation(
     requestAnimationFrame(() => {
       const target = getTitleTarget(route)
       if (!target) return
-      animateTitleClone(text, target, source)
+      animateTitleClone(text, target, {
+        ...source,
+        targetOffsetY: getTargetOffsetY(target),
+      })
     })
   })
 }
@@ -211,8 +230,8 @@ export function navigateWithEntityTitleTransition(
 
   if (
     !route ||
-    route?.route === currentPage ||
-    route?.routeKey === currentPage ||
+    ((route?.route === currentPage || route?.routeKey === currentPage) &&
+      !route.tab) ||
     !(source instanceof HTMLElement)
   ) {
     navigate()
