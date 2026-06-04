@@ -1,5 +1,9 @@
 # datannur
 
+# unreleased
+
+- fix: include observed localized data fields in generated OpenAPI specs and keep generated API docs consistently formatted
+
 ## 0.27.0 (2026-06-04)
 
 - add: introduce English/French localization across the app, data exports, static routes, integrity checks, and LLM/STT flows
