@@ -13,6 +13,7 @@
   import PercentBar from '@info-table/PercentBar.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import TagsInfo from '@info-table/TagsInfo.svelte'
+  import { t } from '@i18n/messages'
   import { safeHtml } from '@lib/html-sanitizer'
   import type { Variable } from '@type'
 
@@ -28,7 +29,7 @@
     <tr>
       <td>
         <Icon type="name" />
-        Nom d'origine
+        {t('column.originalName.title')}
       </td>
       <td>
         {variable.originalName}
@@ -49,7 +50,7 @@
   <tr>
     <td>
       <Icon type="dataset" />
-      Dataset
+      {t('entity.dataset')}
     </td>
     <td>
       <Link href="dataset/{variable.datasetId}" entity="dataset"
@@ -62,25 +63,25 @@
     <tr>
       <td>
         <Icon type="key" />
-        Clé
+        {t('column.key.title')}
       </td>
-      <td> Oui </td>
+      <td> {t('column.trueValue')} </td>
     </tr>
   {/if}
   {#if variable.businessKey}
     <tr>
       <td>
         <Icon type="businessKey" />
-        Clé métier
+        {t('column.businessKey.title')}
       </td>
-      <td> Oui </td>
+      <td> {t('column.trueValue')} </td>
     </tr>
   {/if}
   {#if variable.fkVariableId}
     <tr>
       <td>
         <Icon type="fk" />
-        Clé étrangère
+        {t('column.foreignKey.title')}
       </td>
       <td>
         {#if variable.fkVariableName}
@@ -99,7 +100,7 @@
   <tr>
     <td>
       <Icon type="hashtag" />
-      Position
+      {t('column.position.title')}
     </td>
     <td>
       {variable.num}
@@ -116,7 +117,7 @@
     <tr>
       <td>
         <Icon type="stat" />
-        Stats
+        {t('column.stats.title')}
       </td>
       <td>
         <span use:safeHtml={variable.statsPreview}></span>
@@ -127,7 +128,7 @@
     <tr>
       <td>
         <Icon type="missing" />
-        Manquants
+        {t('column.missing.title')}
       </td>
       <td>
         <PercentBar
@@ -142,7 +143,7 @@
     <tr>
       <td>
         <Icon type="duplicate" />
-        Doublons
+        {t('column.duplicates.title')}
       </td>
       <td>
         <PercentBar
@@ -157,7 +158,7 @@
     <tr>
       <td>
         <Icon type="value" />
-        Valeurs
+        {t('column.values.title')}
       </td>
       <td>
         <PercentBar
@@ -172,7 +173,7 @@
     <tr>
       <td>
         <Icon type="enumeration" />
-        Énumérations
+        {t('entityPlural.enumeration')}
       </td>
       <td>
         <nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
@@ -201,7 +202,8 @@
     {#if variable.concept}
       <div class="concept-wrapper">
         <div style="font-weight: bold;">
-          <Icon type="concept" /> Concept
+          <Icon type="concept" />
+          {t('entity.concept')}
         </div>
         <div class="concept-content">
           <Link href="concept/{variable.conceptId}" entity="concept"

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
   import {
     getTimeAgo,
     getDatetime,
@@ -28,7 +29,7 @@
 
 {#if lastUpdateDate}
   <tr>
-    <td><Icon type="date" /> Mise à jour</td>
+    <td><Icon type="date" /> {t('column.lastUpdate.title')}</td>
     <td>{lastUpdateDateReadable}, {timeAgo}</td>
   </tr>
 {/if}

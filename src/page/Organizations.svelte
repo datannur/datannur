@@ -8,8 +8,10 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
-  import aboutFile from '@markdown/about-organization.md?raw'
-  import { translate } from '@i18n/i18n'
+  import aboutFileEn from '@markdown/about-organization.en.md?raw'
+  import aboutFileFr from '@markdown/about-organization.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
   let keyTab = $state(1)
 
@@ -32,7 +34,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'organization', items: organizations }],
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 
   const nbOrganization = organizations.length
@@ -48,7 +50,7 @@
 <section class="section">
   <Title
     type="organization"
-    name={$translate('entityPlural.organization')}
+    name={t('entityPlural.organization')}
     mode="mainTitle"
   />
   {#if showOpenAllSwitch}

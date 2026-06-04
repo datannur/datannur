@@ -72,3 +72,13 @@ The `data-db-key` parameter provides security enhancement against data exfiltrat
 ```
 
 This configuration expects your data files to be in `/data/db/{key}/`, making file paths unpredictable to malicious scripts.
+
+## Language Selection
+
+The app stores the user's interface language in browser settings under the `language` option. Supported values are:
+
+- `auto`: use the browser language when it is supported, otherwise fall back to English
+- `en`: force English
+- `fr`: force French
+
+English is the default fallback language. A `?lang=en` or `?lang=fr` URL parameter overrides the stored option for that launch. In generated static pages, a small `datannur-locale` meta marker keeps the hydrated app in the same language as the generated HTML, for example `/en/datasets` stays English and `/fr/datasets` stays French. German, Italian, and Spanish are planned soon.

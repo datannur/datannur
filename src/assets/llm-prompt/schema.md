@@ -2,39 +2,41 @@
 
 ### Main Entities
 
-**Dataset** - Collection de données tabulaires
+Technical entity and field names are stable and must not be translated in tool calls.
 
-- Champs clés: `id`, `name`, `description`, `type`, `folderId`, `ownerOrganizationId`, `nbRow`, `startDate`, `endDate`
+**Dataset** - Tabular data collection
+
+- Key fields: `id`, `name`, `description`, `type`, `folderId`, `ownerOrganizationId`, `nbRow`, `startDate`, `endDate`
 - Relations: `variables[]`, `tags[]`, `docs[]`, `folder`, `owner`, `manager`
 
-**Variable** - Colonne dans un dataset
+**Variable** - Column in a dataset
 
-- Champs clés: `id`, `name`, `description`, `type`, `datasetId`, `nbDistinct`, `nbMissing`
+- Key fields: `id`, `name`, `description`, `type`, `datasetId`, `nbDistinct`, `nbMissing`
 - Relations: `dataset`, `enumerations[]`, `tags[]`, `values[]`
 
-**Folder** - Dossier hiérarchique
+**Folder** - Hierarchical folder
 
-- Champs clés: `id`, `name`, `parentId`, `nbDatasetRecursive`
+- Key fields: `id`, `name`, `parentId`, `nbDatasetRecursive`
 - Relations: `datasets[]`, `parent`, `children[]`
 
-**Organization** - Organisation propriétaire/gestionnaire
+**Organization** - Owner or manager organization
 
-- Champs clés: `id`, `name`, `email`, `nbDataset`
+- Key fields: `id`, `name`, `email`, `nbDataset`
 - Relations: `ownedDatasets[]`, `managedDatasets[]`
 
-**Tag** - Mot-clé hiérarchique
+**Tag** - Hierarchical keyword
 
-- Champs clés: `id`, `name`, `parentId`, `nbDataset`, `nbVariable`
+- Key fields: `id`, `name`, `parentId`, `nbDataset`, `nbVariable`
 - Relations: `datasets[]`, `variables[]`
 
-**Enumeration** - Nomenclature pour variables catégorielles
+**Enumeration** - Controlled value list for categorical variables
 
-- Champs clés: `id`, `name`, `description`, `nbVariable`
+- Key fields: `id`, `name`, `description`, `nbVariable`
 - Relations: `variables[]`, `values[]`
 
-**Doc** - Document de métadonnées
+**Doc** - Metadata document
 
-- Champs clés: `id`, `name`, `path`, `type`
+- Key fields: `id`, `name`, `path`, `type`
 - Relations: `datasets[]`, `variables[]`
 
 ### Key Patterns

@@ -68,6 +68,8 @@ datannur can export your catalog metadata to DCAT-AP-CH format, making it compat
 - `catalog_uri`: URI of your catalog
 - `base_uri`: Base URI for generating dataset/publisher URIs
 - `catalog_title`, `catalog_description`, `catalog_publisher`: Catalog metadata
+- `default_language`: Default language tag for unqualified text, usually `"en"`
+- `languages`: Language tags to export from localized fields such as `name:en`, `name:fr`, `description:en`, and `description:fr`
 
 **Usage:**
 
@@ -84,4 +86,4 @@ python3 datannur.py dcat -- json-ld
 - `dcat.rdf` - RDF/XML format
 - `dcat.jsonld` - JSON-LD format
 
-The export includes automatic SHACL validation to ensure DCAT-AP 2.1.1 compliance.
+The export includes automatic SHACL validation to ensure DCAT-AP 2.1.1 compliance. Localized catalog labels are emitted as language-tagged literals when translated fields are available.

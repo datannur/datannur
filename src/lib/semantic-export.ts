@@ -19,8 +19,15 @@ export type ValidationResult = {
   entityType: string
   entityId: string
   entityLabel: string
+  entityLabels?: { [locale: string]: string }
   field: string
   message: string
+}
+
+export type LocalizedCount = {
+  label: string
+  labels?: { [locale: string]: string }
+  count: number
 }
 
 export type SemanticValidation = {
@@ -40,6 +47,7 @@ export type SemanticValidation = {
     licenses: { [label: string]: number }
     formats: { [label: string]: number }
     themes: { [label: string]: number }
+    themeItems?: LocalizedCount[]
   }
   coverage: { [field: string]: CoverageItem }
   files: { [label: string]: string }

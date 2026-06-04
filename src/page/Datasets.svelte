@@ -4,8 +4,10 @@
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
-  import aboutFile from '@markdown/about-dataset.md?raw'
-  import { translate } from '@i18n/i18n'
+  import aboutFileEn from '@markdown/about-dataset.en.md?raw'
+  import aboutFileFr from '@markdown/about-dataset.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
   const datasets = db.getAll('dataset')
   const tags = db.getAll('tag').filter(tag => !!tag.nbDataset)
@@ -23,14 +25,14 @@
     tags,
     evolutions,
     stat: [{ entity: 'dataset', items: datasets }],
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 </script>
 
 <section class="section">
   <Title
     type="dataset"
-    name={$translate('entityPlural.dataset')}
+    name={t('entityPlural.dataset')}
     mode="mainTitle"
   />
   <Tabs {tabs} />

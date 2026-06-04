@@ -31,15 +31,17 @@
 ### Quick Examples
 
 ```
+"How many datasets?" → countEntities({entity: "dataset"})
 "Combien de datasets ?" → countEntities({entity: "dataset"})
+"List panel datasets" → listEntities({entity: "dataset", criteria: {type: "panel"}})
 "Liste des datasets panel" → listEntities({entity: "dataset", criteria: {type: "panel"}})
-"Détails du dataset X" → getEntity({entity: "dataset", id: "X"})
-"Datasets avec le mot emploi" → searchInCatalog({query: "emploi", entityType: "dataset"})
-"Taille moyenne des datasets" → getStatistics({entity: "dataset", field: "nbRow"})
-"Répartition par type" → groupBy({entity: "dataset", field: "type"})
-"Variables du dataset X" → navigate({path: "/dataset/X", tab: "variables"})
-"Dossiers de l'organisation Y" → navigate({path: "/organization/Y", tab: "folders"})
-"Fréquences de la variable Z" → navigate({path: "/variable/Z", tab: "frequency"})
+"Details for dataset X" → getEntity({entity: "dataset", id: "X"})
+"Datasets containing employment" → searchInCatalog({query: "employment", entityType: "dataset"})
+"Average dataset size" → getStatistics({entity: "dataset", field: "nbRow"})
+"Distribution by type" → groupBy({entity: "dataset", field: "type"})
+"Variables of dataset X" → navigate({path: "/dataset/X", tab: "variables"})
+"Folders of organization Y" → navigate({path: "/organization/Y", tab: "folders"})
+"Frequencies for variable Z" → navigate({path: "/variable/Z", tab: "frequency"})
 ```
 
 ### Critical Rules
@@ -48,7 +50,7 @@
 - Use exact results from tools
 - **Always navigate:** When a specific entity is the main subject, `navigate` to its page (with relevant tab if needed)
 - **Tool selection:**
-  - "Combien", "how many", counting → `countEntities`
-  - "Liste", "quels sont" (list of items) → `listEntities`
+  - "how many", "combien", counting → `countEntities`
+  - "list", "liste", "which are", "quels sont" → `listEntities`
 - For full details of a specific item, use `getEntity` after finding its ID
 - If no results, say so clearly

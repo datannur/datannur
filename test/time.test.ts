@@ -92,16 +92,16 @@ describe('Time', () => {
     'should work with param day = true',
     dateNow => {
       const dates = [
-        ['2023/11/25', 'aujourd’hui'],
-        ['2023/11/24', 'hier'],
-        ['2023/11/23', 'avant-hier'],
-        ['2023/11/22', 'il y a 3 jours'],
-        ['2023/11/21', 'il y a 4 jours'],
-        ['2023/11/20', 'il y a 5 jours'],
-        ['2023/11/19', 'il y a 6 jours'],
-        ['2023/11/18', 'la semaine dernière'],
-        ['2023/11/17', 'la semaine dernière'],
-        ['2023/11/16', 'la semaine dernière'],
+        ['2023/11/25', 'today'],
+        ['2023/11/24', 'yesterday'],
+        ['2023/11/23', '2 days ago'],
+        ['2023/11/22', '3 days ago'],
+        ['2023/11/21', '4 days ago'],
+        ['2023/11/20', '5 days ago'],
+        ['2023/11/19', '6 days ago'],
+        ['2023/11/18', 'last week'],
+        ['2023/11/17', 'last week'],
+        ['2023/11/16', 'last week'],
       ]
       dates.forEach(([date, expected]) => {
         const result = getTimeAgo(date, true, true, dateNow)

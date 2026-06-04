@@ -5,6 +5,7 @@
   import Column from '@lib/column'
   import Render from '@lib/render'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import escapeHtml from 'escape-html'
   import type { Organization, Column as ColumnType } from '@type'
 
@@ -40,9 +41,9 @@
     (a.pathString ?? '').localeCompare(b.pathString ?? ''),
   )
 
-  const columns: ColumnType[] = [
+  const columns: ColumnType[] = $derived([
     Column.favorite(),
-    Column.name('organization', 'Organisation', {
+    Column.name('organization', t('entity.organization'), {
       withIndent: true,
       linkSameEntityTab: true,
     }),
@@ -60,8 +61,8 @@
     {
       data: 'email',
       defaultContent: '',
-      title: Render.icon('email') + 'Email',
-      tooltip: 'Email de contact',
+      title: Render.icon('email') + t('column.email.title'),
+      tooltip: t('column.email.tooltip'),
       render: (data, type) => {
         if (!data) return ''
         if (type !== 'display') return String(data)
@@ -74,8 +75,8 @@
     {
       data: 'phone',
       defaultContent: '',
-      title: Render.icon('phone') + 'Téléphone',
-      tooltip: 'Téléphone de contact',
+      title: Render.icon('phone') + t('column.phone.title'),
+      tooltip: t('column.phone.tooltip'),
       render: (data, type) => {
         if (!data) return ''
         if (type !== 'display') return String(data)
@@ -86,7 +87,7 @@
     Column.startDate(),
     Column.endDate(),
     Column.level(levelMax),
-  ]
+  ])
 </script>
 
 <Datatable

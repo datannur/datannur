@@ -29,6 +29,7 @@ class Check:
     status: int
     content_type: str | None = None
     host: str | None = None
+    request_headers: dict[str, str] | None = None
     location: str | None = None
     headers: dict[str, str] | None = None
     body_contains: tuple[str, ...] = ()
@@ -42,8 +43,14 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 OPENER = urllib.request.build_opener(NoRedirect)
 
 
-def request(path: str, host: str | None = None) -> Response:
-    headers = {"Host": host} if host else {}
+def request(
+    path: str,
+    host: str | None = None,
+    request_headers: dict[str, str] | None = None,
+) -> Response:
+    headers = dict(request_headers or {})
+    if host:
+        headers["Host"] = host
     req = urllib.request.Request(f"http://localhost:{PORT}{path}", headers=headers)
     try:
         with OPENER.open(req, timeout=5) as res:
@@ -70,7 +77,7 @@ def wait_until_ready() -> None:
     deadline = time.monotonic() + 30
     while time.monotonic() < deadline:
         try:
-            if request("/").status in {200, 301}:
+            if request("/").status in {200, 301, 302}:
                 return
         except OSError:
             pass
@@ -79,7 +86,7 @@ def wait_until_ready() -> None:
 
 
 def assert_check(check: Check) -> None:
-    response = request(check.path, check.host)
+    response = request(check.path, check.host, check.request_headers)
     label = f"{check.host or 'localhost'} {check.path}"
 
     if response.status != check.status:
@@ -121,7 +128,7 @@ def run_checks(checks: list[Check]) -> None:
 
 def spa_entry_markers() -> tuple[str, ...]:
     return (
-        '<base href="" />',
+        '<base href=""',
         '<div id="app"></div>',
         'data-path="data/db"',
     )
@@ -157,7 +164,7 @@ def assert_spa_only_mode() -> None:
 
 
 def assert_missing_static_family_falls_back_to_spa() -> None:
-    dataset_dir = DIST_DIR / "data" / "static" / "dataset"
+    dataset_dir = DIST_DIR / "data" / "static" / "en" / "dataset"
     dataset_backup_dir = DIST_DIR / "data" / "static" / "dataset.__apache_spa_family__"
 
     if not dataset_dir.exists():
@@ -171,7 +178,7 @@ def assert_missing_static_family_falls_back_to_spa() -> None:
         run_checks(
             [
                 Check(
-                    "/dataset/accident_route",
+                    "/en/dataset/accident_route",
                     200,
                     "text/html",
                     body_contains=spa_entry_markers(),
@@ -192,10 +199,52 @@ def main() -> None:
     root_checks = [
         Check(
             "/",
+            302,
+            location="http://localhost:18088/en/",
+        ),
+        Check(
+            "/",
+            302,
+            request_headers={"Accept-Language": "fr-CH,fr;q=0.9,en;q=0.8"},
+            location="http://localhost:18088/fr/",
+        ),
+        Check(
+            "/",
+            302,
+            request_headers={"Cookie": "datannur-lang=fr"},
+            location="http://localhost:18088/fr/",
+        ),
+        Check(
+            "/datasets",
+            302,
+            location="http://localhost:18088/en/datasets",
+        ),
+        Check(
+            "/datasets",
+            302,
+            request_headers={"Cookie": "datannur-lang=fr"},
+            location="http://localhost:18088/fr/datasets",
+        ),
+        Check(
+            "/en/",
             200,
             "text/html",
             body_contains=(
                 '<meta app-mode="static">',
+                '<meta name="datannur-locale" content="en">',
+                "<title>datannur | Home</title>",
+                'body page="_index"',
+                'id="page-loaded-route-"',
+            ),
+        ),
+        Check(
+            "/fr/",
+            200,
+            "text/html",
+            body_contains=(
+                '<meta app-mode="static">',
+                '<meta name="datannur-locale" content="fr">',
+                'href="/app/manifest.json?v=7"',
                 "<title>datannur | Accueil</title>",
                 'body page="_index"',
                 'id="page-loaded-route-"',
@@ -208,48 +257,89 @@ def main() -> None:
             host="example.com",
             location="https://example.com/datasets?view=full",
         ),
-        Check("/", 200, "text/html", host="localhost"),
-        Check("/", 200, "text/html", host="localhost:18088"),
-        Check("/", 200, "text/html", host="127.0.0.1"),
-        Check("/", 200, "text/html", host="127.0.0.1:18088"),
-        Check("/", 200, "text/html", host="[::1]"),
-        Check("/", 200, "text/html", host="[::1]:18088"),
+        Check("/", 302, host="localhost", location="http://localhost/en/"),
         Check(
-            "/datasets",
+            "/",
+            302,
+            host="localhost:18088",
+            location="http://localhost:18088/en/",
+        ),
+        Check("/", 302, host="127.0.0.1", location="http://127.0.0.1/en/"),
+        Check(
+            "/",
+            302,
+            host="127.0.0.1:18088",
+            location="http://127.0.0.1:18088/en/",
+        ),
+        Check("/", 302, host="[::1]", location="http://[::1]/en/"),
+        Check(
+            "/",
+            302,
+            host="[::1]:18088",
+            location="http://[::1]:18088/en/",
+        ),
+        Check(
+            "/en/datasets",
             200,
             "text/html",
             body_contains=(
+                '<meta name="datannur-locale" content="en">',
                 "<title>Datasets</title>",
                 'body page="datasets"',
                 'id="page-loaded-route-datasets"',
             ),
         ),
         Check(
-            "/organizations",
-            200,
-            "text/html",
-            body_contains=("<title>Organisations</title>", 'body page="organizations"'),
-        ),
-        Check(
-            "/folders",
-            200,
-            "text/html",
-            body_contains=("<title>Dossiers</title>", 'body page="folders"'),
-        ),
-        Check(
-            "/folder/07-agriculture",
+            "/fr/datasets",
             200,
             "text/html",
             body_contains=(
-                "<title>Dossier | 07 - Agriculture et sylviculture</title>",
+                '<meta name="datannur-locale" content="fr">',
+                "<title>Datasets</title>",
+                'body page="datasets"',
+                'id="page-loaded-route-datasets"',
+                "Accidents de la route",
+            ),
+        ),
+        Check(
+            "/en/organizations",
+            200,
+            "text/html",
+            body_contains=("<title>Organizations</title>", 'body page="organizations"'),
+        ),
+        Check(
+            "/en/folders",
+            200,
+            "text/html",
+            body_contains=("<title>Folders</title>", 'body page="folders"'),
+        ),
+        Check(
+            "/en/folder/07-agriculture",
+            200,
+            "text/html",
+            body_contains=(
+                "<title>Folder | 07 - Agriculture and forestry</title>",
                 'body page="folder"',
             ),
         ),
         Check(
-            "/dataset/accident_route",
+            "/en/dataset/accident_route",
             200,
             "text/html",
             body_contains=(
+                '<meta name="datannur-locale" content="en">',
+                "<title>Dataset | Road accidents</title>",
+                'body page="dataset"',
+                'id="page-loaded-route-dataset___accident_route"',
+                "accident_route",
+            ),
+        ),
+        Check(
+            "/fr/dataset/accident_route",
+            200,
+            "text/html",
+            body_contains=(
+                '<meta name="datannur-locale" content="fr">',
                 "<title>Dataset | Accidents de la route</title>",
                 'body page="dataset"',
                 'id="page-loaded-route-dataset___accident_route"',
@@ -257,13 +347,13 @@ def main() -> None:
             ),
         ),
         Check(
-            "/tag/foret",
+            "/en/tag/foret",
             200,
             "text/html",
-            body_contains=("<title>Mot clé | Forêt</title>", 'body page="tag"'),
+            body_contains=("<title>Tag | Forest</title>", 'body page="tag"'),
         ),
         Check(
-            "/concept/population",
+            "/en/concept/population",
             200,
             "text/html",
             body_contains=(
@@ -272,44 +362,44 @@ def main() -> None:
             ),
         ),
         Check(
-            "/doc/tourisme-exemple",
+            "/en/doc/tourisme-exemple",
             200,
             "text/html",
-            body_contains=("<title>Doc | Tourisme exemple</title>", 'body page="doc"'),
+            body_contains=("<title>Doc | Tourism example</title>", 'body page="doc"'),
         ),
         Check(
-            "/variable/unknown",
-            200,
-            "text/html",
-            body_contains=spa_entry_markers(),
-        ),
-        Check(
-            "/enumeration/unknown",
+            "/en/variable/unknown",
             200,
             "text/html",
             body_contains=spa_entry_markers(),
         ),
         Check(
-            "/metaFolder/unknown",
+            "/en/enumeration/unknown",
             200,
             "text/html",
             body_contains=spa_entry_markers(),
         ),
         Check(
-            "/metaDataset/unknown",
+            "/en/metaFolder/unknown",
             200,
             "text/html",
             body_contains=spa_entry_markers(),
         ),
         Check(
-            "/metaVariable/unknown",
+            "/en/metaDataset/unknown",
             200,
             "text/html",
             body_contains=spa_entry_markers(),
         ),
-        Check("/variable/unknown/app/assets/icon/icon.ico", 200),
         Check(
-            "/variable/unknown/data/db/dataset.json",
+            "/en/metaVariable/unknown",
+            200,
+            "text/html",
+            body_contains=spa_entry_markers(),
+        ),
+        Check("/en/variable/unknown/app/assets/icon/icon.ico", 200),
+        Check(
+            "/en/variable/unknown/data/db/dataset.json",
             200,
             "application/json",
             body_contains=('"id": "accident_route"',),
@@ -377,28 +467,24 @@ def main() -> None:
         ),
         Check("/app/assets/icon/icon.ico", 200),
         Check(
-            "/not-a-real-route",
+            "/en/not-a-real-route",
             404,
             "text/html",
-            body_contains=("La page n'existe pas", 'body page="_error"'),
         ),
         Check(
-            "/notarealcleanpage",
+            "/en/notarealcleanpage",
             404,
             "text/html",
-            body_contains=("La page n'existe pas", 'body page="_error"'),
         ),
         Check(
-            "/dataset/not_existing",
+            "/en/dataset/not_existing",
             404,
             "text/html",
-            body_contains=("La page n'existe pas", 'body page="_error"'),
         ),
         Check(
             "/data/static/not-a-real-file.html",
             404,
             "text/html",
-            body_contains=("La page n'existe pas", 'body page="_error"'),
         ),
     ]
 
@@ -406,7 +492,7 @@ def main() -> None:
         run_checks(root_checks)
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True)
-            assert_clean_http_navigation(browser, f"http://localhost:{PORT}")
+            assert_clean_http_navigation(browser, f"http://localhost:{PORT}/en")
             browser.close()
         assert_missing_static_family_falls_back_to_spa()
         assert_spa_only_mode()

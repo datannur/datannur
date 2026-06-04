@@ -4,7 +4,7 @@
   import { documentWidth } from '@lib/viewport-manager'
   import { getColor } from '@lib/util'
   import { allTabs } from '@lib/store'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { getEntityLabelKey } from '@i18n/entity'
   import attributs from './attributs'
   import { addValues } from './stat'
@@ -102,8 +102,8 @@
 
   function getStatEntityLabel(entity: MainEntityName | 'log') {
     return entity === 'log'
-      ? $translate('tab.log')
-      : $translate(getEntityLabelKey(entity))
+      ? t('tab.log')
+      : t(getEntityLabelKey(entity))
   }
 
   const entities = stat.filter(x => x.items?.length > 0)
@@ -125,7 +125,7 @@
       onclick={clickShowAll}
     >
       <Icon type="entity" />
-      <span class="btn-select-entity-name">{$translate('options.all')}</span>
+      <span class="btn-select-entity-name">{t('options.all')}</span>
     </button>
     {#each entities as entity (entity.entity)}
       <button

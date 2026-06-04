@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getPercent } from '@lib/util'
   import { extendable } from '@lib/extendable'
-  import { locale } from '@lib/constant'
+  import { getCurrentLocale } from '@i18n/i18n'
   import Icon from '@layout/Icon.svelte'
   import Link from '@layout/Link.svelte'
   import type { ValueEntry } from './stat'
@@ -12,6 +12,7 @@
     mainColor,
   }: { value: ValueEntry; totalValue: number; mainColor: string } = $props()
 
+  const locale = getCurrentLocale()
   const percent = $derived(getPercent(value.count / totalValue))
 </script>
 

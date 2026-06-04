@@ -2,6 +2,12 @@ import type { LanguageOption, Locale } from './types'
 
 const supportedLocales: Locale[] = ['en', 'fr']
 
+type LocaleDocument = {
+  querySelector(
+    selector: string,
+  ): { getAttribute(name: string): string | null } | null
+}
+
 export function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && supportedLocales.includes(value as Locale)
 }
@@ -18,14 +24,33 @@ export function getBrowserLocale(languages: readonly string[]): Locale {
   return 'en'
 }
 
+export function getDocumentLocale(
+  document: LocaleDocument,
+): Locale | undefined {
+  const value = document
+    .querySelector('meta[name="datannur-locale"]')
+    ?.getAttribute('content')
+  return isLocale(value) ? value : undefined
+}
+
 export function resolveLocale(
   option: unknown,
   urlLang: unknown,
+  documentLocale: unknown,
   languages: readonly string[],
 ): Locale {
   if (isLocale(urlLang)) return urlLang
   if (isLocale(option)) return option
+  if (isLocale(documentLocale)) return documentLocale
   if (option === undefined || option === 'auto')
     return getBrowserLocale(languages)
   return 'en'
+}
+
+export function getLocalePath(pathname: string, locale: Locale): string {
+  const segments = pathname.split('/')
+  const localeIndex = segments.findIndex(segment => isLocale(segment))
+  if (localeIndex < 0) return pathname
+  segments[localeIndex] = locale
+  return segments.join('/') || '/'
 }

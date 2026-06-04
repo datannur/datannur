@@ -1,1 +1,1 @@
-jsonjs.data['configFilter'] = [["entity","field","id","is_active_default","name","value"],["dataset","type","closed_data",true,"Closed Data","closed_data"],["dataset","type","open_data",true,"Open Data","open_data"]]
+jsonjs.data['configFilter'] = [["entity","field","id","is_active_default","name","name:fr","value"],["dataset","type","closed_data",true,"Closed Data","Données fermées","closed_data"],["dataset","type","open_data",true,"Open Data","Données ouvertes","open_data"]]

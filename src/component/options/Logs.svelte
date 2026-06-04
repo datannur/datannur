@@ -5,7 +5,9 @@
   import Datatable from '@datatable/Datatable.svelte'
   import Render from '@lib/render'
   import Column from '@lib/column'
+  import { getEntityName } from '@i18n/constant-labels'
   import { entityNames } from '@lib/constant'
+  import { t } from '@i18n/messages'
   import escapeHTML from 'escape-html'
   import type { Log, Column as ColumnType } from '@type'
 
@@ -14,18 +16,18 @@
 
   for (const log of logs) {
     log._entityClean = log.entity
-      ? entityNames[log.entity as keyof typeof entityNames]
+      ? getEntityName(log.entity as keyof typeof entityNames)
       : ''
     log._entity = log.entity
   }
 
-  let columns: ColumnType[] = [
+  let columns: ColumnType[] = $derived([
     {
       data: 'action',
-      title: Render.icon('log') + 'Log',
+      title: Render.icon('log') + t('column.log.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Action',
+      tooltip: t('column.log.tooltip'),
       render: (data, type, row: Log) => {
         if (type !== 'display') return String(row.actionReadable || row.action)
         let content = ''
@@ -38,9 +40,9 @@
     Column.entity(),
     {
       data: 'element',
-      title: Render.icon('entity') + 'Element',
+      title: Render.icon('entity') + t('column.element.title'),
       defaultContent: '',
-      tooltip: 'Element impliqué',
+      tooltip: t('column.element.tooltip'),
       render: (data, type, row: Log) => {
         if (!data) return ''
         if (type !== 'display') return String(data)
@@ -56,7 +58,7 @@
       },
     },
     Column.timestamp(),
-  ]
+  ])
 </script>
 
 <Datatable entity="log" data={logs} {columns} />

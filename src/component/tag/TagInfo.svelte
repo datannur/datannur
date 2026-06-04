@@ -8,6 +8,7 @@
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
   import type { Tag } from '@type'
 
   let { tag }: { tag: Tag } = $props()
@@ -26,12 +27,21 @@
   <DataSizeInfo dataSize={tag.dataSizeRecursive} />
   {#if tag.propagateToParents}
     <tr>
-      <td><Icon type="propagateToParents" /> Remonte</td>
-      <td>Vers les datasets et dossiers parents</td>
+      <td
+        ><Icon type="propagateToParents" />
+        {t('column.propagates.title')}</td
+      >
+      <td>{t('column.propagates.parentTargets')}</td>
     </tr>
   {/if}
-  <TagsInfo tags={tag.impliedTags ?? []} label="Implique aussi" />
-  <TagsInfo tags={tag.impliedByTags ?? []} label="Est impliqué par" />
+  <TagsInfo
+    tags={tag.impliedTags ?? []}
+    label={t('column.alsoImplies.title')}
+  />
+  <TagsInfo
+    tags={tag.impliedByTags ?? []}
+    label={t('column.impliedBy.title')}
+  />
 </TableWrapper>
 {#if tag.description}
   <DescriptionInfo description={tag.description} />

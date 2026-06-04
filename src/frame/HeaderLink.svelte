@@ -5,7 +5,7 @@
   import { pluralize } from '@lib/util'
   import Link from '@layout/Link.svelte'
   import Icon from '@layout/Icon.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { getEntityPluralLabelKey } from '@i18n/entity'
   import type { Snippet } from 'svelte'
   import type { MainEntityName } from '@type'
@@ -36,7 +36,7 @@
   let icon = $derived(standard ? standard : iconProp)
   let ifUse = $derived(standard ? standard : ifUseProp)
   let standardReadable = $derived(
-    standard ? $translate(getEntityPluralLabelKey(standard)) : '',
+    standard ? t(getEntityPluralLabelKey(standard)) : '',
   )
 
   const closeMenu = () => ($headerOpen = false)

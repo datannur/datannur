@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { tick, untrack } from 'svelte'
+  import { untrack } from 'svelte'
   import jQuery from 'jquery'
   import escapeHtml from 'escape-html'
   import DataTable from 'datatables.net-bm'
@@ -13,7 +13,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { isMobile } from '@lib/browser-utils'
   import { isBigLimit } from '@lib/constant'
-  import { currentLocale, translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { tabSelected, allTablesLoaded, allTabs } from '@lib/store'
   import { appWidth } from '@lib/viewport-manager'
   import { extendable } from '@lib/extendable'
@@ -92,8 +92,6 @@
   let datatable: Api | undefined = undefined
   let domTable: ReturnType<typeof jQuery> | null = null
   let initTimeout: ReturnType<typeof setTimeout> | undefined = undefined
-  let mounted = false
-  let currentLocaleValue = $currentLocale
   let tableRenderKey = $state(0)
 
   const isBig = data.length > isBigLimit
@@ -141,7 +139,7 @@
       keepAllCols,
       metaPath,
       nbRowLoading,
-      $translate,
+      t,
     )
   }
 
@@ -165,14 +163,17 @@
     }
   })
 
-  let buttons = exporter.getButtons()
-  if (isBig) {
-    buttons.push(
-      filter.getBtnInfoPopup(() => {
-        isPopupSearchOptionOpen = true
-      }),
-    )
-  }
+  const buttons = $derived.by(() => {
+    const translatedButtons = exporter.getButtons(t)
+    if (isBig) {
+      translatedButtons.push(
+        filter.getBtnInfoPopup(() => {
+          isPopupSearchOptionOpen = true
+        }),
+      )
+    }
+    return translatedButtons
+  })
 
   function scrollToInitialRow(dt: Api) {
     if (
@@ -238,8 +239,8 @@
         buttons,
         destroy: true,
         language: {
-          zeroRecords: `<span class="no-result">${escapeHtml($translate('datatable.zeroRecords'))}</span>`,
-          buttons: exporter.getLanguage($translate),
+          zeroRecords: `<span class="no-result">${escapeHtml(t('datatable.zeroRecords'))}</span>`,
+          buttons: exporter.getLanguage(t),
         } as ConfigLanguage,
         initComplete: function () {
           if (!isBig) return
@@ -318,24 +319,8 @@
   }
 
   onMount(() => {
-    mounted = true
     initDataTable()
   })
-
-  const localeUnsubscribe = currentLocale.subscribe(locale => {
-    if (!mounted || locale === currentLocaleValue) return
-    currentLocaleValue = locale
-    void resetDataTableForLocale()
-  })
-
-  async function resetDataTableForLocale() {
-    loading = true
-    destroyDataTable()
-    tableRenderKey += 1
-    await tick()
-    if (!mounted) return
-    initDataTable()
-  }
 
   function onResize() {
     datatable?.columns?.adjust()
@@ -358,10 +343,8 @@
   })
 
   onDestroy(() => {
-    mounted = false
     destroyDataTable()
     tabSelectedUnsubscribe()
-    localeUnsubscribe()
     allTablesLoadedUnsubscribe()
     filter.destroy()
   })

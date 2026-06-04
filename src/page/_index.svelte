@@ -9,6 +9,7 @@
   import Tabs from '@tab/Tabs.svelte'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
+  import { t } from '@i18n/messages'
 
   let keyTab = $state(1)
 
@@ -103,12 +104,15 @@
   )
 </script>
 
-<Head title="datannur | Accueil" description="Page d'accueil de datannur" />
+<Head
+  title={t('home.title')}
+  description={t('home.description')}
+/>
 
 <section class="section">
   {#if allEmpty}
-    <p class="has-text-centered">Le catalogue est vide.</p>
-    <p class="has-text-centered">Vous pouvez ajouter du contenu.</p>
+    <p class="has-text-centered">{t('home.emptyCatalog')}</p>
+    <p class="has-text-centered">{t('home.addContent')}</p>
   {:else}
     {#if showOpenAllSwitch}
       <OpenAllSwitch onChange={() => keyTab++} />

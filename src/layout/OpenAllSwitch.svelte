@@ -1,5 +1,6 @@
 <script lang="ts">
   import Switch from '@layout/Switch.svelte'
+  import { t } from '@i18n/messages'
   import Options from '@lib/options'
 
   let { onChange = () => {} }: { onChange: () => void } = $props()
@@ -13,7 +14,7 @@
 
 <div
   class="open-all-wrapper use-tooltip"
-  title="Afficher les éléments imbriqués"
+  title={t('options.openNested')}
 >
   <Switch
     bind:value={openAllRecursive}

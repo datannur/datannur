@@ -42,6 +42,7 @@ class StaticMakeConfig:
     port: int
     first_page_timeout_ms: int
     route_timeout_ms: int
+    languages: list[str]
     entities: list[str]
     routes: list[str]
 
@@ -113,6 +114,7 @@ def load_config(config_path: Path) -> StaticMakeConfig:
         port=int(raw.get("port", 8080)),
         first_page_timeout_ms=int(raw.get("firstPageTimeoutMs", 10000)),
         route_timeout_ms=int(raw.get("routeTimeoutMs", 3000)),
+        languages=[str(language) for language in raw.get("languages", [])],
         entities=[str(entity) for entity in raw.get("entities", [])],
         routes=[str(route) for route in raw.get("routes", [])],
     )
@@ -213,10 +215,22 @@ def remove_db_scripts(content: str, db_path_extractor: Callable[[str], str]) -> 
     return pattern.sub("", content)
 
 
+def inject_locale_meta(content: str, language: str | None) -> str:
+    if not language:
+        return content
+
+    meta = f'<meta name="datannur-locale" content="{html.escape(language)}">'
+    pattern = re.compile(r'<meta\s+name="datannur-locale"\s+content="[^"]*"\s*/?>')
+    if pattern.search(content):
+        return pattern.sub(meta, content, count=1)
+    return content.replace("<head>", f"<head>{meta}", 1)
+
+
 def capture_page(
     page: Page,
     route: str,
     out_dir: Path,
+    language: str | None,
     is_first_page: bool,
     wait_for_db_selector: str,
     first_page_timeout_ms: int,
@@ -247,7 +261,9 @@ def capture_page(
             page.wait_for_selector(
                 'body[page="_index"]', timeout=route_timeout_ms, state="attached"
             )
-        content = remove_db_scripts(page.content(), get_db_path_from_content)
+        content = inject_locale_meta(
+            remove_db_scripts(page.content(), get_db_path_from_content), language
+        )
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(content, encoding="utf-8")
         print(f"create page: {route or 'index'}", flush=True)
@@ -291,8 +307,10 @@ def resolve_output_dir(package_dir: Path, configured_path: str) -> Path:
     return path if path.is_absolute() else package_dir / path
 
 
-def init_page(browser: Browser, port: int) -> Page:
+def init_page(browser: Browser, port: int, language: str | None = None) -> Page:
     page_url = f"http://127.0.0.1:{port}?app_mode=static_render"
+    if language:
+        page_url += f"&lang={quote(language)}"
     wait_until_ready(page_url)
     page = browser.new_page()
     page.set_default_timeout(5000)
@@ -300,14 +318,17 @@ def init_page(browser: Browser, port: int) -> Page:
     return page
 
 
-def generate_static_site(
-    routes: list[str], config: StaticMakeConfig, package_dir: Path
+def generate_static_site_for_language(
+    routes: list[str],
+    config: StaticMakeConfig,
+    package_dir: Path,
+    out_dir: Path,
+    language: str | None = None,
 ):
     start_time = time.monotonic()
     phase_time = start_time
     index_file = package_dir / "index.html"
     backup_file = package_dir / "index.html.bak"
-    out_dir = resolve_output_dir(package_dir, config.out_dir)
     server = None
     failures: list[str] = []
 
@@ -338,7 +359,7 @@ def generate_static_site(
             log_phase("launch browser", phase_time)
             phase_time = time.monotonic()
             try:
-                page = init_page(browser, config.port)
+                page = init_page(browser, config.port, language)
                 log_phase("load first page", phase_time)
                 phase_time = time.monotonic()
                 for index, route in enumerate(routes):
@@ -346,6 +367,7 @@ def generate_static_site(
                         page,
                         route,
                         out_dir,
+                        language,
                         is_first_page=index == 0,
                         wait_for_db_selector="#db-loaded",
                         first_page_timeout_ms=config.first_page_timeout_ms,
@@ -380,13 +402,32 @@ def generate_static_site(
         )
 
 
+def generate_static_site(
+    routes: list[str], config: StaticMakeConfig, package_dir: Path
+):
+    out_dir = resolve_output_dir(package_dir, config.out_dir)
+    if config.languages:
+        for language in config.languages:
+            print(f"Static language: {language}", flush=True)
+            generate_static_site_for_language(
+                routes, config, package_dir, out_dir / language, language
+            )
+        return
+
+    generate_static_site_for_language(routes, config, package_dir, out_dir)
+
+
 def prepare_output(package_dir: Path, config: StaticMakeConfig):
     out_dir = resolve_output_dir(package_dir, config.out_dir)
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True)
-    for entity in config.entities:
-        (out_dir / entity).mkdir(parents=True, exist_ok=True)
+    language_dirs = config.languages or [""]
+    for language in language_dirs:
+        base_dir = out_dir / language if language else out_dir
+        base_dir.mkdir(parents=True, exist_ok=True)
+        for entity in config.entities:
+            (base_dir / entity).mkdir(parents=True, exist_ok=True)
 
 
 def resolve_package_path(package_dir: Path, configured_path: str) -> Path:

@@ -3,7 +3,7 @@
   import Icon from '@layout/Icon.svelte'
   import Loading from '@frame/Loading.svelte'
   import Number from '@layout/Number.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import type { Tab } from './tabs-helper'
 
   let {
@@ -67,7 +67,7 @@
           </span>
         {/if}
         <span class="tab-visible tab-name">
-          {tab.nameKey ? $translate(tab.nameKey) : tab.name}
+          {tab.nameKey ? t(tab.nameKey) : (tab.name ?? '')}
         </span>
       </span>
     </div>

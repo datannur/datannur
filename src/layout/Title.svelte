@@ -11,7 +11,7 @@
   import Icon from '@layout/Icon.svelte'
   import Favorite from '@favorite/Favorite.svelte'
   import ShareLink from '@layout/ShareLink.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { getEntityLabelKey } from '@i18n/entity'
   import { onMount } from 'svelte'
   import type { MouseEventHandler } from 'svelte/elements'
@@ -46,7 +46,7 @@
 
   const separator = ' | '
   const entityName = $derived(
-    isMainEntityName(type) ? $translate(getEntityLabelKey(type)) : '',
+    isMainEntityName(type) ? t(getEntityLabelKey(type)) : '',
   )
 
   const title = $derived(

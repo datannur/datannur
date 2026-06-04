@@ -1,5 +1,7 @@
 import db from '@db'
-import { entityNames, evolutionTypes, parentEntities } from '@lib/constant'
+import { evolutionTypes, parentEntities } from '@lib/constant'
+import { getEntityName, getEvolutionTypeName } from '@i18n/constant-labels'
+import { t } from '@i18n/messages'
 import {
   dateToTimestamp,
   timestampToDate,
@@ -83,12 +85,13 @@ function addHistory(evoDeleted: EvolutionDeleted) {
     ) as ParentableEntityName
 
     evo._entity = evo.entity
-    evo._entityClean = entityNames[evo.entity]
-    evo.typeClean = evolutionTypes[evo.type]
+    evo._entityClean = getEntityName(evo.entity)
+    evo.typeClean = getEvolutionTypeName(evo.type)
     evo.parentEntity = parentEntity
-    evo.parentEntityClean = entityNames[parentEntity]
+    evo.parentEntityClean = getEntityName(parentEntity)
     evo.timestamp *= 1000
-    evo.time = evo.timestamp > Date.now() ? 'Futur' : 'Passé'
+    evo.time =
+      evo.timestamp > Date.now() ? t('evolution.future') : t('evolution.past')
 
     const parentItem = getItem(evo.parentEntity, evo.parentEntityId, evoDeleted)
     evo.parentName =
@@ -167,10 +170,11 @@ function addValidity(
     return
   }
 
-  const time = timestamp > Date.now() ? 'Futur' : 'Passé'
+  const time =
+    timestamp > Date.now() ? t('evolution.future') : t('evolution.past')
 
-  let typeClean = 'Autre'
-  if (type in evolutionTypes) typeClean = evolutionTypes[type]
+  let typeClean = t('evolution.other')
+  if (type in evolutionTypes) typeClean = getEvolutionTypeName(type)
 
   const folderId = getFolderId(
     entity,
@@ -182,10 +186,10 @@ function addValidity(
     id: entityData.id,
     entity: entity,
     _entity: entity,
-    _entityClean: entityNames[entity],
+    _entityClean: getEntityName(entity),
     entityId: entityData.id,
     parentEntity: parentEntity,
-    parentEntityClean: entityNames[parentEntity],
+    parentEntityClean: getEntityName(parentEntity),
     parentEntityId: entityRecord[`${parentEntities[entity]}Id`] as
       | string
       | number

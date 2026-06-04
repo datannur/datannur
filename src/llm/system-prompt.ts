@@ -2,25 +2,44 @@ import promptTemplate from '@llm-prompt/_system-prompt.md?raw'
 import systemInstructions from '@llm-prompt/system-instructions.md?raw'
 import toolsGuidelines from '@llm-prompt/tools-guidelines.md?raw'
 import schemaDoc from '@llm-prompt/schema.md?raw'
+import type { Locale } from '@i18n/types'
 
 let cachedPrompt: string | null = null
-let cachedDate: string | null = null
+let cachedKey: string | null = null
 
-export function buildSystemPrompt(): string {
+const defaultResponseLanguage: { [locale in Locale]: string } = {
+  en: 'English',
+  fr: 'French',
+}
+
+function replacePlaceholders(
+  content: string,
+  placeholders: Map<string, string>,
+) {
+  return content.replace(
+    /\{\{(\w[\w-]*)\}\}/g,
+    (match, key) => placeholders.get(key) ?? match,
+  )
+}
+
+export function buildSystemPrompt(locale: Locale): string {
   const dateOnly = new Date().toISOString().split('T')[0]
-  if (cachedPrompt && cachedDate === dateOnly) return cachedPrompt
+  const cacheKey = `${dateOnly}:${locale}`
+  if (cachedPrompt && cachedKey === cacheKey) return cachedPrompt
 
   const placeholders = new Map([
     ['date', dateOnly],
+    ['locale', locale],
+    ['default-response-language', defaultResponseLanguage[locale]],
     ['system-instructions', systemInstructions],
     ['schema', schemaDoc],
     ['tools-guidelines', toolsGuidelines],
   ])
 
-  cachedDate = dateOnly
-  cachedPrompt = promptTemplate.replace(
-    /\{\{(\w[\w-]*)\}\}/g,
-    (match, key) => placeholders.get(key) ?? match,
+  cachedKey = cacheKey
+  cachedPrompt = replacePlaceholders(
+    replacePlaceholders(promptTemplate, placeholders),
+    placeholders,
   )
 
   return cachedPrompt

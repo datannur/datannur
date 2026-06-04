@@ -2,6 +2,7 @@
   {
     "id": "open_data",
     "name": "Open Data",
+    "name:fr": "Données ouvertes",
     "entity": "dataset",
     "field": "type",
     "value": "open_data",
@@ -10,6 +11,7 @@
   {
     "id": "closed_data",
     "name": "Closed Data",
+    "name:fr": "Données fermées",
     "entity": "dataset",
     "field": "type",
     "value": "closed_data",

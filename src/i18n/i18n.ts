@@ -1,35 +1,29 @@
-import { derived, get, writable } from 'svelte/store'
 import Options from '@lib/options'
 import { UrlParam } from '@lib/url'
-import { en } from './en'
-import { fr } from './fr'
-import { isLanguageOption, resolveLocale } from './locale'
-import type {
-  LanguageOption,
-  Locale,
-  Translation,
-  TranslationKey,
-} from './types'
+import {
+  getDocumentLocale,
+  getLocalePath,
+  isLanguageOption,
+  resolveLocale,
+} from './locale'
+import { currentLocale } from './state'
+import { getCurrentLocale, t, translate } from './messages'
+import type { LanguageOption } from './types'
 
-const translations: { [locale in Locale]: Translation } = { en, fr }
+export { currentLocale, getCurrentLocale, t, translate }
 
-export const currentLocale = writable<Locale>('en')
-export const translate = derived(
-  currentLocale,
-  locale => (key: TranslationKey) => t(key, locale),
-)
+const languageCookieName = 'datannur-lang'
 
-function getMessage(locale: Locale, key: TranslationKey): string | undefined {
-  let message: unknown = translations[locale]
-  for (const part of key.split('.')) {
-    if (!message || typeof message !== 'object') return undefined
-    message = (message as { [key: string]: unknown })[part]
+function setLanguageCookie(language: LanguageOption) {
+  if (language === 'auto') {
+    document.cookie = `${languageCookieName}=; Path=/; SameSite=Lax; Max-Age=0`
+    return
   }
-  return typeof message === 'string' ? message : undefined
+  document.cookie = `${languageCookieName}=${language}; Path=/; SameSite=Lax; Max-Age=31536000`
 }
 
-export function initI18n() {
-  Options.loaded.then(() => {
+export function initI18n(): Promise<void> {
+  return Options.loaded.then(() => {
     const option = Options.get('language')
     if (!isLanguageOption(option)) {
       Options.set('language', 'auto')
@@ -38,6 +32,7 @@ export function initI18n() {
       resolveLocale(
         Options.get('language'),
         UrlParam.get('lang'),
+        getDocumentLocale(document),
         navigator.languages,
       ),
     )
@@ -45,11 +40,18 @@ export function initI18n() {
 }
 
 export function setLanguageOption(language: LanguageOption) {
-  Options.set('language', language)
+  setLanguageCookie(language)
+  Options.set('language', language, () => {
+    if (language !== 'auto') {
+      const localePath = getLocalePath(window.location.pathname, language)
+      if (localePath !== window.location.pathname) {
+        window.location.assign(
+          `${window.location.origin}${localePath}${window.location.search}${window.location.hash}`,
+        )
+        return
+      }
+    }
+    window.location.reload()
+  })
   UrlParam.delete('lang')
-  currentLocale.set(resolveLocale(language, false, navigator.languages))
-}
-
-export function t(key: TranslationKey, locale = get(currentLocale)): string {
-  return getMessage(locale, key) ?? getMessage('en', key) ?? key
 }

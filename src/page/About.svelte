@@ -1,20 +1,29 @@
 <script lang="ts">
-  import aboutStructure from '@markdown/about-page/structure.md?raw'
-  import aboutFeatures from '@markdown/about-page/features.md?raw'
+  import aboutStructureEn from '@markdown/about-page/structure.en.md?raw'
+  import aboutStructureFr from '@markdown/about-page/structure.fr.md?raw'
+  import aboutFeaturesEn from '@markdown/about-page/features.en.md?raw'
+  import aboutFeaturesFr from '@markdown/about-page/features.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
   import { getAboutMain } from '@lib/get-about-main'
   import { tabsHelper } from '@tab/tabs-helper'
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
 
   const tabs = tabsHelper({
     aboutFile: getAboutMain(),
-    aboutStructure,
-    aboutFeatures,
+    aboutStructure: localizedMarkdown({
+      en: aboutStructureEn,
+      fr: aboutStructureFr,
+    }),
+    aboutFeatures: localizedMarkdown({
+      en: aboutFeaturesEn,
+      fr: aboutFeaturesFr,
+    }),
   })
 </script>
 
 <section class="section">
-  <Title type="about" name={$translate('nav.about')} mode="mainTitle" />
+  <Title type="about" name={t('nav.about')} mode="mainTitle" />
   <Tabs {tabs} />
 </section>

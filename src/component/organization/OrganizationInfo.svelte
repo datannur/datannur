@@ -8,6 +8,7 @@
   import DeepLevelInfo from '@info-table/DeepLevelInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
+  import { t } from '@i18n/messages'
   import type { Organization } from '@type'
 
   let { organization }: { organization: Organization } = $props()
@@ -23,7 +24,7 @@
   {/if}
   {#if organization.email}
     <tr>
-      <td><Icon type="email" /> Email</td>
+      <td><Icon type="email" /> {t('column.email.title')}</td>
       <td>
         <a href="mailto:{organization.email}" target="_blanck">
           {organization.email}
@@ -33,7 +34,7 @@
   {/if}
   {#if organization.phone}
     <tr>
-      <td><Icon type="phone" /> Téléphone</td>
+      <td><Icon type="phone" /> {t('column.phone.title')}</td>
       <td>
         <a href="tel:{organization.phone}" target="_blanck">
           {organization.phone}

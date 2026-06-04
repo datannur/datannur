@@ -17,7 +17,7 @@
   import BtnImport from '@layout/BtnImport.svelte'
   import Button from '@layout/Button.svelte'
   import LanguageSelect from '@i18n/LanguageSelect.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import type { Row } from '@type'
 
   async function importUserData(zipFile: File) {
@@ -101,13 +101,13 @@
 
 <div class="flex-cols">
   <div class="flex-col">
-    <h5 class="title is-5">{$translate('options.display')}</h5>
+    <h5 class="title is-5">{t('options.display')}</h5>
     <Switch
       bind:value={openAllRecursive}
       change={updateOpenAllRecursive}
       treeSwitch={true}
     >
-      {$translate('options.openNested')}
+      {t('options.openNested')}
     </Switch>
     <Switch
       bind:value={evolutionSummary}
@@ -115,47 +115,47 @@
       treeSwitch={true}
       minimize={true}
     >
-      {$translate('options.evolutionSummary')}
+      {t('options.evolutionSummary')}
     </Switch>
     <Switch bind:value={openAllTab} change={updateOpenAllTab}>
-      {$translate('options.openAllTabs')}
+      {t('options.openAllTabs')}
     </Switch>
     <Switch bind:value={roundedDesign} change={updateRoundedDesign}>
-      {$translate('options.roundedDesign')}
+      {t('options.roundedDesign')}
     </Switch>
     <Switch bind:value={pageShadowColored} change={updatePageShadowColored}>
-      {$translate('options.pageShadowColored')}
+      {t('options.pageShadowColored')}
     </Switch>
     <div>
-      <DarkModeSwitch label={$translate('options.darkMode')} />
+      <DarkModeSwitch label={t('options.darkMode')} />
     </div>
-    <LanguageSelect label={$translate('language.label')} />
+    <LanguageSelect label={t('language.label')} />
   </div>
 
   <div class="flex-col">
-    <h5 class="title is-5">{$translate('options.reset')}</h5>
+    <h5 class="title is-5">{t('options.reset')}</h5>
     <Button onclick={clearLogs}>
-      {$translate('options.logs')} <Icon type="log" marginLeft={true} />
+      {t('options.logs')} <Icon type="log" marginLeft={true} />
     </Button>
     <Button onclick={clearFavorite}>
-      {$translate('nav.favorites')} <Icon type="favorite" marginLeft={true} />
+      {t('nav.favorites')} <Icon type="favorite" marginLeft={true} />
     </Button>
     <Button onclick={resetColsSearchCache}>
-      {$translate('options.columnFilters')} <Icon type="colSearch" marginLeft={true} />
+      {t('options.columnFilters')} <Icon type="colSearch" marginLeft={true} />
     </Button>
     <Button onclick={clearHistorySearch}>
-      {$translate('options.recentSearches')} <Icon type="recentSearch" marginLeft={true} />
+      {t('options.recentSearches')} <Icon type="recentSearch" marginLeft={true} />
     </Button>
-    <Button onclick={clearAll}>{$translate('options.all')}</Button>
+    <Button onclick={clearAll}>{t('options.all')}</Button>
   </div>
 
   <div class="flex-col">
-    <h5 class="title is-5">{$translate('options.userData')}</h5>
+    <h5 class="title is-5">{t('options.userData')}</h5>
     <Button onclick={downloadUserData}>
-      {$translate('options.export')} <Icon type="download" marginLeft={true} />
+      {t('options.export')} <Icon type="download" marginLeft={true} />
     </Button>
     <BtnImport onImport={importUserData}>
-      {$translate('options.import')} <Icon type="upload" marginLeft={true} />
+      {t('options.import')} <Icon type="upload" marginLeft={true} />
     </BtnImport>
   </div>
 </div>

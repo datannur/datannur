@@ -9,6 +9,8 @@ import {
   initializeLLMConfig,
   isLocalProxy,
 } from './llm-config'
+import { t } from '@i18n/messages'
+import { getCurrentLocale } from '@i18n/i18n'
 
 export type TranscriptionResponse = {
   text: string
@@ -23,6 +25,24 @@ let activeChromeRecognition: SpeechRecognition | null = null
 
 type ErrorResponse = {
   error: string
+}
+
+const whisperLanguageByLocale = {
+  en: 'en',
+  fr: 'fr',
+}
+
+const speechRecognitionLanguageByLocale = {
+  en: 'en-US',
+  fr: 'fr-FR',
+}
+
+function getTranscriptionLanguage() {
+  const locale = getCurrentLocale()
+  return {
+    whisper: whisperLanguageByLocale[locale],
+    speechRecognition: speechRecognitionLanguageByLocale[locale],
+  }
 }
 
 /**
@@ -117,7 +137,7 @@ async function transcribeWithWhisper(
     const formData = new FormData()
     formData.append('file', audioBlob, 'audio.webm')
     formData.append('model', 'whisper')
-    formData.append('language', 'fr')
+    formData.append('language', getTranscriptionLanguage().whisper)
     formData.append('response_format', 'text')
 
     // Build URL based on environment
@@ -182,11 +202,7 @@ function transcribeWithChromeNative(): Promise<TranscriptionResponse> {
   return new Promise((resolve, reject) => {
     if (!isGoogleSpeechAvailable()) {
       reject(
-        createSTTError(
-          "Google Speech n'est pas supporté par ce navigateur (Firefox, Safari...). Veuillez utiliser Whisper ou un navigateur basé sur Chromium (Chrome, Edge).",
-          'not-supported',
-          false,
-        ),
+        createSTTError(t('llm.stt.googleUnsupported'), 'not-supported', false),
       )
       return
     }
@@ -196,7 +212,7 @@ function transcribeWithChromeNative(): Promise<TranscriptionResponse> {
     const recognition = new speechRecognitionConstructor()
     activeChromeRecognition = recognition
 
-    recognition.lang = 'fr-FR'
+    recognition.lang = getTranscriptionLanguage().speechRecognition
     recognition.continuous = false
     recognition.interimResults = false
     recognition.maxAlternatives = 1
@@ -216,29 +232,17 @@ function transcribeWithChromeNative(): Promise<TranscriptionResponse> {
       if (event.error === 'no-speech') {
         resolve({ text: '' })
       } else if (event.error === 'network') {
-        reject(
-          createSTTError(
-            "Google Speech n'est pas disponible. Ce service est bloqué par votre navigateur (ex: Brave). Veuillez utiliser Whisper ou changer de navigateur.",
-            'network',
-            false,
-          ),
-        )
+        reject(createSTTError(t('llm.stt.googleUnavailable'), 'network', false))
       } else if (event.error === 'not-allowed') {
         reject(
-          createSTTError(
-            'Permission microphone refusée. Autorisez le microphone dans les paramètres.',
-            'not-allowed',
-            false,
-          ),
+          createSTTError(t('llm.stt.microphoneDenied'), 'not-allowed', false),
         )
       } else if (event.error === 'aborted') {
-        reject(
-          createSTTError('Reconnaissance vocale annulée.', 'aborted', true),
-        )
+        reject(createSTTError(t('llm.stt.recognitionAborted'), 'aborted', true))
       } else {
         reject(
           createSTTError(
-            `Erreur reconnaissance vocale: ${event.error}`,
+            t('llm.stt.recognitionError', { error: event.error }),
             'unknown',
             true,
           ),
@@ -249,13 +253,7 @@ function transcribeWithChromeNative(): Promise<TranscriptionResponse> {
     try {
       recognition.start()
     } catch {
-      reject(
-        createSTTError(
-          'Impossible de démarrer la reconnaissance vocale.',
-          'unknown',
-          false,
-        ),
-      )
+      reject(createSTTError(t('llm.stt.startError'), 'unknown', false))
     }
   })
 }
@@ -454,15 +452,13 @@ export function transcribeFromMicrophone(
       })
       .catch(err => {
         if (err instanceof Error && err.name === 'NotAllowedError') {
-          reject(
-            new Error(
-              'Permission refusée. Autorisez le microphone dans les paramètres.',
-            ),
-          )
+          reject(new Error(t('llm.stt.microphoneDenied')))
         } else {
           reject(
             new Error(
-              "Impossible d'accéder au microphone: " + (err as Error).message,
+              t('llm.stt.microphoneAccessError', {
+                error: (err as Error).message,
+              }),
             ),
           )
         }

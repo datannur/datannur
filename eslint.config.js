@@ -91,7 +91,6 @@ export default [
   {
     ignores: [
       '**/*.json.js',
-      'app/',
       'dist/',
       'node_modules/',
       'package/app/assets/',

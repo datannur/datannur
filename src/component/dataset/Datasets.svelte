@@ -3,6 +3,7 @@
   import { getLocalFilter } from '@lib/db'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import type { Dataset } from '@type'
 
   let {
@@ -80,8 +81,8 @@
         Column.metaFolder(),
         Column.timestamp({
           varName: 'lastUpdateTimestamp',
-          title: 'Mise à jour',
-          tooltip: 'Moment de la dernière mise à jour',
+          title: t('column.lastUpdate.title'),
+          tooltip: t('column.lastUpdate.tooltip'),
         }),
       ]
     }
@@ -104,7 +105,7 @@
       Column.dataPath(),
     ]
   }
-  const columns = defineColumns()
+  const columns = $derived(defineColumns())
 </script>
 
 <Datatable entity="dataset" data={datasetsSorted} {columns} {metaPath} />

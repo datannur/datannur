@@ -3,6 +3,7 @@
   import { whenAppReady } from '@lib/store'
   import { appWidth } from '@lib/viewport-manager'
   import { debounce } from '@lib/util'
+  import { t } from '@i18n/messages'
   import SearchBarResultRow from './SearchBarResultRow.svelte'
   import type { SearchResult } from './search'
 
@@ -27,7 +28,14 @@
   let hasScrollBar = $state(false)
   let dbLoaded = $state(false)
 
-  const plural = $derived(nbResult > 1 ? 's' : '')
+  const recentSearchCountKey = $derived(
+    nbResult === 1
+      ? 'search.recentSearchCount'
+      : 'search.recentSearchCountPlural',
+  )
+  const resultCountKey = $derived(
+    nbResult === 1 ? 'search.resultCount' : 'search.resultCountPlural',
+  )
 
   function updateHeight() {
     if (!tableWrapper) return
@@ -81,7 +89,7 @@
               <tr>
                 <td colspan="3">
                   <div class="nb-result">
-                    {nbResult} recherche{plural} récente{plural}
+                    {t(recentSearchCountKey, { count: nbResult })}
                   </div>
                 </td>
               </tr>
@@ -91,7 +99,7 @@
               <tr>
                 <td colspan="3">
                   <div class="nb-result">
-                    {nbResult} résultat{plural}
+                    {t(resultCountKey, { count: nbResult })}
                   </div>
                 </td>
               </tr>

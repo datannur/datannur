@@ -16,7 +16,7 @@
   import HeaderLink from './HeaderLink.svelte'
   import Link from '@layout/Link.svelte'
   import Footer from '@frame/Footer.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import type { ApiAvailability } from '@lib/api-availability'
 
   let scrollY = $state(0)
@@ -103,7 +103,7 @@
       {/if}
 
       <HeaderDropdown
-        title={$translate('nav.context')}
+        title={t('nav.context')}
         pages={[
           'organization',
           'organizations',
@@ -138,7 +138,7 @@
       </HeaderDropdown>
 
       <HeaderDropdown
-        title={$translate('nav.data')}
+        title={t('nav.data')}
         pages={[
           'dataset',
           'datasets',
@@ -177,7 +177,7 @@
         {/if}
       </HeaderDropdown>
 
-      <HeaderDropdown title={$translate('nav.filter')} ifUse={['configFilter']}>
+      <HeaderDropdown title={t('nav.filter')} ifUse={['configFilter']}>
         <MainFilter />
       </HeaderDropdown>
 
@@ -185,8 +185,8 @@
         href="favorite"
         pages={['favorite']}
         icon="favorite"
-        info={$translate('nav.favorites')}
-        ><span class="visible-on-mobile">{$translate('nav.favorites')}</span
+        info={t('nav.favorites')}
+        ><span class="visible-on-mobile">{t('nav.favorites')}</span
         ><span class="num-style favorite-number" data-favorite-counter
           >{$nbFavorite}</span
         ></HeaderLink
@@ -196,18 +196,18 @@
         href="about"
         pages={['about']}
         icon="about"
-        info={$translate('nav.about')}
+        info={t('nav.about')}
       >
-        <span class="visible-on-mobile">{$translate('nav.about')}</span>
+        <span class="visible-on-mobile">{t('nav.about')}</span>
       </HeaderLink>
 
       <HeaderLink
         href="options"
         pages={['options']}
         icon="option"
-        info={$translate('nav.options')}
+        info={t('nav.options')}
       >
-        <span class="visible-on-mobile">{$translate('nav.options')}</span>
+        <span class="visible-on-mobile">{t('nav.options')}</span>
       </HeaderLink>
     </div>
 

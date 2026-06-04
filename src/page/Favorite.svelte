@@ -4,8 +4,10 @@
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
-  import aboutFile from '@markdown/about-favorite.md?raw'
-  import { translate } from '@i18n/i18n'
+  import aboutFileEn from '@markdown/about-favorite.en.md?raw'
+  import aboutFileFr from '@markdown/about-favorite.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
   const organizations = db
     .getAll('organization')
@@ -60,14 +62,14 @@
     enumerations,
     evolutions,
     stat,
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 </script>
 
 <section class="section">
   <Title
     type="favorite"
-    name={$translate('nav.favorites')}
+    name={t('nav.favorites')}
     isFavoritePage={true}
     mode="mainTitle"
   />

@@ -16,27 +16,27 @@
   {
     "enumeration_id": "a_or_b",
     "value": "<i>a</i>",
-    "description": "it's a \"a\""
+    "description": "it is an \"a\""
   },
   {
     "enumeration_id": "a_or_b",
     "value": "b",
-    "description": "it's a \"b\""
+    "description": "it is a \"b\""
   },
   {
     "enumeration_id": "a_or_b_or_c",
     "value": "<i>a</i>",
-    "description": "it's a \"a\""
+    "description": "it is an \"a\""
   },
   {
     "enumeration_id": "a_or_b_or_c",
     "value": "b",
-    "description": "it's a \"b\""
+    "description": "it is a \"b\""
   },
   {
     "enumeration_id": "a_or_b_or_c",
     "value": "c",
-    "description": "it's a \"c\""
+    "description": "it is a \"c\""
   },
   {
     "enumeration_id": "only_zero",
@@ -50,7 +50,7 @@
   {
     "enumeration_id": "canton_sigle",
     "value": "BE",
-    "description": "Berne"
+    "description": "Bern"
   },
   {
     "enumeration_id": "canton_sigle",
@@ -65,27 +65,27 @@
   {
     "enumeration_id": "canton_sigle",
     "value": "SZ",
-    "description": "Schwytz et autres régions d'ici et d'ailleur et de partout et de part le monde mais aussi d'ici aussi"
+    "description": "Schwyz and other regions from here, elsewhere, everywhere, around the world, and here as well"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "OW",
-    "description": "Obwald"
+    "description": "Obwalden"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "NW",
-    "description": "Nidwald"
+    "description": "Nidwalden"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "GL",
-    "description": "Glaris"
+    "description": "Glarus"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "ZG",
-    "description": "Zoug"
+    "description": "Zug"
   },
   {
     "enumeration_id": "canton_sigle",
@@ -95,37 +95,37 @@
   {
     "enumeration_id": "canton_sigle",
     "value": "SO",
-    "description": "Soleure"
+    "description": "Solothurn"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "BS",
-    "description": "Bâle-Ville"
+    "description": "Basel-Stadt"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "BL",
-    "description": "Bâle-Campagne"
+    "description": "Basel-Landschaft"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "SH",
-    "description": "Schaffhouse"
+    "description": "Schaffhausen"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "AR",
-    "description": "Appenzell Rhodes-Extérieures"
+    "description": "Appenzell Ausserrhoden"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "AI",
-    "description": "Appenzell Rhodes-Intérieures"
+    "description": "Appenzell Innerrhoden"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "SG",
-    "description": "Saint-Gall"
+    "description": "St. Gallen"
   },
   {
     "enumeration_id": "canton_sigle",
@@ -135,17 +135,17 @@
   {
     "enumeration_id": "canton_sigle",
     "value": "AG",
-    "description": "Argovie"
+    "description": "Aargau"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "TG",
-    "description": "Thurgovie"
+    "description": "Thurgau"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "TI",
-    "description": "Tessin"
+    "description": "Ticino"
   },
   {
     "enumeration_id": "canton_sigle",
@@ -160,12 +160,12 @@
   {
     "enumeration_id": "canton_sigle",
     "value": "NE",
-    "description": "Neuchâtel"
+    "description": "Neuchatel"
   },
   {
     "enumeration_id": "canton_sigle",
     "value": "GE",
-    "description": "Genève"
+    "description": "Geneva"
   },
   {
     "enumeration_id": "canton_sigle",
@@ -175,17 +175,17 @@
   {
     "enumeration_id": "langue_sigle",
     "value": "DE",
-    "description": "Allemand"
+    "description": "German"
   },
   {
     "enumeration_id": "langue_sigle",
     "value": "FR",
-    "description": "Français"
+    "description": "French"
   },
   {
     "enumeration_id": "langue_sigle",
     "value": "IT",
-    "description": "Italien"
+    "description": "Italian"
   },
   {
     "enumeration_id": "langue_sigle",
@@ -195,20 +195,20 @@
   {
     "enumeration_id": "oui_non",
     "value": 0,
-    "description": "non"
+    "description": "no"
   },
   {
     "enumeration_id": "oui_non",
     "value": 1,
-    "description": "oui"
+    "description": "yes"
   },
   {
     "enumeration_id": "vide",
-    "description": "vide / manquant"
+    "description": "empty / missing"
   },
   {
     "enumeration_id": "vide",
     "value": "missing",
-    "description": "manquant"
+    "description": "missing"
   }
 ]

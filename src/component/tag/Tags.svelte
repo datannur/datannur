@@ -6,6 +6,7 @@
   import { getParentPath } from '@lib/db'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import type { Tag, Column as ColumnType } from '@type'
 
   let { tags: tagsProp }: { tags: Tag[] } = $props()
@@ -49,13 +50,13 @@
     columns.push(Column.favorite())
     if (db.useRecursive.tag) {
       columns.push(
-        Column.name('tag', 'Mot clé', {
+        Column.name('tag', t('entity.tag'), {
           withIndent: true,
           linkSameEntityTab: true,
         }),
       )
     } else {
-      columns.push(Column.name('tag', 'Mot clé'))
+      columns.push(Column.name('tag', t('entity.tag')))
     }
 
     columns.push(Column.id())

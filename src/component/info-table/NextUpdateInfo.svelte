@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
   import { getTimeAgo, getDatetime } from '@lib/time'
+  import { t } from '@i18n/messages'
 
   let {
     nextUpdateDate,
@@ -22,7 +23,7 @@
 
 {#if nextUpdateDate}
   <tr>
-    <td><Icon type="date" /> Prochaine</td>
+    <td><Icon type="date" /> {t('column.nextUpdate.title')}</td>
     <td>{nextUpdateDateReadable}, {timeAgo}</td>
   </tr>
 {/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import LLMChatPanel from '@llm/LLMChatPanel.svelte'
   import { isHttp } from '@lib/url'
+  import { t } from '@i18n/messages'
 
   let isOpen = $state(false)
   let isProxyUp = $state(false)
@@ -16,7 +17,7 @@
   <button
     class="floating-chat-btn"
     onclick={toggleChat}
-    title="Ouvrir le chat LLM"
+    title={t('llm.chat.open')}
   >
     <i class="fa-solid fa-comments"></i>
   </button>

@@ -2,19 +2,22 @@
   {
     "id": "Qwen/Qwen3.5-122B-A10B-FP8",
     "name": "Qwen 3.5 122B",
-    "description": "Par defaut - Polyvalent et performant",
+    "description": "Default - Versatile and high-performing",
+    "descriptionKey": "llm.model.qwenDescription",
     "category": "chat_large"
   },
   {
     "id": "google/gemma-4-31B-it",
     "name": "Gemma 4 31B",
-    "description": "Bon compromis entre rapidite et qualite",
+    "description": "Good balance between speed and quality",
+    "descriptionKey": "llm.model.gemmaDescription",
     "category": "omni_small"
   },
   {
     "id": "mistralai/Ministral-3-14B-Instruct-2512",
     "name": "Ministral 3 14B",
-    "description": "Rapide et efficace pour les taches courantes",
+    "description": "Fast and efficient for everyday tasks",
+    "descriptionKey": "llm.model.ministralDescription",
     "category": "chat_small"
   }
 ]

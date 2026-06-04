@@ -1,57 +1,71 @@
 [
   {
-    "description": "BEVNAT: Fiche signalétique",
+    "description": "BEVNAT: Fact sheet",
+    "description:fr": "BEVNAT: Fiche signalétique",
     "id": "bevnat-info",
     "last_update": 1706239962,
-    "name": "BEVNAT: Fiche signalétique",
+    "name": "BEVNAT: Fact sheet",
+    "name:fr": "BEVNAT: Fiche signalétique",
     "path": "data/pdf/bevnat-info.pdf",
     "type": "pdf"
   },
   {
-    "description": "BEVNAT: Liste des variables",
+    "description": "BEVNAT: Variable list",
+    "description:fr": "BEVNAT: Liste des variables",
     "id": "bevnat-variable",
     "last_update": 1606212963,
-    "name": "BEVNAT: Liste des variables",
+    "name": "BEVNAT: Variable list",
+    "name:fr": "BEVNAT: Liste des variables",
     "path": "data/pdf/bevnat-variable.pdf",
     "type": "pdf"
   },
   {
     "description": "pdf wiki",
+    "description:fr": null,
     "id": "pdf-wiki",
     "last_update": 1716215962,
     "name": "pdf_wiki",
+    "name:fr": null,
     "path": "data/pdf/pdf-wiki.pdf",
     "type": "pdf"
   },
   {
     "description": "pdf online test",
+    "description:fr": null,
     "id": "pdf_online",
     "last_update": null,
     "name": "pdf online test",
+    "name:fr": null,
     "path": "https://pdfobject.com/pdf/sample.pdf",
     "type": "pdf"
   },
   {
-    "description": "Communiqué de presse population",
+    "description": "Population press release",
+    "description:fr": "Communiqué de presse population",
     "id": "pop-com-1",
     "last_update": 1724323867,
-    "name": "Communiqué de presse population",
+    "name": "Population press release",
+    "name:fr": "Communiqué de presse population",
     "path": "data/pdf/pop-com-1.pdf",
     "type": "pdf"
   },
   {
-    "description": "STATPOP: Fiche signalétique",
+    "description": "STATPOP: Fact sheet",
+    "description:fr": "STATPOP: Fiche signalétique",
     "id": "statpop-info",
     "last_update": 1606212962,
-    "name": "STATPOP: Fiche signalétique",
+    "name": "STATPOP: Fact sheet",
+    "name:fr": "STATPOP: Fiche signalétique",
     "path": "data/pdf/statpop-info.pdf",
     "type": "pdf"
   },
   {
-    "description": "Tourisme exemple",
+    "description": "Tourism example",
+    "description:fr": "Tourisme exemple",
     "id": "tourisme-exemple",
     "last_update": 1716231182,
-    "name": "Tourisme exemple",
+    "name": "Tourism example",
+    "name:fr": "Tourisme exemple",
     "path": "data/db-source/md/tourisme-exemple.md",
     "type": "md"
   }

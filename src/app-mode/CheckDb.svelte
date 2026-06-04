@@ -1,11 +1,15 @@
 <script lang="ts">
   import db from '@db'
+  import { initI18n } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
+  import Options from '@lib/options'
+  import type { TranslationKey } from '@i18n/types'
 
   type IntegrityResult = Awaited<ReturnType<typeof db.checkIntegrity>>
   type IssueSection = {
     key: keyof IntegrityResult
-    title: string
-    description: string
+    title: TranslationKey
+    description: TranslationKey
     count: number
     entries: [string, unknown][]
   }
@@ -13,34 +17,54 @@
     name: string
     values: string[]
   }
+  type FieldLabelKey =
+    | 'id'
+    | 'table'
+    | 'parentId'
+    | 'foreignId'
+    | 'foreignTable'
+    | 'count'
+
+  const fieldLabels: { [key in FieldLabelKey]: TranslationKey } = {
+    id: 'checkDb.field.id',
+    table: 'checkDb.field.table',
+    parentId: 'checkDb.field.parentId',
+    foreignId: 'checkDb.field.foreignId',
+    foreignTable: 'checkDb.field.foreignTable',
+    count: 'checkDb.field.count',
+  }
 
   const labels: {
-    [key in keyof IntegrityResult]: { title: string; description: string }
+    [key in keyof IntegrityResult]: {
+      title: TranslationKey
+      description: TranslationKey
+    }
   } = {
     emptyId: {
-      title: 'Identifiants vides',
-      description: 'Des lignes existent sans identifiant utilisable.',
+      title: 'checkDb.issue.emptyId.title',
+      description: 'checkDb.issue.emptyId.description',
     },
     duplicateId: {
-      title: 'Identifiants dupliqués',
-      description: 'Un même identifiant est utilisé plusieurs fois.',
+      title: 'checkDb.issue.duplicateId.title',
+      description: 'checkDb.issue.duplicateId.description',
     },
     parentIdNotFound: {
-      title: 'Parents introuvables',
-      description: 'Des lignes référencent un parent absent de la base.',
+      title: 'checkDb.issue.parentIdNotFound.title',
+      description: 'checkDb.issue.parentIdNotFound.description',
     },
     parentIdSame: {
-      title: 'Parents circulaires',
-      description: 'Des lignes se référencent elles-mêmes comme parent.',
+      title: 'checkDb.issue.parentIdSame.title',
+      description: 'checkDb.issue.parentIdSame.description',
     },
     foreignIdNotFound: {
-      title: 'Références introuvables',
-      description: 'Des clés étrangères pointent vers des éléments absents.',
+      title: 'checkDb.issue.foreignIdNotFound.title',
+      description: 'checkDb.issue.foreignIdNotFound.description',
     },
   }
 
   let result = $state<IntegrityResult | null>(null)
   let loading = $state(true)
+  let i18nReady = $state(false)
 
   const issueSections = $derived.by(() => {
     const integrityResult = result
@@ -73,47 +97,66 @@
     return String(value)
   }
 
+  function hasFieldLabel(name: string): name is FieldLabelKey {
+    return Object.hasOwn(fieldLabels, name)
+  }
+
+  function formatFieldName(name: string) {
+    return hasFieldLabel(name) ? t(fieldLabels[name]) : name
+  }
+
   function getDisplayFields(value: unknown): DisplayField[] {
     if (!value || typeof value !== 'object' || Array.isArray(value)) {
-      return [{ name: 'Valeur', values: [formatFieldValue(value)] }]
+      return [
+        {
+          name: t('checkDb.valueField'),
+          values: [formatFieldValue(value)],
+        },
+      ]
     }
 
     return Object.entries(value).map(([name, fieldValue]) => ({
-      name,
+      name: formatFieldName(name),
       values: Array.isArray(fieldValue)
         ? fieldValue.map(formatFieldValue)
         : [formatFieldValue(fieldValue)],
     }))
   }
 
-  db.checkIntegrity().then(res => {
-    result = res
+  async function loadIntegrityCheck() {
+    await initI18n()
+    i18nReady = true
+    result = await db.checkIntegrity()
     loading = false
-  })
+  }
+
+  Options.init({ language: 'auto' })
+  loadIntegrityCheck()
+
+  function getIssueSummary(count: number) {
+    return count === 1
+      ? t('checkDb.issueSummaryOne')
+      : t('checkDb.issueSummaryMany', { count })
+  }
 </script>
 
 <section class="section check-db-page">
-  <h1 class="title">Vérification d'intégrité</h1>
-
-  {#if loading}
-    <div class="status-card neutral">Analyse de la base en cours...</div>
+  {#if !i18nReady}
+    <div class="check-db-placeholder"></div>
+  {:else if loading}
+    <h1 class="title">{t('checkDb.title')}</h1>
+    <div class="status-card neutral">{t('checkDb.loading')}</div>
   {:else if !hasIssues}
+    <h1 class="title">{t('checkDb.title')}</h1>
     <div class="status-card ok">
-      <strong>Tout est en ordre.</strong>
-      <span
-        >Aucune anomalie d'identifiant, de parent ou de référence n'a été
-        détectée.</span
-      >
+      <strong>{t('checkDb.okTitle')}</strong>
+      <span>{t('checkDb.okDescription')}</span>
     </div>
   {:else}
+    <h1 class="title">{t('checkDb.title')}</h1>
     <div class="status-card error">
-      <strong
-        >{issueSections.length} type{issueSections.length > 1 ? 's' : ''} d'anomalie
-        détecté{issueSections.length > 1 ? 's' : ''}.</strong
-      >
-      <span
-        >Les éléments ci-dessous doivent être corrigés dans les données sources.</span
-      >
+      <strong>{getIssueSummary(issueSections.length)}</strong>
+      <span>{t('checkDb.issueDescription')}</span>
     </div>
 
     <div class="issue-list">
@@ -121,8 +164,8 @@
         <section class="issue-section">
           <header>
             <div>
-              <h2>{section.title}</h2>
-              <p>{section.description}</p>
+              <h2>{t(section.title)}</h2>
+              <p>{t(section.description)}</p>
             </div>
             <strong>{section.count}</strong>
           </header>
@@ -168,6 +211,10 @@
     font-size: 1.45rem;
     margin-bottom: 1rem;
     margin-top: 50px;
+  }
+
+  .check-db-placeholder {
+    min-height: 1px;
   }
 
   .status-card {

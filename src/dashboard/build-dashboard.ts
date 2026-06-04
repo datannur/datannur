@@ -13,6 +13,7 @@ import type {
   DashboardTarget,
   DashboardTargetGroup,
 } from './dashboard-types'
+import { t } from '@i18n/messages'
 
 type MaybeValue = string | number | boolean | null | undefined
 
@@ -393,16 +394,30 @@ function buildSummary(entities: DashboardEntities): DashboardMetric[] {
   const nbRows = sum(datasets.map(dataset => dataset.nbRow))
 
   return [
-    makeMetric('organizations', 'Organisations', organizations.length),
-    makeMetric('folders', 'Dossiers', folders.length),
-    makeMetric('tags', 'Mots clés', tags.length),
-    makeMetric('concepts', 'Concepts', concepts.length),
-    makeMetric('docs', 'Docs', docs.length),
-    makeMetric('datasets', 'Datasets', datasets.length),
-    makeMetric('variables', 'Variables', variables.length),
-    makeMetric('enumerations', 'Énumérations', enumerations.length),
-    makeMetric('rows', 'Lignes', nbRows),
-    makeMetric('dataSize', 'Volume', dataSize, undefined, 'bytes'),
+    makeMetric(
+      'organizations',
+      t('dashboard.summary.organizations'),
+      organizations.length,
+    ),
+    makeMetric('folders', t('dashboard.summary.folders'), folders.length),
+    makeMetric('tags', t('dashboard.summary.tags'), tags.length),
+    makeMetric('concepts', t('dashboard.summary.concepts'), concepts.length),
+    makeMetric('docs', t('dashboard.summary.docs'), docs.length),
+    makeMetric('datasets', t('dashboard.summary.datasets'), datasets.length),
+    makeMetric('variables', t('dashboard.summary.variables'), variables.length),
+    makeMetric(
+      'enumerations',
+      t('dashboard.summary.enumerations'),
+      enumerations.length,
+    ),
+    makeMetric('rows', t('dashboard.summary.rows'), nbRows),
+    makeMetric(
+      'dataSize',
+      t('dashboard.summary.dataSize'),
+      dataSize,
+      undefined,
+      'bytes',
+    ),
   ].filter(metric => metric.value > 0)
 }
 
@@ -451,290 +466,290 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
   return [
     score(
       'inventory',
-      'Inventorié',
-      'Patrimoine identifié, localisé et accessible',
+      t('dashboard.dimension.inventory.label'),
+      t('dashboard.dimension.inventory.description'),
       [
         criterion(
           'datasetFolders',
-          'Rattachement dossier',
+          t('dashboard.criterion.datasetFolders.label'),
           filledCount(datasets, dataset => dataset.folderId),
           datasets.length,
-          'Rattachements dossier à préciser',
-          'Rend le patrimoine plus navigable par domaine',
+          t('dashboard.criterion.datasetFolders.priorityLabel'),
+          t('dashboard.criterion.datasetFolders.priorityImpact'),
         ),
         criterion(
           'access',
-          'Accès aux données',
+          t('dashboard.criterion.access.label'),
           datasets.filter(
             dataset => isFilled(dataset.link) || isFilled(dataset.dataPath),
           ).length,
           datasets.length,
-          'Accès aux datasets à préciser',
-          'Facilite la réutilisation opérationnelle',
+          t('dashboard.criterion.access.priorityLabel'),
+          t('dashboard.criterion.access.priorityImpact'),
         ),
         criterion(
           'formats',
-          'Formats',
+          t('dashboard.criterion.formats.label'),
           filledCount(datasets, dataset => dataset.deliveryFormat),
           datasets.length,
-          'Formats à renseigner',
-          'Améliore l’exploitabilité des datasets',
+          t('dashboard.criterion.formats.priorityLabel'),
+          t('dashboard.criterion.formats.priorityImpact'),
         ),
         criterion(
           'previews',
-          'Aperçus',
+          t('dashboard.criterion.previews.label'),
           datasets.filter(dataset => !!dataset.hasPreview).length,
           datasets.length,
-          'Aperçus à générer',
-          'Permet de consulter rapidement le contenu des datasets',
+          t('dashboard.criterion.previews.priorityLabel'),
+          t('dashboard.criterion.previews.priorityImpact'),
         ),
       ],
     ),
     score(
       'understanding',
-      'Compréhensible',
-      'Contexte métier et documentation permettant d’interpréter les données',
+      t('dashboard.dimension.understanding.label'),
+      t('dashboard.dimension.understanding.description'),
       [
         criterion(
           'descriptions',
-          'Descriptions',
+          t('dashboard.criterion.descriptions.label'),
           describedCount(describableItems),
           describableItems.length,
-          'Descriptions à enrichir',
-          'Améliore la compréhension métier des actifs',
+          t('dashboard.criterion.descriptions.priorityLabel'),
+          t('dashboard.criterion.descriptions.priorityImpact'),
         ),
         criterion(
           'tags',
-          'Mots clés',
+          t('dashboard.criterion.tags.label'),
           hasItemsCount(taggedItems, item => item.tags),
           taggedItems.length,
-          'Mots clés à ajouter',
-          'Facilite la recherche et l’exploration du périmètre',
+          t('dashboard.criterion.tags.priorityLabel'),
+          t('dashboard.criterion.tags.priorityImpact'),
         ),
         criterion(
           'linkedDocs',
-          'Documentation liée',
+          t('dashboard.criterion.linkedDocs.label'),
           hasItemsCount(docableItems, item => item.docsRecursive ?? item.docs),
           docableItems.length,
-          'Documents liés à ajouter',
-          'Apporte du contexte aux objets exposés',
+          t('dashboard.criterion.linkedDocs.priorityLabel'),
+          t('dashboard.criterion.linkedDocs.priorityImpact'),
         ),
         criterion(
           'variableDescriptions',
-          'Descriptions de variables',
+          t('dashboard.criterion.variableDescriptions.label'),
           describedCount(variables),
           variables.length,
-          'Descriptions de variables à enrichir',
-          'Améliore le dictionnaire de données',
+          t('dashboard.criterion.variableDescriptions.priorityLabel'),
+          t('dashboard.criterion.variableDescriptions.priorityImpact'),
         ),
         criterion(
           'variableConcepts',
-          'Concepts métier',
+          t('dashboard.criterion.variableConcepts.label'),
           filledCount(variables, variable => variable.conceptId),
           variables.length,
-          'Concepts métier à relier',
-          'Relie les colonnes au vocabulaire métier',
+          t('dashboard.criterion.variableConcepts.priorityLabel'),
+          t('dashboard.criterion.variableConcepts.priorityImpact'),
         ),
         criterion(
           'lineageRelations',
-          'Relations et lineage',
+          t('dashboard.criterion.lineageRelations.label'),
           relationalVariables.length,
           variables.length,
-          'Relations ou lineage à documenter',
-          'Relie les variables à leurs sources et références',
+          t('dashboard.criterion.lineageRelations.priorityLabel'),
+          t('dashboard.criterion.lineageRelations.priorityImpact'),
         ),
       ],
     ),
     score(
       'profileQuality',
-      'Réutilisable',
-      'Conditions, structure et profils permettant une réutilisation fiable',
+      t('dashboard.dimension.profileQuality.label'),
+      t('dashboard.dimension.profileQuality.description'),
       [
         criterion(
           'licenses',
-          'Licences',
+          t('dashboard.criterion.licenses.label'),
           filledCount(datasets, dataset => dataset.license),
           datasets.length,
-          'Licences à compléter',
-          'Clarifie les conditions de réutilisation',
+          t('dashboard.criterion.licenses.priorityLabel'),
+          t('dashboard.criterion.licenses.priorityImpact'),
         ),
         criterion(
           'schemaExtracted',
-          'Schéma extrait',
+          t('dashboard.criterion.schemaExtracted.label'),
           datasets.filter(dataset => numericValue(dataset.nbVariable) > 0)
             .length,
           datasets.length,
-          'Schémas à extraire',
-          'Permet de naviguer dans les colonnes des datasets',
+          t('dashboard.criterion.schemaExtracted.priorityLabel'),
+          t('dashboard.criterion.schemaExtracted.priorityImpact'),
         ),
         criterion(
           'variableTypes',
-          'Types de variables',
+          t('dashboard.criterion.variableTypes.label'),
           filledCount(variables, variable => variable.type),
           variables.length,
-          'Types de variables à renseigner',
-          'Renforce la structure du catalogue',
+          t('dashboard.criterion.variableTypes.priorityLabel'),
+          t('dashboard.criterion.variableTypes.priorityImpact'),
         ),
         criterion(
           'datasetStats',
-          'Stats datasets',
+          t('dashboard.criterion.datasetStats.label'),
           datasets.filter(hasDatasetStats).length,
           datasets.length,
-          'Stats datasets à calculer',
-          'Donne le volume et la taille des datasets',
+          t('dashboard.criterion.datasetStats.priorityLabel'),
+          t('dashboard.criterion.datasetStats.priorityImpact'),
         ),
         criterion(
           'variableStats',
-          'Stats variables',
+          t('dashboard.criterion.variableStats.label'),
           variables.filter(hasVariableStats).length,
           variables.length,
-          'Stats variables à calculer',
-          'Mesure valeurs manquantes, cardinalités et distributions',
+          t('dashboard.criterion.variableStats.priorityLabel'),
+          t('dashboard.criterion.variableStats.priorityImpact'),
         ),
         criterion(
           'enumerationsOrFrequencies',
-          'Valeurs analysées',
+          t('dashboard.criterion.enumerationsOrFrequencies.label'),
           variables.filter(hasEnumerationOrFrequency).length,
           variables.length,
-          'Fréquences ou énumérations à générer',
-          'Rend les distributions et modalités exploitables',
+          t('dashboard.criterion.enumerationsOrFrequencies.priorityLabel'),
+          t('dashboard.criterion.enumerationsOrFrequencies.priorityImpact'),
         ),
         criterion(
           'sampledDatasets',
-          'Échantillonnage explicite',
+          t('dashboard.criterion.sampledDatasets.label'),
           filledCount(datasets, dataset => dataset.sampleSize),
           datasets.filter(hasDatasetStats).length,
-          'Échantillonnage à expliciter',
-          'Indique quand les fréquences reposent sur un échantillon',
+          t('dashboard.criterion.sampledDatasets.priorityLabel'),
+          t('dashboard.criterion.sampledDatasets.priorityImpact'),
         ),
       ],
     ),
     score(
       'governance',
-      'Gouverné',
-      'Responsabilités et contacts clairement identifiés',
+      t('dashboard.dimension.governance.label'),
+      t('dashboard.dimension.governance.description'),
       [
         criterion(
           'owners',
-          'Fournisseurs de données',
+          t('dashboard.criterion.owners.label'),
           filledCount(governedItems, item => item.ownerOrganizationId),
           governedItems.length,
-          'Fournisseurs de données à renseigner',
-          'Identifie l’organisation ou l’acteur qui fournit les données',
+          t('dashboard.criterion.owners.priorityLabel'),
+          t('dashboard.criterion.owners.priorityImpact'),
         ),
         criterion(
           'managers',
-          'Gestionnaires des données',
+          t('dashboard.criterion.managers.label'),
           filledCount(governedItems, item => item.managerOrganizationId),
           governedItems.length,
-          'Gestionnaires des données à renseigner',
-          'Identifie l’acteur responsable du suivi des données',
+          t('dashboard.criterion.managers.priorityLabel'),
+          t('dashboard.criterion.managers.priorityImpact'),
         ),
         criterion(
           'organizationContacts',
-          'Contacts organisation',
+          t('dashboard.criterion.organizationContacts.label'),
           organizations.filter(
             organization =>
               isFilled(organization.email) || isFilled(organization.phone),
           ).length,
           organizations.length,
-          'Contacts organisation à compléter',
-          'Facilite l’identification des bons interlocuteurs',
+          t('dashboard.criterion.organizationContacts.priorityLabel'),
+          t('dashboard.criterion.organizationContacts.priorityImpact'),
         ),
       ],
     ),
     score(
       'protection',
-      'Maîtrisé',
-      'Cycle de vie, qualité et risques suivis dans la durée',
+      t('dashboard.dimension.protection.label'),
+      t('dashboard.dimension.protection.description'),
       [
         criterion(
           'lastUpdateDate',
-          'Date de mise à jour',
+          t('dashboard.criterion.lastUpdateDate.label'),
           filledCount(periodItems, item => item.lastUpdateDate),
           periodItems.length,
-          'Dates de mise à jour à renseigner',
-          'Clarifie la fraîcheur du patrimoine',
+          t('dashboard.criterion.lastUpdateDate.priorityLabel'),
+          t('dashboard.criterion.lastUpdateDate.priorityImpact'),
         ),
         criterion(
           'updateFrequency',
-          'Fréquence de mise à jour',
+          t('dashboard.criterion.updateFrequency.label'),
           filledCount(periodItems, item => item.updatingEach),
           periodItems.length,
-          'Fréquences de mise à jour à renseigner',
-          'Rend le cycle de vie des données plus prévisible',
+          t('dashboard.criterion.updateFrequency.priorityLabel'),
+          t('dashboard.criterion.updateFrequency.priorityImpact'),
         ),
         criterion(
           'periods',
-          'Périodes couvertes',
+          t('dashboard.criterion.periods.label'),
           periodItems.filter(hasPeriod).length,
           periodItems.length,
-          'Périodes à préciser',
-          'Aide à comprendre le périmètre temporel des données',
+          t('dashboard.criterion.periods.priorityLabel'),
+          t('dashboard.criterion.periods.priorityImpact'),
         ),
         criterion(
           'seriesPeriods',
-          'Périodes des séries',
+          t('dashboard.criterion.seriesPeriods.label'),
           seriesDatasets.filter(hasPeriod).length,
           seriesDatasets.length,
-          'Périodes de séries à préciser',
-          'Rend les séries temporelles plus lisibles',
+          t('dashboard.criterion.seriesPeriods.priorityLabel'),
+          t('dashboard.criterion.seriesPeriods.priorityImpact'),
         ),
         criterion(
           'keyUniqueness',
-          'Clés uniques',
+          t('dashboard.criterion.keyUniqueness.label'),
           keyVariables.filter(isUniqueKey).length,
           keyVariables.length,
-          'Clés avec doublons à vérifier',
-          'Sécurise les identifiants et clés métier',
+          t('dashboard.criterion.keyUniqueness.priorityLabel'),
+          t('dashboard.criterion.keyUniqueness.priorityImpact'),
         ),
         ...(sensitiveVariables.length === 0
           ? [
               criterion(
                 'noSensitiveSignals',
-                'Aucun signal sensible détecté',
+                t('dashboard.criterion.noSensitiveSignals.label'),
                 1,
                 1,
-                'Signaux sensibles à qualifier',
-                'Aucun signal sensible automatique n’a été détecté',
+                t('dashboard.criterion.noSensitiveSignals.priorityLabel'),
+                t('dashboard.criterion.noSensitiveSignals.priorityImpact'),
               ),
             ]
           : []),
         criterion(
           'sensitiveIdentified',
-          'Sensibilité détectée',
+          t('dashboard.criterion.sensitiveIdentified.label'),
           sensitiveVariables.length,
           sensitiveVariables.length,
-          'Variables sensibles à qualifier',
-          'Rend les données sensibles visibles dans le catalogue',
+          t('dashboard.criterion.sensitiveIdentified.priorityLabel'),
+          t('dashboard.criterion.sensitiveIdentified.priorityImpact'),
         ),
         criterion(
           'sensitiveProtection',
-          'Fréquences protégées',
+          t('dashboard.criterion.sensitiveProtection.label'),
           sensitiveVariables.filter(isProtectedSensitiveVariable).length,
           sensitiveVariables.length,
-          'Variables sensibles à protéger',
-          'Évite d’exposer des valeurs sensibles dans les fréquences',
+          t('dashboard.criterion.sensitiveProtection.priorityLabel'),
+          t('dashboard.criterion.sensitiveProtection.priorityImpact'),
         ),
         criterion(
           'sensitiveDocumentation',
-          'Variables sensibles documentées',
+          t('dashboard.criterion.sensitiveDocumentation.label'),
           describedCount(sensitiveVariables),
           sensitiveVariables.length,
-          'Variables sensibles à documenter',
-          'Explique la nature et l’usage des données sensibles',
+          t('dashboard.criterion.sensitiveDocumentation.priorityLabel'),
+          t('dashboard.criterion.sensitiveDocumentation.priorityImpact'),
         ),
         criterion(
           'sensitiveGovernance',
-          'Cadre de diffusion',
+          t('dashboard.criterion.sensitiveGovernance.label'),
           sensitiveVariables.filter(
             variable =>
               isFilled(variable.ownerOrganizationId) ||
               isFilled(variable.managerOrganizationId),
           ).length,
           sensitiveVariables.length,
-          'Cadre de diffusion à préciser',
-          'Identifie les responsables des données sensibles',
+          t('dashboard.criterion.sensitiveGovernance.priorityLabel'),
+          t('dashboard.criterion.sensitiveGovernance.priorityImpact'),
         ),
       ],
     ),
@@ -750,27 +765,27 @@ function buildGlobalScore(maturity: DashboardScore[]): DashboardGlobalScore {
           applicableMaturity.reduce((total, item) => total + item.score, 0) /
             applicableMaturity.length,
         )
-  return { label: 'Maturité du catalogue', score: scoreValue }
+  return { label: t('dashboard.globalScore.label'), score: scoreValue }
 }
 
 function diagnosticLabel(scoreValue: number): string {
-  if (scoreValue < 40) return 'Catalogue en structuration'
-  if (scoreValue < 70) return 'Catalogue en consolidation'
-  if (scoreValue < 90) return 'Catalogue opérationnel'
-  return 'Catalogue maîtrisé'
+  if (scoreValue < 40) return t('dashboard.diagnostic.structuring.label')
+  if (scoreValue < 70) return t('dashboard.diagnostic.consolidating.label')
+  if (scoreValue < 90) return t('dashboard.diagnostic.operational.label')
+  return t('dashboard.diagnostic.mastered.label')
 }
 
 function diagnosticDescription(scoreValue: number): string {
   if (scoreValue < 40) {
-    return 'Les fondations du catalogue sont présentes, mais les informations essentielles restent à consolider pour faciliter la compréhension et la réutilisation.'
+    return t('dashboard.diagnostic.structuring.description')
   }
   if (scoreValue < 70) {
-    return 'Le catalogue dispose d’une base opérationnelle. Plusieurs axes restent à renforcer pour fiabiliser son usage et son partage.'
+    return t('dashboard.diagnostic.consolidating.description')
   }
   if (scoreValue < 90) {
-    return 'Le catalogue présente une bonne maturité. Les principaux éléments de compréhension, de suivi et de réutilisation sont en place.'
+    return t('dashboard.diagnostic.operational.description')
   }
-  return 'Le catalogue présente une maturité élevée. Les données sont bien documentées, gouvernées et exploitables.'
+  return t('dashboard.diagnostic.mastered.description')
 }
 
 function diagnosticDimension(
@@ -1025,7 +1040,7 @@ function buildPriorityTargetGroups(
     descriptions: compactGroups([
       targetGroup(scope, {
         entity: 'organization',
-        label: 'Organisations',
+        label: t('dashboard.summary.organizations'),
         tab: 'organizations',
         items: organizations,
         isComplete: item => isFilled(item.description),
@@ -1033,7 +1048,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.description),
@@ -1041,7 +1056,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.description),
@@ -1049,7 +1064,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.description),
@@ -1057,7 +1072,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'doc',
-        label: 'Docs',
+        label: t('dashboard.summary.docs'),
         tab: 'docs',
         items: docs,
         isComplete: item => isFilled(item.description),
@@ -1067,7 +1082,7 @@ function buildPriorityTargetGroups(
     tags: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => (item.tags?.length ?? 0) > 0,
@@ -1075,7 +1090,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => (item.tags?.length ?? 0) > 0,
@@ -1085,7 +1100,7 @@ function buildPriorityTargetGroups(
     datasetFolders: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.folderId),
@@ -1095,7 +1110,7 @@ function buildPriorityTargetGroups(
     owners: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.ownerOrganizationId),
@@ -1103,7 +1118,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.ownerOrganizationId),
@@ -1113,7 +1128,7 @@ function buildPriorityTargetGroups(
     managers: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.managerOrganizationId),
@@ -1121,7 +1136,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.managerOrganizationId),
@@ -1131,7 +1146,7 @@ function buildPriorityTargetGroups(
     organizationContacts: compactGroups([
       targetGroup(scope, {
         entity: 'organization',
-        label: 'Organisations',
+        label: t('dashboard.summary.organizations'),
         tab: 'organizations',
         items: organizations,
         isComplete: item => isFilled(item.email) || isFilled(item.phone),
@@ -1144,7 +1159,7 @@ function buildPriorityTargetGroups(
     access: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.link) || isFilled(item.dataPath),
@@ -1154,7 +1169,7 @@ function buildPriorityTargetGroups(
     formats: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.deliveryFormat),
@@ -1164,7 +1179,7 @@ function buildPriorityTargetGroups(
     volume: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.nbRow) || isFilled(item.dataSize),
@@ -1177,7 +1192,7 @@ function buildPriorityTargetGroups(
     datasetStats: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: hasDatasetStats,
@@ -1190,7 +1205,7 @@ function buildPriorityTargetGroups(
     schemaExtracted: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => numericValue(item.nbVariable) > 0,
@@ -1200,7 +1215,7 @@ function buildPriorityTargetGroups(
     lastUpdateDate: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.lastUpdateDate),
@@ -1208,7 +1223,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.lastUpdateDate),
@@ -1218,7 +1233,7 @@ function buildPriorityTargetGroups(
     updateFrequency: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.updatingEach),
@@ -1226,7 +1241,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.updatingEach),
@@ -1236,7 +1251,7 @@ function buildPriorityTargetGroups(
     periods: compactGroups([
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.startDate || item.endDate),
@@ -1247,7 +1262,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.startDate || item.endDate),
@@ -1260,7 +1275,7 @@ function buildPriorityTargetGroups(
     variableTypes: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.type),
@@ -1270,7 +1285,7 @@ function buildPriorityTargetGroups(
     variableDescriptions: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.description),
@@ -1280,7 +1295,7 @@ function buildPriorityTargetGroups(
     variableConcepts: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.conceptId),
@@ -1290,7 +1305,7 @@ function buildPriorityTargetGroups(
     variableStats: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: hasVariableStats,
@@ -1303,7 +1318,7 @@ function buildPriorityTargetGroups(
     variablesProfiled: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: hasVariableStats,
@@ -1316,7 +1331,7 @@ function buildPriorityTargetGroups(
     keyUniqueness: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables.filter(
           variable => isFilled(variable.key) || isFilled(variable.businessKey),
@@ -1328,7 +1343,7 @@ function buildPriorityTargetGroups(
     enumerationsOrFrequencies: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: hasEnumerationOrFrequency,
@@ -1338,7 +1353,7 @@ function buildPriorityTargetGroups(
     lineageRelations: compactGroups([
       targetGroup(scope, {
         entity: 'variable',
-        label: 'Variables',
+        label: t('dashboard.summary.variables'),
         tab: 'variables',
         items: variables,
         isComplete: hasLineageOrRelation,
@@ -1351,7 +1366,7 @@ function buildPriorityTargetGroups(
     licenses: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.license),
@@ -1361,7 +1376,7 @@ function buildPriorityTargetGroups(
     seriesPeriods: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets.filter(isSeries),
         isComplete: hasPeriod,
@@ -1374,7 +1389,7 @@ function buildPriorityTargetGroups(
     publishableDatasets: compactGroups([
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item =>
@@ -1387,7 +1402,7 @@ function buildPriorityTargetGroups(
     documentedConcepts: compactGroups([
       targetGroup(scope, {
         entity: 'concept',
-        label: 'Concepts',
+        label: t('dashboard.summary.concepts'),
         tab: 'concepts',
         items: concepts,
         isComplete: item => isFilled(item.description),
@@ -1397,7 +1412,7 @@ function buildPriorityTargetGroups(
     documentedTags: compactGroups([
       targetGroup(scope, {
         entity: 'tag',
-        label: 'Mots clés',
+        label: t('dashboard.criterion.tags.label'),
         tab: 'tags',
         items: tags,
         isComplete: item => isFilled(item.description),
@@ -1407,7 +1422,7 @@ function buildPriorityTargetGroups(
     linkedDocs: compactGroups([
       targetGroup(scope, {
         entity: 'organization',
-        label: 'Organisations',
+        label: t('dashboard.summary.organizations'),
         tab: 'organizations',
         items: organizations,
         isComplete: item =>
@@ -1416,7 +1431,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'folder',
-        label: 'Dossiers',
+        label: t('dashboard.summary.folders'),
         tab: 'folders',
         items: folders,
         isComplete: item =>
@@ -1425,7 +1440,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'dataset',
-        label: 'Datasets',
+        label: t('dashboard.summary.datasets'),
         tab: 'datasets',
         items: datasets,
         isComplete: item =>
@@ -1434,7 +1449,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'tag',
-        label: 'Mots clés',
+        label: t('dashboard.criterion.tags.label'),
         tab: 'tags',
         items: tags,
         isComplete: item =>
@@ -1443,7 +1458,7 @@ function buildPriorityTargetGroups(
       }),
       targetGroup(scope, {
         entity: 'concept',
-        label: 'Concepts',
+        label: t('dashboard.summary.concepts'),
         tab: 'concepts',
         items: concepts,
         isComplete: item =>

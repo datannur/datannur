@@ -1,278 +1,368 @@
 [
   {
     "id": "data_protection",
-    "name": "Protection des données",
-    "description": "La protection des données désigne l'ensemble des pratiques et des lois visant à assurer la confidentialité, l'intégrité et la sécurité des informations personnelles. Elle encadre la collecte, le traitement et le stockage des données afin de prévenir leur utilisation non autorisée ou abusive."
+    "name": "Data protection",
+    "description": "Data protection covers the practices and laws that ensure the confidentiality, integrity, and security of personal information. It governs data collection, processing, and storage to prevent unauthorized or abusive use.",
+    "name:fr": "Protection des données",
+    "description:fr": "La protection des données désigne l'ensemble des pratiques et des lois visant à assurer la confidentialité, l'intégrité et la sécurité des informations personnelles. Elle encadre la collecte, le traitement et le stockage des données afin de prévenir leur utilisation non autorisée ou abusive."
   },
   {
     "id": "theme_iso",
-    "name": "Thème ISO",
-    "description": "Thème ISO utilisés par les SITG"
+    "name": "ISO theme",
+    "description": "ISO themes used by SITG.",
+    "name:fr": "Thème ISO",
+    "description:fr": "Thème ISO utilisés par les SITG"
   },
   {
     "id": "personal_data",
     "parent_id": "data_protection",
-    "name": "Données personnelles",
-    "description": "Les données personnelles sont toute information permettant d'identifier directement ou indirectement une personne physique, comme le nom, l'adresse, l'email ou des données sensibles telles que l'orientation sexuelle ou les données biométriques. Elles sont protégées par des lois visant à garantir leur confidentialité et leur sécurité."
+    "name": "Personal data",
+    "description": "Personal data is any information that can directly or indirectly identify a natural person, such as a name, address, email, or sensitive information such as sexual orientation or biometric data. It is protected by laws that ensure confidentiality and security.",
+    "name:fr": "Données personnelles",
+    "description:fr": "Les données personnelles sont toute information permettant d'identifier directement ou indirectement une personne physique, comme le nom, l'adresse, l'email ou des données sensibles telles que l'orientation sexuelle ou les données biométriques. Elles sont protégées par des lois visant à garantir leur confidentialité et leur sécurité."
   },
   {
     "id": "contact_info",
-    "name": "Informations de contact",
-    "description": "Les informations de contact regroupent les moyens permettant de joindre une personne ou une organisation, comme une adresse email, un numéro de téléphone ou une adresse postale.",
+    "name": "Contact information",
+    "description": "Contact information includes the means used to reach a person or organization, such as an email address, phone number, or postal address.",
     "implied_tag_ids": "personal_data, confidentiality_risk",
-    "propagate_to_parents": true
+    "propagate_to_parents": true,
+    "name:fr": "Informations de contact",
+    "description:fr": "Les informations de contact regroupent les moyens permettant de joindre une personne ou une organisation, comme une adresse email, un numéro de téléphone ou une adresse postale."
   },
   {
     "id": "confidentiality_risk",
-    "name": "Risque de confidentialité",
-    "description": "Un risque de confidentialité indique que les données doivent être manipulées avec attention afin d'éviter une divulgation non souhaitée ou un accès non autorisé.",
-    "implied_tag_ids": "data_protection"
+    "name": "Confidentiality risk",
+    "description": "A confidentiality risk indicates that data must be handled carefully to avoid unwanted disclosure or unauthorized access.",
+    "implied_tag_ids": "data_protection",
+    "name:fr": "Risque de confidentialité",
+    "description:fr": "Un risque de confidentialité indique que les données doivent être manipulées avec attention afin d'éviter une divulgation non souhaitée ou un accès non autorisé."
   },
   {
     "id": "sensible_data",
     "parent_id": "data_protection",
-    "name": "Données sensibles",
-    "description": "Les données 2 sensibles sont des catégories particulières de données personnelles qui révèlent des informations hautement confidentielles, comme l'origine raciale ou ethnique, les opinions politiques, les croyances religieuses, la santé, la vie sexuelle, ou les données biométriques. Leur traitement est soumis à des règles strictes pour éviter toute discrimination ou atteinte à la vie privée.",
+    "name": "Sensitive data",
+    "description": "Sensitive data is a special category of personal data revealing highly confidential information, such as racial or ethnic origin, political opinions, religious beliefs, health, sex life, or biometric data. Its processing is subject to strict rules to avoid discrimination or privacy violations.",
     "implied_tag_ids": "confidentiality_risk",
-    "propagate_to_parents": true
+    "propagate_to_parents": true,
+    "name:fr": "Données sensibles",
+    "description:fr": "Les données 2 sensibles sont des catégories particulières de données personnelles qui révèlent des informations hautement confidentielles, comme l'origine raciale ou ethnique, les opinions politiques, les croyances religieuses, la santé, la vie sexuelle, ou les données biométriques. Leur traitement est soumis à des règles strictes pour éviter toute discrimination ou atteinte à la vie privée."
   },
   {
     "id": "pseudonymous_data",
     "parent_id": "data_protection",
-    "name": "Données pseudonymisées",
-    "description": "Les données pseudonymisées sont des données personnelles qui ont été modifiées de manière à ce qu'elles ne puissent plus être attribuées à une personne spécifique sans informations supplémentaires. Cela permet de réduire les risques pour la vie privée, tout en conservant la possibilité de réidentifier les données si nécessaire, en gardant ces informations complémentaires séparées et protégées.",
-    "doc_ids": "statpop-info"
+    "name": "Pseudonymized data",
+    "description": "Pseudonymized data is personal data that has been modified so it can no longer be attributed to a specific person without additional information. This reduces privacy risks while preserving the possibility of reidentification when necessary, provided the additional information is kept separate and protected.",
+    "doc_ids": "statpop-info",
+    "name:fr": "Données pseudonymisées",
+    "description:fr": "Les données pseudonymisées sont des données personnelles qui ont été modifiées de manière à ce qu'elles ne puissent plus être attribuées à une personne spécifique sans informations supplémentaires. Cela permet de réduire les risques pour la vie privée, tout en conservant la possibilité de réidentifier les données si nécessaire, en gardant ces informations complémentaires séparées et protégées."
   },
   {
     "id": "anonymous_data",
     "parent_id": "data_protection",
-    "name": "Données anonymisées",
-    "description": "Les données anonymisées sont des données personnelles qui ont été modifiées de façon irréversible afin qu'elles ne puissent plus être liées à une personne identifiable, directement ou indirectement. Contrairement à la pseudonymisation, l'anonymisation rend impossible la réidentification des individus, même avec des informations supplémentaires.",
-    "doc_ids": "pdf-wiki"
+    "name": "Anonymized data",
+    "description": "Anonymized data is personal data that has been irreversibly modified so it can no longer be linked to an identifiable person, directly or indirectly. Unlike pseudonymization, anonymization makes reidentification impossible even with additional information.",
+    "doc_ids": "pdf-wiki",
+    "name:fr": "Données anonymisées",
+    "description:fr": "Les données anonymisées sont des données personnelles qui ont été modifiées de façon irréversible afin qu'elles ne puissent plus être liées à une personne identifiable, directement ou indirectement. Contrairement à la pseudonymisation, l'anonymisation rend impossible la réidentification des individus, même avec des informations supplémentaires."
   },
   {
     "id": "developpement_territorial",
     "parent_id": "theme_iso",
-    "name": "Développement territorial",
-    "description": "La naissance de la notion de développement territorial renvoie à de multiples acceptions possibles du développement et relève de diverses définitions possibles du territoire. Il est maintenant admis qu'elle élargit, diversifie et approfondit celles de développement local (Pecqueur (B.), 1989)), de développement régional, d'aménagement du territoire, voire les dépasse.",
-    "doc_ids": "pdf_online, bevnat-variable"
+    "name": "Territorial development",
+    "description": "Territorial development refers to multiple possible approaches to development and territory. It broadens and deepens concepts such as local development, regional development, and spatial planning.",
+    "doc_ids": "pdf_online, bevnat-variable",
+    "name:fr": "Développement territorial",
+    "description:fr": "La naissance de la notion de développement territorial renvoie à de multiples acceptions possibles du développement et relève de diverses définitions possibles du territoire. Il est maintenant admis qu'elle élargit, diversifie et approfondit celles de développement local (Pecqueur (B.), 1989)), de développement régional, d'aménagement du territoire, voire les dépasse."
   },
   {
     "id": "cadastre_foncier",
     "parent_id": "theme_iso",
-    "name": "Cadastre foncier",
-    "description": "Un cadastre est le plan d'un lot inscrit dans un registre dressant l'état de la propriété foncière. Un plan cadastral comporte une vue d'ensemble de cadastres d'une circonscription foncière, d'un territoire foncier ou d'un immeuble détenu en copropriété. Un cadastre peut présenter un lot en : \n\ncadastre horizontal en deux dimensions ;\ncadastre vertical, représenté en trois dimensions (volume), tel un immeuble détenu en copropriété divise comportant un ou des bâtiments.Le terme cadastre s'applique aussi parfois aux systèmes informatisés ayant le même objet, à l'organisation chargée de maintenir ces documents ou systèmes d'information ou même aux travaux de terrain aboutissant à la constitution de ces documents ou systèmes d'information.\nPar extension, le terme cadastre peut impliquer d'autres concepts particuliers: cadastre juridique, cadastre agricole, cadastre solaire, cadastre vert, cadastres des émissions ou des émetteurs de pollution, cadastre fiscal et cadastre des restrictions de droit public à la propriété foncière (cadastre RDPPF)."
+    "name": "Land cadastre",
+    "description": "A cadastre is a plan or register describing land ownership. It may cover land parcels, buildings, co-ownership units, computerized land systems, cadastral organizations, or field work used to create these documents and information systems.",
+    "name:fr": "Cadastre foncier",
+    "description:fr": "Un cadastre est le plan d'un lot inscrit dans un registre dressant l'état de la propriété foncière. Un plan cadastral comporte une vue d'ensemble de cadastres d'une circonscription foncière, d'un territoire foncier ou d'un immeuble détenu en copropriété. Un cadastre peut présenter un lot en : \n\ncadastre horizontal en deux dimensions ;\ncadastre vertical, représenté en trois dimensions (volume), tel un immeuble détenu en copropriété divise comportant un ou des bâtiments.Le terme cadastre s'applique aussi parfois aux systèmes informatisés ayant le même objet, à l'organisation chargée de maintenir ces documents ou systèmes d'information ou même aux travaux de terrain aboutissant à la constitution de ces documents ou systèmes d'information.\nPar extension, le terme cadastre peut impliquer d'autres concepts particuliers: cadastre juridique, cadastre agricole, cadastre solaire, cadastre vert, cadastres des émissions ou des émetteurs de pollution, cadastre fiscal et cadastre des restrictions de droit public à la propriété foncière (cadastre RDPPF)."
   },
   {
     "id": "foret",
     "parent_id": "theme_iso",
-    "name": "Forêt",
-    "description": "Une forêt ou un massif forestier est une étendue boisée, relativement grande, constituée d'un ou plusieurs peuplements d'arbres, arbustes et arbrisseaux (fruticée), et aussi d'autres plantes indigènes associées. Les définitions du terme « forêt » sont nombreuses en fonction des latitudes et des usages.\nUn boisement de faible étendue est dit bois, boqueteau ou bosquet selon son importance.\nDivers types de forêts existent ; des forêts primaires aux forêts dites urbaines, avec les gradients intermédiaires. Il existe également de nombreux types d'exploitation des forêts (sylviculture, ligniculture, agrosylviculture…).\nLes forêts sont aussi un milieu de vie et une source de revenus pour l'être humain : au début du XXIe siècle, plus de cinq cent millions de personnes, dont cent cinquante millions d'autochtones[réf. nécessaire], vivent en forêt ou à ses abords. Elles abritent une grande richesse écologique, concentrant 80 % de la biodiversité terrestre mondiale recensée.\nL'action de l'Homme dans plusieurs régions de la planète conduit à une destruction ou une surexploitation des forêts. Cela engendre une importante déforestation qui concerne surtout actuellement les forêts tropicales et dans une moindre mesure la taïga. La moitié des forêts de la planète a été détruite au cours du XXe siècle. Il n'y a pas de gouvernance mondiale des forêts, ni de convention internationale, mais l'ONU a mis en place un Forum des Nations unies sur les forêts (FNUF)."
+    "name": "Forest",
+    "description": "A forest is a relatively large wooded area made up of tree stands, shrubs, and associated native plants. Forests support biodiversity, human livelihoods, and many forms of ecological balance, while also facing deforestation and overexploitation.",
+    "name:fr": "Forêt",
+    "description:fr": "Une forêt ou un massif forestier est une étendue boisée, relativement grande, constituée d'un ou plusieurs peuplements d'arbres, arbustes et arbrisseaux (fruticée), et aussi d'autres plantes indigènes associées. Les définitions du terme « forêt » sont nombreuses en fonction des latitudes et des usages.\nUn boisement de faible étendue est dit bois, boqueteau ou bosquet selon son importance.\nDivers types de forêts existent ; des forêts primaires aux forêts dites urbaines, avec les gradients intermédiaires. Il existe également de nombreux types d'exploitation des forêts (sylviculture, ligniculture, agrosylviculture…).\nLes forêts sont aussi un milieu de vie et une source de revenus pour l'être humain : au début du XXIe siècle, plus de cinq cent millions de personnes, dont cent cinquante millions d'autochtones[réf. nécessaire], vivent en forêt ou à ses abords. Elles abritent une grande richesse écologique, concentrant 80 % de la biodiversité terrestre mondiale recensée.\nL'action de l'Homme dans plusieurs régions de la planète conduit à une destruction ou une surexploitation des forêts. Cela engendre une importante déforestation qui concerne surtout actuellement les forêts tropicales et dans une moindre mesure la taïga. La moitié des forêts de la planète a été détruite au cours du XXe siècle. Il n'y a pas de gouvernance mondiale des forêts, ni de convention internationale, mais l'ONU a mis en place un Forum des Nations unies sur les forêts (FNUF)."
   },
   {
     "id": "flore",
     "parent_id": "theme_iso",
-    "name": "Flore",
-    "description": "La flore est l'ensemble des espèces végétales présentes dans un espace géographique ou un écosystème déterminé (par opposition à la faune).\nPar extension de sens et par analogie, le terme « flore » ou « microflore » désigne aussi l'ensemble des micro-organismes présents en un lieu donné. On parle de flore intestinale ou de flore cutanée pour les bactéries présentes dans l'intestin ou à la surface de la peau, par exemple. Le terme de flore est scientifiquement incorrect et fait référence à l'époque où les bactéries étaient classées dans le règne végétal. La communauté scientifique l'a ainsi rebaptisé microbiote qui évoque, sémantiquement, davantage des micro-organismes vivants (grec bios, « vie ») qu'un monde végétal suggéré par le mot flore.\nPar extension, il désigne aussi les ouvrages répertoriant et décrivant ces espèces, et servant à déterminer les plantes (à les identifier). Le nombre d'espèces à décrire étant très important, les flores à destination du grand public se limitent souvent aux végétaux vasculaires ou aux plantes à graines et à leurs principales espèces.\nLes collections de spécimens servant à définir les différentes espèces sont conservées dans des herbiers. Ce réseau d'herbiers à travers le monde est très important. C'est la référence qui permet aux botanistes de s'y retrouver et de faire le point entre les dénominations et découvertes anciennes et les identifications actuelles.\nOn ne doit pas confondre le terme de flore avec celui de végétation : la flore d'une zone géographique est la liste des plantes de cette zone (flore des Alpes, flore du Bassin Parisien, flore d'Angleterre, etc.), la végétation est le regroupement de certaines plantes en formations végétales déterminées par une flore spécifique et la dominance d'un type biologique. Ainsi, on peut reconnaître des forêts, des prairies, savanes et brousses tempérées, des cultures, des landes, des tourbières, etc. (voir phytosociologie).\nLa floristique est l'étude de la flore."
+    "name": "Flora",
+    "description": "Flora is the set of plant species present in a geographic area or ecosystem. By extension, the term can also refer to works that list and describe plant species and help identify them.",
+    "name:fr": "Flore",
+    "description:fr": "La flore est l'ensemble des espèces végétales présentes dans un espace géographique ou un écosystème déterminé (par opposition à la faune).\nPar extension de sens et par analogie, le terme « flore » ou « microflore » désigne aussi l'ensemble des micro-organismes présents en un lieu donné. On parle de flore intestinale ou de flore cutanée pour les bactéries présentes dans l'intestin ou à la surface de la peau, par exemple. Le terme de flore est scientifiquement incorrect et fait référence à l'époque où les bactéries étaient classées dans le règne végétal. La communauté scientifique l'a ainsi rebaptisé microbiote qui évoque, sémantiquement, davantage des micro-organismes vivants (grec bios, « vie ») qu'un monde végétal suggéré par le mot flore.\nPar extension, il désigne aussi les ouvrages répertoriant et décrivant ces espèces, et servant à déterminer les plantes (à les identifier). Le nombre d'espèces à décrire étant très important, les flores à destination du grand public se limitent souvent aux végétaux vasculaires ou aux plantes à graines et à leurs principales espèces.\nLes collections de spécimens servant à définir les différentes espèces sont conservées dans des herbiers. Ce réseau d'herbiers à travers le monde est très important. C'est la référence qui permet aux botanistes de s'y retrouver et de faire le point entre les dénominations et découvertes anciennes et les identifications actuelles.\nOn ne doit pas confondre le terme de flore avec celui de végétation : la flore d'une zone géographique est la liste des plantes de cette zone (flore des Alpes, flore du Bassin Parisien, flore d'Angleterre, etc.), la végétation est le regroupement de certaines plantes en formations végétales déterminées par une flore spécifique et la dominance d'un type biologique. Ainsi, on peut reconnaître des forêts, des prairies, savanes et brousses tempérées, des cultures, des landes, des tourbières, etc. (voir phytosociologie).\nLa floristique est l'étude de la flore."
   },
   {
     "id": "faune",
     "parent_id": "theme_iso",
-    "name": "Faune",
-    "description": "Le terme faune désigne l'ensemble des espèces animales présentes dans un espace géographique ou un écosystème déterminé (par opposition à la flore), à une époque donnée.\nEn général, la notion ne comprend pas l'être humain, bien qu'il fasse partie du règne animal et qu'il soit classé physiologiquement comme un mammifère.\nLa biodiversité correspond à l'ensemble de la diversité du monde vivant. Elle englobe la faune et la flore, c'est-à-dire la totalité des formes que prennent les êtres vivants (animaux, végétaux, micro-organismes) au sein des environnements dans lesquels ils évoluent et se multiplient. La faune et la flore sont interdépendantes. La faune est essentielle à la survie de nombreuses espèces de plantes, certaines d'entre elles étant entièrement dépendantes d'un unique insecte pour leur pollinisation et donc leur reproduction éventuelle.\nDe nombreuses personnes pensent donc que l'être humain devrait agir sur la nature pour préserver la faune, dans l'intérêt de tout le monde. Cependant l'homme pourrait modifier l'équilibre naturel en voulant à tout prix maintenir certains caractères. D'autres, curieux de suivre l'évolution du phénomène naturel, préfèrent, comme au parc national du Serengeti et dans le cratère du Ngorongoro, laisser la nature agir d'elle-même. Dans ces parcs nationaux de Tanzanie, une population de lions a failli disparaître à la suite de la maladie de Carré transmise par les chiens domestiques. Le parti-pris de ne pas intervenir a été maintenu.",
-    "doc_ids": "pdf-wiki, tourisme-exemple"
+    "name": "Fauna",
+    "description": "Fauna is the set of animal species present in a geographic area or ecosystem at a given time. It is part of biodiversity and is closely linked to flora and ecological balance.",
+    "doc_ids": "pdf-wiki, tourisme-exemple",
+    "name:fr": "Faune",
+    "description:fr": "Le terme faune désigne l'ensemble des espèces animales présentes dans un espace géographique ou un écosystème déterminé (par opposition à la flore), à une époque donnée.\nEn général, la notion ne comprend pas l'être humain, bien qu'il fasse partie du règne animal et qu'il soit classé physiologiquement comme un mammifère.\nLa biodiversité correspond à l'ensemble de la diversité du monde vivant. Elle englobe la faune et la flore, c'est-à-dire la totalité des formes que prennent les êtres vivants (animaux, végétaux, micro-organismes) au sein des environnements dans lesquels ils évoluent et se multiplient. La faune et la flore sont interdépendantes. La faune est essentielle à la survie de nombreuses espèces de plantes, certaines d'entre elles étant entièrement dépendantes d'un unique insecte pour leur pollinisation et donc leur reproduction éventuelle.\nDe nombreuses personnes pensent donc que l'être humain devrait agir sur la nature pour préserver la faune, dans l'intérêt de tout le monde. Cependant l'homme pourrait modifier l'équilibre naturel en voulant à tout prix maintenir certains caractères. D'autres, curieux de suivre l'évolution du phénomène naturel, préfèrent, comme au parc national du Serengeti et dans le cratère du Ngorongoro, laisser la nature agir d'elle-même. Dans ces parcs nationaux de Tanzanie, une population de lions a failli disparaître à la suite de la maladie de Carré transmise par les chiens domestiques. Le parti-pris de ne pas intervenir a été maintenu."
   },
   {
     "id": "protection_env_nature",
     "parent_id": "theme_iso",
-    "name": "Protection de l'environnement et de la nature",
-    "description": "La protection de l'environnement consiste à prendre des mesures pour limiter ou  éliminer l'impact négatif des activités de l'Homme sur son environnement.\nAu-delà de la simple conservation de la nature, il s'agit de comprendre le fonctionnement systémique, et éventuellement planétaire de l'environnement ; d'identifier les actions humaines qui l'endommagent au point de porter préjudice aux générations actuelles ou futures ; et de mettre en place les actions de correction. Cette action est donc à la fois scientifique, car elle nécessite de développer nos connaissances pour le moment limitées dans ce domaine ; citoyenne, puisque les décisions à prendre ont un coût pour les générations actuelles, et un impact pour les générations futures ; politique, car les décisions à prendre sont forcément collectives et parfois planétaires.\nLa connaissance scientifique du fonctionnement global de la planète est très récente ; ce n'est que vers la fin du XIXe siècle que les théories nécessaires ont pu se constituer. Il a fallu presque un siècle de plus pour découvrir que les activités humaines avaient un impact non seulement significatif sur cet environnement, mais qu'il risquait d'être définitif. En 1972, la création simultanée du Programme des Nations unies pour l'environnement et d'instances gouvernementales correspondantes dans les pays développés marque le point de départ de la volonté d'agir sur un plan collectif.\nEn 2020, 227 défenseurs de l'environnement ont été assasssinés."
+    "name": "Environmental and nature protection",
+    "description": "Environmental protection consists of measures that limit or eliminate the negative impact of human activities on the environment. It combines scientific knowledge, civic responsibility, and collective policy decisions.",
+    "name:fr": "Protection de l'environnement et de la nature",
+    "description:fr": "La protection de l'environnement consiste à prendre des mesures pour limiter ou  éliminer l'impact négatif des activités de l'Homme sur son environnement.\nAu-delà de la simple conservation de la nature, il s'agit de comprendre le fonctionnement systémique, et éventuellement planétaire de l'environnement ; d'identifier les actions humaines qui l'endommagent au point de porter préjudice aux générations actuelles ou futures ; et de mettre en place les actions de correction. Cette action est donc à la fois scientifique, car elle nécessite de développer nos connaissances pour le moment limitées dans ce domaine ; citoyenne, puisque les décisions à prendre ont un coût pour les générations actuelles, et un impact pour les générations futures ; politique, car les décisions à prendre sont forcément collectives et parfois planétaires.\nLa connaissance scientifique du fonctionnement global de la planète est très récente ; ce n'est que vers la fin du XIXe siècle que les théories nécessaires ont pu se constituer. Il a fallu presque un siècle de plus pour découvrir que les activités humaines avaient un impact non seulement significatif sur cet environnement, mais qu'il risquait d'être définitif. En 1972, la création simultanée du Programme des Nations unies pour l'environnement et d'instances gouvernementales correspondantes dans les pays développés marque le point de départ de la volonté d'agir sur un plan collectif.\nEn 2020, 227 défenseurs de l'environnement ont été assasssinés."
   },
   {
     "id": "edifices",
     "parent_id": "theme_iso",
-    "name": "Édifices",
-    "description": "Un édifice est un ouvrage bâti en travaux d'art de la construction. Il est synonyme de bâtiment ou de monument. Le terme n'est pourtant souvent employé qu'en parlant des temples, des palais et autres grands bâtiments publics (1694-1832). On élève un édifice quand on construit un « bâtiment durable au-dessus du sol » -Dicobat, 2005.\n« Le bâtiment, c'est tout ce qu'on bâtit; une cabane est un petit bâtiment; une caserne en peut être un grand. L'édifice suppose plus d'art, plus de grandeur, d'élévation, des matériaux plus solides. Un marché public qui n'a presque pas de hauteur, n'est qu'un grand bâtiment; l'église des Invalides est un édifice. Le monument est ce qui sert à instruire la postérité, ce qui reste comme une marque de la grandeur des peuples ou des hommes » -Littré, 1873. \nActuellement un édifice « peut désigner un bâtiment d'une certaine importance » -Dicobat, 2005.\nSont des édifices aussi bien : \n\ndes constructions utiles (un pont, une terrasse murée aménageant un terrain),\nque des constructions d'un ou plusieurs bâtiments organisés en ensemble d'espace habitable ou d'abri de marchandise qui sont des constructions jointives ou non ayant la même destination formant un ensemble architectural ou industriel,\nque des constructions d'apparat ou d'agrément  (un monument arc de triomphe, obélisque, château, hôtel de ville..., un décor de cinéma etc.)\nque des constructions à caractère religieux (églises, mosquées, temples)L'art de construire est tenu par les métiers du bâtiment, qui forment dans leur ensemble un secteur économique où on utilise la mécanisation et l'habileté manuelle. \nL'art de concevoir des édifices s'appelle architecture aussi bien pour leur forme globale que pour l'aménagement intérieur en différentes salles. La science d'édification est nommée génie civil, tandis que celui de disposer les constructions à l'échelle de la ville pour les raccorder en agglomération aux réseaux (voies, eau, égouts, etc.) s'appelle urbanisme.",
-    "doc_ids": "bevnat-variable"
+    "name": "Buildings",
+    "description": "A building is a constructed work, often of some importance. It may be useful, architectural, industrial, symbolic, or religious, and is designed and built through construction, architecture, civil engineering, and urban planning.",
+    "doc_ids": "bevnat-variable",
+    "name:fr": "Édifices",
+    "description:fr": "Un édifice est un ouvrage bâti en travaux d'art de la construction. Il est synonyme de bâtiment ou de monument. Le terme n'est pourtant souvent employé qu'en parlant des temples, des palais et autres grands bâtiments publics (1694-1832). On élève un édifice quand on construit un « bâtiment durable au-dessus du sol » -Dicobat, 2005.\n« Le bâtiment, c'est tout ce qu'on bâtit; une cabane est un petit bâtiment; une caserne en peut être un grand. L'édifice suppose plus d'art, plus de grandeur, d'élévation, des matériaux plus solides. Un marché public qui n'a presque pas de hauteur, n'est qu'un grand bâtiment; l'église des Invalides est un édifice. Le monument est ce qui sert à instruire la postérité, ce qui reste comme une marque de la grandeur des peuples ou des hommes » -Littré, 1873. \nActuellement un édifice « peut désigner un bâtiment d'une certaine importance » -Dicobat, 2005.\nSont des édifices aussi bien : \n\ndes constructions utiles (un pont, une terrasse murée aménageant un terrain),\nque des constructions d'un ou plusieurs bâtiments organisés en ensemble d'espace habitable ou d'abri de marchandise qui sont des constructions jointives ou non ayant la même destination formant un ensemble architectural ou industriel,\nque des constructions d'apparat ou d'agrément  (un monument arc de triomphe, obélisque, château, hôtel de ville..., un décor de cinéma etc.)\nque des constructions à caractère religieux (églises, mosquées, temples)L'art de construire est tenu par les métiers du bâtiment, qui forment dans leur ensemble un secteur économique où on utilise la mécanisation et l'habileté manuelle. \nL'art de concevoir des édifices s'appelle architecture aussi bien pour leur forme globale que pour l'aménagement intérieur en différentes salles. La science d'édification est nommée génie civil, tandis que celui de disposer les constructions à l'échelle de la ville pour les raccorder en agglomération aux réseaux (voies, eau, égouts, etc.) s'appelle urbanisme."
   },
   {
     "id": "infrastructures",
     "parent_id": "theme_iso",
-    "name": "Infrastructures",
-    "description": "L'infrastructure est un ensemble d'éléments, d'ouvrages ou d'installations interdépendants qui supportent en partie ou en totalité une structure ou un réseau. Ces infrastructures peuvent être :\n\nla fondation d'une construction (par exemple: solage, semelle de fondation ou dalles portant des charges), généralement dans le sol ;\nune construction implantée sur le sol (par exemple: ponts, routes, voie ferrées, aéroports, barrages) ;\nun ensemble d'équipements interconnectés (par exemple: réseaux d'aqueduc et/ou d'égouts, réseaux électriques, réseaux téléphoniques) ;\ndes réseaux de hautes technologies (par exemple: réseaux Internet ou intranet, réseaux satellitaires, réseaux 5G, réseaux IoT).Le terme est souvent utilisé d'une façon très abstraite. Par exemple, les outils d'ingénierie informatique sont quelquefois décrits comme une partie de l'infrastructure d'un environnement de développement, et le terme capital d'infrastructure en économie peut être trop large, comme il inclut l'habillement jusqu'au système de canaux qui s'étend sur un continent. Il faut aussi pondérer avec la notion de robustesse dans un environnement fluide."
+    "name": "Infrastructure",
+    "description": "Infrastructure is a set of interdependent elements, works, or installations that support a structure or network, such as foundations, roads, bridges, airports, dams, utility networks, or digital networks.",
+    "name:fr": "Infrastructures",
+    "description:fr": "L'infrastructure est un ensemble d'éléments, d'ouvrages ou d'installations interdépendants qui supportent en partie ou en totalité une structure ou un réseau. Ces infrastructures peuvent être :\n\nla fondation d'une construction (par exemple: solage, semelle de fondation ou dalles portant des charges), généralement dans le sol ;\nune construction implantée sur le sol (par exemple: ponts, routes, voie ferrées, aéroports, barrages) ;\nun ensemble d'équipements interconnectés (par exemple: réseaux d'aqueduc et/ou d'égouts, réseaux électriques, réseaux téléphoniques) ;\ndes réseaux de hautes technologies (par exemple: réseaux Internet ou intranet, réseaux satellitaires, réseaux 5G, réseaux IoT).Le terme est souvent utilisé d'une façon très abstraite. Par exemple, les outils d'ingénierie informatique sont quelquefois décrits comme une partie de l'infrastructure d'un environnement de développement, et le terme capital d'infrastructure en économie peut être trop large, comme il inclut l'habillement jusqu'au système de canaux qui s'étend sur un continent. Il faut aussi pondérer avec la notion de robustesse dans un environnement fluide."
   },
   {
     "id": "ouvrages",
     "parent_id": "theme_iso",
-    "name": "Ouvrages",
-    "description": "Un ouvrage est un « objet résultant d'un travail (plus précisément du travail d'un ouvrier, d'un artisan ou encore d'un artiste, notamment d'un point de vue technique) ». \nCe terme s'applique dans différents domaines."
+    "name": "Works",
+    "description": "A work is an object resulting from labor, especially from technical work by a worker, craftsperson, or artist. The term applies in several domains.",
+    "name:fr": "Ouvrages",
+    "description:fr": "Un ouvrage est un « objet résultant d'un travail (plus précisément du travail d'un ouvrier, d'un artisan ou encore d'un artiste, notamment d'un point de vue technique) ». \nCe terme s'applique dans différents domaines."
   },
   {
     "id": "altimetrie",
     "parent_id": "theme_iso",
-    "name": "Altimétrie",
-    "description": "L'altimétrie est la détermination et la mesure des altitudes d'un lieu ou d'une région donnée. Sa détermination débouche généralement sur la conception d'une carte topographique où les altitudes sont indiquées sous la forme de points locaux ou sous la forme d'isohypses. L'altimétrie est également la technique qui permet de calculer avec le moins d'erreurs possibles, l'altitude d'un aéronef."
+    "name": "Altimetry",
+    "description": "Altimetry is the determination and measurement of the altitude of a place or region. It supports topographic mapping and is also used to calculate aircraft altitude as accurately as possible.",
+    "name:fr": "Altimétrie",
+    "description:fr": "L'altimétrie est la détermination et la mesure des altitudes d'un lieu ou d'une région donnée. Sa détermination débouche généralement sur la conception d'une carte topographique où les altitudes sont indiquées sous la forme de points locaux ou sous la forme d'isohypses. L'altimétrie est également la technique qui permet de calculer avec le moins d'erreurs possibles, l'altitude d'un aéronef."
   },
   {
     "id": "hydrographie",
     "parent_id": "theme_iso",
-    "name": "Hydrographie",
-    "description": "L'hydrographie peut être définie de trois manières, selon le contexte :\n\nl'étude et la description des cours d'eau et des étendues d'eau (océans, mers, lacs...) qu'on peut observer à la surface de la terre ou dans le sous-sol (cours d'eau souterrains...) ;\nLe terme désigne aussi l'ensemble des cours d'eau d'une région donnée, organisés en bassins hydrographiques (ou bassin versant) ;\nla topographie maritime ou lacustre qui a pour objet de lever le plan du fond des mers et des fleuves, et de déterminer les diverses profondeurs de l'eau, la force des courants et des marées, dans le but d'établir des cartes marines,",
-    "doc_ids": "statpop-info, tourisme-exemple"
+    "name": "Hydrography",
+    "description": "Hydrography can mean the study and description of watercourses and bodies of water, the set of watercourses in a region organized by watershed, or maritime and lake-bed surveying for nautical mapping.",
+    "doc_ids": "statpop-info, tourisme-exemple",
+    "name:fr": "Hydrographie",
+    "description:fr": "L'hydrographie peut être définie de trois manières, selon le contexte :\n\nl'étude et la description des cours d'eau et des étendues d'eau (océans, mers, lacs...) qu'on peut observer à la surface de la terre ou dans le sous-sol (cours d'eau souterrains...) ;\nLe terme désigne aussi l'ensemble des cours d'eau d'une région donnée, organisés en bassins hydrographiques (ou bassin versant) ;\nla topographie maritime ou lacustre qui a pour objet de lever le plan du fond des mers et des fleuves, et de déterminer les diverses profondeurs de l'eau, la force des courants et des marées, dans le but d'établir des cartes marines,"
   },
   {
     "id": "limites_pol_admin",
     "parent_id": "theme_iso",
-    "name": "Limites politiques et administratives",
-    "description": "Une région administrative, au Québec, est la première division du territoire après celle de l'État. Le Québec est divisé en 17 régions administratives. Comme leur nom l'indique, il s'agit de divisions administratives et non politiques.\nIl n'existe pas d'instance politique élective responsable de gérer une région et celles-ci ne bénéficient pas de la personnalité morale. Cependant, un ministre responsable, appelé à traiter des enjeux locaux avec le gouvernement provincial ou au nom de ce dernier auprès de la population, est nommé pour chaque région.\nLes régions servent à organiser les services gouvernementaux et le développement du territoire en fonction des particularités régionales. Elles jouent également un rôle identitaire important, les réalités socio-économiques et historiques variant parfois beaucoup en raison de la superficie et de la densité démographique du Québec.\nLes dix premières régions sont créées le 29 mars 1966, puis une réorganisation est faite le 22 décembre 1987.",
-    "doc_ids": "pop-com-1, pdf_online"
+    "name": "Political and administrative boundaries",
+    "description": "Political and administrative boundaries describe administrative divisions used to organize public services, territorial development, local governance responsibilities, and regional identity.",
+    "doc_ids": "pop-com-1, pdf_online",
+    "name:fr": "Limites politiques et administratives",
+    "description:fr": "Une région administrative, au Québec, est la première division du territoire après celle de l'État. Le Québec est divisé en 17 régions administratives. Comme leur nom l'indique, il s'agit de divisions administratives et non politiques.\nIl n'existe pas d'instance politique élective responsable de gérer une région et celles-ci ne bénéficient pas de la personnalité morale. Cependant, un ministre responsable, appelé à traiter des enjeux locaux avec le gouvernement provincial ou au nom de ce dernier auprès de la population, est nommé pour chaque région.\nLes régions servent à organiser les services gouvernementaux et le développement du territoire en fonction des particularités régionales. Elles jouent également un rôle identitaire important, les réalités socio-économiques et historiques variant parfois beaucoup en raison de la superficie et de la densité démographique du Québec.\nLes dix premières régions sont créées le 29 mars 1966, puis une réorganisation est faite le 22 décembre 1987."
   },
   {
     "id": "atmosphere",
     "parent_id": "theme_iso",
-    "name": "Atmosphère",
-    "description": "L'atmosphère terrestre est l'enveloppe gazeuse, entourant la Terre, que l'on appelle air. L'air sec se compose à 78,087 % de diazote, à 20,95 % de dioxygène, à 0,93 % d'argon, à 0,041 % de dioxyde de carbone, et de traces d'autres gaz. L'atmosphère protège la vie sur Terre en filtrant le rayonnement solaire ultraviolet, en réchauffant la surface par la rétention de chaleur (effet de serre) et en réduisant partiellement les écarts de température entre le jour et la nuit.\nLes nuages, parfois liquides, parfois solides, ne sont pas considérés comme des constituants de l'atmosphère. En revanche, la vapeur d'eau contenue dans l'air humide représente, en moyenne, 0,25 % de la masse totale de l'atmosphère. La vapeur d'eau possède la particularité notable d'être le seul fluide de l'atmosphère terrestre susceptible de changer rapidement de phase (solide, liquide, gaz), essentiellement en fonction de la température, et dont la concentration est très variable dans le temps et dans l'espace. La chaleur a tendance à faire monter l'air et son humidité, alors que la pression atmosphérique et la température diminuent avec l'altitude."
+    "name": "Atmosphere",
+    "description": "The atmosphere is the gaseous envelope surrounding Earth. It protects life by filtering ultraviolet radiation, retaining heat through the greenhouse effect, and moderating temperature differences.",
+    "name:fr": "Atmosphère",
+    "description:fr": "L'atmosphère terrestre est l'enveloppe gazeuse, entourant la Terre, que l'on appelle air. L'air sec se compose à 78,087 % de diazote, à 20,95 % de dioxygène, à 0,93 % d'argon, à 0,041 % de dioxyde de carbone, et de traces d'autres gaz. L'atmosphère protège la vie sur Terre en filtrant le rayonnement solaire ultraviolet, en réchauffant la surface par la rétention de chaleur (effet de serre) et en réduisant partiellement les écarts de température entre le jour et la nuit.\nLes nuages, parfois liquides, parfois solides, ne sont pas considérés comme des constituants de l'atmosphère. En revanche, la vapeur d'eau contenue dans l'air humide représente, en moyenne, 0,25 % de la masse totale de l'atmosphère. La vapeur d'eau possède la particularité notable d'être le seul fluide de l'atmosphère terrestre susceptible de changer rapidement de phase (solide, liquide, gaz), essentiellement en fonction de la température, et dont la concentration est très variable dans le temps et dans l'espace. La chaleur a tendance à faire monter l'air et son humidité, alors que la pression atmosphérique et la température diminuent avec l'altitude."
   },
   {
     "id": "climatologie",
     "parent_id": "theme_iso",
-    "name": "Climatologie",
-    "description": "La climatologie est l'étude du climat et de l'état moyen de l'atmosphère, c'est-à-dire la succession des conditions météorologiques sur de longues périodes dans le temps. Il s'agit d'une branche combinée de la géographie physique et de la météorologie, l'étude du temps à court terme étant le domaine de la météorologie opérationnelle. Un climatologue, ou climatologiste, est un spécialiste qui fait l'étude des variations locales et temporelles des climats grâce aux statistiques des données provenant de plusieurs domaines qui affectent le climat.\nSi la climatologie s'intéresse essentiellement à l'étude et à la classification des climats existants sur terre, une partie de la discipline traite aussi de l'interaction entre climat et société ; que ce soit l'influence du climat sur l'Homme ou de l'Homme sur le climat."
+    "name": "Climatology",
+    "description": "Climatology is the study of climate and average atmospheric conditions over long periods. It examines climate patterns, classifications, variations, and interactions between climate and society.",
+    "name:fr": "Climatologie",
+    "description:fr": "La climatologie est l'étude du climat et de l'état moyen de l'atmosphère, c'est-à-dire la succession des conditions météorologiques sur de longues périodes dans le temps. Il s'agit d'une branche combinée de la géographie physique et de la météorologie, l'étude du temps à court terme étant le domaine de la météorologie opérationnelle. Un climatologue, ou climatologiste, est un spécialiste qui fait l'étude des variations locales et temporelles des climats grâce aux statistiques des données provenant de plusieurs domaines qui affectent le climat.\nSi la climatologie s'intéresse essentiellement à l'étude et à la classification des climats existants sur terre, une partie de la discipline traite aussi de l'interaction entre climat et société ; que ce soit l'influence du climat sur l'Homme ou de l'Homme sur le climat."
   },
   {
     "id": "sante",
     "parent_id": "theme_iso",
-    "name": "Santé",
-    "description": "La santé est « un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité ». Dans cette définition par l'Organisation mondiale de la santé, OMS, depuis 1946, la santé représente « l'un des droits fondamentaux de tout être humain, quelles que soient sa race, sa religion, ses opinions politiques, sa condition économique ou sociale »,. Elle implique la satisfaction de tous les besoins fondamentaux de la personne, qu'ils soient affectifs, sanitaires, nutritionnels, sociaux ou culturels.. Mais cette définition confond les notions de santé et de bien-être.\nPar ailleurs, « la santé résulte d'une interaction constante entre l'individu et son milieu » et représente donc « cette « capacité physique, psychique et sociale des personnes d'agir dans leur milieu et d'accomplir les rôles qu'elles entendent assumer d'une manière acceptable pour elles-mêmes et pour les groupes dont elles font partie ». \nRené Dubos présente en 1973 la santé comme « la situation dans laquelle l'organisme réagit par une adaptation tout en préservant son intégrité individuelle. C'est l'état physique et mental relativement exempt de gênes et de souffrances qui permet à l'individu de fonctionner aussi longtemps que possible dans le milieu où le hasard ou le choix l'ont placé. »,Pour René Leriche en 1936, « la santé c'est la vie dans le silence des organes. »,",
+    "name": "Health",
+    "description": "Health is a state of physical, mental, and social well-being and not only the absence of disease or infirmity. It also reflects a person's capacity to act within their environment and fulfill their roles.",
     "implied_tag_ids": "sensible_data",
-    "doc_ids": "pdf-wiki"
+    "doc_ids": "pdf-wiki",
+    "name:fr": "Santé",
+    "description:fr": "La santé est « un état de complet bien-être physique, mental et social, et ne consiste pas seulement en une absence de maladie ou d'infirmité ». Dans cette définition par l'Organisation mondiale de la santé, OMS, depuis 1946, la santé représente « l'un des droits fondamentaux de tout être humain, quelles que soient sa race, sa religion, ses opinions politiques, sa condition économique ou sociale »,. Elle implique la satisfaction de tous les besoins fondamentaux de la personne, qu'ils soient affectifs, sanitaires, nutritionnels, sociaux ou culturels.. Mais cette définition confond les notions de santé et de bien-être.\nPar ailleurs, « la santé résulte d'une interaction constante entre l'individu et son milieu » et représente donc « cette « capacité physique, psychique et sociale des personnes d'agir dans leur milieu et d'accomplir les rôles qu'elles entendent assumer d'une manière acceptable pour elles-mêmes et pour les groupes dont elles font partie ». \nRené Dubos présente en 1973 la santé comme « la situation dans laquelle l'organisme réagit par une adaptation tout en préservant son intégrité individuelle. C'est l'état physique et mental relativement exempt de gênes et de souffrances qui permet à l'individu de fonctionner aussi longtemps que possible dans le milieu où le hasard ou le choix l'ont placé. »,Pour René Leriche en 1936, « la santé c'est la vie dans le silence des organes. »,"
   },
   {
     "id": "agriculture",
     "parent_id": "theme_iso",
     "name": "Agriculture",
-    "description": "L'agriculture (du latin agricultura, composé à partir de ager, « champ », et de cultura, « culture ») est un processus par lequel les êtres humains aménagent leurs écosystèmes et contrôlent le cycle biologique d'espèces domestiquées, dans le but de produire des aliments et d'autres ressources utiles à leurs sociétés,. Elle désigne l'ensemble des savoir-faire et activités ayant pour objet la culture des sols, et, plus généralement, l'ensemble des travaux sur le milieu naturel (pas seulement terrestre) permettant de cultiver et prélever des êtres vivants (végétaux, animaux, voire champignons ou microbes) utiles à l'être humain.\nLa délimitation précise de ce qui entre ou non dans le champ de l'agriculture conduit à de nombreuses conventions qui ne font pas toutes l'objet d'un consensus. Certaines productions peuvent être considérées comme ne faisant pas partie de l'agriculture : la mise en valeur de la forêt (sylviculture), l'élevage d'animal aquatique (aquaculture), l'élevage hors-sol de certains animaux (volaille et porc principalement), la culture sur substrat artificiel (cultures hydroponiques)… Mis à part ces cas particuliers, on distingue principalement la culture pour l'activité concernant le végétal et l'élevage pour l'activité concernant l'animal.\nL'agronomie regroupe, depuis le XIXe siècle, l'ensemble de la connaissance biologique, technique, culturelle, économique et sociale relative à l'agriculture.\nEn économie, l'économie agricole est définie comme le secteur d'activité dont la fonction est de produire un revenu financier à partir de l'exploitation de la terre (culture), de la forêt (sylviculture), de la mer, des lacs et des rivières (aquaculture, pêche), de l'animal de ferme (élevage) et de l'animal sauvage (chasse). Dans la pratique, cet exercice est pondéré par la disponibilité des ressources et les composantes de l'environnement biophysique et humain. La production et la distribution dans ce domaine sont intimement liées à l'économie politique dans un environnement global."
+    "description": "Agriculture is the set of practices through which humans manage ecosystems and biological cycles to produce food and other useful resources. It includes soil cultivation, livestock, forestry-related practices, aquaculture, and broader agricultural economics.",
+    "name:fr": "Agriculture",
+    "description:fr": "L'agriculture (du latin agricultura, composé à partir de ager, « champ », et de cultura, « culture ») est un processus par lequel les êtres humains aménagent leurs écosystèmes et contrôlent le cycle biologique d'espèces domestiquées, dans le but de produire des aliments et d'autres ressources utiles à leurs sociétés,. Elle désigne l'ensemble des savoir-faire et activités ayant pour objet la culture des sols, et, plus généralement, l'ensemble des travaux sur le milieu naturel (pas seulement terrestre) permettant de cultiver et prélever des êtres vivants (végétaux, animaux, voire champignons ou microbes) utiles à l'être humain.\nLa délimitation précise de ce qui entre ou non dans le champ de l'agriculture conduit à de nombreuses conventions qui ne font pas toutes l'objet d'un consensus. Certaines productions peuvent être considérées comme ne faisant pas partie de l'agriculture : la mise en valeur de la forêt (sylviculture), l'élevage d'animal aquatique (aquaculture), l'élevage hors-sol de certains animaux (volaille et porc principalement), la culture sur substrat artificiel (cultures hydroponiques)… Mis à part ces cas particuliers, on distingue principalement la culture pour l'activité concernant le végétal et l'élevage pour l'activité concernant l'animal.\nL'agronomie regroupe, depuis le XIXe siècle, l'ensemble de la connaissance biologique, technique, culturelle, économique et sociale relative à l'agriculture.\nEn économie, l'économie agricole est définie comme le secteur d'activité dont la fonction est de produire un revenu financier à partir de l'exploitation de la terre (culture), de la forêt (sylviculture), de la mer, des lacs et des rivières (aquaculture, pêche), de l'animal de ferme (élevage) et de l'animal sauvage (chasse). Dans la pratique, cet exercice est pondéré par la disponibilité des ressources et les composantes de l'environnement biophysique et humain. La production et la distribution dans ce domaine sont intimement liées à l'économie politique dans un environnement global."
   },
   {
     "id": "geologie",
     "parent_id": "theme_iso",
-    "name": "Géologie",
-    "description": "La biologie (du grec bios « la vie » et logos, « discours ») est la science du vivant. Elle recouvre une partie des sciences de la nature et de l'histoire naturelle des êtres vivants.\nLa vie se présentant sous de nombreuses formes et à des échelles très différentes, la biologie s'étend du niveau moléculaire, à celui de la cellule, puis de l'organisme, jusqu'au niveau de la population et de l'écosystème."
+    "name": "Geology",
+    "description": "Geology studies Earth, its materials, structures, processes, and history. It helps describe rocks, landforms, subsurface resources, and the evolution of natural environments.",
+    "name:fr": "Géologie",
+    "description:fr": "La biologie (du grec bios « la vie » et logos, « discours ») est la science du vivant. Elle recouvre une partie des sciences de la nature et de l'histoire naturelle des êtres vivants.\nLa vie se présentant sous de nombreuses formes et à des échelles très différentes, la biologie s'étend du niveau moléculaire, à celui de la cellule, puis de l'organisme, jusqu'au niveau de la population et de l'écosystème."
   },
   {
     "id": "sols",
     "parent_id": "theme_iso",
-    "name": "Sols",
-    "description": "Le sol est la partie vivante de la géosphère, constituant la couche la plus externe de la croûte terrestre, résultant de l'interaction entre la lithosphère, l'atmosphère, l'hydrosphère et la biosphère. Il résulte de la transformation de la couche superficielle de la roche-mère, dégradée et enrichie en apports de matières organiques par les processus vivants de pédogenèse. Hors des milieux marins et aquatiques d'eau douce, il est ainsi à la fois le support et le produit du vivant. L'humus est la partie du sol la plus riche en matière organique.\nOn différencie le sol de la croûte terrestre par la présence significative de vie. Le sol est aussi un des puits de carbone planétaires, mais semble actuellement perdre une partie de son carbone, de manière accélérée depuis au moins 20 ans[Quand ?]. Il peut contenir et conserver des fossiles, des vestiges historiques et les traces d'anciennes activités humaines (anthropisation, voir aussi anthrosol, archéologie) ou d'évènements climatiques. Ces éléments influent à leur tour sur la composition floristique.\nLe sol est vivant et constitué de nombreuses structures spatiales emboîtées (horizons, rhizosphère, macro- et micro-agrégats, etc.). Cette dimension fractale autorise la coexistence de très nombreux organismes de tailles très diverses et fait du sol un réservoir unique de biodiversité microbienne, animale et végétale. Il est nécessaire à la grande majorité des champignons, des bactéries, des plantes et de la faune. La biodiversité d'un sol est le fruit de l'action d'un ensemble de facteurs, naturels (par exemple pédogenèse) et anthropiques (occupation des sols, pratiques de gestion…) agissant sur de longues périodes.\nTous les sols qui prennent ou ont pris naissance à la surface de la lithosphère forment la pédosphère.\nLa science des sols est la pédologie.\nL'Organisation des Nations unies pour l'alimentation et l'agriculture (FAO), a déclaré 2015 comme étant l'année internationale des sols, avec comme phrase clé « Des sols sains pour une vie saine »."
+    "name": "Soils",
+    "description": "Soil is the living outer layer of the Earth's crust, formed by interactions between rock, atmosphere, water, living organisms, and organic matter. It supports biodiversity, stores carbon, and preserves environmental and historical traces.",
+    "name:fr": "Sols",
+    "description:fr": "Le sol est la partie vivante de la géosphère, constituant la couche la plus externe de la croûte terrestre, résultant de l'interaction entre la lithosphère, l'atmosphère, l'hydrosphère et la biosphère. Il résulte de la transformation de la couche superficielle de la roche-mère, dégradée et enrichie en apports de matières organiques par les processus vivants de pédogenèse. Hors des milieux marins et aquatiques d'eau douce, il est ainsi à la fois le support et le produit du vivant. L'humus est la partie du sol la plus riche en matière organique.\nOn différencie le sol de la croûte terrestre par la présence significative de vie. Le sol est aussi un des puits de carbone planétaires, mais semble actuellement perdre une partie de son carbone, de manière accélérée depuis au moins 20 ans[Quand ?]. Il peut contenir et conserver des fossiles, des vestiges historiques et les traces d'anciennes activités humaines (anthropisation, voir aussi anthrosol, archéologie) ou d'évènements climatiques. Ces éléments influent à leur tour sur la composition floristique.\nLe sol est vivant et constitué de nombreuses structures spatiales emboîtées (horizons, rhizosphère, macro- et micro-agrégats, etc.). Cette dimension fractale autorise la coexistence de très nombreux organismes de tailles très diverses et fait du sol un réservoir unique de biodiversité microbienne, animale et végétale. Il est nécessaire à la grande majorité des champignons, des bactéries, des plantes et de la faune. La biodiversité d'un sol est le fruit de l'action d'un ensemble de facteurs, naturels (par exemple pédogenèse) et anthropiques (occupation des sols, pratiques de gestion…) agissant sur de longues périodes.\nTous les sols qui prennent ou ont pris naissance à la surface de la lithosphère forment la pédosphère.\nLa science des sols est la pédologie.\nL'Organisation des Nations unies pour l'alimentation et l'agriculture (FAO), a déclaré 2015 comme étant l'année internationale des sols, avec comme phrase clé « Des sols sains pour une vie saine »."
   },
   {
     "id": "dangers_naturels",
     "parent_id": "theme_iso",
-    "name": "Dangers naturels",
-    "description": "Un danger est une cause possible de dommage (à une personne, un peuple, un bien, à l'environnement, etc.). La probabilité de survenue de ce dommage est le risque associé à ce danger. On parle évidemment de dangerosité d'une situation ou d'un individu présentant un caractère dangereux."
+    "name": "Natural hazards",
+    "description": "A hazard is a possible cause of harm to people, property, or the environment. The likelihood that this harm occurs is the associated risk.",
+    "name:fr": "Dangers naturels",
+    "description:fr": "Un danger est une cause possible de dommage (à une personne, un peuple, un bien, à l'environnement, etc.). La probabilité de survenue de ce dommage est le risque associé à ce danger. On parle évidemment de dangerosité d'une situation ou d'un individu présentant un caractère dangereux."
   },
   {
     "id": "transport",
     "parent_id": "theme_iso",
     "name": "Transport",
-    "description": "Le transport est le déplacement d'objets, de marchandises, ou d'individus (humains ou animaux) d'un endroit à un autre. Les modes de transport incluent l'aviation, le chemin de fer, le transport routier, le transport maritime, le transport par câble, l'acheminement par pipeline et le transport spatial. Le mode dépend également du type de véhicule ou d'infrastructure utilisé. Les moyens de transport peuvent inclure les véhicules à propulsion humaine, l'automobile, la moto, le scooter, le bus, le métro, le tramway, le train, le camion, la marche à pied, l'ascenseur, l'hélicoptère, le bateau ou l'avion."
+    "description": "Transport is the movement of goods, objects, or people from one place to another. It includes air, rail, road, maritime, cable, pipeline, and space transport, as well as their vehicles and infrastructure.",
+    "name:fr": "Transport",
+    "description:fr": "Le transport est le déplacement d'objets, de marchandises, ou d'individus (humains ou animaux) d'un endroit à un autre. Les modes de transport incluent l'aviation, le chemin de fer, le transport routier, le transport maritime, le transport par câble, l'acheminement par pipeline et le transport spatial. Le mode dépend également du type de véhicule ou d'infrastructure utilisé. Les moyens de transport peuvent inclure les véhicules à propulsion humaine, l'automobile, la moto, le scooter, le bus, le métro, le tramway, le train, le camion, la marche à pied, l'ascenseur, l'hélicoptère, le bateau ou l'avion."
   },
   {
     "id": "population",
     "parent_id": "theme_iso",
     "name": "Population",
-    "description": "Une population est un ensemble d'individus ou d'éléments partageant une ou plusieurs caractéristiques qui servent à les regrouper. On parle ainsi de population humaine, statistique, biologique, civile, voire tout simplement de « gens »."
+    "description": "A population is a set of individuals or elements sharing one or more characteristics used to group them, such as a human, statistical, biological, or civil population.",
+    "name:fr": "Population",
+    "description:fr": "Une population est un ensemble d'individus ou d'éléments partageant une ou plusieurs caractéristiques qui servent à les regrouper. On parle ainsi de population humaine, statistique, biologique, civile, voire tout simplement de « gens »."
   },
   {
     "id": "societe",
     "parent_id": "theme_iso",
-    "name": "Société",
-    "description": "La société anonyme (SA) est une forme de société de capitaux à risque limité répandue dans les pays de tradition civiliste.\nElle convient aux grandes entreprises en ce qu'elle permet de lever du capital auprès de nombreux investisseurs, lesquels ne peuvent supporter des pertes qu'à concurrence de leurs apports. Ses droits sociaux prennent la forme d'actions librement cessibles, et susceptibles d'être cotées en bourse. La règlementation s'imposant à la société anonyme est généralement plus lourde et minutieuse que pour les autres formes sociales."
+    "name": "Society",
+    "description": "Society refers to organized human groups and institutions. In this context it can also describe social structures, collective activity, and legal or economic forms of association.",
+    "name:fr": "Société",
+    "description:fr": "La société anonyme (SA) est une forme de société de capitaux à risque limité répandue dans les pays de tradition civiliste.\nElle convient aux grandes entreprises en ce qu'elle permet de lever du capital auprès de nombreux investisseurs, lesquels ne peuvent supporter des pertes qu'à concurrence de leurs apports. Ses droits sociaux prennent la forme d'actions librement cessibles, et susceptibles d'être cotées en bourse. La règlementation s'imposant à la société anonyme est généralement plus lourde et minutieuse que pour les autres formes sociales."
   },
   {
     "id": "culture",
     "parent_id": "theme_iso",
     "name": "Culture",
-    "description": "En philosophie, le mot culture désigne ce qui est différent de la nature.\nEn sociologie, comme en éthologie, la culture est définie de façon plus étroite comme « ce qui est commun à un groupe d'individus » et comme « ce qui le soude », c'est-à-dire ce qui est appris, transmis, produit et inventé. Ainsi, pour une organisation internationale comme l'UNESCO : « Dans son sens le plus large, la culture peut aujourd'hui être considérée comme l'ensemble des traits distinctifs, spirituels, matériels, intellectuels et affectifs, qui caractérisent une société ou un groupe social. Elle englobe, outre les arts, les lettres et les sciences, les modes de vie, les lois, les systèmes de valeurs, les traditions et les croyances. » Ce « réservoir commun » évolue dans le temps par et dans les formes des échanges. Il se constitue en de multiples manières distinctes d'être, de penser, d'agir et de communiquer en société.\nPar abus de langage, le mot « culture » est employé pour désigner presque exclusivement l'offre de pratiques et de services culturels dans les sociétés modernes, et en particulier dans le domaine des arts et des lettres."
+    "description": "Culture is what is learned, transmitted, produced, and invented within a group. It includes ways of life, values, traditions, beliefs, arts, letters, sciences, and shared social practices.",
+    "name:fr": "Culture",
+    "description:fr": "En philosophie, le mot culture désigne ce qui est différent de la nature.\nEn sociologie, comme en éthologie, la culture est définie de façon plus étroite comme « ce qui est commun à un groupe d'individus » et comme « ce qui le soude », c'est-à-dire ce qui est appris, transmis, produit et inventé. Ainsi, pour une organisation internationale comme l'UNESCO : « Dans son sens le plus large, la culture peut aujourd'hui être considérée comme l'ensemble des traits distinctifs, spirituels, matériels, intellectuels et affectifs, qui caractérisent une société ou un groupe social. Elle englobe, outre les arts, les lettres et les sciences, les modes de vie, les lois, les systèmes de valeurs, les traditions et les croyances. » Ce « réservoir commun » évolue dans le temps par et dans les formes des échanges. Il se constitue en de multiples manières distinctes d'être, de penser, d'agir et de communiquer en société.\nPar abus de langage, le mot « culture » est employé pour désigner presque exclusivement l'offre de pratiques et de services culturels dans les sociétés modernes, et en particulier dans le domaine des arts et des lettres."
   },
   {
     "id": "approvisionnement",
     "parent_id": "theme_iso",
-    "name": "Approvisionnement",
-    "description": "L'approvisionnement est une technique ou méthode permettant de livrer à un tiers un bien ou un service.\nOn peut considérer que l'approvisionnement est distingué en deux flux distincts : physique et administratif (informationnel).\nLe flux administratif est nécessaire à l'envoi et à la réception de données, ordres, commandes, factures, etc. Le flux physique est l'art d'acheminer le bien vers le demandeur, par bateau, avion, camion, chemin de fer, etc.\nL'approvisionnement répond à toutes contraintes environnantes. La règle première est de livrer de la marchandise, au bon moment, au bon prix, et au meilleur coût selon le choix du demandeur.\nLe terme anglais procurement est souvent utilisé pour mettre en évidence une gestion plus fine de l'approvisionnement, selon l'objectif :\n\norienté coût ;\norienté vers la sécurisation de l'approvisionnement.Les exigences sur les approvisionnements se traduisent par le choix de fournisseurs."
+    "name": "Supply",
+    "description": "Supply is the method used to deliver goods or services to a third party. It includes physical flows, administrative information flows, supplier choices, timing, cost, and security of supply.",
+    "name:fr": "Approvisionnement",
+    "description:fr": "L'approvisionnement est une technique ou méthode permettant de livrer à un tiers un bien ou un service.\nOn peut considérer que l'approvisionnement est distingué en deux flux distincts : physique et administratif (informationnel).\nLe flux administratif est nécessaire à l'envoi et à la réception de données, ordres, commandes, factures, etc. Le flux physique est l'art d'acheminer le bien vers le demandeur, par bateau, avion, camion, chemin de fer, etc.\nL'approvisionnement répond à toutes contraintes environnantes. La règle première est de livrer de la marchandise, au bon moment, au bon prix, et au meilleur coût selon le choix du demandeur.\nLe terme anglais procurement est souvent utilisé pour mettre en évidence une gestion plus fine de l'approvisionnement, selon l'objectif :\n\norienté coût ;\norienté vers la sécurisation de l'approvisionnement.Les exigences sur les approvisionnements se traduisent par le choix de fournisseurs."
   },
   {
     "id": "elimination",
     "parent_id": "theme_iso",
-    "name": "Élimination",
-    "description": "En chimie organique, une élimination (ou β-élimination) est une réaction organique qui transforme un alcane substitué (halogénoalcanes, alcools…) en dérivé éthylénique, voire en alcène, si la molécule de départ, outre le groupe partant, n'est qu'une chaîne carbonée de type alcane.\nLes conditions sont, en plus dures, celles d'une substitution nucléophile, réaction proche par de nombreux aspects et concurrente : l'élimination se produit en présence d'une base forte et en chauffant le mélange réactionnel."
+    "name": "Elimination",
+    "description": "In organic chemistry, elimination is a reaction that transforms a substituted alkane into an ethylenic derivative or alkene, usually under stronger conditions than nucleophilic substitution.",
+    "name:fr": "Élimination",
+    "description:fr": "En chimie organique, une élimination (ou β-élimination) est une réaction organique qui transforme un alcane substitué (halogénoalcanes, alcools…) en dérivé éthylénique, voire en alcène, si la molécule de départ, outre le groupe partant, n'est qu'une chaîne carbonée de type alcane.\nLes conditions sont, en plus dures, celles d'une substitution nucléophile, réaction proche par de nombreux aspects et concurrente : l'élimination se produit en présence d'une base forte et en chauffant le mélange réactionnel."
   },
   {
     "id": "communication",
     "parent_id": "theme_iso",
     "name": "Communication",
-    "description": "La communication regroupe les données relatives aux moyens d'échange et de transmission d'informations, comme les réseaux, les services de télécommunication, les canaux de diffusion ou les infrastructures permettant de communiquer."
+    "description": "Communication covers data related to means of exchanging and transmitting information, such as networks, telecommunications services, broadcast channels, and communication infrastructure.",
+    "name:fr": "Communication",
+    "description:fr": "La communication regroupe les données relatives aux moyens d'échange et de transmission d'informations, comme les réseaux, les services de télécommunication, les canaux de diffusion ou les infrastructures permettant de communiquer."
   },
   {
     "id": "armee",
     "parent_id": "theme_iso",
-    "name": "Armée",
-    "description": "Une armée est une organisation structurée d'individus armés visant à conquérir ou à défendre un territoire, détruire ou protéger d'autres unités militaires ou des unités civiles (entreprises, administrations…).\nLorsqu'une armée est organisée par un État, elle est une institution et ses objectifs sont subordonnés aux objectifs politiques de cet État ; on parle alors de l'armée, avec l'article défini.\nL'armée peut également s'occuper de divers travaux et remplir diverses fonctions, comme les travaux de déblaiement en cas de catastrophe naturelle ou de police en cas d'occupation.\nEnfin, lorsque l'État est en grand danger (par exemple en cas de guerre totale), l'institution militaire prend habituellement une très grande extension, et toute la vie civile est militarisée à des degrés divers.\nLorsque la fusion entre l'appareil d'État et l'appareil de l'armée est complète, on parle de dictature militaire."
+    "name": "Army",
+    "description": "An army is a structured organization of armed individuals intended to conquer or defend territory or protect or destroy military or civilian units. When organized by a state, it is an institution subordinate to political goals.",
+    "name:fr": "Armée",
+    "description:fr": "Une armée est une organisation structurée d'individus armés visant à conquérir ou à défendre un territoire, détruire ou protéger d'autres unités militaires ou des unités civiles (entreprises, administrations…).\nLorsqu'une armée est organisée par un État, elle est une institution et ses objectifs sont subordonnés aux objectifs politiques de cet État ; on parle alors de l'armée, avec l'article défini.\nL'armée peut également s'occuper de divers travaux et remplir diverses fonctions, comme les travaux de déblaiement en cas de catastrophe naturelle ou de police en cas d'occupation.\nEnfin, lorsque l'État est en grand danger (par exemple en cas de guerre totale), l'institution militaire prend habituellement une très grande extension, et toute la vie civile est militarisée à des degrés divers.\nLorsque la fusion entre l'appareil d'État et l'appareil de l'armée est complète, on parle de dictature militaire."
   },
   {
     "id": "securite",
     "parent_id": "theme_iso",
-    "name": "Sécurité",
-    "description": "Physiquement, la sécurité est l'état d'une situation présentant le minimum de risque.\nPsychiquement, la sécurité est l'état d'esprit d'une personne qui se sent tranquille et confiante. Pour l'individu ou un groupe, c'est le sentiment (bien ou mal fondé) d'être à l'abri de tout danger et risque."
+    "name": "Security",
+    "description": "Physically, security is the state of a situation with minimal risk. Psychologically, it is the state of mind of a person or group feeling calm, confident, and protected from danger.",
+    "name:fr": "Sécurité",
+    "description:fr": "Physiquement, la sécurité est l'état d'une situation présentant le minimum de risque.\nPsychiquement, la sécurité est l'état d'esprit d'une personne qui se sent tranquille et confiante. Pour l'individu ou un groupe, c'est le sentiment (bien ou mal fondé) d'être à l'abri de tout danger et risque."
   },
   {
     "id": "activites_economiques",
     "parent_id": "theme_iso",
-    "name": "Activités économiques",
-    "description": "L'économie (du grec ancien οἰκονομία / oikonomía : « administration d'un foyer ») est une activité humaine qui consiste en la production, la distribution, l'échange et la consommation de biens et de services.\nOn distingue différents systèmes d'échange parmi lesquelles l'économie de don, l'économie de marché ou encore l'économie du troc.\nParmi les systèmes économiques, certains comme le socialisme reposent sur la propriété collective des moyens de production. À l'inverse, le capitalisme repose sur la propriété privée des moyens de production. \nOn distingue également différents secteurs d'activité parmi lesquelles l'agriculture (ou secteur primaire), l'industrie (ou secteur secondaire) et la fourniture de services (secteur tertiaire).\nAu sein d'une économie, on distingue également le secteur marchand (dont la production se vend dans un marché), le secteur public ou étatique, l'économie domestique,  l'économie sociale et solidaire ou encore l'économie souterraine dont l'activité échappe au contrôle des institutions étatiques. \nL'économie est étudiée par les sciences économiques mais aussi par d'autres sciences sociales comme la sociologie économique ou l'anthropologie économique."
+    "name": "Economic activities",
+    "description": "Economic activity consists of producing, distributing, exchanging, and consuming goods and services. It includes different sectors, exchange systems, ownership models, and public, market, household, social, and informal activities.",
+    "name:fr": "Activités économiques",
+    "description:fr": "L'économie (du grec ancien οἰκονομία / oikonomía : « administration d'un foyer ») est une activité humaine qui consiste en la production, la distribution, l'échange et la consommation de biens et de services.\nOn distingue différents systèmes d'échange parmi lesquelles l'économie de don, l'économie de marché ou encore l'économie du troc.\nParmi les systèmes économiques, certains comme le socialisme reposent sur la propriété collective des moyens de production. À l'inverse, le capitalisme repose sur la propriété privée des moyens de production. \nOn distingue également différents secteurs d'activité parmi lesquelles l'agriculture (ou secteur primaire), l'industrie (ou secteur secondaire) et la fourniture de services (secteur tertiaire).\nAu sein d'une économie, on distingue également le secteur marchand (dont la production se vend dans un marché), le secteur public ou étatique, l'économie domestique,  l'économie sociale et solidaire ou encore l'économie souterraine dont l'activité échappe au contrôle des institutions étatiques. \nL'économie est étudiée par les sciences économiques mais aussi par d'autres sciences sociales comme la sociologie économique ou l'anthropologie économique."
   },
   {
     "id": "localisation",
     "parent_id": "theme_iso",
-    "name": "Localisation",
-    "description": "La localisation regroupe les données permettant de situer un objet, un lieu, un équipement ou un phénomène dans l'espace, par exemple au moyen de coordonnées, d'adresses, de limites administratives ou de références géographiques.",
-    "doc_ids": "tourisme-exemple"
+    "name": "Location",
+    "description": "Location covers data used to situate an object, place, facility, or phenomenon in space, for example through coordinates, addresses, administrative boundaries, or geographic references.",
+    "doc_ids": "tourisme-exemple",
+    "name:fr": "Localisation",
+    "description:fr": "La localisation regroupe les données permettant de situer un objet, un lieu, un équipement ou un phénomène dans l'espace, par exemple au moyen de coordonnées, d'adresses, de limites administratives ou de références géographiques."
   },
   {
     "id": "systemes_reference",
     "parent_id": "theme_iso",
-    "name": "Systèmes de référence",
-    "description": "Un système de référence en anatomie désigne la terminologie utilisée pour se repérer de façon précise dans la structure anatomique d'un organisme, humain ou non. Un système de référence anatomique repose sur un ensemble de plans et d'axes définis par rapport à la position standard de l'organisme décrit. Par exemple, on utilise cette terminologie pour indiquer l'orientation des coupes histologiques ou des vues utilisées dans les schémas et images en médecine ou en biologie humaine à partir de la position de Poirier, c'est-à-dire lorsque le sujet est debout face à l'observateur[réf. souhaitée].",
-    "doc_ids": "bevnat-info, tourisme-exemple"
+    "name": "Reference systems",
+    "description": "A reference system is terminology or a framework used to locate and describe structures precisely. It may rely on defined planes, axes, positions, or standards depending on the domain.",
+    "doc_ids": "bevnat-info, tourisme-exemple",
+    "name:fr": "Systèmes de référence",
+    "description:fr": "Un système de référence en anatomie désigne la terminologie utilisée pour se repérer de façon précise dans la structure anatomique d'un organisme, humain ou non. Un système de référence anatomique repose sur un ensemble de plans et d'axes définis par rapport à la position standard de l'organisme décrit. Par exemple, on utilise cette terminologie pour indiquer l'orientation des coupes histologiques ou des vues utilisées dans les schémas et images en médecine ou en biologie humaine à partir de la position de Poirier, c'est-à-dire lorsque le sujet est debout face à l'observateur[réf. souhaitée]."
   },
   {
     "id": "cartes_reference",
     "parent_id": "theme_iso",
-    "name": "Cartes de référence",
-    "description": "Les cartes de référence fournissent un fond cartographique ou un repère spatial commun pour lire, comparer et contextualiser d'autres données géographiques.",
-    "implied_tag_ids": "localisation"
+    "name": "Reference maps",
+    "description": "Reference maps provide a cartographic background or shared spatial reference for reading, comparing, and contextualizing other geographic data.",
+    "implied_tag_ids": "localisation",
+    "name:fr": "Cartes de référence",
+    "description:fr": "Les cartes de référence fournissent un fond cartographique ou un repère spatial commun pour lire, comparer et contextualiser d'autres données géographiques."
   },
   {
     "id": "couverture_sol",
     "parent_id": "theme_iso",
-    "name": "Couverture du sol",
-    "description": "La couverture du sol, aussi appelée occupation du sol, est constituée des matériaux physiques à la surface de la Terre, qu'ils soient naturels ou anthropogéniques, et incluant l'eau, le sol nu, l'herbe, les arbres, le pavage, les constructions, etc.  \nIl existe deux méthodes principales, et complémentaires pour obtenir de l'information sur la couverture du sol : \n\nles enquêtes terrain complétant la cartographie traditionnelle ;\nla télédétection.La nature de la « couverture du sol » est discutée dans Comber et al (2005).",
-    "doc_ids": "statpop-info"
+    "name": "Land cover",
+    "description": "Land cover describes the physical materials at the Earth's surface, whether natural or human-made, including water, bare soil, grass, trees, pavement, and buildings.",
+    "doc_ids": "statpop-info",
+    "name:fr": "Couverture du sol",
+    "description:fr": "La couverture du sol, aussi appelée occupation du sol, est constituée des matériaux physiques à la surface de la Terre, qu'ils soient naturels ou anthropogéniques, et incluant l'eau, le sol nu, l'herbe, les arbres, le pavage, les constructions, etc.  \nIl existe deux méthodes principales, et complémentaires pour obtenir de l'information sur la couverture du sol : \n\nles enquêtes terrain complétant la cartographie traditionnelle ;\nla télédétection.La nature de la « couverture du sol » est discutée dans Comber et al (2005)."
   },
   {
     "id": "images_aeriennes",
     "parent_id": "theme_iso",
-    "name": "Images aériennes",
-    "description": "La photographie aérienne est un domaine vaste tant sur le plan de la variété des documents que des techniques employées."
+    "name": "Aerial imagery",
+    "description": "Aerial photography and imagery cover a wide range of documents and techniques used to observe territory from above.",
+    "name:fr": "Images aériennes",
+    "description:fr": "La photographie aérienne est un domaine vaste tant sur le plan de la variété des documents que des techniques employées."
   },
   {
     "id": "images_aeriennes_1",
     "parent_id": "images_aeriennes",
-    "name": "Images aériennes sous partie 1"
+    "name": "Aerial imagery subpart 1",
+    "name:fr": "Images aériennes sous partie 1",
+    "description": "Aerial imagery subpart 1.",
+    "description:fr": "Images aériennes sous partie 1."
   },
   {
     "id": "images_aeriennes_2",
     "parent_id": "images_aeriennes",
-    "name": "Images aériennes sous partie 2.1"
+    "name": "Aerial imagery subpart 2.1",
+    "name:fr": "Images aériennes sous partie 2.1",
+    "description": "Aerial imagery subpart 2.1.",
+    "description:fr": "Images aériennes sous partie 2.1."
   }
 ]

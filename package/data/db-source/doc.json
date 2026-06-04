@@ -10,8 +10,10 @@
   {
     "id": "tourisme-exemple",
     "type": "md",
-    "name": "Tourisme exemple",
-    "description": "Tourisme exemple",
+    "name": "Tourism example",
+    "name:fr": "Tourisme exemple",
+    "description": "Tourism example",
+    "description:fr": "Tourisme exemple",
     "path": "data/db-source/md/tourisme-exemple.md",
     "last_update": 1716231182
   },
@@ -25,32 +27,40 @@
   {
     "id": "bevnat-info",
     "type": "pdf",
-    "name": "BEVNAT: Fiche signalétique",
-    "description": "BEVNAT: Fiche signalétique",
+    "name": "BEVNAT: Fact sheet",
+    "name:fr": "BEVNAT: Fiche signalétique",
+    "description": "BEVNAT: Fact sheet",
+    "description:fr": "BEVNAT: Fiche signalétique",
     "path": "data/pdf/bevnat-info.pdf",
     "last_update": 1706239962
   },
   {
     "id": "statpop-info",
     "type": "pdf",
-    "name": "STATPOP: Fiche signalétique",
-    "description": "STATPOP: Fiche signalétique",
+    "name": "STATPOP: Fact sheet",
+    "name:fr": "STATPOP: Fiche signalétique",
+    "description": "STATPOP: Fact sheet",
+    "description:fr": "STATPOP: Fiche signalétique",
     "path": "data/pdf/statpop-info.pdf",
     "last_update": 1606212962
   },
   {
     "id": "bevnat-variable",
     "type": "pdf",
-    "name": "BEVNAT: Liste des variables",
-    "description": "BEVNAT: Liste des variables",
+    "name": "BEVNAT: Variable list",
+    "name:fr": "BEVNAT: Liste des variables",
+    "description": "BEVNAT: Variable list",
+    "description:fr": "BEVNAT: Liste des variables",
     "path": "data/pdf/bevnat-variable.pdf",
     "last_update": 1606212963
   },
   {
     "id": "pop-com-1",
     "type": "pdf",
-    "name": "Communiqué de presse population",
-    "description": "Communiqué de presse population",
+    "name": "Population press release",
+    "name:fr": "Communiqué de presse population",
+    "description": "Population press release",
+    "description:fr": "Communiqué de presse population",
     "path": "data/pdf/pop-com-1.pdf",
     "last_update": 1724323867
   }

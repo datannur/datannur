@@ -5,6 +5,8 @@
 3. **Explore** the demo catalog to see how it works
 4. **Replace** the demo metadata in `/data/db/` with your own (see below)
 
+The application interface is multilingual. English is the default fallback language, French is supported, and the `auto` setting follows the browser language when possible. Users can change the language from the app footer or Options page; German, Italian, and Spanish are planned soon.
+
 For a more integrated experience (Start Menu / Dock shortcut, local server auto-starting at login), see [Installing on Your Computer](/install).
 
 ## Replacing the demo metadata

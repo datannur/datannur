@@ -1,6 +1,7 @@
 <script lang="ts">
   import Options from '@lib/options'
-  import { setLanguageOption, translate } from '@i18n/i18n'
+  import { setLanguageOption } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { isLanguageOption } from '@i18n/locale'
   import type { LanguageOption } from '@i18n/types'
 
@@ -27,13 +28,13 @@
   <div class="language-select-wrap">
     <span class="language-select-value">
       {#if language === 'auto'}
-        <i class="fas fa-globe" title={$translate('language.auto')}></i>
+        <i class="fas fa-globe" title={t('language.auto')}></i>
       {:else}
         {languageLabel}
       {/if}
     </span>
     <select
-      aria-label={$translate('language.label')}
+      aria-label={t('language.label')}
       bind:value={language}
       onchange={updateLanguageFromSelect}
     >

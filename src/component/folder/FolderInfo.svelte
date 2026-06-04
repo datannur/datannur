@@ -20,6 +20,7 @@
   import TypeInfo from '@info-table/TypeInfo.svelte'
   import DataSizeInfo from '@info-table/DataSizeInfo.svelte'
   import { isHttpUrl } from '@lib/util'
+  import { t } from '@i18n/messages'
   import type { Folder } from '@type'
 
   let { folder }: { folder: Folder } = $props()
@@ -53,7 +54,8 @@
   <LocalisationInfo localisation={folder.localisation} />
   {#if folder.surveyType}
     <tr>
-      <td><Icon type="surveyType" /> Type d'enquête</td>
+      <td><Icon type="surveyType" /> {t('column.surveyType.title')}</td
+      >
       <td>{folder.surveyType}</td>
     </tr>
   {/if}
@@ -61,7 +63,8 @@
   <LicenseInfo license={folder.license} />
   {#if folder.metadataPath}
     <tr>
-      <td><Icon type="metadataPath" /> Metadonnées</td>
+      <td><Icon type="metadataPath" /> {t('column.metadata.title')}</td
+      >
       <td>
         {#if isHttpUrl(folder.metadataPath)}
           <a
@@ -82,7 +85,7 @@
   <LinkInfo link={folder.link} />
   {#if folder.gitCode}
     <tr>
-      <td><Icon type="gitCode" /> GIT code</td>
+      <td><Icon type="gitCode" /> {t('column.sourceCode.title')}</td>
       <td>
         <a href={folder.gitCode} target="_blanck" class="break-line">
           {folder.gitCode}

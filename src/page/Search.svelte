@@ -9,10 +9,14 @@
   import SearchResult from '@search/SearchResult.svelte'
   import SearchHistory from '@search/search-history'
   import AboutFile from '@layout/AboutFile.svelte'
-  import aboutSearch from '@markdown/search/about-search.md?raw'
-  import noResult from '@markdown/search/no-result.md?raw'
-  import noRecentSearch from '@markdown/search/no-recent-search.md?raw'
-  import { currentLocale, translate } from '@i18n/i18n'
+  import aboutSearchEn from '@markdown/search/about-search.en.md?raw'
+  import aboutSearchFr from '@markdown/search/about-search.fr.md?raw'
+  import noResultEn from '@markdown/search/no-result.en.md?raw'
+  import noResultFr from '@markdown/search/no-result.fr.md?raw'
+  import noRecentSearchEn from '@markdown/search/no-recent-search.en.md?raw'
+  import noRecentSearchFr from '@markdown/search/no-recent-search.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
   import type { SearchResult as SearchResultType } from '@search/search'
   import type { Tab } from '@tab/tabs-helper'
 
@@ -22,6 +26,15 @@
   let tabKey = $state()
 
   let recentSearchChange = false
+  const aboutSearch = localizedMarkdown({
+    en: aboutSearchEn,
+    fr: aboutSearchFr,
+  })
+  const noResult = localizedMarkdown({ en: noResultEn, fr: noResultFr })
+  const noRecentSearch = localizedMarkdown({
+    en: noRecentSearchEn,
+    fr: noRecentSearchFr,
+  })
 
   function makeTab(name: string, icon: string, key: string, aboutFile: string) {
     return {
@@ -34,14 +47,14 @@
     }
   }
   let aboutTab = $derived(
-    makeTab($translate('nav.about'), 'about', 'about', aboutSearch),
+    makeTab(t('nav.about'), 'about', 'about', aboutSearch),
   )
   let noResultTab = $derived(
-    makeTab($translate('page.search.result'), 'search', 'noResult', noResult),
+    makeTab(t('page.search.result'), 'search', 'noResult', noResult),
   )
   let noRecentSearchTab = $derived(
     makeTab(
-      $translate('page.search.recentSearches'),
+      t('page.search.recentSearches'),
       'search',
       'noRecentSearch',
       noRecentSearch,
@@ -57,7 +70,7 @@
 
   function initSearchRecent() {
     searchResultData = SearchHistory.getRecentSearch()
-    const tabName = $translate('page.search.recentSearches')
+    const tabName = t('page.search.recentSearches')
     setTabs(tabName)
     isLoading = false
   }
@@ -81,7 +94,7 @@
     setTabs()
   }
 
-  function setTabs(name = $translate('page.search.result')) {
+  function setTabs(name = t('page.search.result')) {
     setTabKey()
     if (searchResultData.length === 0) {
       tabs = [isEmptyInput ? noRecentSearchTab : noResultTab]
@@ -118,7 +131,6 @@
 
   $effect(() => {
     void $searchValue
-    void $currentLocale
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
       searchInputChange()
@@ -127,8 +139,8 @@
 </script>
 
 <Head
-  title={$translate('page.search.title')}
-  description={$translate('page.search.description')}
+  title={t('page.search.title')}
+  description={t('page.search.description')}
 />
 
 <section class="section">
@@ -138,7 +150,7 @@
         class="input"
         type="text"
         name="search-page-input"
-        placeholder={$searchReady ? '' : $translate('search.preparing')}
+        placeholder={$searchReady ? '' : t('search.preparing')}
         disabled={!$searchReady}
         bind:value={$searchValue}
         autocomplete="off"

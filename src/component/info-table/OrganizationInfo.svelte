@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { entityNames } from '@lib/constant'
+  import { getEntityName } from '@i18n/constant-labels'
+  import { t } from '@i18n/messages'
   import Icon from '@layout/Icon.svelte'
   import ParentTree from '@component/ParentTree.svelte'
   import ExtendableText from '@layout/ExtendableText.svelte'
@@ -14,7 +15,9 @@
     isSelf?: boolean
   } = $props()
 
-  const name = $derived(isSelf ? 'Partie de' : entityNames[type])
+  const name = $derived(
+    isSelf ? t('column.partOf.title') : getEntityName(type),
+  )
   const icon = $derived(isSelf ? 'folderTreeOrganization' : 'organization')
 </script>
 

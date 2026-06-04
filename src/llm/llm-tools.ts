@@ -11,8 +11,13 @@
 import db from '@db'
 import { router } from '@router/router.svelte'
 import Search from '@search/search'
+import { en } from '@i18n/en'
+import { fr } from '@i18n/fr'
+import type { Locale } from '@i18n/types'
 import type { EntityName, MainEntity, MainEntityName } from '@type'
 import { mainEntityNames } from '@lib/constant'
+
+type LLMToolDescriptionKey = keyof typeof en.llm.tool
 
 /**
  * Tool definitions for LLM
@@ -22,7 +27,7 @@ import { mainEntityNames } from '@lib/constant'
 export type LLMTool = {
   name: string
   description: string
-  descriptionFr?: string
+  descriptionKey: LLMToolDescriptionKey
   parameters: {
     type: 'object'
     properties: {
@@ -64,8 +69,7 @@ const countEntities: LLMTool = {
   name: 'countEntities',
   description:
     'Count entities matching criteria. Use for "how many" questions.',
-  descriptionFr:
-    'Compter les entités selon critères. Pour les questions "combien".',
+  descriptionKey: 'countEntities',
   parameters: {
     type: 'object',
     properties: {
@@ -94,8 +98,7 @@ const listEntities: LLMTool = {
   name: 'listEntities',
   description:
     'List entities matching criteria. Returns first 20 items (id, name) + total count. Use when user asks for a list.',
-  descriptionFr:
-    'Lister les entités selon critères. Retourne les 20 premiers (id, name) + total. Quand on demande une liste.',
+  descriptionKey: 'listEntities',
   parameters: {
     type: 'object',
     properties: {
@@ -130,7 +133,7 @@ const listEntities: LLMTool = {
 const getEntity: LLMTool = {
   name: 'getEntity',
   description: 'Get a single entity by ID',
-  descriptionFr: 'Obtenir une entité par son ID',
+  descriptionKey: 'getEntity',
   parameters: {
     type: 'object',
     properties: {
@@ -159,8 +162,7 @@ const searchInCatalog: LLMTool = {
   name: 'searchInCatalog',
   description:
     'Full-text search across all entities. Returns lightweight results with id, name and entity type. Use getEntity() for full details.',
-  descriptionFr:
-    'Recherche plein texte dans toutes les entités. Retourne résultats légers avec id, name et type. Utiliser getEntity() pour les détails complets.',
+  descriptionKey: 'searchInCatalog',
   parameters: {
     type: 'object',
     properties: {
@@ -211,7 +213,7 @@ const searchInCatalog: LLMTool = {
 const groupBy: LLMTool = {
   name: 'groupBy',
   description: 'Group entities by field and count occurrences',
-  descriptionFr: 'Grouper les entités par champ et compter les occurrences',
+  descriptionKey: 'groupBy',
   parameters: {
     type: 'object',
     properties: {
@@ -261,7 +263,7 @@ const groupBy: LLMTool = {
 const getStatistics: LLMTool = {
   name: 'getStatistics',
   description: 'Get statistical summary of a numeric field',
-  descriptionFr: "Obtenir un résumé statistique d'un champ numérique",
+  descriptionKey: 'getStatistics',
   parameters: {
     type: 'object',
     properties: {
@@ -324,8 +326,7 @@ const navigate: LLMTool = {
   name: 'navigate',
   description:
     'Navigate to a page in the app, optionally to a specific tab. Available tabs by route: organization (folders, tags, docs, datasets, variables, enumerations, evolutions, stat), folder (folders, tags, docs, datasets, variables, enumerations, evolutions, stat), tag (tags, organizations, folders, docs, datasets, variables), dataset (docs, datasets, variables, enumerations, datasetPreview, evolutions, stat), variable (variables, variableValues, frequency, variablePreview, evolutions), enumeration (values, variables, evolutions)',
-  descriptionFr:
-    "Naviguer vers une page de l'application, optionnellement vers un onglet spécifique",
+  descriptionKey: 'navigate',
   parameters: {
     type: 'object',
     properties: {
@@ -396,12 +397,14 @@ export type ToolDefinition = {
 /**
  * Get tool definitions in OpenAI function calling format
  */
-export function getToolDefinitions(): ToolDefinition[] {
+export function getToolDefinitions(locale: Locale): ToolDefinition[] {
+  const toolDescriptions = locale === 'fr' ? fr.llm.tool : en.llm.tool
+
   return llmTools.map(tool => ({
     type: 'function' as const,
     function: {
       name: tool.name,
-      description: tool.description,
+      description: toolDescriptions[tool.descriptionKey] ?? tool.description,
       parameters: tool.parameters,
     },
   }))

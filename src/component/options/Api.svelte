@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
+  import { t } from '@i18n/messages'
   import type { ApiAvailability } from '@lib/api-availability'
 
   type AvailableApi = Extract<ApiAvailability, { available: true }>
@@ -9,20 +10,18 @@
 
 <div class="api-options">
   <section>
-    <h5 class="title is-5">API disponibles</h5>
-    <p>
-      Ce catalogue expose ses métadonnées via une API en lecture seule. Elle
-      permet de réutiliser les informations du catalogue dans d’autres outils,
-      scripts ou portails de données.
-    </p>
+    <h5 class="title is-5">{t('api.title')}</h5>
+    <p>{t('api.description')}</p>
   </section>
 
   <section class="api-links">
     <a class="button" href={api.docsUrl} target="_blank" rel="noreferrer">
-      Documentation <Icon type="book" marginLeft={true} />
+      {t('api.documentation')}
+      <Icon type="book" marginLeft={true} />
     </a>
     <a class="button" href={api.rawDocsUrl} target="_blank" rel="noreferrer">
-      Raw API <Icon type="database" marginLeft={true} />
+      {t('api.rawApi')}
+      <Icon type="database" marginLeft={true} />
     </a>
     <a
       class="button"
@@ -30,16 +29,17 @@
       target="_blank"
       rel="noreferrer"
     >
-      Exemple REST <Icon type="code" marginLeft={true} />
+      {t('api.restExample')}
+      <Icon type="code" marginLeft={true} />
     </a>
   </section>
 
   <section>
-    <h5 class="title is-5">À savoir</h5>
+    <h5 class="title is-5">{t('api.noteTitle')}</h5>
     <ul>
-      <li>L’API apparaît ici uniquement quand elle est disponible.</li>
-      <li>Le catalogue reste utilisable même sans API.</li>
-      <li>En ouverture directe du fichier, l’API n’est pas active.</li>
+      <li>{t('api.availableOnly')}</li>
+      <li>{t('api.catalogStillUsable')}</li>
+      <li>{t('api.directFileInactive')}</li>
     </ul>
   </section>
 </div>

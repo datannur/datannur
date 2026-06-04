@@ -11,6 +11,8 @@
     isLocalProxy,
     createSession,
   } from '@llm/llm-config'
+  import { currentLocale } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import { runAgentLoop } from '@llm/agent-loop'
   import Options from '@lib/options'
   import {
@@ -174,7 +176,7 @@
     try {
       await runAgentLoop(
         {
-          systemPrompt: buildSystemPrompt(),
+          systemPrompt: buildSystemPrompt($currentLocale),
           model: selectedModel.id,
           signal: abortController.signal,
         },
@@ -192,7 +194,10 @@
         const lastIndex = messages.length - 1
         messages = [
           ...messages.slice(0, lastIndex),
-          { ...messages[lastIndex]!, content: `Erreur: ${error}` },
+          {
+            ...messages[lastIndex]!,
+            content: t('llm.chat.error', { error: String(error) }),
+          },
         ]
       }
     } finally {
@@ -322,7 +327,7 @@
           <button
             class="exit-voice-btn"
             onclick={exitVoiceMode}
-            aria-label="Quitter mode vocal"
+            aria-label={t('llm.chat.exitVoiceMode')}
           >
             <i class="fa-solid fa-microphone-slash"></i>
           </button>
@@ -330,8 +335,8 @@
           <button
             class="new-chat-btn use-tooltip"
             onclick={resetChat}
-            aria-label="Nouveau chat"
-            title="Nouveau chat"
+            aria-label={t('llm.chat.newChat')}
+            title={t('llm.chat.newChat')}
           >
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
@@ -340,7 +345,7 @@
       <button
         class="close-btn"
         onclick={() => (isOpen = false)}
-        aria-label="Fermer"
+        aria-label={t('llm.chat.close')}
       >
         <i class="fa-solid fa-xmark"></i>
       </button>

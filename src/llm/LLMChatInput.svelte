@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { t } from '@i18n/messages'
+
   let {
     input = $bindable(''),
     isRecording,
@@ -28,10 +30,10 @@
   } = $props()
 
   let placeholder = $derived.by(() => {
-    if (isRecording) return '🎙️ Enregistrement en cours...'
-    if (isProcessing) return '⏳ Transcription en cours...'
-    if (voiceConversationMode) return '🎙️ Mode conversation vocale actif'
-    return 'Posez votre question...'
+    if (isRecording) return `🎙️ ${t('llm.chat.recording')}`
+    if (isProcessing) return `⏳ ${t('llm.chat.transcribing')}`
+    if (voiceConversationMode) return `🎙️ ${t('llm.chat.voiceMode')}`
+    return t('llm.chat.placeholder')
   })
 
   let disabled = $derived(isRecording || isProcessing)
@@ -59,12 +61,12 @@
         <span></span>
         <span></span>
       </div>
-      <span>Vérification en cours...</span>
+      <span>{t('llm.chat.checking')}</span>
     </div>
   {:else if showSessionError}
     <div class="session-error">
       <i class="fa-solid fa-exclamation-triangle"></i>
-      <span>Impossible de créer la session. Veuillez recharger la page.</span>
+      <span>{t('llm.chat.sessionError')}</span>
     </div>
   {:else}
     <div class="input-wrapper">
@@ -84,7 +86,7 @@
           <button
             type="button"
             onclick={onVoiceClick}
-            aria-label="Arrêter l'enregistrement"
+            aria-label={t('llm.chat.stopRecording')}
             class="stop-btn"
           >
             <i class="fa-solid fa-stop"></i>
@@ -92,7 +94,7 @@
           <button
             type="button"
             onclick={onCancelRecording}
-            aria-label="Annuler"
+            aria-label={t('llm.chat.cancel')}
             class="cancel-btn"
           >
             <i class="fa-solid fa-xmark"></i>
@@ -102,7 +104,7 @@
             type="button"
             class="voice-btn processing"
             disabled
-            aria-label="Traitement en cours"
+            aria-label={t('llm.chat.processing')}
           >
             <i class="fa-solid fa-spinner fa-spin"></i>
           </button>
@@ -110,7 +112,7 @@
           <button
             type="button"
             onclick={onStopGeneration}
-            aria-label="Arrêter"
+            aria-label={t('llm.chat.stop')}
             class="stop-btn"
           >
             <i class="fa-solid fa-stop"></i>
@@ -121,7 +123,7 @@
             class="voice-btn"
             onclick={onVoiceClick}
             disabled={loading}
-            aria-label="Reconnaissance vocale"
+            aria-label={t('llm.chat.speechRecognition')}
           >
             <i class="fa-solid fa-microphone"></i>
           </button>
@@ -130,7 +132,7 @@
             class="send-btn"
             onclick={onSend}
             disabled={!input.trim() || loading}
-            aria-label="Envoyer"
+            aria-label={t('llm.chat.send')}
           >
             <i class="fa-solid fa-paper-plane"></i>
           </button>

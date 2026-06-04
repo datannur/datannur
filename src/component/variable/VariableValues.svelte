@@ -3,6 +3,7 @@
   import Render from '@lib/render'
   import Column from '@lib/column'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import { link } from '@lib/url'
   import escapeHtml from 'escape-html'
   import type { Value, Column as ColumnType } from '@type'
@@ -28,8 +29,9 @@
     if (!isMeta) {
       columns.push({
         data: 'enumerationName',
-        title: Render.icon('enumeration') + 'Énumération',
-        tooltip: 'Énumération',
+        title:
+          Render.icon('enumeration') + t('column.enumeration.title'),
+        tooltip: t('column.enumeration.tooltip'),
         render: (data, type, row: Value) => {
           if (!data) return ''
           if (type !== 'display') return String(data)
@@ -45,7 +47,7 @@
     if (hasDescription) columns.push(Column.description())
     return columns
   }
-  const columns = defineColumns()
+  const columns = $derived(defineColumns())
 </script>
 
 <Datatable

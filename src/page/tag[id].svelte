@@ -12,6 +12,7 @@
   import { tabsHelper, type Tab } from '@tab/tabs-helper'
   import Title from '@layout/Title.svelte'
   import OpenAllSwitch from '@layout/OpenAllSwitch.svelte'
+  import { t } from '@i18n/messages'
   import type {
     MainEntityName,
     Tag,
@@ -163,7 +164,9 @@
     })
   }
 
-  let info = $derived(opposite ? '(absent)' : '(présent)')
+  let info = $derived(
+    opposite ? t('tagStatus.absent') : t('tagStatus.present'),
+  )
 
   function toggleOpposite() {
     opposite = !opposite

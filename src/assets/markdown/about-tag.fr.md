@@ -1,6 +1,6 @@
 Les mots clés peuvent être attribués aux organisations, aux dossiers, aux datasets et aux variables.
 
-Des docs peuvent lui être attribués.
+Des docs peuvent leur être attribuées.
 
 mermaid(
 $tag $recursive

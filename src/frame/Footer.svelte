@@ -6,7 +6,8 @@
   import Icon from '@layout/Icon.svelte'
   import DarkModeSwitch from '@dark-mode/DarkModeSwitch.svelte'
   import LanguageSelect from '@i18n/LanguageSelect.svelte'
-  import { currentLocale, translate } from '@i18n/i18n'
+  import { getCurrentLocale } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import HeaderLink from '@frame/HeaderLink.svelte'
 
   let { menuMobile = false }: { menuMobile?: boolean } = $props()
@@ -18,6 +19,7 @@
     absolute: '',
   })
   const year = new Date().getFullYear()
+  const locale = getCurrentLocale()
 
   let currentInterval: ReturnType<typeof setInterval> | undefined = undefined
   let interval = 1000
@@ -28,7 +30,7 @@
       false,
       false,
       new Date(),
-      $currentLocale,
+      locale,
     )
     const secondsAgo = Math.abs(Date.now() - timestamp) / 1000
     if (interval === 1000 && secondsAgo >= 60) {
@@ -50,25 +52,12 @@
         false,
         false,
         new Date(),
-        $currentLocale,
+        locale,
       )
       lastUpdate.absolute = getDatetime(timestamp)
       currentInterval = setInterval(updateLastModif, interval)
     } else {
       lastUpdate.state = 'notFound'
-    }
-  })
-
-  $effect(() => {
-    const locale = $currentLocale
-    if (lastUpdate.state === 'loaded' && lastUpdate.value) {
-      lastUpdate.relative = getTimeAgo(
-        lastUpdate.value * 1000,
-        false,
-        false,
-        new Date(),
-        locale,
-      )
     }
   })
 </script>
@@ -108,7 +97,7 @@
           className=""
         >
           <Icon type="internalView" marginRight={false} />
-          {$translate('nav.internal')}
+          {t('nav.internal')}
         </HeaderLink>
       </div>
       <div>
@@ -127,7 +116,7 @@
             class="break-line use-tooltip tooltip-top"
             title={lastUpdate.absolute}
           >
-            {$translate('footer.updated')}
+            {t('footer.updated')}
             {lastUpdate.relative}
           </span>
         </div>

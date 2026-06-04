@@ -1,4 +1,5 @@
 import db from '@db'
+import { getEntityName } from '@i18n/constant-labels'
 import { entityNames } from '@lib/constant'
 import type { EntityName, MainEntityName } from '@type'
 import type { SearchResult } from './search'
@@ -90,7 +91,9 @@ export default class SearchHistory {
         folderName: data.folderName,
         _entity: data._entity,
         _entityClean:
-          entityNames[data._entity as keyof typeof entityNames] ?? '',
+          data._entity && data._entity in entityNames
+            ? getEntityName(data._entity as keyof typeof entityNames)
+            : '',
       })
     }
     return result

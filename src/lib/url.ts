@@ -8,6 +8,25 @@ const cleanRoutingCookie = 'datannur-routing=clean'
 const hashPrefix = '#/'
 const defaultHash = 'homepage'
 const indexPage = '_index'
+const supportedLocaleSegments = ['en', 'fr']
+
+function stripLocaleSegment(path: string) {
+  const segments = path.split('/').filter(Boolean)
+  const localeIndex = segments.findIndex(segment =>
+    supportedLocaleSegments.includes(segment),
+  )
+  if (localeIndex >= 0) return segments.slice(localeIndex + 1).join('/')
+  return segments.join('/')
+}
+
+function getLocaleBasePath() {
+  const segments = window.location.pathname.split('/').filter(Boolean)
+  const localeIndex = segments.findIndex(segment =>
+    supportedLocaleSegments.includes(segment),
+  )
+  if (localeIndex < 0) return undefined
+  return '/' + segments.slice(0, localeIndex + 1).join('/') + '/'
+}
 
 export class UrlParam {
   static getAppMode() {
@@ -93,7 +112,7 @@ export class UrlHash {
   static getAll() {
     let hash = window.location.hash
     if (UrlParam.getAppMode() === staticRender) {
-      hash = window.location.pathname.substring(1)
+      hash = stripLocaleSegment(window.location.pathname)
     }
     if (hash.includes(hashPrefix)) {
       hash = hash?.split(hashPrefix)[1]
@@ -147,6 +166,20 @@ export function getAppBasePath() {
   return currentAppBasePath
 }
 
+export function getPackageBasePath() {
+  const pathSegments = window.location.pathname.split('/').filter(Boolean)
+  const localeIndex = pathSegments.findIndex(segment =>
+    supportedLocaleSegments.includes(segment),
+  )
+  const packageSegments =
+    localeIndex >= 0
+      ? pathSegments.slice(0, localeIndex)
+      : getAppBasePath().split('/').filter(Boolean)
+  return packageSegments.length === 0
+    ? '/'
+    : '/' + packageSegments.join('/') + '/'
+}
+
 export function setAppBasePathForPage(pageName: string) {
   const pageBasePath = computePageBasePath(pageName)
   if (pageBasePath) currentAppBasePath = pageBasePath
@@ -162,6 +195,7 @@ function computeAppBasePath(pageName = document.body.getAttribute('page')) {
 
   return (
     computePageBasePath(pageName) ??
+    getLocaleBasePath() ??
     staticAssetBasePath ??
     getDirectoryBasePath()
   )
@@ -205,13 +239,20 @@ const urlPrefix = (() => {
 export function getLinkUrl(href: string) {
   const cleanHref = href.replace(/^\/+/, '')
   if (appMode === staticRender) {
-    if (!isHttp || isSsgRendering) return href
+    if (!isHttp) return href
+    if (isSsgRendering) return getSsgRelativeLinkUrl(cleanHref)
     return getAppBasePath() + cleanHref
   }
 
   if (useCleanRouting) return getAppBasePath() + cleanHref
   if (!href || href === '/') return ''
   return `${urlPrefix}/${cleanHref}`
+}
+
+function getSsgRelativeLinkUrl(cleanHref: string) {
+  const routeDepth = window.location.pathname.split('/').filter(Boolean).length
+  const prefix = routeDepth > 1 ? '../'.repeat(routeDepth - 1) : ''
+  return prefix + cleanHref
 }
 
 export function link(href: string, content: string, entity = '') {

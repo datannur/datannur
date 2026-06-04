@@ -1,25 +1,26 @@
-export const locale = 'fr'
+import type { TranslationKey } from '@i18n/types'
+
 export const isBigLimit = 5
 
 export const mainEntityNames = {
-  organization: 'Organisation',
-  folder: 'Dossier',
-  tag: 'Mot clé',
-  concept: 'Concept',
-  doc: 'Doc',
-  dataset: 'Dataset',
-  variable: 'Variable',
-  enumeration: 'Énumération',
-} as const
+  organization: 'entity.organization',
+  folder: 'entity.folder',
+  tag: 'entity.tag',
+  concept: 'entity.concept',
+  doc: 'entity.doc',
+  dataset: 'entity.dataset',
+  variable: 'entity.variable',
+  enumeration: 'entity.enumeration',
+} as const satisfies { [key: string]: TranslationKey }
 
 export const entityNames = {
   ...mainEntityNames,
-  owner: 'Fournisseur',
-  manager: 'Gestionnaire',
-  value: 'Valeur',
-  frequency: 'Fréquence',
-  log: 'Log',
-} as const
+  owner: 'entity.owner',
+  manager: 'entity.manager',
+  value: 'entity.value',
+  frequency: 'entity.frequency',
+  log: 'entity.log',
+} as const satisfies { [key: string]: TranslationKey }
 
 export const parentEntities = {
   organization: 'parent',
@@ -35,45 +36,59 @@ export const parentEntities = {
 } as const
 
 export const varTypes = {
-  integer: 'nombre',
-  float: 'décimal',
-  string: 'texte',
-  boolean: 'booléen',
-  date: 'date',
-  datetime: 'date-heure',
-  time: 'heure',
-  geometry: 'géométrie',
-  binary: 'binaire',
-  other: 'autre',
-} as const
+  integer: 'varType.integer',
+  float: 'varType.float',
+  string: 'varType.string',
+  boolean: 'varType.boolean',
+  date: 'varType.date',
+  datetime: 'varType.datetime',
+  time: 'varType.time',
+  geometry: 'varType.geometry',
+  binary: 'varType.binary',
+  other: 'varType.other',
+} as const satisfies { [key: string]: TranslationKey }
 
 export const evolutionTypes = {
-  add: 'Ajout',
-  update: 'Modification',
-  delete: 'Suppression',
-  startDate: 'Validité début',
-  endDate: 'Validité fin',
-  lastUpdateDate: 'Dernière mise à jour',
-  nextUpdateDate: 'Prochaine mise à jour',
-} as const
+  add: 'evolution.type.add',
+  update: 'evolution.type.update',
+  delete: 'evolution.type.delete',
+  startDate: 'evolution.type.startDate',
+  endDate: 'evolution.type.endDate',
+  lastUpdateDate: 'evolution.type.lastUpdateDate',
+  nextUpdateDate: 'evolution.type.nextUpdateDate',
+} as const satisfies { [key: string]: TranslationKey }
 
 export const columnCleanNames = {
-  startDate: 'Validité début',
-  endDate: 'Validité fin',
-  lastUpdate: ['Dernière', 'mise à jour'],
-  lastUpdateDate: ['Dernière', 'mise à jour'],
-  nextUpdateDate: ['Prochaine', 'mise à jour'],
-  name: 'Nom',
-  description: 'Description',
-  updatingEach: ['Fréquence', 'de mise à jour'],
-  nbRow: 'Nombre de lignes',
-  nbResources: 'Nombre de ressources',
-  dataSize: 'Taille des données',
-  min: 'Minimum',
-  max: 'Maximum',
-  mean: 'Moyenne',
-  std: 'Écart-type',
-} as const
+  startDate: 'evolution.column.startDate',
+  endDate: 'evolution.column.endDate',
+  lastUpdate: [
+    'evolution.column.lastUpdate.line1',
+    'evolution.column.lastUpdate.line2',
+  ],
+  lastUpdateDate: [
+    'evolution.column.lastUpdate.line1',
+    'evolution.column.lastUpdate.line2',
+  ],
+  nextUpdateDate: [
+    'evolution.column.nextUpdate.line1',
+    'evolution.column.nextUpdate.line2',
+  ],
+  name: 'column.name.title',
+  description: 'column.description.title',
+  updatingEach: [
+    'evolution.column.updatingEach.line1',
+    'evolution.column.updatingEach.line2',
+  ],
+  nbRow: 'column.rows.tooltip',
+  nbResources: 'column.resources.tooltip',
+  dataSize: 'column.size.tooltip',
+  min: 'evolution.column.min',
+  max: 'evolution.column.max',
+  mean: 'evolution.column.mean',
+  std: 'evolution.column.std',
+} as const satisfies {
+  [key: string]: TranslationKey | readonly [TranslationKey, TranslationKey]
+}
 
 export const columnIcons = {
   updatingEach: 'updateFrequency',

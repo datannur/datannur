@@ -1,6 +1,7 @@
 <script lang="ts">
   import db from '@db'
   import { isMobile } from '@lib/browser-utils'
+  import { getEntityName } from '@i18n/constant-labels'
   import { entityNames } from '@lib/constant'
   import { safeHtmlWithSvg } from '@lib/html-sanitizer'
   import { renderSimpleDiagram } from '@lib/simple-diagram'
@@ -13,8 +14,8 @@
   const direction = isMobile ? 'TB' : 'LR'
   let diagrammDefinition = `flowchart ${direction}\n`
   const relationRoleNames = {
-    owner: entityNames.owner,
-    manager: entityNames.manager,
+    owner: getEntityName('owner'),
+    manager: getEntityName('manager'),
   } as const
   const hiddenDiagramRelationRoles = ['source', 'fk']
 
@@ -57,7 +58,9 @@
 
   function getEntityCleanName(entity: string): string {
     return (
-      entityNames[entity as keyof typeof entityNames] ??
+      (entity in entityNames
+        ? getEntityName(entity as keyof typeof entityNames)
+        : undefined) ??
       relationRoleNames[entity as keyof typeof relationRoleNames] ??
       entity
     )

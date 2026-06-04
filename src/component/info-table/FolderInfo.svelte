@@ -3,6 +3,7 @@
   import Icon from '@layout/Icon.svelte'
   import ExtendableText from '@layout/ExtendableText.svelte'
   import Link from '@layout/Link.svelte'
+  import { t } from '@i18n/messages'
 
   let {
     folderId,
@@ -14,7 +15,9 @@
     isMeta?: boolean
   } = $props()
 
-  const name = $derived(isSelf ? 'Partie de' : 'Dossier')
+  const name = $derived(
+    isSelf ? t('column.partOf.title') : t('entity.folder'),
+  )
   const icon = $derived(isSelf ? 'folderTreeFolder' : 'folder')
 </script>
 

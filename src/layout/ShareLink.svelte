@@ -1,9 +1,10 @@
 <script lang="ts">
   import { updateTooltipText } from '@lib/tooltip'
+  import { t } from '@i18n/messages'
 
   let copied = $state(false)
-  const tooltipMsg = 'Copier le lien de partage'
-  const tooltipMsgCopied = 'Lien copié !'
+  const tooltipMsg = t('shareLink.copy')
+  const tooltipMsgCopied = t('shareLink.copied')
 
   function getShareUrl(): string {
     return window.location.href.split('?')[0]
@@ -25,7 +26,7 @@
   class="icon share-link use-tooltip"
   class:copied
   onclick={copyLink}
-  aria-label="Copier le lien"
+  aria-label={t('shareLink.ariaLabel')}
   title={tooltipMsg}
 >
   <i class="fas fa-link"></i>

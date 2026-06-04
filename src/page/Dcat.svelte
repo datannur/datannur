@@ -2,18 +2,23 @@
   import { onMount } from 'svelte'
   import Title from '@layout/Title.svelte'
   import Icon from '@layout/Icon.svelte'
+  import { currentLocale } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import {
     loadSemanticValidation,
     semanticBasePath,
+    type LocalizedCount,
     type SemanticValidation,
+    type ValidationResult,
     type ValidationStatus,
   } from '@lib/semantic-export'
+  import type { TranslationKey } from '@i18n/types'
 
-  const statusLabels: { [status in ValidationStatus]: string } = {
-    conforms: 'Conforme',
-    warnings: 'Avertissements',
-    errors: 'Erreurs',
-    notValidated: 'Non validé',
+  const statusKeys: { [status in ValidationStatus]: TranslationKey } = {
+    conforms: 'page.dcat.status.conforms',
+    warnings: 'page.dcat.status.warnings',
+    errors: 'page.dcat.status.errors',
+    notValidated: 'page.dcat.status.notValidated',
   }
   const fileLabels: { [label: string]: string } = {
     ttl: 'Turtle',
@@ -24,6 +29,7 @@
   let report = $state<SemanticValidation | null>(null)
   let loading = $state(true)
   let unavailable = $state(false)
+  const dateLocale = $derived($currentLocale === 'fr' ? 'fr-CH' : 'en')
 
   const topWarnings = $derived(report?.validation.results.slice(0, 8) ?? [])
   const formattedGeneratedAt = $derived(
@@ -39,14 +45,40 @@
 
   function formatTimestamp(value: string) {
     if (!value) return ''
-    return new Intl.DateTimeFormat('fr-CH', {
+    return new Intl.DateTimeFormat(dateLocale, {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(new Date(value))
   }
 
+  function getProfileGeneratedText() {
+    return t('page.dcat.profileGenerated', {
+      profile: report?.profile ?? '',
+      date: formattedGeneratedAt,
+    })
+  }
+
   function getTopEntries(values: { [label: string]: number }, limit = 6) {
     return Object.entries(values).slice(0, limit)
+  }
+
+  function getTopLocalizedEntries(
+    items: LocalizedCount[] | undefined,
+    values: { [label: string]: number },
+    limit = 6,
+  ) {
+    return (
+      items?.slice(0, limit) ??
+      getTopEntries(values, limit).map(([label, count]) => ({ label, count }))
+    )
+  }
+
+  function getLocalizedCountLabel(item: LocalizedCount) {
+    return item.labels?.[$currentLocale] ?? item.label
+  }
+
+  function getWarningLabel(warning: ValidationResult) {
+    return warning.entityLabels?.[$currentLocale] ?? warning.entityLabel
   }
 
   function printReport() {
@@ -66,54 +98,54 @@
   <Title type="dcat" name="DCAT" mode="mainTitle" />
 
   {#if loading}
-    <div class="notice">Chargement du rapport d'interopérabilité...</div>
+    <div class="notice">{t('page.dcat.loading')}</div>
   {:else if unavailable || !report}
     <div class="notice warning">
-      Aucun export sémantique n'a été détecté dans data/db-semantic.
+      {t('page.dcat.unavailable')}
     </div>
   {:else}
     <div class="action-row app-only">
       <button class="primary-action" type="button" onclick={printReport}>
         <Icon type="print" />
-        Exporter en PDF
+        {t('page.dcat.exportPdf')}
       </button>
-      <span>Dernière génération: {formattedGeneratedAt}</span>
+      <span>{t('page.dcat.lastGenerated')} {formattedGeneratedAt}</span>
     </div>
 
     <div class="report-export-area">
       <div class="print-heading">
-        <h1>Rapport d'interopérabilité DCAT</h1>
-        <p>Profil: {report.profile} · Généré le {formattedGeneratedAt}</p>
+        <h1>{t('page.dcat.reportTitle')}</h1>
+        <p>{getProfileGeneratedText()}</p>
       </div>
 
       <div class="summary-strip">
         <div>
-          <span>Profil</span>
+          <span>{t('page.dcat.profile')}</span>
           <strong>{report.profile}</strong>
         </div>
         <div>
-          <span>Validation</span>
+          <span>{t('page.dcat.validation')}</span>
           <strong class="status {report.validation.status}">
-            {statusLabels[report.validation.status]}
+            {t(statusKeys[report.validation.status])}
           </strong>
         </div>
         <div>
-          <span>Datasets</span>
+          <span>{t('page.dcat.datasets')}</span>
           <strong>{report.counts.datasets}</strong>
         </div>
         <div>
-          <span>Distributions</span>
+          <span>{t('page.dcat.distributions')}</span>
           <strong>{report.counts.distributions}</strong>
         </div>
         <div>
-          <span>Éditeurs</span>
+          <span>{t('page.dcat.publishers')}</span>
           <strong>{report.counts.publishers}</strong>
         </div>
       </div>
 
       <div class="layout-grid">
         <section class="panel files-panel">
-          <h2>Fichiers générés</h2>
+          <h2>{t('page.dcat.generatedFiles')}</h2>
           <div class="file-list">
             {#each generatedFiles as [label, filename] (label)}
               <a href={getFileUrl(filename)} target="_blank" rel="noreferrer">
@@ -125,7 +157,7 @@
         </section>
 
         <section class="panel">
-          <h2>Couverture des champs requis</h2>
+          <h2>{t('page.dcat.requiredFieldsCoverage')}</h2>
           <table>
             <tbody>
               {#each Object.values(report.coverage) as item (item.label)}
@@ -140,27 +172,31 @@
         </section>
 
         <section class="panel wide">
-          <h2>Avertissements prioritaires</h2>
+          <h2>{t('page.dcat.priorityWarnings')}</h2>
           <table>
             <thead>
-              <tr><th>Dataset</th><th>Champ</th><th>Contrôle</th></tr>
+              <tr>
+                <th>{t('page.dcat.dataset')}</th>
+                <th>{t('page.dcat.field')}</th>
+                <th>{t('page.dcat.check')}</th>
+              </tr>
             </thead>
             <tbody>
               {#each topWarnings as warning (`${warning.entityId}-${warning.code}-${warning.field}`)}
                 <tr>
-                  <td>{warning.entityLabel}</td>
+                  <td>{getWarningLabel(warning)}</td>
                   <td>{warning.field}</td>
                   <td>{warning.message}</td>
                 </tr>
               {:else}
-                <tr><td colspan="3">Aucun avertissement détecté.</td></tr>
+                <tr><td colspan="3">{t('page.dcat.noWarnings')}</td></tr>
               {/each}
             </tbody>
           </table>
         </section>
 
         <section class="panel">
-          <h2>Formats</h2>
+          <h2>{t('page.dcat.formats')}</h2>
           <ul class="frequency-list">
             {#each getTopEntries(report.counts.formats) as [label, count] (label)}
               <li><span>{label}</span><strong>{count}</strong></li>
@@ -169,7 +205,7 @@
         </section>
 
         <section class="panel">
-          <h2>Licences</h2>
+          <h2>{t('page.dcat.licenses')}</h2>
           <ul class="frequency-list">
             {#each getTopEntries(report.counts.licenses) as [label, count] (label)}
               <li><span>{label}</span><strong>{count}</strong></li>
@@ -178,10 +214,13 @@
         </section>
 
         <section class="panel wide">
-          <h2>Thèmes principaux</h2>
+          <h2>{t('page.dcat.mainThemes')}</h2>
           <ul class="theme-list">
-            {#each getTopEntries(report.counts.themes, 12) as [label, count] (label)}
-              <li><span>{label}</span><strong>{count}</strong></li>
+            {#each getTopLocalizedEntries(report.counts.themeItems, report.counts.themes, 12) as item (item.label)}
+              <li>
+                <span>{getLocalizedCountLabel(item)}</span>
+                <strong>{item.count}</strong>
+              </li>
             {/each}
           </ul>
         </section>

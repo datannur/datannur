@@ -6,6 +6,9 @@ export type BaseEntity = {
   id: string | number
   name: string
   description?: string
+  [localizedField: `name:${string}` | `description:${string}`]:
+    | string
+    | undefined
 
   // Computed fields added during processing
   _entity?: string
@@ -19,6 +22,7 @@ export type Row = Record<string, unknown>
 export type Config = {
   id: string
   value: string
+  [localizedValue: `value:${string}`]: string | undefined
 }
 
 export type Value = {
@@ -65,6 +69,7 @@ export type SearchHistory = {
 export type ConfigFilter = {
   id: string
   name: string
+  [localizedName: `name:${string}`]: string | undefined
   entity: string
   field: string
   value: string | number | boolean | null

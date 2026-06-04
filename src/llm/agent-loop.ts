@@ -5,6 +5,8 @@
 
 import { chatStream } from '@llm/llm-client'
 import { getToolDefinitions, executeTool } from '@llm/llm-tools'
+import { t } from '@i18n/messages'
+import { getCurrentLocale } from '@i18n/i18n'
 import type { ChatMessage, ToolCall } from '@llm/llm-client'
 
 export type AgentLoopOptions = {
@@ -57,7 +59,7 @@ export async function runAgentLoop(
     }
 
     const currentMessages = [systemMessage, ...messages.slice(0, -1)]
-    const tools = getToolDefinitions()
+    const tools = getToolDefinitions(getCurrentLocale())
 
     await chatStream(
       currentMessages,
@@ -136,7 +138,10 @@ async function handleToolCall(
       ...messages,
       {
         role: 'assistant',
-        content: `Erreur lors de l'exécution de l'outil: ${toolError instanceof Error ? toolError.message : String(toolError)}`,
+        content: t('llm.chat.toolExecutionError', {
+          error:
+            toolError instanceof Error ? toolError.message : String(toolError),
+        }),
       },
     ])
     throw toolError

@@ -3,8 +3,10 @@
   import Title from '@layout/Title.svelte'
   import Tabs from '@tab/Tabs.svelte'
   import { tabsHelper } from '@tab/tabs-helper'
-  import aboutFile from '@markdown/about-doc.md?raw'
-  import { translate } from '@i18n/i18n'
+  import aboutFileEn from '@markdown/about-doc.en.md?raw'
+  import aboutFileFr from '@markdown/about-doc.fr.md?raw'
+  import { localizedMarkdown } from '@i18n/markdown'
+  import { t } from '@i18n/messages'
 
   const docs = db.getAll('doc')
 
@@ -14,11 +16,11 @@
     docs,
     evolutions,
     stat: [{ entity: 'doc', items: docs }],
-    aboutFile,
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
   })
 </script>
 
 <section class="section">
-  <Title type="doc" name={$translate('entityPlural.doc')} mode="mainTitle" />
+  <Title type="doc" name={t('entityPlural.doc')} mode="mainTitle" />
   <Tabs {tabs} />
 </section>

@@ -1,7 +1,7 @@
 import escapeHtml from 'escape-html'
 import db from '@db'
-import { locale } from '@lib/constant'
-import { copyTextClasses, copyTextMsg } from '@lib/copy-text'
+import { getCurrentLocale, t } from '@i18n/messages'
+import { copyTextClasses, getCopyTextMsg } from '@lib/copy-text'
 import {
   getTimeAgo,
   dateToTimestamp,
@@ -32,6 +32,15 @@ import type {
 const separator = ' | '
 
 export default class Render {
+  static otherValuesText(count: number) {
+    const key = count === 1 ? 'render.otherValue' : 'render.otherValues'
+    return t(key, { count: count.toLocaleString(getCurrentLocale()) })
+  }
+  static otherFrequenciesText(count: number) {
+    const key =
+      count === 1 ? 'render.otherFrequency' : 'render.otherFrequencies'
+    return t(key, { count: count.toLocaleString(getCurrentLocale()) })
+  }
   static shortText(data: unknown, type: string) {
     if (!data) return ''
     if (type !== 'display') return data
@@ -119,10 +128,9 @@ export default class Render {
     }
     if (nbValues > values.length && 'id' in row) {
       const nbOtherValues = nbValues - values.length
-      const s = nbOtherValues > 1 ? 's' : ''
       const text = link(
         `${entity}/${row.id}?tab=${tab}`,
-        `... ${nbOtherValues} autre${s} valeur${s}`,
+        Render.otherValuesText(nbOtherValues),
         'value',
       )
       if (type === 'export') content += separator
@@ -165,10 +173,9 @@ export default class Render {
     const totalFreqCount = db.getAll('frequency', { variable: row }).length
     if (totalFreqCount > freqData.length) {
       const nbOtherFreq = totalFreqCount - freqData.length
-      const s = nbOtherFreq > 1 ? 's' : ''
       const text = link(
         `variable/${row.id}?tab=frequency`,
-        `... ${nbOtherFreq} autre${s} fréquence${s}`,
+        Render.otherFrequenciesText(nbOtherFreq),
         'frequency',
       )
       if (type === 'export') content += separator
@@ -182,7 +189,7 @@ export default class Render {
   static num(data: NullableNumber | string, type = 'display'): string | number {
     if (data === false || data === undefined || data === null) return ''
     if (type !== 'display') return data
-    return data.toLocaleString(locale)
+    return data.toLocaleString(getCurrentLocale())
   }
   static dataSize(bytes: NullableNumber): string {
     if (!bytes) return ''
@@ -196,7 +203,7 @@ export default class Render {
     const formatted =
       index === 0
         ? size.toString()
-        : size.toLocaleString(locale, { maximumFractionDigits: 1 })
+        : size.toLocaleString(getCurrentLocale(), { maximumFractionDigits: 1 })
     return `${formatted} ${units[index]}`
   }
   static statsPreview(data: string, type: string): string {
@@ -211,7 +218,7 @@ export default class Render {
     meta: { col: number; row: number },
   ) {
     if (type !== 'display') {
-      return row.isFavorite ? 'favoris' : 'non favoris'
+      return row.isFavorite ? t('render.favorite') : t('render.notFavorite')
     }
     return `
       <span class="icon favorite ${data ? ' is-active' : ''}"
@@ -320,7 +327,7 @@ export default class Render {
     if (!data) return wrapLongText()
     if (type !== 'display') return data
     return wrapLongText(
-      `<span class="${copyTextClasses}" title="${copyTextMsg}">${data}</span>`,
+      `<span class="${copyTextClasses}" title="${getCopyTextMsg()}">${data}</span>`,
     )
   }
   static datetime(
@@ -335,7 +342,7 @@ export default class Render {
 
     let contentAfter = ''
     if (option.estimation) {
-      contentAfter = ` <span style="font-size: 12px;">(estim.)</span>`
+      contentAfter = ` <span style="font-size: 12px;">${t('render.estimated')}</span>`
     }
     const hasTime = hasTimePrecision(data)
     const timeAgo = getTimeAgo(data, true, !hasTime)

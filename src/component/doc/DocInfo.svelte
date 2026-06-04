@@ -5,6 +5,7 @@
   import DocPreview from './DocPreview.svelte'
   import LastUpdateInfo from '@info-table/LastUpdateInfo.svelte'
   import DescriptionInfo from '@info-table/DescriptionInfo.svelte'
+  import { t } from '@i18n/messages'
   import type { Doc } from '@type'
 
   let { doc }: { doc: Doc } = $props()
@@ -14,12 +15,12 @@
   <IdInfo id={doc.id} />
   {#if doc.type}
     <tr>
-      <td><Icon type="type" /> Type</td>
+      <td><Icon type="type" /> {t('column.fileType.title')}</td>
       <td>{doc.type} <Icon type={doc.type} /></td>
     </tr>
   {/if}
   <tr>
-    <td><Icon type="link" /> Lien</td>
+    <td><Icon type="link" /> {t('column.docPath.title')}</td>
     <td>
       <a class="break-line" href={doc.path} target="_blanck">{doc.path}</a>
     </td>

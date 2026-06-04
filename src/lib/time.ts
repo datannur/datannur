@@ -1,4 +1,4 @@
-import { locale } from '@lib/constant'
+import { getCurrentLocale } from '@i18n/messages'
 import type { Locale } from '@i18n/types'
 
 function isQuarterSeparator(char: string): boolean {
@@ -148,7 +148,7 @@ export function getTimeAgo(
   parse = false,
   day = false,
   dateNow = new Date(),
-  formatLocale: Locale | string = locale,
+  formatLocale: Locale | string = getCurrentLocale(),
 ) {
   if (!date) return ''
   if (parse && typeof date === 'string') date = dateToTimestamp(date)

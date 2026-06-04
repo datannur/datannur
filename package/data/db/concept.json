@@ -1,194 +1,258 @@
 [
   {
-    "description": "Événement non intentionnel provoquant un dommage, une blessure ou une perturbation d'activité.",
+    "description": "Unintentional event causing damage, injury, or disruption of activity.",
+    "description:fr": "Événement non intentionnel provoquant un dommage, une blessure ou une perturbation d'activité.",
     "id": "accident",
     "name": "Accident",
+    "name:fr": "Accident",
     "parent_id": null
   },
   {
-    "description": "Valeur de position permettant de localiser un objet ou un lieu dans un système de référence spatial.",
+    "description": "Position value used to locate an object or place in a spatial reference system.",
+    "description:fr": "Valeur de position permettant de localiser un objet ou un lieu dans un système de référence spatial.",
     "id": "coordonnee_geographique",
-    "name": "Coordonnée géographique",
+    "name": "Geographic coordinate",
+    "name:fr": "Coordonnée géographique",
     "parent_id": null
   },
   {
-    "description": "Valeur de position sur l'axe est-ouest dans le système de coordonnées suisses CH1903+ / LV95.",
+    "description": "Position value on the east-west axis in the Swiss CH1903+ / LV95 coordinate system.",
+    "description:fr": "Valeur de position sur l'axe est-ouest dans le système de coordonnées suisses CH1903+ / LV95.",
     "id": "coordonnee_x_lv95",
-    "name": "Coordonnée X LV95",
+    "name": "LV95 X coordinate",
+    "name:fr": "Coordonnée X LV95",
     "parent_id": "coordonnee_geographique"
   },
   {
-    "description": "Valeur de position sur l'axe nord-sud dans le système de coordonnées suisses CH1903+ / LV95.",
+    "description": "Position value on the north-south axis in the Swiss CH1903+ / LV95 coordinate system.",
+    "description:fr": "Valeur de position sur l'axe nord-sud dans le système de coordonnées suisses CH1903+ / LV95.",
     "id": "coordonnee_y_lv95",
-    "name": "Coordonnée Y LV95",
+    "name": "LV95 Y coordinate",
+    "name:fr": "Coordonnée Y LV95",
     "parent_id": "coordonnee_geographique"
   },
   {
-    "description": "Montant engagé ou supporté au titre d'une dépense, d'un investissement ou d'une charge.",
+    "description": "Amount incurred or borne as an expense, investment, or charge.",
+    "description:fr": "Montant engagé ou supporté au titre d'une dépense, d'un investissement ou d'une charge.",
     "id": "cout",
-    "name": "Coût",
+    "name": "Cost",
+    "name:fr": "Coût",
     "parent_id": null
   },
   {
-    "description": "Montant engagé pour financer un investissement ou une dépense d'équipement durable.",
+    "description": "Amount committed to finance an investment or durable equipment expenditure.",
+    "description:fr": "Montant engagé pour financer un investissement ou une dépense d'équipement durable.",
     "id": "cout_investissement",
-    "name": "Coût d'investissement",
+    "name": "Investment cost",
+    "name:fr": "Coût d'investissement",
     "parent_id": "cout"
   },
   {
-    "description": "Rapport entre le nombre d'habitants et la surface du territoire, généralement exprimé en habitants par kilomètre carré.",
+    "description": "Ratio between the number of inhabitants and the area of the territory, usually expressed in inhabitants per square kilometer.",
+    "description:fr": "Rapport entre le nombre d'habitants et la surface du territoire, généralement exprimé en habitants par kilomètre carré.",
     "id": "densite_population",
-    "name": "Densité de population",
+    "name": "Population density",
+    "name:fr": "Densité de population",
     "parent_id": "population"
   },
   {
-    "description": "Situation ou caractéristiques liées à l'exercice d'une activité professionnelle ou à la relation d'emploi.",
+    "description": "Situation or characteristics related to professional activity or the employment relationship.",
+    "description:fr": "Situation ou caractéristiques liées à l'exercice d'une activité professionnelle ou à la relation d'emploi.",
     "id": "emploi",
-    "name": "Emploi",
+    "name": "Employment",
+    "name:fr": "Emploi",
     "parent_id": null
   },
   {
-    "description": "Niveau de sévérité attribué à un accident selon ses conséquences humaines ou matérielles.",
+    "description": "Severity level assigned to an accident according to its human or material consequences.",
+    "description:fr": "Niveau de sévérité attribué à un accident selon ses conséquences humaines ou matérielles.",
     "id": "gravite_accident",
-    "name": "Gravité d'accident",
+    "name": "Accident severity",
+    "name:fr": "Gravité d'accident",
     "parent_id": "accident"
   },
   {
-    "description": "Niveau de formation atteint ou requis, exprimé selon une typologie telle que CFC, Bachelor, Master ou Doctorat.",
+    "description": "Education level attained or required, expressed using a typology such as apprenticeship certificate, bachelor's, master's, or doctorate.",
+    "description:fr": "Niveau de formation atteint ou requis, exprimé selon une typologie telle que CFC, Bachelor, Master ou Doctorat.",
     "id": "niveau_formation",
-    "name": "Niveau de formation",
+    "name": "Education level",
+    "name:fr": "Niveau de formation",
     "parent_id": "emploi"
   },
   {
-    "description": "Nombre de personnes bénéficiant effectivement d'un service, d'une prestation ou d'un dispositif.",
+    "description": "Number of people effectively receiving a service, benefit, or scheme.",
+    "description:fr": "Nombre de personnes bénéficiant effectivement d'un service, d'une prestation ou d'un dispositif.",
     "id": "nombre_beneficiaires",
-    "name": "Nombre de bénéficiaires",
+    "name": "Number of beneficiaries",
+    "name:fr": "Nombre de bénéficiaires",
     "parent_id": "population"
   },
   {
-    "description": "Nombre total de personnes employées dans l'entité, le service ou le secteur observé.",
+    "description": "Total number of people employed in the observed entity, service, or sector.",
+    "description:fr": "Nombre total de personnes employées dans l'entité, le service ou le secteur observé.",
     "id": "nombre_employes",
-    "name": "Nombre d'employés",
+    "name": "Number of employees",
+    "name:fr": "Nombre d'employés",
     "parent_id": "emploi"
   },
   {
-    "description": "Nombre total d'entreprises recensées dans le périmètre observé.",
+    "description": "Total number of companies recorded within the observed scope.",
+    "description:fr": "Nombre total d'entreprises recensées dans le périmètre observé.",
     "id": "nombre_entreprises",
-    "name": "Nombre d'entreprises",
+    "name": "Number of companies",
+    "name:fr": "Nombre d'entreprises",
     "parent_id": "emploi"
   },
   {
-    "description": "Ensemble des personnes résidant dans un territoire ou appartenant à un groupe observé.",
+    "description": "All people residing in a territory or belonging to an observed group.",
+    "description:fr": "Ensemble des personnes résidant dans un territoire ou appartenant à un groupe observé.",
     "id": "population",
     "name": "Population",
+    "name:fr": "Population",
     "parent_id": null
   },
   {
-    "description": "Nombre de personnes de nationalité étrangère dans le territoire observé.",
+    "description": "Number of people of foreign nationality in the observed territory.",
+    "description:fr": "Nombre de personnes de nationalité étrangère dans le territoire observé.",
     "id": "population_etrangere",
-    "name": "Population étrangère",
+    "name": "Foreign population",
+    "name:fr": "Population étrangère",
     "parent_id": "population"
   },
   {
-    "description": "Nombre de personnes de nationalité suisse dans le territoire observé.",
+    "description": "Number of people of Swiss nationality in the observed territory.",
+    "description:fr": "Nombre de personnes de nationalité suisse dans le territoire observé.",
     "id": "population_suisse",
-    "name": "Population suisse",
+    "name": "Swiss population",
+    "name:fr": "Population suisse",
     "parent_id": "population"
   },
   {
-    "description": "Nombre total de personnes résidant dans le territoire observé.",
+    "description": "Total number of people residing in the observed territory.",
+    "description:fr": "Nombre total de personnes résidant dans le territoire observé.",
     "id": "population_totale",
-    "name": "Population totale",
+    "name": "Total population",
+    "name:fr": "Population totale",
     "parent_id": "population"
   },
   {
-    "description": "Transferts monétaires ou en nature versés au titre de la protection sociale, tels que rentes, allocations ou indemnités.",
+    "description": "Cash or in-kind transfers paid under social protection, such as pensions, allowances, or benefits.",
+    "description:fr": "Transferts monétaires ou en nature versés au titre de la protection sociale, tels que rentes, allocations ou indemnités.",
     "id": "prestation_sociale",
-    "name": "Prestations sociales",
+    "name": "Social benefits",
+    "name:fr": "Prestations sociales",
     "parent_id": "revenu"
   },
   {
-    "description": "Ensemble des ressources monétaires perçues par une personne, un ménage ou une unité économique sur une période donnée.",
+    "description": "All monetary resources received by a person, household, or economic unit over a given period.",
+    "description:fr": "Ensemble des ressources monétaires perçues par une personne, un ménage ou une unité économique sur une période donnée.",
     "id": "revenu",
-    "name": "Revenu",
+    "name": "Income",
+    "name:fr": "Revenu",
     "parent_id": null
   },
   {
-    "description": "Part des revenus provenant du patrimoine financier ou immobilier.",
+    "description": "Share of income coming from financial or real estate assets.",
+    "description:fr": "Part des revenus provenant du patrimoine financier ou immobilier.",
     "id": "revenu_du_capital",
-    "name": "Revenus du capital",
+    "name": "Capital income",
+    "name:fr": "Revenus du capital",
     "parent_id": "revenu"
   },
   {
-    "description": "Part des revenus provenant directement d'une activité professionnelle salariée ou indépendante.",
+    "description": "Share of income coming directly from salaried or self-employed professional activity.",
+    "description:fr": "Part des revenus provenant directement d'une activité professionnelle salariée ou indépendante.",
     "id": "revenu_du_travail",
-    "name": "Revenus du travail",
+    "name": "Employment income",
+    "name:fr": "Revenus du travail",
     "parent_id": "revenu"
   },
   {
-    "description": "Niveau de revenu qui partage la population observée en deux parts égales : 50 % en dessous, 50 % au-dessus.",
+    "description": "Income level that divides the observed population into two equal parts: 50% below and 50% above.",
+    "description:fr": "Niveau de revenu qui partage la population observée en deux parts égales : 50 % en dessous, 50 % au-dessus.",
     "id": "revenu_median",
-    "name": "Revenu médian",
+    "name": "Median income",
+    "name:fr": "Revenu médian",
     "parent_id": "revenu"
   },
   {
-    "description": "Montant du revenu total rapporté au nombre de personnes composant le ménage ou le groupe observé.",
+    "description": "Total income amount divided by the number of people in the household or observed group.",
+    "description:fr": "Montant du revenu total rapporté au nombre de personnes composant le ménage ou le groupe observé.",
     "id": "revenu_par_personne",
-    "name": "Revenu par personne",
+    "name": "Income per person",
+    "name:fr": "Revenu par personne",
     "parent_id": "revenu"
   },
   {
-    "description": "Montant total des revenus avant déductions, impôts et autres charges obligatoires.",
+    "description": "Total amount of income before deductions, taxes, and other mandatory charges.",
+    "description:fr": "Montant total des revenus avant déductions, impôts et autres charges obligatoires.",
     "id": "revenu_total_brut",
-    "name": "Revenu total brut",
+    "name": "Total gross income",
+    "name:fr": "Revenu total brut",
     "parent_id": "revenu"
   },
   {
-    "description": "Montant total des revenus après déductions, impôts et charges obligatoires.",
+    "description": "Total amount of income after deductions, taxes, and mandatory charges.",
+    "description:fr": "Montant total des revenus après déductions, impôts et charges obligatoires.",
     "id": "revenu_total_net",
-    "name": "Revenu total net",
+    "name": "Total net income",
+    "name:fr": "Revenu total net",
     "parent_id": "revenu"
   },
   {
-    "description": "Situation d'une personne au regard de l'emploi, par exemple temps plein, temps partiel, chômage ou inactivité.",
+    "description": "A person's situation with respect to employment, such as full-time, part-time, unemployment, or inactivity.",
+    "description:fr": "Situation d'une personne au regard de l'emploi, par exemple temps plein, temps partiel, chômage ou inactivité.",
     "id": "statut_emploi",
-    "name": "Statut d'emploi",
+    "name": "Employment status",
+    "name:fr": "Statut d'emploi",
     "parent_id": "emploi"
   },
   {
-    "description": "Grandeur physique mesurant le niveau thermique observé dans un lieu ou un milieu.",
+    "description": "Physical quantity measuring the thermal level observed in a place or environment.",
+    "description:fr": "Grandeur physique mesurant le niveau thermique observé dans un lieu ou un milieu.",
     "id": "temperature",
-    "name": "Température",
+    "name": "Temperature",
+    "name:fr": "Température",
     "parent_id": null
   },
   {
-    "description": "Valeur maximale de la température observée sur la période de référence.",
+    "description": "Maximum temperature value observed over the reference period.",
+    "description:fr": "Valeur maximale de la température observée sur la période de référence.",
     "id": "temperature_maximale",
-    "name": "Température maximale",
+    "name": "Maximum temperature",
+    "name:fr": "Température maximale",
     "parent_id": "temperature"
   },
   {
-    "description": "Valeur minimale de la température observée sur la période de référence.",
+    "description": "Minimum temperature value observed over the reference period.",
+    "description:fr": "Valeur minimale de la température observée sur la période de référence.",
     "id": "temperature_minimale",
-    "name": "Température minimale",
+    "name": "Minimum temperature",
+    "name:fr": "Température minimale",
     "parent_id": "temperature"
   },
   {
-    "description": "Valeur moyenne de la température observée sur la période de référence.",
+    "description": "Average temperature value observed over the reference period.",
+    "description:fr": "Valeur moyenne de la température observée sur la période de référence.",
     "id": "temperature_moyenne",
-    "name": "Température moyenne",
+    "name": "Average temperature",
+    "name:fr": "Température moyenne",
     "parent_id": "temperature"
   },
   {
-    "description": "Catégorie décrivant la nature de l'accident, par exemple collision, chute ou coupure.",
+    "description": "Category describing the nature of the accident, such as collision, fall, or cut.",
+    "description:fr": "Catégorie décrivant la nature de l'accident, par exemple collision, chute ou coupure.",
     "id": "type_accident",
-    "name": "Type d'accident",
+    "name": "Accident type",
+    "name:fr": "Type d'accident",
     "parent_id": "accident"
   },
   {
-    "description": "Catégorie de contrat de travail liant une personne à un employeur, par exemple CDI, CDD ou apprentissage.",
+    "description": "Category of employment contract linking a person to an employer, such as permanent contract, fixed-term contract, or apprenticeship.",
+    "description:fr": "Catégorie de contrat de travail liant une personne à un employeur, par exemple CDI, CDD ou apprentissage.",
     "id": "type_contrat",
-    "name": "Type de contrat",
+    "name": "Contract type",
+    "name:fr": "Type de contrat",
     "parent_id": "emploi"
   }
 ]

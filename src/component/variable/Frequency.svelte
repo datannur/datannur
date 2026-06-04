@@ -2,6 +2,7 @@
   import { untrack } from 'svelte'
   import Render from '@lib/render'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import { getPercent } from '@lib/util'
   import escapeHtml from 'escape-html'
   import type { Frequency, Column as ColumnType } from '@type'
@@ -27,15 +28,22 @@
 
     columns.push({
       data: 'value',
-      title: Render.icon('value') + (isPattern ? 'Pattern' : 'Valeur'),
-      tooltip: isPattern ? 'Pattern de la variable' : 'Valeur de la variable',
+      title:
+        Render.icon('value') +
+        (isPattern
+          ? t('column.pattern.title')
+          : t('column.value.title')),
+      tooltip: isPattern
+        ? t('column.pattern.tooltip')
+        : t('column.variableValue.tooltip'),
       render: Render.longText,
     })
 
     columns.push({
       data: 'frequency',
-      title: Render.icon('frequency') + 'Fréquence',
-      tooltip: "Nombre d'occurrences avec pourcentage",
+      title:
+        Render.icon('frequency') + t('column.frequencyCount.title'),
+      tooltip: t('column.frequencyCount.tooltip'),
       filterType: 'input',
       className: 'text-right',
       render: (data, type) => {
@@ -68,7 +76,7 @@
     return columns
   }
 
-  const columns = defineColumns()
+  const columns = $derived(defineColumns())
 </script>
 
 <Datatable entity="frequency" data={freqSorted} {columns} keepAllCols={true} />

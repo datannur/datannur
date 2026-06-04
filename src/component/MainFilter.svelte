@@ -3,7 +3,7 @@
   import MainFilter from '@lib/main-filter'
   import Switch from '@layout/Switch.svelte'
   import Button from '@layout/Button.svelte'
-  import { translate } from '@i18n/i18n'
+  import { t } from '@i18n/messages'
   import type { ConfigFilter } from '@type'
 
   let filters: ConfigFilter[] = $state([])
@@ -25,7 +25,7 @@
 
 <div class="navbar-item">
   <Button onclick={() => window.location.reload()}
-    >{$translate('filter.apply')}</Button
+    >{t('filter.apply')}</Button
   >
 </div>
 

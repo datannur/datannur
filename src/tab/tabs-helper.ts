@@ -6,7 +6,7 @@ import type { Component } from 'svelte'
 import type { TranslationKey } from '@i18n/types'
 
 export type TabConfig = {
-  name: string
+  name?: string
   nameKey?: TranslationKey
   icon: string
   /* eslint-disable-next-line */

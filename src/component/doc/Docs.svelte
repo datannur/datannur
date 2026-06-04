@@ -5,6 +5,7 @@
   import { link } from '@lib/url'
   import { getPercent } from '@lib/util'
   import Datatable from '@datatable/Datatable.svelte'
+  import { t } from '@i18n/messages'
   import escapeHtml from 'escape-html'
   import type { Doc, Column as ColumnType } from '@type'
 
@@ -34,17 +35,17 @@
   }
   sortDocs(docsSorted)
 
-  let columns: ColumnType[] = [
+  let columns: ColumnType[] = $derived([
     Column.favorite(),
     Column.name('doc', 'Doc'),
     Column.description(),
     {
       data: 'type',
       name: 'docType',
-      title: Render.icon('type') + 'Type',
+      title: Render.icon('type') + t('column.fileType.title'),
       defaultContent: '',
       filterType: 'select',
-      tooltip: 'Type de fichier (markdown ou pdf)',
+      tooltip: t('column.fileType.tooltip'),
       render: (data, type) => {
         if (!data) return ''
         if (type !== 'display') return String(data)
@@ -55,10 +56,10 @@
     Column.docPath(),
     {
       data: 'lastUpdateDate',
-      title: Render.icon('date') + 'Mise à jour',
+      title: Render.icon('date') + t('column.lastUpdate.title'),
       defaultContent: '',
       filterType: 'input',
-      tooltip: 'Date de dernière mise à jour',
+      tooltip: t('column.lastUpdate.tooltip'),
       render: (data, type, row) => Render.datetime(data, type, row),
     },
     Column.inherited(),
@@ -68,7 +69,7 @@
         Render.icon('organization') +
         "<span class='hidden'>nbOrganizations</span>",
       filterType: 'input',
-      tooltip: "Nombre d'organisations",
+      tooltip: t('column.organizations.tooltip'),
       render: (data, type, row: Doc) => {
         if (!data) return ''
         const content = link(
@@ -83,7 +84,7 @@
       data: 'nbFolder',
       title: Render.icon('folder') + "<span class='hidden'>nbFolders</span>",
       filterType: 'input',
-      tooltip: 'Nombre de dossiers',
+      tooltip: t('column.folders.tooltip'),
       render: (data, type, row: Doc) => {
         if (!data) return ''
         const content = link('doc/' + row.id + '?tab=folders', escapeHtml(data))
@@ -95,7 +96,7 @@
       data: 'nbTag',
       title: Render.icon('tag') + "<span class='hidden'>nbTags</span>",
       filterType: 'input',
-      tooltip: 'Nombre de mots clés',
+      tooltip: t('column.tagCount.tooltip'),
       render: (data, type, row: Doc) => {
         if (!data) return ''
         const content = link('doc/' + row.id + '?tab=tags', escapeHtml(data))
@@ -107,7 +108,7 @@
       data: 'nbDataset',
       title: Render.icon('dataset') + "<span class='hidden'>nbDatasets</span>",
       filterType: 'input',
-      tooltip: 'Nombre de datasets',
+      tooltip: t('column.datasets.tooltip'),
       render: (data, type, row: Doc) => {
         if (!data) return ''
         const content = link(
@@ -118,7 +119,7 @@
         return `${Render.numPercent(content, percent, 'dataset', type)}`
       },
     },
-  ]
+  ])
 </script>
 
 <Datatable entity="doc" data={docsSorted} {columns} />
