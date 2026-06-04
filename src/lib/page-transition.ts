@@ -13,6 +13,7 @@ type TextStyleSnapshot = {
 type TextTransitionSnapshot = {
   bounds: TextRectSnapshot
   color: string
+  targetOffsetY?: number
 }
 
 type TextRectSnapshot = {
@@ -27,15 +28,18 @@ function cleanTransitionPart(value: string | number) {
 }
 
 function getEntityRoute(href: string) {
-  const route = href.replace(/^\/+/, '').split('?')[0]
+  const cleanHref = href.replace(/^\/+/, '')
+  const route = cleanHref.split('?')[0]
   const match = route.match(entityRoutePattern)
   if (!match) return undefined
+  const params = new URLSearchParams(cleanHref.split('?')[1] ?? '')
 
   return {
     entity: match[1],
     id: match[2],
     route,
     routeKey: route.replace(/\//g, '___'),
+    tab: params.get('tab') ?? undefined,
   }
 }
 
@@ -54,8 +58,54 @@ function getTitleTarget(route: ReturnType<typeof getEntityRoute>) {
   )
 }
 
+function getTabTarget(route: ReturnType<typeof getEntityRoute>) {
+  if (!route?.tab) return undefined
+  return document.querySelector<HTMLElement>(
+    `[data-tab-transition="${route.tab}"]`,
+  )
+}
+
+function normalizeTransitionText(text: string) {
+  return text.replace(/\s+/g, ' ').trim()
+}
+
+function normalizeTransitionNumber(text: string) {
+  return text.replace(/\D/g, '')
+}
+
+function textMatchesTarget(sourceText: string, target: HTMLElement) {
+  return (
+    normalizeTransitionText(sourceText) ===
+    normalizeTransitionText(target.textContent ?? '')
+  )
+}
+
+function numberMatchesTarget(sourceText: string, target: HTMLElement) {
+  const sourceNumber = normalizeTransitionNumber(sourceText)
+  if (!sourceNumber) return false
+  return sourceNumber === normalizeTransitionNumber(target.textContent ?? '')
+}
+
+function getMatchingTarget(
+  text: string,
+  route: ReturnType<typeof getEntityRoute>,
+) {
+  const titleTarget = getTitleTarget(route)
+  if (titleTarget && textMatchesTarget(text, titleTarget)) return titleTarget
+
+  const tabTarget = getTabTarget(route)
+  if (tabTarget && numberMatchesTarget(text, tabTarget)) return tabTarget
+
+  return undefined
+}
+
+function getTargetOffsetY(target: HTMLElement) {
+  return target.dataset.tabTransition ? 5 : 0
+}
+
 function getTextSource(source: HTMLElement) {
   return (
+    source.querySelector<HTMLElement>('.num-percent-value') ??
     source.querySelector<HTMLElement>('.long-text') ??
     source.querySelector<HTMLElement>('.var-main-col a') ??
     source.querySelector<HTMLElement>('a') ??
@@ -126,7 +176,8 @@ function animateTitleClone(
   source: TextTransitionSnapshot,
 ) {
   const from = source.bounds
-  const to = getTextRect(target)
+  const to = toRectSnapshot(getTextRect(target))
+  to.top += source.targetOffsetY ?? 0
   if (
     from.width === 0 ||
     from.height === 0 ||
@@ -189,9 +240,12 @@ function animateAfterNavigation(
 ) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const target = getTitleTarget(route)
+      const target = getMatchingTarget(text, route)
       if (!target) return
-      animateTitleClone(text, target, source)
+      animateTitleClone(text, target, {
+        ...source,
+        targetOffsetY: getTargetOffsetY(target),
+      })
     })
   })
 }
@@ -211,8 +265,8 @@ export function navigateWithEntityTitleTransition(
 
   if (
     !route ||
-    route?.route === currentPage ||
-    route?.routeKey === currentPage ||
+    ((route?.route === currentPage || route?.routeKey === currentPage) &&
+      !route.tab) ||
     !(source instanceof HTMLElement)
   ) {
     navigate()

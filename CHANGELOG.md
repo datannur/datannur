@@ -1,9 +1,12 @@
 # datannur
 
-## Unreleased
+## 0.27.0 (2026-06-04)
 
 - add: introduce English/French localization across the app, data exports, static routes, integrity checks, and LLM/STT flows
 - change: use English as the fallback language, with browser detection, persisted preference, `?lang=`, and adaptive LLM replies
+- fix: render labeled bidirectional self-loop edges cleanly in lightweight structure diagrams
+- fix: animate entity and count links only toward matching page titles or tab counters
+- fix: include datasets with folder-inherited owner or manager organizations in organization pages and recursive counters
 
 ## 0.26.0 (2026-06-02)
 
