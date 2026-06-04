@@ -377,15 +377,36 @@ function addDatasetInheritedInfo(dataset: EntityTypeMap['dataset']) {
   const folder = db.get('folder', dataset.folderId)
   if (!folder) return
 
-  if (isMissing(dataset.ownerOrganizationId))
-    dataset.ownerOrganizationId = folder.ownerOrganizationId
-  if (isMissing(dataset.managerOrganizationId))
-    dataset.managerOrganizationId = folder.managerOrganizationId
+  if (isMissing(dataset.ownerOrganizationId) && folder.ownerOrganizationId) {
+    db.addForeignKey(
+      'dataset',
+      dataset.id,
+      'ownerOrganizationId',
+      folder.ownerOrganizationId,
+    )
+  }
+  if (
+    isMissing(dataset.managerOrganizationId) &&
+    folder.managerOrganizationId
+  ) {
+    db.addForeignKey(
+      'dataset',
+      dataset.id,
+      'managerOrganizationId',
+      folder.managerOrganizationId,
+    )
+  }
   if (isMissing(dataset.updatingEach))
     dataset.updatingEach = folder.updatingEach
   if (isMissing(dataset.license) && folder.license) {
     dataset.license = folder.license
   }
+}
+
+function inheritDatasetInfoFromFolder() {
+  db.foreach('dataset', dataset => {
+    addDatasetInheritedInfo(dataset)
+  })
 }
 
 function addFolderDatasetDates(folder: EntityTypeMap['folder']) {
@@ -731,7 +752,6 @@ class Process {
     db.foreach('dataset', dataset => {
       addEntity(dataset, 'dataset')
       dataset.isFavorite = false
-      addDatasetInheritedInfo(dataset)
       dataset.tags = db.getAll('tag', { dataset })
       addDocs('dataset', dataset)
       if (db.use.organization)
@@ -973,6 +993,7 @@ export function getLocalFilter() {
 
 export function dbAddProcessedData() {
   Process.localize()
+  inheritDatasetInfoFromFolder()
   Process.tag()
   Process.organization()
   Process.folder()

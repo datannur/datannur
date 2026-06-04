@@ -61,7 +61,7 @@ export function initApp(): Promise<void> {
         const searchTimer = performance.now()
         search.init().then(() => {
           console.log(
-            'search init',
+            'search init time',
             Math.round(performance.now() - searchTimer),
           )
         })
