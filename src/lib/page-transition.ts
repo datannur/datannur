@@ -52,16 +52,51 @@ export function getEntityTitleTransitionName(
 
 function getTitleTarget(route: ReturnType<typeof getEntityRoute>) {
   if (!route) return undefined
-  if (route.tab) {
-    const tabTarget = document.querySelector<HTMLElement>(
-      `[data-tab-transition="${route.tab}"]`,
-    )
-    if (tabTarget) return tabTarget
-  }
   const transitionName = getEntityTitleTransitionName(route.entity, route.id)
   return document.querySelector<HTMLElement>(
     `[data-entity-title-transition="${transitionName}"]`,
   )
+}
+
+function getTabTarget(route: ReturnType<typeof getEntityRoute>) {
+  if (!route?.tab) return undefined
+  return document.querySelector<HTMLElement>(
+    `[data-tab-transition="${route.tab}"]`,
+  )
+}
+
+function normalizeTransitionText(text: string) {
+  return text.replace(/\s+/g, ' ').trim()
+}
+
+function normalizeTransitionNumber(text: string) {
+  return text.replace(/\D/g, '')
+}
+
+function textMatchesTarget(sourceText: string, target: HTMLElement) {
+  return (
+    normalizeTransitionText(sourceText) ===
+    normalizeTransitionText(target.textContent ?? '')
+  )
+}
+
+function numberMatchesTarget(sourceText: string, target: HTMLElement) {
+  const sourceNumber = normalizeTransitionNumber(sourceText)
+  if (!sourceNumber) return false
+  return sourceNumber === normalizeTransitionNumber(target.textContent ?? '')
+}
+
+function getMatchingTarget(
+  text: string,
+  route: ReturnType<typeof getEntityRoute>,
+) {
+  const titleTarget = getTitleTarget(route)
+  if (titleTarget && textMatchesTarget(text, titleTarget)) return titleTarget
+
+  const tabTarget = getTabTarget(route)
+  if (tabTarget && numberMatchesTarget(text, tabTarget)) return tabTarget
+
+  return undefined
 }
 
 function getTargetOffsetY(target: HTMLElement) {
@@ -205,7 +240,7 @@ function animateAfterNavigation(
 ) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const target = getTitleTarget(route)
+      const target = getMatchingTarget(text, route)
       if (!target) return
       animateTitleClone(text, target, {
         ...source,
