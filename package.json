@@ -26,6 +26,7 @@
     "test:apache": "npm run static-make && python3 test/apache/smoke_test.py",
     "test:apache:subfolder": "npm run static-make && python3 test/apache/subfolder_browser_test.py",
     "test:runtime": "npm run test:ui && npm run test:dev-links && npm run test:python-local && npm run test:apache && npm run test:apache:subfolder",
+    "test:runtime:summary": "npm run node:ts node-scripts/run-command-summary.ts -- npm run test:runtime",
     "test": "npm run test:unit && npm run test:ui",
     "test:no-build": "vitest run",
     "node:ts": "node --experimental-strip-types --disable-warning=ExperimentalWarning",
