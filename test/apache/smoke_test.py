@@ -4,6 +4,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import shutil
 from dataclasses import dataclass
 
 from pathlib import Path
@@ -160,6 +161,56 @@ def assert_spa_only_mode() -> None:
         )
     finally:
         remove_container()
+        static_backup_dir.rename(static_dir)
+
+
+def assert_legacy_unprefixed_static_mode() -> None:
+    static_dir = DIST_DIR / "data" / "static"
+    static_backup_dir = DIST_DIR / "data" / "static.__apache_multilingual__"
+    english_static_dir = static_dir / "en"
+
+    if not english_static_dir.exists():
+        sys.exit("ERROR: data/static/en not found. Run npm run static-make first.")
+    if static_backup_dir.exists():
+        sys.exit(f"ERROR: temporary directory already exists: {static_backup_dir}")
+
+    remove_container()
+    static_dir.rename(static_backup_dir)
+    try:
+        shutil.copytree(static_backup_dir / "en", static_dir)
+        run_checks(
+            [
+                Check(
+                    "/",
+                    200,
+                    "text/html",
+                    body_contains=(
+                        "<title>datannur | Home</title>",
+                        'body page="_index"',
+                    ),
+                ),
+                Check(
+                    "/datasets",
+                    200,
+                    "text/html",
+                    body_contains=("<title>Datasets</title>", 'body page="datasets"'),
+                ),
+                Check(
+                    "/dataset/accident_route",
+                    200,
+                    "text/html",
+                    body_contains=(
+                        "<title>Dataset | Road accidents</title>",
+                        'body page="dataset"',
+                    ),
+                ),
+                Check("/en/datasets", 404, "text/html"),
+            ]
+        )
+    finally:
+        remove_container()
+        if static_dir.exists():
+            shutil.rmtree(static_dir)
         static_backup_dir.rename(static_dir)
 
 
@@ -495,6 +546,7 @@ def main() -> None:
             assert_clean_http_navigation(browser, f"http://localhost:{PORT}/en")
             browser.close()
         assert_missing_static_family_falls_back_to_spa()
+        assert_legacy_unprefixed_static_mode()
         assert_spa_only_mode()
     finally:
         remove_container()
