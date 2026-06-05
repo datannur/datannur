@@ -55,7 +55,6 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    min-height: 2.5em;
   }
 
   .language-select-wrap {
@@ -111,5 +110,10 @@
     appearance: none;
     cursor: pointer;
     outline: 0;
+  }
+
+  .language-select-wrap select option {
+    color: $color-1;
+    background: $background-2;
   }
 </style>
