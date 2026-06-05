@@ -3,6 +3,7 @@
 # unreleased
 
 - fix: include observed localized data fields in generated OpenAPI specs and keep generated API docs consistently formatted
+- fix: keep the language selector compact and make native select options readable in dark mode
 
 ## 0.27.0 (2026-06-04)
 
