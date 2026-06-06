@@ -98,14 +98,35 @@
     if (navPosition === 0) {
       goToPageSearch()
     } else {
+      let didTriggerSelectedLink = false
       applyToAllSearch((item, itemNum, entity) => {
         if (itemNum === navPosition) {
+          const selectedLink = document.querySelector(
+            '.search-result-row.nav-hover a',
+          )
+
+          if (selectedLink instanceof HTMLAnchorElement) {
+            selectedLink.dispatchEvent(
+              new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true,
+                ctrlKey: e.ctrlKey,
+                metaKey: e.metaKey,
+                shiftKey: e.shiftKey,
+                altKey: e.altKey,
+              }),
+            )
+            didTriggerSelectedLink = true
+            return
+          }
+
           router.navigate(`/${entity}/${item.id}`)
           SearchHistory.add(entity, item.id)
           isFocusIn = false
           Logs.add('searchBar', { entity, entityId: item.id })
         }
       })
+      if (didTriggerSelectedLink) return
     }
   }
 

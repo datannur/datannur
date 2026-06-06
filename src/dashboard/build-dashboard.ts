@@ -614,14 +614,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           t('dashboard.criterion.enumerationsOrFrequencies.priorityLabel'),
           t('dashboard.criterion.enumerationsOrFrequencies.priorityImpact'),
         ),
-        criterion(
-          'sampledDatasets',
-          t('dashboard.criterion.sampledDatasets.label'),
-          filledCount(datasets, dataset => dataset.sampleSize),
-          datasets.filter(hasDatasetStats).length,
-          t('dashboard.criterion.sampledDatasets.priorityLabel'),
-          t('dashboard.criterion.sampledDatasets.priorityImpact'),
-        ),
       ],
     ),
     score(
@@ -896,9 +888,6 @@ function buildPriorityTargets(entities: DashboardEntities): {
       'dataset',
       datasets,
       item => numericValue(item.nbVariable) > 0,
-    ),
-    sampledDatasets: missingTargets('dataset', datasets, item =>
-      isFilled(item.sampleSize),
     ),
     lastUpdateDate: [
       ...missingTargets('folder', folders, item =>

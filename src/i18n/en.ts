@@ -282,11 +282,6 @@ export const en = {
         priorityLabel: 'Frequencies or enumerations to generate',
         priorityImpact: 'Makes distributions and modalities usable',
       },
-      sampledDatasets: {
-        label: 'Explicit sampling',
-        priorityLabel: 'Sampling to clarify',
-        priorityImpact: 'Indicates when frequencies rely on a sample',
-      },
       owners: {
         label: 'Data providers',
         priorityLabel: 'Data providers to fill in',
@@ -692,7 +687,8 @@ export const en = {
     evolutionSummary: 'Show evolutions as a summary',
     openAllTabs: 'Load all tabs automatically',
     roundedDesign: 'Rounded design',
-    pageShadowColored: 'neon mode (colored tabs)',
+    pageShadowColored: 'Neon mode (colored tabs)',
+    entityTitleTransition: 'Animate page title transitions',
     darkMode: 'Dark mode',
     reset: 'Reset',
     logs: 'Logs',

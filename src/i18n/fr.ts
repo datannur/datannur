@@ -286,12 +286,6 @@ export const fr = {
         priorityLabel: 'Fréquences ou énumérations à générer',
         priorityImpact: 'Rend les distributions et modalités exploitables',
       },
-      sampledDatasets: {
-        label: 'Échantillonnage explicite',
-        priorityLabel: 'Échantillonnage à expliciter',
-        priorityImpact:
-          'Indique quand les fréquences reposent sur un échantillon',
-      },
       owners: {
         label: 'Fournisseurs de données',
         priorityLabel: 'Fournisseurs de données à renseigner',
@@ -722,7 +716,8 @@ export const fr = {
     evolutionSummary: 'Afficher les évolultions de façon résumée',
     openAllTabs: 'Charger tous les onglets automatiquement',
     roundedDesign: 'Design arrondi',
-    pageShadowColored: 'mode néon (onglets colorés)',
+    pageShadowColored: 'Mode néon (onglets colorés)',
+    entityTitleTransition: 'Animer les transitions des titres',
     darkMode: 'Mode sombre',
     reset: 'Réinitialiser',
     logs: 'Logs',

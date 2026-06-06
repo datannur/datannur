@@ -260,6 +260,11 @@ export function navigateWithEntityTitleTransition(
 
   event.preventDefault()
 
+  if (!document.documentElement.classList.contains('entityTitleTransition')) {
+    navigate()
+    return
+  }
+
   const route = getEntityRoute(href)
   const source = event.currentTarget
 

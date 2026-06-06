@@ -2,8 +2,14 @@
 
 # unreleased
 
+## 0.27.1 (2026-06-07)
+
 - fix: include observed localized data fields in generated OpenAPI specs and keep generated API docs consistently formatted
 - fix: keep the language selector compact and make native select options readable in dark mode
+- change: remove the dashboard explicit-sampling maturity criterion, which only reflected optional scan metadata for sampled frequency analysis
+- fix: make header search result rows fully clickable with rounded hover transitions, smoother recent-delete icon swaps, and the same title animation on keyboard Enter selection
+- change: add an option to enable or disable animated page-title transitions during navigation
+- fix: map legacy XLS delivery formats to the correct DCAT file type and media type
 
 ## 0.27.0 (2026-06-04)
 
