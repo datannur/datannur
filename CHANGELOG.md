@@ -3,7 +3,8 @@
 # unreleased
 
 - change: make upper maturity-pyramid labels progressively smaller to reinforce depth in the dashboard
-- fix: skip search pre-initialization during static rendering so generated HTML pages do not inline the FlexSearch bundle in the head
+- fix: skip search pre-initialization only during static rendering so generated HTML pages stay lighter without disabling search on the final static site
+- fix: retry static output cleanup when the filesystem briefly reports a non-empty directory during static generation
 
 ## 0.27.1 (2026-06-07)
 

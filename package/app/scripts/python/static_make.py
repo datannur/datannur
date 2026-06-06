@@ -9,6 +9,7 @@ import json
 import os
 import re
 import shutil
+import errno
 import sys
 import threading
 import time
@@ -417,10 +418,23 @@ def generate_static_site(
     generate_static_site_for_language(routes, config, package_dir, out_dir)
 
 
+def remove_output_dir(out_dir: Path, attempts: int = 3) -> None:
+    for attempt in range(attempts):
+        try:
+            shutil.rmtree(out_dir)
+            return
+        except FileNotFoundError:
+            return
+        except OSError as error:
+            if error.errno != errno.ENOTEMPTY or attempt == attempts - 1:
+                raise
+            time.sleep(0.1)
+
+
 def prepare_output(package_dir: Path, config: StaticMakeConfig):
     out_dir = resolve_output_dir(package_dir, config.out_dir)
     if out_dir.exists():
-        shutil.rmtree(out_dir)
+        remove_output_dir(out_dir)
     out_dir.mkdir(parents=True)
     language_dirs = config.languages or [""]
     for language in language_dirs:
