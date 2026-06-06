@@ -2,6 +2,8 @@
 
 # unreleased
 
+- change: make upper maturity-pyramid labels progressively smaller to reinforce depth in the dashboard
+
 ## 0.27.1 (2026-06-07)
 
 - fix: include observed localized data fields in generated OpenAPI specs and keep generated API docs consistently formatted
