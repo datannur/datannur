@@ -687,7 +687,7 @@ export const en = {
     evolutionSummary: 'Show evolutions as a summary',
     openAllTabs: 'Load all tabs automatically',
     roundedDesign: 'Rounded design',
-    pageShadowColored: 'neon mode (colored tabs)',
+    pageShadowColored: 'Neon mode (colored tabs)',
     darkMode: 'Dark mode',
     reset: 'Reset',
     logs: 'Logs',

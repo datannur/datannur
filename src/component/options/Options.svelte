@@ -102,49 +102,57 @@
 <div class="flex-cols">
   <div class="flex-col">
     <h5 class="title is-5">{t('options.display')}</h5>
-    <Switch
-      bind:value={openAllRecursive}
-      change={updateOpenAllRecursive}
-      treeSwitch={true}
-    >
-      {t('options.openNested')}
-    </Switch>
-    <Switch
-      bind:value={evolutionSummary}
-      change={updateEvolutionSummary}
-      treeSwitch={true}
-      minimize={true}
-    >
-      {t('options.evolutionSummary')}
-    </Switch>
-    <Switch bind:value={openAllTab} change={updateOpenAllTab}>
-      {t('options.openAllTabs')}
-    </Switch>
-    <Switch bind:value={roundedDesign} change={updateRoundedDesign}>
-      {t('options.roundedDesign')}
-    </Switch>
-    <Switch bind:value={pageShadowColored} change={updatePageShadowColored}>
-      {t('options.pageShadowColored')}
-    </Switch>
-    <div>
-      <DarkModeSwitch label={t('options.darkMode')} />
+    <div class="display-options">
+      <Switch
+        bind:value={openAllRecursive}
+        change={updateOpenAllRecursive}
+        treeSwitch={true}
+      >
+        {t('options.openNested')}
+      </Switch>
+      <Switch
+        bind:value={evolutionSummary}
+        change={updateEvolutionSummary}
+        treeSwitch={true}
+        minimize={true}
+      >
+        {t('options.evolutionSummary')}
+      </Switch>
+      <Switch bind:value={openAllTab} change={updateOpenAllTab}>
+        {t('options.openAllTabs')}
+      </Switch>
+      <Switch bind:value={roundedDesign} change={updateRoundedDesign}>
+        {t('options.roundedDesign')}
+      </Switch>
+      <Switch bind:value={pageShadowColored} change={updatePageShadowColored}>
+        {t('options.pageShadowColored')}
+      </Switch>
+      <div class="dark-mode-option">
+        <DarkModeSwitch label={t('options.darkMode')} />
+      </div>
+      <div class="language-option">
+        <LanguageSelect label={t('language.label')} />
+      </div>
     </div>
-    <LanguageSelect label={t('language.label')} />
   </div>
 
   <div class="flex-col">
     <h5 class="title is-5">{t('options.reset')}</h5>
     <Button onclick={clearLogs}>
-      {t('options.logs')} <Icon type="log" marginLeft={true} />
+      {t('options.logs')}
+      <Icon type="log" marginLeft={true} />
     </Button>
     <Button onclick={clearFavorite}>
-      {t('nav.favorites')} <Icon type="favorite" marginLeft={true} />
+      {t('nav.favorites')}
+      <Icon type="favorite" marginLeft={true} />
     </Button>
     <Button onclick={resetColsSearchCache}>
-      {t('options.columnFilters')} <Icon type="colSearch" marginLeft={true} />
+      {t('options.columnFilters')}
+      <Icon type="colSearch" marginLeft={true} />
     </Button>
     <Button onclick={clearHistorySearch}>
-      {t('options.recentSearches')} <Icon type="recentSearch" marginLeft={true} />
+      {t('options.recentSearches')}
+      <Icon type="recentSearch" marginLeft={true} />
     </Button>
     <Button onclick={clearAll}>{t('options.all')}</Button>
   </div>
@@ -152,10 +160,12 @@
   <div class="flex-col">
     <h5 class="title is-5">{t('options.userData')}</h5>
     <Button onclick={downloadUserData}>
-      {t('options.export')} <Icon type="download" marginLeft={true} />
+      {t('options.export')}
+      <Icon type="download" marginLeft={true} />
     </Button>
     <BtnImport onImport={importUserData}>
-      {t('options.import')} <Icon type="upload" marginLeft={true} />
+      {t('options.import')}
+      <Icon type="upload" marginLeft={true} />
     </BtnImport>
   </div>
 </div>
@@ -170,6 +180,20 @@
 
   .title {
     text-align: center;
+  }
+
+  .display-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+  }
+
+  .display-options :global(.field) {
+    margin-bottom: 0;
+  }
+
+  .language-option {
+    margin-top: 0.62rem;
   }
 
   @include viewport-small-mobile {

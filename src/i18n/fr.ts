@@ -716,7 +716,7 @@ export const fr = {
     evolutionSummary: 'Afficher les évolultions de façon résumée',
     openAllTabs: 'Charger tous les onglets automatiquement',
     roundedDesign: 'Design arrondi',
-    pageShadowColored: 'mode néon (onglets colorés)',
+    pageShadowColored: 'Mode néon (onglets colorés)',
     darkMode: 'Mode sombre',
     reset: 'Réinitialiser',
     logs: 'Logs',
