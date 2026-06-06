@@ -717,6 +717,7 @@ export const fr = {
     openAllTabs: 'Charger tous les onglets automatiquement',
     roundedDesign: 'Design arrondi',
     pageShadowColored: 'Mode néon (onglets colorés)',
+    entityTitleTransition: 'Animer les transitions des titres',
     darkMode: 'Mode sombre',
     reset: 'Réinitialiser',
     logs: 'Logs',

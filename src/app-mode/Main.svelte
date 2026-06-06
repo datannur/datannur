@@ -32,6 +32,7 @@
   let hasCustomBanner = $state(false)
 
   Options.init({
+    entityTitleTransition: true,
     roundedDesign: true,
     openAllRecursive: true,
     evolutionSummary: false,

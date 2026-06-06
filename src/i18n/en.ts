@@ -688,6 +688,7 @@ export const en = {
     openAllTabs: 'Load all tabs automatically',
     roundedDesign: 'Rounded design',
     pageShadowColored: 'Neon mode (colored tabs)',
+    entityTitleTransition: 'Animate page title transitions',
     darkMode: 'Dark mode',
     reset: 'Reset',
     logs: 'Logs',

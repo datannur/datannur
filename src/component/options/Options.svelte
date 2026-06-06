@@ -76,6 +76,17 @@
     document.documentElement.classList.toggle('pageShadowColored')
   }
 
+  let entityTitleTransition = $state(
+    Options.get('entityTitleTransition'),
+  ) as boolean
+  function updateEntityTitleTransition() {
+    Options.set('entityTitleTransition', entityTitleTransition)
+    document.documentElement.classList.toggle(
+      'entityTitleTransition',
+      entityTitleTransition,
+    )
+  }
+
   function clearLogs() {
     Logs.clear()
     location.reload()
@@ -126,6 +137,12 @@
       </Switch>
       <Switch bind:value={pageShadowColored} change={updatePageShadowColored}>
         {t('options.pageShadowColored')}
+      </Switch>
+      <Switch
+        bind:value={entityTitleTransition}
+        change={updateEntityTitleTransition}
+      >
+        {t('options.entityTitleTransition')}
       </Switch>
       <div class="dark-mode-option">
         <DarkModeSwitch label={t('options.darkMode')} />
