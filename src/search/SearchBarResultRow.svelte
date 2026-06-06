@@ -33,9 +33,36 @@
     SearchHistory.remove(entityName, itemId)
     selectInput()
   }
+
+  function clickRow(event: MouseEvent) {
+    const target = event.target
+    if (!(target instanceof HTMLElement)) return
+    if (target.closest('a, button, input, textarea, select, label')) return
+
+    const row = event.currentTarget
+    if (!(row instanceof HTMLTableRowElement)) return
+
+    const link = row.querySelector('a')
+    if (!(link instanceof HTMLAnchorElement)) return
+
+    link.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        ctrlKey: event.ctrlKey,
+        metaKey: event.metaKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+      }),
+    )
+  }
 </script>
 
-<tr class:nav-hover={item.navHover}>
+<tr
+  class="search-result-row color-entity-{item.entity}"
+  class:nav-hover={item.navHover}
+  onclick={clickRow}
+>
   <td style="width: 20px;">
     <div>
       <Icon type={item.entity} />
@@ -84,13 +111,50 @@
 <style lang="scss">
   @use 'main.scss' as *;
 
-  tr.nav-hover,
-  tr:hover {
-    background: rgba(127, 127, 127, 0.1);
-  }
   td {
     border: 0;
+    background: transparent;
+    transition: background-color $transition-basic-1;
   }
+
+  .search-result-row {
+    cursor: pointer;
+  }
+
+  .search-result-row :global(a),
+  .search-result-row button {
+    cursor: pointer;
+  }
+
+  .search-result-row.nav-hover :global(a),
+  .search-result-row:hover :global(a) {
+    color: $color-3 !important;
+  }
+
+  @each $entity in $entities {
+    .search-result-row.color-entity-#{$entity}.nav-hover :global(a),
+    .search-result-row.color-entity-#{$entity}:hover :global(a) {
+      color: #{color($entity)} !important;
+    }
+  }
+
+  tr.nav-hover > td,
+  tr:hover > td {
+    background: $color-6;
+  }
+
+  :global(html.roundedDesign) {
+    tr > td:first-child {
+      border-top-left-radius: $rounded;
+      border-bottom-left-radius: $rounded;
+    }
+
+    tr > td:last-child {
+      border-top-right-radius: $rounded;
+      border-bottom-right-radius: $rounded;
+    }
+  }
+
   .long-text {
     word-break: break-word;
     width: 100%;
@@ -107,28 +171,41 @@
     height: 16px;
     vertical-align: middle;
     color: $color-2;
+
     .fa-solid {
-      transition: opacity $transition-basic-1;
+      transition:
+        opacity $transition-basic-1,
+        transform $transition-basic-1;
       position: absolute;
       top: 0;
       left: 0;
       margin: auto;
     }
+
     .recent {
       opacity: 1;
+      transform: scale(1);
     }
+
     .close {
       opacity: 0;
+      padding-right: 1px;
+      transform: scale(0.92);
     }
+
+    tr.nav-hover &,
     tr:hover & {
-      opacity: 1;
       .recent {
         opacity: 0;
+        transform: scale(0.92);
       }
+
       .close {
         opacity: 1;
+        transform: scale(1);
       }
     }
+
     &:hover {
       text-shadow: 0 0 10px;
     }
