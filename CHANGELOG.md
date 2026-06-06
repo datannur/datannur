@@ -2,6 +2,8 @@
 
 # unreleased
 
+## 0.27.1 (2026-06-07)
+
 - fix: include observed localized data fields in generated OpenAPI specs and keep generated API docs consistently formatted
 - fix: keep the language selector compact and make native select options readable in dark mode
 - change: remove the dashboard explicit-sampling maturity criterion, which only reflected optional scan metadata for sampled frequency analysis
