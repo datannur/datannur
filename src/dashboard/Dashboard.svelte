@@ -200,6 +200,11 @@
     return index * (220 / total) + 1
   }
 
+  function pyramidLabelScale(index: number, total: number): number {
+    if (total <= 1) return 1
+    return 0.78 + (index / (total - 1)) * 0.22
+  }
+
   function pyramidScoreSegmentPoints(): string {
     const apexY = -(118 * 220) / (392 - 118)
     const bottomY = -3
@@ -348,6 +353,7 @@
                   <div
                     class="pyramid-segment-label color-entity-{level.key}"
                     class:not-applicable={!level.applicable}
+                    style={`--pyramid-label-scale: ${pyramidLabelScale(index, pyramidLevels.length)}`}
                   >
                     <div class="pyramid-segment-topline">
                       <Icon type={level.key} mode="compact" />
@@ -852,7 +858,7 @@
     overflow: hidden;
     color: $color-1;
     font-family: inherit;
-    font-size: 0.78rem;
+    font-size: calc(0.78rem * var(--pyramid-label-scale, 1));
     font-weight: 800;
     line-height: 0.68;
     transform: translateY(-1px);
@@ -869,6 +875,8 @@
 
   .pyramid-segment-topline :global(.icon) {
     flex: none;
+    transform: scale(var(--pyramid-label-scale, 1));
+    transform-origin: center;
   }
 
   .pyramid-segment-label span {
@@ -884,7 +892,7 @@
   .pyramid-segment-label b {
     flex: none;
     color: inherit;
-    font-size: 0.87rem;
+    font-size: calc(0.87rem * var(--pyramid-label-scale, 1));
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
