@@ -37,6 +37,7 @@ SCHEMA = Namespace("http://schema.org/")
 
 FILE_TYPE_URIS = {
     "csv": "http://publications.europa.eu/resource/authority/file-type/CSV",
+    "xls": "http://publications.europa.eu/resource/authority/file-type/XLS",
     "xlsx": "http://publications.europa.eu/resource/authority/file-type/XLSX",
     "xml": "http://publications.europa.eu/resource/authority/file-type/XML",
     "json": "http://publications.europa.eu/resource/authority/file-type/JSON",
@@ -48,6 +49,7 @@ FILE_TYPE_URIS = {
 
 MEDIA_TYPES = {
     "csv": "text/csv",
+    "xls": "application/vnd.ms-excel",
     "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     "xml": "application/xml",
     "json": "application/json",
