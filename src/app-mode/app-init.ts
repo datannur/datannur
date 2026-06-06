@@ -11,6 +11,7 @@ import SearchHistory from '@search/search-history'
 import dbSchema from '@src/assets/db-schema.json'
 import { checkLocalEditStatus } from '@src/local-edit/local-edit-config'
 import { localEditStatus } from '@lib/store'
+import { isStaticMode } from '@lib/url'
 import type { SearchHistoryEntry } from '@search/search-history'
 import type { Favorite } from '@favorite/favorites'
 import type { ConfigFilter, Log } from '@src/type'
@@ -66,10 +67,12 @@ export function initApp(): Promise<void> {
           )
         })
       }
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(scheduleSearchInit)
-      } else {
-        setTimeout(scheduleSearchInit, 0)
+      if (!isStaticMode) {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(scheduleSearchInit)
+        } else {
+          setTimeout(scheduleSearchInit, 0)
+        }
       }
 
       stepTimer = performance.now()
