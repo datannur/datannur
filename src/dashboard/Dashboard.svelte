@@ -197,7 +197,7 @@
   }
 
   function pyramidLabelY(index: number, total: number): number {
-    return index * (220 / total) + 10
+    return index * (220 / total) + 1
   }
 
   function pyramidScoreSegmentPoints(): string {
@@ -343,19 +343,21 @@
                   x="90"
                   y={pyramidLabelY(index, pyramidLevels.length)}
                   width="240"
-                  height="28"
+                  height="32"
                 >
                   <div
                     class="pyramid-segment-label color-entity-{level.key}"
                     class:not-applicable={!level.applicable}
                   >
-                    <Icon type={level.key} mode="compact" />
+                    <div class="pyramid-segment-topline">
+                      <Icon type={level.key} mode="compact" />
+                      <b
+                        >{level.applicable
+                          ? `${animatedScore(level.score)}%`
+                          : 'n/a'}</b
+                      >
+                    </div>
                     <span>{level.label}</span>
-                    <b
-                      >{level.applicable
-                        ? `${animatedScore(level.score)}%`
-                        : 'n/a'}</b
-                    >
                   </div>
                 </foreignObject>
               {/each}
@@ -833,38 +835,56 @@
     .pyramid-segment-fill.#{$entity} {
       fill: rgba(color($entity), 0.34);
     }
+
+    .pyramid-segment-label.color-entity-#{$entity} {
+      color: color($entity);
+    }
   }
 
   .pyramid-segment-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-content: center;
+    gap: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     color: $color-1;
     font-family: inherit;
     font-size: 0.78rem;
     font-weight: 800;
-    line-height: 1;
+    line-height: 0.68;
+    transform: translateY(-1px);
+  }
+
+  .pyramid-segment-topline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    max-width: 100%;
     white-space: nowrap;
   }
 
-  .pyramid-segment-label :global(.icon) {
+  .pyramid-segment-topline :global(.icon) {
     flex: none;
-    margin-right: -2px;
   }
 
   .pyramid-segment-label span {
+    display: block;
     min-width: 0;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
   }
 
   .pyramid-segment-label b {
     flex: none;
-    color: $color-2;
-    font-size: 0.7rem;
+    color: inherit;
+    font-size: 0.87rem;
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
