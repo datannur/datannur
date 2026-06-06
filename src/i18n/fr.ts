@@ -286,12 +286,6 @@ export const fr = {
         priorityLabel: 'Fréquences ou énumérations à générer',
         priorityImpact: 'Rend les distributions et modalités exploitables',
       },
-      sampledDatasets: {
-        label: 'Échantillonnage explicite',
-        priorityLabel: 'Échantillonnage à expliciter',
-        priorityImpact:
-          'Indique quand les fréquences reposent sur un échantillon',
-      },
       owners: {
         label: 'Fournisseurs de données',
         priorityLabel: 'Fournisseurs de données à renseigner',

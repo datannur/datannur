@@ -69,7 +69,7 @@ describe('buildDashboard', () => {
     const dashboard = buildDashboard(input)
     expect(dashboard.globalScore).toEqual({
       label: 'Maturité du catalogue',
-      score: 26,
+      score: 27,
     })
     expect(dashboard.diagnostic).toEqual(
       expect.objectContaining({
@@ -84,8 +84,8 @@ describe('buildDashboard', () => {
             label: 'Compréhensible',
           }),
           expect.objectContaining({
-            key: 'profileQuality',
-            label: 'Réutilisable',
+            key: 'inventory',
+            label: 'Inventorié',
           }),
         ],
       }),
@@ -120,7 +120,7 @@ describe('buildDashboard', () => {
     const dashboard = buildDashboard(input)
     expect(dashboard.globalScore).toEqual({
       label: 'Catalog maturity',
-      score: 26,
+      score: 27,
     })
     expect(dashboard.diagnostic).toEqual({
       label: 'Catalog under structuring',
@@ -132,7 +132,7 @@ describe('buildDashboard', () => {
       ],
       watchpoints: [
         { key: 'understanding', label: 'Understandable', score: 18 },
-        { key: 'profileQuality', label: 'Reusable', score: 21 },
+        { key: 'inventory', label: 'Inventoried', score: 25 },
       ],
     })
     expect(
@@ -155,7 +155,7 @@ describe('buildDashboard', () => {
       {
         key: 'profileQuality',
         label: 'Reusable',
-        score: 21,
+        score: 25,
         applicable: true,
       },
     ])
@@ -202,7 +202,6 @@ describe('buildDashboard', () => {
       'datasetStats',
       'variableStats',
       'enumerationsOrFrequencies',
-      'sampledDatasets',
     ])
     expect(governance?.score).toBe(34)
     expect(protection?.criteria.map(item => item.key)).toEqual([
