@@ -130,6 +130,7 @@
   let searchTimeout: ReturnType<typeof setTimeout> | undefined = undefined
 
   $effect(() => {
+    void $searchReady
     void $searchValue
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {

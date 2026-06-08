@@ -5,6 +5,9 @@
 - change: make upper maturity-pyramid labels progressively smaller to reinforce depth in the dashboard
 - fix: skip search pre-initialization only during static rendering so generated HTML pages stay lighter without disabling search on the final static site
 - fix: retry static output cleanup when the filesystem briefly reports a non-empty directory during static generation
+- change: localize the screenshot capture suite with `/fr` and `/en` URLs, language-suffixed output filenames, clearer progress logs, and configurable waits/timeouts
+- fix: rerun page search automatically when the search index becomes ready so `?search=...` URLs reliably show results on first load
+- fix: relax Apache clean-routing ID segments to accept URL-encoded non-slash characters such as spaces in entity IDs
 
 ## 0.27.1 (2026-06-07)
 

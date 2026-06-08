@@ -6,6 +6,8 @@ const config: ScreenshotSuiteConfig = {
   browserChannel: 'chrome',
   format: 'jpeg',
   quality: 60,
+  locales: ['fr', 'en'],
+  timeoutMs: 10000,
   viewports: {
     desktop: { width: 1600, height: 900, deviceScaleFactor: 2 },
     mobile: { width: 390, height: 700, deviceScaleFactor: 2 },
@@ -78,7 +80,7 @@ const config: ScreenshotSuiteConfig = {
     },
     {
       name: 'doc-pdf',
-      path: 'doc/doc---pdf---c1b86ffb9b371917',
+      path: 'doc/doc---pdf---e75a5ef0ad5a7baa',
       viewport: 'desktop',
       actions: [{ type: 'wait', ms: 3000 }],
     },
@@ -111,7 +113,7 @@ const config: ScreenshotSuiteConfig = {
     },
     {
       name: 'organization-page-folder-tab-mobile',
-      path: 'organization/amt-fuer-geoinformation-des-kantons-bern?tab=folders&tab_folder_2=na',
+      path: 'organization/ssd?tab=folders&tab_folder_2=na',
       viewport: 'mobile',
     },
     {
