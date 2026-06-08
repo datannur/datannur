@@ -1,6 +1,7 @@
 import { mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium, type BrowserContextOptions, type Page } from 'playwright'
+import type { Locale } from '../src/i18n/types.ts'
 
 type ImageFormat = 'jpeg' | 'png'
 type Theme = 'light' | 'dark'
@@ -28,8 +29,10 @@ export type ScreenshotUserDataSeed = {
 export type ScreenshotPageConfig = {
   name: string
   path: string
+  locales?: Locale[]
   viewport?: string
   waitFor?: string
+  timeoutMs?: number
   fullPage?: boolean
   themes?: Theme[]
   actions?: ScreenshotPageAction[]
@@ -42,7 +45,9 @@ export type ScreenshotSuiteConfig = {
   format?: ImageFormat
   quality?: number
   waitFor?: string
+  timeoutMs?: number
   fullPage?: boolean
+  locales?: Locale[]
   themes?: Theme[]
   viewports: { [name: string]: Viewport }
   seed?: ScreenshotUserDataSeed
@@ -52,6 +57,7 @@ export type ScreenshotSuiteConfig = {
 type CaptureOptions = {
   url: string
   name: string
+  locale: Locale
   outDir: string
   browserChannel?: string
   width: number
@@ -61,6 +67,7 @@ type CaptureOptions = {
   quality: number
   fullPage: boolean
   waitFor: string
+  timeoutMs: number
   themes: Theme[]
   seed?: ScreenshotUserDataSeed
   actions: ScreenshotPageAction[]
@@ -71,10 +78,18 @@ const defaultFormat: ImageFormat = 'jpeg'
 const defaultQuality = 88
 const defaultDeviceScaleFactor = 1
 const defaultWaitFor = 'div#wrapper > section.section'
+const defaultTimeoutMs = 10000
+const defaultPostLoadWaitMs = 1000
 const defaultThemes: Theme[] = ['light', 'dark']
+const defaultLocales: Locale[] = ['en', 'fr']
 
 function joinUrl(baseUrl: string, pagePath: string) {
   return new URL(pagePath, baseUrl).href
+}
+
+function getLocalePath(pagePath: string, locale: Locale) {
+  if (pagePath.startsWith('?')) return `${locale}/${pagePath}`
+  return `${locale}/${pagePath.replace(/^\/+/, '')}`
 }
 
 async function loadConfig() {
@@ -85,7 +100,11 @@ async function loadConfig() {
   return module.default
 }
 
-function getOptions(config: ScreenshotSuiteConfig, page: ScreenshotPageConfig) {
+function getOptions(
+  config: ScreenshotSuiteConfig,
+  page: ScreenshotPageConfig,
+  locale: Locale,
+) {
   const viewportName = page.viewport ?? 'desktop'
   const viewport = config.viewports[viewportName]
 
@@ -96,8 +115,9 @@ function getOptions(config: ScreenshotSuiteConfig, page: ScreenshotPageConfig) {
   }
 
   return {
-    url: joinUrl(config.baseUrl, page.path),
+    url: joinUrl(config.baseUrl, getLocalePath(page.path, locale)),
     name: page.name,
+    locale,
     outDir: config.outDir,
     browserChannel: config.browserChannel,
     width: viewport.width,
@@ -107,6 +127,7 @@ function getOptions(config: ScreenshotSuiteConfig, page: ScreenshotPageConfig) {
     quality: config.quality ?? defaultQuality,
     fullPage: page.fullPage ?? config.fullPage ?? false,
     waitFor: page.waitFor ?? config.waitFor ?? defaultWaitFor,
+    timeoutMs: page.timeoutMs ?? config.timeoutMs ?? defaultTimeoutMs,
     themes: page.themes ?? config.themes ?? defaultThemes,
     seed: config.seed,
     actions: page.actions ?? [],
@@ -116,7 +137,14 @@ function getOptions(config: ScreenshotSuiteConfig, page: ScreenshotPageConfig) {
 function getFilePath(options: CaptureOptions, theme: Theme) {
   const suffix = theme === 'dark' ? '-dark' : ''
   const extension = options.format === 'jpeg' ? 'jpg' : 'png'
-  return path.join(options.outDir, `${options.name}${suffix}.${extension}`)
+  return path.join(
+    options.outDir,
+    `${options.name}.${options.locale}${suffix}.${extension}`,
+  )
+}
+
+function getCaptureLabel(options: CaptureOptions, theme: Theme) {
+  return `${options.name} [${options.locale}/${theme}]`
 }
 
 function timestamp(index: number) {
@@ -233,56 +261,76 @@ async function captureTheme(options: CaptureOptions, theme: Theme) {
     channel: options.browserChannel,
     headless: true,
   })
-  const contextOptions: BrowserContextOptions = {
-    colorScheme: theme,
-    deviceScaleFactor: options.deviceScaleFactor,
-    viewport: {
-      width: options.width,
-      height: options.height,
-    },
-  }
-  const context = await browser.newContext(contextOptions)
+  const label = getCaptureLabel(options, theme)
 
-  await context.addInitScript(selectedTheme => {
-    if (selectedTheme === 'dark') {
-      document.documentElement.classList.add('dark-mode')
-    } else {
-      document.documentElement.classList.remove('dark-mode')
+  try {
+    console.log(`Start ${label}: ${options.url}`)
+
+    const contextOptions: BrowserContextOptions = {
+      colorScheme: theme,
+      deviceScaleFactor: options.deviceScaleFactor,
+      viewport: {
+        width: options.width,
+        height: options.height,
+      },
     }
-  }, theme)
+    const context = await browser.newContext(contextOptions)
 
-  const page = await context.newPage()
-  await seedUserData(page, options)
-  await page.goto(options.url, { waitUntil: 'domcontentloaded' })
-  await page.waitForSelector(options.waitFor, { state: 'visible' })
-  await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {})
-  await page.evaluate(() => document.fonts.ready)
-  await page.evaluate(() =>
-    Promise.all(
-      Array.from(document.images)
-        .filter(image => !image.complete)
-        .map(
-          image =>
-            new Promise(resolve => {
-              image.addEventListener('load', resolve, { once: true })
-              image.addEventListener('error', resolve, { once: true })
-            }),
-        ),
-    ),
-  )
-  await applyPageActions(page, options.actions)
-  await page.waitForTimeout(300)
+    await context.addInitScript(selectedTheme => {
+      if (selectedTheme === 'dark') {
+        document.documentElement.classList.add('dark-mode')
+      } else {
+        document.documentElement.classList.remove('dark-mode')
+      }
+    }, theme)
 
-  const filePath = getFilePath(options, theme)
-  await page.screenshot({
-    path: filePath,
-    type: options.format,
-    quality: options.format === 'jpeg' ? options.quality : undefined,
-    fullPage: options.fullPage,
-  })
+    const page = await context.newPage()
+    page.setDefaultTimeout(options.timeoutMs)
+    await seedUserData(page, options)
+    await page.goto(options.url, { waitUntil: 'domcontentloaded' })
+    await page.waitForSelector(options.waitFor, {
+      state: 'visible',
+      timeout: options.timeoutMs,
+    })
+    await page
+      .waitForLoadState('networkidle', { timeout: options.timeoutMs })
+      .catch(() => {})
+    await page.evaluate(() => document.fonts.ready)
+    await page.evaluate(() =>
+      Promise.all(
+        Array.from(document.images)
+          .filter(image => !image.complete)
+          .map(
+            image =>
+              new Promise(resolve => {
+                image.addEventListener('load', resolve, { once: true })
+                image.addEventListener('error', resolve, { once: true })
+              }),
+          ),
+      ),
+    )
+    await applyPageActions(page, options.actions)
+    await page.waitForTimeout(defaultPostLoadWaitMs)
 
-  await browser.close()
-  return filePath
+    const filePath = getFilePath(options, theme)
+    await page.screenshot({
+      path: filePath,
+      type: options.format,
+      quality: options.format === 'jpeg' ? options.quality : undefined,
+      fullPage: options.fullPage,
+    })
+
+    console.log(`Done  ${label}: ${filePath}`)
+    await context.close()
+    return filePath
+  } catch (error) {
+    throw new Error(
+      `Screenshot failed for ${label} at ${options.url} (waitFor: ${options.waitFor}, timeoutMs: ${options.timeoutMs})`,
+      { cause: error },
+    )
+  } finally {
+    await browser.close()
+  }
 }
 
 async function main() {
@@ -291,10 +339,13 @@ async function main() {
 
   const filePaths = []
   for (const page of config.pages) {
-    const options = getOptions(config, page)
-    await mkdir(options.outDir, { recursive: true })
-    for (const theme of options.themes) {
-      filePaths.push(await captureTheme(options, theme))
+    const locales = page.locales ?? config.locales ?? defaultLocales
+    for (const locale of locales) {
+      const options = getOptions(config, page, locale)
+      await mkdir(options.outDir, { recursive: true })
+      for (const theme of options.themes) {
+        filePaths.push(await captureTheme(options, theme))
+      }
     }
   }
 
