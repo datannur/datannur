@@ -75,7 +75,7 @@ const config: ScreenshotSuiteConfig = {
     },
     {
       name: 'dataset-mobile',
-      path: 'dataset/142af638-f9d8-450f-b01e-e206470a2ebe',
+      path: 'dataset/95dd7fb5-8a51-4e39-8926-5589e0000ada',
       viewport: 'mobile',
     },
     {
@@ -86,7 +86,7 @@ const config: ScreenshotSuiteConfig = {
     },
     {
       name: 'folder-about-tab',
-      path: 'folder/2be419d8-0dc5-4881-8e93-963d5a5cc772',
+      path: 'folder/1f7a2199-1081-4340-b71e-936bef8cd00c',
       viewport: 'desktop',
     },
     {
