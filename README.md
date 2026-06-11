@@ -17,14 +17,18 @@ datannur is a client-side data catalog designed to organize and explore datasets
 pip install datannurpy
 ```
 
-Create a minimal `catalog.yml`:
+Create a `catalog.yml`:
 
 ```yaml
+# catalog.yml
 app_path: ./my-catalog
+open_browser: true
 
 add:
   - folder: ./data
     include: ['*.csv', '*.xlsx', '*.parquet']
+
+  - database: sqlite:///mydb.sqlite
 ```
 
 Build and open the catalog:
