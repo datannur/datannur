@@ -9,7 +9,17 @@
 
 # datannur
 
-datannur is a client-side data catalog designed to organize and explore datasets without requiring a server or database. This repository contains the Datannur app; for most users, the easiest way to create a catalog from real files or databases is the Python builder, [`datannurpy`](https://github.com/datannur/datannurpy).
+datannur is an open-source data catalog that runs from static files, without requiring a server or database. This repository contains the datannur app; for most users, the easiest way to create a catalog from real files or databases is the Python builder, [`datannurpy`](https://github.com/datannur/datannurpy).
+
+![datannur catalog screenshot](https://raw.githubusercontent.com/datannur/datannur/main/docs/public/screenshot_dashboard_dark.png?raw=true)
+
+👉 [Try the live demo](https://dev.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy)
+
+## Why datannur?
+
+Useful datasets are often scattered across spreadsheets, databases, folders, definitions, and documentation. datannur helps make this metadata visible, understandable, and shareable while keeping the catalog lightweight, portable, and under your control.
+
+Start small or scale gradually: generate a portable catalog, explore it in the browser, and share it from a local folder, shared drive, web server, or cloud storage.
 
 ## Quick start: generate a catalog with datannurpy
 
@@ -41,7 +51,7 @@ See the [datannurpy repository](https://github.com/datannur/datannurpy) and the 
 
 ## This repository
 
-The Datannur app is the portable catalog interface that runs from a single `index.html`. It is bundled by `datannurpy` when you create a catalog, and this repository is the right place to develop the UI, inspect the app source, or explore the demo data.
+The datannur app is the portable catalog interface that runs from a single `index.html`. It is bundled by `datannurpy` when you create a catalog, and this repository is the right place to develop the UI, inspect the app source, or explore the demo data.
 
 **Key features:**
 
