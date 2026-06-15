@@ -6,6 +6,7 @@ import {
   dateToTimestamp,
   timestampToDate,
   convertQuarterToFullDate,
+  normalizeLastUpdateDate,
 } from '@lib/time'
 import { diffWords } from 'diff'
 import { getPeriod } from '@lib/time'
@@ -262,6 +263,10 @@ function parseDateStandard(dateString: string) {
   if (dateString.length === 6 && dateString[4] === 't') {
     dateString = convertQuarterToFullDate(dateString, 'start')
   }
+  if (/(?:T| )\d{1,2}:\d{2}/.test(dateString)) {
+    const timestamp = dateToTimestamp(dateString)
+    return Number.isFinite(timestamp) ? new Date(timestamp) : null
+  }
   const parts = dateString.split('/')
   if (parts.length === 2) parts.push('1')
   if (parts.length !== 3) return null
@@ -292,19 +297,35 @@ function outputDiffDate(
   oldDateString: string,
   newDateString: string,
 ) {
-  const diffDays = Math.ceil(
-    (newDate.getTime() - oldDate.getTime()) / (1000 * 60 * 60 * 24),
+  const diffMs = newDate.getTime() - oldDate.getTime()
+  const hasTime = [oldDateString, newDateString].some(date =>
+    /(?:T| )\d{1,2}:\d{2}/.test(date),
   )
-  const diffClass =
-    diffDays > 0 ? 'highlight-diff-add' : 'highlight-diff-delete'
+  const diffClass = diffMs > 0 ? 'highlight-diff-add' : 'highlight-diff-delete'
 
-  const diffRelative = getPeriod(oldDate, newDate, true)
+  const diffRelative = hasTime
+    ? formatDateTimeDiff(diffMs)
+    : getPeriod(oldDate, newDate, true)
+  const diffPrefix = hasTime && diffMs < 0 ? '-' : diffMs > 0 ? '+' : ''
 
   return `
   ${oldDateString} ${arrowRight} ${newDateString}
-  <br><span class="${diffClass}">${
-    diffDays > 0 ? '+' : ''
-  }${diffRelative}</span>`
+  <br><span class="${diffClass}">${diffPrefix}${diffRelative}</span>`
+}
+
+function formatDateTimeDiff(diffMs: number) {
+  const absSeconds = Math.abs(diffMs) / 1000
+  if (absSeconds < 60) return `${Math.round(absSeconds)} secondes`
+  const absMinutes = absSeconds / 60
+  if (absMinutes < 60) return formatDiffUnit(absMinutes, 'minute')
+  const absHours = absMinutes / 60
+  if (absHours < 24) return formatDiffUnit(absHours, 'heure')
+  return formatDiffUnit(absHours / 24, 'jour')
+}
+
+function formatDiffUnit(value: number, unit: string) {
+  const rounded = Math.round(value)
+  return `${rounded} ${unit}${rounded > 1 ? 's' : ''}`
 }
 
 function outputDiffString(oldVal: string, newVal: string) {
@@ -330,8 +351,14 @@ export function highlightDiff(
   if (!a && !b) return ''
 
   if (variable === 'lastUpdate') {
-    a = timestampToDate((a as number) * 1000)
-    b = timestampToDate((b as number) * 1000)
+    a =
+      typeof a === 'number'
+        ? timestampToDate(a * 1000)
+        : normalizeLastUpdateDate(String(a))
+    b =
+      typeof b === 'number'
+        ? timestampToDate(b * 1000)
+        : normalizeLastUpdateDate(String(b))
   }
 
   const aStr = a ? a.toString() : ''

@@ -168,5 +168,14 @@
     "variable": "description",
     "old_value": "Data on drinking water",
     "new_value": "Updated drinking water data"
+  },
+  {
+    "timestamp": 1778003321,
+    "type": "update",
+    "entity": "doc",
+    "entity_id": "tourisme-exemple",
+    "variable": "last_update",
+    "old_value": "2026/06/15T12:32:13",
+    "new_value": "2026/06/15T13:32:14"
   }
 ]

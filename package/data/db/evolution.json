@@ -229,5 +229,16 @@
     "timestamp": 1779135971,
     "type": "update",
     "variable": "description"
+  },
+  {
+    "entity": "doc",
+    "entity_id": "tourisme-exemple",
+    "name": null,
+    "new_value": "2026/06/15T13:32:14",
+    "old_value": "2026/06/15T12:32:13",
+    "parent_entity_id": null,
+    "timestamp": 1778003321,
+    "type": "update",
+    "variable": "last_update"
   }
 ]

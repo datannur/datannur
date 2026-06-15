@@ -1,6 +1,6 @@
 {
   "name": "datannur",
-  "version": "0.27.1",
+  "version": "0.27.2",
   "description": "datannur is a portable data catalog that can run without a server",
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "dev:minimal": "DB=db-minimal vite",
+    "dev:minimal": "DB=db-source-minimal vite",
     "dev:proxy": "python3 package/app/scripts/python/proxy_llm.py",
     "build": "vite build",
     "build:debug": "SOURCE_MAP=true vite build",

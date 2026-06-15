@@ -1,7 +1,8 @@
 # datannur
 
-# unreleased
+## 0.27.2 (2026-06-15)
 
+- fix: preserve time precision when comparing evolution `lastUpdate` values with date-time strings
 - change: make upper maturity-pyramid labels progressively smaller to reinforce depth in the dashboard
 - fix: skip search pre-initialization only during static rendering so generated HTML pages stay lighter without disabling search on the final static site
 - fix: retry static output cleanup when the filesystem briefly reports a non-empty directory during static generation
