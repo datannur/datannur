@@ -90,7 +90,7 @@ const priorityTargetLimit = 6
 const emptyFilterValue = `=""`
 
 type FilterColumn = {
-  column: number
+  column: string
   value: string
 }
 
@@ -336,11 +336,6 @@ function isSeries(dataset: DatasetLike): boolean {
   return numericValue(dataset.nbResources) > 1
 }
 
-function isUniqueKey(variable: VariableLike): boolean {
-  if (!isFilled(variable.key) && !isFilled(variable.businessKey)) return true
-  return numericValue(variable.nbDuplicate) === 0
-}
-
 function variableTags(variable: VariableLike): string[] {
   return [
     variable.tagIds ?? '',
@@ -442,7 +437,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
     ...organizations,
     ...folders,
     ...datasets,
-    ...variables,
     ...docs,
   ]
   const taggedItems: TaggedItem[] = [...folders, ...datasets]
@@ -455,9 +449,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
   ]
   const periodItems = [...folders, ...datasets]
   const seriesDatasets = datasets.filter(isSeries)
-  const keyVariables = variables.filter(
-    variable => isFilled(variable.key) || isFilled(variable.businessKey),
-  )
   const relationalVariables = variables.filter(variable =>
     hasLineageOrRelation(variable),
   )
@@ -687,14 +678,6 @@ function buildMaturity(entities: DashboardEntities): DashboardScore[] {
           t('dashboard.criterion.seriesPeriods.priorityLabel'),
           t('dashboard.criterion.seriesPeriods.priorityImpact'),
         ),
-        criterion(
-          'keyUniqueness',
-          t('dashboard.criterion.keyUniqueness.label'),
-          keyVariables.filter(isUniqueKey).length,
-          keyVariables.length,
-          t('dashboard.criterion.keyUniqueness.priorityLabel'),
-          t('dashboard.criterion.keyUniqueness.priorityImpact'),
-        ),
         ...(sensitiveVariables.length === 0
           ? [
               criterion(
@@ -834,9 +817,6 @@ function buildPriorityTargets(entities: DashboardEntities): {
       ...missingTargets('dataset', datasets, item =>
         isFilled(item.description),
       ),
-      ...missingTargets('variable', variables, item =>
-        isFilled(item.description),
-      ),
       ...missingTargets('doc', docs, item => isFilled(item.description)),
     ].slice(0, priorityTargetLimit),
     tags: [
@@ -922,13 +902,6 @@ function buildPriorityTargets(entities: DashboardEntities): {
     ),
     variableStats: missingTargets('variable', variables, hasVariableStats),
     variablesProfiled: missingTargets('variable', variables, hasVariableStats),
-    keyUniqueness: missingTargets(
-      'variable',
-      variables.filter(
-        variable => isFilled(variable.key) || isFilled(variable.businessKey),
-      ),
-      isUniqueKey,
-    ),
     enumerationsOrFrequencies: missingTargets(
       'variable',
       variables,
@@ -1033,7 +1006,7 @@ function buildPriorityTargetGroups(
         tab: 'organizations',
         items: organizations,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'folder',
@@ -1041,7 +1014,7 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1049,15 +1022,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
-      }),
-      targetGroup(scope, {
-        entity: 'variable',
-        label: t('dashboard.summary.variables'),
-        tab: 'variables',
-        items: variables,
-        isComplete: item => isFilled(item.description),
-        filters: [{ column: 3, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'doc',
@@ -1065,7 +1030,7 @@ function buildPriorityTargetGroups(
         tab: 'docs',
         items: docs,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
     ]),
     tags: compactGroups([
@@ -1075,7 +1040,7 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => (item.tags?.length ?? 0) > 0,
-        filters: [{ column: 9, value: emptyFilterValue }],
+        filters: [{ column: 'tag', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1083,7 +1048,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => (item.tags?.length ?? 0) > 0,
-        filters: [{ column: 15, value: emptyFilterValue }],
+        filters: [{ column: 'tag', value: emptyFilterValue }],
       }),
     ]),
     datasetFolders: compactGroups([
@@ -1093,7 +1058,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.folderId),
-        filters: [{ column: 14, value: emptyFilterValue }],
+        filters: [{ column: 'folderName', value: emptyFilterValue }],
       }),
     ]),
     owners: compactGroups([
@@ -1103,7 +1068,7 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.ownerOrganizationId),
-        filters: [{ column: 16, value: emptyFilterValue }],
+        filters: [{ column: 'ownerName', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1111,7 +1076,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.ownerOrganizationId),
-        filters: [{ column: 21, value: emptyFilterValue }],
+        filters: [{ column: 'ownerName', value: emptyFilterValue }],
       }),
     ]),
     managers: compactGroups([
@@ -1121,7 +1086,7 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.managerOrganizationId),
-        filters: [{ column: 17, value: emptyFilterValue }],
+        filters: [{ column: 'managerName', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1129,7 +1094,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.managerOrganizationId),
-        filters: [{ column: 22, value: emptyFilterValue }],
+        filters: [{ column: 'managerName', value: emptyFilterValue }],
       }),
     ]),
     organizationContacts: compactGroups([
@@ -1140,8 +1105,8 @@ function buildPriorityTargetGroups(
         items: organizations,
         isComplete: item => isFilled(item.email) || isFilled(item.phone),
         filters: [
-          { column: 11, value: emptyFilterValue },
-          { column: 12, value: emptyFilterValue },
+          { column: 'email', value: emptyFilterValue },
+          { column: 'phone', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1152,7 +1117,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.link) || isFilled(item.dataPath),
-        filters: [{ column: 26, value: emptyFilterValue }],
+        filters: [{ column: 'dataPath', value: emptyFilterValue }],
       }),
     ]),
     formats: compactGroups([
@@ -1162,7 +1127,12 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.deliveryFormat),
-        filters: [{ column: 24, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'deliveryFormat',
+            value: emptyFilterValue,
+          },
+        ],
       }),
     ]),
     volume: compactGroups([
@@ -1173,8 +1143,8 @@ function buildPriorityTargetGroups(
         items: datasets,
         isComplete: item => isFilled(item.nbRow) || isFilled(item.dataSize),
         filters: [
-          { column: 10, value: emptyFilterValue },
-          { column: 12, value: emptyFilterValue },
+          { column: 'nbRow', value: emptyFilterValue },
+          { column: 'dataSize', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1186,8 +1156,8 @@ function buildPriorityTargetGroups(
         items: datasets,
         isComplete: hasDatasetStats,
         filters: [
-          { column: 10, value: emptyFilterValue },
-          { column: 12, value: emptyFilterValue },
+          { column: 'nbRow', value: emptyFilterValue },
+          { column: 'dataSize', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1198,7 +1168,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => numericValue(item.nbVariable) > 0,
-        filters: [{ column: 8, value: emptyFilterValue }],
+        filters: [{ column: 'nbVariable', value: emptyFilterValue }],
       }),
     ]),
     lastUpdateDate: compactGroups([
@@ -1208,7 +1178,12 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.lastUpdateDate),
-        filters: [{ column: 10, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'lastUpdate',
+            value: emptyFilterValue,
+          },
+        ],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1216,7 +1191,12 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.lastUpdateDate),
-        filters: [{ column: 16, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'lastUpdate',
+            value: emptyFilterValue,
+          },
+        ],
       }),
     ]),
     updateFrequency: compactGroups([
@@ -1226,7 +1206,12 @@ function buildPriorityTargetGroups(
         tab: 'folders',
         items: folders,
         isComplete: item => isFilled(item.updatingEach),
-        filters: [{ column: 12, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'updateFrequency',
+            value: emptyFilterValue,
+          },
+        ],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1234,7 +1219,12 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.updatingEach),
-        filters: [{ column: 18, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'updateFrequency',
+            value: emptyFilterValue,
+          },
+        ],
       }),
     ]),
     periods: compactGroups([
@@ -1245,8 +1235,8 @@ function buildPriorityTargetGroups(
         items: folders,
         isComplete: item => isFilled(item.startDate || item.endDate),
         filters: [
-          { column: 13, value: emptyFilterValue },
-          { column: 14, value: emptyFilterValue },
+          { column: 'startDate', value: emptyFilterValue },
+          { column: 'endDate', value: emptyFilterValue },
         ],
       }),
       targetGroup(scope, {
@@ -1256,8 +1246,8 @@ function buildPriorityTargetGroups(
         items: datasets,
         isComplete: item => isFilled(item.startDate || item.endDate),
         filters: [
-          { column: 19, value: emptyFilterValue },
-          { column: 20, value: emptyFilterValue },
+          { column: 'startDate', value: emptyFilterValue },
+          { column: 'endDate', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1268,7 +1258,7 @@ function buildPriorityTargetGroups(
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.type),
-        filters: [{ column: 5, value: emptyFilterValue }],
+        filters: [{ column: 'type', value: emptyFilterValue }],
       }),
     ]),
     variableDescriptions: compactGroups([
@@ -1278,7 +1268,12 @@ function buildPriorityTargetGroups(
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 3, value: emptyFilterValue }],
+        filters: [
+          {
+            column: 'description',
+            value: emptyFilterValue,
+          },
+        ],
       }),
     ]),
     variableConcepts: compactGroups([
@@ -1288,7 +1283,7 @@ function buildPriorityTargetGroups(
         tab: 'variables',
         items: variables,
         isComplete: item => isFilled(item.conceptId),
-        filters: [{ column: 4, value: emptyFilterValue }],
+        filters: [{ column: 'concept', value: emptyFilterValue }],
       }),
     ]),
     variableStats: compactGroups([
@@ -1299,8 +1294,11 @@ function buildPriorityTargetGroups(
         items: variables,
         isComplete: hasVariableStats,
         filters: [
-          { column: 16, value: emptyFilterValue },
-          { column: 17, value: emptyFilterValue },
+          { column: 'nbMissing', value: emptyFilterValue },
+          {
+            column: 'nbDuplicate',
+            value: emptyFilterValue,
+          },
         ],
       }),
     ]),
@@ -1312,21 +1310,12 @@ function buildPriorityTargetGroups(
         items: variables,
         isComplete: hasVariableStats,
         filters: [
-          { column: 16, value: emptyFilterValue },
-          { column: 17, value: emptyFilterValue },
+          { column: 'nbMissing', value: emptyFilterValue },
+          {
+            column: 'nbDuplicate',
+            value: emptyFilterValue,
+          },
         ],
-      }),
-    ]),
-    keyUniqueness: compactGroups([
-      targetGroup(scope, {
-        entity: 'variable',
-        label: t('dashboard.summary.variables'),
-        tab: 'variables',
-        items: variables.filter(
-          variable => isFilled(variable.key) || isFilled(variable.businessKey),
-        ),
-        isComplete: isUniqueKey,
-        filters: [{ column: 16, value: '>0' }],
       }),
     ]),
     enumerationsOrFrequencies: compactGroups([
@@ -1336,7 +1325,7 @@ function buildPriorityTargetGroups(
         tab: 'variables',
         items: variables,
         isComplete: hasEnumerationOrFrequency,
-        filters: [{ column: 19, value: emptyFilterValue }],
+        filters: [{ column: 'freqPreview', value: emptyFilterValue }],
       }),
     ]),
     lineageRelations: compactGroups([
@@ -1347,8 +1336,8 @@ function buildPriorityTargetGroups(
         items: variables,
         isComplete: hasLineageOrRelation,
         filters: [
-          { column: 8, value: emptyFilterValue },
-          { column: 10, value: emptyFilterValue },
+          { column: 'fkVariableName', value: emptyFilterValue },
+          { column: 'sourceIds', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1359,7 +1348,7 @@ function buildPriorityTargetGroups(
         tab: 'datasets',
         items: datasets,
         isComplete: item => isFilled(item.license),
-        filters: [{ column: 25, value: emptyFilterValue }],
+        filters: [{ column: 'license', value: emptyFilterValue }],
       }),
     ]),
     seriesPeriods: compactGroups([
@@ -1370,8 +1359,8 @@ function buildPriorityTargetGroups(
         items: datasets.filter(isSeries),
         isComplete: hasPeriod,
         filters: [
-          { column: 19, value: emptyFilterValue },
-          { column: 20, value: emptyFilterValue },
+          { column: 'startDate', value: emptyFilterValue },
+          { column: 'endDate', value: emptyFilterValue },
         ],
       }),
     ]),
@@ -1385,7 +1374,7 @@ function buildPriorityTargetGroups(
           isFilled(item.license) &&
           (isFilled(item.link) || isFilled(item.dataPath)) &&
           !!item.hasPreview,
-        filters: [{ column: 25, value: emptyFilterValue }],
+        filters: [{ column: 'license', value: emptyFilterValue }],
       }),
     ]),
     documentedConcepts: compactGroups([
@@ -1395,7 +1384,7 @@ function buildPriorityTargetGroups(
         tab: 'concepts',
         items: concepts,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
     ]),
     documentedTags: compactGroups([
@@ -1405,7 +1394,7 @@ function buildPriorityTargetGroups(
         tab: 'tags',
         items: tags,
         isComplete: item => isFilled(item.description),
-        filters: [{ column: 2, value: emptyFilterValue }],
+        filters: [{ column: 'description', value: emptyFilterValue }],
       }),
     ]),
     linkedDocs: compactGroups([
@@ -1416,7 +1405,7 @@ function buildPriorityTargetGroups(
         items: organizations,
         isComplete: item =>
           ((item.docsRecursive ?? item.docs)?.length ?? 0) > 0,
-        filters: [{ column: 8, value: emptyFilterValue }],
+        filters: [{ column: 'docsRecursive', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'folder',
@@ -1425,7 +1414,7 @@ function buildPriorityTargetGroups(
         items: folders,
         isComplete: item =>
           ((item.docsRecursive ?? item.docs)?.length ?? 0) > 0,
-        filters: [{ column: 8, value: emptyFilterValue }],
+        filters: [{ column: 'docsRecursive', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'dataset',
@@ -1434,7 +1423,7 @@ function buildPriorityTargetGroups(
         items: datasets,
         isComplete: item =>
           ((item.docsRecursive ?? item.docs)?.length ?? 0) > 0,
-        filters: [{ column: 13, value: emptyFilterValue }],
+        filters: [{ column: 'docsRecursive', value: emptyFilterValue }],
       }),
       targetGroup(scope, {
         entity: 'tag',

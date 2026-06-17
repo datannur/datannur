@@ -131,7 +131,7 @@ describe('buildDashboard', () => {
         { key: 'protection', label: 'Controlled', score: 33 },
       ],
       watchpoints: [
-        { key: 'understanding', label: 'Understandable', score: 18 },
+        { key: 'understanding', label: 'Understandable', score: 20 },
         { key: 'inventory', label: 'Inventoried', score: 25 },
       ],
     })
@@ -147,7 +147,7 @@ describe('buildDashboard', () => {
       {
         key: 'understanding',
         label: 'Understandable',
-        score: 18,
+        score: 20,
         applicable: true,
       },
       { key: 'governance', label: 'Governed', score: 34, applicable: true },
@@ -261,7 +261,45 @@ describe('buildDashboard', () => {
         entity: 'variable',
         label: 'Variables',
         count: 1,
-        href: 'variables?tab=variables&tab_variable_5=%3D%22%22',
+        href: 'variables?tab=variables&tab_variable_type=%3D%22%22',
+      },
+    ])
+    expect(
+      dashboard.priorities.find(item => item.key === 'descriptions')
+        ?.targetGroups,
+    ).toEqual([
+      {
+        entity: 'dataset',
+        label: 'Datasets',
+        count: 1,
+        href: 'datasets?tab=datasets&tab_dataset_description=%3D%22%22',
+      },
+    ])
+    expect(
+      dashboard.priorities.find(item => item.key === 'variableDescriptions')
+        ?.targetGroups,
+    ).toEqual([
+      {
+        entity: 'variable',
+        label: 'Variables',
+        count: 1,
+        href: 'variables?tab=variables&tab_variable_description=%3D%22%22',
+      },
+    ])
+    expect(
+      dashboard.priorities.find(item => item.key === 'managers')?.targetGroups,
+    ).toEqual([
+      {
+        entity: 'folder',
+        label: 'Folders',
+        count: 1,
+        href: 'folders?tab=folders&tab_folder_managerName=%3D%22%22',
+      },
+      {
+        entity: 'dataset',
+        label: 'Datasets',
+        count: 2,
+        href: 'datasets?tab=datasets&tab_dataset_managerName=%3D%22%22',
       },
     ])
   })

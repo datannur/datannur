@@ -1185,7 +1185,7 @@
 
   :global(.target-link strong) {
     flex: none;
-    color: $color-1;
+    color: inherit;
     font-size: 0.78rem;
     font-weight: 800;
   }

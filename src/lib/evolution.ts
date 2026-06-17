@@ -1,7 +1,7 @@
 import db from '@db'
 import { evolutionTypes, parentEntities } from '@lib/constant'
 import { getEntityName, getEvolutionTypeName } from '@i18n/constant-labels'
-import { t } from '@i18n/messages'
+import { getCurrentLocale, t } from '@i18n/messages'
 import {
   dateToTimestamp,
   timestampToDate,
@@ -315,17 +315,27 @@ function outputDiffDate(
 
 function formatDateTimeDiff(diffMs: number) {
   const absSeconds = Math.abs(diffMs) / 1000
-  if (absSeconds < 60) return `${Math.round(absSeconds)} secondes`
+  if (absSeconds < 60) return formatDiffUnit(absSeconds, 'second')
   const absMinutes = absSeconds / 60
   if (absMinutes < 60) return formatDiffUnit(absMinutes, 'minute')
   const absHours = absMinutes / 60
-  if (absHours < 24) return formatDiffUnit(absHours, 'heure')
-  return formatDiffUnit(absHours / 24, 'jour')
+  if (absHours < 24) return formatDiffUnit(absHours, 'hour')
+  const absDays = absHours / 24
+  if (absDays < 7) return formatDiffUnit(absDays, 'day')
+  const absWeeks = absDays / 7
+  if (absWeeks < 4.34524) return formatDiffUnit(absWeeks, 'week')
+  const absMonths = absWeeks / 4.34524
+  if (absMonths < 12) return formatDiffUnit(absMonths, 'month')
+  return formatDiffUnit(absMonths / 12, 'year')
 }
 
-function formatDiffUnit(value: number, unit: string) {
+function formatDiffUnit(value: number, unit: Intl.NumberFormatOptions['unit']) {
   const rounded = Math.round(value)
-  return `${rounded} ${unit}${rounded > 1 ? 's' : ''}`
+  return new Intl.NumberFormat(getCurrentLocale(), {
+    style: 'unit',
+    unit,
+    unitDisplay: 'long',
+  }).format(rounded)
 }
 
 function outputDiffString(oldVal: string, newVal: string) {
