@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- fix: make dashboard quick-access filters use stable column keys and remove misleading quality checks for variable-level descriptions and composite key uniqueness
 - fix: localize evolution `lastUpdate` date-time differences and format long durations as weeks, months, or years
 
 ## 0.27.2 (2026-06-15)

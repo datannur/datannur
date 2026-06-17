@@ -27,6 +27,8 @@ export function getActiveFilterCount(entity: string): number {
 export default class FilterHelper {
   tableId: string
   filters: Record<number, number>
+  filterKeyByColumn: Record<number, string>
+  filterColumnByKey: Record<string, number>
   filterTableId: string
   onUpdateFilterCount: (count: number) => void
   openFilterSelectPopup?: (request: FilterSelectPopupRequest) => void
@@ -39,6 +41,8 @@ export default class FilterHelper {
   ) {
     this.tableId = tableId
     this.filters = {}
+    this.filterKeyByColumn = {}
+    this.filterColumnByKey = {}
     this.filterTableId = 'tab_' + entity
     this.onUpdateFilterCount = onUpdateFilterCount
     this.openFilterSelectPopup = openFilterSelectPopup
@@ -56,6 +60,9 @@ export default class FilterHelper {
     const columnAttr = column.settings().init().columns?.[columnNum] as
       | Column
       | undefined
+    const columnKey = this.getColumnKey(columnAttr, columnNum)
+    this.filterKeyByColumn[columnNum] = columnKey
+    this.filterColumnByKey[columnKey] = columnNum
     const columnDateType = columnAttr?.dateType
     const filterType = columnAttr?.filterType
     const uniqueValues = column.data().unique().toArray() as unknown[]
@@ -123,11 +130,11 @@ export default class FilterHelper {
         if (val === 'false') val = t('column.falseValue')
 
         searchSelectValue(val)
-        this.updateFilterUrl(columnNum, val)
+        this.updateFilterUrl(columnNum, columnKey, val)
         this.updateFilterCount()
       })
 
-      const colFilterUrl = this.getColFilterUrl(columnNum)
+      const colFilterUrl = this.getColFilterUrl(columnNum, columnKey)
 
       if (colFilterUrl) {
         select.val(colFilterUrl)
@@ -188,17 +195,23 @@ export default class FilterHelper {
           column.search(value)
         }
         column.draw()
-        this.updateFilterUrl(columnNum, String(elem.val()))
+        this.updateFilterUrl(columnNum, columnKey, String(elem.val()))
         this.updateFilterCount()
       })
 
-      const colFilterUrl = this.getColFilterUrl(columnNum)
+      const colFilterUrl = this.getColFilterUrl(columnNum, columnKey)
       if (colFilterUrl) {
         filterElem.val(colFilterUrl).trigger('keyup')
       } else if (column.search() !== '') {
         filterElem.val(column.search()).trigger('keyup')
       }
     }
+  }
+  getColumnKey(column: Column | undefined, columnNum: number): string {
+    const data = column?.data
+    if (column?.name) return column.name
+    if (typeof data === 'string') return data
+    return String(columnNum)
   }
   initSelectPopup(select: JQuery<HTMLSelectElement>) {
     if (!this.openFilterSelectPopup) return
@@ -275,17 +288,21 @@ export default class FilterHelper {
     const toRemove = Object.values(this.filters)
     dt.ext.search = dt.ext.search.filter((v, i) => toRemove.indexOf(i) === -1)
   }
-  updateFilterUrl(colNum: number, value: string) {
-    const colId = this.filterTableId + '_' + colNum
+  updateFilterUrl(colNum: number, columnKey: string, value: string) {
+    const colId = this.filterTableId + '_' + columnKey
+    const legacyColId = this.filterTableId + '_' + colNum
     if ([undefined, null, NaN, ''].includes(value)) {
       UrlParam.delete(colId)
+      UrlParam.delete(legacyColId)
     } else {
       UrlParam.set(colId, value)
+      UrlParam.delete(legacyColId)
     }
   }
-  getColFilterUrl(colNum: number) {
-    const colId = this.filterTableId + '_' + colNum
-    const value = UrlParam.get(colId)
+  getColFilterUrl(colNum: number, columnKey: string) {
+    const colId = this.filterTableId + '_' + columnKey
+    const legacyColId = this.filterTableId + '_' + colNum
+    const value = UrlParam.get(colId) || UrlParam.get(legacyColId)
     if (!value) return false
     return value
   }
@@ -299,7 +316,9 @@ export default class FilterHelper {
   removeAll() {
     for (const key in UrlParam.getAllParams()) {
       if (key.startsWith(this.filterTableId + '_')) {
-        const colNum = key.split(this.filterTableId + '_')[1]
+        const columnKey = key.split(this.filterTableId + '_')[1]
+        const colNum = this.filterColumnByKey[columnKey] ?? Number(columnKey)
+        if (!Number.isFinite(colNum)) continue
         const id = 'datatables-title-' + this.tableId + '-filter-' + colNum
         jQuery('#' + id)
           .val('')
