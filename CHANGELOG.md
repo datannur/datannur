@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: localize evolution `lastUpdate` date-time differences and format long durations as weeks, months, or years
+
 ## 0.27.2 (2026-06-15)
 
 - fix: preserve time precision when comparing evolution `lastUpdate` values with date-time strings
