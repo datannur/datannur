@@ -777,6 +777,11 @@ class Process {
       if (dataset.type) {
         dataset.typeClean = filterToName[dataset.type]
       }
+      dataset.geoType = dataset.geometryType
+        ? String(dataset.geometryType)
+        : dataset.spatialResolution != null
+          ? 'raster'
+          : ''
     })
   }
   static doc() {

@@ -44,6 +44,7 @@ export const varTypes = {
   datetime: 'varType.datetime',
   time: 'varType.time',
   geometry: 'varType.geometry',
+  band: 'varType.band',
   binary: 'varType.binary',
   other: 'varType.other',
 } as const satisfies { [key: string]: TranslationKey }
@@ -176,6 +177,7 @@ export const entityToIcon = {
   timeAgo: 'clock',
   stat: 'signal',
   localisation: 'location-dot',
+  geo: 'earth-europe',
   dataPath: 'server',
   name: 'signature',
   description: 'comment',

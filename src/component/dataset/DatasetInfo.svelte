@@ -11,6 +11,7 @@
   import LastUpdateInfo from '@info-table/LastUpdateInfo.svelte'
   import NextUpdateInfo from '@info-table/NextUpdateInfo.svelte'
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
+  import GeoInfo from '@info-table/GeoInfo.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
   import LinkInfo from '@info-table/LinkInfo.svelte'
@@ -73,6 +74,7 @@
     />
   {/if}
   <LocalisationInfo localisation={dataset.localisation} />
+  <GeoInfo {dataset} />
   <DeliveryFormatInfo deliveryFormat={dataset.deliveryFormat} />
   <LicenseInfo license={dataset.license} />
   <DataPathInfo dataPath={dataset.dataPath} />

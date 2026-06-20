@@ -599,6 +599,10 @@ export const en = {
     favorites: { title: 'favorite', tooltip: 'Favorites' },
     level: { title: 'level', tooltip: 'Tree depth level' },
     location: { title: 'Location', tooltip: 'Data geographic location' },
+    geo: {
+      title: 'Geo',
+      tooltip: 'Spatial type (geometry or raster)',
+    },
     format: { title: 'Format', tooltip: 'Data format' },
     license: { title: 'License', tooltip: 'License' },
     period: { title: 'Period', tooltip: 'Period covered by the data' },
@@ -829,6 +833,7 @@ export const en = {
     datetime: 'date-time',
     time: 'time',
     geometry: 'geometry',
+    band: 'band',
     binary: 'binary',
     other: 'other',
   },

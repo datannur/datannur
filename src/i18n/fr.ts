@@ -629,6 +629,10 @@ export const fr = {
       title: 'Localisation',
       tooltip: 'Localisation géographique des données',
     },
+    geo: {
+      title: 'Géo',
+      tooltip: 'Type spatial (géométrie ou raster)',
+    },
     format: { title: 'Format', tooltip: 'Format des données' },
     license: { title: 'Licence', tooltip: 'Licence' },
     period: { title: 'Période', tooltip: 'Période couverte par les données' },
@@ -860,6 +864,7 @@ export const fr = {
     datetime: 'date-heure',
     time: 'heure',
     geometry: 'géométrie',
+    band: 'bande',
     binary: 'binaire',
     other: 'autre',
   },
