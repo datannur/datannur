@@ -10,6 +10,13 @@
     "type": "object",
     "required": ["id", "name", "entity", "field", "value"],
     "additionalProperties": false,
+    "patternProperties": {
+      "^[a-z_]+:[a-z]{2}$": {
+        "type": ["string", "null"],
+        "description": "Localized variant (<field>:<lang>) of a translatable field",
+        "x-description-fr": "Variante localisée (<champ>:<langue>) d'un champ traduisible"
+      }
+    },
     "properties": {
       "id": {
         "type": "string",

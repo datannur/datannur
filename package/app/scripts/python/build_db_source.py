@@ -77,11 +77,45 @@ def sort_rows(table_name: str, rows: list[dict[str, Any]]) -> list[dict[str, Any
     return rows
 
 
+PRINT_WIDTH = 80
+
+
+def _is_primitive(value: Any) -> bool:
+    return value is None or isinstance(value, (bool, int, float, str))
+
+
+def format_json(value: Any, indent: int = 0) -> str:
+    """Serialize like Prettier: objects always multiline, scalar arrays inline
+    when they fit, everything else multiline. Keeps build output prettier-clean."""
+    pad = "  " * indent
+    child_pad = "  " * (indent + 1)
+
+    if isinstance(value, dict):
+        if not value:
+            return "{}"
+        items = [
+            f"{child_pad}{json.dumps(key, ensure_ascii=False)}: "
+            f"{format_json(item, indent + 1)}"
+            for key, item in value.items()
+        ]
+        return "{\n" + ",\n".join(items) + "\n" + pad + "}"
+
+    if isinstance(value, list):
+        if not value:
+            return "[]"
+        if all(_is_primitive(item) for item in value):
+            inline = json.dumps(value, ensure_ascii=False, separators=(", ", ": "))
+            if len(pad) + len(inline) <= PRINT_WIDTH:
+                return inline
+        items = [f"{child_pad}{format_json(item, indent + 1)}" for item in value]
+        return "[\n" + ",\n".join(items) + "\n" + pad + "]"
+
+    return json.dumps(value, ensure_ascii=False)
+
+
 def write_json(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    path.write_text(format_json(rows) + "\n", encoding="utf-8")
 
 
 def write_jsonjs(path: Path, table_name: str, rows: list[dict[str, Any]]) -> None:

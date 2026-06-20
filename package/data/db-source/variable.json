@@ -5550,5 +5550,60 @@
     "source_variable_ids": "exportations__secteur",
     "name:fr": "Source des données",
     "description:fr": "Origine : OFS, SECO, registres cantonaux."
+  },
+  {
+    "id": "pop_region__geometry",
+    "dataset_id": "pop_region",
+    "name": "Geometry",
+    "name:fr": "Géométrie",
+    "original_name": "GEOM",
+    "type": "geometry",
+    "description": "Polygon geometry of each region",
+    "description:fr": "Géométrie polygonale de chaque région"
+  },
+  {
+    "id": "ortho_vd__band_red",
+    "dataset_id": "ortho_vd",
+    "name": "Red band",
+    "name:fr": "Bande rouge",
+    "original_name": "B1",
+    "type": "band",
+    "min": 0,
+    "max": 255,
+    "mean": 112.4,
+    "std": 47.8,
+    "nb_missing": 12480,
+    "description": "Red channel pixel values (0-255)",
+    "description:fr": "Valeurs de pixels du canal rouge (0-255)"
+  },
+  {
+    "id": "ortho_vd__band_green",
+    "dataset_id": "ortho_vd",
+    "name": "Green band",
+    "name:fr": "Bande verte",
+    "original_name": "B2",
+    "type": "band",
+    "min": 0,
+    "max": 255,
+    "mean": 121.7,
+    "std": 44.1,
+    "nb_missing": 12480,
+    "description": "Green channel pixel values (0-255)",
+    "description:fr": "Valeurs de pixels du canal vert (0-255)"
+  },
+  {
+    "id": "ortho_vd__band_blue",
+    "dataset_id": "ortho_vd",
+    "name": "Blue band",
+    "name:fr": "Bande bleue",
+    "original_name": "B3",
+    "type": "band",
+    "min": 0,
+    "max": 255,
+    "mean": 98.3,
+    "std": 50.6,
+    "nb_missing": 12480,
+    "description": "Blue channel pixel values (0-255)",
+    "description:fr": "Valeurs de pixels du canal bleu (0-255)"
   }
 ]

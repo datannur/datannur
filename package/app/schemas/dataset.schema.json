@@ -10,6 +10,13 @@
     "type": "object",
     "required": ["id"],
     "additionalProperties": false,
+    "patternProperties": {
+      "^[a-z_]+:[a-z]{2}$": {
+        "type": ["string", "null"],
+        "description": "Localized variant (<field>:<lang>) of a translatable field",
+        "x-description-fr": "Variante localisée (<champ>:<langue>) d'un champ traduisible"
+      }
+    },
     "properties": {
       "id": {
         "type": "string",
@@ -89,6 +96,30 @@
         "type": ["string", "null"],
         "description": "Geographic area covered by the dataset",
         "x-description-fr": "Zone géographique concernée par le dataset"
+      },
+      "crs": {
+        "type": ["string", "null"],
+        "description": "Coordinate reference system of the dataset geometries (EPSG code), e.g. \"EPSG:2056\"",
+        "x-description-fr": "Système de coordonnées des géométries du dataset (code EPSG), ex. « EPSG:2056 »"
+      },
+      "bbox": {
+        "type": ["array", "null"],
+        "items": { "type": "number" },
+        "minItems": 4,
+        "maxItems": 4,
+        "description": "Geographic bounding box [west, south, east, north] in WGS84 lon/lat",
+        "x-description-fr": "Emprise géographique [ouest, sud, est, nord] en WGS84 lon/lat",
+        "examples": [[6.02, 45.8, 10.5, 47.8], null]
+      },
+      "geometry_type": {
+        "type": ["string", "null"],
+        "description": "Geometry type for vector datasets: point, linestring, polygon, multipoint, multilinestring, multipolygon, geometrycollection (null for raster or non-geo)",
+        "x-description-fr": "Type de géométrie pour les datasets vecteur : point, linestring, polygon, multipoint, multilinestring, multipolygon, geometrycollection (null pour raster ou non-géo)"
+      },
+      "spatial_resolution": {
+        "type": ["number", "null"],
+        "description": "Spatial resolution in meters (e.g. raster pixel size)",
+        "x-description-fr": "Résolution spatiale en mètres (ex. taille de pixel d'un raster)"
       },
       "nb_row": {
         "type": ["integer", "null"],

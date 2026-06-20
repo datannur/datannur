@@ -74,6 +74,15 @@
             }
           },
           "additionalProperties": false
+        },
+        "patternProperties": {
+          "type": "object",
+          "patternProperties": {
+            "^.+$": {
+              "$ref": "#/definitions/property"
+            }
+          },
+          "additionalProperties": false
         }
       }
     }
@@ -88,17 +97,47 @@
           "oneOf": [
             {
               "type": "string",
-              "enum": ["string", "integer", "number", "boolean", "null"]
+              "enum": [
+                "string",
+                "integer",
+                "number",
+                "boolean",
+                "null",
+                "array"
+              ]
             },
             {
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["string", "integer", "number", "boolean", "null"]
+                "enum": [
+                  "string",
+                  "integer",
+                  "number",
+                  "boolean",
+                  "null",
+                  "array"
+                ]
               },
               "minItems": 1
             }
           ]
+        },
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["string", "integer", "number", "boolean", "null"]
+            }
+          }
+        },
+        "minItems": {
+          "type": "integer"
+        },
+        "maxItems": {
+          "type": "integer"
         },
         "description": {
           "type": "string"
