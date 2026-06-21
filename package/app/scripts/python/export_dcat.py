@@ -515,11 +515,12 @@ class DCATExporter:
 
     def _add_spatial(self, dataset_uri: URIRef, item: Dict):
         """Spatial coverage (GeoDCAT-AP): a dct:Location carrying the human
-        label and the bounding box, plus the reference system and resolution."""
+        label, the bounding box and centroid, plus the reference system and
+        resolution on the dataset."""
         localisation = item.get("localisation")
-        bbox = self._bbox_wkt(item.get("bbox"))
+        coords = parse_bbox(item.get("bbox"))
 
-        if localisation or bbox is not None:
+        if localisation or coords is not None:
             location = BNode()
             self.graph.add((dataset_uri, DCTERMS.spatial, location))
             self.graph.add((location, RDF.type, DCTERMS.Location))
@@ -527,9 +528,8 @@ class DCATExporter:
                 self.graph.add(
                     (location, SKOS.prefLabel, self._get_language_literal(localisation))
                 )
-            if bbox is not None:
-                self.graph.add((location, DCAT.bbox, bbox))
-                self.graph.add((location, LOCN.geometry, bbox))
+            if coords is not None:
+                self._add_geometry(location, coords)
 
         crs_uri = self._crs_uri(item.get("crs"))
         if crs_uri is not None:
@@ -545,18 +545,32 @@ class DCATExporter:
                 )
             )
 
-    def _bbox_wkt(self, bbox) -> Optional[Literal]:
-        """[west, south, east, north] (CRS84 lon/lat) -> GeoSPARQL WKT literal."""
-        coords = parse_bbox(bbox)
-        if coords is None:
-            return None
+    def _add_geometry(self, location: BNode, coords: List[float]):
+        """Bounding box and centroid as GeoSPARQL WKT (CRS84 lon/lat).
+
+        DCAT-AP allows a single literal per geo property, so WKT — the most
+        widely supported encoding — is used rather than several encodings."""
         west, south, east, north = coords
-        wkt = (
-            "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "
-            f"POLYGON(({west} {south}, {east} {south}, "
-            f"{east} {north}, {west} {north}, {west} {south}))"
+        ring = ", ".join(
+            f"{lon} {lat}"
+            for lon, lat in (
+                (west, south),
+                (east, south),
+                (east, north),
+                (west, north),
+                (west, south),
+            )
         )
-        return Literal(wkt, datatype=GEOSPARQL.wktLiteral)
+        bbox = self._wkt(f"POLYGON(({ring}))")
+        self.graph.add((location, DCAT.bbox, bbox))
+        self.graph.add((location, LOCN.geometry, bbox))
+
+        cx, cy = (west + east) / 2, (south + north) / 2
+        self.graph.add((location, DCAT.centroid, self._wkt(f"POINT({cx} {cy})")))
+
+    def _wkt(self, body: str) -> Literal:
+        crs = "<http://www.opengis.net/def/crs/OGC/1.3/CRS84>"
+        return Literal(f"{crs} {body}", datatype=GEOSPARQL.wktLiteral)
 
     def _crs_uri(self, crs) -> Optional[URIRef]:
         """'EPSG:2056' -> OGC CRS register URI (spatial reference system)."""
