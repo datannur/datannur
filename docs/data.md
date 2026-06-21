@@ -81,6 +81,19 @@ The catalog supports several entities with flexible relationships. All tables ar
 >
 > **🔗 Entity Structure:** For information about entities and their relationships, see the about page at `index.html#/about?tab=aboutStructure` in your catalog.
 
+### Geographic metadata
+
+Datasets can carry optional geographic metadata:
+
+- **`bbox`**: bounding box as an array of four numbers `[west, south, east, north]` in WGS84 (lon/lat)
+- **`crs`**: coordinate reference system, e.g. `"EPSG:2056"`
+- **`geometry_type`**: `point`, `linestring`, `polygon`, … (vector datasets)
+- **`spatial_resolution`**: spatial resolution in metres (raster datasets)
+
+When present, the catalog shows a **"Geo" column** in lists and a **coverage map** on the dataset (and folder) page, and these fields drive the [geospatial exports](./integrations#semantic-and-geospatial-exports) (DCAT/GeoDCAT-AP, STAC, ISO 19139). A folder's coverage is the union of its datasets' bounding boxes.
+
+For variables, two `type` values support geodata: **`geometry`** (the geometry column of a vector dataset) and **`band`** (one variable per band of a raster dataset, with its pixel statistics).
+
 ### Configuration Options
 
 The `config.json` file allows you to customize various application settings:
