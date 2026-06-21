@@ -703,7 +703,7 @@ class DCATExporter:
                 (
                     dist_uri,
                     DCAT.byteSize,
-                    Literal(Decimal(str(dataset["data_size"])), datatype=XSD.decimal),
+                    Literal(int(dataset["data_size"]), datatype=XSD.nonNegativeInteger),
                 )
             )
 
