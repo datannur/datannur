@@ -14,6 +14,12 @@ from typing import Dict, List, Optional, Tuple
 from urllib.parse import quote, urljoin
 
 from _local_runtime import SCHEMAS_DIR, require_data_db_dir
+from export_common import (
+    load_config,
+    parse_bbox,
+    parse_epsg,
+    write_export_summary,
+)
 
 try:
     from rdflib import Graph, Namespace, Literal, URIRef, BNode
@@ -34,6 +40,7 @@ except ImportError:
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 SCHEMA = Namespace("http://schema.org/")
+GEOSPARQL = Namespace("http://www.opengis.net/ont/geosparql#")
 
 FILE_TYPE_URIS = {
     "csv": "http://publications.europa.eu/resource/authority/file-type/CSV",
@@ -89,6 +96,10 @@ class DCATExporter:
         self.languages = self.config.get("languages", ["en", "fr"])
         if self.default_language not in self.languages:
             self.languages = [self.default_language, *self.languages]
+        # Target profile: "eu" (default, DCAT-AP 3 / GeoDCAT-AP) or "ch" (eCH-0200)
+        self.profile = self.config.get("profile", "eu")
+        self.catalog_publisher_uri = None
+        self.catalog_contact_uri = None
 
     def _bind_namespaces(self):
         """Bind RDF namespaces"""
@@ -100,6 +111,7 @@ class DCATExporter:
         self.graph.bind("vcard", VCARD)
         self.graph.bind("schema", SCHEMA)
         self.graph.bind("skos", SKOS)
+        self.graph.bind("geosparql", GEOSPARQL)
 
     def load_data(self):
         """Load JSON data from database files"""
@@ -144,19 +156,57 @@ class DCATExporter:
             (catalog_uri, DCTERMS.description, self._get_language_literal(catalog_desc))
         )
 
-        # Mandatory: publisher
+        # Mandatory: publisher (+ a catalog contact used as fallback for datasets)
+        base_uri = self.config.get("base_uri", "https://example.org/")
         catalog_publisher = self.config.get("catalog_publisher", "")
         if catalog_publisher:
-            publisher_uri = URIRef(
-                f"{self.config.get('base_uri', 'https://example.org/')}publisher/catalog"
+            self.catalog_publisher_uri = URIRef(f"{base_uri}publisher/catalog")
+            self.graph.add(
+                (catalog_uri, DCTERMS.publisher, self.catalog_publisher_uri)
             )
-            self.graph.add((catalog_uri, DCTERMS.publisher, publisher_uri))
-            self.graph.add((publisher_uri, RDF.type, FOAF.Agent))
+            self.graph.add((self.catalog_publisher_uri, RDF.type, FOAF.Agent))
             self.graph.add(
                 (
-                    publisher_uri,
+                    self.catalog_publisher_uri,
                     FOAF.name,
                     self._get_language_literal(catalog_publisher),
+                )
+            )
+            self.catalog_contact_uri = URIRef(f"{base_uri}contact/catalog")
+            self.graph.add((self.catalog_contact_uri, RDF.type, VCARD.Organization))
+            self.graph.add((self.catalog_contact_uri, RDF.type, VCARD.Kind))
+            self.graph.add(
+                (self.catalog_contact_uri, VCARD.fn, Literal(catalog_publisher))
+            )
+
+        # License (required by DCAT-AP-CH on the catalog)
+        license_uri = self.config.get("default_license")
+        if license_uri:
+            self.graph.add(
+                (
+                    catalog_uri,
+                    DCTERMS.license,
+                    self._typed(URIRef(license_uri), DCTERMS.LicenseDocument),
+                )
+            )
+
+        # DCAT-AP-CH also requires an issued date and a homepage on the catalog.
+        self.graph.add(
+            (
+                catalog_uri,
+                DCTERMS.issued,
+                Literal(
+                    self.config.get("catalog_issued", "2024-01-01"), datatype=XSD.date
+                ),
+            )
+        )
+        homepage = self.config.get("catalog_homepage") or self.config.get("base_uri")
+        if homepage:
+            self.graph.add(
+                (
+                    catalog_uri,
+                    FOAF.homepage,
+                    self._typed(URIRef(homepage), FOAF.Document),
                 )
             )
 
@@ -260,24 +310,23 @@ class DCATExporter:
                 iso_date = f"{parts[0]}-{parts[1].zfill(2)}-{parts[2].zfill(2)}"
                 return self._date_literal(iso_date)
 
-        # Handle Year/Month format (YYYY/MM)
+        # Year/Month (YYYY/MM) -> first of month (xsd:date: EU-ok, CH-required)
         if "/" in date_str:
             parts = date_str.split("/")
             if len(parts) == 2:
-                iso_date = f"{parts[0]}-{parts[1].zfill(2)}"
-                return self._year_month_literal(iso_date)
+                return self._date_literal(f"{parts[0]}-{parts[1].zfill(2)}-01")
 
-        # Handle YYYY-MM format (already ISO format for gYearMonth)
+        # YYYY-MM -> first of month (xsd:date)
         if "-" in date_str and len(date_str) == 7:
-            return self._year_month_literal(date_str)
+            return self._date_literal(f"{date_str}-01")
 
         # Handle YYYY-MM-DD format
         if "-" in date_str and len(date_str) == 10:
             return self._date_literal(date_str)
 
-        # Year only
+        # Year only -> first of January (xsd:date)
         if date_str.isdigit() and len(date_str) == 4:
-            return Literal(date_str, datatype=XSD.gYear)
+            return self._date_literal(f"{date_str}-01-01")
 
         return None
 
@@ -313,13 +362,6 @@ class DCATExporter:
         except ValueError:
             return None
         return Literal(date_str, datatype=XSD.date)
-
-    def _year_month_literal(self, date_str: str) -> Optional[Literal]:
-        try:
-            datetime.strptime(date_str, "%Y-%m")
-        except ValueError:
-            return None
-        return Literal(date_str, datatype=XSD.gYearMonth)
 
     def _date_time_literal(self, date_str: str) -> Optional[Literal]:
         try:
@@ -425,13 +467,7 @@ class DCATExporter:
             dataset_uri, DCTERMS.description, item, "description"
         )
 
-        if item.get("owner_organization_id"):
-            self._add_publisher(dataset_uri, item["owner_organization_id"])
-
-        if item.get("manager_organization_id"):
-            self._add_contact_point(dataset_uri, item["manager_organization_id"])
-        elif item.get("owner_organization_id"):
-            self._add_contact_point(dataset_uri, item["owner_organization_id"])
+        self._add_responsible(dataset_uri, item)
 
         if item.get("start_date"):
             issued_date = self._parse_date(item["start_date"])
@@ -481,14 +517,7 @@ class DCATExporter:
             if end:
                 self.graph.add((temporal_node, SCHEMA.endDate, end))
 
-        if item.get("localisation"):
-            self.graph.add(
-                (
-                    dataset_uri,
-                    DCTERMS.spatial,
-                    self._get_language_literal(item["localisation"]),
-                )
-            )
+        self._add_spatial(dataset_uri, item)
 
         if item.get("updating_each"):
             freq_mapping = {
@@ -503,7 +532,11 @@ class DCATExporter:
             freq_uri = freq_mapping.get(item["updating_each"].lower())
             if freq_uri:
                 self.graph.add(
-                    (dataset_uri, DCTERMS.accrualPeriodicity, URIRef(freq_uri))
+                    (
+                        dataset_uri,
+                        DCTERMS.accrualPeriodicity,
+                        self._typed(URIRef(freq_uri), DCTERMS.Frequency),
+                    )
                 )
 
         for doc_id in self._split_ids(item.get("doc_ids")):
@@ -514,6 +547,85 @@ class DCATExporter:
                     doc_uri = self._document_uri_ref(doc_link)
                     self.graph.add((dataset_uri, DCTERMS.relation, doc_uri))
                     self._add_language_literals(doc_uri, RDFS.label, doc, "name")
+
+    def _add_spatial(self, dataset_uri: URIRef, item: Dict):
+        """Spatial coverage (GeoDCAT-AP): a dct:Location carrying the human
+        label, the bounding box and centroid, plus the reference system and
+        resolution on the dataset."""
+        localisation = item.get("localisation")
+        coords = parse_bbox(item.get("bbox"))
+
+        if localisation or coords is not None:
+            location = BNode()
+            self.graph.add((dataset_uri, DCTERMS.spatial, location))
+            self.graph.add((location, RDF.type, DCTERMS.Location))
+            if localisation:
+                self.graph.add(
+                    (location, SKOS.prefLabel, self._get_language_literal(localisation))
+                )
+            if coords is not None:
+                self._add_geometry(location, coords)
+
+        # eCH-0200 forbids dct:conformsTo, so the CRS reference is EU-only.
+        crs_uri = self._crs_uri(item.get("crs"))
+        if crs_uri is not None and self.profile != "ch":
+            self.graph.add(
+                (
+                    dataset_uri,
+                    DCTERMS.conformsTo,
+                    self._typed(crs_uri, DCTERMS.Standard),
+                )
+            )
+
+        resolution = item.get("spatial_resolution")
+        if isinstance(resolution, (int, float)) and not isinstance(resolution, bool):
+            self.graph.add(
+                (
+                    dataset_uri,
+                    DCAT.spatialResolutionInMeters,
+                    Literal(Decimal(str(resolution)), datatype=XSD.decimal),
+                )
+            )
+
+    def _add_geometry(self, location: BNode, coords: List[float]):
+        """Bounding box and centroid as GeoSPARQL WKT (CRS84 lon/lat).
+
+        DCAT-AP allows a single literal per geo property, so WKT — the most
+        widely supported encoding — is used rather than several encodings."""
+        west, south, east, north = coords
+        ring = ", ".join(
+            f"{lon} {lat}"
+            for lon, lat in (
+                (west, south),
+                (east, south),
+                (east, north),
+                (west, north),
+                (west, south),
+            )
+        )
+        bbox = self._wkt(f"POLYGON(({ring}))")
+        self.graph.add((location, DCAT.bbox, bbox))
+
+        cx, cy = (west + east) / 2, (south + north) / 2
+        self.graph.add((location, DCAT.centroid, self._wkt(f"POINT({cx} {cy})")))
+
+    def _wkt(self, body: str) -> Literal:
+        crs = "<http://www.opengis.net/def/crs/OGC/1.3/CRS84>"
+        return Literal(f"{crs} {body}", datatype=GEOSPARQL.wktLiteral)
+
+    def _typed(self, node: URIRef, rdf_class: URIRef) -> URIRef:
+        """Give an IRI object an explicit rdf:type. DCAT-AP / GeoDCAT-AP /
+        DCAT-AP-CH expect typed resources for these properties; the type is
+        additive and does not affect plain DCAT consumers."""
+        self.graph.add((node, RDF.type, rdf_class))
+        return node
+
+    def _crs_uri(self, crs) -> Optional[URIRef]:
+        """'EPSG:2056' -> OGC CRS register URI (spatial reference system)."""
+        epsg = parse_epsg(crs)
+        if epsg is None:
+            return None
+        return URIRef(f"http://www.opengis.net/def/crs/EPSG/0/{epsg}")
 
     def _add_publisher(self, dataset_uri: URIRef, organization_id: str):
         """Add publisher information (foaf:Agent)"""
@@ -542,6 +654,7 @@ class DCATExporter:
 
         self.graph.add((dataset_uri, DCAT.contactPoint, contact_uri))
         self.graph.add((contact_uri, RDF.type, VCARD.Organization))
+        self.graph.add((contact_uri, RDF.type, VCARD.Kind))
 
         organization_name = self._localized_field(organization, "name")
         if organization_name:
@@ -549,11 +662,29 @@ class DCATExporter:
 
         if organization.get("email"):
             email_uri = URIRef(f"mailto:{organization['email']}")
-            self.graph.add((contact_uri, VCARD.hasEmail, email_uri))
+            self.graph.add(
+                (contact_uri, VCARD.hasEmail, self._typed(email_uri, VCARD.Email))
+            )
 
         if organization.get("phone"):
             phone_uri = URIRef(f"tel:{quote(str(organization['phone']), safe='+')}")
             self.graph.add((contact_uri, VCARD.hasTelephone, phone_uri))
+
+    def _add_responsible(self, subject: URIRef, item: Dict):
+        """Publisher + contact point, falling back to the catalog's when the item
+        has no organisation, so each one carries them (DCAT-AP-CH requires it)."""
+        owner = item.get("owner_organization_id")
+        manager = item.get("manager_organization_id")
+        if owner is not None and owner in self.organizations:
+            self._add_publisher(subject, owner)
+        elif self.catalog_publisher_uri is not None:
+            self.graph.add((subject, DCTERMS.publisher, self.catalog_publisher_uri))
+
+        contact_org = manager if manager in self.organizations else owner
+        if contact_org is not None and contact_org in self.organizations:
+            self._add_contact_point(subject, contact_org)
+        elif self.catalog_contact_uri is not None:
+            self.graph.add((subject, DCAT.contactPoint, self.catalog_contact_uri))
 
     def _create_distribution(
         self,
@@ -576,14 +707,18 @@ class DCATExporter:
         access_url = str(self._uri_ref(access_url))
         self.graph.add((dist_uri, DCAT.accessURL, URIRef(access_url)))
 
+        # DCAT-AP-CH requires a publisher and contact point on each distribution.
+        self._add_responsible(dist_uri, dataset)
+
         # Optional: download URL
         download_url = str(self._uri_ref(dataset.get("data_path") or access_url))
         if download_url and dataset.get("delivery_format"):
             self.graph.add((dist_uri, DCAT.downloadURL, URIRef(download_url)))
 
-        # Mandatory: issued date
-        issued_date = self._parse_date(
-            dataset.get("start_date", datetime.now().strftime("%Y-%m-%d"))
+        # Mandatory (DCAT-AP-CH): issued date — fall back to the catalog date when
+        # the dataset has none, so every distribution carries one.
+        issued_date = self._parse_date(dataset.get("start_date")) or self._parse_date(
+            self.config.get("catalog_issued", "2024-01-01")
         )
         if issued_date:
             self.graph.add((dist_uri, DCTERMS.issued, issued_date))
@@ -591,9 +726,10 @@ class DCATExporter:
         # Mandatory: license
         license_uri = self._effective_license(dataset, parent)
         if license_uri:
-            self.graph.add(
-                (dist_uri, DCTERMS.license, self._license_value(license_uri))
-            )
+            license_value = self._license_value(license_uri)
+            if isinstance(license_value, URIRef):
+                self._typed(license_value, DCTERMS.LicenseDocument)
+            self.graph.add((dist_uri, DCTERMS.license, license_value))
 
         delivery_format = dataset.get("delivery_format")
         normalized_format = delivery_format.lower() if delivery_format else ""
@@ -602,20 +738,34 @@ class DCATExporter:
         if dataset.get("delivery_format"):
             format_uri = FILE_TYPE_URIS.get(normalized_format)
             if format_uri:
-                self.graph.add((dist_uri, DCTERMS.format, URIRef(format_uri)))
+                self.graph.add(
+                    (
+                        dist_uri,
+                        DCTERMS.format,
+                        self._typed(URIRef(format_uri), DCTERMS.MediaTypeOrExtent),
+                    )
+                )
 
         # Conditional: media type
         if dataset.get("delivery_format"):
             media_type = MEDIA_TYPES.get(normalized_format)
             if media_type:
-                self.graph.add((dist_uri, DCAT.mediaType, Literal(media_type)))
+                media_uri = URIRef(
+                    f"https://www.iana.org/assignments/media-types/{media_type}"
+                )
+                self.graph.add(
+                    (dist_uri, DCAT.mediaType, self._typed(media_uri, DCTERMS.MediaType))
+                )
+                self.graph.add((media_uri, RDF.type, DCTERMS.MediaTypeOrExtent))
 
-        if dataset.get("data_size"):
+        # EU (DCAT-AP 3) wants a non-negative integer; eCH-0200's byteSize shape
+        # expects a resource (incompatible with a byte count), so skip it in CH mode.
+        if dataset.get("data_size") and self.profile != "ch":
             self.graph.add(
                 (
                     dist_uri,
                     DCAT.byteSize,
-                    Literal(Decimal(str(dataset["data_size"])), datatype=XSD.decimal),
+                    Literal(int(dataset["data_size"]), datatype=XSD.nonNegativeInteger),
                 )
             )
 
@@ -782,10 +932,10 @@ class DCATExporter:
         for item in report_items:
             for tag_id in self._split_ids(item.get("tag_ids")):
                 tag = self.tags.get(tag_id, {})
-            tag_labels = self._localized_fields(tag, "name")
-            label = tag_labels.get(self.default_language) or tag_id
-            themes[label] += 1
-            theme_labels[label] = tag_labels
+                tag_labels = self._localized_fields(tag, "name")
+                label = tag_labels.get(self.default_language) or tag_id
+                themes[label] += 1
+                theme_labels[label] = tag_labels
 
         return {
             "datasets": self.dcat_dataset_count or len(report_items),
@@ -949,6 +1099,26 @@ class DCATExporter:
         print(results_text)
         return False, results_text
 
+    def report_profile(self, label: str, shacl_file: Path) -> None:
+        """Non-blocking conformance report against an additional profile.
+
+        The primary DCAT-AP validation stays the gate; this only measures how
+        close the output is to the EU (GeoDCAT-AP) and Swiss (DCAT-AP-CH) levels.
+        """
+        if validate_shacl is None or not shacl_file.exists():
+            return
+        conforms, _, results_text = validate_shacl(
+            self.graph,
+            shacl_graph=str(shacl_file),
+            inference="rdfs",
+            abort_on_first=False,
+        )
+        if conforms:
+            print(f"  ✓ {label}: conformant")
+        else:
+            count = results_text.count("Constraint Violation")
+            print(f"  • {label}: {count} issue(s) — informational, non-blocking")
+
     def write_validation_json(
         self,
         output_dir: Path,
@@ -958,8 +1128,12 @@ class DCATExporter:
     ) -> Dict:
         generated_at = datetime.now(timezone.utc).isoformat()
         status = self.get_validation_status(shacl_conforms)
+        profile_labels = {
+            "eu": "DCAT-AP 3.0.1",
+            "ch": "DCAT-AP-CH (eCH-0200)",
+        }
         payload = {
-            "profile": self.config.get("profile", "DCAT-AP-CH"),
+            "profile": profile_labels.get(self.profile, self.profile),
             "generatedAt": generated_at,
             "validation": {
                 "status": status,
@@ -972,31 +1146,20 @@ class DCATExporter:
             "coverage": self.get_required_field_coverage(),
             "files": files,
         }
-        with open(output_dir / "validation.json", "w", encoding="utf-8") as file:
-            json.dump(payload, file, ensure_ascii=False, indent=2)
-        validation_json = json.dumps(payload, ensure_ascii=False, indent=2).replace(
-            "</", "<\\/"
+        write_export_summary(
+            output_dir, "validation", "datannurSemanticValidation", payload
         )
-        with open(output_dir / "validation.json.js", "w", encoding="utf-8") as file:
-            file.write(f"window.datannurSemanticValidation = {validation_json};\n")
         return payload
 
 
-def load_config(config_file: Path) -> Dict:
-    """Load configuration file"""
-    if config_file.exists():
-        with open(config_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-
-    # Default configuration
-    return {
-        "catalog_uri": "https://example.org/catalog",
-        "base_uri": "https://example.org/",
-        "organization_slug": "datannur",
-        "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
-        "default_language": "en",
-        "languages": ["en", "fr", "de", "it"],
-    }
+DEFAULT_CONFIG = {
+    "catalog_uri": "https://example.org/catalog",
+    "base_uri": "https://example.org/",
+    "organization_slug": "datannur",
+    "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
+    "default_language": "en",
+    "languages": ["en", "fr", "de", "it"],
+}
 
 
 def main():
@@ -1009,7 +1172,12 @@ def main():
     config_file = data_dir / "dcat-export.config.json"
     if not config_file.exists():
         config_file = DATA_TEMPLATE_DIR / "dcat-export.config.json"
-    config = load_config(config_file)
+    config = load_config(config_file, DEFAULT_CONFIG)
+    # CLI override: `datannur dcat --profile ch`
+    if "--profile" in sys.argv:
+        index = sys.argv.index("--profile")
+        if index + 1 < len(sys.argv):
+            config["profile"] = sys.argv[index + 1]
 
     output_dir = data_dir / "db-semantic"
     output_dir.mkdir(exist_ok=True)
@@ -1044,10 +1212,24 @@ def main():
     exporter.build_internal_validation()
 
     # Validate
-    shacl_file = SCHEMAS_DIR / "semantic" / "dcat-ap-shacl.ttl"
-    shacl_conforms, shacl_message = exporter.validate(shacl_file)
+    semantic_dir = SCHEMAS_DIR / "semantic"
+    profiles = [
+        ("DCAT-AP 3.0.1 (EU)", "dcat-ap-shacl.ttl", "eu"),
+        ("GeoDCAT-AP 3.1 (EU)", "geodcat-ap-shacl.ttl", None),
+        ("DCAT-AP-CH / eCH-0200 (CH)", "dcat-ap-ch-shacl.ttl", "ch"),
+    ]
+    primary_file = "dcat-ap-ch-shacl.ttl" if exporter.profile == "ch" else "dcat-ap-shacl.ttl"
+
+    shacl_conforms, shacl_message = exporter.validate(semantic_dir / primary_file)
     exporter.write_validation_json(output_dir, files, shacl_conforms, shacl_message)
     print(f"✓ Wrote validation summary to {output_dir / 'validation.json'}")
+
+    print()
+    print(f"Profile: {exporter.profile} (primary, blocking)")
+    print("Other profile conformance (informational, non-blocking):")
+    for label, fname, _ in profiles:
+        if fname != primary_file:
+            exporter.report_profile(label, semantic_dir / fname)
 
 
 if __name__ == "__main__":

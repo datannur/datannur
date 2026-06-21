@@ -53,58 +53,94 @@ export type SemanticValidation = {
   files: { [label: string]: string }
 }
 
+export type StacExport = {
+  generatedAt: string
+  itemCount: number
+  datasetTotal: number
+  valid: boolean
+  validationMessage: string
+  files: { [label: string]: string }
+}
+
+export type IsoExport = {
+  generatedAt: string
+  profile: string
+  recordCount: number
+  datasetTotal: number
+  records: { id: string; file: string }[]
+}
+
 declare global {
   interface Window {
     datannurSemanticValidation?: SemanticValidation
+    datannurStacExport?: StacExport
+    datannurIsoExport?: IsoExport
   }
 }
-
-const semanticExportScriptId = 'datannur-semantic-validation-json-js'
-let semanticValidationPromise: Promise<SemanticValidation | null> | null = null
 
 export const semanticBasePath = isHttp
   ? `${getAppBasePath()}data/db-semantic/`
   : 'data/db-semantic/'
 
-async function fetchSemanticValidation() {
-  try {
-    const response = await fetch(`${semanticBasePath}validation.json`, {
-      cache: 'no-store',
-    })
-    if (!response.ok) return null
-    return (await response.json()) as SemanticValidation
-  } catch {
-    return null
-  }
-}
+/**
+ * Load an export summary written by the Python export scripts: over HTTP we
+ * fetch `<basename>.json`; from the filesystem we inject `<basename>.json.js`,
+ * which assigns the global, since file:// blocks fetch. Memoized per basename.
+ */
+function makeExportLoader<T>(basename: string, globalKey: keyof Window) {
+  let promise: Promise<T | null> | null = null
 
-async function loadSemanticValidationScript() {
-  if (window.datannurSemanticValidation)
-    return window.datannurSemanticValidation
-
-  return new Promise<SemanticValidation | null>(resolve => {
-    const existingScript = document.getElementById(semanticExportScriptId)
-    if (existingScript) {
-      resolve(window.datannurSemanticValidation ?? null)
-      return
+  const fromFetch = async () => {
+    try {
+      const response = await fetch(`${semanticBasePath}${basename}.json`, {
+        cache: 'no-store',
+      })
+      return response.ok ? ((await response.json()) as T) : null
+    } catch {
+      return null
     }
+  }
 
-    const script = document.createElement('script')
-    script.id = semanticExportScriptId
-    script.src = `${semanticBasePath}validation.json.js`
-    script.onload = () => resolve(window.datannurSemanticValidation ?? null)
-    script.onerror = () => resolve(null)
-    document.head.appendChild(script)
-  })
+  const fromScript = () =>
+    new Promise<T | null>(resolve => {
+      const current = window[globalKey] as T | undefined
+      if (current) return resolve(current)
+
+      const scriptId = `datannur-${basename}-json-js`
+      if (document.getElementById(scriptId)) {
+        return resolve((window[globalKey] as T | undefined) ?? null)
+      }
+
+      const script = document.createElement('script')
+      script.id = scriptId
+      script.src = `${semanticBasePath}${basename}.json.js`
+      script.onload = () =>
+        resolve((window[globalKey] as T | undefined) ?? null)
+      script.onerror = () => resolve(null)
+      document.head.appendChild(script)
+    })
+
+  return () => (promise ??= isHttp ? fromFetch() : fromScript())
 }
 
-export async function loadSemanticValidation() {
-  semanticValidationPromise ??= isHttp
-    ? fetchSemanticValidation()
-    : loadSemanticValidationScript()
-  return semanticValidationPromise
-}
+export const loadSemanticValidation = makeExportLoader<SemanticValidation>(
+  'validation',
+  'datannurSemanticValidation',
+)
+export const loadStacExport = makeExportLoader<StacExport>(
+  'stac',
+  'datannurStacExport',
+)
+export const loadIsoExport = makeExportLoader<IsoExport>(
+  'iso',
+  'datannurIsoExport',
+)
 
 export async function checkSemanticExportAvailability() {
-  return (await loadSemanticValidation()) !== null
+  const [dcat, stac, iso] = await Promise.all([
+    loadSemanticValidation(),
+    loadStacExport(),
+    loadIsoExport(),
+  ])
+  return dcat !== null || stac !== null || iso !== null
 }

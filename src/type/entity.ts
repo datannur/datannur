@@ -108,6 +108,10 @@ export type Dataset = BaseEntity &
     link?: string
     hasPreview?: boolean | number | string
     localisation?: string
+    crs?: string
+    bbox?: number[]
+    geometryType?: string
+    spatialResolution?: number
     nbRow?: number
     schemaSignature?: string | null
     sampleSize?: number
@@ -119,6 +123,7 @@ export type Dataset = BaseEntity &
 
     // Computed fields added during processing
     typeClean?: string
+    geoType?: string
     folderName?: string
     ownerName?: string
     managerName?: string
@@ -231,6 +236,7 @@ export type Folder = BaseEntity &
     dataSizeRecursive?: number
     nextUpdateDate?: string
     typeClean?: string
+    bbox?: number[]
   }
 
 export type Organization = BaseEntity &

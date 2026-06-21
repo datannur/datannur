@@ -57,33 +57,56 @@ The generated files are written to `data/api` so they stay with your catalog dat
 
 > **Server requirement:** The RESTful API requires PHP 7.4+ to run on shared hosting. For local use, run `python3 datannur.py api` alongside the local app server. The Raw API works with any static file server. When opening `index.html` directly with `file://`, the app remains usable but the HTTP API is not active.
 
-## DCAT-AP-CH Export
+## Semantic and geospatial exports
 
-datannur can export your catalog metadata to DCAT-AP-CH format, making it compatible with [opendata.swiss](https://opendata.swiss) and other semantic web portals.
+datannur can export your catalog to standard metadata formats so it can be harvested by open-data and geospatial portals. **Geographic datasets** — those carrying a bounding box, coordinate system, geometry type, or spatial resolution (see [Geographic metadata](./data#geographic-metadata)) — get richer spatial metadata in every format.
 
-**Export command:** `python3 datannur.py dcat`
+Each export is a post-processing step that reads the generated `/data/db/` JSON and writes static files to `/data/db-semantic/`. They rely on a few extra Python packages, installed once:
 
-**Configuration:** Edit `/data/dcat-export.config.json` to set:
+- DCAT: `pip install rdflib pyshacl`
+- STAC: `pip install pystac`
+- ISO 19139: `pip install pygeometa`
 
-- `catalog_uri`: URI of your catalog
-- `base_uri`: Base URI for generating dataset/publisher URIs
-- `catalog_title`, `catalog_description`, `catalog_publisher`: Catalog metadata
-- `default_language`: Default language tag for unqualified text, usually `"en"`
-- `languages`: Language tags to export from localized fields such as `name:en`, `name:fr`, `description:en`, and `description:fr`
+### DCAT / GeoDCAT-AP
 
-**Usage:**
+**Command:** `python3 datannur.py dcat`
 
-```bash
-# Export to RDF/XML (default)
-python3 datannur.py dcat
+Exports your catalog as RDF (Turtle, JSON-LD, and RDF/XML), validated against the current **DCAT-AP 3.0.1** SHACL shapes. Geographic datasets also carry **GeoDCAT-AP** spatial coverage: bounding box and centroid (WKT), coordinate reference system, and spatial resolution.
 
-# Export to JSON-LD
-python3 datannur.py dcat -- json-ld
-```
+After exporting, it reports — without blocking — how close the output is to **GeoDCAT-AP 3.1** (EU) and **DCAT-AP-CH** (Swiss), so you can track the gap to each level.
 
-**Output:** Generated files in `/data/db-semantic/`:
+**Profiles** — the output targets the broadest (European) level by default:
 
-- `dcat.rdf` - RDF/XML format
-- `dcat.jsonld` - JSON-LD format
+- **default (`eu`)**: conformant to DCAT-AP 3.0.1 and GeoDCAT-AP 3.1.
+- **`python3 datannur.py dcat --profile ch`**: conformant to **DCAT-AP-CH** (eCH-0200) for harvesting by [opendata.swiss](https://opendata.swiss). It drops the CRS reference and integer byte size that the Swiss profile rejects; the result then validates against all three profiles.
 
-The export includes automatic SHACL validation to ensure DCAT-AP 2.1.1 compliance. Localized catalog labels are emitted as language-tagged literals when translated fields are available.
+**Configuration:** Edit `/data/dcat-export.config.json`:
+
+- `catalog_uri`, `base_uri`: URIs of the catalog and for generated dataset/publisher URIs
+- `catalog_title`, `catalog_description`, `catalog_publisher`: catalog metadata
+- `default_license`: license URI for the catalog and distributions
+- `default_language`, `languages`: language tags for unqualified text and for localized fields such as `name:fr`, `description:fr`
+- `profile`: `"eu"` (default) or `"ch"` (same effect as `--profile ch`)
+
+**Output** in `/data/db-semantic/`: `dcat.ttl`, `dcat.jsonld`, `dcat.rdf`, and `validation.json`.
+
+### STAC
+
+**Command:** `python3 datannur.py stac`
+
+Exports each geographic dataset as a **STAC Item** (footprint geometry, bounding box, datetime, `proj:code` from the CRS, `gsd` from the resolution) inside a self-contained static STAC catalog, validated with pystac. Useful for STAC browsers and geospatial discovery clients.
+
+**Output:** `/data/db-semantic/stac/` — a `catalog.json` plus one item per geographic dataset.
+
+### ISO 19139
+
+**Command:** `python3 datannur.py iso`
+
+Exports each geographic dataset as an **ISO 19139** metadata record (title, abstract, WGS84 geographic bounding box, temporal extent, keywords, contact, distribution), generated with pygeometa. Suitable for ISO/INSPIRE catalogs and GeoNetwork/CSW portals (such as geocat.ch).
+
+**Profiles** — like the DCAT export, the output targets the broadest level by default:
+
+- **default (`eu`)**: generic ISO 19139. Records are basic but valid.
+- **`python3 datannur.py iso --profile ch`**: adds the elements the Swiss profile (**eCH-0271**, expected by [geocat.ch](https://www.geocat.ch)) makes mandatory on top of generic ISO — topic category and a lineage / data-quality block. These come from config defaults (`ch_topic_category`, `ch_lineage`), so records are structurally complete and ingestable; the placeholders still warrant human review for accurate lineage and topic category. Strict eCH-0271 conformance (XSD + Schematron) is confirmed by geocat.ch's own validator on ingest.
+
+**Output:** `/data/db-semantic/iso/` — one XML record per geographic dataset.

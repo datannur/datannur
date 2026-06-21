@@ -671,6 +671,17 @@ export default class Column {
       render: Render.shortText,
     }
   }
+  static geo(): ColumnType {
+    return {
+      data: 'geoType',
+      title: Render.icon('geo') + t('column.geo.title'),
+      name: 'geo',
+      defaultContent: '',
+      filterType: 'select',
+      tooltip: t('column.geo.tooltip'),
+      render: Render.shortText,
+    }
+  }
   static deliveryFormat(): ColumnType {
     return {
       data: 'deliveryFormat',

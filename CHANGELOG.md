@@ -1,7 +1,12 @@
 # datannur
 
-## Unreleased
+## 0.28.0 (2026-06-21)
 
+- add: support geographic metadata on datasets (CRS, bounding box, geometry type, spatial resolution), shown with a bounding-box locator map on dataset and folder pages
+- add: export geographic datasets to standard metadata formats — DCAT / GeoDCAT-AP with spatial coverage (`datannur dcat`), a static STAC catalog (`datannur stac`), and ISO 19139 records (`datannur iso`)
+- add: target the Swiss profile with `--profile ch` on the DCAT (DCAT-AP-CH / eCH-0200) and ISO (eCH-0271, for geocat.ch) exports, the broadest EU/generic level staying the default
+- change: validate the DCAT export against DCAT-AP 3.0.1 (instead of 2.1.1) and report GeoDCAT-AP 3.1 and DCAT-AP-CH conformance without blocking
+- change: turn the in-app DCAT page into an Interoperability hub that also summarizes the STAC and ISO 19139 exports (counts, validity, downloads)
 - fix: make dashboard quick-access filters use stable column keys and remove misleading quality checks for variable-level descriptions and composite key uniqueness
 - fix: localize evolution `lastUpdate` date-time differences and format long durations as weeks, months, or years
 

@@ -121,6 +121,25 @@ function addPeriod(item: PeriodableEntity) {
   }
 }
 
+// Smallest bounding box covering every child dataset's bbox (lon/lat WGS84).
+function unionBbox(items: { bbox?: number[] }[]): number[] | undefined {
+  const boxes = items
+    .map(item => item.bbox)
+    .filter(
+      (box): box is number[] =>
+        Array.isArray(box) &&
+        box.length === 4 &&
+        box.every(n => typeof n === 'number' && Number.isFinite(n)),
+    )
+  if (!boxes.length) return undefined
+  return [
+    Math.min(...boxes.map(box => box[0])),
+    Math.min(...boxes.map(box => box[1])),
+    Math.max(...boxes.map(box => box[2])),
+    Math.max(...boxes.map(box => box[3])),
+  ]
+}
+
 function addDocs(entity: DocableEntityName, item: DocableEntity) {
   item.docs = db.getAll('doc', { [entity]: item.id })
   for (const doc of item.docs) {
@@ -710,6 +729,7 @@ class Process {
         )
       addPeriod(folder)
       const datasets = getRecursive('folder', folder.id, 'dataset')
+      folder.bbox = unionBbox(datasets)
       folder.nbDatasetRecursive = datasets.length
       folder.nbVariableRecursive = datasets.reduce(
         (sum, d) => sum + db.countRelated('dataset', d.id, 'variable'),
@@ -777,6 +797,11 @@ class Process {
       if (dataset.type) {
         dataset.typeClean = filterToName[dataset.type]
       }
+      dataset.geoType = dataset.geometryType
+        ? String(dataset.geometryType)
+        : dataset.spatialResolution != null
+          ? 'raster'
+          : ''
     })
   }
   static doc() {

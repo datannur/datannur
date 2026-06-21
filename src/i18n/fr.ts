@@ -629,6 +629,10 @@ export const fr = {
       title: 'Localisation',
       tooltip: 'Localisation géographique des données',
     },
+    geo: {
+      title: 'Géo',
+      tooltip: 'Type spatial (géométrie ou raster)',
+    },
     format: { title: 'Format', tooltip: 'Format des données' },
     license: { title: 'Licence', tooltip: 'Licence' },
     period: { title: 'Période', tooltip: 'Période couverte par les données' },
@@ -708,6 +712,7 @@ export const fr = {
     favorites: 'Favoris',
     filter: 'Filtre',
     internal: 'Interne',
+    interop: 'Interopérabilité',
     options: 'Options',
   },
   options: {
@@ -730,12 +735,13 @@ export const fr = {
   },
   page: {
     dcat: {
+      title: 'Interopérabilité',
       loading: "Chargement du rapport d'interopérabilité...",
       unavailable:
         "Aucun export sémantique n'a été détecté dans data/db-semantic.",
       exportPdf: 'Exporter en PDF',
       lastGenerated: 'Dernière génération:',
-      reportTitle: "Rapport d'interopérabilité DCAT",
+      reportTitle: "Rapport d'interopérabilité",
       profileGenerated: 'Profil: {profile} · Généré le {date}',
       profile: 'Profil',
       validation: 'Validation',
@@ -758,6 +764,19 @@ export const fr = {
         errors: 'Erreurs',
         notValidated: 'Non validé',
       },
+      dcatSection: 'DCAT / GeoDCAT-AP',
+      stacSection: 'STAC',
+      isoSection: 'ISO 19139',
+      geoExports: 'Exports géospatiaux',
+      items: 'Items',
+      records: 'Enregistrements',
+      valid: 'Valide',
+      invalid: 'Invalide',
+      openCatalog: 'Ouvrir le catalogue STAC',
+      stacNote:
+        'Catalogue STAC statique des datasets géographiques — ouvrez-le dans un STAC browser.',
+      isoNote:
+        'Enregistrements ISO 19139 de base, un par dataset géographique. Profil ch pour eCH-0271 (geocat.ch).',
     },
     openapi: {
       loading: 'Chargement de la documentation OpenAPI...',
@@ -860,6 +879,7 @@ export const fr = {
     datetime: 'date-heure',
     time: 'heure',
     geometry: 'géométrie',
+    band: 'bande',
     binary: 'binaire',
     other: 'autre',
   },

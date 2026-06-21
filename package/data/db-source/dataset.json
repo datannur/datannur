@@ -42,7 +42,9 @@
     "link": "data/db-source/dataset/accident_route.csv",
     "data_path": "https://raw.githubusercontent.com/ofs-data/data/accident-route.json",
     "data_size": 543,
-    "tag_ids": "systemes_reference, armee, developpement_territorial"
+    "tag_ids": "systemes_reference, armee, developpement_territorial",
+    "bbox": [5.96, 45.82, 10.49, 47.81],
+    "geometry_type": "point"
   },
   {
     "id": "dep_sante",
@@ -100,7 +102,10 @@
     "delivery_format": "csv",
     "data_path": "https://data.admin.ch/data/pop-region.json",
     "tag_ids": "climatologie, personal_data, localisation, transport, faune, cadastre_foncier",
-    "doc_ids": "statpop-info"
+    "doc_ids": "statpop-info",
+    "crs": "EPSG:2056",
+    "bbox": [5.96, 45.82, 10.49, 47.81],
+    "geometry_type": "polygon"
   },
   {
     "id": "eco_energies",
@@ -404,5 +409,25 @@
     "localisation": "Genève",
     "delivery_format": "csv",
     "data_path": "https://opendata.swiss/data/emplois-tech2.json"
+  },
+  {
+    "id": "ortho_vd",
+    "folder_id": "02-espace",
+    "owner_organization_id": "ge-df",
+    "manager_organization_id": "dgaic",
+    "name": "Aerial orthophoto",
+    "name:fr": "Orthophoto aérienne",
+    "type": "open_data",
+    "description": "RGB aerial orthophoto raster, 10 m resolution",
+    "description:fr": "Orthophoto aérienne RVB en raster, résolution 10 m",
+    "last_update_date": "2024/06/15",
+    "localisation": "Vaud",
+    "delivery_format": "geotiff",
+    "license": "CC-BY-4.0",
+    "data_path": "https://opendata.swiss/data/ortho-vd.tif",
+    "data_size": 854000000,
+    "crs": "EPSG:2056",
+    "bbox": [6.06, 46.19, 7.25, 46.99],
+    "spatial_resolution": 10
   }
 ]

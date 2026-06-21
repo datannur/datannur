@@ -5,10 +5,14 @@
   import { currentLocale } from '@i18n/i18n'
   import { t } from '@i18n/messages'
   import {
+    loadIsoExport,
     loadSemanticValidation,
+    loadStacExport,
     semanticBasePath,
+    type IsoExport,
     type LocalizedCount,
     type SemanticValidation,
+    type StacExport,
     type ValidationResult,
     type ValidationStatus,
   } from '@lib/semantic-export'
@@ -27,13 +31,18 @@
   }
 
   let report = $state<SemanticValidation | null>(null)
+  let stac = $state<StacExport | null>(null)
+  let iso = $state<IsoExport | null>(null)
   let loading = $state(true)
   let unavailable = $state(false)
   const dateLocale = $derived($currentLocale === 'fr' ? 'fr-CH' : 'en')
 
   const topWarnings = $derived(report?.validation.results.slice(0, 8) ?? [])
+  const generatedAt = $derived(
+    report?.generatedAt ?? stac?.generatedAt ?? iso?.generatedAt ?? '',
+  )
   const formattedGeneratedAt = $derived(
-    report ? formatTimestamp(report.generatedAt) : '',
+    generatedAt ? formatTimestamp(generatedAt) : '',
   )
   const generatedFiles = $derived(
     Object.entries(report?.files ?? {}).filter(([label]) => label !== 'report'),
@@ -86,8 +95,15 @@
   }
 
   onMount(async () => {
-    report = await loadSemanticValidation()
-    if (!report) {
+    const [dcat, stacData, isoData] = await Promise.all([
+      loadSemanticValidation(),
+      loadStacExport(),
+      loadIsoExport(),
+    ])
+    report = dcat
+    stac = stacData
+    iso = isoData
+    if (!report && !stac && !iso) {
       unavailable = true
     }
     loading = false
@@ -95,11 +111,11 @@
 </script>
 
 <section class="section dcat-page">
-  <Title type="dcat" name="DCAT" mode="mainTitle" />
+  <Title type="dcat" name={t('page.dcat.title')} mode="mainTitle" />
 
   {#if loading}
     <div class="notice">{t('page.dcat.loading')}</div>
-  {:else if unavailable || !report}
+  {:else if unavailable}
     <div class="notice warning">
       {t('page.dcat.unavailable')}
     </div>
@@ -115,10 +131,14 @@
     <div class="report-export-area">
       <div class="print-heading">
         <h1>{t('page.dcat.reportTitle')}</h1>
-        <p>{getProfileGeneratedText()}</p>
+        {#if report}
+          <p>{getProfileGeneratedText()}</p>
+        {/if}
       </div>
 
-      <div class="summary-strip">
+      {#if report}
+        <h2 class="section-heading">{t('page.dcat.dcatSection')}</h2>
+        <div class="summary-strip">
         <div>
           <span>{t('page.dcat.profile')}</span>
           <strong>{report.profile}</strong>
@@ -224,7 +244,71 @@
             {/each}
           </ul>
         </section>
-      </div>
+        </div>
+      {/if}
+
+      {#if stac || iso}
+        <h2 class="section-heading">{t('page.dcat.geoExports')}</h2>
+        <div class="layout-grid">
+          {#if stac}
+            <section class="panel">
+              <h2>{t('page.dcat.stacSection')}</h2>
+              <ul class="frequency-list">
+                <li>
+                  <span>{t('page.dcat.items')}</span>
+                  <strong>{stac.itemCount}</strong>
+                </li>
+                <li>
+                  <span>{t('page.dcat.validation')}</span>
+                  <strong class="status {stac.valid ? 'conforms' : 'errors'}">
+                    {stac.valid ? t('page.dcat.valid') : t('page.dcat.invalid')}
+                  </strong>
+                </li>
+              </ul>
+              <div class="file-list">
+                <a
+                  href={getFileUrl(stac.files.catalog)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>{t('page.dcat.openCatalog')}</span>
+                  <small>{stac.files.catalog}</small>
+                </a>
+              </div>
+              <p class="note">{t('page.dcat.stacNote')}</p>
+            </section>
+          {/if}
+
+          {#if iso}
+            <section class="panel">
+              <h2>{t('page.dcat.isoSection')}</h2>
+              <ul class="frequency-list">
+                <li>
+                  <span>{t('page.dcat.records')}</span>
+                  <strong>{iso.recordCount}</strong>
+                </li>
+                <li>
+                  <span>{t('page.dcat.profile')}</span>
+                  <strong>{iso.profile}</strong>
+                </li>
+              </ul>
+              <div class="file-list">
+                {#each iso.records as record (record.id)}
+                  <a
+                    href={getFileUrl(record.file)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span>{record.id}</span>
+                    <small>{record.file}</small>
+                  </a>
+                {/each}
+              </div>
+              <p class="note">{t('page.dcat.isoNote')}</p>
+            </section>
+          {/if}
+        </div>
+      {/if}
     </div>
   {/if}
 </section>
@@ -326,6 +410,12 @@
     margin-top: 1rem;
   }
 
+  .section-heading {
+    margin: 1.5rem 0 0;
+    font-size: 1.15rem;
+    color: $color-1;
+  }
+
   .panel {
     border-radius: 6px;
     padding: 1rem;
@@ -337,6 +427,11 @@
       margin: 0 0 0.75rem;
       font-size: 1rem;
       color: $color-1;
+    }
+    .note {
+      margin: 0.75rem 0 0;
+      font-size: 0.82rem;
+      color: $color-2;
     }
   }
 

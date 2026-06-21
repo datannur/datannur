@@ -100,6 +100,7 @@
       Column.owner(),
       Column.manager(),
       Column.localisation(),
+      Column.geo(),
       Column.deliveryFormat(),
       Column.license(),
       Column.dataPath(),

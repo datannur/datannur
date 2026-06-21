@@ -10,6 +10,7 @@
   import NextUpdateInfo from '@info-table/NextUpdateInfo.svelte'
   import FrequencyInfo from '@info-table/FrequencyInfo.svelte'
   import LocalisationInfo from '@info-table/LocalisationInfo.svelte'
+  import BboxMap from '@info-table/BboxMap.svelte'
   import PeriodInfo from '@info-table/PeriodInfo.svelte'
   import DataPathInfo from '@info-table/DataPathInfo.svelte'
   import LinkInfo from '@info-table/LinkInfo.svelte'
@@ -52,6 +53,12 @@
     <PeriodInfo period={folder.period} periodDuration={folder.periodDuration} />
   {/if}
   <LocalisationInfo localisation={folder.localisation} />
+  {#if folder.bbox}
+    <tr>
+      <td><Icon type="geo" /> {t('column.geo.title')}</td>
+      <td><BboxMap bbox={folder.bbox} /></td>
+    </tr>
+  {/if}
   {#if folder.surveyType}
     <tr>
       <td><Icon type="surveyType" /> {t('column.surveyType.title')}</td
