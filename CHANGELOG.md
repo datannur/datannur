@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: export geographic datasets to a static STAC catalog (`datannur stac`)
 - add: include spatial coverage (bounding box, coordinate system, resolution) in the DCAT export
 - add: show a bounding-box locator map on geographic datasets and folders
 - add: support geographic dataset metadata (CRS, bounding box, geometry type, spatial resolution)

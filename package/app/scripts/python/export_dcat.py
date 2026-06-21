@@ -14,6 +14,7 @@ from typing import Dict, List, Optional, Tuple
 from urllib.parse import quote, urljoin
 
 from _local_runtime import SCHEMAS_DIR, require_data_db_dir
+from export_common import load_config, parse_bbox, parse_epsg
 
 try:
     from rdflib import Graph, Namespace, Literal, URIRef, BNode
@@ -546,13 +547,10 @@ class DCATExporter:
 
     def _bbox_wkt(self, bbox) -> Optional[Literal]:
         """[west, south, east, north] (CRS84 lon/lat) -> GeoSPARQL WKT literal."""
-        if (
-            not isinstance(bbox, list)
-            or len(bbox) != 4
-            or not all(isinstance(v, (int, float)) for v in bbox)
-        ):
+        coords = parse_bbox(bbox)
+        if coords is None:
             return None
-        west, south, east, north = bbox
+        west, south, east, north = coords
         wkt = (
             "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "
             f"POLYGON(({west} {south}, {east} {south}, "
@@ -562,12 +560,10 @@ class DCATExporter:
 
     def _crs_uri(self, crs) -> Optional[URIRef]:
         """'EPSG:2056' -> OGC CRS register URI (spatial reference system)."""
-        if not crs:
+        epsg = parse_epsg(crs)
+        if epsg is None:
             return None
-        match = re.match(r"^EPSG:(\d+)$", str(crs).strip(), re.IGNORECASE)
-        if not match:
-            return None
-        return URIRef(f"http://www.opengis.net/def/crs/EPSG/0/{match.group(1)}")
+        return URIRef(f"http://www.opengis.net/def/crs/EPSG/0/{epsg}")
 
     def _add_publisher(self, dataset_uri: URIRef, organization_id: str):
         """Add publisher information (foaf:Agent)"""
@@ -1036,21 +1032,14 @@ class DCATExporter:
         return payload
 
 
-def load_config(config_file: Path) -> Dict:
-    """Load configuration file"""
-    if config_file.exists():
-        with open(config_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-
-    # Default configuration
-    return {
-        "catalog_uri": "https://example.org/catalog",
-        "base_uri": "https://example.org/",
-        "organization_slug": "datannur",
-        "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
-        "default_language": "en",
-        "languages": ["en", "fr", "de", "it"],
-    }
+DEFAULT_CONFIG = {
+    "catalog_uri": "https://example.org/catalog",
+    "base_uri": "https://example.org/",
+    "organization_slug": "datannur",
+    "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
+    "default_language": "en",
+    "languages": ["en", "fr", "de", "it"],
+}
 
 
 def main():
@@ -1063,7 +1052,7 @@ def main():
     config_file = data_dir / "dcat-export.config.json"
     if not config_file.exists():
         config_file = DATA_TEMPLATE_DIR / "dcat-export.config.json"
-    config = load_config(config_file)
+    config = load_config(config_file, DEFAULT_CONFIG)
 
     output_dir = data_dir / "db-semantic"
     output_dir.mkdir(exist_ok=True)
