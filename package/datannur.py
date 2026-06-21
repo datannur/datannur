@@ -34,6 +34,7 @@ COMMANDS = {
     "deploy": Command("Deploy files with rsync over SSH", "deploy.py"),
     "dcat": Command("Export the catalog to DCAT", "export_dcat.py"),
     "stac": Command("Export geographic datasets to STAC", "export_stac.py"),
+    "iso": Command("Export geographic datasets to ISO 19139", "export_iso.py"),
     "build-db-source": Command(
         "Build data/db-source from source files", "build_db_source.py"
     ),

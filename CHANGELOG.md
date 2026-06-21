@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: export geographic datasets to ISO 19139 metadata records (`datannur iso`)
 - add: export geographic datasets to a static STAC catalog (`datannur stac`)
 - add: include spatial coverage (bounding box, centroid, coordinate system, resolution) in the DCAT export
 - add: show a bounding-box locator map on geographic datasets and folders

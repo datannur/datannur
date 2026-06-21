@@ -7,13 +7,12 @@ Reuses dcat-export.config.json for the catalog identity.
 """
 
 import json
-import re
 import sys
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 from _local_runtime import DATA_DIR, require_data_db_dir
-from export_common import load_config, parse_bbox, parse_epsg
+from export_common import first_datetime, load_config, parse_bbox, parse_epsg
 
 try:
     import pystac
@@ -45,34 +44,6 @@ def bbox_to_geometry(bbox: List[float]) -> Dict:
     }
 
 
-def parse_datetime(value) -> Optional[datetime]:
-    if value is None:
-        return None
-    text = str(value).strip()
-    if re.fullmatch(r"\d{10}", text):
-        return datetime.fromtimestamp(int(text), tz=timezone.utc)
-    match = re.match(r"^(\d{4})(?:[/-](\d{1,2}))?(?:[/-](\d{1,2}))?", text)
-    if not match:
-        return None
-    year, month, day = (
-        int(match.group(1)),
-        int(match.group(2) or 1),
-        int(match.group(3) or 1),
-    )
-    try:
-        return datetime(year, month, day, tzinfo=timezone.utc)
-    except ValueError:
-        return None
-
-
-def item_datetime(dataset: Dict) -> Optional[datetime]:
-    for field in ("start_date", "last_update_date", "end_date"):
-        parsed = parse_datetime(dataset.get(field))
-        if parsed:
-            return parsed
-    return None
-
-
 def build_item(dataset: Dict) -> Optional[pystac.Item]:
     bbox = parse_bbox(dataset.get("bbox"))
     if bbox is None:
@@ -91,7 +62,7 @@ def build_item(dataset: Dict) -> Optional[pystac.Item]:
         id=str(dataset["id"]),
         geometry=bbox_to_geometry(bbox),
         bbox=bbox,
-        datetime=item_datetime(dataset) or FALLBACK_DATETIME,
+        datetime=first_datetime(dataset) or FALLBACK_DATETIME,
         properties=properties,
     )
 
