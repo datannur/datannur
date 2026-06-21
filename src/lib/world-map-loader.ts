@@ -6,11 +6,14 @@ declare global {
   }
 }
 
-// The world geometry (~110 KB) is shipped as a classic JS asset and pulled in
-// on demand via a <script> tag — not an ESM import() — so it also works under
-// the file:// protocol, where module loading and fetch are blocked.
+// The world geometry (~110 KB) is a fixed app asset (Natural Earth borders),
+// not user data, so it lives under app/assets/geo. It is pulled in on demand via
+// a <script> tag — not an ESM import() — so it also works under the file://
+// protocol, where module loading and fetch are blocked.
 const scriptId = 'datannur-world-map-json-js'
-const basePath = isHttp ? `${getAppBasePath()}data/` : 'data/'
+const basePath = isHttp
+  ? `${getAppBasePath()}app/assets/geo/`
+  : 'app/assets/geo/'
 
 let worldMapPromise: Promise<string | null> | null = null
 
