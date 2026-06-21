@@ -34,6 +34,8 @@ except ImportError:
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 SCHEMA = Namespace("http://schema.org/")
+LOCN = Namespace("http://www.w3.org/ns/locn#")
+GEOSPARQL = Namespace("http://www.opengis.net/ont/geosparql#")
 
 FILE_TYPE_URIS = {
     "csv": "http://publications.europa.eu/resource/authority/file-type/CSV",
@@ -100,6 +102,8 @@ class DCATExporter:
         self.graph.bind("vcard", VCARD)
         self.graph.bind("schema", SCHEMA)
         self.graph.bind("skos", SKOS)
+        self.graph.bind("locn", LOCN)
+        self.graph.bind("geosparql", GEOSPARQL)
 
     def load_data(self):
         """Load JSON data from database files"""
@@ -481,14 +485,7 @@ class DCATExporter:
             if end:
                 self.graph.add((temporal_node, SCHEMA.endDate, end))
 
-        if item.get("localisation"):
-            self.graph.add(
-                (
-                    dataset_uri,
-                    DCTERMS.spatial,
-                    self._get_language_literal(item["localisation"]),
-                )
-            )
+        self._add_spatial(dataset_uri, item)
 
         if item.get("updating_each"):
             freq_mapping = {
@@ -514,6 +511,63 @@ class DCATExporter:
                     doc_uri = self._document_uri_ref(doc_link)
                     self.graph.add((dataset_uri, DCTERMS.relation, doc_uri))
                     self._add_language_literals(doc_uri, RDFS.label, doc, "name")
+
+    def _add_spatial(self, dataset_uri: URIRef, item: Dict):
+        """Spatial coverage (GeoDCAT-AP): a dct:Location carrying the human
+        label and the bounding box, plus the reference system and resolution."""
+        localisation = item.get("localisation")
+        bbox = self._bbox_wkt(item.get("bbox"))
+
+        if localisation or bbox is not None:
+            location = BNode()
+            self.graph.add((dataset_uri, DCTERMS.spatial, location))
+            self.graph.add((location, RDF.type, DCTERMS.Location))
+            if localisation:
+                self.graph.add(
+                    (location, SKOS.prefLabel, self._get_language_literal(localisation))
+                )
+            if bbox is not None:
+                self.graph.add((location, DCAT.bbox, bbox))
+                self.graph.add((location, LOCN.geometry, bbox))
+
+        crs_uri = self._crs_uri(item.get("crs"))
+        if crs_uri is not None:
+            self.graph.add((dataset_uri, DCTERMS.conformsTo, crs_uri))
+
+        resolution = item.get("spatial_resolution")
+        if isinstance(resolution, (int, float)) and not isinstance(resolution, bool):
+            self.graph.add(
+                (
+                    dataset_uri,
+                    DCAT.spatialResolutionInMeters,
+                    Literal(Decimal(str(resolution)), datatype=XSD.decimal),
+                )
+            )
+
+    def _bbox_wkt(self, bbox) -> Optional[Literal]:
+        """[west, south, east, north] (CRS84 lon/lat) -> GeoSPARQL WKT literal."""
+        if (
+            not isinstance(bbox, list)
+            or len(bbox) != 4
+            or not all(isinstance(v, (int, float)) for v in bbox)
+        ):
+            return None
+        west, south, east, north = bbox
+        wkt = (
+            "<http://www.opengis.net/def/crs/OGC/1.3/CRS84> "
+            f"POLYGON(({west} {south}, {east} {south}, "
+            f"{east} {north}, {west} {north}, {west} {south}))"
+        )
+        return Literal(wkt, datatype=GEOSPARQL.wktLiteral)
+
+    def _crs_uri(self, crs) -> Optional[URIRef]:
+        """'EPSG:2056' -> OGC CRS register URI (spatial reference system)."""
+        if not crs:
+            return None
+        match = re.match(r"^EPSG:(\d+)$", str(crs).strip(), re.IGNORECASE)
+        if not match:
+            return None
+        return URIRef(f"http://www.opengis.net/def/crs/EPSG/0/{match.group(1)}")
 
     def _add_publisher(self, dataset_uri: URIRef, organization_id: str):
         """Add publisher information (foaf:Agent)"""
