@@ -236,6 +236,7 @@ export type Folder = BaseEntity &
     dataSizeRecursive?: number
     nextUpdateDate?: string
     typeClean?: string
+    bbox?: number[]
   }
 
 export type Organization = BaseEntity &
