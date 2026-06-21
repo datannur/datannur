@@ -14,7 +14,12 @@ from typing import Dict, List, Optional, Tuple
 from urllib.parse import quote, urljoin
 
 from _local_runtime import SCHEMAS_DIR, require_data_db_dir
-from export_common import load_config, parse_bbox, parse_epsg
+from export_common import (
+    load_config,
+    parse_bbox,
+    parse_epsg,
+    write_export_summary,
+)
 
 try:
     from rdflib import Graph, Namespace, Literal, URIRef, BNode
@@ -670,13 +675,13 @@ class DCATExporter:
         has no organisation, so each one carries them (DCAT-AP-CH requires it)."""
         owner = item.get("owner_organization_id")
         manager = item.get("manager_organization_id")
-        if owner in self.organizations:
+        if owner is not None and owner in self.organizations:
             self._add_publisher(subject, owner)
         elif self.catalog_publisher_uri is not None:
             self.graph.add((subject, DCTERMS.publisher, self.catalog_publisher_uri))
 
         contact_org = manager if manager in self.organizations else owner
-        if contact_org in self.organizations:
+        if contact_org is not None and contact_org in self.organizations:
             self._add_contact_point(subject, contact_org)
         elif self.catalog_contact_uri is not None:
             self.graph.add((subject, DCAT.contactPoint, self.catalog_contact_uri))
@@ -927,10 +932,10 @@ class DCATExporter:
         for item in report_items:
             for tag_id in self._split_ids(item.get("tag_ids")):
                 tag = self.tags.get(tag_id, {})
-            tag_labels = self._localized_fields(tag, "name")
-            label = tag_labels.get(self.default_language) or tag_id
-            themes[label] += 1
-            theme_labels[label] = tag_labels
+                tag_labels = self._localized_fields(tag, "name")
+                label = tag_labels.get(self.default_language) or tag_id
+                themes[label] += 1
+                theme_labels[label] = tag_labels
 
         return {
             "datasets": self.dcat_dataset_count or len(report_items),
@@ -1123,8 +1128,12 @@ class DCATExporter:
     ) -> Dict:
         generated_at = datetime.now(timezone.utc).isoformat()
         status = self.get_validation_status(shacl_conforms)
+        profile_labels = {
+            "eu": "DCAT-AP 3.0.1",
+            "ch": "DCAT-AP-CH (eCH-0200)",
+        }
         payload = {
-            "profile": self.config.get("profile", "DCAT-AP-CH"),
+            "profile": profile_labels.get(self.profile, self.profile),
             "generatedAt": generated_at,
             "validation": {
                 "status": status,
@@ -1137,13 +1146,9 @@ class DCATExporter:
             "coverage": self.get_required_field_coverage(),
             "files": files,
         }
-        with open(output_dir / "validation.json", "w", encoding="utf-8") as file:
-            json.dump(payload, file, ensure_ascii=False, indent=2)
-        validation_json = json.dumps(payload, ensure_ascii=False, indent=2).replace(
-            "</", "<\\/"
+        write_export_summary(
+            output_dir, "validation", "datannurSemanticValidation", payload
         )
-        with open(output_dir / "validation.json.js", "w", encoding="utf-8") as file:
-            file.write(f"window.datannurSemanticValidation = {validation_json};\n")
         return payload
 
 

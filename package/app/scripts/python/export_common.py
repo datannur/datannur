@@ -15,6 +15,24 @@ def load_config(config_file: Path, default: Optional[Dict] = None) -> Dict:
     return default if default is not None else {}
 
 
+def write_export_summary(
+    output_dir: Path, basename: str, global_var: str, payload: Dict
+) -> None:
+    """Write an export summary the app's Interoperability page can read.
+
+    Emits both `<basename>.json` (for the HTTP fetch path) and a file://-safe
+    `<basename>.json.js` that assigns `window.<global_var>` (loaded via a script
+    tag when the app runs from the filesystem). Mirrors the DCAT validation.json.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(payload, ensure_ascii=False, indent=2)
+    (output_dir / f"{basename}.json").write_text(text, encoding="utf-8")
+    safe = text.replace("</", "<\\/")
+    (output_dir / f"{basename}.json.js").write_text(
+        f"window.{global_var} = {safe};\n", encoding="utf-8"
+    )
+
+
 def parse_bbox(bbox) -> Optional[List[float]]:
     """Validate a [west, south, east, north] bbox; return its floats or None."""
     if (

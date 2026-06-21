@@ -102,6 +102,11 @@ Exports each geographic dataset as a **STAC Item** (footprint geometry, bounding
 
 **Command:** `python3 datannur.py iso`
 
-Exports each geographic dataset as an **ISO 19139** metadata record (title, abstract, WGS84 geographic bounding box, temporal extent, keywords, contact, distribution), generated with pygeometa. Suitable for ISO/INSPIRE catalogs and GeoNetwork/CSW portals (such as geocat.ch). Records are basic but valid; full INSPIRE completeness needs manually entered fields (lineage, topic category, access conditions) that a scan cannot infer.
+Exports each geographic dataset as an **ISO 19139** metadata record (title, abstract, WGS84 geographic bounding box, temporal extent, keywords, contact, distribution), generated with pygeometa. Suitable for ISO/INSPIRE catalogs and GeoNetwork/CSW portals (such as geocat.ch).
+
+**Profiles** — like the DCAT export, the output targets the broadest level by default:
+
+- **default (`eu`)**: generic ISO 19139. Records are basic but valid.
+- **`python3 datannur.py iso --profile ch`**: adds the elements the Swiss profile (**eCH-0271**, expected by [geocat.ch](https://www.geocat.ch)) makes mandatory on top of generic ISO — topic category and a lineage / data-quality block. These come from config defaults (`ch_topic_category`, `ch_lineage`), so records are structurally complete and ingestable; the placeholders still warrant human review for accurate lineage and topic category. Strict eCH-0271 conformance (XSD + Schematron) is confirmed by geocat.ch's own validator on ingest.
 
 **Output:** `/data/db-semantic/iso/` — one XML record per geographic dataset.

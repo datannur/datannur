@@ -12,7 +12,13 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 from _local_runtime import DATA_DIR, require_data_db_dir
-from export_common import first_datetime, load_config, parse_bbox, parse_epsg
+from export_common import (
+    first_datetime,
+    load_config,
+    parse_bbox,
+    parse_epsg,
+    write_export_summary,
+)
 
 try:
     import pystac
@@ -115,11 +121,29 @@ def main():
     print(f"✓ Wrote STAC catalog to {output_dir}")
 
     print("Validating against STAC schemas...")
+    valid = True
+    validation_message = "Valid STAC"
     try:
         catalog.validate_all()
         print("✓ Validation passed — valid STAC")
     except Exception as error:  # noqa: BLE001 - report any validation failure
+        valid = False
+        validation_message = str(error)
         print(f"⚠️  STAC validation failed: {error}")
+
+    write_export_summary(
+        output_dir.parent,
+        "stac",
+        "datannurStacExport",
+        {
+            "generatedAt": datetime.now(timezone.utc).isoformat(),
+            "itemCount": count,
+            "datasetTotal": len(datasets),
+            "valid": valid,
+            "validationMessage": validation_message,
+            "files": {"catalog": "stac/catalog.json"},
+        },
+    )
 
 
 if __name__ == "__main__":

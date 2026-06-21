@@ -172,7 +172,7 @@
 
         {#if semanticExportAvailable}
           <HeaderLink href="dcat" pages={['dcat']} icon="dcat">
-            <span>DCAT</span>
+            <span>{t('nav.interop')}</span>
           </HeaderLink>
         {/if}
       </HeaderDropdown>

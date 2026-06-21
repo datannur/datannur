@@ -8,6 +8,13 @@ has a bounding box. Reuses dcat-export.config.json and the export_common helpers
 The records are basic but valid: they carry the fields derivable from the
 catalog. Full INSPIRE completeness (lineage, topic category, access conditions)
 needs manually-entered metadata that a scan cannot produce.
+
+A `--profile ch` flag adds the elements that the Swiss profile (eCH-0271,
+expected by geocat.ch) makes mandatory on top of generic ISO 19139 — topic
+category and a lineage / data-quality block — filled from config defaults so the
+records are structurally complete and ingestable. The values are generic
+placeholders unless overridden in config; accurate lineage and topic category
+still warrant human review.
 """
 
 import json
@@ -16,7 +23,12 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 from _local_runtime import DATA_DIR, require_data_db_dir
-from export_common import first_datetime, load_config, parse_bbox
+from export_common import (
+    first_datetime,
+    load_config,
+    parse_bbox,
+    write_export_summary,
+)
 
 try:
     from pygeometa.core import read_mcf
@@ -40,6 +52,13 @@ GEOM_TYPES = {
     "geometrycollection": "complex",
 }
 
+# Swiss profile (eCH-0271) defaults for elements not derivable from a scan.
+CH_DEFAULT_TOPIC_CATEGORY = "geoscientificInformation"
+CH_DEFAULT_LINEAGE = (
+    "Metadata generated automatically by datannur from the catalog; "
+    "see the data provider for the full production lineage."
+)
+
 
 def _date(value: Optional[datetime]) -> str:
     return (value or FALLBACK_DATE).date().isoformat()
@@ -54,8 +73,24 @@ def _keywords(dataset: Dict, tags: Dict) -> List[str]:
     return names
 
 
+def _apply_ch_profile(mcf: Dict, config: Dict) -> None:
+    """Add the elements eCH-0271 (geocat.ch) makes mandatory over generic ISO.
+
+    Topic category and a lineage / data-quality block — both filled from config
+    defaults (generic placeholders) so the record is structurally complete.
+    """
+    topic = config.get("ch_topic_category") or CH_DEFAULT_TOPIC_CATEGORY
+    mcf["identification"]["topiccategory"] = [topic]
+    mcf["dataquality"] = {
+        "scope": {"level": mcf["metadata"]["hierarchylevel"]},
+        "lineage": {
+            "statement": config.get("ch_lineage") or CH_DEFAULT_LINEAGE
+        },
+    }
+
+
 def dataset_to_mcf(
-    dataset: Dict, config: Dict, tags: Dict, organizations: Dict
+    dataset: Dict, config: Dict, tags: Dict, organizations: Dict, profile: str = "eu"
 ) -> Optional[Dict]:
     coords = parse_bbox(dataset.get("bbox"))
     if coords is None:
@@ -86,7 +121,7 @@ def dataset_to_mcf(
 
     creation = _date(first_datetime(dataset))
 
-    return {
+    mcf: Dict = {
         "mcf": {"version": 2.0},
         "metadata": {
             "identifier": str(dataset["id"]),
@@ -134,9 +169,19 @@ def dataset_to_mcf(
         },
     }
 
+    if profile == "ch":
+        _apply_ch_profile(mcf, config)
+
+    return mcf
+
 
 def main():
     config = load_config(DATA_DIR / "dcat-export.config.json")
+    profile = config.get("profile", "eu")
+    if "--profile" in sys.argv:
+        index = sys.argv.index("--profile")
+        if index + 1 < len(sys.argv):
+            profile = sys.argv[index + 1]
     db_dir = require_data_db_dir(DATA_DIR.parent)
     output_dir = DATA_DIR / "db-semantic" / "iso"
 
@@ -147,22 +192,41 @@ def main():
     with open(db_dir / "organization.json", "r", encoding="utf-8") as f:
         organizations = {org["id"]: org for org in json.load(f)}
 
-    print("📊 Exporting datannur geographic datasets to ISO 19139...")
+    label = "ISO 19139 (eCH-0271 / CH profile)" if profile == "ch" else "ISO 19139"
+    print(f"📊 Exporting datannur geographic datasets to {label}...")
     writer = ISO19139OutputSchema()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    count = 0
+    records = []
     for dataset in datasets:
-        mcf = dataset_to_mcf(dataset, config, tags, organizations)
+        mcf = dataset_to_mcf(dataset, config, tags, organizations, profile)
         if mcf is None:
             continue
         xml = writer.write(read_mcf(mcf))
+        if not isinstance(xml, str):  # ISO19139 always stringifies; satisfy typing
+            xml = json.dumps(xml, ensure_ascii=False)
         (output_dir / f"{dataset['id']}.xml").write_text(xml, encoding="utf-8")
-        count += 1
+        records.append(
+            {"id": str(dataset["id"]), "file": f"iso/{dataset['id']}.xml"}
+        )
 
+    count = len(records)
     print(f"  ✓ {count} geographic dataset(s) of {len(datasets)} total")
     if count:
         print(f"✓ Wrote ISO 19139 records to {output_dir}")
+
+    write_export_summary(
+        output_dir.parent,
+        "iso",
+        "datannurIsoExport",
+        {
+            "generatedAt": datetime.now(timezone.utc).isoformat(),
+            "profile": "eCH-0271 / CH" if profile == "ch" else "ISO 19139",
+            "recordCount": count,
+            "datasetTotal": len(datasets),
+            "records": records,
+        },
+    )
 
 
 if __name__ == "__main__":

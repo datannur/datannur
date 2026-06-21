@@ -683,6 +683,7 @@ export const en = {
     favorites: 'Favorites',
     filter: 'Filter',
     internal: 'Internal',
+    interop: 'Interoperability',
     options: 'Options',
   },
   options: {
@@ -705,11 +706,12 @@ export const en = {
   },
   page: {
     dcat: {
+      title: 'Interoperability',
       loading: 'Loading the interoperability report...',
       unavailable: 'No semantic export was detected in data/db-semantic.',
       exportPdf: 'Export as PDF',
       lastGenerated: 'Last generated:',
-      reportTitle: 'DCAT interoperability report',
+      reportTitle: 'Interoperability report',
       profileGenerated: 'Profile: {profile} · Generated on {date}',
       profile: 'Profile',
       validation: 'Validation',
@@ -732,6 +734,19 @@ export const en = {
         errors: 'Errors',
         notValidated: 'Not validated',
       },
+      dcatSection: 'DCAT / GeoDCAT-AP',
+      stacSection: 'STAC',
+      isoSection: 'ISO 19139',
+      geoExports: 'Geospatial exports',
+      items: 'Items',
+      records: 'Records',
+      valid: 'Valid',
+      invalid: 'Invalid',
+      openCatalog: 'Open STAC catalog',
+      stacNote:
+        'Static STAC catalog for geographic datasets — open it in any STAC browser.',
+      isoNote:
+        'Basic ISO 19139 records, one per geographic dataset. Use the ch profile for eCH-0271 (geocat.ch).',
     },
     openapi: {
       loading: 'Loading the OpenAPI documentation...',
