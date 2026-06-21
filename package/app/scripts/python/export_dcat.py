@@ -91,6 +91,10 @@ class DCATExporter:
         self.languages = self.config.get("languages", ["en", "fr"])
         if self.default_language not in self.languages:
             self.languages = [self.default_language, *self.languages]
+        # Target profile: "eu" (default, DCAT-AP 3 / GeoDCAT-AP) or "ch" (eCH-0200)
+        self.profile = self.config.get("profile", "eu")
+        self.catalog_publisher_uri = None
+        self.catalog_contact_uri = None
 
     def _bind_namespaces(self):
         """Bind RDF namespaces"""
@@ -147,19 +151,57 @@ class DCATExporter:
             (catalog_uri, DCTERMS.description, self._get_language_literal(catalog_desc))
         )
 
-        # Mandatory: publisher
+        # Mandatory: publisher (+ a catalog contact used as fallback for datasets)
+        base_uri = self.config.get("base_uri", "https://example.org/")
         catalog_publisher = self.config.get("catalog_publisher", "")
         if catalog_publisher:
-            publisher_uri = URIRef(
-                f"{self.config.get('base_uri', 'https://example.org/')}publisher/catalog"
+            self.catalog_publisher_uri = URIRef(f"{base_uri}publisher/catalog")
+            self.graph.add(
+                (catalog_uri, DCTERMS.publisher, self.catalog_publisher_uri)
             )
-            self.graph.add((catalog_uri, DCTERMS.publisher, publisher_uri))
-            self.graph.add((publisher_uri, RDF.type, FOAF.Agent))
+            self.graph.add((self.catalog_publisher_uri, RDF.type, FOAF.Agent))
             self.graph.add(
                 (
-                    publisher_uri,
+                    self.catalog_publisher_uri,
                     FOAF.name,
                     self._get_language_literal(catalog_publisher),
+                )
+            )
+            self.catalog_contact_uri = URIRef(f"{base_uri}contact/catalog")
+            self.graph.add((self.catalog_contact_uri, RDF.type, VCARD.Organization))
+            self.graph.add((self.catalog_contact_uri, RDF.type, VCARD.Kind))
+            self.graph.add(
+                (self.catalog_contact_uri, VCARD.fn, Literal(catalog_publisher))
+            )
+
+        # License (required by DCAT-AP-CH on the catalog)
+        license_uri = self.config.get("default_license")
+        if license_uri:
+            self.graph.add(
+                (
+                    catalog_uri,
+                    DCTERMS.license,
+                    self._typed(URIRef(license_uri), DCTERMS.LicenseDocument),
+                )
+            )
+
+        # DCAT-AP-CH also requires an issued date and a homepage on the catalog.
+        self.graph.add(
+            (
+                catalog_uri,
+                DCTERMS.issued,
+                Literal(
+                    self.config.get("catalog_issued", "2024-01-01"), datatype=XSD.date
+                ),
+            )
+        )
+        homepage = self.config.get("catalog_homepage") or self.config.get("base_uri")
+        if homepage:
+            self.graph.add(
+                (
+                    catalog_uri,
+                    FOAF.homepage,
+                    self._typed(URIRef(homepage), FOAF.Document),
                 )
             )
 
@@ -263,24 +305,23 @@ class DCATExporter:
                 iso_date = f"{parts[0]}-{parts[1].zfill(2)}-{parts[2].zfill(2)}"
                 return self._date_literal(iso_date)
 
-        # Handle Year/Month format (YYYY/MM)
+        # Year/Month (YYYY/MM) -> first of month (xsd:date: EU-ok, CH-required)
         if "/" in date_str:
             parts = date_str.split("/")
             if len(parts) == 2:
-                iso_date = f"{parts[0]}-{parts[1].zfill(2)}"
-                return self._year_month_literal(iso_date)
+                return self._date_literal(f"{parts[0]}-{parts[1].zfill(2)}-01")
 
-        # Handle YYYY-MM format (already ISO format for gYearMonth)
+        # YYYY-MM -> first of month (xsd:date)
         if "-" in date_str and len(date_str) == 7:
-            return self._year_month_literal(date_str)
+            return self._date_literal(f"{date_str}-01")
 
         # Handle YYYY-MM-DD format
         if "-" in date_str and len(date_str) == 10:
             return self._date_literal(date_str)
 
-        # Year only
+        # Year only -> first of January (xsd:date)
         if date_str.isdigit() and len(date_str) == 4:
-            return Literal(date_str, datatype=XSD.gYear)
+            return self._date_literal(f"{date_str}-01-01")
 
         return None
 
@@ -316,13 +357,6 @@ class DCATExporter:
         except ValueError:
             return None
         return Literal(date_str, datatype=XSD.date)
-
-    def _year_month_literal(self, date_str: str) -> Optional[Literal]:
-        try:
-            datetime.strptime(date_str, "%Y-%m")
-        except ValueError:
-            return None
-        return Literal(date_str, datatype=XSD.gYearMonth)
 
     def _date_time_literal(self, date_str: str) -> Optional[Literal]:
         try:
@@ -428,13 +462,7 @@ class DCATExporter:
             dataset_uri, DCTERMS.description, item, "description"
         )
 
-        if item.get("owner_organization_id"):
-            self._add_publisher(dataset_uri, item["owner_organization_id"])
-
-        if item.get("manager_organization_id"):
-            self._add_contact_point(dataset_uri, item["manager_organization_id"])
-        elif item.get("owner_organization_id"):
-            self._add_contact_point(dataset_uri, item["owner_organization_id"])
+        self._add_responsible(dataset_uri, item)
 
         if item.get("start_date"):
             issued_date = self._parse_date(item["start_date"])
@@ -533,8 +561,9 @@ class DCATExporter:
             if coords is not None:
                 self._add_geometry(location, coords)
 
+        # eCH-0200 forbids dct:conformsTo, so the CRS reference is EU-only.
         crs_uri = self._crs_uri(item.get("crs"))
-        if crs_uri is not None:
+        if crs_uri is not None and self.profile != "ch":
             self.graph.add(
                 (
                     dataset_uri,
@@ -636,6 +665,22 @@ class DCATExporter:
             phone_uri = URIRef(f"tel:{quote(str(organization['phone']), safe='+')}")
             self.graph.add((contact_uri, VCARD.hasTelephone, phone_uri))
 
+    def _add_responsible(self, subject: URIRef, item: Dict):
+        """Publisher + contact point, falling back to the catalog's when the item
+        has no organisation, so each one carries them (DCAT-AP-CH requires it)."""
+        owner = item.get("owner_organization_id")
+        manager = item.get("manager_organization_id")
+        if owner in self.organizations:
+            self._add_publisher(subject, owner)
+        elif self.catalog_publisher_uri is not None:
+            self.graph.add((subject, DCTERMS.publisher, self.catalog_publisher_uri))
+
+        contact_org = manager if manager in self.organizations else owner
+        if contact_org in self.organizations:
+            self._add_contact_point(subject, contact_org)
+        elif self.catalog_contact_uri is not None:
+            self.graph.add((subject, DCAT.contactPoint, self.catalog_contact_uri))
+
     def _create_distribution(
         self,
         dataset_uri: URIRef,
@@ -657,14 +702,18 @@ class DCATExporter:
         access_url = str(self._uri_ref(access_url))
         self.graph.add((dist_uri, DCAT.accessURL, URIRef(access_url)))
 
+        # DCAT-AP-CH requires a publisher and contact point on each distribution.
+        self._add_responsible(dist_uri, dataset)
+
         # Optional: download URL
         download_url = str(self._uri_ref(dataset.get("data_path") or access_url))
         if download_url and dataset.get("delivery_format"):
             self.graph.add((dist_uri, DCAT.downloadURL, URIRef(download_url)))
 
-        # Mandatory: issued date
-        issued_date = self._parse_date(
-            dataset.get("start_date", datetime.now().strftime("%Y-%m-%d"))
+        # Mandatory (DCAT-AP-CH): issued date — fall back to the catalog date when
+        # the dataset has none, so every distribution carries one.
+        issued_date = self._parse_date(dataset.get("start_date")) or self._parse_date(
+            self.config.get("catalog_issued", "2024-01-01")
         )
         if issued_date:
             self.graph.add((dist_uri, DCTERMS.issued, issued_date))
@@ -702,8 +751,11 @@ class DCATExporter:
                 self.graph.add(
                     (dist_uri, DCAT.mediaType, self._typed(media_uri, DCTERMS.MediaType))
                 )
+                self.graph.add((media_uri, RDF.type, DCTERMS.MediaTypeOrExtent))
 
-        if dataset.get("data_size"):
+        # EU (DCAT-AP 3) wants a non-negative integer; eCH-0200's byteSize shape
+        # expects a resource (incompatible with a byte count), so skip it in CH mode.
+        if dataset.get("data_size") and self.profile != "ch":
             self.graph.add(
                 (
                     dist_uri,
@@ -1116,6 +1168,11 @@ def main():
     if not config_file.exists():
         config_file = DATA_TEMPLATE_DIR / "dcat-export.config.json"
     config = load_config(config_file, DEFAULT_CONFIG)
+    # CLI override: `datannur dcat --profile ch`
+    if "--profile" in sys.argv:
+        index = sys.argv.index("--profile")
+        if index + 1 < len(sys.argv):
+            config["profile"] = sys.argv[index + 1]
 
     output_dir = data_dir / "db-semantic"
     output_dir.mkdir(exist_ok=True)
@@ -1150,18 +1207,24 @@ def main():
     exporter.build_internal_validation()
 
     # Validate
-    shacl_file = SCHEMAS_DIR / "semantic" / "dcat-ap-shacl.ttl"
-    shacl_conforms, shacl_message = exporter.validate(shacl_file)
+    semantic_dir = SCHEMAS_DIR / "semantic"
+    profiles = [
+        ("DCAT-AP 3.0.1 (EU)", "dcat-ap-shacl.ttl", "eu"),
+        ("GeoDCAT-AP 3.1 (EU)", "geodcat-ap-shacl.ttl", None),
+        ("DCAT-AP-CH / eCH-0200 (CH)", "dcat-ap-ch-shacl.ttl", "ch"),
+    ]
+    primary_file = "dcat-ap-ch-shacl.ttl" if exporter.profile == "ch" else "dcat-ap-shacl.ttl"
+
+    shacl_conforms, shacl_message = exporter.validate(semantic_dir / primary_file)
     exporter.write_validation_json(output_dir, files, shacl_conforms, shacl_message)
     print(f"✓ Wrote validation summary to {output_dir / 'validation.json'}")
 
-    semantic_dir = SCHEMAS_DIR / "semantic"
     print()
-    print("Additional profile conformance (informational, non-blocking):")
-    exporter.report_profile("GeoDCAT-AP 3.1 (EU)", semantic_dir / "geodcat-ap-shacl.ttl")
-    exporter.report_profile(
-        "DCAT-AP-CH / eCH-0200 (CH)", semantic_dir / "dcat-ap-ch-shacl.ttl"
-    )
+    print(f"Profile: {exporter.profile} (primary, blocking)")
+    print("Other profile conformance (informational, non-blocking):")
+    for label, fname, _ in profiles:
+        if fname != primary_file:
+            exporter.report_profile(label, semantic_dir / fname)
 
 
 if __name__ == "__main__":
