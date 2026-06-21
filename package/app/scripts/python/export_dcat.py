@@ -501,7 +501,11 @@ class DCATExporter:
             freq_uri = freq_mapping.get(item["updating_each"].lower())
             if freq_uri:
                 self.graph.add(
-                    (dataset_uri, DCTERMS.accrualPeriodicity, URIRef(freq_uri))
+                    (
+                        dataset_uri,
+                        DCTERMS.accrualPeriodicity,
+                        self._typed(URIRef(freq_uri), DCTERMS.Frequency),
+                    )
                 )
 
         for doc_id in self._split_ids(item.get("doc_ids")):
@@ -572,6 +576,13 @@ class DCATExporter:
         crs = "<http://www.opengis.net/def/crs/OGC/1.3/CRS84>"
         return Literal(f"{crs} {body}", datatype=GEOSPARQL.wktLiteral)
 
+    def _typed(self, node: URIRef, rdf_class: URIRef) -> URIRef:
+        """Give an IRI object an explicit rdf:type. DCAT-AP / GeoDCAT-AP /
+        DCAT-AP-CH expect typed resources for these properties; the type is
+        additive and does not affect plain DCAT consumers."""
+        self.graph.add((node, RDF.type, rdf_class))
+        return node
+
     def _crs_uri(self, crs) -> Optional[URIRef]:
         """'EPSG:2056' -> OGC CRS register URI (spatial reference system)."""
         epsg = parse_epsg(crs)
@@ -606,6 +617,7 @@ class DCATExporter:
 
         self.graph.add((dataset_uri, DCAT.contactPoint, contact_uri))
         self.graph.add((contact_uri, RDF.type, VCARD.Organization))
+        self.graph.add((contact_uri, RDF.type, VCARD.Kind))
 
         organization_name = self._localized_field(organization, "name")
         if organization_name:
@@ -655,9 +667,10 @@ class DCATExporter:
         # Mandatory: license
         license_uri = self._effective_license(dataset, parent)
         if license_uri:
-            self.graph.add(
-                (dist_uri, DCTERMS.license, self._license_value(license_uri))
-            )
+            license_value = self._license_value(license_uri)
+            if isinstance(license_value, URIRef):
+                self._typed(license_value, DCTERMS.LicenseDocument)
+            self.graph.add((dist_uri, DCTERMS.license, license_value))
 
         delivery_format = dataset.get("delivery_format")
         normalized_format = delivery_format.lower() if delivery_format else ""
@@ -666,13 +679,24 @@ class DCATExporter:
         if dataset.get("delivery_format"):
             format_uri = FILE_TYPE_URIS.get(normalized_format)
             if format_uri:
-                self.graph.add((dist_uri, DCTERMS.format, URIRef(format_uri)))
+                self.graph.add(
+                    (
+                        dist_uri,
+                        DCTERMS.format,
+                        self._typed(URIRef(format_uri), DCTERMS.MediaTypeOrExtent),
+                    )
+                )
 
         # Conditional: media type
         if dataset.get("delivery_format"):
             media_type = MEDIA_TYPES.get(normalized_format)
             if media_type:
-                self.graph.add((dist_uri, DCAT.mediaType, Literal(media_type)))
+                media_uri = URIRef(
+                    f"https://www.iana.org/assignments/media-types/{media_type}"
+                )
+                self.graph.add(
+                    (dist_uri, DCAT.mediaType, self._typed(media_uri, DCTERMS.MediaType))
+                )
 
         if dataset.get("data_size"):
             self.graph.add(
