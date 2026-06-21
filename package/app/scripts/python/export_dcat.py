@@ -35,7 +35,6 @@ except ImportError:
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 SCHEMA = Namespace("http://schema.org/")
-LOCN = Namespace("http://www.w3.org/ns/locn#")
 GEOSPARQL = Namespace("http://www.opengis.net/ont/geosparql#")
 
 FILE_TYPE_URIS = {
@@ -103,7 +102,6 @@ class DCATExporter:
         self.graph.bind("vcard", VCARD)
         self.graph.bind("schema", SCHEMA)
         self.graph.bind("skos", SKOS)
-        self.graph.bind("locn", LOCN)
         self.graph.bind("geosparql", GEOSPARQL)
 
     def load_data(self):
@@ -537,7 +535,13 @@ class DCATExporter:
 
         crs_uri = self._crs_uri(item.get("crs"))
         if crs_uri is not None:
-            self.graph.add((dataset_uri, DCTERMS.conformsTo, crs_uri))
+            self.graph.add(
+                (
+                    dataset_uri,
+                    DCTERMS.conformsTo,
+                    self._typed(crs_uri, DCTERMS.Standard),
+                )
+            )
 
         resolution = item.get("spatial_resolution")
         if isinstance(resolution, (int, float)) and not isinstance(resolution, bool):
@@ -567,7 +571,6 @@ class DCATExporter:
         )
         bbox = self._wkt(f"POLYGON(({ring}))")
         self.graph.add((location, DCAT.bbox, bbox))
-        self.graph.add((location, LOCN.geometry, bbox))
 
         cx, cy = (west + east) / 2, (south + north) / 2
         self.graph.add((location, DCAT.centroid, self._wkt(f"POINT({cx} {cy})")))
@@ -625,7 +628,9 @@ class DCATExporter:
 
         if organization.get("email"):
             email_uri = URIRef(f"mailto:{organization['email']}")
-            self.graph.add((contact_uri, VCARD.hasEmail, email_uri))
+            self.graph.add(
+                (contact_uri, VCARD.hasEmail, self._typed(email_uri, VCARD.Email))
+            )
 
         if organization.get("phone"):
             phone_uri = URIRef(f"tel:{quote(str(organization['phone']), safe='+')}")
