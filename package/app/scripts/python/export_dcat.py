@@ -1042,6 +1042,26 @@ class DCATExporter:
         print(results_text)
         return False, results_text
 
+    def report_profile(self, label: str, shacl_file: Path) -> None:
+        """Non-blocking conformance report against an additional profile.
+
+        The primary DCAT-AP validation stays the gate; this only measures how
+        close the output is to the EU (GeoDCAT-AP) and Swiss (DCAT-AP-CH) levels.
+        """
+        if validate_shacl is None or not shacl_file.exists():
+            return
+        conforms, _, results_text = validate_shacl(
+            self.graph,
+            shacl_graph=str(shacl_file),
+            inference="rdfs",
+            abort_on_first=False,
+        )
+        if conforms:
+            print(f"  ✓ {label}: conformant")
+        else:
+            count = results_text.count("Constraint Violation")
+            print(f"  • {label}: {count} issue(s) — informational, non-blocking")
+
     def write_validation_json(
         self,
         output_dir: Path,
@@ -1134,6 +1154,14 @@ def main():
     shacl_conforms, shacl_message = exporter.validate(shacl_file)
     exporter.write_validation_json(output_dir, files, shacl_conforms, shacl_message)
     print(f"✓ Wrote validation summary to {output_dir / 'validation.json'}")
+
+    semantic_dir = SCHEMAS_DIR / "semantic"
+    print()
+    print("Additional profile conformance (informational, non-blocking):")
+    exporter.report_profile("GeoDCAT-AP 3.1 (EU)", semantic_dir / "geodcat-ap-shacl.ttl")
+    exporter.report_profile(
+        "DCAT-AP-CH / eCH-0200 (CH)", semantic_dir / "dcat-ap-ch-shacl.ttl"
+    )
 
 
 if __name__ == "__main__":
