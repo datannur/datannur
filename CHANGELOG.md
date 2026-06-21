@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: show a bounding-box locator map on geographic datasets
 - add: support geographic dataset metadata (CRS, bounding box, geometry type, spatial resolution)
 - fix: make dashboard quick-access filters use stable column keys and remove misleading quality checks for variable-level descriptions and composite key uniqueness
 - fix: localize evolution `lastUpdate` date-time differences and format long durations as weeks, months, or years

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '@layout/Icon.svelte'
   import Render from '@lib/render'
+  import BboxMap from '@info-table/BboxMap.svelte'
   import { t } from '@i18n/messages'
   import type { Dataset } from '@type'
 
@@ -27,5 +28,11 @@
         ({geoDetails})
       {/if}
     </td>
+  </tr>
+{/if}
+{#if dataset.bbox}
+  <tr>
+    <td></td>
+    <td><BboxMap bbox={dataset.bbox} /></td>
   </tr>
 {/if}
