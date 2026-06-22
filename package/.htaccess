@@ -6,6 +6,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteRule ^(.+/)?app/assets/(.+)$ app/assets/$2 [L]
 RewriteRule ^(.+/)?app/api/(.+)$ app/api/$2 [L]
+RewriteRule ^(.+/)?app/manifest\.json$ app/manifest.json [L]
 RewriteCond %{THE_REQUEST} \s([^\s?]*/api)[?\s] [NC]
 RewriteRule ^api$ %1/ [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \s([^\s?]*/api/raw)/[?\s] [NC]
