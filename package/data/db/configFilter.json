@@ -5,6 +5,7 @@
     "id": "closed_data",
     "is_active_default": true,
     "name": "Closed Data",
+    "name:de": "Geschlossene Daten",
     "name:fr": "Données fermées",
     "value": "closed_data"
   },
@@ -14,6 +15,7 @@
     "id": "open_data",
     "is_active_default": true,
     "name": "Open Data",
+    "name:de": "Offene Daten",
     "name:fr": "Données ouvertes",
     "value": "open_data"
   }

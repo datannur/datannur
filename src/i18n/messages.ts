@@ -1,10 +1,11 @@
 import { derived, get } from 'svelte/store'
 import { en } from './en'
 import { fr } from './fr'
+import { de } from './de'
 import { currentLocale } from './state'
 import type { Locale, Translation, TranslationKey } from './types'
 
-const translations: { [locale in Locale]: Translation } = { en, fr }
+const translations: { [locale in Locale]: Translation } = { en, fr, de }
 export type TranslationParams = { [key: string]: string | number }
 
 export const translate = derived(

@@ -9,6 +9,7 @@ import { t } from '@i18n/messages'
 import { currentLocale } from '@i18n/state'
 import { en } from '@i18n/en'
 import { fr } from '@i18n/fr'
+import { de } from '@i18n/de'
 
 function getTranslationKeys(
   value: { readonly [key: string]: unknown },
@@ -30,8 +31,10 @@ function getTranslationKeys(
 describe('i18n', () => {
   it('should resolve supported browser languages', () => {
     expect(getBrowserLocale(['fr-CA', 'en-US'])).toBe('fr')
-    expect(getBrowserLocale(['de-DE', 'en-GB'])).toBe('en')
-    expect(getBrowserLocale(['de-DE'])).toBe('en')
+    expect(getBrowserLocale(['de-DE', 'en-GB'])).toBe('de')
+    expect(getBrowserLocale(['de-DE'])).toBe('de')
+    expect(getBrowserLocale(['it-IT', 'en-GB'])).toBe('en')
+    expect(getBrowserLocale(['it-IT'])).toBe('en')
   })
 
   it('should resolve locale precedence', () => {
@@ -54,14 +57,18 @@ describe('i18n', () => {
     const document = {
       querySelector: () => ({ getAttribute: () => 'fr' }),
     }
-    const unsupportedDocument = {
+    const germanDocument = {
       querySelector: () => ({ getAttribute: () => 'de' }),
+    }
+    const unsupportedDocument = {
+      querySelector: () => ({ getAttribute: () => 'it' }),
     }
     const documentWithoutLocale = {
       querySelector: () => null,
     }
 
     expect(getDocumentLocale(document)).toBe('fr')
+    expect(getDocumentLocale(germanDocument)).toBe('de')
     expect(getDocumentLocale(unsupportedDocument)).toBeUndefined()
     expect(getDocumentLocale(documentWithoutLocale)).toBeUndefined()
   })
@@ -80,6 +87,10 @@ describe('i18n', () => {
 
   it('should keep french translations structurally complete', () => {
     expect(getTranslationKeys(fr).sort()).toEqual(getTranslationKeys(en).sort())
+  })
+
+  it('should keep german translations structurally complete', () => {
+    expect(getTranslationKeys(de).sort()).toEqual(getTranslationKeys(en).sort())
   })
 
   it('should translate representative UI labels', () => {

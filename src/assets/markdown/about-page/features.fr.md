@@ -1,6 +1,6 @@
 datannur est un catalogue de données portable : il fonctionne dans le navigateur, sans serveur obligatoire, et rassemble dans une même interface les informations utiles pour retrouver, comprendre et exploiter les données.
 
-Cette page donne un aperçu rapide des principales fonctions. Pour une présentation plus illustrée, consultez la [version complète sur le site web](https://datannur.com/fonctionnalites/). Pour l'installation, la configuration et les intégrations, consultez la [documentation technique](https://docs.datannur.com/app/).
+Cette page donne un aperçu rapide des principales fonctions. Pour une présentation plus illustrée, consultez la [version complète sur le site web](https://datannur.com/fr/fonctionnalites/). Pour l'installation, la configuration et les intégrations, consultez la [documentation technique](https://docs.datannur.com/app/).
 
 ## Explorer le catalogue
 
@@ -28,5 +28,5 @@ Ces données locales peuvent être réinitialisées, exportées ou importées de
 
 ## Aller plus loin
 
-- [Présentation complète sur datannur.com](https://datannur.com/fonctionnalites/)
+- [Présentation complète sur datannur.com](https://datannur.com/fr/fonctionnalites/)
 - [Documentation technique](https://docs.datannur.com/app/)

@@ -6,6 +6,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFileEn from '@markdown/about-variable.en.md?raw'
   import aboutFileFr from '@markdown/about-variable.fr.md?raw'
+  import aboutFileDe from '@markdown/about-variable.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -25,7 +26,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'variable', items: variables }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
   })
 </script>
 

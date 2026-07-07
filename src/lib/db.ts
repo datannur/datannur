@@ -44,6 +44,18 @@ function localizeDataFields(item: { [key: string]: unknown }) {
   }
 }
 
+// Meta entities carry per-locale descriptions as camelCase fields
+// (descriptionFr, descriptionDe, ...). Pick the one for the current locale.
+function localizedMetaDescription(item: {
+  [key: string]: unknown
+}): string | undefined {
+  const locale = getCurrentLocale()
+  if (locale === 'en') return undefined
+  const key = `description${locale.charAt(0).toUpperCase()}${locale.slice(1)}`
+  const value = item[key]
+  return typeof value === 'string' && value !== '' ? value : undefined
+}
+
 function formatStat(value: number | null | undefined): string {
   if (value === null || value === undefined) return ''
   return value.toLocaleString(getCurrentLocale(), { maximumFractionDigits: 1 })
@@ -919,8 +931,10 @@ class Process {
         metaVariable,
       )
 
-      if (getCurrentLocale() === 'fr' && metaVariable.descriptionFr) {
-        metaVariable.description = metaVariable.descriptionFr
+      const localizedVariableDescription =
+        localizedMetaDescription(metaVariable)
+      if (localizedVariableDescription) {
+        metaVariable.description = localizedVariableDescription
       }
 
       if (metaVariable.name === 'id') metaVariable.key = t('column.trueValue')
@@ -945,8 +959,9 @@ class Process {
       metaDataset.isMeta = true
       metaDataset.folder = { id: metaDataset.metaFolderId }
       metaDataset.folderName = metaDataset.metaFolderId as string
-      if (getCurrentLocale() === 'fr' && metaDataset.descriptionFr) {
-        metaDataset.description = metaDataset.descriptionFr
+      const localizedDatasetDescription = localizedMetaDescription(metaDataset)
+      if (localizedDatasetDescription) {
+        metaDataset.description = localizedDatasetDescription
       }
       addVariableNum(metaDataset, 'metaDataset', 'metaVariable')
       const metaVariables = db.getAll('metaVariable', { metaDataset })
@@ -964,8 +979,9 @@ class Process {
     db.foreach('metaFolder', metaFolder => {
       metaFolder._entity = 'metaFolder'
       metaFolder.isMeta = true
-      if (getCurrentLocale() === 'fr' && metaFolder.descriptionFr) {
-        metaFolder.description = metaFolder.descriptionFr
+      const localizedFolderDescription = localizedMetaDescription(metaFolder)
+      if (localizedFolderDescription) {
+        metaFolder.description = localizedFolderDescription
       }
       const metaDatasets = db.getAll('metaDataset', { metaFolder })
       metaFolder.nbDataset = metaDatasets.length

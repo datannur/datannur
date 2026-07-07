@@ -1,5 +1,11 @@
 # datannur
 
+## 0.29.0 (2026-07-07)
+
+- add: German (DE) interface language — full UI, help pages, and demo catalog content translated, selectable alongside English and French
+- fix: keep datatable column-header tooltips open when moving the pointer onto them, so their stat button stays clickable
+- fix: tighten German label wrapping in the options list and shorten the datatable copy-export label to avoid overflow
+
 ## 0.28.0 (2026-06-21)
 
 - add: support geographic metadata on datasets (CRS, bounding box, geometry type, spatial resolution), shown with a bounding-box locator map on dataset and folder pages

@@ -11,10 +11,13 @@
   import AboutFile from '@layout/AboutFile.svelte'
   import aboutSearchEn from '@markdown/search/about-search.en.md?raw'
   import aboutSearchFr from '@markdown/search/about-search.fr.md?raw'
+  import aboutSearchDe from '@markdown/search/about-search.de.md?raw'
   import noResultEn from '@markdown/search/no-result.en.md?raw'
   import noResultFr from '@markdown/search/no-result.fr.md?raw'
+  import noResultDe from '@markdown/search/no-result.de.md?raw'
   import noRecentSearchEn from '@markdown/search/no-recent-search.en.md?raw'
   import noRecentSearchFr from '@markdown/search/no-recent-search.fr.md?raw'
+  import noRecentSearchDe from '@markdown/search/no-recent-search.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
   import type { SearchResult as SearchResultType } from '@search/search'
@@ -29,11 +32,17 @@
   const aboutSearch = localizedMarkdown({
     en: aboutSearchEn,
     fr: aboutSearchFr,
+    de: aboutSearchDe,
   })
-  const noResult = localizedMarkdown({ en: noResultEn, fr: noResultFr })
+  const noResult = localizedMarkdown({
+    en: noResultEn,
+    fr: noResultFr,
+    de: noResultDe,
+  })
   const noRecentSearch = localizedMarkdown({
     en: noRecentSearchEn,
     fr: noRecentSearchFr,
+    de: noRecentSearchDe,
   })
 
   function makeTab(name: string, icon: string, key: string, aboutFile: string) {

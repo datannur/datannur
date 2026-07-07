@@ -13,6 +13,7 @@ import { router } from '@router/router.svelte'
 import Search from '@search/search'
 import { en } from '@i18n/en'
 import { fr } from '@i18n/fr'
+import { de } from '@i18n/de'
 import type { Locale } from '@i18n/types'
 import type { EntityName, MainEntity, MainEntityName } from '@type'
 import { mainEntityNames } from '@lib/constant'
@@ -398,7 +399,12 @@ export type ToolDefinition = {
  * Get tool definitions in OpenAI function calling format
  */
 export function getToolDefinitions(locale: Locale): ToolDefinition[] {
-  const toolDescriptions = locale === 'fr' ? fr.llm.tool : en.llm.tool
+  const toolDescriptionsByLocale = {
+    en: en.llm.tool,
+    fr: fr.llm.tool,
+    de: de.llm.tool,
+  } satisfies { [locale in Locale]: Record<string, string> }
+  const toolDescriptions = toolDescriptionsByLocale[locale] ?? en.llm.tool
 
   return llmTools.map(tool => ({
     type: 'function' as const,

@@ -32,35 +32,43 @@
     "folder_id": "00-base",
     "name": "Canton abbreviations",
     "name:fr": "Sigle des cantons",
+    "name:de": "Kantonskürzel",
     "type": "string",
     "description": "List of the 26 Swiss cantons and their abbreviations",
-    "description:fr": "Liste des 26 cantons suisses et leur sigle"
+    "description:fr": "Liste des 26 cantons suisses et leur sigle",
+    "description:de": "Liste der 26 Schweizer Kantone und ihrer Kürzel"
   },
   {
     "id": "langue_sigle",
     "folder_id": "00-base",
     "name": "Language abbreviations",
     "name:fr": "Sigle des langues",
+    "name:de": "Sprachkürzel",
     "type": "string",
     "description": "List of the 3 main Swiss languages and their abbreviations",
-    "description:fr": "Liste des 3 principales langues suisses et leurs sigles"
+    "description:fr": "Liste des 3 principales langues suisses et leurs sigles",
+    "description:de": "Liste der 3 wichtigsten Schweizer Sprachen und ihrer Kürzel"
   },
   {
     "id": "oui_non",
     "folder_id": "00-base",
     "name": "Yes or no",
     "name:fr": "Oui ou non",
+    "name:de": "Ja oder nein",
     "type": "integer",
     "description": "Yes or no coded as 0 or 1",
-    "description:fr": "Oui ou non codé en 0 ou 1"
+    "description:fr": "Oui ou non codé en 0 ou 1",
+    "description:de": "Ja oder nein codiert als 0 oder 1"
   },
   {
     "id": "vide",
     "folder_id": "00-base",
     "name": "empty / missing",
     "name:fr": "vide / manquant",
+    "name:de": "leer / fehlend",
     "type": "integer",
     "description": "Empty or missing value",
-    "description:fr": "Valeur vide ou manquante"
+    "description:fr": "Valeur vide ou manquante",
+    "description:de": "Leerer oder fehlender Wert"
   }
 ]

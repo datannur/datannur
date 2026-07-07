@@ -19,7 +19,8 @@
 
   const priorityTargetVisibleLimit = 4
   const locale = getCurrentLocale()
-  const dateLocale = locale === 'fr' ? 'fr-CH' : 'en'
+  const dateLocale =
+    locale === 'fr' ? 'fr-CH' : locale === 'de' ? 'de-CH' : 'en'
   const metricNumberFormatter = new Intl.NumberFormat(locale, {
     useGrouping: true,
   })

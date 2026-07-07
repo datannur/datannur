@@ -2,8 +2,15 @@ import { sanitizeHtml } from '@lib/html-sanitizer'
 
 let tooltipEl: HTMLDivElement | null = null
 let hideTimeout: ReturnType<typeof setTimeout> | null = null
-let isOverTrigger = false
-let isOverTooltip = false
+
+// Bounding box that encloses both the trigger and the tooltip (plus a margin).
+// The tooltip stays visible as long as the pointer is inside this "safe area",
+// so the user can move onto the tooltip from anywhere on the trigger — whatever
+// the relative size/position of the two (wide header + narrow tooltip, gaps...).
+type SafeRect = { left: number; top: number; right: number; bottom: number }
+let safeRect: SafeRect | null = null
+const safeMargin = 12
+const hideDelay = 250
 
 function createTooltip(): HTMLDivElement {
   const el = document.createElement('div')
@@ -52,6 +59,10 @@ function positionTooltip(target: HTMLElement, tooltip: HTMLDivElement) {
     tooltip.classList.remove('tooltip-top')
   }
 
+  // Set the safe area synchronously so a mousemove arriving before the
+  // requestAnimationFrame below never reads a stale rect from a prior tooltip.
+  updateSafeArea(rect, tooltip)
+
   // Smart repositioning if overflowing
   requestAnimationFrame(() => {
     const tooltipRect = tooltip.getBoundingClientRect()
@@ -75,7 +86,22 @@ function positionTooltip(target: HTMLElement, tooltip: HTMLDivElement) {
       tooltip.classList.remove('tooltip-bottom')
       tooltip.classList.add('tooltip-top')
     }
+
+    // Recompute the safe area after any overflow repositioning above.
+    updateSafeArea(target.getBoundingClientRect(), tooltip)
   })
+}
+
+// Safe area = bounding box enclosing both the trigger and the tooltip, plus a
+// margin. The pointer can travel anywhere inside it without the tooltip hiding.
+function updateSafeArea(targetRect: DOMRect, tooltip: HTMLDivElement) {
+  const p = tooltip.getBoundingClientRect()
+  safeRect = {
+    left: Math.min(targetRect.left, p.left) - safeMargin,
+    top: Math.min(targetRect.top, p.top) - safeMargin,
+    right: Math.max(targetRect.right, p.right) + safeMargin,
+    bottom: Math.max(targetRect.bottom, p.bottom) + safeMargin,
+  }
 }
 
 function showTooltip(target: HTMLElement) {
@@ -106,56 +132,49 @@ function cancelHide() {
   }
 }
 
+function hideTooltip() {
+  getTooltip().classList.remove('visible')
+  safeRect = null
+}
+
 function scheduleHide() {
-  cancelHide()
+  if (hideTimeout) return
   hideTimeout = setTimeout(() => {
-    // Only hide if mouse is not on trigger or tooltip
-    if (!isOverTrigger && !isOverTooltip) {
-      const tooltip = getTooltip()
-      tooltip.classList.remove('visible')
-    }
-  }, 150)
+    hideTimeout = null
+    hideTooltip()
+  }, hideDelay)
+}
+
+function isInSafeArea(x: number, y: number): boolean {
+  return (
+    !!safeRect &&
+    x >= safeRect.left &&
+    x <= safeRect.right &&
+    y >= safeRect.top &&
+    y <= safeRect.bottom
+  )
 }
 
 export function initTooltips() {
-  const tooltip = getTooltip()
+  getTooltip()
 
-  // Tooltip mouse tracking
-  tooltip.addEventListener('mouseenter', () => {
-    isOverTooltip = true
-    cancelHide()
+  // Keep the tooltip open while the pointer stays inside the safe area that
+  // spans both the trigger and the tooltip; hide it (after a short delay) once
+  // the pointer leaves. This works regardless of their relative size/position.
+  document.addEventListener('mousemove', e => {
+    if (!safeRect) return
+    if (isInSafeArea(e.clientX, e.clientY)) cancelHide()
+    else scheduleHide()
   })
 
-  tooltip.addEventListener('mouseleave', () => {
-    isOverTooltip = false
-    scheduleHide()
-  })
-
-  // Trigger mouse tracking using event delegation
+  // Show the tooltip when the pointer enters a trigger (event delegation).
   document.body.addEventListener(
     'mouseenter',
     e => {
       const target = (e.target as HTMLElement).closest?.(
         '.use-tooltip',
       ) as HTMLElement | null
-      if (target) {
-        isOverTrigger = true
-        showTooltip(target)
-      }
-    },
-    true,
-  )
-
-  document.body.addEventListener(
-    'mouseleave',
-    e => {
-      const target = (e.target as HTMLElement).closest?.(
-        '.use-tooltip',
-      ) as HTMLElement | null
-      if (target) {
-        isOverTrigger = false
-        scheduleHide()
-      }
+      if (target) showTooltip(target)
     },
     true,
   )

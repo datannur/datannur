@@ -12,8 +12,10 @@
     "type": "md",
     "name": "Tourism example",
     "name:fr": "Tourisme exemple",
+    "name:de": "Tourismus-Beispiel",
     "description": "Tourism example",
     "description:fr": "Tourisme exemple",
+    "description:de": "Tourismus-Beispiel",
     "path": "data/db-source/md/tourisme-exemple.md",
     "last_update": 1716231182
   },
@@ -29,8 +31,10 @@
     "type": "pdf",
     "name": "BEVNAT: Fact sheet",
     "name:fr": "BEVNAT: Fiche signalétique",
+    "name:de": "BEVNAT: Datenblatt",
     "description": "BEVNAT: Fact sheet",
     "description:fr": "BEVNAT: Fiche signalétique",
+    "description:de": "BEVNAT: Datenblatt",
     "path": "data/pdf/bevnat-info.pdf",
     "last_update": 1706239962
   },
@@ -39,8 +43,10 @@
     "type": "pdf",
     "name": "STATPOP: Fact sheet",
     "name:fr": "STATPOP: Fiche signalétique",
+    "name:de": "STATPOP: Datenblatt",
     "description": "STATPOP: Fact sheet",
     "description:fr": "STATPOP: Fiche signalétique",
+    "description:de": "STATPOP: Datenblatt",
     "path": "data/pdf/statpop-info.pdf",
     "last_update": 1606212962
   },
@@ -49,8 +55,10 @@
     "type": "pdf",
     "name": "BEVNAT: Variable list",
     "name:fr": "BEVNAT: Liste des variables",
+    "name:de": "BEVNAT: Variablenliste",
     "description": "BEVNAT: Variable list",
     "description:fr": "BEVNAT: Liste des variables",
+    "description:de": "BEVNAT: Variablenliste",
     "path": "data/pdf/bevnat-variable.pdf",
     "last_update": 1606212963
   },
@@ -59,8 +67,10 @@
     "type": "pdf",
     "name": "Population press release",
     "name:fr": "Communiqué de presse population",
+    "name:de": "Pressemitteilung Bevölkerung",
     "description": "Population press release",
     "description:fr": "Communiqué de presse population",
+    "description:de": "Pressemitteilung Bevölkerung",
     "path": "data/pdf/pop-com-1.pdf",
     "last_update": 1724323867
   }

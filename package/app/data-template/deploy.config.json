@@ -16,7 +16,8 @@
     "data/localhost-ports.config.json",
     "data/deploy.config.json",
     "data/static-make.config.json",
-    "data/update-app.json"
+    "data/update-app.json",
+    "data/db/_scan"
   ],
   "syncOption": {
     "delete": true

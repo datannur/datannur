@@ -80,5 +80,6 @@ The app stores the user's interface language in browser settings under the `lang
 - `auto`: use the browser language when it is supported, otherwise fall back to English
 - `en`: force English
 - `fr`: force French
+- `de`: force German
 
-English is the default fallback language. A `?lang=en` or `?lang=fr` URL parameter overrides the stored option for that launch. In generated static pages, a small `datannur-locale` meta marker keeps the hydrated app in the same language as the generated HTML, for example `/en/datasets` stays English and `/fr/datasets` stays French. German, Italian, and Spanish are planned soon.
+English is the default fallback language. A `?lang=en`, `?lang=fr`, or `?lang=de` URL parameter overrides the stored option for that launch. In generated static pages, a small `datannur-locale` meta marker keeps the hydrated app in the same language as the generated HTML, for example `/en/datasets` stays English, `/fr/datasets` stays French, and `/de/datasets` stays German. Italian and Spanish are planned soon.

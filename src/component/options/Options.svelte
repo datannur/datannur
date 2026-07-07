@@ -209,6 +209,11 @@
     margin-bottom: 0;
   }
 
+  // Only tighten the leading of labels that wrap onto several lines
+  .display-options :global(.slot-wrapper) {
+    line-height: 1.2;
+  }
+
   .language-option {
     margin-top: 0.62rem;
   }

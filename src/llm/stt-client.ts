@@ -30,11 +30,13 @@ type ErrorResponse = {
 const whisperLanguageByLocale = {
   en: 'en',
   fr: 'fr',
+  de: 'de',
 }
 
 const speechRecognitionLanguageByLocale = {
   en: 'en-US',
   fr: 'fr-FR',
+  de: 'de-DE',
 }
 
 function getTranscriptionLanguage() {

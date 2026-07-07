@@ -81,7 +81,7 @@ const defaultWaitFor = 'div#wrapper > section.section'
 const defaultTimeoutMs = 10000
 const defaultPostLoadWaitMs = 1000
 const defaultThemes: Theme[] = ['light', 'dark']
-const defaultLocales: Locale[] = ['en', 'fr']
+const defaultLocales: Locale[] = ['en', 'fr', 'de']
 
 function joinUrl(baseUrl: string, pagePath: string) {
   return new URL(pagePath, baseUrl).href
