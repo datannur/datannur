@@ -1,73 +1,89 @@
 [
   {
     "description": "contains \"a\" or \"b\"",
+    "description:de": null,
     "description:fr": null,
     "folder_id": "00-base",
     "id": "a_or_b",
     "name": "a or b",
+    "name:de": null,
     "name:fr": null,
     "type": "string"
   },
   {
     "description": "contains \"a\" or \"b\" or \"c\"",
+    "description:de": null,
     "description:fr": null,
     "folder_id": "00-base",
     "id": "a_or_b_or_c",
     "name": "a or b or c",
+    "name:de": null,
     "name:fr": null,
     "type": "string"
   },
   {
     "description": "List of the 26 Swiss cantons and their abbreviations",
+    "description:de": "Liste der 26 Schweizer Kantone und ihrer Kürzel",
     "description:fr": "Liste des 26 cantons suisses et leur sigle",
     "folder_id": "00-base",
     "id": "canton_sigle",
     "name": "Canton abbreviations",
+    "name:de": "Kantonskürzel",
     "name:fr": "Sigle des cantons",
     "type": "string"
   },
   {
     "description": "description of enumeration 1",
+    "description:de": null,
     "description:fr": null,
     "folder_id": "13-protec-social",
     "id": "enumeration_1",
     "name": "enumeration 1",
+    "name:de": null,
     "name:fr": null,
     "type": "integer"
   },
   {
     "description": "List of the 3 main Swiss languages and their abbreviations",
+    "description:de": "Liste der 3 wichtigsten Schweizer Sprachen und ihrer Kürzel",
     "description:fr": "Liste des 3 principales langues suisses et leurs sigles",
     "folder_id": "00-base",
     "id": "langue_sigle",
     "name": "Language abbreviations",
+    "name:de": "Sprachkürzel",
     "name:fr": "Sigle des langues",
     "type": "string"
   },
   {
     "description": "contains only a 0 value",
+    "description:de": null,
     "description:fr": null,
     "folder_id": "00-base",
     "id": "only_zero",
     "name": "only zero",
+    "name:de": null,
     "name:fr": null,
     "type": "integer"
   },
   {
     "description": "Yes or no coded as 0 or 1",
+    "description:de": "Ja oder nein codiert als 0 oder 1",
     "description:fr": "Oui ou non codé en 0 ou 1",
     "folder_id": "00-base",
     "id": "oui_non",
     "name": "Yes or no",
+    "name:de": "Ja oder nein",
     "name:fr": "Oui ou non",
     "type": "integer"
   },
   {
     "description": "Empty or missing value",
+    "description:de": "Leerer oder fehlender Wert",
     "description:fr": "Valeur vide ou manquante",
     "folder_id": "00-base",
     "id": "vide",
     "name": "empty / missing",
+    "name:de": "leer / fehlend",
     "name:fr": "vide / manquant",
     "type": "integer"
   }

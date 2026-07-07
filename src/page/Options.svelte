@@ -7,6 +7,7 @@
   import { checkApiAvailability } from '@lib/api-availability'
   import aboutFileEn from '@markdown/about-options.en.md?raw'
   import aboutFileFr from '@markdown/about-options.fr.md?raw'
+  import aboutFileDe from '@markdown/about-options.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
   import type { ApiAvailability } from '@lib/api-availability'
@@ -19,7 +20,7 @@
       api: apiAvailability.available ? apiAvailability : false,
       logs,
       stat: [{ entity: 'log', items: logs }],
-      aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
+      aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
     }),
   )
 

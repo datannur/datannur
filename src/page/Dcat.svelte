@@ -35,7 +35,9 @@
   let iso = $state<IsoExport | null>(null)
   let loading = $state(true)
   let unavailable = $state(false)
-  const dateLocale = $derived($currentLocale === 'fr' ? 'fr-CH' : 'en')
+  const dateLocale = $derived(
+    $currentLocale === 'fr' ? 'fr-CH' : $currentLocale === 'de' ? 'de-CH' : 'en',
+  )
 
   const topWarnings = $derived(report?.validation.results.slice(0, 8) ?? [])
   const generatedAt = $derived(

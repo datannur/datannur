@@ -2,11 +2,13 @@
   {
     "id": "contact_email",
     "value": "contact@datannur.com",
+    "value:de": null,
     "value:fr": null
   },
   {
     "id": "more_info",
     "value": "This version uses fictional data for demonstration purposes.",
+    "value:de": "Diese Version verwendet fiktive Daten zu Demonstrationszwecken.",
     "value:fr": "Cette version utilise des données fictives à des fins de démonstration."
   }
 ]

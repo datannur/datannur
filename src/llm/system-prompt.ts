@@ -10,6 +10,7 @@ let cachedKey: string | null = null
 const defaultResponseLanguage: { [locale in Locale]: string } = {
   en: 'English',
   fr: 'French',
+  de: 'German',
 }
 
 function replacePlaceholders(

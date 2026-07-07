@@ -6,7 +6,7 @@ const config: ScreenshotSuiteConfig = {
   browserChannel: 'chrome',
   format: 'jpeg',
   quality: 60,
-  locales: ['fr', 'en'],
+  locales: ['fr', 'en', 'de'],
   timeoutMs: 10000,
   viewports: {
     desktop: { width: 1600, height: 900, deviceScaleFactor: 2 },

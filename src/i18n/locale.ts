@@ -1,6 +1,6 @@
 import type { LanguageOption, Locale } from './types'
 
-const supportedLocales: Locale[] = ['en', 'fr']
+const supportedLocales: Locale[] = ['en', 'fr', 'de']
 
 type LocaleDocument = {
   querySelector(

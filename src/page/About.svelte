@@ -1,8 +1,10 @@
 <script lang="ts">
   import aboutStructureEn from '@markdown/about-page/structure.en.md?raw'
   import aboutStructureFr from '@markdown/about-page/structure.fr.md?raw'
+  import aboutStructureDe from '@markdown/about-page/structure.de.md?raw'
   import aboutFeaturesEn from '@markdown/about-page/features.en.md?raw'
   import aboutFeaturesFr from '@markdown/about-page/features.fr.md?raw'
+  import aboutFeaturesDe from '@markdown/about-page/features.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { getAboutMain } from '@lib/get-about-main'
   import { tabsHelper } from '@tab/tabs-helper'
@@ -15,10 +17,12 @@
     aboutStructure: localizedMarkdown({
       en: aboutStructureEn,
       fr: aboutStructureFr,
+      de: aboutStructureDe,
     }),
     aboutFeatures: localizedMarkdown({
       en: aboutFeaturesEn,
       fr: aboutFeaturesFr,
+      de: aboutFeaturesDe,
     }),
   })
 </script>

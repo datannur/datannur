@@ -5,6 +5,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFileEn from '@markdown/about-enumeration.en.md?raw'
   import aboutFileFr from '@markdown/about-enumeration.fr.md?raw'
+  import aboutFileDe from '@markdown/about-enumeration.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -18,7 +19,7 @@
     enumerationsCompare: enumerations.length > 1,
     evolutions,
     stat: [{ entity: 'enumeration', items: enumerations }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
   })
 </script>
 

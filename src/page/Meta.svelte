@@ -3,6 +3,7 @@
   import { tabsHelper } from '@tab/tabs-helper'
   import aboutFileEn from '@markdown/about-main-meta.en.md?raw'
   import aboutFileFr from '@markdown/about-main-meta.fr.md?raw'
+  import aboutFileDe from '@markdown/about-main-meta.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
   import Title from '@layout/Title.svelte'
@@ -19,7 +20,7 @@
   ]
 
   const tabs = tabsHelper({
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
     metaFolders,
     metaDatasets,
     metaVariables,

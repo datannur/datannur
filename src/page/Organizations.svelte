@@ -10,6 +10,7 @@
   import EvolutionSummarySwitch from '@layout/EvolutionSummarySwitch.svelte'
   import aboutFileEn from '@markdown/about-organization.en.md?raw'
   import aboutFileFr from '@markdown/about-organization.fr.md?raw'
+  import aboutFileDe from '@markdown/about-organization.de.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -34,7 +35,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'organization', items: organizations }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
   })
 
   const nbOrganization = organizations.length
