@@ -263,8 +263,17 @@
         domTable.on('mouseenter', '.long-text', function () {
           extendable.open.call(this)
         })
-        domTable.on('mouseleave', '.long-text', function () {
-          extendable.closeTwoLines.call(this)
+        domTable.on('mouseleave', '.long-text', function (this: HTMLElement) {
+          // Collapse back to the height the CSS defines via `--collapsed-height`
+          // (taller for frequency cells). jQuery's animate leaves an inline
+          // max-height, so reading the CSS value keeps a single source of truth
+          // and avoids clipping frequency cells back to one item.
+          const collapsed =
+            parseInt(
+              getComputedStyle(this).getPropertyValue('--collapsed-height'),
+              10,
+            ) || 50
+          extendable.close.call(this, collapsed)
         })
 
         domTable.on('click', 'td', event => {
@@ -942,7 +951,11 @@
             padding-right: 0px;
             text-overflow: ellipsis;
             white-space: normal;
-            max-height: 50px;
+            // Single source of truth for the collapsed (pre/post-hover) height,
+            // also read by the mouseleave handler above so the close animation
+            // lands on the same value. Overridden for frequency cells below.
+            --collapsed-height: 50px;
+            max-height: var(--collapsed-height);
             min-height: auto;
             overflow-x: hidden;
             overflow-y: hidden;
@@ -966,6 +979,16 @@
             &.open-full {
               overflow-y: auto;
             }
+          }
+          // Frequency cells wrap taller `.freq-item-container` items, so the
+          // shared 50px / 2-line clamp only reveals one item. Bump the collapsed
+          // height (and the line clamp) so two items show when there are 2 or
+          // more, matching the value column. `.open` still expands to show all;
+          // the clamp is inert there since `.open` switches to `display: block`.
+          td div.long-text:has(.freq-item-container) {
+            --collapsed-height: 62px;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
           }
           &.clickable-rows {
             tbody > tr:not(:has(.dt-empty)) {
