@@ -18,6 +18,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write # needed to delete stale artifacts left over from re-runs
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -55,6 +56,16 @@ jobs:
         run: touch dist/.nojekyll
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Delete stale github-pages artifacts from previous attempts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
+            --paginate --jq '.artifacts[] | select(.name=="github-pages") | .id' \
+          | while read -r id; do
+              echo "Deleting stale artifact $id"
+              gh api -X DELETE "repos/${{ github.repository }}/actions/artifacts/$id"
+            done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
