@@ -1,5 +1,10 @@
 # datannur
 
+## Unreleased
+
+- fix: route the German (DE) locale in the Apache .htaccess — segment detection, cookie / Accept-Language auto-selection, redirects, and error documents
+- fix: show two frequency items before hover in the variable datatable (like the value column) when there are two or more
+
 ## 0.29.0 (2026-07-07)
 
 - add: German (DE) interface language — full UI, help pages, and demo catalog content translated, selectable alongside English and French
