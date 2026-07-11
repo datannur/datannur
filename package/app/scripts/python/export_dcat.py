@@ -73,6 +73,57 @@ LICENSE_URIS = {
     "cc by 4.0": "https://creativecommons.org/licenses/by/4.0/",
 }
 
+# Sentence templates for opt-in synthesized fallback descriptions
+# (`synthesize_missing_descriptions` config flag), per catalog language.
+DESCRIPTION_TEMPLATES = {
+    "en": {
+        "publication": "This data publication is provided{publisher}.",
+        "dataset": "This dataset is provided{publisher}.",
+        "publisher": " by {name}",
+        "formats": "Available formats: {values}.",
+        "themes": "Themes: {values}.",
+        "temporal": "Temporal coverage: {value}.",
+        "range": "{start} to {end}",
+        "and": " and ",
+    },
+    "fr": {
+        "publication": "Cette publication de données est mise à disposition{publisher}.",
+        "dataset": "Ce jeu de données est mis à disposition{publisher}.",
+        "publisher": " par {name}",
+        "formats": "Formats disponibles : {values}.",
+        "themes": "Thèmes : {values}.",
+        "temporal": "Couverture temporelle : {value}.",
+        "range": "{start} à {end}",
+        "and": " et ",
+    },
+    "de": {
+        "publication": "Diese Datenpublikation wird{publisher} bereitgestellt.",
+        "dataset": "Dieser Datensatz wird{publisher} bereitgestellt.",
+        "publisher": " von {name}",
+        "formats": "Verfügbare Formate: {values}.",
+        "themes": "Themen: {values}.",
+        "temporal": "Zeitliche Abdeckung: {value}.",
+        "range": "{start} bis {end}",
+        "and": " und ",
+    },
+    "it": {
+        "publication": "Questa pubblicazione di dati è messa a disposizione{publisher}.",
+        "dataset": "Questo set di dati è messo a disposizione{publisher}.",
+        "publisher": " da {name}",
+        "formats": "Formati disponibili: {values}.",
+        "themes": "Temi: {values}.",
+        "temporal": "Copertura temporale: {value}.",
+        "range": "dal {start} al {end}",
+        "and": " e ",
+    },
+}
+
+
+def _join_with_conjunction(values: List[str], conjunction: str) -> str:
+    if len(values) == 1:
+        return values[0]
+    return f"{', '.join(values[:-1])}{conjunction}{values[-1]}"
+
 
 class DCATExporter:
     """Export datannur catalog to DCAT-AP-CH format"""
@@ -100,6 +151,7 @@ class DCATExporter:
             self.languages = [self.default_language, *self.languages]
         # Target profile: "eu" (default, DCAT-AP 3 / GeoDCAT-AP) or "ch" (eCH-0200)
         self.profile = self.config.get("profile", "eu")
+        self.synthesized_description_ids: set = set()
         self.catalog_publisher_uri = None
         self.catalog_contact_uri = None
 
@@ -137,6 +189,88 @@ class DCATExporter:
         with open(db_dir / "doc.json", "r", encoding="utf-8") as f:
             docs = json.load(f)
             self.docs = {doc["id"]: doc for doc in docs}
+
+    def synthesize_missing_descriptions(self) -> int:
+        """Fill missing descriptions on export items from standard catalog fields.
+
+        Opt-in (`synthesize_missing_descriptions` config flag), export-time only:
+        the text never reaches the catalog data, and the items are tracked so
+        field coverage and validation keep reporting the gap.
+        """
+        datasets_by_folder = self._get_datasets_by_publication_folder()
+        for item in self._get_report_items():
+            if self._localized_fields(item, "description"):
+                continue
+            children = datasets_by_folder.get(item["id"])
+            descriptions = self._build_synthetic_descriptions(item, children)
+            # Base field is English by convention; other languages get suffixed fields
+            item["description"] = descriptions.pop("en", None) or next(
+                iter(descriptions.values())
+            )
+            for language, text in descriptions.items():
+                item[f"description:{language}"] = text
+            self.synthesized_description_ids.add(item["id"])
+        return len(self.synthesized_description_ids)
+
+    def _build_synthetic_descriptions(
+        self, item: Dict, child_datasets: Optional[List[Dict]] = None
+    ) -> Dict[str, str]:
+        is_publication = child_datasets is not None
+        sources = child_datasets if is_publication else [item]
+        formats = sorted(
+            {
+                str(source.get("delivery_format")).upper()
+                for source in sources
+                if source.get("delivery_format")
+            }
+        )
+        publisher = self.organizations.get(item.get("owner_organization_id"), {})
+        item_tags = [
+            self.tags[tag_id]
+            for tag_id in self._split_ids(item.get("tag_ids"))
+            if tag_id in self.tags
+        ]
+        start_date = str(item.get("start_date") or "").strip()
+        end_date = str(item.get("end_date") or "").strip()
+
+        descriptions: Dict[str, str] = {}
+        for language in self.languages:
+            templates = DESCRIPTION_TEMPLATES.get(language)
+            if templates is None:
+                continue
+            publisher_name = localized_field(publisher, "name", language)
+            intro_key = "publication" if is_publication else "dataset"
+            publisher_part = (
+                templates["publisher"].format(name=publisher_name)
+                if publisher_name
+                else ""
+            )
+            parts = [templates[intro_key].format(publisher=publisher_part)]
+            if formats:
+                parts.append(
+                    templates["formats"].format(
+                        values=_join_with_conjunction(formats, templates["and"])
+                    )
+                )
+            theme_names = [
+                name
+                for tag in item_tags
+                if (name := localized_field(tag, "name", language))
+            ]
+            if theme_names:
+                parts.append(
+                    templates["themes"].format(
+                        values=_join_with_conjunction(theme_names, templates["and"])
+                    )
+                )
+            if start_date and end_date:
+                temporal = templates["range"].format(start=start_date, end=end_date)
+            else:
+                temporal = start_date or end_date
+            if temporal:
+                parts.append(templates["temporal"].format(value=temporal))
+            descriptions[language] = " ".join(parts)
+        return descriptions
 
     def create_catalog(self):
         """Create the main DCAT Catalog"""
@@ -841,6 +975,12 @@ class DCATExporter:
                 "Dataset description is missing.",
                 "description",
             )
+        elif item.get("id") in self.synthesized_description_ids:
+            add_warning(
+                "synthesized_description",
+                "Description was synthesized from catalog fields (publisher, formats, themes, temporal coverage) — consider writing a real one.",
+                "description",
+            )
         if not item.get("owner_organization_id"):
             add_warning(
                 "missing_publisher",
@@ -938,6 +1078,7 @@ class DCATExporter:
         return {
             "datasets": self.dcat_dataset_count or len(report_items),
             "distributions": len(self.distributions),
+            "synthesizedDescriptions": len(self.synthesized_description_ids),
             "publishers": len(publishers),
             "licenses": dict(licenses.most_common()),
             "formats": dict(formats.most_common()),
@@ -989,7 +1130,12 @@ class DCATExporter:
             ),
             "description": coverage(
                 "Description",
-                sum(1 for item in report_items if item.get("description")),
+                sum(
+                    1
+                    for item in report_items
+                    if item.get("description")
+                    and item["id"] not in self.synthesized_description_ids
+                ),
             ),
             "publisher": coverage(
                 "Publisher",
@@ -1157,6 +1303,7 @@ DEFAULT_CONFIG = {
     "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
     "default_language": "en",
     "languages": SUPPORTED_LANGUAGES,
+    "synthesize_missing_descriptions": False,
 }
 
 
@@ -1196,6 +1343,10 @@ def main():
     print(f"  ✓ {len(exporter.datasets)} datasets")
     print(f"  ✓ {len(exporter.organizations)} organizations")
     print(f"  ✓ {len(exporter.tags)} tags")
+    if config.get("synthesize_missing_descriptions"):
+        synthesized = exporter.synthesize_missing_descriptions()
+        if synthesized:
+            print(f"  ✓ {synthesized} missing description(s) synthesized")
     print()
 
     print("Creating DCAT catalog...")
