@@ -40,8 +40,9 @@
     >
       <option value="auto">Auto</option>
       <option value="en">EN</option>
-      <option value="fr">FR</option>
       <option value="de">DE</option>
+      <option value="fr">FR</option>
+      <option value="it">IT</option>
     </select>
   </div>
   {#if label}

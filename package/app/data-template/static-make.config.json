@@ -7,7 +7,7 @@
   "port": 8080,
   "firstPageTimeoutMs": 10000,
   "routeTimeoutMs": 3000,
-  "languages": ["en", "fr", "de"],
+  "languages": ["en", "fr", "de", "it"],
   "entities": ["organization", "folder", "tag", "concept", "doc", "dataset"],
   "routes": [
     "",

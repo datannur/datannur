@@ -1,6 +1,6 @@
 import type { en } from './en'
 
-export type Locale = 'en' | 'fr' | 'de'
+export type Locale = 'en' | 'fr' | 'de' | 'it'
 export type LanguageOption = 'auto' | Locale
 type WidenStringValues<T> = {
   readonly [Key in keyof T]: T[Key] extends string

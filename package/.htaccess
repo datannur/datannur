@@ -21,26 +21,27 @@ RewriteRule ^(.+/)?data/(.+)$ data/$2 [L]
 RewriteRule ^fr(?:/|$) - [E=DATANNUR_LANG:fr]
 RewriteRule ^en(?:/|$) - [E=DATANNUR_LANG:en]
 RewriteRule ^de(?:/|$) - [E=DATANNUR_LANG:de]
+RewriteRule ^it(?:/|$) - [E=DATANNUR_LANG:it]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/index.html -f
-RewriteRule ^(en|fr|de)/?$ data/static/$1/index.html [L]
+RewriteRule ^(en|fr|de|it)/?$ data/static/$1/index.html [L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html -f
-RewriteRule ^(en|fr|de)/([a-zA-Z0-9_\-]+)$ data/static/$1/$2.html [L]
+RewriteRule ^(en|fr|de|it)/([a-zA-Z0-9_\-]+)$ data/static/$1/$2.html [L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2.html !-f
-RewriteRule ^(en|fr|de)/([a-zA-Z0-9_\-]+)$ - [R=404,L]
+RewriteRule ^(en|fr|de|it)/([a-zA-Z0-9_\-]+)$ - [R=404,L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2 -d
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2/$3.html -f
-RewriteRule ^(en|fr|de)/([a-zA-Z0-9_\-]+)/([^/]+)$ data/static/$1/$2/$3.html [L]
+RewriteRule ^(en|fr|de|it)/([a-zA-Z0-9_\-]+)/([^/]+)$ data/static/$1/$2/$3.html [L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2 -d
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2/$3.html !-f
-RewriteRule ^(en|fr|de)/([a-zA-Z0-9_\-]+)/([^/]+)$ - [R=404,L]
+RewriteRule ^(en|fr|de|it)/([a-zA-Z0-9_\-]+)/([^/]+)$ - [R=404,L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/$1/$2 !-d
-RewriteRule ^(en|fr|de)/([a-zA-Z0-9_\-]+)/([^/]+)$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L]
+RewriteRule ^(en|fr|de|it)/([a-zA-Z0-9_\-]+)/([^/]+)$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
@@ -59,6 +60,11 @@ RewriteRule ^ - [E=DATANNUR_LANG:de]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
+RewriteCond %{HTTP:Cookie} (^|;\s*)datannur-lang=it(;|$) [NC]
+RewriteRule ^ - [E=DATANNUR_LANG:it]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
 RewriteCond %{HTTP:Accept-Language} (^|,)\s*fr [NC]
 RewriteCond %{ENV:DATANNUR_LANG} ^$
 RewriteRule ^ - [E=DATANNUR_LANG:fr]
@@ -68,6 +74,12 @@ RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
 RewriteCond %{HTTP:Accept-Language} (^|,)\s*de [NC]
 RewriteCond %{ENV:DATANNUR_LANG} ^$
 RewriteRule ^ - [E=DATANNUR_LANG:de]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
+RewriteCond %{HTTP:Accept-Language} (^|,)\s*it [NC]
+RewriteCond %{ENV:DATANNUR_LANG} ^$
+RewriteRule ^ - [E=DATANNUR_LANG:it]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
@@ -83,7 +95,13 @@ RewriteRule ^$ %1de/ [R=302,L,NE]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
-RewriteCond %{ENV:DATANNUR_LANG} !^(fr|de)$
+RewriteCond %{ENV:DATANNUR_LANG} ^it$
+RewriteCond %{THE_REQUEST} \s([^\s?]*/)[?\s] [NC]
+RewriteRule ^$ %1it/ [R=302,L,NE]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
+RewriteCond %{ENV:DATANNUR_LANG} !^(fr|de|it)$
 RewriteCond %{THE_REQUEST} \s([^\s?]*/)[?\s] [NC]
 RewriteRule ^$ %1en/ [R=302,L,NE]
 
@@ -101,7 +119,13 @@ RewriteRule ^([a-zA-Z0-9_\-]+(/[^/]+)?)$ %1de/%2 [R=302,L,NE]
 
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
 RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
-RewriteCond %{ENV:DATANNUR_LANG} !^(fr|de)$
+RewriteCond %{ENV:DATANNUR_LANG} ^it$
+RewriteCond %{THE_REQUEST} \s([^\s?]*/)([a-zA-Z0-9_\-]+(/[^/?\s]+)?)[?\s] [NC]
+RewriteRule ^([a-zA-Z0-9_\-]+(/[^/]+)?)$ %1it/%2 [R=302,L,NE]
+
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/en/index.html -f [OR]
+RewriteCond %{CONTEXT_DOCUMENT_ROOT}/data/static/fr/index.html -f
+RewriteCond %{ENV:DATANNUR_LANG} !^(fr|de|it)$
 RewriteCond %{THE_REQUEST} \s([^\s?]*/)([a-zA-Z0-9_\-]+(/[^/?\s]+)?)[?\s] [NC]
 RewriteRule ^([a-zA-Z0-9_\-]+(/[^/]+)?)$ %1en/%2 [R=302,L,NE]
 
@@ -137,7 +161,11 @@ RewriteRule ^([a-zA-Z0-9_\-]+)/([^/]+)$ index.html [E=DATANNUR_CLEAN_ROUTING:1,L
   ErrorDocument 404 /de/_error
 </If>
 
-<If "-f '%{DOCUMENT_ROOT}/data/static/en/_error.html' && %{ENV:DATANNUR_LANG} != 'fr' && %{ENV:DATANNUR_LANG} != 'de'">
+<If "-f '%{DOCUMENT_ROOT}/data/static/it/_error.html' && %{ENV:DATANNUR_LANG} == 'it'">
+  ErrorDocument 404 /it/_error
+</If>
+
+<If "-f '%{DOCUMENT_ROOT}/data/static/en/_error.html' && %{ENV:DATANNUR_LANG} != 'fr' && %{ENV:DATANNUR_LANG} != 'de' && %{ENV:DATANNUR_LANG} != 'it'">
   ErrorDocument 404 /en/_error
 </If>
 

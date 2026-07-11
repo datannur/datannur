@@ -11,6 +11,7 @@
   import aboutFileEn from '@markdown/about-folder.en.md?raw'
   import aboutFileFr from '@markdown/about-folder.fr.md?raw'
   import aboutFileDe from '@markdown/about-folder.de.md?raw'
+  import aboutFileIt from '@markdown/about-folder.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -33,7 +34,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'folder', items: folders }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 
   const nbFolder = folders.length

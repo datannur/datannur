@@ -20,7 +20,7 @@ python3 datannur.py static-deploy
 
 - **domain**: Your public domain (e.g., `"https://yourdomain.com"`) - required for sitemap generation when `indexSeo: true`
 - **indexSeo**: `true` to allow search engine indexing, `false` to add `noindex` meta tag (default: `false`)
-- **languages**: Language folders to generate, for example `["en", "fr", "de"]`; when set, static pages are written under language-prefixed paths such as `/en/datasets`, `/fr/datasets`, and `/de/datasets`
+- **languages**: Language folders to generate, for example `["en", "fr", "de", "it"]`; when set, static pages are written under language-prefixed paths such as `/en/datasets`, `/fr/datasets`, `/de/datasets`, and `/it/datasets`
 - **entities**: Which entity types to generate static pages for
 - **routes**: Which routes to pre-generate
 
@@ -33,7 +33,7 @@ The generated package includes an `.htaccess` file for Apache deployments, inclu
 Apache deployment provides:
 
 - Clean application URLs such as `/dataset/accident_route`
-- Language-prefixed static URLs such as `/en/dataset/accident_route`, `/fr/dataset/accident_route`, and `/de/dataset/accident_route` when multilingual static generation is enabled
+- Language-prefixed static URLs such as `/en/dataset/accident_route`, `/fr/dataset/accident_route`, `/de/dataset/accident_route`, and `/it/dataset/accident_route` when multilingual static generation is enabled
 - Static HTML pages when generated, with SPA fallback when a static page is missing
 - Public API entry points under `/api/`, including Raw API docs and REST API routes
 - PHP LLM proxy endpoints under `/api/llm/` when LLM web integration is enabled

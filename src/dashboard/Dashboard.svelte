@@ -6,6 +6,7 @@
   import { buildDashboard } from './build-dashboard'
   import Render from '@lib/render'
   import { getCurrentLocale } from '@i18n/i18n'
+  import { getDateLocale } from '@i18n/locale'
   import { t } from '@i18n/messages'
   import { preserveScroll } from '@lib/preserve-scroll'
   import type {
@@ -19,8 +20,7 @@
 
   const priorityTargetVisibleLimit = 4
   const locale = getCurrentLocale()
-  const dateLocale =
-    locale === 'fr' ? 'fr-CH' : locale === 'de' ? 'de-CH' : 'en'
+  const dateLocale = getDateLocale(locale)
   const metricNumberFormatter = new Intl.NumberFormat(locale, {
     useGrouping: true,
   })

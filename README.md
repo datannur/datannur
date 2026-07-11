@@ -59,7 +59,7 @@ The datannur app is the portable catalog interface that runs from a single `inde
 - **Portable** - Works locally, on shared drives, or cloud storage
 - **Structured metadata** - Organizes catalogs around 8 core concepts: Organization, Folder, Tag, Concept, Doc, Dataset, Variable, and Enumeration
 - **Browser-isolated** - Runs in the browser sandbox, with no direct system access
-- **Multilingual interface** - English by default, with French and German support and browser language detection; Italian and Spanish are planned soon
+- **Multilingual interface** - English by default, with French, German, and Italian support and browser language detection
 
 ## Documentation
 

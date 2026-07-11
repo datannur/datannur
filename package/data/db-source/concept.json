@@ -4,63 +4,77 @@
     "name": "Income",
     "name:fr": "Revenu",
     "name:de": "Einkommen",
+    "name:it": "Reddito",
     "description": "All monetary resources received by a person, household, or economic unit over a given period.",
     "description:fr": "Ensemble des ressources monétaires perçues par une personne, un ménage ou une unité économique sur une période donnée.",
-    "description:de": "Gesamtheit der Geldmittel, die eine Person, ein Haushalt oder eine Wirtschaftseinheit in einem bestimmten Zeitraum erhält."
+    "description:de": "Gesamtheit der Geldmittel, die eine Person, ein Haushalt oder eine Wirtschaftseinheit in einem bestimmten Zeitraum erhält.",
+    "description:it": "Insieme delle risorse monetarie percepite da una persona, un'economia domestica o un'unità economica in un determinato periodo."
   },
   {
     "id": "population",
     "name": "Population",
     "name:fr": "Population",
     "name:de": "Bevölkerung",
+    "name:it": "Popolazione",
     "description": "All people residing in a territory or belonging to an observed group.",
     "description:fr": "Ensemble des personnes résidant dans un territoire ou appartenant à un groupe observé.",
-    "description:de": "Gesamtheit der Personen, die in einem Gebiet wohnen oder zu einer beobachteten Gruppe gehören."
+    "description:de": "Gesamtheit der Personen, die in einem Gebiet wohnen oder zu einer beobachteten Gruppe gehören.",
+    "description:it": "Insieme delle persone residenti in un territorio o appartenenti a un gruppo osservato."
   },
   {
     "id": "temperature",
     "name": "Temperature",
     "name:fr": "Température",
     "name:de": "Temperatur",
+    "name:it": "Temperatura",
     "description": "Physical quantity measuring the thermal level observed in a place or environment.",
     "description:fr": "Grandeur physique mesurant le niveau thermique observé dans un lieu ou un milieu.",
-    "description:de": "Physikalische Grösse zur Messung des in einem Ort oder Umfeld beobachteten Wärmeniveaus."
+    "description:de": "Physikalische Grösse zur Messung des in einem Ort oder Umfeld beobachteten Wärmeniveaus.",
+    "description:it": "Grandezza fisica che misura il livello termico osservato in un luogo o in un ambiente."
   },
   {
     "id": "coordonnee_geographique",
     "name": "Geographic coordinate",
     "name:fr": "Coordonnée géographique",
     "name:de": "Geografische Koordinate",
+    "name:it": "Coordinata geografica",
     "description": "Position value used to locate an object or place in a spatial reference system.",
     "description:fr": "Valeur de position permettant de localiser un objet ou un lieu dans un système de référence spatial.",
-    "description:de": "Positionswert zur Verortung eines Objekts oder Orts in einem räumlichen Referenzsystem."
+    "description:de": "Positionswert zur Verortung eines Objekts oder Orts in einem räumlichen Referenzsystem.",
+    "description:it": "Valore di posizione che consente di localizzare un oggetto o un luogo in un sistema di riferimento spaziale."
   },
   {
     "id": "accident",
     "name": "Accident",
     "name:fr": "Accident",
     "name:de": "Unfall",
+    "name:it": "Incidente",
     "description": "Unintentional event causing damage, injury, or disruption of activity.",
     "description:fr": "Événement non intentionnel provoquant un dommage, une blessure ou une perturbation d'activité.",
-    "description:de": "Unbeabsichtigtes Ereignis, das einen Schaden, eine Verletzung oder eine Störung der Tätigkeit verursacht."
+    "description:de": "Unbeabsichtigtes Ereignis, das einen Schaden, eine Verletzung oder eine Störung der Tätigkeit verursacht.",
+    "description:it": "Evento non intenzionale che provoca un danno, una lesione o un'interruzione dell'attività."
   },
   {
     "id": "emploi",
     "name": "Employment",
     "name:fr": "Emploi",
     "name:de": "Beschäftigung",
+    "name:it": "Occupazione",
     "description": "Situation or characteristics related to professional activity or the employment relationship.",
     "description:fr": "Situation ou caractéristiques liées à l'exercice d'une activité professionnelle ou à la relation d'emploi.",
-    "description:de": "Situation oder Merkmale im Zusammenhang mit der Berufstätigkeit oder dem Arbeitsverhältnis."
+    "description:de": "Situation oder Merkmale im Zusammenhang mit der Berufstätigkeit oder dem Arbeitsverhältnis.",
+    "description:it": "Situazione o caratteristiche legate all'esercizio di un'attività professionale o al rapporto di lavoro."
   },
   {
     "id": "cout",
     "name": "Cost",
     "name:fr": "Coût",
     "name:de": "Kosten",
+    "name:it": "Costo",
     "description": "Amount incurred or borne as an expense, investment, or charge.",
     "description:fr": "Montant engagé ou supporté au titre d'une dépense, d'un investissement ou d'une charge.",
-    "description:de": "Betrag, der als Ausgabe, Investition oder Aufwand eingegangen oder getragen wird."
+    "description:de": "Betrag, der als Ausgabe, Investition oder Aufwand eingegangen oder getragen wird.",
+    "description:it": "Importo impegnato o sostenuto a titolo di spesa, investimento o onere."
   },
   {
     "id": "revenu_total_brut",
@@ -68,9 +82,11 @@
     "name": "Total gross income",
     "name:fr": "Revenu total brut",
     "name:de": "Bruttogesamteinkommen",
+    "name:it": "Reddito totale lordo",
     "description": "Total amount of income before deductions, taxes, and other mandatory charges.",
     "description:fr": "Montant total des revenus avant déductions, impôts et autres charges obligatoires.",
-    "description:de": "Gesamtbetrag der Einkommen vor Abzügen, Steuern und weiteren obligatorischen Abgaben."
+    "description:de": "Gesamtbetrag der Einkommen vor Abzügen, Steuern und weiteren obligatorischen Abgaben.",
+    "description:it": "Importo totale dei redditi prima di deduzioni, imposte e altri oneri obbligatori."
   },
   {
     "id": "revenu_total_net",
@@ -78,9 +94,11 @@
     "name": "Total net income",
     "name:fr": "Revenu total net",
     "name:de": "Nettogesamteinkommen",
+    "name:it": "Reddito totale netto",
     "description": "Total amount of income after deductions, taxes, and mandatory charges.",
     "description:fr": "Montant total des revenus après déductions, impôts et charges obligatoires.",
-    "description:de": "Gesamtbetrag der Einkommen nach Abzügen, Steuern und obligatorischen Abgaben."
+    "description:de": "Gesamtbetrag der Einkommen nach Abzügen, Steuern und obligatorischen Abgaben.",
+    "description:it": "Importo totale dei redditi dopo deduzioni, imposte e oneri obbligatori."
   },
   {
     "id": "revenu_par_personne",
@@ -88,9 +106,11 @@
     "name": "Income per person",
     "name:fr": "Revenu par personne",
     "name:de": "Einkommen pro Person",
+    "name:it": "Reddito per persona",
     "description": "Total income amount divided by the number of people in the household or observed group.",
     "description:fr": "Montant du revenu total rapporté au nombre de personnes composant le ménage ou le groupe observé.",
-    "description:de": "Gesamteinkommen im Verhältnis zur Anzahl der Personen im Haushalt oder in der beobachteten Gruppe."
+    "description:de": "Gesamteinkommen im Verhältnis zur Anzahl der Personen im Haushalt oder in der beobachteten Gruppe.",
+    "description:it": "Importo del reddito totale rapportato al numero di persone che compongono l'economia domestica o il gruppo osservato."
   },
   {
     "id": "revenu_median",
@@ -98,9 +118,11 @@
     "name": "Median income",
     "name:fr": "Revenu médian",
     "name:de": "Medianeinkommen",
+    "name:it": "Reddito mediano",
     "description": "Income level that divides the observed population into two equal parts: 50% below and 50% above.",
     "description:fr": "Niveau de revenu qui partage la population observée en deux parts égales : 50 % en dessous, 50 % au-dessus.",
-    "description:de": "Einkommensniveau, das die beobachtete Bevölkerung in zwei gleiche Teile teilt: 50 % darunter, 50 % darüber."
+    "description:de": "Einkommensniveau, das die beobachtete Bevölkerung in zwei gleiche Teile teilt: 50 % darunter, 50 % darüber.",
+    "description:it": "Livello di reddito che divide la popolazione osservata in due parti uguali: 50 % al di sotto e 50 % al di sopra."
   },
   {
     "id": "revenu_du_travail",
@@ -108,9 +130,11 @@
     "name": "Employment income",
     "name:fr": "Revenus du travail",
     "name:de": "Erwerbseinkommen",
+    "name:it": "Redditi da lavoro",
     "description": "Share of income coming directly from salaried or self-employed professional activity.",
     "description:fr": "Part des revenus provenant directement d'une activité professionnelle salariée ou indépendante.",
-    "description:de": "Anteil der Einkommen, die direkt aus einer unselbständigen oder selbständigen Erwerbstätigkeit stammen."
+    "description:de": "Anteil der Einkommen, die direkt aus einer unselbständigen oder selbständigen Erwerbstätigkeit stammen.",
+    "description:it": "Parte dei redditi proveniente direttamente da un'attività professionale dipendente o indipendente."
   },
   {
     "id": "revenu_du_capital",
@@ -118,9 +142,11 @@
     "name": "Capital income",
     "name:fr": "Revenus du capital",
     "name:de": "Kapitaleinkommen",
+    "name:it": "Redditi da capitale",
     "description": "Share of income coming from financial or real estate assets.",
     "description:fr": "Part des revenus provenant du patrimoine financier ou immobilier.",
-    "description:de": "Anteil der Einkommen, die aus Finanz- oder Immobilienvermögen stammen."
+    "description:de": "Anteil der Einkommen, die aus Finanz- oder Immobilienvermögen stammen.",
+    "description:it": "Parte dei redditi proveniente dal patrimonio finanziario o immobiliare."
   },
   {
     "id": "prestation_sociale",
@@ -128,9 +154,11 @@
     "name": "Social benefits",
     "name:fr": "Prestations sociales",
     "name:de": "Sozialleistungen",
+    "name:it": "Prestazioni sociali",
     "description": "Cash or in-kind transfers paid under social protection, such as pensions, allowances, or benefits.",
     "description:fr": "Transferts monétaires ou en nature versés au titre de la protection sociale, tels que rentes, allocations ou indemnités.",
-    "description:de": "Geld- oder Sachleistungen, die im Rahmen der sozialen Sicherheit ausgerichtet werden, wie Renten, Zulagen oder Entschädigungen."
+    "description:de": "Geld- oder Sachleistungen, die im Rahmen der sozialen Sicherheit ausgerichtet werden, wie Renten, Zulagen oder Entschädigungen.",
+    "description:it": "Trasferimenti in denaro o in natura versati a titolo di protezione sociale, come rendite, assegni o indennità."
   },
   {
     "id": "population_totale",
@@ -138,9 +166,11 @@
     "name": "Total population",
     "name:fr": "Population totale",
     "name:de": "Gesamtbevölkerung",
+    "name:it": "Popolazione totale",
     "description": "Total number of people residing in the observed territory.",
     "description:fr": "Nombre total de personnes résidant dans le territoire observé.",
-    "description:de": "Gesamtzahl der im beobachteten Gebiet wohnhaften Personen."
+    "description:de": "Gesamtzahl der im beobachteten Gebiet wohnhaften Personen.",
+    "description:it": "Numero totale di persone residenti nel territorio osservato."
   },
   {
     "id": "population_suisse",
@@ -148,9 +178,11 @@
     "name": "Swiss population",
     "name:fr": "Population suisse",
     "name:de": "Schweizer Bevölkerung",
+    "name:it": "Popolazione svizzera",
     "description": "Number of people of Swiss nationality in the observed territory.",
     "description:fr": "Nombre de personnes de nationalité suisse dans le territoire observé.",
-    "description:de": "Anzahl der Personen mit Schweizer Staatsangehörigkeit im beobachteten Gebiet."
+    "description:de": "Anzahl der Personen mit Schweizer Staatsangehörigkeit im beobachteten Gebiet.",
+    "description:it": "Numero di persone di nazionalità svizzera nel territorio osservato."
   },
   {
     "id": "population_etrangere",
@@ -158,9 +190,11 @@
     "name": "Foreign population",
     "name:fr": "Population étrangère",
     "name:de": "Ausländische Bevölkerung",
+    "name:it": "Popolazione straniera",
     "description": "Number of people of foreign nationality in the observed territory.",
     "description:fr": "Nombre de personnes de nationalité étrangère dans le territoire observé.",
-    "description:de": "Anzahl der Personen mit ausländischer Staatsangehörigkeit im beobachteten Gebiet."
+    "description:de": "Anzahl der Personen mit ausländischer Staatsangehörigkeit im beobachteten Gebiet.",
+    "description:it": "Numero di persone di nazionalità straniera nel territorio osservato."
   },
   {
     "id": "densite_population",
@@ -168,9 +202,11 @@
     "name": "Population density",
     "name:fr": "Densité de population",
     "name:de": "Bevölkerungsdichte",
+    "name:it": "Densità di popolazione",
     "description": "Ratio between the number of inhabitants and the area of the territory, usually expressed in inhabitants per square kilometer.",
     "description:fr": "Rapport entre le nombre d'habitants et la surface du territoire, généralement exprimé en habitants par kilomètre carré.",
-    "description:de": "Verhältnis zwischen der Anzahl der Einwohner und der Fläche des Gebiets, in der Regel ausgedrückt in Einwohnern pro Quadratkilometer."
+    "description:de": "Verhältnis zwischen der Anzahl der Einwohner und der Fläche des Gebiets, in der Regel ausgedrückt in Einwohnern pro Quadratkilometer.",
+    "description:it": "Rapporto tra il numero di abitanti e la superficie del territorio, generalmente espresso in abitanti per chilometro quadrato."
   },
   {
     "id": "nombre_beneficiaires",
@@ -178,9 +214,11 @@
     "name": "Number of beneficiaries",
     "name:fr": "Nombre de bénéficiaires",
     "name:de": "Anzahl der Leistungsbezüger",
+    "name:it": "Numero di beneficiari",
     "description": "Number of people effectively receiving a service, benefit, or scheme.",
     "description:fr": "Nombre de personnes bénéficiant effectivement d'un service, d'une prestation ou d'un dispositif.",
-    "description:de": "Anzahl der Personen, die tatsächlich eine Dienstleistung, Leistung oder Massnahme in Anspruch nehmen."
+    "description:de": "Anzahl der Personen, die tatsächlich eine Dienstleistung, Leistung oder Massnahme in Anspruch nehmen.",
+    "description:it": "Numero di persone che beneficiano effettivamente di un servizio, di una prestazione o di un dispositivo."
   },
   {
     "id": "temperature_moyenne",
@@ -188,9 +226,11 @@
     "name": "Average temperature",
     "name:fr": "Température moyenne",
     "name:de": "Durchschnittstemperatur",
+    "name:it": "Temperatura media",
     "description": "Average temperature value observed over the reference period.",
     "description:fr": "Valeur moyenne de la température observée sur la période de référence.",
-    "description:de": "Durchschnittlicher Temperaturwert, der im Referenzzeitraum beobachtet wurde."
+    "description:de": "Durchschnittlicher Temperaturwert, der im Referenzzeitraum beobachtet wurde.",
+    "description:it": "Valore medio della temperatura osservata nel periodo di riferimento."
   },
   {
     "id": "temperature_minimale",
@@ -198,9 +238,11 @@
     "name": "Minimum temperature",
     "name:fr": "Température minimale",
     "name:de": "Minimaltemperatur",
+    "name:it": "Temperatura minima",
     "description": "Minimum temperature value observed over the reference period.",
     "description:fr": "Valeur minimale de la température observée sur la période de référence.",
-    "description:de": "Minimaler Temperaturwert, der im Referenzzeitraum beobachtet wurde."
+    "description:de": "Minimaler Temperaturwert, der im Referenzzeitraum beobachtet wurde.",
+    "description:it": "Valore minimo della temperatura osservata nel periodo di riferimento."
   },
   {
     "id": "temperature_maximale",
@@ -208,9 +250,11 @@
     "name": "Maximum temperature",
     "name:fr": "Température maximale",
     "name:de": "Maximaltemperatur",
+    "name:it": "Temperatura massima",
     "description": "Maximum temperature value observed over the reference period.",
     "description:fr": "Valeur maximale de la température observée sur la période de référence.",
-    "description:de": "Maximaler Temperaturwert, der im Referenzzeitraum beobachtet wurde."
+    "description:de": "Maximaler Temperaturwert, der im Referenzzeitraum beobachtet wurde.",
+    "description:it": "Valore massimo della temperatura osservata nel periodo di riferimento."
   },
   {
     "id": "coordonnee_x_lv95",
@@ -218,9 +262,11 @@
     "name": "LV95 X coordinate",
     "name:fr": "Coordonnée X LV95",
     "name:de": "LV95-X-Koordinate",
+    "name:it": "Coordinata X LV95",
     "description": "Position value on the east-west axis in the Swiss CH1903+ / LV95 coordinate system.",
     "description:fr": "Valeur de position sur l'axe est-ouest dans le système de coordonnées suisses CH1903+ / LV95.",
-    "description:de": "Positionswert auf der Ost-West-Achse im Schweizer Koordinatensystem CH1903+ / LV95."
+    "description:de": "Positionswert auf der Ost-West-Achse im Schweizer Koordinatensystem CH1903+ / LV95.",
+    "description:it": "Valore di posizione sull'asse est-ovest nel sistema di coordinate svizzero CH1903+ / LV95."
   },
   {
     "id": "coordonnee_y_lv95",
@@ -228,9 +274,11 @@
     "name": "LV95 Y coordinate",
     "name:fr": "Coordonnée Y LV95",
     "name:de": "LV95-Y-Koordinate",
+    "name:it": "Coordinata Y LV95",
     "description": "Position value on the north-south axis in the Swiss CH1903+ / LV95 coordinate system.",
     "description:fr": "Valeur de position sur l'axe nord-sud dans le système de coordonnées suisses CH1903+ / LV95.",
-    "description:de": "Positionswert auf der Nord-Süd-Achse im Schweizer Koordinatensystem CH1903+ / LV95."
+    "description:de": "Positionswert auf der Nord-Süd-Achse im Schweizer Koordinatensystem CH1903+ / LV95.",
+    "description:it": "Valore di posizione sull'asse nord-sud nel sistema di coordinate svizzero CH1903+ / LV95."
   },
   {
     "id": "type_accident",
@@ -238,9 +286,11 @@
     "name": "Accident type",
     "name:fr": "Type d'accident",
     "name:de": "Unfalltyp",
+    "name:it": "Tipo di incidente",
     "description": "Category describing the nature of the accident, such as collision, fall, or cut.",
     "description:fr": "Catégorie décrivant la nature de l'accident, par exemple collision, chute ou coupure.",
-    "description:de": "Kategorie, die die Art des Unfalls beschreibt, zum Beispiel Kollision, Sturz oder Schnittverletzung."
+    "description:de": "Kategorie, die die Art des Unfalls beschreibt, zum Beispiel Kollision, Sturz oder Schnittverletzung.",
+    "description:it": "Categoria che descrive la natura dell'incidente, ad esempio collisione, caduta o taglio."
   },
   {
     "id": "gravite_accident",
@@ -248,9 +298,11 @@
     "name": "Accident severity",
     "name:fr": "Gravité d'accident",
     "name:de": "Unfallschwere",
+    "name:it": "Gravità dell'incidente",
     "description": "Severity level assigned to an accident according to its human or material consequences.",
     "description:fr": "Niveau de sévérité attribué à un accident selon ses conséquences humaines ou matérielles.",
-    "description:de": "Schweregrad, der einem Unfall aufgrund seiner personellen oder materiellen Folgen zugeordnet wird."
+    "description:de": "Schweregrad, der einem Unfall aufgrund seiner personellen oder materiellen Folgen zugeordnet wird.",
+    "description:it": "Livello di gravità attribuito a un incidente in base alle sue conseguenze umane o materiali."
   },
   {
     "id": "nombre_employes",
@@ -258,9 +310,11 @@
     "name": "Number of employees",
     "name:fr": "Nombre d'employés",
     "name:de": "Anzahl der Beschäftigten",
+    "name:it": "Numero di dipendenti",
     "description": "Total number of people employed in the observed entity, service, or sector.",
     "description:fr": "Nombre total de personnes employées dans l'entité, le service ou le secteur observé.",
-    "description:de": "Gesamtzahl der in der beobachteten Einheit, Dienststelle oder Branche beschäftigten Personen."
+    "description:de": "Gesamtzahl der in der beobachteten Einheit, Dienststelle oder Branche beschäftigten Personen.",
+    "description:it": "Numero totale di persone impiegate nell'entità, nel servizio o nel settore osservato."
   },
   {
     "id": "nombre_entreprises",
@@ -268,9 +322,11 @@
     "name": "Number of companies",
     "name:fr": "Nombre d'entreprises",
     "name:de": "Anzahl der Unternehmen",
+    "name:it": "Numero di imprese",
     "description": "Total number of companies recorded within the observed scope.",
     "description:fr": "Nombre total d'entreprises recensées dans le périmètre observé.",
-    "description:de": "Gesamtzahl der im beobachteten Bereich erfassten Unternehmen."
+    "description:de": "Gesamtzahl der im beobachteten Bereich erfassten Unternehmen.",
+    "description:it": "Numero totale di imprese censite nel perimetro osservato."
   },
   {
     "id": "niveau_formation",
@@ -278,9 +334,11 @@
     "name": "Education level",
     "name:fr": "Niveau de formation",
     "name:de": "Bildungsniveau",
+    "name:it": "Livello di formazione",
     "description": "Education level attained or required, expressed using a typology such as apprenticeship certificate, bachelor's, master's, or doctorate.",
     "description:fr": "Niveau de formation atteint ou requis, exprimé selon une typologie telle que CFC, Bachelor, Master ou Doctorat.",
-    "description:de": "Erreichtes oder gefordertes Bildungsniveau, ausgedrückt anhand einer Typologie wie EFZ, Bachelor, Master oder Doktorat."
+    "description:de": "Erreichtes oder gefordertes Bildungsniveau, ausgedrückt anhand einer Typologie wie EFZ, Bachelor, Master oder Doktorat.",
+    "description:it": "Livello di formazione raggiunto o richiesto, espresso secondo una tipologia come AFC, Bachelor, Master o dottorato."
   },
   {
     "id": "type_contrat",
@@ -288,9 +346,11 @@
     "name": "Contract type",
     "name:fr": "Type de contrat",
     "name:de": "Vertragsart",
+    "name:it": "Tipo di contratto",
     "description": "Category of employment contract linking a person to an employer, such as permanent contract, fixed-term contract, or apprenticeship.",
     "description:fr": "Catégorie de contrat de travail liant une personne à un employeur, par exemple CDI, CDD ou apprentissage.",
-    "description:de": "Kategorie des Arbeitsvertrags, der eine Person mit einem Arbeitgeber verbindet, zum Beispiel unbefristeter Vertrag, befristeter Vertrag oder Lehrvertrag."
+    "description:de": "Kategorie des Arbeitsvertrags, der eine Person mit einem Arbeitgeber verbindet, zum Beispiel unbefristeter Vertrag, befristeter Vertrag oder Lehrvertrag.",
+    "description:it": "Categoria di contratto di lavoro che lega una persona a un datore di lavoro, ad esempio contratto a tempo indeterminato, a tempo determinato o di apprendistato."
   },
   {
     "id": "statut_emploi",
@@ -298,9 +358,11 @@
     "name": "Employment status",
     "name:fr": "Statut d'emploi",
     "name:de": "Beschäftigungsstatus",
+    "name:it": "Stato occupazionale",
     "description": "A person's situation with respect to employment, such as full-time, part-time, unemployment, or inactivity.",
     "description:fr": "Situation d'une personne au regard de l'emploi, par exemple temps plein, temps partiel, chômage ou inactivité.",
-    "description:de": "Situation einer Person in Bezug auf die Beschäftigung, zum Beispiel Vollzeit, Teilzeit, Arbeitslosigkeit oder Nichterwerbstätigkeit."
+    "description:de": "Situation einer Person in Bezug auf die Beschäftigung, zum Beispiel Vollzeit, Teilzeit, Arbeitslosigkeit oder Nichterwerbstätigkeit.",
+    "description:it": "Situazione di una persona rispetto all'occupazione, ad esempio tempo pieno, tempo parziale, disoccupazione o inattività."
   },
   {
     "id": "cout_investissement",
@@ -308,8 +370,10 @@
     "name": "Investment cost",
     "name:fr": "Coût d'investissement",
     "name:de": "Investitionskosten",
+    "name:it": "Costo d'investimento",
     "description": "Amount committed to finance an investment or durable equipment expenditure.",
     "description:fr": "Montant engagé pour financer un investissement ou une dépense d'équipement durable.",
-    "description:de": "Betrag, der zur Finanzierung einer Investition oder einer dauerhaften Ausrüstungsausgabe eingegangen wird."
+    "description:de": "Betrag, der zur Finanzierung einer Investition oder einer dauerhaften Ausrüstungsausgabe eingegangen wird.",
+    "description:it": "Importo impegnato per finanziare un investimento o una spesa in attrezzature durevoli."
   }
 ]

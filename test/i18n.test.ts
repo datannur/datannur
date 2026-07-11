@@ -10,6 +10,7 @@ import { currentLocale } from '@i18n/state'
 import { en } from '@i18n/en'
 import { fr } from '@i18n/fr'
 import { de } from '@i18n/de'
+import { it as italian } from '@i18n/it'
 
 function getTranslationKeys(
   value: { readonly [key: string]: unknown },
@@ -33,8 +34,10 @@ describe('i18n', () => {
     expect(getBrowserLocale(['fr-CA', 'en-US'])).toBe('fr')
     expect(getBrowserLocale(['de-DE', 'en-GB'])).toBe('de')
     expect(getBrowserLocale(['de-DE'])).toBe('de')
-    expect(getBrowserLocale(['it-IT', 'en-GB'])).toBe('en')
-    expect(getBrowserLocale(['it-IT'])).toBe('en')
+    expect(getBrowserLocale(['it-IT', 'en-GB'])).toBe('it')
+    expect(getBrowserLocale(['it-IT'])).toBe('it')
+    expect(getBrowserLocale(['es-ES', 'en-GB'])).toBe('en')
+    expect(getBrowserLocale(['es-ES'])).toBe('en')
   })
 
   it('should resolve locale precedence', () => {
@@ -60,8 +63,11 @@ describe('i18n', () => {
     const germanDocument = {
       querySelector: () => ({ getAttribute: () => 'de' }),
     }
-    const unsupportedDocument = {
+    const italianDocument = {
       querySelector: () => ({ getAttribute: () => 'it' }),
+    }
+    const unsupportedDocument = {
+      querySelector: () => ({ getAttribute: () => 'es' }),
     }
     const documentWithoutLocale = {
       querySelector: () => null,
@@ -69,6 +75,7 @@ describe('i18n', () => {
 
     expect(getDocumentLocale(document)).toBe('fr')
     expect(getDocumentLocale(germanDocument)).toBe('de')
+    expect(getDocumentLocale(italianDocument)).toBe('it')
     expect(getDocumentLocale(unsupportedDocument)).toBeUndefined()
     expect(getDocumentLocale(documentWithoutLocale)).toBeUndefined()
   })
@@ -91,6 +98,12 @@ describe('i18n', () => {
 
   it('should keep german translations structurally complete', () => {
     expect(getTranslationKeys(de).sort()).toEqual(getTranslationKeys(en).sort())
+  })
+
+  it('should keep italian translations structurally complete', () => {
+    expect(getTranslationKeys(italian).sort()).toEqual(
+      getTranslationKeys(en).sort(),
+    )
   })
 
   it('should translate representative UI labels', () => {

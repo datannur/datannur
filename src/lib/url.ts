@@ -8,7 +8,7 @@ const cleanRoutingCookie = 'datannur-routing=clean'
 const hashPrefix = '#/'
 const defaultHash = 'homepage'
 const indexPage = '_index'
-const supportedLocaleSegments = ['en', 'fr', 'de']
+const supportedLocaleSegments = ['en', 'fr', 'de', 'it']
 
 function stripLocaleSegment(path: string) {
   const segments = path.split('/').filter(Boolean)

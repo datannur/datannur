@@ -6,6 +6,7 @@
   import aboutFileEn from '@markdown/about-doc.en.md?raw'
   import aboutFileFr from '@markdown/about-doc.fr.md?raw'
   import aboutFileDe from '@markdown/about-doc.de.md?raw'
+  import aboutFileIt from '@markdown/about-doc.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -17,7 +18,7 @@
     docs,
     evolutions,
     stat: [{ entity: 'doc', items: docs }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 </script>
 

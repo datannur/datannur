@@ -11,6 +11,7 @@
   import aboutFileEn from '@markdown/about-concept.en.md?raw'
   import aboutFileFr from '@markdown/about-concept.fr.md?raw'
   import aboutFileDe from '@markdown/about-concept.de.md?raw'
+  import aboutFileIt from '@markdown/about-concept.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -30,7 +31,7 @@
     concepts,
     evolutions,
     stat: [{ entity: 'concept', items: concepts }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 
   const nbConcepts = concepts.length

@@ -33,10 +33,12 @@
     "name": "Canton abbreviations",
     "name:fr": "Sigle des cantons",
     "name:de": "Kantonskürzel",
+    "name:it": "Sigle dei cantoni",
     "type": "string",
     "description": "List of the 26 Swiss cantons and their abbreviations",
     "description:fr": "Liste des 26 cantons suisses et leur sigle",
-    "description:de": "Liste der 26 Schweizer Kantone und ihrer Kürzel"
+    "description:de": "Liste der 26 Schweizer Kantone und ihrer Kürzel",
+    "description:it": "Elenco dei 26 cantoni svizzeri e delle loro sigle"
   },
   {
     "id": "langue_sigle",
@@ -44,10 +46,12 @@
     "name": "Language abbreviations",
     "name:fr": "Sigle des langues",
     "name:de": "Sprachkürzel",
+    "name:it": "Sigle delle lingue",
     "type": "string",
     "description": "List of the 3 main Swiss languages and their abbreviations",
     "description:fr": "Liste des 3 principales langues suisses et leurs sigles",
-    "description:de": "Liste der 3 wichtigsten Schweizer Sprachen und ihrer Kürzel"
+    "description:de": "Liste der 3 wichtigsten Schweizer Sprachen und ihrer Kürzel",
+    "description:it": "Elenco delle 3 principali lingue svizzere e delle loro sigle"
   },
   {
     "id": "oui_non",
@@ -55,10 +59,12 @@
     "name": "Yes or no",
     "name:fr": "Oui ou non",
     "name:de": "Ja oder nein",
+    "name:it": "Sì o no",
     "type": "integer",
     "description": "Yes or no coded as 0 or 1",
     "description:fr": "Oui ou non codé en 0 ou 1",
-    "description:de": "Ja oder nein codiert als 0 oder 1"
+    "description:de": "Ja oder nein codiert als 0 oder 1",
+    "description:it": "Sì o no codificato come 0 o 1"
   },
   {
     "id": "vide",
@@ -66,9 +72,11 @@
     "name": "empty / missing",
     "name:fr": "vide / manquant",
     "name:de": "leer / fehlend",
+    "name:it": "vuoto / mancante",
     "type": "integer",
     "description": "Empty or missing value",
     "description:fr": "Valeur vide ou manquante",
-    "description:de": "Leerer oder fehlender Wert"
+    "description:de": "Leerer oder fehlender Wert",
+    "description:it": "Valore vuoto o mancante"
   }
 ]

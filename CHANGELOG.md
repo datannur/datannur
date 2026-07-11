@@ -1,7 +1,10 @@
 # datannur
 
-## Unreleased
+## 0.30.0 (2026-07-11)
 
+- add: Italian (IT) interface language — full UI, help pages, and demo catalog content translated, selectable alongside English, French, and German, with Apache .htaccess locale routing
+- add: multilingual documentation site — French, German, and Italian translations of all app docs pages alongside English, with a language switcher and localized search
+- fix: point the About features page and homepage links to the language-matched datannur.com pages (English and German previously landed on the French site)
 - fix: route the German (DE) locale in the Apache .htaccess — segment detection, cookie / Accept-Language auto-selection, redirects, and error documents
 - fix: show two frequency items before hover in the variable datatable (like the value column) when there are two or more
 

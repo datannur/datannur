@@ -11,6 +11,7 @@ const defaultResponseLanguage: { [locale in Locale]: string } = {
   en: 'English',
   fr: 'French',
   de: 'German',
+  it: 'Italian',
 }
 
 function replacePlaceholders(

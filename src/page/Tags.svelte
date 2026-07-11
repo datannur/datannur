@@ -11,6 +11,7 @@
   import aboutFileEn from '@markdown/about-tag.en.md?raw'
   import aboutFileFr from '@markdown/about-tag.fr.md?raw'
   import aboutFileDe from '@markdown/about-tag.de.md?raw'
+  import aboutFileIt from '@markdown/about-tag.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -28,7 +29,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'tag', items: tags }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 
   const nbTags = tags.length

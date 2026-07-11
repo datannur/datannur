@@ -1,11 +1,22 @@
 import type { LanguageOption, Locale } from './types'
 
-const supportedLocales: Locale[] = ['en', 'fr', 'de']
+const supportedLocales: Locale[] = ['en', 'fr', 'de', 'it']
 
 type LocaleDocument = {
   querySelector(
     selector: string,
   ): { getAttribute(name: string): string | null } | null
+}
+
+const dateLocales: { [locale in Locale]: string } = {
+  en: 'en',
+  fr: 'fr-CH',
+  de: 'de-CH',
+  it: 'it-CH',
+}
+
+export function getDateLocale(locale: Locale): string {
+  return dateLocales[locale]
 }
 
 export function isLocale(value: unknown): value is Locale {
