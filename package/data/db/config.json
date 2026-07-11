@@ -3,12 +3,14 @@
     "id": "contact_email",
     "value": "contact@datannur.com",
     "value:de": null,
-    "value:fr": null
+    "value:fr": null,
+    "value:it": null
   },
   {
     "id": "more_info",
     "value": "This version uses fictional data for demonstration purposes.",
     "value:de": "Diese Version verwendet fiktive Daten zu Demonstrationszwecken.",
-    "value:fr": "Cette version utilise des données fictives à des fins de démonstration."
+    "value:fr": "Cette version utilise des données fictives à des fins de démonstration.",
+    "value:it": "Questa versione utilizza dati fittizi a scopo dimostrativo."
   }
 ]

@@ -11,6 +11,7 @@
   import aboutFileEn from '@markdown/about-organization.en.md?raw'
   import aboutFileFr from '@markdown/about-organization.fr.md?raw'
   import aboutFileDe from '@markdown/about-organization.de.md?raw'
+  import aboutFileIt from '@markdown/about-organization.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -35,7 +36,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'organization', items: organizations }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 
   const nbOrganization = organizations.length

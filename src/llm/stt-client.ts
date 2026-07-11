@@ -31,12 +31,14 @@ const whisperLanguageByLocale = {
   en: 'en',
   fr: 'fr',
   de: 'de',
+  it: 'it',
 }
 
 const speechRecognitionLanguageByLocale = {
   en: 'en-US',
   fr: 'fr-FR',
   de: 'de-DE',
+  it: 'it-IT',
 }
 
 function getTranscriptionLanguage() {

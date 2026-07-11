@@ -1,6 +1,6 @@
 datannur ist ein portabler Datenkatalog: Er läuft im Browser, benötigt keinen Server und vereint die Informationen, die man braucht, um Daten zu finden, zu verstehen und zu nutzen.
 
-Diese Seite gibt einen schnellen Überblick über die wichtigsten Funktionen. Für eine ausführlichere Darstellung siehe die [vollständige Version auf der Website](https://datannur.com/fonctionnalites/). Für Installation, Konfiguration und Integrationen siehe die [technische Dokumentation](https://docs.datannur.com/app/).
+Diese Seite gibt einen schnellen Überblick über die wichtigsten Funktionen. Für eine ausführlichere Darstellung siehe die [vollständige Version auf der Website](https://datannur.com/de/funktionen/). Für Installation, Konfiguration und Integrationen siehe die [technische Dokumentation](https://docs.datannur.com/app/).
 
 ## Den Katalog erkunden
 
@@ -28,5 +28,5 @@ Diese lokalen Daten können auf der Seite Optionen zurückgesetzt, exportiert od
 
 ## Weiterführende Informationen
 
-- [Vollständige Präsentation auf datannur.com](https://datannur.com/fonctionnalites/)
+- [Vollständige Präsentation auf datannur.com](https://datannur.com/de/funktionen/)
 - [Technische Dokumentation](https://docs.datannur.com/app/)

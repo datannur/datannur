@@ -1,6 +1,6 @@
 datannur is a portable data catalog: it runs in the browser, does not require a server, and brings together the information needed to find, understand, and use data.
 
-This page gives a quick overview of the main features. For a more illustrated presentation, see the [complete version on the website](https://datannur.com/fonctionnalites/). For installation, configuration, and integrations, see the [technical documentation](https://docs.datannur.com/app/).
+This page gives a quick overview of the main features. For a more illustrated presentation, see the [complete version on the website](https://datannur.com/features/). For installation, configuration, and integrations, see the [technical documentation](https://docs.datannur.com/app/).
 
 ## Explore the catalog
 
@@ -28,5 +28,5 @@ This local data can be reset, exported, or imported from the Options page. The c
 
 ## Go further
 
-- [Complete presentation on datannur.com](https://datannur.com/fonctionnalites/)
+- [Complete presentation on datannur.com](https://datannur.com/features/)
 - [Technical documentation](https://docs.datannur.com/app/)

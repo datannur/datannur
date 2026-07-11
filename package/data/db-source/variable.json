@@ -16,8 +16,10 @@
     "business_key": 1,
     "name:fr": "Commune",
     "name:de": "Gemeinde",
+    "name:it": "Comune",
     "description:fr": "Nom de la commune où le service public est offert.",
-    "description:de": "Name der Gemeinde, in der die öffentliche Dienstleistung angeboten wird."
+    "description:de": "Name der Gemeinde, in der die öffentliche Dienstleistung angeboten wird.",
+    "description:it": "Nome del comune in cui è offerto il servizio pubblico."
   },
   {
     "id": "ser_pub_loc__annee",
@@ -36,8 +38,10 @@
     "business_key": 2,
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des données.",
-    "description:de": "Referenzjahr der Daten."
+    "description:de": "Referenzjahr der Daten.",
+    "description:it": "Anno di riferimento dei dati."
   },
   {
     "id": "ser_pub_loc__type_service",
@@ -56,8 +60,10 @@
     "business_key": 3,
     "name:fr": "Type de service",
     "name:de": "Diensttyp",
+    "name:it": "Tipo di servizio",
     "description:fr": "Catégorie du service (administration, transport, santé, etc.).",
-    "description:de": "Kategorie der Dienstleistung (Verwaltung, Verkehr, Gesundheit usw.)."
+    "description:de": "Kategorie der Dienstleistung (Verwaltung, Verkehr, Gesundheit usw.).",
+    "description:it": "Categoria del servizio (amministrazione, trasporti, salute, ecc.)."
   },
   {
     "id": "ser_pub_loc__nb_employes",
@@ -75,8 +81,10 @@
     "concept_id": "nombre_employes",
     "name:fr": "Nombre d'employés",
     "name:de": "Anzahl Beschäftigte",
+    "name:it": "Numero di dipendenti",
     "description:fr": "Effectif du personnel du service public.",
-    "description:de": "Personalbestand der öffentlichen Dienststelle."
+    "description:de": "Personalbestand der öffentlichen Dienststelle.",
+    "description:it": "Effettivo del personale del servizio pubblico."
   },
   {
     "id": "ser_pub_loc__budget_annuel",
@@ -94,8 +102,10 @@
     "source_variable_ids": "emplois_tech__annee, pollution_air__unite, emploi_jeunes__secteur_activite",
     "name:fr": "Budget annuel",
     "name:de": "Jahresbudget",
+    "name:it": "Budget annuale",
     "description:fr": "Budget total annuel consacré au service (CHF).",
-    "description:de": "Gesamtes Jahresbudget für die Dienstleistung (CHF)."
+    "description:de": "Gesamtes Jahresbudget für die Dienstleistung (CHF).",
+    "description:it": "Budget annuale totale destinato al servizio (CHF)."
   },
   {
     "id": "ser_pub_loc__cout_par_habitant",
@@ -112,8 +122,10 @@
     "tag_ids": "limites_pol_admin, cadastre_foncier, infrastructures, dangers_naturels",
     "name:fr": "Coût par habitant",
     "name:de": "Kosten pro Einwohner",
+    "name:it": "Costo per abitante",
     "description:fr": "Montant dépensé par habitant pour ce service (CHF).",
-    "description:de": "Pro Einwohner für diese Dienstleistung ausgegebener Betrag (CHF)."
+    "description:de": "Pro Einwohner für diese Dienstleistung ausgegebener Betrag (CHF).",
+    "description:it": "Importo speso per abitante per questo servizio (CHF)."
   },
   {
     "id": "ser_pub_loc__nb_beneficiaires",
@@ -131,8 +143,10 @@
     "concept_id": "nombre_beneficiaires",
     "name:fr": "Nombre de bénéficiaires",
     "name:de": "Anzahl Begünstigte",
+    "name:it": "Numero di beneficiari",
     "description:fr": "Nombre de personnes bénéficiant du service.",
-    "description:de": "Anzahl der Personen, die die Dienstleistung nutzen."
+    "description:de": "Anzahl der Personen, die die Dienstleistung nutzen.",
+    "description:it": "Numero di persone che beneficiano del servizio."
   },
   {
     "id": "ser_pub_loc__taux_couverture",
@@ -149,8 +163,10 @@
     "enumeration_ids": "a_or_b_or_c, langue_sigle",
     "name:fr": "Taux de couverture",
     "name:de": "Abdeckungsgrad",
+    "name:it": "Tasso di copertura",
     "description:fr": "Proportion de la population couverte (%)",
-    "description:de": "Anteil der abgedeckten Bevölkerung (%)"
+    "description:de": "Anteil der abgedeckten Bevölkerung (%)",
+    "description:it": "Quota della popolazione coperta (%)."
   },
   {
     "id": "ser_pub_loc__region",
@@ -169,8 +185,10 @@
     "tag_ids": "armee, agriculture, population, communication, images_aeriennes_2, flore",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région administrative de rattachement.",
-    "description:de": "Zugehörige Verwaltungsregion."
+    "description:de": "Zugehörige Verwaltungsregion.",
+    "description:it": "Regione amministrativa associata."
   },
   {
     "id": "ser_pub_loc__quartier",
@@ -188,8 +206,10 @@
     "tag_ids": "systemes_reference, flore, atmosphere, foret, transport",
     "name:fr": "Quartier",
     "name:de": "Quartier",
+    "name:it": "Quartiere",
     "description:fr": "Quartier ou unité territoriale infra-communale.",
-    "description:de": "Quartier oder unterkommunale Gebietseinheit."
+    "description:de": "Quartier oder unterkommunale Gebietseinheit.",
+    "description:it": "Quartiere o unità territoriale sottocomunale."
   },
   {
     "id": "ser_pub_loc__mode_gestion",
@@ -206,8 +226,10 @@
     "tag_ids": "pseudonymous_data, images_aeriennes_2",
     "name:fr": "Mode de gestion",
     "name:de": "Verwaltungsform",
+    "name:it": "Modalità di gestione",
     "description:fr": "Gestion communale, intercommunale ou privée.",
-    "description:de": "Kommunale, interkommunale oder private Verwaltung."
+    "description:de": "Kommunale, interkommunale oder private Verwaltung.",
+    "description:it": "Gestione comunale, intercomunale o privata."
   },
   {
     "id": "ser_pub_loc__type_infrastructure",
@@ -224,8 +246,10 @@
     "tag_ids": "personal_data, images_aeriennes_2, images_aeriennes_1, images_aeriennes, foret, approvisionnement",
     "name:fr": "Type d'infrastructure",
     "name:de": "Infrastrukturtyp",
+    "name:it": "Tipo di infrastruttura",
     "description:fr": "Type principal d'infrastructure (bâtiment, réseau, équipement).",
-    "description:de": "Hauptinfrastrukturtyp (Gebäude, Netz, Anlage)."
+    "description:de": "Hauptinfrastrukturtyp (Gebäude, Netz, Anlage).",
+    "description:it": "Tipo principale di infrastruttura (edificio, rete, impianto)."
   },
   {
     "id": "ser_pub_loc__surface_infrastructure",
@@ -243,8 +267,10 @@
     "tag_ids": "sensible_data, culture",
     "name:fr": "Surface de l'infrastructure",
     "name:de": "Infrastrukturfläche",
+    "name:it": "Superficie dell'infrastruttura",
     "description:fr": "Surface totale de l'infrastructure (m²).",
-    "description:de": "Gesamtfläche der Infrastruktur (m²)."
+    "description:de": "Gesamtfläche der Infrastruktur (m²).",
+    "description:it": "Superficie totale dell'infrastruttura (m²)."
   },
   {
     "id": "ser_pub_loc__nb_points_service",
@@ -260,8 +286,10 @@
     "end_date": "2005/04",
     "name:fr": "Nombre de points de service",
     "name:de": "Anzahl Servicestellen",
+    "name:it": "Numero di punti di servizio",
     "description:fr": "Nombre de points d'accueil (guichets, bureaux, etc.).",
-    "description:de": "Anzahl der Anlaufstellen (Schalter, Büros usw.)."
+    "description:de": "Anzahl der Anlaufstellen (Schalter, Büros usw.).",
+    "description:it": "Numero di punti di accoglienza (sportelli, uffici, ecc.)."
   },
   {
     "id": "ser_pub_loc__niveau_accessibilite",
@@ -279,8 +307,10 @@
     "source_variable_ids": "immobilier_prix__source_donnee, revenus_menages__niveau_formation, temperature_moy__vitesse_vent_moy",
     "name:fr": "Niveau d'accessibilité",
     "name:de": "Zugänglichkeitsniveau",
+    "name:it": "Livello di accessibilità",
     "description:fr": "Niveau d'accessibilité (PMR, transports, horaires).",
-    "description:de": "Zugänglichkeitsniveau (barrierefreier Zugang, Verkehr, Öffnungszeiten)."
+    "description:de": "Zugänglichkeitsniveau (barrierefreier Zugang, Verkehr, Öffnungszeiten).",
+    "description:it": "Livello di accessibilità (accesso per persone a mobilità ridotta, trasporti, orari di apertura)."
   },
   {
     "id": "ser_pub_loc__cout_investissement",
@@ -297,8 +327,10 @@
     "concept_id": "cout_investissement",
     "name:fr": "Coût d'investissement",
     "name:de": "Investitionskosten",
+    "name:it": "Costo d'investimento",
     "description:fr": "Montants d'investissement dans le service (CHF).",
-    "description:de": "Investitionsbeträge in die Dienstleistung (CHF)."
+    "description:de": "Investitionsbeträge in die Dienstleistung (CHF).",
+    "description:it": "Importi investiti nel servizio (CHF)."
   },
   {
     "id": "ser_pub_loc__satisfaction_usagers",
@@ -319,8 +351,10 @@
     "std": 0.32,
     "name:fr": "Satisfaction des usagers",
     "name:de": "Nutzerzufriedenheit",
+    "name:it": "Soddisfazione degli utenti",
     "description:fr": "Indice de satisfaction (0–100).",
-    "description:de": "Zufriedenheitsindex (0–100)."
+    "description:de": "Zufriedenheitsindex (0–100).",
+    "description:it": "Indice di soddisfazione (0–100)."
   },
   {
     "id": "ser_pub_loc__nb_interventions",
@@ -337,8 +371,10 @@
     "tag_ids": "communication, images_aeriennes, securite, theme_iso",
     "name:fr": "Nombre d'interventions",
     "name:de": "Anzahl Einsätze",
+    "name:it": "Numero di interventi",
     "description:fr": "Interventions réalisées par le service.",
-    "description:de": "Vom Dienst durchgeführte Einsätze."
+    "description:de": "Vom Dienst durchgeführte Einsätze.",
+    "description:it": "Interventi effettuati dal servizio."
   },
   {
     "id": "ser_pub_loc__delai_moyen_traitement",
@@ -355,8 +391,10 @@
     "tag_ids": "agriculture, ouvrages, altimetrie, climatologie, images_aeriennes_2",
     "name:fr": "Délai moyen de traitement",
     "name:de": "Durchschnittliche Bearbeitungszeit",
+    "name:it": "Tempo medio di trattamento",
     "description:fr": "Délai moyen (jours) pour traiter une demande.",
-    "description:de": "Durchschnittliche Bearbeitungszeit (Tage) für eine Anfrage."
+    "description:de": "Durchschnittliche Bearbeitungszeit (Tage) für eine Anfrage.",
+    "description:it": "Tempo medio in giorni per trattare una richiesta."
   },
   {
     "id": "ser_pub_loc__source_financement",
@@ -377,8 +415,10 @@
     "std": 34.432,
     "name:fr": "Source de financement",
     "name:de": "Finanzierungsquelle",
+    "name:it": "Fonte di finanziamento",
     "description:fr": "Source principale : communal, cantonal, fédéral ou privé.",
-    "description:de": "Hauptquelle: kommunal, kantonal, eidgenössisch oder privat."
+    "description:de": "Hauptquelle: kommunal, kantonal, eidgenössisch oder privat.",
+    "description:it": "Fonte principale: comunale, cantonale, federale o privata."
   },
   {
     "id": "accident_route__date_accident",
@@ -394,8 +434,10 @@
     "end_date": "1998/05/24",
     "name:fr": "Date de l'accident",
     "name:de": "Unfalldatum",
+    "name:it": "Data dell'incidente",
     "description:fr": "Date exacte à laquelle l'accident s'est produit.",
-    "description:de": "Genaues Datum, an dem sich der Unfall ereignet hat."
+    "description:de": "Genaues Datum, an dem sich der Unfall ereignet hat.",
+    "description:it": "Data esatta in cui si è verificato l'incidente."
   },
   {
     "id": "accident_route__type_accident",
@@ -413,8 +455,10 @@
     "concept_id": "type_accident",
     "name:fr": "Type d'accident",
     "name:de": "Unfalltyp",
+    "name:it": "Tipo di incidente",
     "description:fr": "Type d'accident (collision, sortie de route, choc avec piéton, etc.).",
-    "description:de": "Unfalltyp (Kollision, Abkommen von der Fahrbahn, Zusammenstoss mit Fussgänger usw.)."
+    "description:de": "Unfalltyp (Kollision, Abkommen von der Fahrbahn, Zusammenstoss mit Fussgänger usw.).",
+    "description:it": "Tipo di incidente (collisione, uscita di strada, investimento di pedone, ecc.)."
   },
   {
     "id": "accident_route__gravite",
@@ -432,8 +476,10 @@
     "concept_id": "gravite_accident",
     "name:fr": "Gravité",
     "name:de": "Schweregrad",
+    "name:it": "Gravità",
     "description:fr": "Niveau de gravité : léger, grave, mortel.",
-    "description:de": "Schweregrad: leicht, schwer, tödlich."
+    "description:de": "Schweregrad: leicht, schwer, tödlich.",
+    "description:it": "Livello di gravità: lieve, grave, mortale."
   },
   {
     "id": "accident_route__nb_blesses",
@@ -451,8 +497,10 @@
     "source_variable_ids": "tourisme_annu__prix_moy_nuit",
     "name:fr": "Nombre de blessés",
     "name:de": "Anzahl Verletzte",
+    "name:it": "Numero di feriti",
     "description:fr": "Nombre total de personnes blessées lors de l'accident.",
-    "description:de": "Gesamtzahl der beim Unfall verletzten Personen."
+    "description:de": "Gesamtzahl der beim Unfall verletzten Personen.",
+    "description:it": "Numero totale di persone ferite nell'incidente."
   },
   {
     "id": "accident_route__cause_presumee",
@@ -468,8 +516,10 @@
     "end_date": "2008/06/11",
     "name:fr": "Cause présumée",
     "name:de": "Vermutete Ursache",
+    "name:it": "Causa presunta",
     "description:fr": "Cause probable de l'accident (alcool, vitesse, distraction, météo, etc.).",
-    "description:de": "Wahrscheinliche Unfallursache (Alkohol, Geschwindigkeit, Ablenkung, Wetter usw.)."
+    "description:de": "Wahrscheinliche Unfallursache (Alkohol, Geschwindigkeit, Ablenkung, Wetter usw.).",
+    "description:it": "Causa probabile dell'incidente (alcol, velocità, distrazione, meteo, ecc.)."
   },
   {
     "id": "dep_sante__annee",
@@ -486,8 +536,10 @@
     "tag_ids": "atmosphere, geologie, infrastructures, population, protection_env_nature",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des dépenses publiques en santé.",
-    "description:de": "Referenzjahr der öffentlichen Gesundheitsausgaben."
+    "description:de": "Referenzjahr der öffentlichen Gesundheitsausgaben.",
+    "description:it": "Anno di riferimento delle spese sanitarie pubbliche."
   },
   {
     "id": "dep_sante__canton",
@@ -507,8 +559,10 @@
     "business_key": 1,
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton concerné par la dépense publique.",
-    "description:de": "Vom öffentlichen Aufwand betroffener Kanton."
+    "description:de": "Vom öffentlichen Aufwand betroffener Kanton.",
+    "description:it": "Cantone interessato dalla spesa pubblica."
   },
   {
     "id": "dep_sante__type_depense",
@@ -529,8 +583,10 @@
     "source_variable_ids": "accidents_travail__gravite",
     "name:fr": "Type de dépense",
     "name:de": "Ausgabenart",
+    "name:it": "Tipo di spesa",
     "description:fr": "Catégorie de dépense (hôpitaux, soins ambulatoires, prévention, etc.).",
-    "description:de": "Ausgabenkategorie (Spitäler, ambulante Versorgung, Prävention usw.)."
+    "description:de": "Ausgabenkategorie (Spitäler, ambulante Versorgung, Prävention usw.).",
+    "description:it": "Categoria di spesa (ospedali, cure ambulatoriali, prevenzione, ecc.)."
   },
   {
     "id": "dep_sante__montant_total",
@@ -548,8 +604,10 @@
     "source_variable_ids": "exportations__delai_paiement, pollution_air__unite, exportations__delai_livraison, exportations__pays_destination",
     "name:fr": "Montant total",
     "name:de": "Gesamtbetrag",
+    "name:it": "Importo totale",
     "description:fr": "Montant total des dépenses (CHF).",
-    "description:de": "Gesamtbetrag der Ausgaben (CHF)."
+    "description:de": "Gesamtbetrag der Ausgaben (CHF).",
+    "description:it": "Importo totale delle spese (CHF)."
   },
   {
     "id": "dep_sante__montant_par_habitant",
@@ -566,8 +624,10 @@
     "tag_ids": "altimetrie, ouvrages, systemes_reference, communication",
     "name:fr": "Montant par habitant",
     "name:de": "Betrag pro Einwohner",
+    "name:it": "Importo per abitante",
     "description:fr": "Montant annuel par habitant (CHF).",
-    "description:de": "Jährlicher Betrag pro Einwohner (CHF)."
+    "description:de": "Jährlicher Betrag pro Einwohner (CHF).",
+    "description:it": "Importo annuo per abitante (CHF)."
   },
   {
     "id": "dep_sante__population_cible",
@@ -584,8 +644,10 @@
     "source_variable_ids": "revenus_menages__revenu_total_brut",
     "name:fr": "Population cible",
     "name:de": "Zielgruppe",
+    "name:it": "Popolazione target",
     "description:fr": "Groupe concerné (adultes, personnes âgées, enfants, etc.).",
-    "description:de": "Betroffene Gruppe (Erwachsene, ältere Menschen, Kinder usw.)."
+    "description:de": "Betroffene Gruppe (Erwachsene, ältere Menschen, Kinder usw.).",
+    "description:it": "Gruppo interessato (adulti, persone anziane, bambini, ecc.)."
   },
   {
     "id": "dep_sante__mode_financement",
@@ -602,8 +664,10 @@
     "tag_ids": "images_aeriennes_2, communication",
     "name:fr": "Mode de financement",
     "name:de": "Finanzierungsform",
+    "name:it": "Modalità di finanziamento",
     "description:fr": "Financement : communal, cantonal, fédéral, assurances, etc.",
-    "description:de": "Finanzierung: kommunal, kantonal, eidgenössisch, Versicherungen usw."
+    "description:de": "Finanzierung: kommunal, kantonal, eidgenössisch, Versicherungen usw.",
+    "description:it": "Finanziamento: comunale, cantonale, federale, assicurazioni, ecc."
   },
   {
     "id": "dep_sante__institution_responsable",
@@ -620,8 +684,10 @@
     "tag_ids": "atmosphere, hydrographie, personal_data, securite, foret, theme_iso",
     "name:fr": "Institution responsable",
     "name:de": "Verantwortliche Institution",
+    "name:it": "Istituzione responsabile",
     "description:fr": "Acteur public responsable de la dépense.",
-    "description:de": "Für die Ausgabe verantwortlicher öffentlicher Akteur."
+    "description:de": "Für die Ausgabe verantwortlicher öffentlicher Akteur.",
+    "description:it": "Attore pubblico responsabile della spesa."
   },
   {
     "id": "dep_sante__cout_investissement",
@@ -639,8 +705,10 @@
     "concept_id": "cout_investissement",
     "name:fr": "Coût d'investissement",
     "name:de": "Investitionskosten",
+    "name:it": "Costo d'investimento",
     "description:fr": "Dépenses d'investissement en infrastructures et équipements.",
-    "description:de": "Investitionsausgaben für Infrastruktur und Ausstattung."
+    "description:de": "Investitionsausgaben für Infrastruktur und Ausstattung.",
+    "description:it": "Spese d'investimento in infrastrutture e attrezzature."
   },
   {
     "id": "dep_sante__cout_fonctionnement",
@@ -657,8 +725,10 @@
     "tag_ids": "flore, dangers_naturels, pseudonymous_data, foret",
     "name:fr": "Coût de fonctionnement",
     "name:de": "Betriebskosten",
+    "name:it": "Costo di esercizio",
     "description:fr": "Dépenses liées au fonctionnement courant des services de santé.",
-    "description:de": "Ausgaben für den laufenden Betrieb der Gesundheitsdienste."
+    "description:de": "Ausgaben für den laufenden Betrieb der Gesundheitsdienste.",
+    "description:it": "Spese legate al funzionamento corrente dei servizi sanitari."
   },
   {
     "id": "dep_sante__nb_beneficiaires",
@@ -678,8 +748,10 @@
     "source_variable_ids": "accident_route__type_accident, pop_region__type_region",
     "name:fr": "Nombre de bénéficiaires",
     "name:de": "Anzahl Begünstigte",
+    "name:it": "Numero di beneficiari",
     "description:fr": "Nombre de personnes bénéficiant de la prestation correspondante.",
-    "description:de": "Anzahl der Personen, die die entsprechende Leistung beziehen."
+    "description:de": "Anzahl der Personen, die die entsprechende Leistung beziehen.",
+    "description:it": "Numero di persone che beneficiano della prestazione corrispondente."
   },
   {
     "id": "dep_sante__taux_croissance",
@@ -696,8 +768,10 @@
     "source_variable_ids": "temperature_moy__source_donnee, dep_sante__cout_investissement, pop_region__population_etrangere, eau_potable__ph",
     "name:fr": "Taux de croissance annuel",
     "name:de": "Jährliche Wachstumsrate",
+    "name:it": "Tasso di crescita annuo",
     "description:fr": "Variation annuelle des dépenses publiques en santé (%).",
-    "description:de": "Jährliche Veränderung der öffentlichen Gesundheitsausgaben (%)."
+    "description:de": "Jährliche Veränderung der öffentlichen Gesundheitsausgaben (%).",
+    "description:it": "Variazione annua delle spese sanitarie pubbliche (%)."
   },
   {
     "id": "dep_sante__region_sanitaire",
@@ -714,8 +788,10 @@
     "tag_ids": "edifices, population, images_aeriennes_2, sensible_data, hydrographie, agriculture",
     "name:fr": "Région sanitaire",
     "name:de": "Gesundheitsregion",
+    "name:it": "Regione sanitaria",
     "description:fr": "Région sanitaire utilisée dans le découpage analytique.",
-    "description:de": "Gesundheitsregion, die in der analytischen Gliederung verwendet wird."
+    "description:de": "Gesundheitsregion, die in der analytischen Gliederung verwendet wird.",
+    "description:it": "Regione sanitaria utilizzata nella ripartizione analitica."
   },
   {
     "id": "temperature_moy__annee",
@@ -733,8 +809,10 @@
     "business_key": 1,
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de mesure des températures.",
-    "description:de": "Jahr der Temperaturmessung."
+    "description:de": "Jahr der Temperaturmessung.",
+    "description:it": "Anno in cui sono state misurate le temperature."
   },
   {
     "id": "temperature_moy__mois",
@@ -754,8 +832,10 @@
     "source_variable_ids": "ser_pub_loc__budget_annuel, emplois_tech__region",
     "name:fr": "Mois",
     "name:de": "Monat",
+    "name:it": "Mese",
     "description:fr": "Mois de l'année (janvier–décembre).",
-    "description:de": "Monat des Jahres (Januar–Dezember)."
+    "description:de": "Monat des Jahres (Januar–Dezember).",
+    "description:it": "Mese dell'anno (gennaio–dicembre)."
   },
   {
     "id": "temperature_moy__station",
@@ -772,8 +852,10 @@
     "business_key": 3,
     "name:fr": "Station de mesure",
     "name:de": "Messstation",
+    "name:it": "Stazione di misurazione",
     "description:fr": "Station météorologique concernée.",
-    "description:de": "Betroffene Wetterstation."
+    "description:de": "Betroffene Wetterstation.",
+    "description:it": "Stazione meteorologica interessata."
   },
   {
     "id": "temperature_moy__altitude_station",
@@ -790,8 +872,10 @@
     "tag_ids": "population, anonymous_data",
     "name:fr": "Altitude de la station",
     "name:de": "Höhe der Station",
+    "name:it": "Altitudine della stazione",
     "description:fr": "Altitude en mètres de la station de mesure.",
-    "description:de": "Höhe der Messstation in Metern."
+    "description:de": "Höhe der Messstation in Metern.",
+    "description:it": "Altitudine della stazione di misurazione in metri."
   },
   {
     "id": "temperature_moy__temp_moy",
@@ -810,8 +894,10 @@
     "source_variable_ids": "ser_pub_loc__nb_points_service, eau_potable__conformite",
     "name:fr": "Température moyenne",
     "name:de": "Durchschnittstemperatur",
+    "name:it": "Temperatura media",
     "description:fr": "Température moyenne mensuelle (°C).",
-    "description:de": "Durchschnittliche Monatstemperatur (°C)."
+    "description:de": "Durchschnittliche Monatstemperatur (°C).",
+    "description:it": "Temperatura media mensile (°C)."
   },
   {
     "id": "temperature_moy__temp_min",
@@ -829,8 +915,10 @@
     "source_variable_ids": "ser_pub_loc__delai_moyen_traitement",
     "name:fr": "Température minimale",
     "name:de": "Minimaltemperatur",
+    "name:it": "Temperatura minima",
     "description:fr": "Température minimale du mois (°C).",
-    "description:de": "Minimaltemperatur des Monats (°C)."
+    "description:de": "Minimaltemperatur des Monats (°C).",
+    "description:it": "Temperatura minima del mese (°C)."
   },
   {
     "id": "temperature_moy__temp_max",
@@ -849,8 +937,10 @@
     "source_variable_ids": "accident_route__date_accident, tourisme_annu__nb_nuitees",
     "name:fr": "Température maximale",
     "name:de": "Maximaltemperatur",
+    "name:it": "Temperatura massima",
     "description:fr": "Température maximale du mois (°C).",
-    "description:de": "Maximaltemperatur des Monats (°C)."
+    "description:de": "Maximaltemperatur des Monats (°C).",
+    "description:it": "Temperatura massima del mese (°C)."
   },
   {
     "id": "temperature_moy__dev_normale",
@@ -867,8 +957,10 @@
     "tag_ids": "limites_pol_admin, altimetrie, population, protection_env_nature, cartes_reference, couverture_sol",
     "name:fr": "Écart à la normale",
     "name:de": "Abweichung von der Norm",
+    "name:it": "Scarto dalla norma",
     "description:fr": "Différence par rapport à la normale climatique (°C).",
-    "description:de": "Abweichung von der klimatischen Norm (°C)."
+    "description:de": "Abweichung von der klimatischen Norm (°C).",
+    "description:it": "Differenza rispetto alla norma climatica (°C)."
   },
   {
     "id": "temperature_moy__precipitation_mensuelle",
@@ -886,8 +978,10 @@
     "source_variable_ids": "emplois_tech__nb_offres_emploi",
     "name:fr": "Précipitations mensuelles",
     "name:de": "Monatlicher Niederschlag",
+    "name:it": "Precipitazioni mensili",
     "description:fr": "Total mensuel des précipitations (mm).",
-    "description:de": "Monatliche Niederschlagssumme (mm)."
+    "description:de": "Monatliche Niederschlagssumme (mm).",
+    "description:it": "Totale mensile delle precipitazioni (mm)."
   },
   {
     "id": "temperature_moy__nb_jours_gel",
@@ -906,8 +1000,10 @@
     "source_variable_ids": "dep_sante__institution_responsable",
     "name:fr": "Jours de gel",
     "name:de": "Frosttage",
+    "name:it": "Giorni di gelo",
     "description:fr": "Nombre de jours avec température < 0°C.",
-    "description:de": "Anzahl Tage mit Temperatur < 0°C."
+    "description:de": "Anzahl Tage mit Temperatur < 0°C.",
+    "description:it": "Numero di giorni con temperatura < 0°C."
   },
   {
     "id": "temperature_moy__nb_jours_ete",
@@ -924,8 +1020,10 @@
     "tag_ids": "faune, activites_economiques, societe",
     "name:fr": "Jours d'été",
     "name:de": "Sommertage",
+    "name:it": "Giorni estivi",
     "description:fr": "Nombre de jours avec température ≥ 25°C.",
-    "description:de": "Anzahl Tage mit Temperatur ≥ 25°C."
+    "description:de": "Anzahl Tage mit Temperatur ≥ 25°C.",
+    "description:it": "Numero di giorni con temperatura ≥ 25°C."
   },
   {
     "id": "temperature_moy__nb_jours_tres_chaud",
@@ -942,8 +1040,10 @@
     "tag_ids": "flore, dangers_naturels, limites_pol_admin",
     "name:fr": "Jours très chauds",
     "name:de": "Hitzetage",
+    "name:it": "Giorni molto caldi",
     "description:fr": "Nombre de jours ≥ 30°C.",
-    "description:de": "Anzahl Tage ≥ 30°C."
+    "description:de": "Anzahl Tage ≥ 30°C.",
+    "description:it": "Numero di giorni ≥ 30°C."
   },
   {
     "id": "temperature_moy__humidite_moy",
@@ -960,8 +1060,10 @@
     "tag_ids": "systemes_reference, theme_iso, agriculture, approvisionnement",
     "name:fr": "Humidité moyenne",
     "name:de": "Durchschnittliche Luftfeuchtigkeit",
+    "name:it": "Umidità media",
     "description:fr": "Humidité relative moyenne du mois (%).",
-    "description:de": "Durchschnittliche relative Luftfeuchtigkeit des Monats (%)."
+    "description:de": "Durchschnittliche relative Luftfeuchtigkeit des Monats (%).",
+    "description:it": "Umidità relativa media del mese (%)."
   },
   {
     "id": "temperature_moy__pression_moy",
@@ -977,8 +1079,10 @@
     "end_date": "2024/04",
     "name:fr": "Pression moyenne",
     "name:de": "Durchschnittlicher Luftdruck",
+    "name:it": "Pressione media",
     "description:fr": "Pression atmosphérique moyenne (hPa).",
-    "description:de": "Durchschnittlicher Luftdruck (hPa)."
+    "description:de": "Durchschnittlicher Luftdruck (hPa).",
+    "description:it": "Pressione atmosferica media (hPa)."
   },
   {
     "id": "temperature_moy__ensoleillement",
@@ -996,8 +1100,10 @@
     "tag_ids": "altimetrie, personal_data, pseudonymous_data",
     "name:fr": "Ensoleillement",
     "name:de": "Sonnenscheindauer",
+    "name:it": "Soleggiamento",
     "description:fr": "Durée totale d'ensoleillement (heures).",
-    "description:de": "Gesamte Sonnenscheindauer (Stunden)."
+    "description:de": "Gesamte Sonnenscheindauer (Stunden).",
+    "description:it": "Durata totale del soleggiamento (ore)."
   },
   {
     "id": "temperature_moy__rayonnement_solaire",
@@ -1013,8 +1119,10 @@
     "end_date": "2001/10/10",
     "name:fr": "Rayonnement solaire",
     "name:de": "Sonneneinstrahlung",
+    "name:it": "Radiazione solare",
     "description:fr": "Rayonnement solaire reçu (MJ/m²).",
-    "description:de": "Empfangene Sonneneinstrahlung (MJ/m²)."
+    "description:de": "Empfangene Sonneneinstrahlung (MJ/m²).",
+    "description:it": "Radiazione solare ricevuta (MJ/m²)."
   },
   {
     "id": "temperature_moy__direction_vent_dominant",
@@ -1031,8 +1139,10 @@
     "tag_ids": "climatologie, altimetrie, sols, pseudonymous_data",
     "name:fr": "Direction du vent dominant",
     "name:de": "Vorherrschende Windrichtung",
+    "name:it": "Direzione del vento dominante",
     "description:fr": "Direction dominante du vent (N, NE, E, etc.).",
-    "description:de": "Vorherrschende Windrichtung (N, NE, E usw.)."
+    "description:de": "Vorherrschende Windrichtung (N, NE, E usw.).",
+    "description:it": "Direzione del vento dominante (N, NE, E, ecc.)."
   },
   {
     "id": "temperature_moy__vitesse_vent_moy",
@@ -1049,8 +1159,10 @@
     "tag_ids": "climatologie, infrastructures, theme_iso, images_aeriennes_1, securite",
     "name:fr": "Vitesse moyenne du vent",
     "name:de": "Durchschnittliche Windgeschwindigkeit",
+    "name:it": "Velocità media del vento",
     "description:fr": "Vitesse moyenne du vent (km/h).",
-    "description:de": "Durchschnittliche Windgeschwindigkeit (km/h)."
+    "description:de": "Durchschnittliche Windgeschwindigkeit (km/h).",
+    "description:it": "Velocità media del vento (km/h)."
   },
   {
     "id": "temperature_moy__vitesse_vent_max",
@@ -1067,8 +1179,10 @@
     "tag_ids": "faune, climatologie",
     "name:fr": "Rafale maximale",
     "name:de": "Maximale Windböe",
+    "name:it": "Raffica massima",
     "description:fr": "Rafale maximale enregistrée (km/h).",
-    "description:de": "Maximal registrierte Windböe (km/h)."
+    "description:de": "Maximal registrierte Windböe (km/h).",
+    "description:it": "Raffica massima registrata (km/h)."
   },
   {
     "id": "temperature_moy__indice_chaleur",
@@ -1085,8 +1199,10 @@
     "tag_ids": "images_aeriennes_2, developpement_territorial, securite",
     "name:fr": "Indice de chaleur",
     "name:de": "Hitzeindex",
+    "name:it": "Indice di calore",
     "description:fr": "Indice combinant température et humidité.",
-    "description:de": "Index, der Temperatur und Luftfeuchtigkeit kombiniert."
+    "description:de": "Index, der Temperatur und Luftfeuchtigkeit kombiniert.",
+    "description:it": "Indice che combina temperatura e umidità."
   },
   {
     "id": "temperature_moy__indice_froid",
@@ -1103,8 +1219,10 @@
     "tag_ids": "societe, personal_data, edifices, couverture_sol, geologie",
     "name:fr": "Indice de froid",
     "name:de": "Kälteindex",
+    "name:it": "Indice di freddo",
     "description:fr": "Indice combinant température, vent et humidité.",
-    "description:de": "Index, der Temperatur, Wind und Luftfeuchtigkeit kombiniert."
+    "description:de": "Index, der Temperatur, Wind und Luftfeuchtigkeit kombiniert.",
+    "description:it": "Indice che combina temperatura, vento e umidità."
   },
   {
     "id": "temperature_moy__source_donnee",
@@ -1121,8 +1239,10 @@
     "tag_ids": "approvisionnement, atmosphere, images_aeriennes_1",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine de la série (MétéoSuisse, station locale, etc.).",
-    "description:de": "Herkunft der Reihe (MeteoSchweiz, lokale Station usw.)."
+    "description:de": "Herkunft der Reihe (MeteoSchweiz, lokale Station usw.).",
+    "description:it": "Origine della serie (MeteoSvizzera, stazione locale, ecc.)."
   },
   {
     "id": "pop_region__annee",
@@ -1140,8 +1260,10 @@
     "tag_ids": "infrastructures, altimetrie, armee, cadastre_foncier",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des données démographiques.",
-    "description:de": "Referenzjahr der demografischen Daten."
+    "description:de": "Referenzjahr der demografischen Daten.",
+    "description:it": "Anno di riferimento dei dati demografici."
   },
   {
     "id": "pop_region__region",
@@ -1160,8 +1282,10 @@
     "source_variable_ids": "ser_pub_loc__nb_beneficiaires, revenus_menages__epargne_mensuelle",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région administrative ou statistique.",
-    "description:de": "Verwaltungs- oder statistische Region."
+    "description:de": "Verwaltungs- oder statistische Region.",
+    "description:it": "Regione amministrativa o statistica."
   },
   {
     "id": "pop_region__canton",
@@ -1178,8 +1302,10 @@
     "tag_ids": "communication, geologie",
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton auquel la région est rattachée.",
-    "description:de": "Kanton, dem die Region zugeordnet ist."
+    "description:de": "Kanton, dem die Region zugeordnet ist.",
+    "description:it": "Cantone a cui appartiene la regione."
   },
   {
     "id": "pop_region__population_totale",
@@ -1197,8 +1323,10 @@
     "concept_id": "population_totale",
     "name:fr": "Population totale",
     "name:de": "Gesamtbevölkerung",
+    "name:it": "Popolazione totale",
     "description:fr": "Population totale résidente dans la région.",
-    "description:de": "Gesamte Wohnbevölkerung in der Region."
+    "description:de": "Gesamte Wohnbevölkerung in der Region.",
+    "description:it": "Popolazione residente totale nella regione."
   },
   {
     "id": "pop_region__population_suisse",
@@ -1216,8 +1344,10 @@
     "concept_id": "population_suisse",
     "name:fr": "Population suisse",
     "name:de": "Schweizer Bevölkerung",
+    "name:it": "Popolazione svizzera",
     "description:fr": "Personnes de nationalité suisse dans la région.",
-    "description:de": "Personen mit Schweizer Staatsangehörigkeit in der Region."
+    "description:de": "Personen mit Schweizer Staatsangehörigkeit in der Region.",
+    "description:it": "Persone di nazionalità svizzera nella regione."
   },
   {
     "id": "pop_region__population_etrangere",
@@ -1235,8 +1365,10 @@
     "concept_id": "population_etrangere",
     "name:fr": "Population étrangère",
     "name:de": "Ausländische Bevölkerung",
+    "name:it": "Popolazione straniera",
     "description:fr": "Personnes de nationalité étrangère dans la région.",
-    "description:de": "Personen mit ausländischer Staatsangehörigkeit in der Region."
+    "description:de": "Personen mit ausländischer Staatsangehörigkeit in der Region.",
+    "description:it": "Persone di nazionalità straniera nella regione."
   },
   {
     "id": "pop_region__densite_population",
@@ -1255,8 +1387,10 @@
     "source_variable_ids": "vente_voitures__modele, ser_pub_loc__niveau_accessibilite, revenus_menages__epargne_mensuelle",
     "name:fr": "Densité de population",
     "name:de": "Bevölkerungsdichte",
+    "name:it": "Densità di popolazione",
     "description:fr": "Nombre d'habitants par km².",
-    "description:de": "Anzahl Einwohner pro km²."
+    "description:de": "Anzahl Einwohner pro km².",
+    "description:it": "Numero di abitanti per km²."
   },
   {
     "id": "pop_region__age_median",
@@ -1273,8 +1407,10 @@
     "tag_ids": "altimetrie",
     "name:fr": "Âge médian",
     "name:de": "Medianalter",
+    "name:it": "Età mediana",
     "description:fr": "Âge médian de la population dans la région.",
-    "description:de": "Medianalter der Bevölkerung in der Region."
+    "description:de": "Medianalter der Bevölkerung in der Region.",
+    "description:it": "Età mediana della popolazione nella regione."
   },
   {
     "id": "pop_region__part_65_plus",
@@ -1292,8 +1428,10 @@
     "source_variable_ids": "exportations__incoterm, emploi_jeunes__formation_continue",
     "name:fr": "Part des 65+",
     "name:de": "Anteil der 65+",
+    "name:it": "Quota di 65 anni e più",
     "description:fr": "Proportion de la population âgée de 65 ans ou plus (%).",
-    "description:de": "Anteil der Bevölkerung im Alter von 65 Jahren oder älter (%)."
+    "description:de": "Anteil der Bevölkerung im Alter von 65 Jahren oder älter (%).",
+    "description:it": "Quota della popolazione di 65 anni o più (%)."
   },
   {
     "id": "pop_region__part_0_14",
@@ -1311,8 +1449,10 @@
     "tag_ids": "agriculture, population, hydrographie, culture, couverture_sol, images_aeriennes",
     "name:fr": "Part des 0–14 ans",
     "name:de": "Anteil der 0–14-Jährigen",
+    "name:it": "Quota di 0–14 anni",
     "description:fr": "Proportion de la population âgée de 0 à 14 ans (%).",
-    "description:de": "Anteil der Bevölkerung im Alter von 0 bis 14 Jahren (%)."
+    "description:de": "Anteil der Bevölkerung im Alter von 0 bis 14 Jahren (%).",
+    "description:it": "Quota della popolazione da 0 a 14 anni (%)."
   },
   {
     "id": "pop_region__superficie_km2",
@@ -1329,8 +1469,10 @@
     "tag_ids": "protection_env_nature, altimetrie, foret, couverture_sol",
     "name:fr": "Superficie",
     "name:de": "Fläche",
+    "name:it": "Superficie",
     "description:fr": "Surface totale de la région en km².",
-    "description:de": "Gesamtfläche der Region in km²."
+    "description:de": "Gesamtfläche der Region in km².",
+    "description:it": "Superficie totale della regione in km²."
   },
   {
     "id": "pop_region__altitude_moyenne",
@@ -1348,8 +1490,10 @@
     "tag_ids": "agriculture, securite, sensible_data",
     "name:fr": "Altitude moyenne",
     "name:de": "Durchschnittliche Höhe",
+    "name:it": "Altitudine media",
     "description:fr": "Altitude moyenne de la région (m).",
-    "description:de": "Durchschnittliche Höhe der Region (m)."
+    "description:de": "Durchschnittliche Höhe der Region (m).",
+    "description:it": "Altitudine media della regione (m)."
   },
   {
     "id": "pop_region__coord_x",
@@ -1366,8 +1510,10 @@
     "concept_id": "coordonnee_x_lv95",
     "name:fr": "Coordonnée X",
     "name:de": "X-Koordinate",
+    "name:it": "Coordinata X",
     "description:fr": "Coordonnée géographique projetée (CH1903+ / LV95).",
-    "description:de": "Projizierte geografische Koordinate (CH1903+ / LV95)."
+    "description:de": "Projizierte geografische Koordinate (CH1903+ / LV95).",
+    "description:it": "Coordinata geografica proiettata (CH1903+ / LV95)."
   },
   {
     "id": "pop_region__coord_y",
@@ -1386,8 +1532,10 @@
     "concept_id": "coordonnee_y_lv95",
     "name:fr": "Coordonnée Y",
     "name:de": "Y-Koordinate",
+    "name:it": "Coordinata Y",
     "description:fr": "Coordonnée géographique projetée (CH1903+ / LV95).",
-    "description:de": "Projizierte geografische Koordinate (CH1903+ / LV95)."
+    "description:de": "Projizierte geografische Koordinate (CH1903+ / LV95).",
+    "description:it": "Coordinata geografica proiettata (CH1903+ / LV95)."
   },
   {
     "id": "pop_region__type_region",
@@ -1404,8 +1552,10 @@
     "tag_ids": "infrastructures, securite, flore, sensible_data, hydrographie",
     "name:fr": "Type de région",
     "name:de": "Regionstyp",
+    "name:it": "Tipo di regione",
     "description:fr": "Typologie : urbaine, périurbaine, rurale, montagne, etc.",
-    "description:de": "Typologie: städtisch, stadtnah, ländlich, Berggebiet usw."
+    "description:de": "Typologie: städtisch, stadtnah, ländlich, Berggebiet usw.",
+    "description:it": "Tipologia: urbana, periurbana, rurale, di montagna, ecc."
   },
   {
     "id": "pop_region__taux_croissance_demo",
@@ -1421,8 +1571,10 @@
     "end_date": "2020/08/17",
     "name:fr": "Taux de croissance démographique",
     "name:de": "Bevölkerungswachstumsrate",
+    "name:it": "Tasso di crescita demografica",
     "description:fr": "Variation annuelle de la population (%).",
-    "description:de": "Jährliche Veränderung der Bevölkerung (%)."
+    "description:de": "Jährliche Veränderung der Bevölkerung (%).",
+    "description:it": "Variazione annua della popolazione (%)."
   },
   {
     "id": "pop_region__source_donnee",
@@ -1439,8 +1591,10 @@
     "tag_ids": "limites_pol_admin, data_protection, geologie",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données (OS, communes, registres).",
-    "description:de": "Herkunft der Daten (statistisches Amt, Gemeinden, Register)."
+    "description:de": "Herkunft der Daten (statistisches Amt, Gemeinden, Register).",
+    "description:it": "Origine dei dati (ufficio di statistica, comuni, registri)."
   },
   {
     "id": "eau_potable__region",
@@ -1457,8 +1611,10 @@
     "tag_ids": "faune",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région géographique où l'échantillon d'eau potable a été prélevé.",
-    "description:de": "Geografische Region, in der die Trinkwasserprobe entnommen wurde."
+    "description:de": "Geografische Region, in der die Trinkwasserprobe entnommen wurde.",
+    "description:it": "Regione geografica in cui è stato prelevato il campione di acqua potabile."
   },
   {
     "id": "eau_potable__annee",
@@ -1474,8 +1630,10 @@
     "end_date": "2012",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de l'analyse de la qualité de l'eau.",
-    "description:de": "Referenzjahr der Wasserqualitätsanalyse."
+    "description:de": "Referenzjahr der Wasserqualitätsanalyse.",
+    "description:it": "Anno di riferimento dell'analisi della qualità dell'acqua."
   },
   {
     "id": "eau_potable__ph",
@@ -1492,8 +1650,10 @@
     "tag_ids": "dangers_naturels, activites_economiques, systemes_reference, protection_env_nature, transport, cadastre_foncier",
     "name:fr": "pH de l'eau",
     "name:de": "pH-Wert des Wassers",
+    "name:it": "pH dell'acqua",
     "description:fr": "Valeur du pH mesurée pour l'échantillon d'eau potable.",
-    "description:de": "Für die Trinkwasserprobe gemessener pH-Wert."
+    "description:de": "Für die Trinkwasserprobe gemessener pH-Wert.",
+    "description:it": "Valore del pH misurato per il campione di acqua potabile."
   },
   {
     "id": "eau_potable__nitrates_mg_l",
@@ -1511,8 +1671,10 @@
     "tag_ids": "faune, securite, atmosphere, couverture_sol",
     "name:fr": "Nitrates (mg/L)",
     "name:de": "Nitrate (mg/L)",
+    "name:it": "Nitrati (mg/L)",
     "description:fr": "Concentration en nitrates (mg par litre).",
-    "description:de": "Nitratkonzentration (mg pro Liter)."
+    "description:de": "Nitratkonzentration (mg pro Liter).",
+    "description:it": "Concentrazione di nitrati (mg per litro)."
   },
   {
     "id": "eau_potable__pesticides_ug_l",
@@ -1529,8 +1691,10 @@
     "tag_ids": "cartes_reference, approvisionnement, culture, edifices",
     "name:fr": "Pesticides (µg/L)",
     "name:de": "Pestizide (µg/L)",
+    "name:it": "Pesticidi (µg/L)",
     "description:fr": "Concentration totale de pesticides mesurés (microgrammes/L).",
-    "description:de": "Gesamtkonzentration der gemessenen Pestizide (Mikrogramm/L)."
+    "description:de": "Gesamtkonzentration der gemessenen Pestizide (Mikrogramm/L).",
+    "description:it": "Concentrazione totale dei pesticidi misurati (microgrammi/L)."
   },
   {
     "id": "eau_potable__bacteries_colonie_100ml",
@@ -1547,8 +1711,10 @@
     "source_variable_ids": "revenus_menages__patrimoine_total, temperature_moy__nb_jours_ete, immobilier_prix__charges_annuelles",
     "name:fr": "Bactéries (UFC/100mL)",
     "name:de": "Bakterien (KBE/100mL)",
+    "name:it": "Batteri (UFC/100mL)",
     "description:fr": "Nombre de colonies de bactéries par 100 mL d'eau.",
-    "description:de": "Anzahl Bakterienkolonien pro 100 mL Wasser."
+    "description:de": "Anzahl Bakterienkolonien pro 100 mL Wasser.",
+    "description:it": "Numero di colonie batteriche per 100 mL di acqua."
   },
   {
     "id": "eau_potable__conformite",
@@ -1566,8 +1732,10 @@
     "tag_ids": "activites_economiques, approvisionnement, cartes_reference",
     "name:fr": "Conformité",
     "name:de": "Konformität",
+    "name:it": "Conformità",
     "description:fr": "Indication de conformité aux normes suisses : conforme, à surveiller, non conforme.",
-    "description:de": "Angabe zur Konformität mit den Schweizer Normen: konform, zu überwachen, nicht konform."
+    "description:de": "Angabe zur Konformität mit den Schweizer Normen: konform, zu überwachen, nicht konform.",
+    "description:it": "Conformità alle norme svizzere: conforme, da monitorare, non conforme."
   },
   {
     "id": "eau_potable__source_prelevement",
@@ -1584,8 +1752,10 @@
     "tag_ids": "localisation, hydrographie, atmosphere, activites_economiques, elimination, agriculture",
     "name:fr": "Source de prélèvement",
     "name:de": "Entnahmequelle",
+    "name:it": "Fonte di prelievo",
     "description:fr": "Type de source : réseau communal, nappe phréatique, captage de montagne, etc.",
-    "description:de": "Art der Quelle: kommunales Netz, Grundwasser, Bergquellfassung usw."
+    "description:de": "Art der Quelle: kommunales Netz, Grundwasser, Bergquellfassung usw.",
+    "description:it": "Tipo di fonte: rete comunale, falda freatica, captazione di montagna, ecc."
   },
   {
     "id": "tourisme_annu__annee",
@@ -1602,8 +1772,10 @@
     "tag_ids": "edifices, developpement_territorial, flore",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des statistiques touristiques.",
-    "description:de": "Referenzjahr der Tourismusstatistik."
+    "description:de": "Referenzjahr der Tourismusstatistik.",
+    "description:it": "Anno di riferimento delle statistiche sul turismo."
   },
   {
     "id": "tourisme_annu__mois",
@@ -1620,8 +1792,10 @@
     "tag_ids": "transport",
     "name:fr": "Mois",
     "name:de": "Monat",
+    "name:it": "Mese",
     "description:fr": "Mois de l'année.",
-    "description:de": "Monat des Jahres."
+    "description:de": "Monat des Jahres.",
+    "description:it": "Mese dell'anno."
   },
   {
     "id": "tourisme_annu__canton",
@@ -1638,8 +1812,10 @@
     "source_variable_ids": "ser_pub_loc__mode_gestion, pollution_air__sources_stationnaires, revenus_menages__statut_emploi, transport_pub__nb_lignes",
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton où se situe l'établissement touristique.",
-    "description:de": "Kanton, in dem sich der Tourismusbetrieb befindet."
+    "description:de": "Kanton, in dem sich der Tourismusbetrieb befindet.",
+    "description:it": "Cantone in cui si trova la struttura turistica."
   },
   {
     "id": "tourisme_annu__region_touristique",
@@ -1656,8 +1832,10 @@
     "tag_ids": "dangers_naturels, theme_iso",
     "name:fr": "Région touristique",
     "name:de": "Tourismusregion",
+    "name:it": "Regione turistica",
     "description:fr": "Région touristique définie dans la statistique officielle.",
-    "description:de": "In der offiziellen Statistik definierte Tourismusregion."
+    "description:de": "In der offiziellen Statistik definierte Tourismusregion.",
+    "description:it": "Regione turistica definita nelle statistiche ufficiali."
   },
   {
     "id": "tourisme_annu__type_etablissement",
@@ -1673,8 +1851,10 @@
     "end_date": "2002",
     "name:fr": "Type d'établissement",
     "name:de": "Betriebstyp",
+    "name:it": "Tipo di struttura",
     "description:fr": "Hôtel, auberge, camping, résidence, etc.",
-    "description:de": "Hotel, Gasthof, Campingplatz, Residenz usw."
+    "description:de": "Hotel, Gasthof, Campingplatz, Residenz usw.",
+    "description:it": "Hotel, locanda, campeggio, residence, ecc."
   },
   {
     "id": "tourisme_annu__categorie_etoiles",
@@ -1690,8 +1870,10 @@
     "end_date": "2007/07/10",
     "name:fr": "Catégorie (étoiles)",
     "name:de": "Kategorie (Sterne)",
+    "name:it": "Categoria (stelle)",
     "description:fr": "Classification officielle 1–5 étoiles.",
-    "description:de": "Offizielle Klassifizierung 1–5 Sterne."
+    "description:de": "Offizielle Klassifizierung 1–5 Sterne.",
+    "description:it": "Classificazione ufficiale 1–5 stelle."
   },
   {
     "id": "tourisme_annu__nb_arrivees",
@@ -1708,8 +1890,10 @@
     "tag_ids": "anonymous_data, armee, communication",
     "name:fr": "Nombre d'arrivées",
     "name:de": "Anzahl Ankünfte",
+    "name:it": "Numero di arrivi",
     "description:fr": "Nombre de clients enregistrés à l'arrivée.",
-    "description:de": "Anzahl der bei der Ankunft registrierten Gäste."
+    "description:de": "Anzahl der bei der Ankunft registrierten Gäste.",
+    "description:it": "Numero di ospiti registrati all'arrivo."
   },
   {
     "id": "tourisme_annu__nb_nuitees",
@@ -1725,8 +1909,10 @@
     "end_date": "2024/02",
     "name:fr": "Nombre de nuitées",
     "name:de": "Anzahl Logiernächte",
+    "name:it": "Numero di pernottamenti",
     "description:fr": "Nombre total de nuitées effectuées.",
-    "description:de": "Gesamtzahl der getätigten Logiernächte."
+    "description:de": "Gesamtzahl der getätigten Logiernächte.",
+    "description:it": "Numero totale di pernottamenti effettuati."
   },
   {
     "id": "tourisme_annu__pays_origine",
@@ -1743,8 +1929,10 @@
     "tag_ids": "sols, approvisionnement, societe, pseudonymous_data",
     "name:fr": "Pays d'origine",
     "name:de": "Herkunftsland",
+    "name:it": "Paese di provenienza",
     "description:fr": "Nationalité principale des clients.",
-    "description:de": "Hauptnationalität der Gäste."
+    "description:de": "Hauptnationalität der Gäste.",
+    "description:it": "Nazionalità principale degli ospiti."
   },
   {
     "id": "tourisme_annu__continent_origine",
@@ -1761,8 +1949,10 @@
     "tag_ids": "theme_iso, sensible_data",
     "name:fr": "Continent d'origine",
     "name:de": "Herkunftskontinent",
+    "name:it": "Continente di provenienza",
     "description:fr": "Continent de provenance des touristes.",
-    "description:de": "Herkunftskontinent der Touristen."
+    "description:de": "Herkunftskontinent der Touristen.",
+    "description:it": "Continente di provenienza dei turisti."
   },
   {
     "id": "tourisme_annu__nb_chambres",
@@ -1779,8 +1969,10 @@
     "tag_ids": "faune, anonymous_data, flore, localisation, foret",
     "name:fr": "Nombre de chambres",
     "name:de": "Anzahl Zimmer",
+    "name:it": "Numero di camere",
     "description:fr": "Nombre de chambres disponibles dans l'établissement.",
-    "description:de": "Anzahl der im Betrieb verfügbaren Zimmer."
+    "description:de": "Anzahl der im Betrieb verfügbaren Zimmer.",
+    "description:it": "Numero di camere disponibili nella struttura."
   },
   {
     "id": "tourisme_annu__nb_lits",
@@ -1796,8 +1988,10 @@
     "end_date": "2005/01",
     "name:fr": "Nombre de lits",
     "name:de": "Anzahl Betten",
+    "name:it": "Numero di letti",
     "description:fr": "Nombre total de lits.",
-    "description:de": "Gesamtzahl der Betten."
+    "description:de": "Gesamtzahl der Betten.",
+    "description:it": "Numero totale di letti."
   },
   {
     "id": "tourisme_annu__taux_occupation_chambres",
@@ -1815,8 +2009,10 @@
     "source_variable_ids": "emplois_tech__region",
     "name:fr": "Taux d'occupation (chambres)",
     "name:de": "Belegungsrate (Zimmer)",
+    "name:it": "Tasso di occupazione (camere)",
     "description:fr": "Proportion moyenne d'occupation des chambres (%).",
-    "description:de": "Durchschnittliche Zimmerbelegung (%)."
+    "description:de": "Durchschnittliche Zimmerbelegung (%).",
+    "description:it": "Tasso medio di occupazione delle camere (%)."
   },
   {
     "id": "tourisme_annu__taux_occupation_lits",
@@ -1833,8 +2029,10 @@
     "tag_ids": "systemes_reference, edifices",
     "name:fr": "Taux d'occupation (lits)",
     "name:de": "Belegungsrate (Betten)",
+    "name:it": "Tasso di occupazione (letti)",
     "description:fr": "Proportion moyenne d'occupation des lits (%).",
-    "description:de": "Durchschnittliche Bettenbelegung (%)."
+    "description:de": "Durchschnittliche Bettenbelegung (%).",
+    "description:it": "Tasso medio di occupazione dei letti (%)."
   },
   {
     "id": "tourisme_annu__duree_moyenne_sejour",
@@ -1851,8 +2049,10 @@
     "source_variable_ids": "revenus_menages__nb_personnes",
     "name:fr": "Durée moyenne du séjour",
     "name:de": "Durchschnittliche Aufenthaltsdauer",
+    "name:it": "Durata media del soggiorno",
     "description:fr": "Nombre moyen de nuits par séjour.",
-    "description:de": "Durchschnittliche Anzahl Nächte pro Aufenthalt."
+    "description:de": "Durchschnittliche Anzahl Nächte pro Aufenthalt.",
+    "description:it": "Numero medio di notti per soggiorno."
   },
   {
     "id": "tourisme_annu__nb_personnel",
@@ -1869,8 +2069,10 @@
     "tag_ids": "images_aeriennes_1, couverture_sol, geologie, systemes_reference, foret",
     "name:fr": "Personnel (ETP)",
     "name:de": "Personal (VZÄ)",
+    "name:it": "Personale (ETP)",
     "description:fr": "Nombre de collaborateurs équivalents plein-temps.",
-    "description:de": "Anzahl der Vollzeitäquivalente an Mitarbeitenden."
+    "description:de": "Anzahl der Vollzeitäquivalente an Mitarbeitenden.",
+    "description:it": "Numero di collaboratori in equivalenti a tempo pieno."
   },
   {
     "id": "tourisme_annu__presence_familles",
@@ -1888,8 +2090,10 @@
     "source_variable_ids": "emplois_tech__taux_croissance, accidents_travail__sexe_victime",
     "name:fr": "Présence de familles",
     "name:de": "Anwesenheit von Familien",
+    "name:it": "Presenza di famiglie",
     "description:fr": "Indique si une part significative de familles est accueillie.",
-    "description:de": "Gibt an, ob ein bedeutender Anteil an Familien beherbergt wird."
+    "description:de": "Gibt an, ob ein bedeutender Anteil an Familien beherbergt wird.",
+    "description:it": "Indica se viene ospitata una quota significativa di famiglie."
   },
   {
     "id": "tourisme_annu__presence_groupes",
@@ -1907,8 +2111,10 @@
     "source_variable_ids": "ser_pub_loc__delai_moyen_traitement",
     "name:fr": "Présence de groupes",
     "name:de": "Anwesenheit von Gruppen",
+    "name:it": "Presenza di gruppi",
     "description:fr": "Indique si la clientèle comprend un volume notable de groupes.",
-    "description:de": "Gibt an, ob die Gästeschaft einen nennenswerten Anteil an Gruppen umfasst."
+    "description:de": "Gibt an, ob die Gästeschaft einen nennenswerten Anteil an Gruppen umfasst.",
+    "description:it": "Indica se la clientela comprende un volume rilevante di gruppi."
   },
   {
     "id": "tourisme_annu__offre_wellness",
@@ -1925,8 +2131,10 @@
     "tag_ids": "culture, securite, protection_env_nature, images_aeriennes_2, flore",
     "name:fr": "Offre bien-être",
     "name:de": "Wellnessangebot",
+    "name:it": "Offerta wellness",
     "description:fr": "Présence d'infrastructures wellness/spa.",
-    "description:de": "Vorhandensein von Wellness-/Spa-Einrichtungen."
+    "description:de": "Vorhandensein von Wellness-/Spa-Einrichtungen.",
+    "description:it": "Presenza di strutture wellness o spa."
   },
   {
     "id": "tourisme_annu__offre_restauration",
@@ -1943,8 +2151,10 @@
     "tag_ids": "anonymous_data, images_aeriennes_2, faune, climatologie, communication",
     "name:fr": "Offre restauration",
     "name:de": "Gastronomieangebot",
+    "name:it": "Offerta di ristorazione",
     "description:fr": "Indique si l'établissement possède un service de restauration.",
-    "description:de": "Gibt an, ob der Betrieb über ein Gastronomieangebot verfügt."
+    "description:de": "Gibt an, ob der Betrieb über ein Gastronomieangebot verfügt.",
+    "description:it": "Indica se la struttura dispone di un servizio di ristorazione."
   },
   {
     "id": "tourisme_annu__prix_moy_nuit",
@@ -1962,8 +2172,10 @@
     "source_variable_ids": "emploi_jeunes__sexe, revenus_menages__indice_satisfaction_vie, exportations__valeur_eur",
     "name:fr": "Prix moyen par nuit",
     "name:de": "Durchschnittspreis pro Nacht",
+    "name:it": "Prezzo medio per notte",
     "description:fr": "Prix moyen facturé pour une nuit (CHF).",
-    "description:de": "Durchschnittlich für eine Nacht verrechneter Preis (CHF)."
+    "description:de": "Durchschnittlich für eine Nacht verrechneter Preis (CHF).",
+    "description:it": "Prezzo medio applicato per una notte (CHF)."
   },
   {
     "id": "tourisme_annu__indice_satisfaction",
@@ -1981,8 +2193,10 @@
     "source_variable_ids": "revenus_menages__nb_heures_travail, immobilier_prix__etat_bien",
     "name:fr": "Indice de satisfaction",
     "name:de": "Zufriedenheitsindex",
+    "name:it": "Indice di soddisfazione",
     "description:fr": "Indice de satisfaction de la clientèle (0–100).",
-    "description:de": "Kundenzufriedenheitsindex (0–100)."
+    "description:de": "Kundenzufriedenheitsindex (0–100).",
+    "description:it": "Indice di soddisfazione della clientela (0–100)."
   },
   {
     "id": "tourisme_annu__altitude",
@@ -1999,8 +2213,10 @@
     "tag_ids": "flore, climatologie",
     "name:fr": "Altitude",
     "name:de": "Höhe",
+    "name:it": "Altitudine",
     "description:fr": "Altitude de l'établissement (m).",
-    "description:de": "Höhe des Betriebs (m)."
+    "description:de": "Höhe des Betriebs (m).",
+    "description:it": "Altitudine della struttura (m)."
   },
   {
     "id": "tourisme_annu__coord_x",
@@ -2019,8 +2235,10 @@
     "source_variable_ids": "accidents_travail__cout_assurance, emplois_tech2__source_donnee, usage_internet__connexion_domicile, vente_voitures__source_donnee",
     "name:fr": "Coordonnée X",
     "name:de": "X-Koordinate",
+    "name:it": "Coordinata X",
     "description:fr": "Coordonnée LV95.",
-    "description:de": "LV95-Koordinate."
+    "description:de": "LV95-Koordinate.",
+    "description:it": "Coordinata LV95."
   },
   {
     "id": "tourisme_annu__coord_y",
@@ -2038,8 +2256,10 @@
     "concept_id": "coordonnee_y_lv95",
     "name:fr": "Coordonnée Y",
     "name:de": "Y-Koordinate",
+    "name:it": "Coordinata Y",
     "description:fr": "Coordonnée LV95.",
-    "description:de": "LV95-Koordinate."
+    "description:de": "LV95-Koordinate.",
+    "description:it": "Coordinata LV95."
   },
   {
     "id": "tourisme_annu__saison",
@@ -2055,8 +2275,10 @@
     "tag_ids": "atmosphere, elimination",
     "name:fr": "Saison",
     "name:de": "Saison",
+    "name:it": "Stagione",
     "description:fr": "Saison touristique : hiver, été, intersaison…",
-    "description:de": "Tourismussaison: Winter, Sommer, Zwischensaison …"
+    "description:de": "Tourismussaison: Winter, Sommer, Zwischensaison …",
+    "description:it": "Stagione turistica: inverno, estate, mezza stagione, ecc."
   },
   {
     "id": "tourisme_annu__type_clientele",
@@ -2073,8 +2295,10 @@
     "tag_ids": "securite, atmosphere, elimination",
     "name:fr": "Type de clientèle",
     "name:de": "Kundentyp",
+    "name:it": "Tipo di clientela",
     "description:fr": "Clientèle dominante (affaires, loisirs, familles…).",
-    "description:de": "Vorherrschende Kundschaft (Geschäft, Freizeit, Familien …)."
+    "description:de": "Vorherrschende Kundschaft (Geschäft, Freizeit, Familien …).",
+    "description:it": "Segmento di clientela dominante (affari, svago, famiglie, ecc.)."
   },
   {
     "id": "tourisme_annu__classification_officielle",
@@ -2089,8 +2313,10 @@
     "tag_ids": "couverture_sol, personal_data",
     "name:fr": "Classification officielle",
     "name:de": "Offizielle Klassifizierung",
+    "name:it": "Classificazione ufficiale",
     "description:fr": "Label ou catégorie attribuée par l'office du tourisme.",
-    "description:de": "Vom Tourismusbüro vergebenes Label oder vergebene Kategorie."
+    "description:de": "Vom Tourismusbüro vergebenes Label oder vergebene Kategorie.",
+    "description:it": "Etichetta o categoria attribuita dall'ufficio del turismo."
   },
   {
     "id": "tourisme_annu__gestion_etab",
@@ -2107,8 +2333,10 @@
     "tag_ids": "flore, infrastructures, sols, localisation, communication",
     "name:fr": "Gestion de l'établissement",
     "name:de": "Betriebsführung",
+    "name:it": "Gestione della struttura",
     "description:fr": "Gestion familiale, chaîne hôtelière, coopérative, etc.",
-    "description:de": "Familienbetrieb, Hotelkette, Genossenschaft usw."
+    "description:de": "Familienbetrieb, Hotelkette, Genossenschaft usw.",
+    "description:it": "Gestione familiare, catena alberghiera, cooperativa, ecc."
   },
   {
     "id": "tourisme_annu__source_donnee",
@@ -2125,8 +2353,10 @@
     "tag_ids": "infrastructures, limites_pol_admin, atmosphere",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine de la donnée (OFS, canton, association hôtelière…).",
-    "description:de": "Herkunft der Daten (BFS, Kanton, Hotelverband …)."
+    "description:de": "Herkunft der Daten (BFS, Kanton, Hotelverband …).",
+    "description:it": "Origine dei dati (UST, cantone, associazione alberghiera, ecc.)."
   },
   {
     "id": "tourisme_annu__nb_evenements_locaux",
@@ -2143,8 +2373,10 @@
     "source_variable_ids": "conso_energie__type_energie, exportations__certification_requise, pollution_air__pression_atm",
     "name:fr": "Événements locaux",
     "name:de": "Lokale Veranstaltungen",
+    "name:it": "Eventi locali",
     "description:fr": "Nombre d'événements ayant potentiellement influencé la fréquentation.",
-    "description:de": "Anzahl der Veranstaltungen, die die Frequentierung möglicherweise beeinflusst haben."
+    "description:de": "Anzahl der Veranstaltungen, die die Frequentierung möglicherweise beeinflusst haben.",
+    "description:it": "Numero di eventi che possono aver influenzato l'affluenza."
   },
   {
     "id": "tourisme_annu__taux_croissance_nuitees",
@@ -2160,8 +2392,10 @@
     "tag_ids": "anonymous_data, approvisionnement",
     "name:fr": "Taux croissance nuitées",
     "name:de": "Wachstumsrate der Logiernächte",
+    "name:it": "Tasso di crescita dei pernottamenti",
     "description:fr": "Variation annuelle des nuitées (%).",
-    "description:de": "Jährliche Veränderung der Logiernächte (%)."
+    "description:de": "Jährliche Veränderung der Logiernächte (%).",
+    "description:it": "Variazione annua dei pernottamenti (%)."
   },
   {
     "id": "pollution_air__date",
@@ -2181,8 +2415,10 @@
     "std": 53,
     "name:fr": "Date de mesure",
     "name:de": "Messdatum",
+    "name:it": "Data della misurazione",
     "description:fr": "Date du relevé de pollution.",
-    "description:de": "Datum der Schadstoffmessung."
+    "description:de": "Datum der Schadstoffmessung.",
+    "description:it": "Data del rilevamento dell'inquinamento."
   },
   {
     "id": "pollution_air__heure",
@@ -2199,8 +2435,10 @@
     "source_variable_ids": "accidents_travail__taux_accidents_secteur, emploi_jeunes__formation_continue",
     "name:fr": "Heure",
     "name:de": "Uhrzeit",
+    "name:it": "Ora",
     "description:fr": "Heure locale de la mesure.",
-    "description:de": "Lokale Uhrzeit der Messung."
+    "description:de": "Lokale Uhrzeit der Messung.",
+    "description:it": "Ora locale della misurazione."
   },
   {
     "id": "pollution_air__station",
@@ -2216,8 +2454,10 @@
     "tag_ids": "approvisionnement",
     "name:fr": "Station de mesure",
     "name:de": "Messstation",
+    "name:it": "Stazione di misurazione",
     "description:fr": "Station urbaine ayant effectué la mesure.",
-    "description:de": "Städtische Station, die die Messung durchgeführt hat."
+    "description:de": "Städtische Station, die die Messung durchgeführt hat.",
+    "description:it": "Stazione urbana che ha effettuato la misurazione."
   },
   {
     "id": "pollution_air__polluant",
@@ -2232,8 +2472,10 @@
     "start_date": "2017/02",
     "name:fr": "Polluant mesuré",
     "name:de": "Gemessener Schadstoff",
+    "name:it": "Inquinante misurato",
     "description:fr": "Type de polluant analysé (PM2.5, PM10, NO2, O3…).",
-    "description:de": "Art des analysierten Schadstoffs (PM2.5, PM10, NO2, O3 …)."
+    "description:de": "Art des analysierten Schadstoffs (PM2.5, PM10, NO2, O3 …).",
+    "description:it": "Tipo di inquinante analizzato (PM2.5, PM10, NO2, O3, ecc.)."
   },
   {
     "id": "pollution_air__concentration",
@@ -2249,8 +2491,10 @@
     "tag_ids": "faune, couverture_sol, hydrographie, foret",
     "name:fr": "Concentration",
     "name:de": "Konzentration",
+    "name:it": "Concentrazione",
     "description:fr": "Concentration du polluant (µg/m³).",
-    "description:de": "Schadstoffkonzentration (µg/m³)."
+    "description:de": "Schadstoffkonzentration (µg/m³).",
+    "description:it": "Concentrazione dell'inquinante (µg/m³)."
   },
   {
     "id": "pollution_air__unite",
@@ -2266,8 +2510,10 @@
     "source_variable_ids": "exportations__secteur, pop_region__population_etrangere",
     "name:fr": "Unité",
     "name:de": "Einheit",
+    "name:it": "Unità",
     "description:fr": "Unité de mesure (µg/m³).",
-    "description:de": "Masseinheit (µg/m³)."
+    "description:de": "Masseinheit (µg/m³).",
+    "description:it": "Unità di misura (µg/m³)."
   },
   {
     "id": "pollution_air__temperature",
@@ -2284,8 +2530,10 @@
     "tag_ids": "altimetrie, personal_data, geologie, sols, faune",
     "name:fr": "Température",
     "name:de": "Temperatur",
+    "name:it": "Temperatura",
     "description:fr": "Température ambiante lors du relevé (°C).",
-    "description:de": "Umgebungstemperatur zum Zeitpunkt der Messung (°C)."
+    "description:de": "Umgebungstemperatur zum Zeitpunkt der Messung (°C).",
+    "description:it": "Temperatura ambiente al momento del rilevamento (°C)."
   },
   {
     "id": "pollution_air__humidite",
@@ -2301,8 +2549,10 @@
     "tag_ids": "elimination, edifices, hydrographie",
     "name:fr": "Humidité relative",
     "name:de": "Relative Luftfeuchtigkeit",
+    "name:it": "Umidità relativa",
     "description:fr": "Humidité de l'air (%).",
-    "description:de": "Luftfeuchtigkeit (%)."
+    "description:de": "Luftfeuchtigkeit (%).",
+    "description:it": "Umidità dell'aria (%)."
   },
   {
     "id": "pollution_air__vent_vitesse",
@@ -2319,8 +2569,10 @@
     "source_variable_ids": "accidents_travail__presence_temoins, usage_internet__sexe, emploi_jeunes__salaire_mensuel",
     "name:fr": "Vitesse du vent",
     "name:de": "Windgeschwindigkeit",
+    "name:it": "Velocità del vento",
     "description:fr": "Vitesse du vent (km/h).",
-    "description:de": "Windgeschwindigkeit (km/h)."
+    "description:de": "Windgeschwindigkeit (km/h).",
+    "description:it": "Velocità del vento (km/h)."
   },
   {
     "id": "pollution_air__vent_direction",
@@ -2337,8 +2589,10 @@
     "tag_ids": "approvisionnement, cartes_reference, couverture_sol, altimetrie, geologie, anonymous_data",
     "name:fr": "Direction du vent",
     "name:de": "Windrichtung",
+    "name:it": "Direzione del vento",
     "description:fr": "Direction dominante du vent (N, NE, E…).",
-    "description:de": "Vorherrschende Windrichtung (N, NE, E …)."
+    "description:de": "Vorherrschende Windrichtung (N, NE, E …).",
+    "description:it": "Direzione del vento dominante (N, NE, E, ecc.)."
   },
   {
     "id": "pollution_air__pression_atm",
@@ -2354,8 +2608,10 @@
     "tag_ids": "altimetrie, societe",
     "name:fr": "Pression atmosphérique",
     "name:de": "Luftdruck",
+    "name:it": "Pressione atmosferica",
     "description:fr": "Pression atmosphérique (hPa).",
-    "description:de": "Luftdruck (hPa)."
+    "description:de": "Luftdruck (hPa).",
+    "description:it": "Pressione atmosferica (hPa)."
   },
   {
     "id": "pollution_air__precipitations",
@@ -2371,8 +2627,10 @@
     "tag_ids": "anonymous_data, agriculture, elimination, images_aeriennes_2, altimetrie, theme_iso",
     "name:fr": "Précipitations",
     "name:de": "Niederschlag",
+    "name:it": "Precipitazioni",
     "description:fr": "Quantité de précipitations (mm).",
-    "description:de": "Niederschlagsmenge (mm)."
+    "description:de": "Niederschlagsmenge (mm).",
+    "description:it": "Quantità di precipitazioni (mm)."
   },
   {
     "id": "pollution_air__indice_qualite_air",
@@ -2388,8 +2646,10 @@
     "tag_ids": "transport, dangers_naturels, faune, culture, sols, securite",
     "name:fr": "Indice de qualité de l'air",
     "name:de": "Luftqualitätsindex",
+    "name:it": "Indice di qualità dell'aria",
     "description:fr": "Indice global basé sur les normes suisses.",
-    "description:de": "Gesamtindex auf Basis der Schweizer Normen."
+    "description:de": "Gesamtindex auf Basis der Schweizer Normen.",
+    "description:it": "Indice complessivo basato sulle norme svizzere."
   },
   {
     "id": "pollution_air__niveau_alerte",
@@ -2405,8 +2665,10 @@
     "tag_ids": "images_aeriennes_1, elimination, climatologie, sensible_data, sante",
     "name:fr": "Niveau d'alerte",
     "name:de": "Alarmstufe",
+    "name:it": "Livello di allerta",
     "description:fr": "Niveau d'alerte : normal, modéré, élevé, très élevé.",
-    "description:de": "Alarmstufe: normal, mässig, hoch, sehr hoch."
+    "description:de": "Alarmstufe: normal, mässig, hoch, sehr hoch.",
+    "description:it": "Livello di allerta: normale, moderato, alto, molto alto."
   },
   {
     "id": "pollution_air__zone_urbaine",
@@ -2422,8 +2684,10 @@
     "tag_ids": "sensible_data, dangers_naturels, theme_iso, cadastre_foncier",
     "name:fr": "Zone urbaine",
     "name:de": "Städtisches Gebiet",
+    "name:it": "Zona urbana",
     "description:fr": "Quartier ou zone urbaine concernée.",
-    "description:de": "Betroffenes Quartier oder städtisches Gebiet."
+    "description:de": "Betroffenes Quartier oder städtisches Gebiet.",
+    "description:it": "Quartiere o zona urbana interessata."
   },
   {
     "id": "pollution_air__trafic_local",
@@ -2440,8 +2704,10 @@
     "key": 1,
     "name:fr": "Trafic local",
     "name:de": "Lokaler Verkehr",
+    "name:it": "Traffico locale",
     "description:fr": "Indice estimant l'intensité du trafic local.",
-    "description:de": "Index zur Schätzung der lokalen Verkehrsintensität."
+    "description:de": "Index zur Schätzung der lokalen Verkehrsintensität.",
+    "description:it": "Indice che stima l'intensità del traffico locale."
   },
   {
     "id": "pollution_air__sources_stationnaires",
@@ -2458,8 +2724,10 @@
     "source_variable_ids": "emploi_jeunes__nb_heures_second_emploi, emploi_jeunes__anciennete_poste, tourisme_annu__classification_officielle, revenus_menages__charges_garde",
     "name:fr": "Sources stationnaires",
     "name:de": "Stationäre Quellen",
+    "name:it": "Fonti stazionarie",
     "description:fr": "Contribution estimée des sources fixes (industries…).",
-    "description:de": "Geschätzter Beitrag stationärer Quellen (Industrie …)."
+    "description:de": "Geschätzter Beitrag stationärer Quellen (Industrie …).",
+    "description:it": "Contributo stimato delle fonti fisse (industrie, ecc.)."
   },
   {
     "id": "pollution_air__sources_mobiles",
@@ -2476,8 +2744,10 @@
     "key": 2,
     "name:fr": "Sources mobiles",
     "name:de": "Mobile Quellen",
+    "name:it": "Fonti mobili",
     "description:fr": "Contribution estimée des véhicules.",
-    "description:de": "Geschätzter Beitrag der Fahrzeuge."
+    "description:de": "Geschätzter Beitrag der Fahrzeuge.",
+    "description:it": "Contributo stimato dei veicoli."
   },
   {
     "id": "pollution_air__conditions_meteo",
@@ -2493,8 +2763,10 @@
     "tag_ids": "approvisionnement, population, cartes_reference, atmosphere, foret",
     "name:fr": "Conditions météo",
     "name:de": "Wetterbedingungen",
+    "name:it": "Condizioni meteorologiche",
     "description:fr": "Synthèse météo : clair, nuageux, pluie, brouillard…",
-    "description:de": "Wetterzusammenfassung: klar, bewölkt, Regen, Nebel …"
+    "description:de": "Wetterzusammenfassung: klar, bewölkt, Regen, Nebel …",
+    "description:it": "Sintesi meteo: sereno, nuvoloso, pioggia, nebbia, ecc."
   },
   {
     "id": "pollution_air__niveau_bruit",
@@ -2511,8 +2783,10 @@
     "source_variable_ids": "exportations__continent, vente_voitures__source_donnee",
     "name:fr": "Niveau de bruit",
     "name:de": "Lärmpegel",
+    "name:it": "Livello di rumore",
     "description:fr": "Niveau sonore en dB.",
-    "description:de": "Lärmpegel in dB."
+    "description:de": "Lärmpegel in dB.",
+    "description:it": "Livello di rumore in dB."
   },
   {
     "id": "pollution_air__source_donnee",
@@ -2529,8 +2803,10 @@
     "tag_ids": "activites_economiques, edifices, population, data_protection",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données (OFEV, stations cantonales…).",
-    "description:de": "Herkunft der Daten (BAFU, kantonale Stationen …)."
+    "description:de": "Herkunft der Daten (BAFU, kantonale Stationen …).",
+    "description:it": "Origine dei dati (UFAM, stazioni cantonali, ecc.)."
   },
   {
     "id": "transport_pub__localite",
@@ -2545,8 +2821,10 @@
     "source_variable_ids": "tourisme_annu__presence_familles, pop_region__source_donnee, exportations__type_produit",
     "name:fr": "Localité",
     "name:de": "Ortschaft",
+    "name:it": "Località",
     "description:fr": "Ville ou village desservi par le réseau de transports publics.",
-    "description:de": "Stadt oder Dorf, das durch das öffentliche Verkehrsnetz erschlossen ist."
+    "description:de": "Stadt oder Dorf, das durch das öffentliche Verkehrsnetz erschlossen ist.",
+    "description:it": "Città o villaggio servito dalla rete di trasporti pubblici."
   },
   {
     "id": "transport_pub__nb_lignes",
@@ -2562,8 +2840,10 @@
     "source_variable_ids": "emplois_tech__annee, revenus_menages__region, revenus_menages__charges_sante",
     "name:fr": "Nombre de lignes",
     "name:de": "Anzahl Linien",
+    "name:it": "Numero di linee",
     "description:fr": "Nombre total de lignes (bus, tram, train, etc.) desservant la localité.",
-    "description:de": "Gesamtzahl der Linien (Bus, Tram, Zug usw.), die die Ortschaft bedienen."
+    "description:de": "Gesamtzahl der Linien (Bus, Tram, Zug usw.), die die Ortschaft bedienen.",
+    "description:it": "Numero totale di linee (bus, tram, treno, ecc.) che servono la località."
   },
   {
     "id": "transport_pub__frequence_moyenne",
@@ -2579,8 +2859,10 @@
     "source_variable_ids": "temperature_moy__altitude_station, pollution_air__temperature",
     "name:fr": "Fréquence moyenne",
     "name:de": "Durchschnittliche Frequenz",
+    "name:it": "Frequenza media",
     "description:fr": "Fréquence moyenne des passages en minutes (pondérée sur toutes les lignes).",
-    "description:de": "Durchschnittliche Taktfrequenz in Minuten (gewichtet über alle Linien)."
+    "description:de": "Durchschnittliche Taktfrequenz in Minuten (gewichtet über alle Linien).",
+    "description:it": "Frequenza media del servizio in minuti, ponderata su tutte le linee."
   },
   {
     "id": "usage_internet__annee",
@@ -2596,8 +2878,10 @@
     "tag_ids": "sols, couverture_sol, communication, protection_env_nature, foret",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de l'enquête d'utilisation d'internet.",
-    "description:de": "Referenzjahr der Erhebung zur Internetnutzung."
+    "description:de": "Referenzjahr der Erhebung zur Internetnutzung.",
+    "description:it": "Anno di riferimento dell'indagine sull'uso di internet."
   },
   {
     "id": "usage_internet__tranche_age",
@@ -2614,8 +2898,10 @@
     "source_variable_ids": "temperature_moy__nb_jours_ete, accidents_travail__responsabilite_identifiee, pop_region__coord_x",
     "name:fr": "Tranche d'âge",
     "name:de": "Altersgruppe",
+    "name:it": "Fascia d'età",
     "description:fr": "Tranche d'âge des répondants (15–24, 25–34, etc.).",
-    "description:de": "Altersgruppe der Befragten (15–24, 25–34 usw.)."
+    "description:de": "Altersgruppe der Befragten (15–24, 25–34 usw.).",
+    "description:it": "Fascia d'età degli intervistati (15–24, 25–34, ecc.)."
   },
   {
     "id": "usage_internet__sexe",
@@ -2631,8 +2917,10 @@
     "tag_ids": "foret, hydrographie, societe, geologie",
     "name:fr": "Sexe",
     "name:de": "Geschlecht",
+    "name:it": "Sesso",
     "description:fr": "Sexe des répondants : homme, femme, autre/NSP.",
-    "description:de": "Geschlecht der Befragten: männlich, weiblich, andere/keine Angabe."
+    "description:de": "Geschlecht der Befragten: männlich, weiblich, andere/keine Angabe.",
+    "description:it": "Sesso degli intervistati: maschile, femminile, altro/non dichiarato."
   },
   {
     "id": "usage_internet__region",
@@ -2648,8 +2936,10 @@
     "tag_ids": "images_aeriennes_2, personal_data, agriculture, sante, flore",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région ou grand-région (CH05, CH07…).",
-    "description:de": "Region oder Grossregion (CH05, CH07 …)."
+    "description:de": "Region oder Grossregion (CH05, CH07 …).",
+    "description:it": "Regione o grande regione (CH05, CH07, ecc.)."
   },
   {
     "id": "usage_internet__frequence_utilisation",
@@ -2665,8 +2955,10 @@
     "tag_ids": "pseudonymous_data",
     "name:fr": "Fréquence d'utilisation",
     "name:de": "Nutzungshäufigkeit",
+    "name:it": "Frequenza di utilizzo",
     "description:fr": "Fréquence d'usage : quotidienne, hebdomadaire, rare, etc.",
-    "description:de": "Nutzungshäufigkeit: täglich, wöchentlich, selten usw."
+    "description:de": "Nutzungshäufigkeit: täglich, wöchentlich, selten usw.",
+    "description:it": "Frequenza di utilizzo: quotidiana, settimanale, rara, ecc."
   },
   {
     "id": "usage_internet__nb_heures_semaine",
@@ -2682,8 +2974,10 @@
     "tag_ids": "localisation, flore",
     "name:fr": "Heures/semaine",
     "name:de": "Stunden/Woche",
+    "name:it": "Ore/settimana",
     "description:fr": "Nombre d'heures d'utilisation par semaine.",
-    "description:de": "Anzahl der Nutzungsstunden pro Woche."
+    "description:de": "Anzahl der Nutzungsstunden pro Woche.",
+    "description:it": "Numero di ore di utilizzo alla settimana."
   },
   {
     "id": "usage_internet__type_activite_principale",
@@ -2699,8 +2993,10 @@
     "tag_ids": "systemes_reference, pseudonymous_data",
     "name:fr": "Activité principale",
     "name:de": "Haupttätigkeit",
+    "name:it": "Attività principale",
     "description:fr": "Activité principale réalisée en ligne (réseaux sociaux, nouvelles, achats…).",
-    "description:de": "Wichtigste online ausgeübte Tätigkeit (soziale Netzwerke, Nachrichten, Einkäufe …)."
+    "description:de": "Wichtigste online ausgeübte Tätigkeit (soziale Netzwerke, Nachrichten, Einkäufe …).",
+    "description:it": "Attività principale svolta online (social network, notizie, acquisti, ecc.)."
   },
   {
     "id": "usage_internet__equipement_utilise",
@@ -2716,8 +3012,10 @@
     "tag_ids": "developpement_territorial, atmosphere",
     "name:fr": "Équipement utilisé",
     "name:de": "Verwendetes Gerät",
+    "name:it": "Dispositivo utilizzato",
     "description:fr": "Appareil utilisé : smartphone, PC, tablette, etc.",
-    "description:de": "Verwendetes Gerät: Smartphone, PC, Tablet usw."
+    "description:de": "Verwendetes Gerät: Smartphone, PC, Tablet usw.",
+    "description:it": "Dispositivo utilizzato: smartphone, PC, tablet, ecc."
   },
   {
     "id": "usage_internet__connexion_domicile",
@@ -2733,8 +3031,10 @@
     "tag_ids": "sols, ouvrages, communication",
     "name:fr": "Connexion à domicile",
     "name:de": "Internetanschluss zu Hause",
+    "name:it": "Connessione a domicilio",
     "description:fr": "Indique si le ménage dispose d'une connexion internet.",
-    "description:de": "Gibt an, ob der Haushalt über einen Internetanschluss verfügt."
+    "description:de": "Gibt an, ob der Haushalt über einen Internetanschluss verfügt.",
+    "description:it": "Indica se l'economia domestica dispone di una connessione internet."
   },
   {
     "id": "usage_internet__connexion_mobile",
@@ -2751,8 +3051,10 @@
     "source_variable_ids": "accidents_travail__rapport_medical, conso_energie__emissions_co2_tonnes, temperature_moy__indice_chaleur, temperature_moy__nb_jours_ete",
     "name:fr": "Connexion mobile",
     "name:de": "Mobile Verbindung",
+    "name:it": "Connessione mobile",
     "description:fr": "Accès internet via réseau mobile.",
-    "description:de": "Internetzugang über das Mobilfunknetz."
+    "description:de": "Internetzugang über das Mobilfunknetz.",
+    "description:it": "Accesso a internet tramite rete mobile."
   },
   {
     "id": "usage_internet__competence_numerique",
@@ -2769,8 +3071,10 @@
     "source_variable_ids": "accidents_travail__type_contrat",
     "name:fr": "Compétence numérique",
     "name:de": "Digitale Kompetenz",
+    "name:it": "Competenza digitale",
     "description:fr": "Indice de compétence numérique (0–100).",
-    "description:de": "Index der digitalen Kompetenz (0–100)."
+    "description:de": "Index der digitalen Kompetenz (0–100).",
+    "description:it": "Indice di competenza digitale (0–100)."
   },
   {
     "id": "usage_internet__nb_applications_utilisees",
@@ -2784,8 +3088,10 @@
     "description": "Total number of applications used regularly.",
     "name:fr": "Nombre d'applications utilisées",
     "name:de": "Anzahl genutzter Anwendungen",
+    "name:it": "Numero di applicazioni utilizzate",
     "description:fr": "Nombre total d'applications utilisées régulièrement.",
-    "description:de": "Gesamtzahl der regelmässig genutzten Anwendungen."
+    "description:de": "Gesamtzahl der regelmässig genutzten Anwendungen.",
+    "description:it": "Numero totale di applicazioni utilizzate regolarmente."
   },
   {
     "id": "usage_internet__achats_en_ligne",
@@ -2802,8 +3108,10 @@
     "source_variable_ids": "temperature_moy__nb_jours_ete, revenus_menages__nb_membres_actifs, vente_voitures__co2_g_km, revenus_menages__presence_handicap",
     "name:fr": "Achats en ligne",
     "name:de": "Online-Einkäufe",
+    "name:it": "Acquisti online",
     "description:fr": "Indique si la personne a effectué des achats en ligne.",
-    "description:de": "Gibt an, ob die Person online eingekauft hat."
+    "description:de": "Gibt an, ob die Person online eingekauft hat.",
+    "description:it": "Indica se la persona ha effettuato acquisti online."
   },
   {
     "id": "usage_internet__streaming_video",
@@ -2819,8 +3127,10 @@
     "tag_ids": "atmosphere, developpement_territorial, theme_iso, infrastructures",
     "name:fr": "Streaming vidéo",
     "name:de": "Video-Streaming",
+    "name:it": "Streaming video",
     "description:fr": "Utilisation de services de streaming vidéo.",
-    "description:de": "Nutzung von Video-Streaming-Diensten."
+    "description:de": "Nutzung von Video-Streaming-Diensten.",
+    "description:it": "Utilizzo di servizi di streaming video."
   },
   {
     "id": "usage_internet__reseaux_sociaux",
@@ -2837,8 +3147,10 @@
     "source_variable_ids": "accidents_travail__mesures_prevention_post, ser_pub_loc__type_infrastructure, tourisme_annu__source_donnee, accidents_travail__annee",
     "name:fr": "Réseaux sociaux",
     "name:de": "Soziale Netzwerke",
+    "name:it": "Social network",
     "description:fr": "Indique si l'utilisateur fréquente des réseaux sociaux.",
-    "description:de": "Gibt an, ob die nutzende Person soziale Netzwerke verwendet."
+    "description:de": "Gibt an, ob die nutzende Person soziale Netzwerke verwendet.",
+    "description:it": "Indica se l'utente utilizza i social network."
   },
   {
     "id": "usage_internet__confiance_internet",
@@ -2856,8 +3168,10 @@
     "source_variable_ids": "vente_voitures__categorie, ser_pub_loc__quartier",
     "name:fr": "Confiance dans internet",
     "name:de": "Vertrauen ins Internet",
+    "name:it": "Fiducia in internet",
     "description:fr": "Niveau de confiance dans l'utilisation d'internet (0–100).",
-    "description:de": "Vertrauensniveau in die Internetnutzung (0–100)."
+    "description:de": "Vertrauensniveau in die Internetnutzung (0–100).",
+    "description:it": "Livello di fiducia nell'uso di internet (0–100)."
   },
   {
     "id": "usage_internet__source_donnee",
@@ -2873,8 +3187,10 @@
     "tag_ids": "data_protection, dangers_naturels, images_aeriennes_2, cadastre_foncier, faune, foret",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données (OFFT, OFS, partenaires…).",
-    "description:de": "Herkunft der Daten (BBT, BFS, Partner …)."
+    "description:de": "Herkunft der Daten (BBT, BFS, Partner …).",
+    "description:it": "Origine dei dati (UFFT, UST, partner, ecc.)."
   },
   {
     "id": "emplois_tech__annee",
@@ -2889,8 +3205,10 @@
     "start_date": "2004/10",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de l'analyse des emplois technologiques.",
-    "description:de": "Referenzjahr der Analyse der Technologiearbeitsplätze."
+    "description:de": "Referenzjahr der Analyse der Technologiearbeitsplätze.",
+    "description:it": "Anno di riferimento dell'analisi degli impieghi nel settore tecnologico."
   },
   {
     "id": "emplois_tech__region",
@@ -2908,8 +3226,10 @@
     "tag_ids": "data_protection, images_aeriennes, sols, securite, hydrographie, couverture_sol",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région ou zone économique (CH01–CH07).",
-    "description:de": "Region oder Wirtschaftsraum (CH01–CH07)."
+    "description:de": "Region oder Wirtschaftsraum (CH01–CH07).",
+    "description:it": "Regione o zona economica (CH01–CH07)."
   },
   {
     "id": "emplois_tech__secteur_tech",
@@ -2925,8 +3245,10 @@
     "tag_ids": "geologie, foret, anonymous_data",
     "name:fr": "Secteur technologique",
     "name:de": "Technologiesektor",
+    "name:it": "Settore tecnologico",
     "description:fr": "Secteur concerné : IA, cybersécurité, software, hardware, biotech…",
-    "description:de": "Betroffener Sektor: KI, Cybersicherheit, Software, Hardware, Biotech …"
+    "description:de": "Betroffener Sektor: KI, Cybersicherheit, Software, Hardware, Biotech …",
+    "description:it": "Settore interessato: IA, cybersicurezza, software, hardware, biotech, ecc."
   },
   {
     "id": "emplois_tech__nb_entreprises",
@@ -2944,8 +3266,10 @@
     "concept_id": "nombre_entreprises",
     "name:fr": "Nombre d'entreprises",
     "name:de": "Anzahl Unternehmen",
+    "name:it": "Numero di imprese",
     "description:fr": "Nombre d'entreprises actives dans le secteur technologique.",
-    "description:de": "Anzahl der im Technologiesektor tätigen Unternehmen."
+    "description:de": "Anzahl der im Technologiesektor tätigen Unternehmen.",
+    "description:it": "Numero di imprese attive nel settore tecnologico."
   },
   {
     "id": "emplois_tech__nb_employes",
@@ -2963,8 +3287,10 @@
     "concept_id": "nombre_employes",
     "name:fr": "Nombre d'employés",
     "name:de": "Anzahl Beschäftigte",
+    "name:it": "Numero di dipendenti",
     "description:fr": "Nombre total d'employés dans ces entreprises.",
-    "description:de": "Gesamtzahl der Beschäftigten in diesen Unternehmen."
+    "description:de": "Gesamtzahl der Beschäftigten in diesen Unternehmen.",
+    "description:it": "Numero totale di dipendenti in queste imprese."
   },
   {
     "id": "emplois_tech__taux_croissance",
@@ -2980,8 +3306,10 @@
     "tag_ids": "activites_economiques, approvisionnement, atmosphere, sols",
     "name:fr": "Taux de croissance annuel",
     "name:de": "Jährliche Wachstumsrate",
+    "name:it": "Tasso di crescita annuo",
     "description:fr": "Variation annuelle du nombre d'emplois (%).",
-    "description:de": "Jährliche Veränderung der Anzahl Arbeitsplätze (%)."
+    "description:de": "Jährliche Veränderung der Anzahl Arbeitsplätze (%).",
+    "description:it": "Variazione annua del numero di posti di lavoro (%)."
   },
   {
     "id": "emplois_tech__salaire_median",
@@ -2998,8 +3326,10 @@
     "tag_ids": "sante, hydrographie, systemes_reference, limites_pol_admin, securite",
     "name:fr": "Salaire médian",
     "name:de": "Medianlohn",
+    "name:it": "Salario mediano",
     "description:fr": "Salaire médian (CHF) des employés du secteur technologique.",
-    "description:de": "Medianlohn (CHF) der Beschäftigten im Technologiesektor."
+    "description:de": "Medianlohn (CHF) der Beschäftigten im Technologiesektor.",
+    "description:it": "Salario mediano (CHF) dei dipendenti del settore tecnologico."
   },
   {
     "id": "emplois_tech__niveau_formation",
@@ -3018,8 +3348,10 @@
     "source_variable_ids": "pop_region__annee",
     "name:fr": "Niveau de formation",
     "name:de": "Bildungsniveau",
+    "name:it": "Livello di formazione",
     "description:fr": "Niveau de formation requis (CFC, Bachelor, Master, Doctorat…).",
-    "description:de": "Erforderliches Bildungsniveau (EFZ, Bachelor, Master, Doktorat …)."
+    "description:de": "Erforderliches Bildungsniveau (EFZ, Bachelor, Master, Doktorat …).",
+    "description:it": "Livello di formazione richiesto (AFC, bachelor, master, dottorato, ecc.)."
   },
   {
     "id": "emplois_tech__taux_vacance",
@@ -3036,8 +3368,10 @@
     "tag_ids": "altimetrie, images_aeriennes_1, theme_iso, sante, armee",
     "name:fr": "Taux de vacance",
     "name:de": "Vakanzquote",
+    "name:it": "Tasso di posti vacanti",
     "description:fr": "Taux de postes vacants (%) dans le secteur technologique.",
-    "description:de": "Quote offener Stellen (%) im Technologiesektor."
+    "description:de": "Quote offener Stellen (%) im Technologiesektor.",
+    "description:it": "Tasso di posti di lavoro vacanti (%) nel settore tecnologico."
   },
   {
     "id": "emplois_tech__nb_offres_emploi",
@@ -3055,8 +3389,10 @@
     "source_variable_ids": "accidents_travail__cout_assurance",
     "name:fr": "Offres d'emploi publiées",
     "name:de": "Veröffentlichte Stellenangebote",
+    "name:it": "Numero di offerte di lavoro",
     "description:fr": "Nombre total d'offres publiées dans l'année.",
-    "description:de": "Gesamtzahl der im Jahr veröffentlichten Stellenangebote."
+    "description:de": "Gesamtzahl der im Jahr veröffentlichten Stellenangebote.",
+    "description:it": "Numero totale di annunci di lavoro pubblicati durante l'anno."
   },
   {
     "id": "emplois_tech__source_donnee",
@@ -3074,8 +3410,10 @@
     "tag_ids": "edifices",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Principale source de données : OFS, SECO, plateformes d'emploi.",
-    "description:de": "Wichtigste Datenquelle: BFS, SECO, Stellenplattformen."
+    "description:de": "Wichtigste Datenquelle: BFS, SECO, Stellenplattformen.",
+    "description:it": "Fonte principale dei dati: UST, SECO, piattaforme di impiego."
   },
   {
     "id": "accidents_travail__annee",
@@ -3092,8 +3430,10 @@
     "tag_ids": "elimination, hydrographie, images_aeriennes_1, personal_data, sante",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de survenue de l'accident de travail.",
-    "description:de": "Jahr, in dem sich der Arbeitsunfall ereignet hat."
+    "description:de": "Jahr, in dem sich der Arbeitsunfall ereignet hat.",
+    "description:it": "Anno in cui si è verificato l'infortunio sul lavoro."
   },
   {
     "id": "accidents_travail__secteur_activite",
@@ -3110,8 +3450,10 @@
     "tag_ids": "approvisionnement, data_protection, atmosphere, climatologie, securite, dangers_naturels",
     "name:fr": "Secteur d'activité",
     "name:de": "Tätigkeitsbereich",
+    "name:it": "Settore di attività",
     "description:fr": "Secteur économique (construction, industrie, santé…).",
-    "description:de": "Wirtschaftssektor (Bau, Industrie, Gesundheit …)."
+    "description:de": "Wirtschaftssektor (Bau, Industrie, Gesundheit …).",
+    "description:it": "Settore economico (costruzioni, industria, salute, ecc.)."
   },
   {
     "id": "accidents_travail__sous_secteur",
@@ -3128,8 +3470,10 @@
     "tag_ids": "sante, infrastructures, faune, data_protection, theme_iso, elimination",
     "name:fr": "Sous-secteur",
     "name:de": "Teilsektor",
+    "name:it": "Sottosettore",
     "description:fr": "Sous-catégorie du secteur principal.",
-    "description:de": "Unterkategorie des Hauptsektors."
+    "description:de": "Unterkategorie des Hauptsektors.",
+    "description:it": "Sottocategoria del settore principale."
   },
   {
     "id": "accidents_travail__type_accident",
@@ -3147,8 +3491,10 @@
     "source_variable_ids": "revenus_menages__sexe_chef_menage",
     "name:fr": "Type d'accident",
     "name:de": "Unfalltyp",
+    "name:it": "Tipo di infortunio",
     "description:fr": "Nature de l'accident (chute, coupure, collision…).",
-    "description:de": "Art des Unfalls (Sturz, Schnittverletzung, Kollision …)."
+    "description:de": "Art des Unfalls (Sturz, Schnittverletzung, Kollision …).",
+    "description:it": "Natura dell'infortunio (caduta, taglio, collisione, ecc.)."
   },
   {
     "id": "accidents_travail__gravite",
@@ -3166,8 +3512,10 @@
     "concept_id": "gravite_accident",
     "name:fr": "Gravité",
     "name:de": "Schweregrad",
+    "name:it": "Gravità",
     "description:fr": "Gravité : léger, grave, très grave, mortel.",
-    "description:de": "Schweregrad: leicht, schwer, sehr schwer, tödlich."
+    "description:de": "Schweregrad: leicht, schwer, sehr schwer, tödlich.",
+    "description:it": "Gravità: lieve, grave, molto grave, mortale."
   },
   {
     "id": "accidents_travail__age_victime",
@@ -3185,8 +3533,10 @@
     "tag_ids": "climatologie, elimination, sante",
     "name:fr": "Âge de la victime",
     "name:de": "Alter des Opfers",
+    "name:it": "Età della vittima",
     "description:fr": "Âge au moment de l'accident.",
-    "description:de": "Alter zum Zeitpunkt des Unfalls."
+    "description:de": "Alter zum Zeitpunkt des Unfalls.",
+    "description:it": "Età al momento dell'infortunio."
   },
   {
     "id": "accidents_travail__sexe_victime",
@@ -3204,8 +3554,10 @@
     "source_variable_ids": "eau_potable__bacteries_colonie_100ml",
     "name:fr": "Sexe de la victime",
     "name:de": "Geschlecht des Opfers",
+    "name:it": "Sesso della vittima",
     "description:fr": "Sexe : homme, femme, autre/NSP.",
-    "description:de": "Geschlecht: männlich, weiblich, andere/keine Angabe."
+    "description:de": "Geschlecht: männlich, weiblich, andere/keine Angabe.",
+    "description:it": "Sesso: maschile, femminile, altro/non dichiarato."
   },
   {
     "id": "accidents_travail__nationalite",
@@ -3222,8 +3574,10 @@
     "source_variable_ids": "usage_internet__streaming_video, pop_region__coord_x, pollution_air__date, emploi_jeunes__mobilite_professionnelle",
     "name:fr": "Nationalité",
     "name:de": "Nationalität",
+    "name:it": "Nazionalità",
     "description:fr": "Nationalité de la victime.",
-    "description:de": "Nationalität des Opfers."
+    "description:de": "Nationalität des Opfers.",
+    "description:it": "Nazionalità della vittima."
   },
   {
     "id": "accidents_travail__fonction",
@@ -3240,8 +3594,10 @@
     "tag_ids": "developpement_territorial, approvisionnement, altimetrie, armee, localisation, pseudonymous_data",
     "name:fr": "Fonction",
     "name:de": "Funktion",
+    "name:it": "Funzione",
     "description:fr": "Fonction professionnelle au moment de l'accident.",
-    "description:de": "Berufliche Funktion zum Zeitpunkt des Unfalls."
+    "description:de": "Berufliche Funktion zum Zeitpunkt des Unfalls.",
+    "description:it": "Funzione professionale al momento dell'infortunio."
   },
   {
     "id": "accidents_travail__anciennete_poste",
@@ -3258,8 +3614,10 @@
     "tag_ids": "approvisionnement, population, theme_iso, images_aeriennes, hydrographie",
     "name:fr": "Ancienneté au poste",
     "name:de": "Dienstalter in der Position",
+    "name:it": "Anzianità nella posizione",
     "description:fr": "Nombre d'années dans le poste.",
-    "description:de": "Anzahl Jahre in der Position."
+    "description:de": "Anzahl Jahre in der Position.",
+    "description:it": "Numero di anni nella posizione."
   },
   {
     "id": "accidents_travail__type_contrat",
@@ -3276,8 +3634,10 @@
     "concept_id": "type_contrat",
     "name:fr": "Type de contrat",
     "name:de": "Vertragsart",
+    "name:it": "Tipo di contratto",
     "description:fr": "CDI, CDD, apprentissage, temporaire, autre.",
-    "description:de": "Unbefristeter Vertrag, befristeter Vertrag, Lehre, temporär, andere."
+    "description:de": "Unbefristeter Vertrag, befristeter Vertrag, Lehre, temporär, andere.",
+    "description:it": "Contratto a tempo indeterminato, a tempo determinato, apprendistato, temporaneo, altro."
   },
   {
     "id": "accidents_travail__horaire_travail",
@@ -3294,8 +3654,10 @@
     "tag_ids": "armee, flore, images_aeriennes, approvisionnement",
     "name:fr": "Horaire de travail",
     "name:de": "Arbeitszeit",
+    "name:it": "Orario di lavoro",
     "description:fr": "Jour, nuit, équipes, temps partiel.",
-    "description:de": "Tag, Nacht, Schicht, Teilzeit."
+    "description:de": "Tag, Nacht, Schicht, Teilzeit.",
+    "description:it": "Giorno, notte, turni, tempo parziale."
   },
   {
     "id": "accidents_travail__lieu_accident",
@@ -3312,8 +3674,10 @@
     "enumeration_ids": "only_zero, oui_non",
     "name:fr": "Lieu de l'accident",
     "name:de": "Unfallort",
+    "name:it": "Luogo dell'infortunio",
     "description:fr": "Atelier, chantier, bureau, laboratoire…",
-    "description:de": "Werkstatt, Baustelle, Büro, Labor …"
+    "description:de": "Werkstatt, Baustelle, Büro, Labor …",
+    "description:it": "Officina, cantiere, ufficio, laboratorio, ecc."
   },
   {
     "id": "accidents_travail__heure_accident",
@@ -3330,8 +3694,10 @@
     "tag_ids": "agriculture, images_aeriennes_2, foret, images_aeriennes, data_protection, couverture_sol",
     "name:fr": "Heure de l'accident",
     "name:de": "Unfallzeit",
+    "name:it": "Ora dell'infortunio",
     "description:fr": "Heure approximative de l'événement.",
-    "description:de": "Ungefähre Uhrzeit des Ereignisses."
+    "description:de": "Ungefähre Uhrzeit des Ereignisses.",
+    "description:it": "Ora approssimativa dell'evento."
   },
   {
     "id": "accidents_travail__presence_equipements",
@@ -3348,8 +3714,10 @@
     "tag_ids": "societe, climatologie, transport, edifices, anonymous_data, culture",
     "name:fr": "Équipements de sécurité",
     "name:de": "Sicherheitsausrüstung",
+    "name:it": "Equipaggiamento di sicurezza",
     "description:fr": "Indique si les EPI étaient portés.",
-    "description:de": "Gibt an, ob die persönliche Schutzausrüstung getragen wurde."
+    "description:de": "Gibt an, ob die persönliche Schutzausrüstung getragen wurde.",
+    "description:it": "Indica se erano indossati i dispositivi di protezione individuale."
   },
   {
     "id": "accidents_travail__formation_securite",
@@ -3366,8 +3734,10 @@
     "tag_ids": "altimetrie, dangers_naturels",
     "name:fr": "Formation sécurité reçue",
     "name:de": "Erhaltene Sicherheitsschulung",
+    "name:it": "Formazione in materia di sicurezza",
     "description:fr": "Indique si la personne avait reçu une formation récente.",
-    "description:de": "Gibt an, ob die Person kürzlich eine Schulung erhalten hatte."
+    "description:de": "Gibt an, ob die Person kürzlich eine Schulung erhalten hatte.",
+    "description:it": "Indica se la persona aveva ricevuto una formazione recente."
   },
   {
     "id": "accidents_travail__nb_jours_arret",
@@ -3384,8 +3754,10 @@
     "source_variable_ids": "temperature_moy__temp_moy, emploi_jeunes__canton, tourisme_annu__type_etablissement",
     "name:fr": "Jours d'arrêt de travail",
     "name:de": "Arbeitsausfalltage",
+    "name:it": "Giorni di assenza dal lavoro",
     "description:fr": "Durée de l'arrêt consécutif à l'accident.",
-    "description:de": "Dauer des durch den Unfall bedingten Arbeitsausfalls."
+    "description:de": "Dauer des durch den Unfall bedingten Arbeitsausfalls.",
+    "description:it": "Durata dell'interruzione del lavoro in seguito all'infortunio."
   },
   {
     "id": "accidents_travail__cout_assurance",
@@ -3402,8 +3774,10 @@
     "tag_ids": "personal_data, ouvrages",
     "name:fr": "Coût assurance",
     "name:de": "Versicherungskosten",
+    "name:it": "Costo assicurativo",
     "description:fr": "Coût estimé pour l'assurance (CHF).",
-    "description:de": "Geschätzte Kosten für die Versicherung (CHF)."
+    "description:de": "Geschätzte Kosten für die Versicherung (CHF).",
+    "description:it": "Costo stimato per l'assicurazione (CHF)."
   },
   {
     "id": "accidents_travail__cout_total",
@@ -3420,8 +3794,10 @@
     "tag_ids": "activites_economiques, population",
     "name:fr": "Coût total",
     "name:de": "Gesamtkosten",
+    "name:it": "Costo totale",
     "description:fr": "Coût total direct et indirect (CHF).",
-    "description:de": "Gesamte direkte und indirekte Kosten (CHF)."
+    "description:de": "Gesamte direkte und indirekte Kosten (CHF).",
+    "description:it": "Costo totale diretto e indiretto (CHF)."
   },
   {
     "id": "accidents_travail__temps_recuperation",
@@ -3438,8 +3814,10 @@
     "tag_ids": "edifices, armee, pseudonymous_data, sensible_data",
     "name:fr": "Temps de récupération",
     "name:de": "Genesungszeit",
+    "name:it": "Tempo di recupero",
     "description:fr": "Durée estimée de récupération (jours).",
-    "description:de": "Geschätzte Genesungsdauer (Tage)."
+    "description:de": "Geschätzte Genesungsdauer (Tage).",
+    "description:it": "Tempo di recupero stimato (giorni)."
   },
   {
     "id": "accidents_travail__rapport_medical",
@@ -3455,8 +3833,10 @@
     "end_date": "2001",
     "name:fr": "Rapport médical complet",
     "name:de": "Vollständiger Arztbericht",
+    "name:it": "Rapporto medico completo",
     "description:fr": "Présence d'un rapport médical détaillé.",
-    "description:de": "Vorhandensein eines detaillierten Arztberichts."
+    "description:de": "Vorhandensein eines detaillierten Arztberichts.",
+    "description:it": "Presenza di un rapporto medico dettagliato."
   },
   {
     "id": "accidents_travail__presence_temoins",
@@ -3474,8 +3854,10 @@
     "tag_ids": "dangers_naturels, societe, communication",
     "name:fr": "Témoins présents",
     "name:de": "Zeugen anwesend",
+    "name:it": "Testimoni presenti",
     "description:fr": "Indique si des témoins ont assisté à l'accident.",
-    "description:de": "Gibt an, ob Zeugen den Unfall beobachtet haben."
+    "description:de": "Gibt an, ob Zeugen den Unfall beobachtet haben.",
+    "description:it": "Indica se dei testimoni hanno assistito all'infortunio."
   },
   {
     "id": "accidents_travail__nb_temoins",
@@ -3491,8 +3873,10 @@
     "end_date": "2003/02",
     "name:fr": "Nombre de témoins",
     "name:de": "Anzahl Zeugen",
+    "name:it": "Numero di testimoni",
     "description:fr": "Nombre de témoins déclarés.",
-    "description:de": "Anzahl der gemeldeten Zeugen."
+    "description:de": "Anzahl der gemeldeten Zeugen.",
+    "description:it": "Numero di testimoni dichiarati."
   },
   {
     "id": "accidents_travail__mesures_prevention_existantes",
@@ -3509,8 +3893,10 @@
     "tag_ids": "faune, agriculture, couverture_sol",
     "name:fr": "Mesures de prévention existantes",
     "name:de": "Bestehende Präventionsmassnahmen",
+    "name:it": "Misure di prevenzione esistenti",
     "description:fr": "Mesures déjà en place : EPI, balisage, procédures.",
-    "description:de": "Bereits bestehende Massnahmen: Schutzausrüstung, Signalisation, Verfahren."
+    "description:de": "Bereits bestehende Massnahmen: Schutzausrüstung, Signalisation, Verfahren.",
+    "description:it": "Misure già in atto: dispositivi di protezione individuale, segnaletica, procedure."
   },
   {
     "id": "accidents_travail__mesures_prevention_post",
@@ -3528,8 +3914,10 @@
     "tag_ids": "systemes_reference, cadastre_foncier",
     "name:fr": "Mesures prises après l'accident",
     "name:de": "Nach dem Unfall ergriffene Massnahmen",
+    "name:it": "Misure adottate dopo l'infortunio",
     "description:fr": "Actions correctives mises en œuvre.",
-    "description:de": "Umgesetzte Korrekturmassnahmen."
+    "description:de": "Umgesetzte Korrekturmassnahmen.",
+    "description:it": "Misure correttive attuate."
   },
   {
     "id": "accidents_travail__statut_enquete",
@@ -3546,8 +3934,10 @@
     "source_variable_ids": "temperature_moy__station",
     "name:fr": "Statut de l'enquête",
     "name:de": "Status der Untersuchung",
+    "name:it": "Stato dell'inchiesta",
     "description:fr": "Statut administratif : ouvert, en cours, clos, classé.",
-    "description:de": "Administrativer Status: offen, in Bearbeitung, abgeschlossen, archiviert."
+    "description:de": "Administrativer Status: offen, in Bearbeitung, abgeschlossen, archiviert.",
+    "description:it": "Stato amministrativo: aperta, in corso, chiusa, archiviata."
   },
   {
     "id": "accidents_travail__responsabilite_identifiee",
@@ -3564,8 +3954,10 @@
     "tag_ids": "developpement_territorial, culture",
     "name:fr": "Responsabilité identifiée",
     "name:de": "Festgestellte Verantwortung",
+    "name:it": "Responsabilità accertata",
     "description:fr": "Indique si une responsabilité est clairement attribuée.",
-    "description:de": "Gibt an, ob eine Verantwortung eindeutig zugewiesen ist."
+    "description:de": "Gibt an, ob eine Verantwortung eindeutig zugewiesen ist.",
+    "description:it": "Indica se la responsabilità è chiaramente attribuita."
   },
   {
     "id": "accidents_travail__type_responsabilite",
@@ -3582,8 +3974,10 @@
     "tag_ids": "climatologie, anonymous_data, images_aeriennes_2, sols, pseudonymous_data, images_aeriennes_1",
     "name:fr": "Type de responsabilité",
     "name:de": "Art der Verantwortung",
+    "name:it": "Tipo di responsabilità",
     "description:fr": "Victime, employeur, tiers, matériel, environnement.",
-    "description:de": "Opfer, Arbeitgeber, Dritte, Material, Umgebung."
+    "description:de": "Opfer, Arbeitgeber, Dritte, Material, Umgebung.",
+    "description:it": "Vittima, datore di lavoro, terzi, attrezzatura, ambiente."
   },
   {
     "id": "accidents_travail__taux_accidents_secteur",
@@ -3601,8 +3995,10 @@
     "source_variable_ids": "emploi_jeunes__formation_continue, usage_internet__nb_applications_utilisees, pollution_air__zone_urbaine",
     "name:fr": "Taux d'accidents secteur",
     "name:de": "Unfallrate im Sektor",
+    "name:it": "Tasso di infortuni nel settore",
     "description:fr": "Taux d'incidents par secteur (%).",
-    "description:de": "Vorfallrate nach Sektor (%)."
+    "description:de": "Vorfallrate nach Sektor (%).",
+    "description:it": "Tasso di incidenti per settore (%)."
   },
   {
     "id": "accidents_travail__indice_risque",
@@ -3619,8 +4015,10 @@
     "tag_ids": "limites_pol_admin, couverture_sol, data_protection",
     "name:fr": "Indice de risque",
     "name:de": "Risikoindex",
+    "name:it": "Indice di rischio",
     "description:fr": "Indice de risque calculé pour chaque cas.",
-    "description:de": "Für jeden Fall berechneter Risikoindex."
+    "description:de": "Für jeden Fall berechneter Risikoindex.",
+    "description:it": "Indice di rischio calcolato per ogni caso."
   },
   {
     "id": "accidents_travail__source_donnee",
@@ -3636,8 +4034,10 @@
     "tag_ids": "sensible_data, limites_pol_admin, systemes_reference, agriculture",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine de la donnée (SUVA, OFS, entreprises).",
-    "description:de": "Herkunft der Daten (SUVA, BFS, Unternehmen)."
+    "description:de": "Herkunft der Daten (SUVA, BFS, Unternehmen).",
+    "description:it": "Origine dei dati (SUVA, UST, imprese)."
   },
   {
     "id": "vente_voitures__annee",
@@ -3655,8 +4055,10 @@
     "source_variable_ids": "revenus_menages__salaire_horaire",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de la statistique.",
-    "description:de": "Referenzjahr der Statistik."
+    "description:de": "Referenzjahr der Statistik.",
+    "description:it": "Anno di riferimento della statistica."
   },
   {
     "id": "vente_voitures__mois",
@@ -3673,8 +4075,10 @@
     "key": 2,
     "name:fr": "Mois",
     "name:de": "Monat",
+    "name:it": "Mese",
     "description:fr": "Mois de vente.",
-    "description:de": "Verkaufsmonat."
+    "description:de": "Verkaufsmonat.",
+    "description:it": "Mese della vendita."
   },
   {
     "id": "vente_voitures__region",
@@ -3691,8 +4095,10 @@
     "key": 3,
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région administrative ou économique.",
-    "description:de": "Verwaltungs- oder Wirtschaftsregion."
+    "description:de": "Verwaltungs- oder Wirtschaftsregion.",
+    "description:it": "Regione amministrativa o economica."
   },
   {
     "id": "vente_voitures__marque",
@@ -3709,8 +4115,10 @@
     "tag_ids": "elimination, atmosphere, foret, cartes_reference",
     "name:fr": "Marque",
     "name:de": "Marke",
+    "name:it": "Marca",
     "description:fr": "Marque du véhicule vendu.",
-    "description:de": "Marke des verkauften Fahrzeugs."
+    "description:de": "Marke des verkauften Fahrzeugs.",
+    "description:it": "Marca del veicolo venduto."
   },
   {
     "id": "vente_voitures__modele",
@@ -3727,8 +4135,10 @@
     "source_variable_ids": "pop_region__region",
     "name:fr": "Modèle",
     "name:de": "Modell",
+    "name:it": "Modello",
     "description:fr": "Modèle précis du véhicule.",
-    "description:de": "Genaues Modell des Fahrzeugs."
+    "description:de": "Genaues Modell des Fahrzeugs.",
+    "description:it": "Modello esatto del veicolo."
   },
   {
     "id": "vente_voitures__categorie",
@@ -3746,8 +4156,10 @@
     "tag_ids": "infrastructures, armee, societe, theme_iso, systemes_reference, personal_data",
     "name:fr": "Catégorie",
     "name:de": "Kategorie",
+    "name:it": "Categoria",
     "description:fr": "Catégorie : compacte, SUV, berline, utilitaire…",
-    "description:de": "Kategorie: Kompaktwagen, SUV, Limousine, Nutzfahrzeug …"
+    "description:de": "Kategorie: Kompaktwagen, SUV, Limousine, Nutzfahrzeug …",
+    "description:it": "Categoria: compatta, SUV, berlina, veicolo commerciale, ecc."
   },
   {
     "id": "vente_voitures__carburant",
@@ -3764,8 +4176,10 @@
     "tag_ids": "elimination, hydrographie, images_aeriennes, transport",
     "name:fr": "Type de carburant",
     "name:de": "Kraftstoffart",
+    "name:it": "Carburante",
     "description:fr": "Essence, diesel, hybride, électrique, GPL…",
-    "description:de": "Benzin, Diesel, Hybrid, Elektro, Flüssiggas …"
+    "description:de": "Benzin, Diesel, Hybrid, Elektro, Flüssiggas …",
+    "description:it": "Benzina, diesel, ibrido, elettrico, GPL, ecc."
   },
   {
     "id": "vente_voitures__prix_moyen",
@@ -3782,8 +4196,10 @@
     "tag_ids": "atmosphere, systemes_reference, edifices, sante",
     "name:fr": "Prix moyen",
     "name:de": "Durchschnittspreis",
+    "name:it": "Prezzo medio",
     "description:fr": "Prix moyen des véhicules vendus (CHF).",
-    "description:de": "Durchschnittspreis der verkauften Fahrzeuge (CHF)."
+    "description:de": "Durchschnittspreis der verkauften Fahrzeuge (CHF).",
+    "description:it": "Prezzo medio dei veicoli venduti (CHF)."
   },
   {
     "id": "vente_voitures__puissance_hp",
@@ -3800,8 +4216,10 @@
     "source_variable_ids": "ser_pub_loc__mode_gestion, emplois_tech2__region, emploi_jeunes__secteur_activite, conso_energie__conso_totale_mwh",
     "name:fr": "Puissance (HP)",
     "name:de": "Leistung (PS)",
+    "name:it": "Potenza (CV)",
     "description:fr": "Puissance du moteur en chevaux (HP).",
-    "description:de": "Motorleistung in Pferdestärken (PS)."
+    "description:de": "Motorleistung in Pferdestärken (PS).",
+    "description:it": "Potenza del motore in cavalli (CV)."
   },
   {
     "id": "vente_voitures__co2_g_km",
@@ -3818,8 +4236,10 @@
     "tag_ids": "ouvrages, altimetrie, faune",
     "name:fr": "Émissions de CO₂",
     "name:de": "CO₂-Emissionen",
+    "name:it": "Emissioni di CO₂",
     "description:fr": "Émissions de CO₂ (g/km).",
-    "description:de": "CO₂-Emissionen (g/km)."
+    "description:de": "CO₂-Emissionen (g/km).",
+    "description:it": "Emissioni di CO₂ (g/km)."
   },
   {
     "id": "vente_voitures__nb_places",
@@ -3834,8 +4254,10 @@
     "end_date": "2017/11/20",
     "name:fr": "Nombre de places",
     "name:de": "Anzahl Sitzplätze",
+    "name:it": "Numero di posti",
     "description:fr": "Nombre de sièges homologués.",
-    "description:de": "Anzahl der zugelassenen Sitzplätze."
+    "description:de": "Anzahl der zugelassenen Sitzplätze.",
+    "description:it": "Numero di posti omologati."
   },
   {
     "id": "vente_voitures__transmission",
@@ -3853,8 +4275,10 @@
     "source_variable_ids": "emplois_tech__taux_vacance, emplois_tech__salaire_median, temperature_moy__nb_jours_ete",
     "name:fr": "Transmission",
     "name:de": "Getriebe",
+    "name:it": "Cambio",
     "description:fr": "Automatique, manuelle, semi-automatique, CVT.",
-    "description:de": "Automatik, manuell, halbautomatisch, CVT."
+    "description:de": "Automatik, manuell, halbautomatisch, CVT.",
+    "description:it": "Automatico, manuale, semiautomatico, CVT."
   },
   {
     "id": "vente_voitures__source_donnee",
@@ -3872,8 +4296,10 @@
     "tag_ids": "images_aeriennes, couverture_sol, personal_data, altimetrie",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données : importateurs, OFROU, concessionnaires.",
-    "description:de": "Herkunft der Daten: Importeure, ASTRA, Händler."
+    "description:de": "Herkunft der Daten: Importeure, ASTRA, Händler.",
+    "description:it": "Origine dei dati: importatori, USTRA, concessionari."
   },
   {
     "id": "exportations__annee",
@@ -3891,8 +4317,10 @@
     "source_variable_ids": "accidents_travail__mesures_prevention_existantes, emplois_tech2__taux_croissance, accidents_travail__formation_securite",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des exportations.",
-    "description:de": "Referenzjahr der Exporte."
+    "description:de": "Referenzjahr der Exporte.",
+    "description:it": "Anno di riferimento delle esportazioni."
   },
   {
     "id": "exportations__mois",
@@ -3910,8 +4338,10 @@
     "source_variable_ids": "exportations__taux_croissance_secteur, emplois_tech__source_donnee",
     "name:fr": "Mois",
     "name:de": "Monat",
+    "name:it": "Mese",
     "description:fr": "Mois de l'enregistrement.",
-    "description:de": "Monat der Erfassung."
+    "description:de": "Monat der Erfassung.",
+    "description:it": "Mese di registrazione."
   },
   {
     "id": "exportations__secteur",
@@ -3930,8 +4360,10 @@
     "source_variable_ids": "exportations__nb_unites",
     "name:fr": "Secteur économique",
     "name:de": "Wirtschaftssektor",
+    "name:it": "Settore economico",
     "description:fr": "Secteur exportateur : pharma, machines, horlogerie…",
-    "description:de": "Exportsektor: Pharma, Maschinen, Uhrenindustrie …"
+    "description:de": "Exportsektor: Pharma, Maschinen, Uhrenindustrie …",
+    "description:it": "Settore esportatore: farmaceutica, macchinari, orologeria, ecc."
   },
   {
     "id": "exportations__sous_secteur",
@@ -3950,8 +4382,10 @@
     "source_variable_ids": "pollution_air__pression_atm",
     "name:fr": "Sous-secteur",
     "name:de": "Teilsektor",
+    "name:it": "Sottosettore",
     "description:fr": "Sous-catégorie économique précise.",
-    "description:de": "Genaue wirtschaftliche Unterkategorie."
+    "description:de": "Genaue wirtschaftliche Unterkategorie.",
+    "description:it": "Sottocategoria economica specifica."
   },
   {
     "id": "exportations__pays_destination",
@@ -3969,8 +4403,10 @@
     "source_variable_ids": "exportations__type_produit, accidents_travail__horaire_travail, tourisme_annu__offre_wellness",
     "name:fr": "Pays de destination",
     "name:de": "Zielland",
+    "name:it": "Paese di destinazione",
     "description:fr": "Pays destinataire de l'exportation.",
-    "description:de": "Zielland des Exports."
+    "description:de": "Zielland des Exports.",
+    "description:it": "Paese di destinazione dell'esportazione."
   },
   {
     "id": "exportations__continent",
@@ -3987,8 +4423,10 @@
     "tag_ids": "approvisionnement, infrastructures, sensible_data, images_aeriennes, edifices, foret",
     "name:fr": "Continent",
     "name:de": "Kontinent",
+    "name:it": "Continente",
     "description:fr": "Continent du pays destinataire.",
-    "description:de": "Kontinent des Ziellandes."
+    "description:de": "Kontinent des Ziellandes.",
+    "description:it": "Continente del paese di destinazione."
   },
   {
     "id": "exportations__valeur_chf",
@@ -4005,8 +4443,10 @@
     "tag_ids": "edifices, protection_env_nature, limites_pol_admin, dangers_naturels",
     "name:fr": "Valeur exportée (CHF)",
     "name:de": "Exportwert (CHF)",
+    "name:it": "Valore delle esportazioni (CHF)",
     "description:fr": "Valeur totale exportée en francs.",
-    "description:de": "Gesamter Exportwert in Franken."
+    "description:de": "Gesamter Exportwert in Franken.",
+    "description:it": "Valore totale esportato in franchi."
   },
   {
     "id": "exportations__poids_kg",
@@ -4023,8 +4463,10 @@
     "tag_ids": "culture, approvisionnement, altimetrie, transport, cadastre_foncier",
     "name:fr": "Poids (kg)",
     "name:de": "Gewicht (kg)",
+    "name:it": "Peso (kg)",
     "description:fr": "Poids total exporté en kilogrammes.",
-    "description:de": "Gesamtes exportiertes Gewicht in Kilogramm."
+    "description:de": "Gesamtes exportiertes Gewicht in Kilogramm.",
+    "description:it": "Peso totale esportato in chilogrammi."
   },
   {
     "id": "exportations__type_produit",
@@ -4043,8 +4485,10 @@
     "source_variable_ids": "usage_internet__frequence_utilisation, emploi_jeunes__taux_croissance_salaire, tourisme_annu__type_etablissement",
     "name:fr": "Type de produit",
     "name:de": "Produkttyp",
+    "name:it": "Tipo di prodotto",
     "description:fr": "Catégorie du produit exporté.",
-    "description:de": "Kategorie des exportierten Produkts."
+    "description:de": "Kategorie des exportierten Produkts.",
+    "description:it": "Categoria del prodotto esportato."
   },
   {
     "id": "exportations__classification_hs",
@@ -4061,8 +4505,10 @@
     "tag_ids": "images_aeriennes, limites_pol_admin, elimination, sols, dangers_naturels, theme_iso",
     "name:fr": "Code douanier HS",
     "name:de": "HS-Zollcode",
+    "name:it": "Codice doganale HS",
     "description:fr": "Code du Système harmonisé (HS).",
-    "description:de": "Code des Harmonisierten Systems (HS)."
+    "description:de": "Code des Harmonisierten Systems (HS).",
+    "description:it": "Codice del Sistema armonizzato (HS)."
   },
   {
     "id": "exportations__nb_unites",
@@ -4077,8 +4523,10 @@
     "tag_ids": "atmosphere, securite",
     "name:fr": "Nombre d'unités",
     "name:de": "Anzahl Einheiten",
+    "name:it": "Numero di unità",
     "description:fr": "Quantité unitaire exportée.",
-    "description:de": "Exportierte Stückzahl."
+    "description:de": "Exportierte Stückzahl.",
+    "description:it": "Quantità di unità esportate."
   },
   {
     "id": "exportations__entreprise_export",
@@ -4096,8 +4544,10 @@
     "tag_ids": "climatologie, cadastre_foncier",
     "name:fr": "Entreprise exportatrice",
     "name:de": "Exportunternehmen",
+    "name:it": "Impresa esportatrice",
     "description:fr": "Nom ou identifiant de l'entreprise.",
-    "description:de": "Name oder Kennung des Unternehmens."
+    "description:de": "Name oder Kennung des Unternehmens.",
+    "description:it": "Nome o identificativo dell'impresa."
   },
   {
     "id": "exportations__canton",
@@ -4114,8 +4564,10 @@
     "tag_ids": "images_aeriennes, hydrographie",
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton d'exportation.",
-    "description:de": "Exportkanton."
+    "description:de": "Exportkanton.",
+    "description:it": "Cantone esportatore."
   },
   {
     "id": "exportations__region",
@@ -4132,8 +4584,10 @@
     "tag_ids": "communication, cadastre_foncier, couverture_sol, securite, sante, images_aeriennes",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région économique (CH01–CH07).",
-    "description:de": "Wirtschaftsregion (CH01–CH07)."
+    "description:de": "Wirtschaftsregion (CH01–CH07).",
+    "description:it": "Regione economica (CH01–CH07)."
   },
   {
     "id": "exportations__type_transport",
@@ -4151,8 +4605,10 @@
     "source_variable_ids": "revenus_menages__nb_enfants, temperature_moy__vitesse_vent_max",
     "name:fr": "Mode de transport",
     "name:de": "Transportart",
+    "name:it": "Modalità di trasporto",
     "description:fr": "Rail, route, air, maritime…",
-    "description:de": "Schiene, Strasse, Luft, See …"
+    "description:de": "Schiene, Strasse, Luft, See …",
+    "description:it": "Ferrovia, strada, aereo, marittimo, ecc."
   },
   {
     "id": "exportations__delai_livraison",
@@ -4170,8 +4626,10 @@
     "source_variable_ids": "exportations__pays_destination, usage_internet__nb_heures_semaine",
     "name:fr": "Délai de livraison (jours)",
     "name:de": "Lieferzeit (Tage)",
+    "name:it": "Tempo di consegna (giorni)",
     "description:fr": "Délai moyen jusqu'à la destination.",
-    "description:de": "Durchschnittliche Dauer bis zum Ziel."
+    "description:de": "Durchschnittliche Dauer bis zum Ziel.",
+    "description:it": "Durata media fino alla destinazione."
   },
   {
     "id": "exportations__assurance_transport",
@@ -4188,8 +4646,10 @@
     "tag_ids": "edifices",
     "name:fr": "Assurance transport",
     "name:de": "Transportversicherung",
+    "name:it": "Assicurazione trasporto",
     "description:fr": "Indique si l'exportation était assurée.",
-    "description:de": "Gibt an, ob der Export versichert war."
+    "description:de": "Gibt an, ob der Export versichert war.",
+    "description:it": "Indica se l'esportazione era assicurata."
   },
   {
     "id": "exportations__incoterm",
@@ -4206,8 +4666,10 @@
     "tag_ids": "climatologie, elimination, sensible_data, personal_data",
     "name:fr": "Incoterm",
     "name:de": "Incoterm",
+    "name:it": "Incoterm",
     "description:fr": "Terme commercial (FOB, CIF, EXW, etc.).",
-    "description:de": "Handelsklausel (FOB, CIF, EXW usw.)."
+    "description:de": "Handelsklausel (FOB, CIF, EXW usw.).",
+    "description:it": "Clausola commerciale (FOB, CIF, EXW, ecc.)."
   },
   {
     "id": "exportations__devise_facturation",
@@ -4223,8 +4685,10 @@
     "tag_ids": "cadastre_foncier, population, climatologie, agriculture, images_aeriennes_2",
     "name:fr": "Devise de facturation",
     "name:de": "Rechnungswährung",
+    "name:it": "Valuta di fatturazione",
     "description:fr": "CHF, EUR, USD, GBP…",
-    "description:de": "CHF, EUR, USD, GBP …"
+    "description:de": "CHF, EUR, USD, GBP …",
+    "description:it": "CHF, EUR, USD, GBP, ecc."
   },
   {
     "id": "exportations__taux_change",
@@ -4242,8 +4706,10 @@
     "source_variable_ids": "temperature_moy__station",
     "name:fr": "Taux de change",
     "name:de": "Wechselkurs",
+    "name:it": "Tasso di cambio",
     "description:fr": "Taux appliqué pour la facturation.",
-    "description:de": "Für die Rechnungsstellung angewandter Kurs."
+    "description:de": "Für die Rechnungsstellung angewandter Kurs.",
+    "description:it": "Tasso di cambio applicato per la fatturazione."
   },
   {
     "id": "exportations__valeur_usd",
@@ -4260,8 +4726,10 @@
     "source_variable_ids": "usage_internet__nb_heures_semaine, pop_region__canton, immobilier_prix__annee_construction, dep_sante__region_sanitaire",
     "name:fr": "Valeur en USD",
     "name:de": "Wert in USD",
+    "name:it": "Valore in USD",
     "description:fr": "Conversion de la valeur exportée en dollars.",
-    "description:de": "Umrechnung des Exportwerts in Dollar."
+    "description:de": "Umrechnung des Exportwerts in Dollar.",
+    "description:it": "Conversione del valore esportato in dollari."
   },
   {
     "id": "exportations__valeur_eur",
@@ -4277,8 +4745,10 @@
     "end_date": "2009/11",
     "name:fr": "Valeur en EUR",
     "name:de": "Wert in EUR",
+    "name:it": "Valore in EUR",
     "description:fr": "Conversion de la valeur exportée en euros.",
-    "description:de": "Umrechnung des Exportwerts in Euro."
+    "description:de": "Umrechnung des Exportwerts in Euro.",
+    "description:it": "Conversione del valore esportato in euro."
   },
   {
     "id": "exportations__certification_requise",
@@ -4295,8 +4765,10 @@
     "tag_ids": "edifices, altimetrie, images_aeriennes_1, armee",
     "name:fr": "Certification requise",
     "name:de": "Erforderliche Zertifizierung",
+    "name:it": "Certificazione richiesta",
     "description:fr": "Certification nécessaire selon le produit.",
-    "description:de": "Je nach Produkt erforderliche Zertifizierung."
+    "description:de": "Je nach Produkt erforderliche Zertifizierung.",
+    "description:it": "Certificazione richiesta a seconda del prodotto."
   },
   {
     "id": "exportations__risque_pays",
@@ -4314,8 +4786,10 @@
     "tag_ids": "sols, hydrographie, foret, faune, infrastructures, images_aeriennes_1",
     "name:fr": "Risque pays",
     "name:de": "Länderrisiko",
+    "name:it": "Rischio paese",
     "description:fr": "Indice de risque macroéconomique du pays.",
-    "description:de": "Makroökonomischer Länderrisikoindex."
+    "description:de": "Makroökonomischer Länderrisikoindex.",
+    "description:it": "Indice di rischio macroeconomico del paese."
   },
   {
     "id": "exportations__retour_client",
@@ -4333,8 +4807,10 @@
     "source_variable_ids": "tourisme_annu__type_clientele, emploi_jeunes__contrat_secondaire, ser_pub_loc__surface_infrastructure",
     "name:fr": "Retour client (feedback)",
     "name:de": "Kundenfeedback",
+    "name:it": "Feedback dei clienti",
     "description:fr": "Indication de satisfaction ou incidents.",
-    "description:de": "Angabe zu Zufriedenheit oder Vorfällen."
+    "description:de": "Angabe zu Zufriedenheit oder Vorfällen.",
+    "description:it": "Indicazione di soddisfazione o di incidenti."
   },
   {
     "id": "exportations__delai_paiement",
@@ -4351,8 +4827,10 @@
     "tag_ids": "activites_economiques, altimetrie, images_aeriennes, localisation, protection_env_nature",
     "name:fr": "Délai de paiement",
     "name:de": "Zahlungsfrist",
+    "name:it": "Termine di pagamento",
     "description:fr": "Délai contractuel de paiement (jours).",
-    "description:de": "Vertragliche Zahlungsfrist (Tage)."
+    "description:de": "Vertragliche Zahlungsfrist (Tage).",
+    "description:it": "Termine di pagamento contrattuale (giorni)."
   },
   {
     "id": "exportations__taux_croissance_secteur",
@@ -4370,8 +4848,10 @@
     "source_variable_ids": "temperature_moy__nb_jours_tres_chaud, revenus_menages__revenu_median, emploi_jeunes__formation_continue",
     "name:fr": "Croissance du secteur",
     "name:de": "Sektorwachstum",
+    "name:it": "Crescita del settore",
     "description:fr": "Taux de croissance annuel du secteur économique.",
-    "description:de": "Jährliche Wachstumsrate des Wirtschaftssektors."
+    "description:de": "Jährliche Wachstumsrate des Wirtschaftssektors.",
+    "description:it": "Tasso di crescita annuo del settore economico."
   },
   {
     "id": "exportations__volume_historique_region",
@@ -4388,8 +4868,10 @@
     "tag_ids": "anonymous_data, data_protection, images_aeriennes_1",
     "name:fr": "Volume historique régional",
     "name:de": "Historisches Regionalvolumen",
+    "name:it": "Volume storico regionale",
     "description:fr": "Historique des volumes exportés par région.",
-    "description:de": "Verlauf der exportierten Volumen nach Region."
+    "description:de": "Verlauf der exportierten Volumen nach Region.",
+    "description:it": "Storico dei volumi esportati per regione."
   },
   {
     "id": "exportations__source_donnee",
@@ -4407,8 +4889,10 @@
     "source_variable_ids": "revenus_menages__taux_endettement, vente_voitures__prix_moyen",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données (OCE, OFS, douanes).",
-    "description:de": "Herkunft der Daten (OCE, BFS, Zoll)."
+    "description:de": "Herkunft der Daten (OCE, BFS, Zoll).",
+    "description:it": "Origine dei dati (OCE, UST, dogane)."
   },
   {
     "id": "immobilier_prix__ville",
@@ -4425,8 +4909,10 @@
     "tag_ids": "data_protection, flore, approvisionnement, localisation",
     "name:fr": "Ville",
     "name:de": "Stadt",
+    "name:it": "Città",
     "description:fr": "Ville concernée par la transaction immobilière.",
-    "description:de": "Von der Immobilientransaktion betroffene Stadt."
+    "description:de": "Von der Immobilientransaktion betroffene Stadt.",
+    "description:it": "Città interessata dalla transazione immobiliare."
   },
   {
     "id": "immobilier_prix__quartier",
@@ -4443,8 +4929,10 @@
     "key": 1,
     "name:fr": "Quartier",
     "name:de": "Quartier",
+    "name:it": "Quartiere",
     "description:fr": "Quartier ou zone statistique de la ville.",
-    "description:de": "Quartier oder statistisches Gebiet der Stadt."
+    "description:de": "Quartier oder statistisches Gebiet der Stadt.",
+    "description:it": "Quartiere o zona statistica della città."
   },
   {
     "id": "immobilier_prix__type_bien",
@@ -4462,8 +4950,10 @@
     "key": 2,
     "name:fr": "Type de bien",
     "name:de": "Objektart",
+    "name:it": "Tipo di immobile",
     "description:fr": "Appartement, maison, bureau, commerce, etc.",
-    "description:de": "Wohnung, Haus, Büro, Geschäft usw."
+    "description:de": "Wohnung, Haus, Büro, Geschäft usw.",
+    "description:it": "Appartamento, casa, ufficio, superficie commerciale, ecc."
   },
   {
     "id": "immobilier_prix__surface_habitable",
@@ -4480,8 +4970,10 @@
     "tag_ids": "localisation",
     "name:fr": "Surface habitable (m²)",
     "name:de": "Wohnfläche (m²)",
+    "name:it": "Superficie abitabile (m²)",
     "description:fr": "Surface habitable du bien (m²).",
-    "description:de": "Wohnfläche des Objekts (m²)."
+    "description:de": "Wohnfläche des Objekts (m²).",
+    "description:it": "Superficie abitabile dell'immobile (m²)."
   },
   {
     "id": "immobilier_prix__surface_parcelle",
@@ -4498,8 +4990,10 @@
     "tag_ids": "sensible_data, hydrographie, images_aeriennes_2, couverture_sol, transport, images_aeriennes_1",
     "name:fr": "Surface de la parcelle",
     "name:de": "Grundstücksfläche",
+    "name:it": "Superficie della particella",
     "description:fr": "Surface du terrain associé (m²).",
-    "description:de": "Fläche des zugehörigen Grundstücks (m²)."
+    "description:de": "Fläche des zugehörigen Grundstücks (m²).",
+    "description:it": "Superficie del terreno associato (m²)."
   },
   {
     "id": "immobilier_prix__nb_pieces",
@@ -4516,8 +5010,10 @@
     "tag_ids": "edifices, couverture_sol, limites_pol_admin, protection_env_nature",
     "name:fr": "Nombre de pièces",
     "name:de": "Anzahl Zimmer",
+    "name:it": "Numero di locali",
     "description:fr": "Nombre de pièces du logement.",
-    "description:de": "Anzahl Zimmer der Wohnung."
+    "description:de": "Anzahl Zimmer der Wohnung.",
+    "description:it": "Numero di locali dell'abitazione."
   },
   {
     "id": "immobilier_prix__annee_construction",
@@ -4534,8 +5030,10 @@
     "tag_ids": "images_aeriennes_2, agriculture, approvisionnement",
     "name:fr": "Année de construction",
     "name:de": "Baujahr",
+    "name:it": "Anno di costruzione",
     "description:fr": "Année de construction du bâtiment.",
-    "description:de": "Baujahr des Gebäudes."
+    "description:de": "Baujahr des Gebäudes.",
+    "description:it": "Anno di costruzione dell'edificio."
   },
   {
     "id": "immobilier_prix__etat_bien",
@@ -4552,8 +5050,10 @@
     "source_variable_ids": "emploi_jeunes__source_donnee",
     "name:fr": "État du bien",
     "name:de": "Zustand des Objekts",
+    "name:it": "Stato dell'immobile",
     "description:fr": "Neuf, rénové, bon, à rénover, vétuste.",
-    "description:de": "Neu, renoviert, guter Zustand, renovierungsbedürftig, baufällig."
+    "description:de": "Neu, renoviert, guter Zustand, renovierungsbedürftig, baufällig.",
+    "description:it": "Nuovo, ristrutturato, buono stato, da ristrutturare, fatiscente."
   },
   {
     "id": "immobilier_prix__prix_vente_chf",
@@ -4570,8 +5070,10 @@
     "tag_ids": "sante, anonymous_data, dangers_naturels, personal_data, pseudonymous_data",
     "name:fr": "Prix de vente (CHF)",
     "name:de": "Verkaufspreis (CHF)",
+    "name:it": "Prezzo di vendita (CHF)",
     "description:fr": "Prix réel de transaction.",
-    "description:de": "Tatsächlicher Transaktionspreis."
+    "description:de": "Tatsächlicher Transaktionspreis.",
+    "description:it": "Prezzo effettivo della transazione."
   },
   {
     "id": "immobilier_prix__prix_m2_chf",
@@ -4588,8 +5090,10 @@
     "tag_ids": "cartes_reference, flore, localisation",
     "name:fr": "Prix au m² (CHF)",
     "name:de": "Preis pro m² (CHF)",
+    "name:it": "Prezzo al m² (CHF)",
     "description:fr": "Prix ramené au mètre carré.",
-    "description:de": "Preis pro Quadratmeter."
+    "description:de": "Preis pro Quadratmeter.",
+    "description:it": "Prezzo al metro quadrato."
   },
   {
     "id": "immobilier_prix__charges_annuelles",
@@ -4605,8 +5109,10 @@
     "tag_ids": "systemes_reference, infrastructures, pseudonymous_data, edifices, data_protection",
     "name:fr": "Charges annuelles",
     "name:de": "Jährliche Nebenkosten",
+    "name:it": "Spese accessorie annuali",
     "description:fr": "Ensembles des charges annuelles du bien.",
-    "description:de": "Gesamtheit der jährlichen Nebenkosten des Objekts."
+    "description:de": "Gesamtheit der jährlichen Nebenkosten des Objekts.",
+    "description:it": "Insieme delle spese annuali dell'immobile."
   },
   {
     "id": "immobilier_prix__type_vente",
@@ -4621,8 +5127,10 @@
     "start_date": "2009/02/11",
     "name:fr": "Type de vente",
     "name:de": "Verkaufsart",
+    "name:it": "Tipo di vendita",
     "description:fr": "Vente privée, enchère, promotion, vente institutionnelle.",
-    "description:de": "Privatverkauf, Versteigerung, Neubauprojekt, institutioneller Verkauf."
+    "description:de": "Privatverkauf, Versteigerung, Neubauprojekt, institutioneller Verkauf.",
+    "description:it": "Vendita privata, asta, nuova costruzione, vendita istituzionale."
   },
   {
     "id": "immobilier_prix__nb_jours_marche",
@@ -4638,8 +5146,10 @@
     "tag_ids": "sante, sensible_data, personal_data, dangers_naturels, cartes_reference",
     "name:fr": "Jours sur le marché",
     "name:de": "Tage auf dem Markt",
+    "name:it": "Giorni sul mercato",
     "description:fr": "Nombre de jours entre la mise en vente et la transaction.",
-    "description:de": "Anzahl der Tage zwischen Inserierung und Transaktion."
+    "description:de": "Anzahl der Tage zwischen Inserierung und Transaktion.",
+    "description:it": "Numero di giorni tra l'annuncio e la transazione."
   },
   {
     "id": "immobilier_prix__indice_attractivite",
@@ -4656,8 +5166,10 @@
     "tag_ids": "developpement_territorial, elimination, data_protection, edifices, images_aeriennes",
     "name:fr": "Indice d'attractivité",
     "name:de": "Attraktivitätsindex",
+    "name:it": "Indice di attrattività",
     "description:fr": "Score basé sur localisation, services, mobilité, etc.",
-    "description:de": "Score auf Basis von Lage, Dienstleistungen, Mobilität usw."
+    "description:de": "Score auf Basis von Lage, Dienstleistungen, Mobilität usw.",
+    "description:it": "Punteggio basato su posizione, servizi, mobilità, ecc."
   },
   {
     "id": "immobilier_prix__source_donnee",
@@ -4674,8 +5186,10 @@
     "tag_ids": "armee, ouvrages, climatologie",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine de la donnée : registres fonciers, plateformes immobilières, offices cantonaux.",
-    "description:de": "Herkunft der Daten: Grundbücher, Immobilienplattformen, kantonale Ämter."
+    "description:de": "Herkunft der Daten: Grundbücher, Immobilienplattformen, kantonale Ämter.",
+    "description:it": "Origine dei dati: registri fondiari, piattaforme immobiliari, uffici cantonali."
   },
   {
     "id": "conso_energie__annee",
@@ -4692,8 +5206,10 @@
     "tag_ids": "ouvrages",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des données énergétiques.",
-    "description:de": "Referenzjahr der Energiedaten."
+    "description:de": "Referenzjahr der Energiedaten.",
+    "description:it": "Anno di riferimento dei dati energetici."
   },
   {
     "id": "conso_energie__secteur",
@@ -4710,8 +5226,10 @@
     "tag_ids": "protection_env_nature, activites_economiques, culture",
     "name:fr": "Secteur économique",
     "name:de": "Wirtschaftssektor",
+    "name:it": "Settore economico",
     "description:fr": "Secteur : industrie, services, agriculture, ménages, etc.",
-    "description:de": "Sektor: Industrie, Dienstleistungen, Landwirtschaft, Haushalte usw."
+    "description:de": "Sektor: Industrie, Dienstleistungen, Landwirtschaft, Haushalte usw.",
+    "description:it": "Settore: industria, servizi, agricoltura, economie domestiche, ecc."
   },
   {
     "id": "conso_energie__sous_secteur",
@@ -4729,8 +5247,10 @@
     "tag_ids": "communication, anonymous_data, images_aeriennes_1, developpement_territorial, sensible_data",
     "name:fr": "Sous-secteur",
     "name:de": "Teilsektor",
+    "name:it": "Sottosettore",
     "description:fr": "Sous-catégorie du secteur principal.",
-    "description:de": "Unterkategorie des Hauptsektors."
+    "description:de": "Unterkategorie des Hauptsektors.",
+    "description:it": "Sottocategoria del settore principale."
   },
   {
     "id": "conso_energie__type_energie",
@@ -4746,8 +5266,10 @@
     "end_date": "2023/07/19",
     "name:fr": "Type d'énergie",
     "name:de": "Energieträger",
+    "name:it": "Tipo di energia",
     "description:fr": "Électricité, gaz, mazout, renouvelables, etc.",
-    "description:de": "Strom, Gas, Heizöl, erneuerbare Energien usw."
+    "description:de": "Strom, Gas, Heizöl, erneuerbare Energien usw.",
+    "description:it": "Elettricità, gas, olio da riscaldamento, energie rinnovabili, ecc."
   },
   {
     "id": "conso_energie__conso_totale_mwh",
@@ -4765,8 +5287,10 @@
     "source_variable_ids": "emploi_jeunes__source_donnee, pop_region__canton, accidents_travail__age_victime, tourisme_annu__categorie_etoiles",
     "name:fr": "Consommation totale (MWh)",
     "name:de": "Gesamtverbrauch (MWh)",
+    "name:it": "Consumo totale (MWh)",
     "description:fr": "Consommation totale d'énergie en MWh.",
-    "description:de": "Gesamter Energieverbrauch in MWh."
+    "description:de": "Gesamter Energieverbrauch in MWh.",
+    "description:it": "Consumo totale di energia in MWh."
   },
   {
     "id": "conso_energie__conso_par_employe",
@@ -4784,8 +5308,10 @@
     "tag_ids": "societe",
     "name:fr": "Consommation par employé",
     "name:de": "Verbrauch pro Beschäftigten",
+    "name:it": "Consumo per dipendente",
     "description:fr": "Consommation moyenne d'énergie par employé.",
-    "description:de": "Durchschnittlicher Energieverbrauch pro Beschäftigten."
+    "description:de": "Durchschnittlicher Energieverbrauch pro Beschäftigten.",
+    "description:it": "Consumo medio di energia per dipendente."
   },
   {
     "id": "conso_energie__nb_employes",
@@ -4804,8 +5330,10 @@
     "source_variable_ids": "revenus_menages__nb_enfants, immobilier_prix__type_vente, dep_sante__type_depense, temperature_moy__nb_jours_ete",
     "name:fr": "Nombre d'employés",
     "name:de": "Anzahl Beschäftigte",
+    "name:it": "Numero di dipendenti",
     "description:fr": "Taille du secteur ou sous-secteur en effectifs.",
-    "description:de": "Grösse des Sektors oder Teilsektors nach Beschäftigtenzahl."
+    "description:de": "Grösse des Sektors oder Teilsektors nach Beschäftigtenzahl.",
+    "description:it": "Dimensione del settore o del sottosettore in numero di addetti."
   },
   {
     "id": "conso_energie__part_renouvelable",
@@ -4823,8 +5351,10 @@
     "source_variable_ids": "dep_sante__population_cible",
     "name:fr": "Part renouvelable (%)",
     "name:de": "Anteil erneuerbar (%)",
+    "name:it": "Quota rinnovabile (%)",
     "description:fr": "Part d'énergie issue de sources renouvelables.",
-    "description:de": "Anteil der Energie aus erneuerbaren Quellen."
+    "description:de": "Anteil der Energie aus erneuerbaren Quellen.",
+    "description:it": "Quota di energia da fonti rinnovabili."
   },
   {
     "id": "conso_energie__emissions_co2_tonnes",
@@ -4841,8 +5371,10 @@
     "tag_ids": "faune, altimetrie, dangers_naturels",
     "name:fr": "Émissions CO₂ (t)",
     "name:de": "CO₂-Emissionen (t)",
+    "name:it": "Emissioni di CO₂ (t)",
     "description:fr": "Émissions de CO₂ en tonnes équivalent CO₂.",
-    "description:de": "CO₂-Emissionen in Tonnen CO₂-Äquivalent."
+    "description:de": "CO₂-Emissionen in Tonnen CO₂-Äquivalent.",
+    "description:it": "Emissioni di CO₂ in tonnellate di CO₂ equivalente."
   },
   {
     "id": "conso_energie__intensite_energetique",
@@ -4859,8 +5391,10 @@
     "tag_ids": "activites_economiques, localisation, sante, anonymous_data",
     "name:fr": "Intensité énergétique",
     "name:de": "Energieintensität",
+    "name:it": "Intensità energetica",
     "description:fr": "Ratio énergie consommée / valeur ajoutée.",
-    "description:de": "Verhältnis von verbrauchter Energie zu Wertschöpfung."
+    "description:de": "Verhältnis von verbrauchter Energie zu Wertschöpfung.",
+    "description:it": "Rapporto tra energia consumata e valore aggiunto."
   },
   {
     "id": "conso_energie__region",
@@ -4878,8 +5412,10 @@
     "source_variable_ids": "accidents_travail__heure_accident, tourisme_annu__mois, dep_sante__type_depense, accident_route__nb_blesses",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région économique (CH01–CH07).",
-    "description:de": "Wirtschaftsregion (CH01–CH07)."
+    "description:de": "Wirtschaftsregion (CH01–CH07).",
+    "description:it": "Regione economica (CH01–CH07)."
   },
   {
     "id": "conso_energie__source_donnee",
@@ -4897,8 +5433,10 @@
     "tag_ids": "elimination",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine : OFEN, OFS, administrations cantonales.",
-    "description:de": "Herkunft: BFE, BFS, kantonale Verwaltungen."
+    "description:de": "Herkunft: BFE, BFS, kantonale Verwaltungen.",
+    "description:it": "Origine: UFE, UST, amministrazioni cantonali."
   },
   {
     "id": "revenus_menages__annee",
@@ -4915,8 +5453,10 @@
     "tag_ids": "systemes_reference, atmosphere",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence des données.",
-    "description:de": "Referenzjahr der Daten."
+    "description:de": "Referenzjahr der Daten.",
+    "description:it": "Anno di riferimento dei dati."
   },
   {
     "id": "revenus_menages__canton",
@@ -4933,8 +5473,10 @@
     "tag_ids": "images_aeriennes, sols, communication, hydrographie, systemes_reference, culture",
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton du ménage.",
-    "description:de": "Kanton des Haushalts."
+    "description:de": "Kanton des Haushalts.",
+    "description:it": "Cantone dell'economia domestica."
   },
   {
     "id": "revenus_menages__region",
@@ -4952,8 +5494,10 @@
     "tag_ids": "faune",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Grande région économique.",
-    "description:de": "Grosse Wirtschaftsregion."
+    "description:de": "Grosse Wirtschaftsregion.",
+    "description:it": "Grande regione economica."
   },
   {
     "id": "revenus_menages__type_menage",
@@ -4971,8 +5515,10 @@
     "source_variable_ids": "accidents_travail__annee, pollution_air__niveau_alerte, revenus_menages__nb_heures_travail",
     "name:fr": "Type de ménage",
     "name:de": "Haushaltstyp",
+    "name:it": "Tipo di economia domestica",
     "description:fr": "Famille, personne seule, couple sans enfants, etc.",
-    "description:de": "Familie, Einzelperson, Paar ohne Kinder usw."
+    "description:de": "Familie, Einzelperson, Paar ohne Kinder usw.",
+    "description:it": "Famiglia, persona sola, coppia senza figli, ecc."
   },
   {
     "id": "revenus_menages__nb_personnes",
@@ -4989,8 +5535,10 @@
     "tag_ids": "communication, pseudonymous_data, geologie",
     "name:fr": "Nombre de personnes",
     "name:de": "Anzahl Personen",
+    "name:it": "Numero di persone",
     "description:fr": "Nombre total d'individus dans le ménage.",
-    "description:de": "Gesamtzahl der Personen im Haushalt."
+    "description:de": "Gesamtzahl der Personen im Haushalt.",
+    "description:it": "Numero totale di persone nell'economia domestica."
   },
   {
     "id": "revenus_menages__nb_enfants",
@@ -5007,8 +5555,10 @@
     "tag_ids": "sante, personal_data",
     "name:fr": "Nombre d'enfants",
     "name:de": "Anzahl Kinder",
+    "name:it": "Numero di figli",
     "description:fr": "Nombre d'enfants dans le ménage.",
-    "description:de": "Anzahl Kinder im Haushalt."
+    "description:de": "Anzahl Kinder im Haushalt.",
+    "description:it": "Numero di figli nell'economia domestica."
   },
   {
     "id": "revenus_menages__age_chef_menage",
@@ -5024,8 +5574,10 @@
     "end_date": "2023",
     "name:fr": "Âge du chef de ménage",
     "name:de": "Alter des Haushaltsvorstands",
+    "name:it": "Età del capofamiglia",
     "description:fr": "Âge de la personne de référence.",
-    "description:de": "Alter der Referenzperson."
+    "description:de": "Alter der Referenzperson.",
+    "description:it": "Età della persona di riferimento."
   },
   {
     "id": "revenus_menages__sexe_chef_menage",
@@ -5043,8 +5595,10 @@
     "source_variable_ids": "immobilier_prix__type_bien, emploi_jeunes__profession, revenus_menages__age_chef_menage, exportations__retour_client",
     "name:fr": "Sexe du chef de ménage",
     "name:de": "Geschlecht des Haushaltsvorstands",
+    "name:it": "Sesso del capofamiglia",
     "description:fr": "Sexe : homme, femme, autre/NSP.",
-    "description:de": "Geschlecht: männlich, weiblich, andere/keine Angabe."
+    "description:de": "Geschlecht: männlich, weiblich, andere/keine Angabe.",
+    "description:it": "Sesso: maschile, femminile, altro/non dichiarato."
   },
   {
     "id": "revenus_menages__nationalite",
@@ -5061,8 +5615,10 @@
     "tag_ids": "communication, societe, cadastre_foncier",
     "name:fr": "Nationalité",
     "name:de": "Nationalität",
+    "name:it": "Nazionalità",
     "description:fr": "Nationalité du ménage ou de la personne de référence.",
-    "description:de": "Nationalität des Haushalts oder der Referenzperson."
+    "description:de": "Nationalität des Haushalts oder der Referenzperson.",
+    "description:it": "Nazionalità dell'economia domestica o della persona di riferimento."
   },
   {
     "id": "revenus_menages__revenu_total_brut",
@@ -5079,8 +5635,10 @@
     "concept_id": "revenu_total_brut",
     "name:fr": "Revenu total brut",
     "name:de": "Bruttogesamteinkommen",
+    "name:it": "Reddito totale lordo",
     "description:fr": "Total des revenus bruts (CHF).",
-    "description:de": "Summe der Bruttoeinkommen (CHF)."
+    "description:de": "Summe der Bruttoeinkommen (CHF).",
+    "description:it": "Totale dei redditi lordi (CHF)."
   },
   {
     "id": "revenus_menages__revenu_total_net",
@@ -5097,8 +5655,10 @@
     "concept_id": "revenu_total_net",
     "name:fr": "Revenu total net",
     "name:de": "Nettogesamteinkommen",
+    "name:it": "Reddito totale netto",
     "description:fr": "Revenu après déductions et charges obligatoires.",
-    "description:de": "Einkommen nach Abzügen und obligatorischen Abgaben."
+    "description:de": "Einkommen nach Abzügen und obligatorischen Abgaben.",
+    "description:it": "Reddito dopo deduzioni e oneri obbligatori."
   },
   {
     "id": "revenus_menages__revenu_par_personne",
@@ -5116,8 +5676,10 @@
     "source_variable_ids": "dep_sante__canton",
     "name:fr": "Revenu par personne",
     "name:de": "Einkommen pro Person",
+    "name:it": "Reddito per persona",
     "description:fr": "Revenu total divisé par le nombre de personnes.",
-    "description:de": "Gesamteinkommen geteilt durch die Anzahl Personen."
+    "description:de": "Gesamteinkommen geteilt durch die Anzahl Personen.",
+    "description:it": "Reddito totale diviso per il numero di persone."
   },
   {
     "id": "revenus_menages__revenu_median",
@@ -5135,8 +5697,10 @@
     "concept_id": "revenu_median",
     "name:fr": "Revenu médian",
     "name:de": "Medianeinkommen",
+    "name:it": "Reddito mediano",
     "description:fr": "Mesure du revenu médian du ménage.",
-    "description:de": "Mass für das Medianeinkommen des Haushalts."
+    "description:de": "Mass für das Medianeinkommen des Haushalts.",
+    "description:it": "Misura del reddito mediano dell'economia domestica."
   },
   {
     "id": "revenus_menages__revenus_travail",
@@ -5154,8 +5718,10 @@
     "concept_id": "revenu_du_travail",
     "name:fr": "Revenus du travail",
     "name:de": "Erwerbseinkommen",
+    "name:it": "Redditi da lavoro",
     "description:fr": "Revenus provenant d'activités professionnelles.",
-    "description:de": "Einkommen aus beruflichen Tätigkeiten."
+    "description:de": "Einkommen aus beruflichen Tätigkeiten.",
+    "description:it": "Redditi da attività professionali."
   },
   {
     "id": "revenus_menages__revenus_capital",
@@ -5174,8 +5740,10 @@
     "concept_id": "revenu_du_capital",
     "name:fr": "Revenus du capital",
     "name:de": "Kapitaleinkommen",
+    "name:it": "Redditi da capitale",
     "description:fr": "Revenus du patrimoine financier et immobilier.",
-    "description:de": "Einkommen aus Finanz- und Immobilienvermögen."
+    "description:de": "Einkommen aus Finanz- und Immobilienvermögen.",
+    "description:it": "Redditi da patrimonio finanziario e immobiliare."
   },
   {
     "id": "revenus_menages__revenus_transferts",
@@ -5192,8 +5760,10 @@
     "concept_id": "prestation_sociale",
     "name:fr": "Prestations sociales",
     "name:de": "Sozialleistungen",
+    "name:it": "Prestazioni sociali",
     "description:fr": "Rentes, allocations, indemnités, etc.",
-    "description:de": "Renten, Zulagen, Entschädigungen usw."
+    "description:de": "Renten, Zulagen, Entschädigungen usw.",
+    "description:it": "Rendite, assegni, indennità, ecc."
   },
   {
     "id": "revenus_menages__impots_payes",
@@ -5210,8 +5780,10 @@
     "tag_ids": "cadastre_foncier, hydrographie, cartes_reference, agriculture, flore, images_aeriennes_2",
     "name:fr": "Impôts payés",
     "name:de": "Bezahlte Steuern",
+    "name:it": "Imposte pagate",
     "description:fr": "Montant annuel des impôts acquittés.",
-    "description:de": "Jährlicher Betrag der bezahlten Steuern."
+    "description:de": "Jährlicher Betrag der bezahlten Steuern.",
+    "description:it": "Importo annuo delle imposte pagate."
   },
   {
     "id": "revenus_menages__charges_logement",
@@ -5227,8 +5799,10 @@
     "end_date": "2022",
     "name:fr": "Charges de logement",
     "name:de": "Wohnkosten",
+    "name:it": "Spese per l'alloggio",
     "description:fr": "Loyer, hypothèque, chauffage, etc.",
-    "description:de": "Miete, Hypothek, Heizung usw."
+    "description:de": "Miete, Hypothek, Heizung usw.",
+    "description:it": "Affitto, ipoteca, riscaldamento, ecc."
   },
   {
     "id": "revenus_menages__charges_transport",
@@ -5245,8 +5819,10 @@
     "tag_ids": "faune, pseudonymous_data",
     "name:fr": "Dépenses de transport",
     "name:de": "Transportausgaben",
+    "name:it": "Spese di trasporto",
     "description:fr": "Dépenses liées à la mobilité.",
-    "description:de": "Ausgaben im Zusammenhang mit Mobilität."
+    "description:de": "Ausgaben im Zusammenhang mit Mobilität.",
+    "description:it": "Spese legate alla mobilità."
   },
   {
     "id": "revenus_menages__charges_sante",
@@ -5263,8 +5839,10 @@
     "tag_ids": "securite, societe, limites_pol_admin, dangers_naturels",
     "name:fr": "Dépenses de santé",
     "name:de": "Gesundheitsausgaben",
+    "name:it": "Spese sanitarie",
     "description:fr": "Primes maladie, soins, médicaments.",
-    "description:de": "Krankenkassenprämien, Behandlungen, Medikamente."
+    "description:de": "Krankenkassenprämien, Behandlungen, Medikamente.",
+    "description:it": "Premi di cassa malati, cure, medicamenti."
   },
   {
     "id": "revenus_menages__charges_alimentation",
@@ -5282,8 +5860,10 @@
     "tag_ids": "climatologie, protection_env_nature, communication, transport, elimination",
     "name:fr": "Dépenses alimentaires",
     "name:de": "Ausgaben für Lebensmittel",
+    "name:it": "Spese alimentari",
     "description:fr": "Alimentation et boissons.",
-    "description:de": "Nahrungsmittel und Getränke."
+    "description:de": "Nahrungsmittel und Getränke.",
+    "description:it": "Alimenti e bevande."
   },
   {
     "id": "revenus_menages__charges_garde",
@@ -5301,8 +5881,10 @@
     "source_variable_ids": "tourisme_annu__mois, exportations__mois",
     "name:fr": "Dépenses de garde",
     "name:de": "Betreuungsausgaben",
+    "name:it": "Spese di custodia",
     "description:fr": "Garderie, parascolaire, nounou.",
-    "description:de": "Kinderkrippe, Tagesbetreuung, Kinderfrau."
+    "description:de": "Kinderkrippe, Tagesbetreuung, Kinderfrau.",
+    "description:it": "Asilo nido, custodia parascolastica, tata."
   },
   {
     "id": "revenus_menages__patrimoine_total",
@@ -5319,8 +5901,10 @@
     "tag_ids": "activites_economiques, developpement_territorial, couverture_sol",
     "name:fr": "Patrimoine total",
     "name:de": "Gesamtvermögen",
+    "name:it": "Patrimonio totale",
     "description:fr": "Valeur estimée du patrimoine du ménage.",
-    "description:de": "Geschätzter Wert des Haushaltsvermögens."
+    "description:de": "Geschätzter Wert des Haushaltsvermögens.",
+    "description:it": "Valore stimato del patrimonio dell'economia domestica."
   },
   {
     "id": "revenus_menages__patrimoine_immobilier",
@@ -5337,8 +5921,10 @@
     "source_variable_ids": "accidents_travail__formation_securite",
     "name:fr": "Patrimoine immobilier",
     "name:de": "Immobilienvermögen",
+    "name:it": "Patrimonio immobiliare",
     "description:fr": "Valeur immobilière détenue.",
-    "description:de": "Wert des gehaltenen Immobilienvermögens."
+    "description:de": "Wert des gehaltenen Immobilienvermögens.",
+    "description:it": "Valore dei beni immobiliari posseduti."
   },
   {
     "id": "revenus_menages__taux_effort_logement",
@@ -5355,8 +5941,10 @@
     "tag_ids": "cadastre_foncier, theme_iso",
     "name:fr": "Taux d'effort logement",
     "name:de": "Wohnkostenbelastung",
+    "name:it": "Incidenza dei costi dell'alloggio",
     "description:fr": "Proportion du revenu consacrée au logement (%).",
-    "description:de": "Anteil des für das Wohnen aufgewendeten Einkommens (%)."
+    "description:de": "Anteil des für das Wohnen aufgewendeten Einkommens (%).",
+    "description:it": "Quota del reddito destinata all'alloggio (%)."
   },
   {
     "id": "revenus_menages__niveau_formation",
@@ -5375,8 +5963,10 @@
     "source_variable_ids": "emploi_jeunes__nb_heures_travail, ser_pub_loc__cout_investissement, usage_internet__source_donnee, vente_voitures__co2_g_km",
     "name:fr": "Niveau de formation",
     "name:de": "Bildungsniveau",
+    "name:it": "Livello di formazione",
     "description:fr": "CFC, maturité, Bachelor, Master, Doctorat.",
-    "description:de": "EFZ, Matura, Bachelor, Master, Doktorat."
+    "description:de": "EFZ, Matura, Bachelor, Master, Doktorat.",
+    "description:it": "AFC, maturità, bachelor, master, dottorato."
   },
   {
     "id": "revenus_menages__situation_professionnelle",
@@ -5391,8 +5981,10 @@
     "tag_ids": "images_aeriennes_1, sante",
     "name:fr": "Situation professionnelle",
     "name:de": "Berufliche Situation",
+    "name:it": "Situazione professionale",
     "description:fr": "Employé, indépendant, retraité, étudiant, au foyer…",
-    "description:de": "Angestellt, selbstständig, pensioniert, studierend, im Haushalt tätig …"
+    "description:de": "Angestellt, selbstständig, pensioniert, studierend, im Haushalt tätig …",
+    "description:it": "Dipendente, indipendente, pensionato, studente, casalingo/a, ecc."
   },
   {
     "id": "revenus_menages__statut_emploi",
@@ -5410,8 +6002,10 @@
     "concept_id": "statut_emploi",
     "name:fr": "Statut d'emploi",
     "name:de": "Erwerbsstatus",
+    "name:it": "Stato occupazionale",
     "description:fr": "Temps plein, temps partiel, chômage, inactif.",
-    "description:de": "Vollzeit, Teilzeit, Arbeitslosigkeit, nicht erwerbstätig."
+    "description:de": "Vollzeit, Teilzeit, Arbeitslosigkeit, nicht erwerbstätig.",
+    "description:it": "Tempo pieno, tempo parziale, disoccupazione, inattivo."
   },
   {
     "id": "revenus_menages__nb_heures_travail",
@@ -5427,8 +6021,10 @@
     "end_date": "2006/01",
     "name:fr": "Heures de travail/semaine",
     "name:de": "Arbeitsstunden/Woche",
+    "name:it": "Ore di lavoro/settimana",
     "description:fr": "Heures travaillées par semaine par la personne de référence.",
-    "description:de": "Von der Referenzperson pro Woche geleistete Arbeitsstunden."
+    "description:de": "Von der Referenzperson pro Woche geleistete Arbeitsstunden.",
+    "description:it": "Ore lavorate a settimana dalla persona di riferimento."
   },
   {
     "id": "revenus_menages__salaire_horaire",
@@ -5445,8 +6041,10 @@
     "tag_ids": "protection_env_nature, ouvrages",
     "name:fr": "Salaire horaire",
     "name:de": "Stundenlohn",
+    "name:it": "Salario orario",
     "description:fr": "Salaire horaire moyen du ménage.",
-    "description:de": "Durchschnittlicher Stundenlohn des Haushalts."
+    "description:de": "Durchschnittlicher Stundenlohn des Haushalts.",
+    "description:it": "Salario orario medio dell'economia domestica."
   },
   {
     "id": "revenus_menages__indice_satisfaction_vie",
@@ -5462,8 +6060,10 @@
     "end_date": "2009/11",
     "name:fr": "Satisfaction de vie",
     "name:de": "Lebenszufriedenheit",
+    "name:it": "Soddisfazione di vita",
     "description:fr": "Échelle de satisfaction subjective (0–10).",
-    "description:de": "Subjektive Zufriedenheitsskala (0–10)."
+    "description:de": "Subjektive Zufriedenheitsskala (0–10).",
+    "description:it": "Scala di soddisfazione soggettiva (0–10)."
   },
   {
     "id": "revenus_menages__indice_precarite",
@@ -5478,8 +6078,10 @@
     "tag_ids": "agriculture, faune",
     "name:fr": "Indice de précarité",
     "name:de": "Prekaritätsindex",
+    "name:it": "Indice di precarietà",
     "description:fr": "Indice composite de vulnérabilité économique.",
-    "description:de": "Zusammengesetzter Index der wirtschaftlichen Verwundbarkeit."
+    "description:de": "Zusammengesetzter Index der wirtschaftlichen Verwundbarkeit.",
+    "description:it": "Indice composito di vulnerabilità economica."
   },
   {
     "id": "revenus_menages__taux_endettement",
@@ -5496,8 +6098,10 @@
     "tag_ids": "faune, hydrographie, personal_data, population",
     "name:fr": "Taux d'endettement",
     "name:de": "Verschuldungsgrad",
+    "name:it": "Tasso di indebitamento",
     "description:fr": "Proportion d'endettement par rapport aux revenus.",
-    "description:de": "Verschuldungsanteil im Verhältnis zum Einkommen."
+    "description:de": "Verschuldungsanteil im Verhältnis zum Einkommen.",
+    "description:it": "Quota di debito rispetto al reddito."
   },
   {
     "id": "revenus_menages__epargne_mensuelle",
@@ -5515,8 +6119,10 @@
     "source_variable_ids": "ser_pub_loc__nb_points_service, vente_voitures__nb_places",
     "name:fr": "Épargne mensuelle",
     "name:de": "Monatliche Ersparnis",
+    "name:it": "Risparmio mensile",
     "description:fr": "Montant épargné en moyenne par mois.",
-    "description:de": "Durchschnittlich pro Monat gesparter Betrag."
+    "description:de": "Durchschnittlich pro Monat gesparter Betrag.",
+    "description:it": "Importo medio risparmiato al mese."
   },
   {
     "id": "revenus_menages__recours_aides_sociales",
@@ -5533,8 +6139,10 @@
     "tag_ids": "sante, couverture_sol, images_aeriennes_1",
     "name:fr": "Recours à l'aide sociale",
     "name:de": "Bezug von Sozialhilfe",
+    "name:it": "Ricorso all'aiuto sociale",
     "description:fr": "Indique si le ménage reçoit une aide sociale.",
-    "description:de": "Gibt an, ob der Haushalt Sozialhilfe bezieht."
+    "description:de": "Gibt an, ob der Haushalt Sozialhilfe bezieht.",
+    "description:it": "Indica se l'economia domestica percepisce l'aiuto sociale."
   },
   {
     "id": "revenus_menages__nb_membres_actifs",
@@ -5551,8 +6159,10 @@
     "tag_ids": "sensible_data, culture",
     "name:fr": "Membres actifs",
     "name:de": "Erwerbstätige Mitglieder",
+    "name:it": "Membri attivi",
     "description:fr": "Nombre de personnes actives dans le ménage.",
-    "description:de": "Anzahl der erwerbstätigen Personen im Haushalt."
+    "description:de": "Anzahl der erwerbstätigen Personen im Haushalt.",
+    "description:it": "Numero di persone economicamente attive nell'economia domestica."
   },
   {
     "id": "revenus_menages__presence_handicap",
@@ -5569,8 +6179,10 @@
     "enumeration_ids": "enumeration_1",
     "name:fr": "Présence de handicap",
     "name:de": "Vorliegen einer Behinderung",
+    "name:it": "Presenza di disabilità",
     "description:fr": "Ménage comprenant au moins une personne en situation de handicap.",
-    "description:de": "Haushalt mit mindestens einer Person mit Behinderung."
+    "description:de": "Haushalt mit mindestens einer Person mit Behinderung.",
+    "description:it": "Economia domestica con almeno una persona con disabilità."
   },
   {
     "id": "revenus_menages__cout_assurance_maladie",
@@ -5587,8 +6199,10 @@
     "tag_ids": "ouvrages, sols, systemes_reference, transport, sensible_data, images_aeriennes_2",
     "name:fr": "Assurance maladie",
     "name:de": "Krankenversicherung",
+    "name:it": "Assicurazione malattia",
     "description:fr": "Coût annuel des assurances pour le ménage.",
-    "description:de": "Jährliche Versicherungskosten des Haushalts."
+    "description:de": "Jährliche Versicherungskosten des Haushalts.",
+    "description:it": "Costo assicurativo annuo dell'economia domestica."
   },
   {
     "id": "revenus_menages__source_donnee",
@@ -5605,8 +6219,10 @@
     "tag_ids": "ouvrages",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données : OFS, fiscalité cantonale, enquêtes.",
-    "description:de": "Herkunft der Daten: BFS, kantonale Steuerbehörden, Erhebungen."
+    "description:de": "Herkunft der Daten: BFS, kantonale Steuerbehörden, Erhebungen.",
+    "description:it": "Origine dei dati: UST, fiscalità cantonale, indagini."
   },
   {
     "id": "emploi_jeunes__annee",
@@ -5623,8 +6239,10 @@
     "tag_ids": "couverture_sol, geologie, anonymous_data, foret, culture",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de l'enquête.",
-    "description:de": "Referenzjahr der Erhebung."
+    "description:de": "Referenzjahr der Erhebung.",
+    "description:it": "Anno di riferimento dell'indagine."
   },
   {
     "id": "emploi_jeunes__age",
@@ -5641,8 +6259,10 @@
     "tag_ids": "limites_pol_admin",
     "name:fr": "Âge",
     "name:de": "Alter",
+    "name:it": "Età",
     "description:fr": "Âge de la personne (18 à 36 ans).",
-    "description:de": "Alter der Person (18 bis 36 Jahre)."
+    "description:de": "Alter der Person (18 bis 36 Jahre).",
+    "description:it": "Età della persona (da 18 a 36 anni)."
   },
   {
     "id": "emploi_jeunes__sexe",
@@ -5660,8 +6280,10 @@
     "tag_ids": "securite, edifices, sols, couverture_sol",
     "name:fr": "Sexe",
     "name:de": "Geschlecht",
+    "name:it": "Sesso",
     "description:fr": "Homme, femme, autre/NSP.",
-    "description:de": "Männlich, weiblich, andere/keine Angabe."
+    "description:de": "Männlich, weiblich, andere/keine Angabe.",
+    "description:it": "Maschile, femminile, altro/non dichiarato."
   },
   {
     "id": "emploi_jeunes__nationalite",
@@ -5680,8 +6302,10 @@
     "is_pattern": 1,
     "name:fr": "Nationalité",
     "name:de": "Nationalität",
+    "name:it": "Nazionalità",
     "description:fr": "Nationalité déclarée de la personne.",
-    "description:de": "Angegebene Nationalität der Person."
+    "description:de": "Angegebene Nationalität der Person.",
+    "description:it": "Nazionalità dichiarata della persona."
   },
   {
     "id": "emploi_jeunes__canton",
@@ -5699,8 +6323,10 @@
     "tag_ids": "elimination, hydrographie, sols, limites_pol_admin, activites_economiques",
     "name:fr": "Canton",
     "name:de": "Kanton",
+    "name:it": "Cantone",
     "description:fr": "Canton de résidence.",
-    "description:de": "Wohnkanton."
+    "description:de": "Wohnkanton.",
+    "description:it": "Cantone di domicilio."
   },
   {
     "id": "emploi_jeunes__region",
@@ -5717,8 +6343,10 @@
     "tag_ids": "culture, cadastre_foncier",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Grande région économique.",
-    "description:de": "Grosse Wirtschaftsregion."
+    "description:de": "Grosse Wirtschaftsregion.",
+    "description:it": "Grande regione economica."
   },
   {
     "id": "emploi_jeunes__niveau_formation",
@@ -5737,8 +6365,10 @@
     "source_variable_ids": "vente_voitures__transmission, accidents_travail__nationalite",
     "name:fr": "Niveau de formation",
     "name:de": "Bildungsniveau",
+    "name:it": "Livello di formazione",
     "description:fr": "CFC, maturité, Bachelor, Master, etc.",
-    "description:de": "EFZ, Matura, Bachelor, Master usw."
+    "description:de": "EFZ, Matura, Bachelor, Master usw.",
+    "description:it": "AFC, maturità, bachelor, master, ecc."
   },
   {
     "id": "emploi_jeunes__statut_emploi",
@@ -5757,8 +6387,10 @@
     "source_variable_ids": "exportations__type_produit",
     "name:fr": "Statut d'emploi",
     "name:de": "Erwerbsstatus",
+    "name:it": "Stato occupazionale",
     "description:fr": "Temps plein, temps partiel, chômage, inactif, étudiant.",
-    "description:de": "Vollzeit, Teilzeit, Arbeitslosigkeit, nicht erwerbstätig, studierend."
+    "description:de": "Vollzeit, Teilzeit, Arbeitslosigkeit, nicht erwerbstätig, studierend.",
+    "description:it": "Tempo pieno, tempo parziale, disoccupazione, inattivo, studente."
   },
   {
     "id": "emploi_jeunes__secteur_activite",
@@ -5774,8 +6406,10 @@
     "tag_ids": "pseudonymous_data, cadastre_foncier",
     "name:fr": "Secteur d'activité",
     "name:de": "Tätigkeitsbereich",
+    "name:it": "Settore di attività",
     "description:fr": "Secteur économique (services, industrie, santé, tech…).",
-    "description:de": "Wirtschaftssektor (Dienstleistungen, Industrie, Gesundheit, Tech …)."
+    "description:de": "Wirtschaftssektor (Dienstleistungen, Industrie, Gesundheit, Tech …).",
+    "description:it": "Settore economico (servizi, industria, salute, tech, ecc.)."
   },
   {
     "id": "emploi_jeunes__profession",
@@ -5791,8 +6425,10 @@
     "end_date": "2005/02/18",
     "name:fr": "Profession",
     "name:de": "Beruf",
+    "name:it": "Professione",
     "description:fr": "Titre professionnel déclaré.",
-    "description:de": "Angegebene Berufsbezeichnung."
+    "description:de": "Angegebene Berufsbezeichnung.",
+    "description:it": "Denominazione professionale dichiarata."
   },
   {
     "id": "emploi_jeunes__type_contrat",
@@ -5811,8 +6447,10 @@
     "source_variable_ids": "accidents_travail__cout_total, tourisme_annu__classification_officielle, conso_energie__conso_totale_mwh, vente_voitures__nb_places",
     "name:fr": "Type de contrat",
     "name:de": "Vertragsart",
+    "name:it": "Tipo di contratto",
     "description:fr": "CDI, CDD, apprentissage, temporaire.",
-    "description:de": "Unbefristeter Vertrag, befristeter Vertrag, Lehre, temporär."
+    "description:de": "Unbefristeter Vertrag, befristeter Vertrag, Lehre, temporär.",
+    "description:it": "Contratto a tempo indeterminato, a tempo determinato, apprendistato, temporaneo."
   },
   {
     "id": "emploi_jeunes__taux_occupation",
@@ -5829,8 +6467,10 @@
     "tag_ids": "activites_economiques",
     "name:fr": "Taux d'occupation (%)",
     "name:de": "Beschäftigungsgrad (%)",
+    "name:it": "Grado di occupazione (%)",
     "description:fr": "Taux contractuel d'activité.",
-    "description:de": "Vertraglicher Beschäftigungsgrad."
+    "description:de": "Vertraglicher Beschäftigungsgrad.",
+    "description:it": "Grado di occupazione contrattuale."
   },
   {
     "id": "emploi_jeunes__salaire_mensuel",
@@ -5846,8 +6486,10 @@
     "tag_ids": "culture, developpement_territorial, images_aeriennes_2, pseudonymous_data",
     "name:fr": "Salaire mensuel (CHF)",
     "name:de": "Monatslohn (CHF)",
+    "name:it": "Salario mensile (CHF)",
     "description:fr": "Salaire mensuel déclaré.",
-    "description:de": "Angegebener Monatslohn."
+    "description:de": "Angegebener Monatslohn.",
+    "description:it": "Salario mensile dichiarato."
   },
   {
     "id": "emploi_jeunes__nb_heures_travail",
@@ -5863,8 +6505,10 @@
     "tag_ids": "hydrographie",
     "name:fr": "Heures de travail / semaine",
     "name:de": "Arbeitsstunden / Woche",
+    "name:it": "Ore/settimana",
     "description:fr": "Nombre d'heures de travail hebdomadaires.",
-    "description:de": "Anzahl der wöchentlichen Arbeitsstunden."
+    "description:de": "Anzahl der wöchentlichen Arbeitsstunden.",
+    "description:it": "Numero di ore di lavoro settimanali."
   },
   {
     "id": "emploi_jeunes__anciennete_poste",
@@ -5883,8 +6527,10 @@
     "source_variable_ids": "pop_region__type_region",
     "name:fr": "Ancienneté au poste",
     "name:de": "Dienstalter in der Position",
+    "name:it": "Anzianità nella posizione",
     "description:fr": "Nombre d'années à ce poste.",
-    "description:de": "Anzahl Jahre in dieser Position."
+    "description:de": "Anzahl Jahre in dieser Position.",
+    "description:it": "Numero di anni in questa posizione."
   },
   {
     "id": "emploi_jeunes__mode_travail",
@@ -5902,8 +6548,10 @@
     "source_variable_ids": "dep_sante__montant_par_habitant, pollution_air__concentration, emploi_jeunes__nationalite, pop_region__coord_y",
     "name:fr": "Mode de travail",
     "name:de": "Arbeitsform",
+    "name:it": "Modalità di lavoro",
     "description:fr": "Présentiel, télétravail, hybride.",
-    "description:de": "Präsenz, Homeoffice, hybrid."
+    "description:de": "Präsenz, Homeoffice, hybrid.",
+    "description:it": "In presenza, telelavoro, ibrido."
   },
   {
     "id": "emploi_jeunes__duree_chomage_precedent",
@@ -5921,8 +6569,10 @@
     "source_variable_ids": "tourisme_annu__region_touristique, ser_pub_loc__satisfaction_usagers, emplois_tech2__source_donnee",
     "name:fr": "Durée du dernier chômage",
     "name:de": "Dauer der letzten Arbeitslosigkeit",
+    "name:it": "Durata dell'ultima disoccupazione",
     "description:fr": "Durée en mois du précédent épisode de chômage.",
-    "description:de": "Dauer der vorherigen Arbeitslosigkeit in Monaten."
+    "description:de": "Dauer der vorherigen Arbeitslosigkeit in Monaten.",
+    "description:it": "Durata in mesi del periodo di disoccupazione precedente."
   },
   {
     "id": "emploi_jeunes__satisfaction_emploi",
@@ -5939,8 +6589,10 @@
     "source_variable_ids": "tourisme_annu__duree_moyenne_sejour, accidents_travail__formation_securite",
     "name:fr": "Satisfaction professionnelle",
     "name:de": "Berufszufriedenheit",
+    "name:it": "Soddisfazione professionale",
     "description:fr": "Score subjectif (0–10).",
-    "description:de": "Subjektiver Score (0–10)."
+    "description:de": "Subjektiver Score (0–10).",
+    "description:it": "Punteggio soggettivo (0–10)."
   },
   {
     "id": "emploi_jeunes__mobilite_professionnelle",
@@ -5956,8 +6608,10 @@
     "source_variable_ids": "exportations__certification_requise, dep_sante__type_depense, emploi_jeunes__contrat_secondaire, accidents_travail__presence_equipements",
     "name:fr": "Mobilité professionnelle",
     "name:de": "Berufliche Mobilität",
+    "name:it": "Mobilità professionale",
     "description:fr": "Indique si la personne a changé de poste dans l'année.",
-    "description:de": "Gibt an, ob die Person im Laufe des Jahres die Stelle gewechselt hat."
+    "description:de": "Gibt an, ob die Person im Laufe des Jahres die Stelle gewechselt hat.",
+    "description:it": "Indica se la persona ha cambiato impiego durante l'anno."
   },
   {
     "id": "emploi_jeunes__formation_continue",
@@ -5975,8 +6629,10 @@
     "source_variable_ids": "revenus_menages__presence_handicap, pollution_air__source_donnee, emplois_tech2__taux_croissance, revenus_menages__nb_personnes",
     "name:fr": "Formation continue suivie",
     "name:de": "Absolvierte Weiterbildung",
+    "name:it": "Formazione continua seguita",
     "description:fr": "Participation à une formation continue.",
-    "description:de": "Teilnahme an einer Weiterbildung."
+    "description:de": "Teilnahme an einer Weiterbildung.",
+    "description:it": "Partecipazione a una formazione continua."
   },
   {
     "id": "emploi_jeunes__temps_transport",
@@ -5993,8 +6649,10 @@
     "tag_ids": "faune, altimetrie, images_aeriennes_1",
     "name:fr": "Temps de transport (min)",
     "name:de": "Wegzeit (Min)",
+    "name:it": "Tempo di trasporto (min)",
     "description:fr": "Durée moyenne quotidienne du trajet domicile–travail.",
-    "description:de": "Durchschnittliche tägliche Dauer des Arbeitswegs."
+    "description:de": "Durchschnittliche tägliche Dauer des Arbeitswegs.",
+    "description:it": "Durata media giornaliera del tragitto casa–lavoro."
   },
   {
     "id": "emploi_jeunes__type_transport",
@@ -6011,8 +6669,10 @@
     "tag_ids": "elimination, infrastructures, systemes_reference",
     "name:fr": "Mode de transport",
     "name:de": "Transportart",
+    "name:it": "Modalità di trasporto",
     "description:fr": "Train, bus, voiture, vélo, marche, etc.",
-    "description:de": "Zug, Bus, Auto, Velo, zu Fuss usw."
+    "description:de": "Zug, Bus, Auto, Velo, zu Fuss usw.",
+    "description:it": "Treno, bus, auto, bicicletta, a piedi, ecc."
   },
   {
     "id": "emploi_jeunes__conditions_travail",
@@ -6030,8 +6690,10 @@
     "source_variable_ids": "temperature_moy__temp_moy, accidents_travail__mesures_prevention_existantes",
     "name:fr": "Conditions de travail",
     "name:de": "Arbeitsbedingungen",
+    "name:it": "Condizioni di lavoro",
     "description:fr": "Niveau d'exigence, stress, flexibilité, etc.",
-    "description:de": "Anforderungsniveau, Stress, Flexibilität usw."
+    "description:de": "Anforderungsniveau, Stress, Flexibilität usw.",
+    "description:it": "Livello di esigenze, stress, flessibilità, ecc."
   },
   {
     "id": "emploi_jeunes__contrat_secondaire",
@@ -6048,8 +6710,10 @@
     "tag_ids": "images_aeriennes",
     "name:fr": "Second emploi",
     "name:de": "Zweitbeschäftigung",
+    "name:it": "Secondo impiego",
     "description:fr": "Indique si la personne occupe un second emploi.",
-    "description:de": "Gibt an, ob die Person eine Zweitbeschäftigung ausübt."
+    "description:de": "Gibt an, ob die Person eine Zweitbeschäftigung ausübt.",
+    "description:it": "Indica se la persona esercita un secondo impiego."
   },
   {
     "id": "emploi_jeunes__nb_heures_second_emploi",
@@ -6066,8 +6730,10 @@
     "tag_ids": "ouvrages, edifices",
     "name:fr": "Heures du second emploi",
     "name:de": "Stunden der Zweitbeschäftigung",
+    "name:it": "Ore del secondo impiego",
     "description:fr": "Heures hebdomadaires du second emploi.",
-    "description:de": "Wöchentliche Stunden der Zweitbeschäftigung."
+    "description:de": "Wöchentliche Stunden der Zweitbeschäftigung.",
+    "description:it": "Ore settimanali lavorate nel secondo impiego."
   },
   {
     "id": "emploi_jeunes__taux_croissance_salaire",
@@ -6083,8 +6749,10 @@
     "tag_ids": "theme_iso, images_aeriennes_1, pseudonymous_data, data_protection, societe, localisation",
     "name:fr": "Croissance salariale (%)",
     "name:de": "Lohnwachstum (%)",
+    "name:it": "Crescita salariale (%)",
     "description:fr": "Évolution annuelle estimée du salaire.",
-    "description:de": "Geschätzte jährliche Lohnentwicklung."
+    "description:de": "Geschätzte jährliche Lohnentwicklung.",
+    "description:it": "Evoluzione salariale annua stimata."
   },
   {
     "id": "emploi_jeunes__source_donnee",
@@ -6101,8 +6769,10 @@
     "tag_ids": "approvisionnement, theme_iso, edifices, sante",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine des données : OFS, enquêtes, employeurs.",
-    "description:de": "Herkunft der Daten: BFS, Erhebungen, Arbeitgeber."
+    "description:de": "Herkunft der Daten: BFS, Erhebungen, Arbeitgeber.",
+    "description:it": "Origine dei dati: UST, indagini, datori di lavoro."
   },
   {
     "id": "emplois_tech2__annee",
@@ -6119,8 +6789,10 @@
     "tag_ids": "sensible_data, faune, flore",
     "name:fr": "Année",
     "name:de": "Jahr",
+    "name:it": "Anno",
     "description:fr": "Année de référence de la statistique.",
-    "description:de": "Referenzjahr der Statistik."
+    "description:de": "Referenzjahr der Statistik.",
+    "description:it": "Anno di riferimento della statistica."
   },
   {
     "id": "emplois_tech2__secteur_tech",
@@ -6138,8 +6810,10 @@
     "source_variable_ids": "exportations__nb_unites, vente_voitures__source_donnee, conso_energie__conso_totale_mwh",
     "name:fr": "Secteur technologique",
     "name:de": "Technologiesektor",
+    "name:it": "Settore tecnologico",
     "description:fr": "IA, cybersécurité, software, hardware, biotech, etc.",
-    "description:de": "KI, Cybersicherheit, Software, Hardware, Biotech usw."
+    "description:de": "KI, Cybersicherheit, Software, Hardware, Biotech usw.",
+    "description:it": "IA, cybersicurezza, software, hardware, biotech, ecc."
   },
   {
     "id": "emplois_tech2__nb_entreprises",
@@ -6157,8 +6831,10 @@
     "concept_id": "nombre_entreprises",
     "name:fr": "Nombre d'entreprises",
     "name:de": "Anzahl Unternehmen",
+    "name:it": "Numero di imprese",
     "description:fr": "Nombre d'entreprises actives dans le secteur technologique.",
-    "description:de": "Anzahl der im Technologiesektor tätigen Unternehmen."
+    "description:de": "Anzahl der im Technologiesektor tätigen Unternehmen.",
+    "description:it": "Numero di imprese attive nel settore tecnologico."
   },
   {
     "id": "emplois_tech2__nb_employes",
@@ -6177,8 +6853,10 @@
     "source_variable_ids": "conso_energie__conso_totale_mwh, exportations__canton, accidents_travail__statut_enquete, vente_voitures__prix_moyen",
     "name:fr": "Nombre d'employés",
     "name:de": "Anzahl Beschäftigte",
+    "name:it": "Numero di dipendenti",
     "description:fr": "Nombre total d'employés recensés dans le secteur.",
-    "description:de": "Gesamtzahl der im Sektor erfassten Beschäftigten."
+    "description:de": "Gesamtzahl der im Sektor erfassten Beschäftigten.",
+    "description:it": "Numero totale di dipendenti rilevati nel settore."
   },
   {
     "id": "emplois_tech2__taux_croissance",
@@ -6195,8 +6873,10 @@
     "tag_ids": "cadastre_foncier, hydrographie, transport, data_protection",
     "name:fr": "Taux de croissance (%)",
     "name:de": "Wachstumsrate (%)",
+    "name:it": "Tasso di crescita (%)",
     "description:fr": "Croissance annuelle estimée du nombre d'emplois.",
-    "description:de": "Geschätztes jährliches Wachstum der Anzahl Arbeitsplätze."
+    "description:de": "Geschätztes jährliches Wachstum der Anzahl Arbeitsplätze.",
+    "description:it": "Crescita annua stimata del numero di posti di lavoro."
   },
   {
     "id": "emplois_tech2__region",
@@ -6213,8 +6893,10 @@
     "tag_ids": "protection_env_nature, theme_iso, images_aeriennes_1",
     "name:fr": "Région",
     "name:de": "Region",
+    "name:it": "Regione",
     "description:fr": "Région économique (CH01–CH07).",
-    "description:de": "Wirtschaftsregion (CH01–CH07)."
+    "description:de": "Wirtschaftsregion (CH01–CH07).",
+    "description:it": "Regione economica (CH01–CH07)."
   },
   {
     "id": "emplois_tech2__source_donnee",
@@ -6232,8 +6914,10 @@
     "source_variable_ids": "exportations__secteur",
     "name:fr": "Source des données",
     "name:de": "Datenquelle",
+    "name:it": "Fonte dei dati",
     "description:fr": "Origine : OFS, SECO, registres cantonaux.",
-    "description:de": "Herkunft: BFS, SECO, kantonale Register."
+    "description:de": "Herkunft: BFS, SECO, kantonale Register.",
+    "description:it": "Origine: UST, SECO, registri cantonali."
   },
   {
     "id": "pop_region__geometry",
@@ -6241,11 +6925,13 @@
     "name": "Geometry",
     "name:fr": "Géométrie",
     "name:de": "Geometrie",
+    "name:it": "Geometria",
     "original_name": "GEOM",
     "type": "geometry",
     "description": "Polygon geometry of each region",
     "description:fr": "Géométrie polygonale de chaque région",
-    "description:de": "Polygongeometrie jeder Region"
+    "description:de": "Polygongeometrie jeder Region",
+    "description:it": "Geometria poligonale di ogni regione"
   },
   {
     "id": "ortho_vd__band_red",
@@ -6253,6 +6939,7 @@
     "name": "Red band",
     "name:fr": "Bande rouge",
     "name:de": "Rotes Band",
+    "name:it": "Banda rossa",
     "original_name": "B1",
     "type": "band",
     "min": 0,
@@ -6262,7 +6949,8 @@
     "nb_missing": 12480,
     "description": "Red channel pixel values (0-255)",
     "description:fr": "Valeurs de pixels du canal rouge (0-255)",
-    "description:de": "Pixelwerte des Rotkanals (0-255)"
+    "description:de": "Pixelwerte des Rotkanals (0-255)",
+    "description:it": "Valori dei pixel del canale rosso (0-255)"
   },
   {
     "id": "ortho_vd__band_green",
@@ -6270,6 +6958,7 @@
     "name": "Green band",
     "name:fr": "Bande verte",
     "name:de": "Grünes Band",
+    "name:it": "Banda verde",
     "original_name": "B2",
     "type": "band",
     "min": 0,
@@ -6279,7 +6968,8 @@
     "nb_missing": 12480,
     "description": "Green channel pixel values (0-255)",
     "description:fr": "Valeurs de pixels du canal vert (0-255)",
-    "description:de": "Pixelwerte des Grünkanals (0-255)"
+    "description:de": "Pixelwerte des Grünkanals (0-255)",
+    "description:it": "Valori dei pixel del canale verde (0-255)"
   },
   {
     "id": "ortho_vd__band_blue",
@@ -6287,6 +6977,7 @@
     "name": "Blue band",
     "name:fr": "Bande bleue",
     "name:de": "Blaues Band",
+    "name:it": "Banda blu",
     "original_name": "B3",
     "type": "band",
     "min": 0,
@@ -6296,6 +6987,7 @@
     "nb_missing": 12480,
     "description": "Blue channel pixel values (0-255)",
     "description:fr": "Valeurs de pixels du canal bleu (0-255)",
-    "description:de": "Pixelwerte des Blaukanals (0-255)"
+    "description:de": "Pixelwerte des Blaukanals (0-255)",
+    "description:it": "Valori dei pixel del canale blu (0-255)"
   }
 ]

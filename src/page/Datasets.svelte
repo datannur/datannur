@@ -7,6 +7,7 @@
   import aboutFileEn from '@markdown/about-dataset.en.md?raw'
   import aboutFileFr from '@markdown/about-dataset.fr.md?raw'
   import aboutFileDe from '@markdown/about-dataset.de.md?raw'
+  import aboutFileIt from '@markdown/about-dataset.it.md?raw'
   import { localizedMarkdown } from '@i18n/markdown'
   import { t } from '@i18n/messages'
 
@@ -26,7 +27,7 @@
     tags,
     evolutions,
     stat: [{ entity: 'dataset', items: datasets }],
-    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe }),
+    aboutFile: localizedMarkdown({ en: aboutFileEn, fr: aboutFileFr, de: aboutFileDe, it: aboutFileIt }),
   })
 </script>
 

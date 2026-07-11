@@ -7,6 +7,7 @@
     "name": "Closed Data",
     "name:de": "Geschlossene Daten",
     "name:fr": "Données fermées",
+    "name:it": "Dati chiusi",
     "value": "closed_data"
   },
   {
@@ -17,6 +18,7 @@
     "name": "Open Data",
     "name:de": "Offene Daten",
     "name:fr": "Données ouvertes",
+    "name:it": "Dati aperti",
     "value": "open_data"
   }
 ]

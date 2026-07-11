@@ -3,6 +3,7 @@
   import Title from '@layout/Title.svelte'
   import Icon from '@layout/Icon.svelte'
   import { currentLocale } from '@i18n/i18n'
+  import { getDateLocale } from '@i18n/locale'
   import { t } from '@i18n/messages'
   import {
     loadIsoExport,
@@ -35,9 +36,7 @@
   let iso = $state<IsoExport | null>(null)
   let loading = $state(true)
   let unavailable = $state(false)
-  const dateLocale = $derived(
-    $currentLocale === 'fr' ? 'fr-CH' : $currentLocale === 'de' ? 'de-CH' : 'en',
-  )
+  const dateLocale = $derived(getDateLocale($currentLocale))
 
   const topWarnings = $derived(report?.validation.results.slice(0, 8) ?? [])
   const generatedAt = $derived(
