@@ -3,6 +3,8 @@
 ## Unreleased
 
 - fix: prevent intermittent app-update failures on truncated downloads — read the release zip in full, detect incomplete transfers against Content-Length, and retry
+- fix: carry German and Italian through the metadata exports — DCAT emits `@de`/`@it` literals by default, and the ISO 19139 and STAC exports localize titles, descriptions, and keywords per the configured catalog language
+- fix: validate the STAC export offline by vendoring the projection extension schema instead of fetching it from the network
 
 ## 0.30.0 (2026-07-11)
 

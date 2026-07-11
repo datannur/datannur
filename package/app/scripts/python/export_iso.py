@@ -26,6 +26,7 @@ from _local_runtime import DATA_DIR, require_data_db_dir
 from export_common import (
     first_datetime,
     load_config,
+    localized_field,
     parse_bbox,
     write_export_summary,
 )
@@ -40,6 +41,9 @@ except ImportError as e:
     sys.exit(1)
 
 FALLBACK_DATE = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+# catalog language (ISO 639-1) -> ISO 19139 metadata language (ISO 639-2)
+ISO_LANGUAGES = {"en": "eng", "fr": "fra", "de": "deu", "it": "ita"}
 
 # datannur geometry_type -> ISO geometric object type
 GEOM_TYPES = {
@@ -64,12 +68,14 @@ def _date(value: Optional[datetime]) -> str:
     return (value or FALLBACK_DATE).date().isoformat()
 
 
-def _keywords(dataset: Dict, tags: Dict) -> List[str]:
+def _keywords(dataset: Dict, tags: Dict, language: str) -> List[str]:
     names = []
     for tag_id in str(dataset.get("tag_ids") or "").split(","):
         tag = tags.get(tag_id.strip())
-        if tag and tag.get("name"):
-            names.append(tag["name"])
+        if tag:
+            name = localized_field(tag, "name", language)
+            if name:
+                names.append(name)
     return names
 
 
@@ -101,11 +107,15 @@ def dataset_to_mcf(
 
     base_uri = config.get("base_uri", "https://example.org/")
     landing = f"{base_uri}dataset/{dataset['id']}"
-    title = dataset.get("name") or str(dataset["id"])
-    abstract = dataset.get("description") or title
+    language = config.get("default_language", config.get("language", "en"))
+    iso_language = ISO_LANGUAGES.get(language, "eng")
+    title = localized_field(dataset, "name", language) or str(dataset["id"])
+    abstract = localized_field(dataset, "description", language) or title
 
     owner = organizations.get(dataset.get("owner_organization_id"), {})
-    org_name = owner.get("name") or config.get("catalog_publisher", "datannur")
+    org_name = localized_field(owner, "name", language) or config.get(
+        "catalog_publisher", "datannur"
+    )
 
     # The ISO geographic bounding box is always WGS84 (our bbox already is).
     extents: Dict = {"spatial": [{"bbox": list(coords), "crs": 4326}]}
@@ -125,7 +135,7 @@ def dataset_to_mcf(
         "mcf": {"version": 2.0},
         "metadata": {
             "identifier": str(dataset["id"]),
-            "language": "eng",
+            "language": iso_language,
             "charset": "utf8",
             "hierarchylevel": "dataset",
             "dataseturi": landing,
@@ -136,14 +146,14 @@ def dataset_to_mcf(
             "geomtype": GEOM_TYPES.get(geometry_type, "surface"),
         },
         "identification": {
-            "language": "eng",
+            "language": iso_language,
             "charset": "utf8",
             "title": title,
             "abstract": abstract,
             "dates": {"creation": creation},
             "keywords": {
                 "default": {
-                    "keywords": _keywords(dataset, tags),
+                    "keywords": _keywords(dataset, tags, language),
                     "keywords_type": "theme",
                 }
             },

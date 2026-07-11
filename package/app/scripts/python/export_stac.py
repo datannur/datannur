@@ -11,10 +11,11 @@ import sys
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
-from _local_runtime import DATA_DIR, require_data_db_dir
+from _local_runtime import DATA_DIR, SCHEMAS_DIR, require_data_db_dir
 from export_common import (
     first_datetime,
     load_config,
+    localized_field,
     parse_bbox,
     parse_epsg,
     write_export_summary,
@@ -22,6 +23,7 @@ from export_common import (
 
 try:
     import pystac
+    import pystac.validation
     from pystac.extensions.projection import ProjectionExtension
 except ImportError as e:
     missing = str(e).split("'")[1] if "'" in str(e) else "pystac"
@@ -31,6 +33,19 @@ except ImportError as e:
 
 # Fallback datetime for datasets with no usable date (STAC requires one).
 FALLBACK_DATETIME = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+
+def preload_vendored_schemas():
+    """Seed pystac's validator cache with the vendored extension schemas.
+
+    pystac bundles the core STAC schemas but fetches extension schemas (e.g.
+    projection) from the network, which fails offline — the app must work
+    without internet. Keyed by each schema's $id, checked before any fetch.
+    """
+    validator = pystac.validation.RegisteredValidator.get_validator()
+    for schema_file in (SCHEMAS_DIR / "semantic").glob("stac-*.json"):
+        schema = json.loads(schema_file.read_text(encoding="utf-8"))
+        validator.schema_cache.setdefault(schema["$id"], schema)
 
 
 def bbox_to_geometry(bbox: List[float]) -> Dict:
@@ -50,16 +65,18 @@ def bbox_to_geometry(bbox: List[float]) -> Dict:
     }
 
 
-def build_item(dataset: Dict) -> Optional[pystac.Item]:
+def build_item(dataset: Dict, language: str) -> Optional[pystac.Item]:
     bbox = parse_bbox(dataset.get("bbox"))
     if bbox is None:
         return None
 
     properties: Dict = {}
-    if dataset.get("name"):
-        properties["title"] = dataset["name"]
-    if dataset.get("description"):
-        properties["description"] = dataset["description"]
+    title = localized_field(dataset, "name", language)
+    if title:
+        properties["title"] = title
+    description = localized_field(dataset, "description", language)
+    if description:
+        properties["description"] = description
     resolution = dataset.get("spatial_resolution")
     if isinstance(resolution, (int, float)) and not isinstance(resolution, bool):
         properties["gsd"] = resolution
@@ -91,9 +108,10 @@ def build_catalog(config: Dict, datasets: List[Dict]) -> tuple[pystac.Catalog, i
             "catalog_description", "datannur geographic datasets"
         ),
     )
+    language = config.get("default_language", config.get("language", "en"))
     count = 0
     for dataset in datasets:
-        item = build_item(dataset)
+        item = build_item(dataset, language)
         if item is not None:
             catalog.add_item(item)
             count += 1
@@ -124,6 +142,7 @@ def main():
     valid = True
     validation_message = "Valid STAC"
     try:
+        preload_vendored_schemas()
         catalog.validate_all()
         print("✓ Validation passed — valid STAC")
     except Exception as error:  # noqa: BLE001 - report any validation failure

@@ -6,6 +6,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence
 
+# Catalog languages: base fields (`name`) are English, translations live in
+# `name:fr` / `name:de` / `name:it` suffixed fields.
+SUPPORTED_LANGUAGES = ["en", "fr", "de", "it"]
+
+
+def localized_field(item: Dict, field: str, language: str) -> str:
+    """Value of `field` in `language` (`field:xx` key), falling back to the base field."""
+    localized_value = item.get(f"{field}:{language}")
+    if localized_value is not None and localized_value != "":
+        return str(localized_value)
+    value = item.get(field)
+    return str(value) if value is not None else ""
+
 
 def load_config(config_file: Path, default: Optional[Dict] = None) -> Dict:
     """Load a JSON config file, or return `default` (or {}) when it is missing."""
