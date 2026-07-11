@@ -15,7 +15,9 @@ from urllib.parse import quote, urljoin
 
 from _local_runtime import SCHEMAS_DIR, require_data_db_dir
 from export_common import (
+    SUPPORTED_LANGUAGES,
     load_config,
+    localized_field,
     parse_bbox,
     parse_epsg,
     write_export_summary,
@@ -93,7 +95,7 @@ class DCATExporter:
         self.default_language = self.config.get(
             "default_language", self.config.get("language", "en")
         )
-        self.languages = self.config.get("languages", ["en", "fr"])
+        self.languages = self.config.get("languages", SUPPORTED_LANGUAGES)
         if self.default_language not in self.languages:
             self.languages = [self.default_language, *self.languages]
         # Target profile: "eu" (default, DCAT-AP 3 / GeoDCAT-AP) or "ch" (eCH-0200)
@@ -379,11 +381,7 @@ class DCATExporter:
         )
 
     def _localized_field(self, item: Dict, field: str) -> str:
-        localized_value = item.get(f"{field}:{self.default_language}")
-        if localized_value is not None and localized_value != "":
-            return str(localized_value)
-        value = item.get(field)
-        return str(value) if value is not None else ""
+        return localized_field(item, field, self.default_language)
 
     def _localized_fields(self, item: Dict, field: str) -> Dict[str, str]:
         values: Dict[str, str] = {}
@@ -1158,7 +1156,7 @@ DEFAULT_CONFIG = {
     "organization_slug": "datannur",
     "default_license": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
     "default_language": "en",
-    "languages": ["en", "fr", "de", "it"],
+    "languages": SUPPORTED_LANGUAGES,
 }
 
 
