@@ -20,6 +20,7 @@ ASSET_PRE_RELEASE = "datannur-app-pre-release.zip"
 ASSET_LATEST = "datannur-app-latest.zip"
 MAX_DOWNLOAD_SIZE = 100 * 1024 * 1024  # 100MB
 REQUEST_TIMEOUT = 30  # seconds
+REQUEST_ATTEMPTS = 5
 
 
 class Config(TypedDict):
@@ -75,7 +76,7 @@ def get_config() -> Config:
 
 
 def make_request(url: str, proxy_url: Optional[str] = None) -> bytes:
-    """Make HTTP request with optional proxy and size limit."""
+    """Make HTTP request with optional proxy, size limit and retries."""
 
     def read_with_limit(response: addinfourl) -> bytes:
         content_size = response.headers.get("Content-Length")
@@ -83,21 +84,44 @@ def make_request(url: str, proxy_url: Optional[str] = None) -> bytes:
             msg = f"{ERROR} File too large: {content_size} bytes (max: {MAX_DOWNLOAD_SIZE})"
             raise ValueError(msg)
 
-        data = response.read(MAX_DOWNLOAD_SIZE + 1)
-        if len(data) > MAX_DOWNLOAD_SIZE:
-            msg = f"{ERROR} Downloaded file exceeds size limit: {len(data)} bytes (max: {MAX_DOWNLOAD_SIZE})"
-            raise ValueError(msg)
-        return data
+        # response.read(n) may return fewer than n bytes, and http.client
+        # silently treats an early connection close as a normal EOF: read in
+        # a loop and check the result against Content-Length
+        chunks = []
+        total = 0
+        while True:
+            chunk = response.read(1024 * 1024)
+            if not chunk:
+                break
+            total += len(chunk)
+            if total > MAX_DOWNLOAD_SIZE:
+                msg = f"{ERROR} Downloaded file exceeds size limit: {total} bytes (max: {MAX_DOWNLOAD_SIZE})"
+                raise ValueError(msg)
+            chunks.append(chunk)
+        if content_size and total != int(content_size):
+            msg = f"incomplete download: got {total} of {content_size} bytes"
+            raise urllib.error.URLError(msg)
+        return b"".join(chunks)
 
     if proxy_url:
         proxy_values = {"http": proxy_url, "https": proxy_url}
         proxy_handler = urllib.request.ProxyHandler(proxy_values)
-        opener = urllib.request.build_opener(proxy_handler)
-        with opener.open(url, timeout=REQUEST_TIMEOUT) as response:
-            return read_with_limit(response)
+        open_url = urllib.request.build_opener(proxy_handler).open
+    else:
+        open_url = urllib.request.urlopen
 
-    with urllib.request.urlopen(url, timeout=REQUEST_TIMEOUT) as response:
-        return read_with_limit(response)
+    attempts = 0
+    while True:
+        try:
+            with open_url(url, timeout=REQUEST_TIMEOUT) as response:
+                return read_with_limit(response)
+        except urllib.error.HTTPError:
+            raise  # 4xx/5xx will not get better by retrying
+        except urllib.error.URLError as e:
+            attempts += 1
+            if attempts == REQUEST_ATTEMPTS:
+                raise
+            print(f"{WARNING} Request failed ({e.reason}), retrying...")
 
 
 def verify_file_integrity(file_path: Path, expected_sha256: str) -> bool:
