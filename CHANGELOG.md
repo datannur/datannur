@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: prevent intermittent app-update failures on truncated downloads — read the release zip in full, detect incomplete transfers against Content-Length, and retry
+
 ## 0.30.0 (2026-07-11)
 
 - add: Italian (IT) interface language — full UI, help pages, and demo catalog content translated, selectable alongside English, French, and German, with Apache .htaccess locale routing
