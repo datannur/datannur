@@ -1,7 +1,8 @@
 # datannur
 
-## Unreleased
+## 0.30.1 (2026-07-13)
 
+- perf: much faster startup on large catalogs — remove quadratic tag-relation processing and speed up self-catalog stats (via jsonjsdb 0.12.6), and build evolution validity rows without per-row full-object copies; a 100k-variable catalog now boots in seconds instead of minutes
 - fix: prevent intermittent app-update failures on truncated downloads — read the release zip in full, detect incomplete transfers against Content-Length, and retry
 - fix: carry German and Italian through the metadata exports — DCAT emits `@de`/`@it` literals by default, and the ISO 19139 and STAC exports localize titles, descriptions, and keywords per the configured catalog language
 - fix: validate the STAC export offline by vendoring the projection extension schema instead of fetching it from the network

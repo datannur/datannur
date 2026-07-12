@@ -10,6 +10,7 @@ __pycache__/
 /dist/
 /tmp/
 /package/app/assets/external/*.js
+/package/data/db-big/
 /package/data/db-semantic/
 /package/data/deploy.config.json
 /package/data/llm-web.config.json

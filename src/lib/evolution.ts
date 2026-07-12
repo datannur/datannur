@@ -24,6 +24,16 @@ type EvolutionDeleted = {
   }
 }
 
+type EvolutionItemRef = {
+  id?: string | number
+  name?: string
+  folderId?: string | number
+  parentEntityId?: string | number
+  _deleted: boolean
+}
+
+type EvolutionItemCache = Map<string, EvolutionItemRef | null>
+
 const arrowRight = `<i class="fas fa-arrow-right"></i>`
 
 function getEvoDeleted() {
@@ -43,26 +53,54 @@ function getItem(
   entity: ParentableEntityName,
   entityId: string | number | undefined,
   evoDeleted: EvolutionDeleted,
-): ParentableEntityItem | null {
+  cache: EvolutionItemCache,
+): EvolutionItemRef | null {
   if (!entityId) return null
 
+  const cacheKey = `${entity}|${entityId}`
+  const cached = cache.get(cacheKey)
+  if (cached !== undefined) return cached
+
   if (db.exists(entity, entityId)) {
-    const item = db.get(entity, entityId)
-    if (!item) return null
-    const parentKey = `${parentEntities[entity]}Id` as keyof typeof item
-    const parentEntityId = item[parentKey] as string | number | undefined
-    return { ...item, _deleted: false, parentEntityId } as ParentableEntityItem
+    const item = db.get(entity, entityId) as Record<string, unknown> | undefined
+    if (!item) {
+      cache.set(cacheKey, null)
+      return null
+    }
+    const parentKey = `${parentEntities[entity]}Id`
+    const ref: EvolutionItemRef = {
+      id: item.id as string | number | undefined,
+      name: item.name as string | undefined,
+      folderId: item.folderId as string | number | undefined,
+      parentEntityId: item[parentKey] as string | number | undefined,
+      _deleted: false,
+    }
+    cache.set(cacheKey, ref)
+    return ref
   }
 
-  const item = evoDeleted[entity]?.[entityId]
-  if (!item) return null
+  const deletedEvo = evoDeleted[entity]?.[entityId]
+  if (!deletedEvo) {
+    cache.set(cacheKey, null)
+    return null
+  }
 
-  return { ...item, _deleted: true } as ParentableEntityItem
+  // not cached: addHistory can still mutate the source evolution row
+  return {
+    id: deletedEvo.id,
+    name: deletedEvo.name,
+    folderId: deletedEvo.folderId as string | number | undefined,
+    parentEntityId: deletedEvo.parentEntityId,
+    _deleted: true,
+  }
 }
 
-function addHistory(evoDeleted: EvolutionDeleted) {
+function addHistory(evoDeleted: EvolutionDeleted, cache: EvolutionItemCache) {
+  const now = Date.now()
+  const futureLabel = t('evolution.future')
+  const pastLabel = t('evolution.past')
   db.foreach('evolution', evo => {
-    const item = getItem(evo.entity, evo.entityId, evoDeleted)
+    const item = getItem(evo.entity, evo.entityId, evoDeleted, cache)
     if (item && 'name' in item && item.name) {
       evo.name = item.name
       evo.parentEntityId = item.parentEntityId
@@ -91,10 +129,14 @@ function addHistory(evoDeleted: EvolutionDeleted) {
     evo.parentEntity = parentEntity
     evo.parentEntityClean = getEntityName(parentEntity)
     evo.timestamp *= 1000
-    evo.time =
-      evo.timestamp > Date.now() ? t('evolution.future') : t('evolution.past')
+    evo.time = evo.timestamp > now ? futureLabel : pastLabel
 
-    const parentItem = getItem(evo.parentEntity, evo.parentEntityId, evoDeleted)
+    const parentItem = getItem(
+      evo.parentEntity,
+      evo.parentEntityId,
+      evoDeleted,
+      cache,
+    )
     evo.parentName =
       parentItem && 'name' in parentItem ? parentItem.name : undefined
     evo.parentDeleted = parentItem?._deleted
@@ -115,8 +157,8 @@ function addHistory(evoDeleted: EvolutionDeleted) {
 
 function getFolderId(
   entity: ParentableEntityName,
-  entityData: ParentableEntityItem | null,
-  parentItem: ParentableEntityItem | null,
+  entityData: EvolutionItemRef | ParentableEntityItem | null,
+  parentItem: EvolutionItemRef | null,
 ) {
   if (entity === 'folder' && entityData && 'id' in entityData) {
     return entityData.id
@@ -136,29 +178,48 @@ function getFolderId(
   return undefined
 }
 
+type ValidityContext = {
+  entity: ParentableEntityName
+  parentEntity: ParentableEntityName
+  parentKey: string
+  entityClean: string
+  parentEntityClean: string
+  now: number
+  futureLabel: string
+  pastLabel: string
+  typeCleanByType: Record<string, string>
+  evoDeleted: EvolutionDeleted
+  cache: EvolutionItemCache
+}
+
+const validityTypes = [
+  'startDate',
+  'endDate',
+  'lastUpdateDate',
+  'nextUpdateDate',
+] as const
+
 function addValidity(
   validities: Evolution[],
   type: keyof typeof evolutionTypes,
-  entity: ParentableEntityName,
+  ctx: ValidityContext,
   entityData: ParentableEntity,
-  evoDeleted: EvolutionDeleted,
 ) {
   if (!entityData || !('id' in entityData)) return
 
-  const parentEntityValue = parentEntities[entity]
-  const parentEntity = (
-    parentEntityValue === 'parent' ? entity : parentEntityValue
-  ) as ParentableEntityName
-
-  const parentKey = `${parentEntityValue}Id` as keyof ParentableEntity
-  const parentEntityId =
-    parentKey in entityData
-      ? (entityData[parentKey] as string | number | undefined)
-      : undefined
-
-  const parentItem = getItem(parentEntity, parentEntityId, evoDeleted)
-
   const entityRecord = entityData as unknown as Record<string, unknown>
+  const parentEntityId = entityRecord[ctx.parentKey] as
+    | string
+    | number
+    | undefined
+
+  const parentItem = getItem(
+    ctx.parentEntity,
+    parentEntityId,
+    ctx.evoDeleted,
+    ctx.cache,
+  )
+
   const timestamp = dateToTimestamp(
     entityRecord[type] as string,
     type === 'startDate' ? 'start' : 'end',
@@ -166,91 +227,88 @@ function addValidity(
 
   if (!timestamp) {
     console.error(
-      `Invalid date format for ${type} in ${entity} with id ${entityRecord.id}, value = ${entityRecord[type]}`,
+      `Invalid date format for ${type} in ${ctx.entity} with id ${entityRecord.id}, value = ${entityRecord[type]}`,
     )
     return
   }
 
-  const time =
-    timestamp > Date.now() ? t('evolution.future') : t('evolution.past')
-
-  let typeClean = t('evolution.other')
-  if (type in evolutionTypes) typeClean = getEvolutionTypeName(type)
-
   const folderId = getFolderId(
-    entity,
+    ctx.entity,
     entityData as ParentableEntityItem,
     parentItem,
   )
 
   validities.push({
     id: entityData.id,
-    entity: entity,
-    _entity: entity,
-    _entityClean: getEntityName(entity),
+    entity: ctx.entity,
+    _entity: ctx.entity,
+    _entityClean: ctx.entityClean,
     entityId: entityData.id,
-    parentEntity: parentEntity,
-    parentEntityClean: getEntityName(parentEntity),
-    parentEntityId: entityRecord[`${parentEntities[entity]}Id`] as
-      | string
-      | number
-      | undefined,
-    parentName:
-      parentItem && 'name' in parentItem ? parentItem.name : undefined,
+    parentEntity: ctx.parentEntity,
+    parentEntityClean: ctx.parentEntityClean,
+    parentEntityId,
+    parentName: parentItem?.name,
     name: entityData.name,
     type,
     oldValue: entityRecord[type] as string | undefined,
     newValue: entityRecord[type] as string | undefined,
     variable: type,
-    typeClean: typeClean,
+    typeClean: ctx.typeCleanByType[type],
     timestamp,
-    time,
+    time: timestamp > ctx.now ? ctx.futureLabel : ctx.pastLabel,
     date: timestampToDate(timestamp),
     folderId,
     isFavorite: false,
   })
 }
 
-function addValidities(evoDeleted: EvolutionDeleted) {
+function addValidities(
+  evoDeleted: EvolutionDeleted,
+  cache: EvolutionItemCache,
+) {
   const validities: Evolution[] = []
+  const now = Date.now()
+  const futureLabel = t('evolution.future')
+  const pastLabel = t('evolution.past')
+  const otherLabel = t('evolution.other')
+  const typeCleanByType: Record<string, string> = {}
+  for (const type of validityTypes) {
+    typeCleanByType[type] =
+      type in evolutionTypes ? getEvolutionTypeName(type) : otherLabel
+  }
+
   const entities = Object.keys(parentEntities) as ParentableEntityName[]
   for (const entity of entities) {
     const tableData = db.tables[entity]
-    if (
-      Array.isArray(tableData) &&
-      tableData.length > 0 &&
-      (Object.keys(tableData[0]).includes('startDate') ||
-        Object.keys(tableData[0]).includes('endDate') ||
-        Object.keys(tableData[0]).includes('lastUpdateDate') ||
-        Object.keys(tableData[0]).includes('nextUpdateDate'))
-    ) {
-      db.foreach(entity, entityData => {
-        if ('startDate' in entityData && entityData.startDate) {
-          addValidity(validities, 'startDate', entity, entityData, evoDeleted)
-        }
-        if ('endDate' in entityData && entityData.endDate) {
-          addValidity(validities, 'endDate', entity, entityData, evoDeleted)
-        }
-        if ('lastUpdateDate' in entityData && entityData.lastUpdateDate) {
-          addValidity(
-            validities,
-            'lastUpdateDate',
-            entity,
-            entityData,
-            evoDeleted,
-          )
-        }
-        if ('nextUpdateDate' in entityData && entityData.nextUpdateDate) {
-          addValidity(
-            validities,
-            'nextUpdateDate',
-            entity,
-            entityData,
-            evoDeleted,
-          )
-        }
-      })
+    if (!Array.isArray(tableData) || tableData.length === 0) continue
+    const columns = Object.keys(tableData[0])
+    if (!validityTypes.some(type => columns.includes(type))) continue
+
+    const parentEntityValue = parentEntities[entity]
+    const parentEntity = (
+      parentEntityValue === 'parent' ? entity : parentEntityValue
+    ) as ParentableEntityName
+    const ctx: ValidityContext = {
+      entity,
+      parentEntity,
+      parentKey: `${parentEntityValue}Id`,
+      entityClean: getEntityName(entity),
+      parentEntityClean: getEntityName(parentEntity),
+      now,
+      futureLabel,
+      pastLabel,
+      typeCleanByType,
+      evoDeleted,
+      cache,
     }
+    db.foreach(entity, entityData => {
+      const record = entityData as unknown as Record<string, unknown>
+      for (const type of validityTypes) {
+        if (record[type]) {
+          addValidity(validities, type, ctx, entityData)
+        }
+      }
+    })
   }
 
   if (!db.tables.evolution) db.tables.evolution = []
@@ -405,6 +463,7 @@ export function highlightDiff(
 
 export function evolutionInitialSetup() {
   const evoDeleted = getEvoDeleted()
-  addHistory(evoDeleted)
-  addValidities(evoDeleted)
+  const cache: EvolutionItemCache = new Map()
+  addHistory(evoDeleted, cache)
+  addValidities(evoDeleted, cache)
 }
