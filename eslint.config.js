@@ -97,6 +97,7 @@ export default [
       'src/page/.router-index.ts',
       'docs/.vitepress/cache/',
       'docs/.vitepress/dist/',
+      'tmp/',
     ],
   },
   {

@@ -3,5 +3,6 @@
 public/data/db/**/*.json
 public/data/api/**/*
 app/data/db/**/*.json
+package/data/db-big/**/*.json
 
 .claude
