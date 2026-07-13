@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: never leave `index.html` corrupted when a `static` build is interrupted — the local server now serves the `app-mode="static"` variant from memory instead of rewriting the live file and restoring it afterwards, so a Ctrl-C, kill, or crash mid-run can no longer strand every route on the 404 page or launder the broken marker through later builds; an index already damaged by an earlier version is repaired on the next `static` run
+
 ## 0.30.2 (2026-07-14)
 
 - perf: much faster datatable display on large catalogs — opening the variable tab of a 100k-variable catalog drops from ~5 s to ~3 s: cell renderers now hand raw values to sorting and filtering instead of HTML that was built then stripped per cell (and the frequency-preview renderer no longer queries the db per cell), rows are no longer cloned to carry a row number, name sorting reuses a single collator, and select filter options are built on first open instead of scanning every column at mount
