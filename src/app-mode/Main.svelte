@@ -18,7 +18,7 @@
   import StatBox from '@stat/StatBox.svelte'
   import SearchBar from '@search/SearchBar.svelte'
   import FloatingChatButton from '@llm/FloatingChatButton.svelte'
-  import { initApp } from '@src/app-mode/app-init'
+  import { initApp, ensureMetaReady } from '@src/app-mode/app-init'
   import { initI18n } from '@i18n/i18n'
   import { t } from '@i18n/messages'
   import type { AttributWithValues } from '@stat/stat'
@@ -169,6 +169,8 @@
           {routerIndex}
           whenAppReady={$whenAppReady}
           onRouteChange={handleRouteChange}
+          beforeRoute={(entity: string) =>
+            entity.startsWith('meta') ? ensureMetaReady() : undefined}
           getEntityData={(entity: string, id: string) =>
             db.get(entity as EntityName, id)}
         />

@@ -80,28 +80,23 @@ export function getCleanData(
 
   const hasFilterRecursive = isRecursive && isBig && getHasFilterRecursive()
   const tempData = [...data]
-  const newData: (Row & { _rowNum: number })[] = []
   if (sortByName) {
+    const collator = new Intl.Collator()
     tempData.sort((a, b) => {
       const aName = (('name' in a ? a.name : '') ?? '') as string
       const bName = (('name' in b ? b.name : '') ?? '') as string
-      return aName.localeCompare(bName)
+      return collator.compare(aName, bName)
     })
   }
-  let rowNum = 0
-  for (const rows of tempData) {
-    if (
-      hasFilterRecursive &&
-      'parentsRelative' in rows &&
-      'minimumDeep' in rows &&
-      ((rows.parentsRelative as unknown[])?.length ?? 0) -
-        ((rows.minimumDeep as number) ?? 0) !==
-        0
-    ) {
-      continue
-    }
-    rowNum += 1
-    newData.push({ ...rows, _rowNum: rowNum })
-  }
-  return newData
+  if (!hasFilterRecursive) return tempData
+  return tempData.filter(
+    rows =>
+      !(
+        'parentsRelative' in rows &&
+        'minimumDeep' in rows &&
+        ((rows.parentsRelative as unknown[])?.length ?? 0) -
+          ((rows.minimumDeep as number) ?? 0) !==
+          0
+      ),
+  )
 }

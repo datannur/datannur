@@ -63,13 +63,20 @@ export default class Render {
     return Render.tree(row._entity, [...data].reverse(), type)
   }
   static tree(entity: string, elements: AnyEntity[], type = 'display') {
+    if (type !== 'display') {
+      const names: string[] = []
+      for (const element of elements) {
+        if (!element || !('id' in element) || !('name' in element)) continue
+        names.push(String(element.name))
+      }
+      return names.join(separator)
+    }
     let content = ''
     let level = 0
     for (const element of elements) {
       if (!element) continue
       if (!('id' in element) || !('name' in element)) continue
-      let name = String(element.name)
-      if (level > 0 && type !== 'display') name = separator + name
+      const name = String(element.name)
       content += link(
         entity + '/' + element.id,
         addIndend(escapeHtml(name), level),
@@ -106,6 +113,23 @@ export default class Render {
     )
   }
   static value(values: Value[], type: string, row: AnyEntity) {
+    if (type !== 'display') {
+      if (!values || values.length === 0) return ''
+      if (!('values' in row) || !row.values) return ''
+      const parts: string[] = []
+      for (const value of values) {
+        let valueContent = value.value ?? ''
+        if (value.description && value.description !== '') {
+          valueContent += ' : ' + value.description
+        }
+        parts.push(valueContent)
+      }
+      const nbValues = row.values.length
+      if (nbValues > values.length && 'id' in row) {
+        parts.push(Render.otherValuesText(nbValues - values.length))
+      }
+      return parts.join(separator)
+    }
     if (!values || values.length === 0) return wrapLongText()
     if (!('values' in row) || !row.values) return wrapLongText()
     const nbValues = row.values.length
@@ -116,15 +140,12 @@ export default class Render {
       tab = 'variableMetaValues'
     }
     let content = '<ul class="ul-value">'
-    let i = 0
     for (const value of values) {
       let valueContent = value.value
       if (value.description && value.description !== '') {
         valueContent += ' : ' + value.description
       }
-      if (i > 0 && type === 'export') valueContent = separator + valueContent
       content += '<li><span>' + escapeHtml(valueContent) + '</span></li>'
-      i += 1
     }
     if (nbValues > values.length && 'id' in row) {
       const nbOtherValues = nbValues - values.length
@@ -133,7 +154,6 @@ export default class Render {
         Render.otherValuesText(nbOtherValues),
         'value',
       )
-      if (type === 'export') content += separator
       content += `<li><i>${text}</i></li>`
     }
     content += '</ul>'
@@ -142,32 +162,46 @@ export default class Render {
   static freqPreview(freqData: FreqPreview[], type: string, row: Variable) {
     if (!freqData || freqData.length === 0 || !row.id) return ''
 
+    if (type !== 'display') {
+      const parts: string[] = []
+      for (const freqItem of freqData) {
+        const scaledFreq = freqItem.scale
+          ? Math.round(freqItem.frequency * freqItem.scale)
+          : freqItem.frequency
+        const approx = freqItem.scale ? '≈ ' : ''
+        parts.push(
+          `${freqItem.value}: ${approx}${Render.num(scaledFreq, type)}`,
+        )
+      }
+      if (type === 'export') {
+        const totalFreqCount = db.getAll('frequency', { variable: row }).length
+        if (totalFreqCount > freqData.length) {
+          parts.push(
+            Render.otherFrequenciesText(totalFreqCount - freqData.length),
+          )
+        }
+      }
+      return parts.join(separator)
+    }
+
     const ulClass = row.isPattern ? 'ul-value ul-pattern' : 'ul-value'
     let content = `<ul class="${ulClass}">`
-    let i = 0
 
     for (const freqItem of freqData) {
-      const percentDisplay = getPercent(freqItem.frequency / freqItem.total)
       const percentBackground = getPercent(freqItem.frequency / freqItem.max)
       const scaledFreq = freqItem.scale
         ? Math.round(freqItem.frequency * freqItem.scale)
         : freqItem.frequency
       const approx = freqItem.scale ? '≈ ' : ''
-      const freqNum = approx + Render.num(scaledFreq, type)
-      const percentText = type === 'display' ? ` (${percentDisplay}%)` : ''
+      const freqNum = approx + Render.num(scaledFreq, 'display')
 
-      const freqContent =
-        type === 'display'
-          ? `<div class="freq-item-container">
+      const freqContent = `<div class="freq-item-container">
           <div class="freq-background color-frequency" style="width: ${percentBackground}%"></div>
           <span class="freq-value">${escapeHtml(freqItem.value)}</span>
           <span class="freq-number">${freqNum}</span>
         </div>`
-          : `${freqItem.value}: ${freqNum}${percentText}`
 
-      const prefix = i > 0 && type === 'export' ? separator : ''
-      content += '<li>' + prefix + freqContent + '</li>'
-      i += 1
+      content += '<li>' + freqContent + '</li>'
     }
 
     const totalFreqCount = db.getAll('frequency', { variable: row }).length
@@ -178,7 +212,6 @@ export default class Render {
         Render.otherFrequenciesText(nbOtherFreq),
         'frequency',
       )
-      if (type === 'export') content += separator
       content += `<li><i>${text}</i></li>`
     }
     content += '</ul>'
@@ -191,8 +224,11 @@ export default class Render {
     if (type !== 'display') return data
     return data.toLocaleString(getCurrentLocale())
   }
-  static dataSize(bytes: NullableNumber): string {
+  static dataSize(bytes: NullableNumber, type?: 'display'): string
+  static dataSize(bytes: NullableNumber, type: string): string | number
+  static dataSize(bytes: NullableNumber, type = 'display'): string | number {
     if (!bytes) return ''
+    if (type === 'sort' || type === 'type') return bytes
     const units = ['o', 'Ko', 'Mo', 'Go', 'To']
     let index = 0
     let size = bytes
@@ -238,7 +274,11 @@ export default class Render {
     const classNames = icon.startsWith('fa-brands') ? icon : `fas fa-${icon}`
     return `<span class='icon icon-${entity}'><i class='${classNames}'></i></span>`
   }
-  static enumerationsName(enumerations: Enumeration[]) {
+  static enumerationsName(enumerations: Enumeration[], type = 'display') {
+    if (type !== 'display') {
+      if (!enumerations || enumerations.length === 0) return ''
+      return enumerations.map(enumeration => enumeration.name).join(separator)
+    }
     if (!enumerations || enumerations.length === 0) return wrapLongText()
     const enumerationsName: string[] = []
     for (const enumeration of enumerations) {
@@ -307,7 +347,8 @@ export default class Render {
   ) {
     let displayValue = Render.num(data, type)
     if (!displayValue) return ''
-    if (type === 'display' && withPercent) displayValue += ` (${percent}%)`
+    if (type !== 'display') return displayValue
+    if (withPercent) displayValue += ` (${percent}%)`
     return `
     <div class="num-percent-container">
       <span class="num-percent color-${colorType} placeholder" style="width: 100%"></span>
@@ -315,7 +356,11 @@ export default class Render {
     </div>
     <span class="num-percent-value">${displayValue}</span>`
   }
-  static tags(tags: Tag[]) {
+  static tags(tags: Tag[], type = 'display') {
+    if (type !== 'display') {
+      if (!tags || tags.length === 0) return ''
+      return tags.map(tag => tag.name).join(separator)
+    }
     if (!tags || tags.length === 0) return wrapLongText()
     const tagsName: string[] = []
     for (const tag of tags) {

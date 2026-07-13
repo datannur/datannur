@@ -407,7 +407,7 @@
                 <tr>
                   {#each columnsCopy as column, j (`${column.data}/${column.title}`)}
                     <td class:first-col={j === 0} class:first-row={i === 0}>
-                      {#if column.data === '_rowNum'}
+                      {#if column.name === '_rowNum'}
                         {i + 1}
                       {:else if column.data === 'isFavorite'}
                         <span class="icon favorite">
