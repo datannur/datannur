@@ -11,7 +11,7 @@
   import SearchHistory from '@search/search-history'
   import Icon from '@layout/Icon.svelte'
   import { resetColsSearchCache } from '@lib/util'
-  import { getUserData } from '@lib/user-data'
+  import { loadUserData } from '@lib/user-data'
   import Switch from '@layout/Switch.svelte'
   import DarkModeSwitch from '@dark-mode/DarkModeSwitch.svelte'
   import BtnImport from '@layout/BtnImport.svelte'
@@ -37,9 +37,10 @@
 
   async function downloadUserData() {
     const jszip = new JSZip()
-    const dataFolder = jszip.folder('user-data')
-    const userData = getUserData()
-    for (const [name, data] of Object.entries(!!userData)) {
+    const dataFolder = jszip.folder('userData')
+    const userData = await loadUserData()
+    for (const [name, data] of Object.entries(userData)) {
+      if (!data) continue
       const filename = name + '.json'
       const jsonData = JSON.stringify(data, null, 2)
       dataFolder?.file(filename, jsonData)

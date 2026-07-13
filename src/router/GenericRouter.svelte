@@ -33,6 +33,7 @@
       entityId: string
     }) => void
     getEntityData?: (entity: string, id: string) => unknown
+    beforeRoute?: (entity: string) => Promise<void> | void
     errorPage?: T
     loadingPage?: T
   }
@@ -42,6 +43,7 @@
     whenAppReady: whenAppReadyProp,
     onRouteChange,
     getEntityData,
+    beforeRoute,
     errorPage = '_error' as T,
     loadingPage: loadingPageProp = '_loading' as T,
   }: Props<T> = $props()
@@ -126,6 +128,8 @@
         await whenAppReady
         routerInitialized = true
       }
+
+      await beforeRoute?.(entity)
 
       if (!ctx?.data) {
         if (!ctx) return

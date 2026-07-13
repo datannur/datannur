@@ -8,19 +8,30 @@ type Translate = (key: TranslationKey) => string
 
 function filterEmptyColumns(columns: ColumnType[], items: Row[]) {
   const hasProp: Record<string, boolean> = {}
+  const wanted = new Set(
+    columns.map(column => String(column.data)).filter(key => key !== 'null'),
+  )
   for (const item of items) {
-    for (const key of Object.keys(item)) {
+    if (wanted.size === 0) break
+    for (const key of [...wanted]) {
       if (key === 'id' || key === 'isFavorite') {
-        hasProp[key] = true
+        if (key in item) {
+          hasProp[key] = true
+          wanted.delete(key)
+        }
         continue
       }
       const value = (item as Record<string, unknown>)[key]
-      if (Array.isArray(value)) {
-        if (value.length > 0) hasProp[key] = true
-      } else if (value) hasProp[key] = true
+      const isEmpty = Array.isArray(value) ? value.length === 0 : !value
+      if (!isEmpty) {
+        hasProp[key] = true
+        wanted.delete(key)
+      }
     }
   }
-  const filterColumns = columns.filter(column => String(column.data) in hasProp)
+  const filterColumns = columns.filter(
+    column => column.data === null || String(column.data) in hasProp,
+  )
   return filterColumns
 }
 
@@ -50,23 +61,23 @@ export function defineColumns(
 
   if (columnsCopy[0]?.title !== '#') {
     const colNumerotation: ColumnType = {
-      data: '_rowNum',
+      data: null,
       name: '_rowNum',
       title: '#',
       tooltip: translate('column.rowNumber.tooltip'),
       filterType: 'input',
       width: '20px',
+      defaultContent: '',
     }
     if (entity in entityNames) {
-      if (metaPath) {
-        colNumerotation.render = (data, type, row: Row) => {
-          return link(metaPath + '/' + row.id, data)
-        }
-      } else {
-        colNumerotation.render = (data, type, row: Row) => {
-          return link(entity + '/' + row.id, data)
-        }
+      const basePath = metaPath ?? entity
+      colNumerotation.render = (data, type, row: Row, meta) => {
+        const rowNum = meta.row + 1
+        if (type !== 'display') return rowNum
+        return link(basePath + '/' + row.id, String(rowNum))
       }
+    } else {
+      colNumerotation.render = (data, type, row: Row, meta) => meta.row + 1
     }
     columnsCopy = [colNumerotation, ...columnsCopy]
   }

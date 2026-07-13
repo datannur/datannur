@@ -1043,9 +1043,12 @@ export function dbAddProcessedData() {
   Process.doc()
   Process.variable()
   Process.enumeration()
+  Process.evolution()
+  if (db.use.doc) addDocRecursive()
+}
+
+export function dbAddProcessedMetaData() {
   Process.metaVariable()
   Process.metaDataset()
   Process.metaFolder()
-  Process.evolution()
-  if (db.use.doc) addDocRecursive()
 }

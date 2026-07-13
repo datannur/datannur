@@ -2,7 +2,7 @@ import db from '@db'
 import Options from '@lib/options'
 import MainFilter from '@lib/main-filter'
 import { loadUserData } from '@lib/user-data'
-import { dbAddProcessedData } from '@lib/db'
+import { dbAddProcessedData, dbAddProcessedMetaData } from '@lib/db'
 import { initI18n } from '@i18n/i18n'
 import search from '@search/search'
 import Logs from '@lib/logs'
@@ -17,6 +17,18 @@ import type { Favorite } from '@favorite/favorites'
 import type { ConfigFilter, Log } from '@src/type'
 
 let initPromise: Promise<void> | null = null
+let metaReadyPromise: Promise<void> | null = null
+
+// The meta catalog (addMeta scans every row of every table) is only needed by
+// the /meta* pages: build it on first visit instead of at boot.
+export function ensureMetaReady(): Promise<void> {
+  metaReadyPromise ??= (async () => {
+    const userData = await loadUserData()
+    db.addMeta(userData, dbSchema as Record<string, unknown>[])
+    dbAddProcessedMetaData()
+  })()
+  return metaReadyPromise
+}
 
 export function initApp(): Promise<void> {
   if (initPromise) {
@@ -54,7 +66,6 @@ export function initApp(): Promise<void> {
 
       stepTimer = performance.now()
       const userData = await loadUserData()
-      db.addMeta(userData, dbSchema as Record<string, unknown>[])
       dbAddProcessedData()
       const processDbMs = performance.now() - stepTimer
 

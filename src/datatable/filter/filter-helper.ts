@@ -65,23 +65,19 @@ export default class FilterHelper {
     this.filterColumnByKey[columnKey] = columnNum
     const columnDateType = columnAttr?.dateType
     const filterType = columnAttr?.filterType
-    const uniqueValues = column.data().unique().toArray() as unknown[]
 
-    if (
-      filterType === 'select' ||
-      (filterType !== 'input' &&
-        uniqueValues.length < 10 &&
-        Array.isArray(uniqueValues[0]) &&
-        typeof uniqueValues[0] !== 'object' &&
-        Array.isArray(uniqueValues[1]) &&
-        typeof uniqueValues[1] !== 'object')
-    ) {
-      let options = '<option value="">- - -</option>'
-      if (column.header().innerHTML.includes('icon-favorite')) {
-        for (const val of [t('filter.favorite'), t('filter.notFavorite')]) {
-          options += '<option value="' + val + '">' + val + '</option>'
+    if (filterType === 'select') {
+      const isFavorite = column.header().innerHTML.includes('icon-favorite')
+      const buildOptions = () => {
+        let options = '<option value="">- - -</option>'
+        if (isFavorite) {
+          for (const val of [t('filter.favorite'), t('filter.notFavorite')]) {
+            options += '<option value="' + val + '">' + val + '</option>'
+          }
+          return options
         }
-      } else {
+        // scans the whole column: only run on first interaction (lazy)
+        const uniqueValues = column.data().unique().toArray() as unknown[]
         const values = uniqueValues
           .map(val => (val === null || val === undefined ? '' : val))
           .sort()
@@ -103,12 +99,32 @@ export default class FilterHelper {
               '<option value="' + safeVal + '">' + safeVal + '</option>'
           }
         }
+        return options
       }
       const selectElem = document.createElement('select')
       selectElem.required = true
       selectElem.name = id
       selectElem.id = id
-      selectElem.innerHTML = options
+      selectElem.innerHTML = '<option value="">- - -</option>'
+      let optionsReady = false
+      const ensureOptions = () => {
+        if (optionsReady) return
+        optionsReady = true
+        const currentValue = selectElem.value
+        selectElem.innerHTML = buildOptions()
+        selectElem.value = currentValue
+      }
+      const seedOption = (val: string) => {
+        if (optionsReady || !val) return
+        const safeVal = escapeHtml(val)
+        const label = val === '__empty__' ? t('filter.emptyOption') : safeVal
+        selectElem.insertAdjacentHTML(
+          'beforeend',
+          '<option value="' + safeVal + '">' + label + '</option>',
+        )
+      }
+      selectElem.addEventListener('pointerdown', ensureOptions)
+      selectElem.addEventListener('focus', ensureOptions)
       const select = jQuery(selectElem)
       filterContainer.html('')
       const selectWrap = jQuery('<div class="select"></div>')
@@ -137,6 +153,7 @@ export default class FilterHelper {
       const colFilterUrl = this.getColFilterUrl(columnNum, columnKey)
 
       if (colFilterUrl) {
+        seedOption(colFilterUrl)
         select.val(colFilterUrl)
         searchSelectValue(colFilterUrl)
         this.updateFilterCount()
@@ -145,6 +162,7 @@ export default class FilterHelper {
           .search()
           .replace(/^\^|\$$/g, '')
           .replace(/\\(.)/g, '$1')
+        seedOption(rawVal)
         select.val(rawVal).trigger('change')
       }
     } else {

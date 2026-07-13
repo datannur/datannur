@@ -1,5 +1,12 @@
 # datannur
 
+## 0.30.2 (2026-07-14)
+
+- perf: much faster datatable display on large catalogs — opening the variable tab of a 100k-variable catalog drops from ~5 s to ~3 s: cell renderers now hand raw values to sorting and filtering instead of HTML that was built then stripped per cell (and the frequency-preview renderer no longer queries the db per cell), rows are no longer cloned to carry a row number, name sorting reuses a single collator, and select filter options are built on first open instead of scanning every column at mount
+- perf: build the meta catalog (the Meta section describing the datannur model itself) on first visit to a Meta page instead of at every boot
+- change: sort size columns by their byte value instead of their formatted text
+- fix: make the user-data export zip actually contain the data — it was always empty, and its folder name did not match what the import reads, so exported favorites, logs, and search history could never be restored
+
 ## 0.30.1 (2026-07-13)
 
 - perf: much faster startup on large catalogs — remove quadratic tag-relation processing and speed up self-catalog stats (via jsonjsdb 0.12.6), and build evolution validity rows without per-row full-object copies; a 100k-variable catalog now boots in seconds instead of minutes
