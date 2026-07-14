@@ -85,6 +85,7 @@ Dopo l'esportazione, indica — senza bloccare — quanto l'output è vicino a *
 - `catalog_uri`, `base_uri`: URI del catalogo e base per gli URI generati di dataset/publisher
 - `catalog_title`, `catalog_description`, `catalog_publisher`: metadati del catalogo
 - `default_license`: URI della licenza per il catalogo e le distribuzioni
+- `license_uris`: mappa opzionale che associa le etichette della colonna `license` a IRI (unita alla tabella integrata), così le etichette restano leggibili nell'UI mentre l'export produce gli IRI richiesti da SHACL — es. `{"Opendata.swiss BY": "http://dcat-ap.ch/vocabulary/licenses/terms_by"}`
 - `default_language`, `languages`: tag di lingua per i testi non qualificati e per i campi localizzati come `name:fr`, `description:fr`
 - `profile`: `"eu"` (predefinito) o `"ch"` (stesso effetto di `--profile ch`)
 

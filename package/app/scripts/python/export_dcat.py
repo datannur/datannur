@@ -68,9 +68,17 @@ MEDIA_TYPES = {
     "encolonne": "text/plain",
 }
 
+# Built-in label -> IRI mapping. Keys are matched normalized (see
+# _normalize_license_key). Deployments extend this via the config
+# `license_uris` map, which is merged over these defaults.
 LICENSE_URIS = {
     "cc-by-4.0": "https://creativecommons.org/licenses/by/4.0/",
     "cc by 4.0": "https://creativecommons.org/licenses/by/4.0/",
+    # DCAT-AP-CH / opendata.swiss vocabulary
+    "opendata.swiss open": "http://dcat-ap.ch/vocabulary/licenses/terms_open",
+    "opendata.swiss by": "http://dcat-ap.ch/vocabulary/licenses/terms_by",
+    "opendata.swiss ask": "http://dcat-ap.ch/vocabulary/licenses/terms_ask",
+    "opendata.swiss by ask": "http://dcat-ap.ch/vocabulary/licenses/terms_by_ask",
 }
 
 # Sentence templates for opt-in synthesized fallback descriptions
@@ -151,6 +159,11 @@ class DCATExporter:
             self.languages = [self.default_language, *self.languages]
         # Target profile: "eu" (default, DCAT-AP 3 / GeoDCAT-AP) or "ch" (eCH-0200)
         self.profile = self.config.get("profile", "eu")
+        # Label -> IRI license map: config `license_uris` merged over built-ins.
+        # Keys are normalized so config labels match UI casing/spacing.
+        self.license_uris = dict(LICENSE_URIS)
+        for label, iri in (self.config.get("license_uris") or {}).items():
+            self.license_uris[self._normalize_license_key(label)] = iri
         self.synthesized_description_ids: set = set()
         self.catalog_publisher_uri = None
         self.catalog_contact_uri = None
@@ -538,11 +551,15 @@ class DCATExporter:
         """Create a language-tagged literal"""
         return Literal(text, lang=lang or self.default_language)
 
+    @staticmethod
+    def _normalize_license_key(label: str) -> str:
+        return label.strip().lower().split(" - ")[0]
+
     def _license_value(self, license_value: str):
         normalized_license = license_value.strip()
-        license_key = normalized_license.lower().split(" - ")[0]
-        if license_key in LICENSE_URIS:
-            return URIRef(LICENSE_URIS[license_key])
+        license_key = self._normalize_license_key(normalized_license)
+        if license_key in self.license_uris:
+            return URIRef(self.license_uris[license_key])
         if normalized_license.startswith(("http://", "https://")):
             return URIRef(normalized_license)
         return Literal(normalized_license)

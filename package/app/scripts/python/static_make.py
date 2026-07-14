@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import functools
 import html
+import io
 import json
 import os
 import re
@@ -54,11 +55,12 @@ class SpaRequestHandler(SimpleHTTPRequestHandler):
         *args: Any,
         directory: str,
         data_dir: str,
-        index_file: str,
+        index_bytes: bytes,
         **kwargs: Any,
     ):
         self.data_dir = data_dir
-        self.index_file = index_file
+        self.index_bytes = index_bytes
+        self.index_path = os.path.abspath(os.path.join(directory, "index.html"))
         super().__init__(*args, directory=directory, **kwargs)
 
     def log_message(self, format: str, *args: Any):
@@ -75,15 +77,13 @@ class SpaRequestHandler(SimpleHTTPRequestHandler):
     def send_head(self):
         path = self.translate_path(self.path)
 
+        # Serve the patched index from memory for the app root, the SPA
+        # fallback, and any explicit index.html request — the live file on
+        # disk is never mutated, so it can never be left corrupted.
         if os.path.isdir(path):
-            return super().send_head()
-
-        if not os.path.exists(path):
-            path = os.path.join(self.directory, self.index_file)
-
-        if not os.path.isfile(path):
-            self.send_error(404, "File not found")
-            return None
+            return self._send_index()
+        if not os.path.exists(path) or os.path.abspath(path) == self.index_path:
+            return self._send_index()
 
         try:
             file = open(path, "rb")
@@ -98,6 +98,13 @@ class SpaRequestHandler(SimpleHTTPRequestHandler):
         self.send_header("Last-Modified", self.date_time_string(stat.st_mtime))
         self.end_headers()
         return file
+
+    def _send_index(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.send_header("Content-Length", str(len(self.index_bytes)))
+        self.end_headers()
+        return io.BytesIO(self.index_bytes)
 
 
 def load_config(config_path: Path) -> StaticMakeConfig:
@@ -198,16 +205,38 @@ def log_phase(label: str, start_time: float):
     print(f"{label}: {elapsed:.2f}s", flush=True)
 
 
-def create_index_file(source_file: Path, target_file: Path, index_seo: bool):
-    index = source_file.read_text(encoding="utf-8")
-    index = index.replace("<head>", '<head><meta app-mode="static" />')
+STATIC_MODE_META = '<meta app-mode="static" />'
+
+
+def patch_index_html(content: str, index_seo: bool) -> str:
+    content = content.replace("<head>", f"<head>{STATIC_MODE_META}", 1)
 
     if index_seo:
-        index = index.replace(
+        content = content.replace(
             '<meta name="robots" content="noindex"', '<meta name="robots"'
         )
 
-    target_file.write_text(index, encoding="utf-8")
+    return content
+
+
+def heal_index_file(index_file: Path) -> None:
+    """Strip a leftover static-mode marker from the live index.
+
+    Static generation serves the patched index from memory and never mutates
+    the file on disk, so it can no longer corrupt it. This repairs an index
+    left broken by an earlier version that did mutate it in place — the marker
+    has no legitimate reason to appear in the live index and makes every route
+    resolve to the 404 page.
+    """
+    if not index_file.exists():
+        return
+
+    content = index_file.read_text(encoding="utf-8")
+    if STATIC_MODE_META not in content:
+        return
+
+    index_file.write_text(content.replace(STATIC_MODE_META, ""), encoding="utf-8")
+    print(f"Repaired stale static marker in {index_file.name}", flush=True)
 
 
 def remove_db_scripts(content: str, db_path_extractor: Callable[[str], str]) -> str:
@@ -329,12 +358,12 @@ def generate_static_site_for_language(
     start_time = time.monotonic()
     phase_time = start_time
     index_file = package_dir / "index.html"
-    backup_file = package_dir / "index.html.bak"
     server = None
     failures: list[str] = []
 
-    shutil.move(index_file, backup_file)
-    create_index_file(backup_file, index_file, config.index_seo)
+    index_bytes = patch_index_html(
+        index_file.read_text(encoding="utf-8"), config.index_seo
+    ).encode("utf-8")
     log_phase("prepare index", phase_time)
     phase_time = time.monotonic()
 
@@ -343,7 +372,7 @@ def generate_static_site_for_language(
             SpaRequestHandler,
             directory=str(package_dir),
             data_dir=str(DATA_DIR),
-            index_file=index_file.name,
+            index_bytes=index_bytes,
         )
         server = create_local_http_server(config.port, handler, "static generation")
         server_thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -385,7 +414,6 @@ def generate_static_site_for_language(
         if server is not None:
             server.shutdown()
             server.server_close()
-        shutil.move(backup_file, index_file)
 
     if config.index_seo:
         generate_sitemap(routes, config.domain, out_dir / "sitemap.xml")
@@ -461,6 +489,7 @@ def main():
     config = load_config(config_path)
     package_dir = resolve_package_path(PACKAGE_DIR, config.app_path).resolve()
 
+    heal_index_file(package_dir / "index.html")
     prepare_output(package_dir, config)
     db_meta_path = get_db_meta_path(
         resolve_db_meta_path(package_dir, config.db_meta_path)
