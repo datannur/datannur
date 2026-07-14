@@ -256,6 +256,51 @@ def inject_locale_meta(content: str, language: str | None) -> str:
     return content.replace("<head>", f"<head>{meta}", 1)
 
 
+def page_url(domain: str, language: str | None, route: str) -> str:
+    """Absolute public URL of a generated page.
+
+    Language-prefixed for a given language (e.g. `.../en/datasets`), unprefixed
+    for the language-negotiated entry point (`language=None`, used by x-default).
+    Root pages keep a trailing slash.
+    """
+    parts = [domain.rstrip("/")]
+    if language:
+        parts.append(language)
+    if route:
+        parts.append(quote(route))
+    url = "/".join(parts)
+    if route == "":
+        url += "/"
+    return url
+
+
+def build_seo_links(
+    domain: str, languages: list[str], route: str, current_language: str | None
+) -> str:
+    """canonical + hreflang alternates for one page.
+
+    In multilingual mode every language variant is advertised, plus an
+    `x-default` pointing at the unprefixed language-negotiated URL. In
+    single-language mode only the canonical link is emitted.
+    """
+    links = [f'<link rel="canonical" href="{html.escape(page_url(domain, current_language, route))}"/>']
+    if languages:
+        for language in languages:
+            href = page_url(domain, language, route)
+            links.append(
+                f'<link rel="alternate" hreflang="{html.escape(language)}" href="{html.escape(href)}"/>'
+            )
+        xdefault = page_url(domain, None, route)
+        links.append(f'<link rel="alternate" hreflang="x-default" href="{html.escape(xdefault)}"/>')
+    return "".join(links)
+
+
+def inject_seo_links(content: str, links: str) -> str:
+    if not links:
+        return content
+    return content.replace("</head>", f"{links}</head>", 1)
+
+
 def capture_page(
     page: Page,
     route: str,
@@ -265,6 +310,7 @@ def capture_page(
     wait_for_db_selector: str,
     first_page_timeout_ms: int,
     route_timeout_ms: int,
+    seo_head: str = "",
 ) -> bool:
     output_path = out_dir / ("index.html" if route == "" else f"{route}.html")
     print(f"capture page: {route or 'index'}", flush=True)
@@ -294,6 +340,7 @@ def capture_page(
         content = inject_locale_meta(
             remove_db_scripts(page.content(), get_db_path_from_content), language
         )
+        content = inject_seo_links(content, seo_head)
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(content, encoding="utf-8")
         print(f"create page: {route or 'index'}", flush=True)
@@ -310,22 +357,47 @@ def calculate_priority(route: str) -> float:
     return max(0.3, 1.0 - depth * 0.2)
 
 
-def generate_sitemap(routes: list[str], domain: str, target_file: Path):
+def generate_sitemap(
+    routes: list[str], languages: list[str], domain: str, target_file: Path
+):
+    """One root sitemap covering every page.
+
+    In multilingual mode each route contributes one `<url>` per language, each
+    carrying the full set of `xhtml:link` hreflang alternates (plus x-default at
+    the unprefixed URL) so the sitemap mirrors the on-page canonical/alternate
+    links. In single-language mode routes map to plain unprefixed URLs.
+    """
+    entry_languages: list[str | None] = list(languages) if languages else [None]
     items = []
     for route in routes:
-        location = f"{domain.rstrip('/')}/{quote(route)}"
         priority = calculate_priority(route)
-        items.append(
-            "  <url>"
-            f"<loc>{html.escape(location)}</loc>"
-            "<changefreq>monthly</changefreq>"
-            f"<priority>{priority:.1f}</priority>"
-            "</url>"
-        )
+        alternates = ""
+        if languages:
+            alternate_links = [
+                f'<xhtml:link rel="alternate" hreflang="{html.escape(language)}"'
+                f' href="{html.escape(page_url(domain, language, route))}"/>'
+                for language in languages
+            ]
+            alternate_links.append(
+                '<xhtml:link rel="alternate" hreflang="x-default"'
+                f' href="{html.escape(page_url(domain, None, route))}"/>'
+            )
+            alternates = "".join(alternate_links)
+        for language in entry_languages:
+            location = page_url(domain, language, route)
+            items.append(
+                "  <url>"
+                f"<loc>{html.escape(location)}</loc>"
+                f"{alternates}"
+                "<changefreq>monthly</changefreq>"
+                f"<priority>{priority:.1f}</priority>"
+                "</url>"
+            )
 
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+        ' xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + "\n".join(items)
         + "\n</urlset>\n"
     )
@@ -392,7 +464,15 @@ def generate_static_site_for_language(
                 page = init_page(browser, config.port, language)
                 log_phase("load first page", phase_time)
                 phase_time = time.monotonic()
+                emit_seo = config.index_seo and bool(config.domain)
                 for index, route in enumerate(routes):
+                    seo_head = (
+                        build_seo_links(
+                            config.domain, config.languages, route, language
+                        )
+                        if emit_seo
+                        else ""
+                    )
                     ok = capture_page(
                         page,
                         route,
@@ -402,6 +482,7 @@ def generate_static_site_for_language(
                         wait_for_db_selector="#db-loaded",
                         first_page_timeout_ms=config.first_page_timeout_ms,
                         route_timeout_ms=config.route_timeout_ms,
+                        seo_head=seo_head,
                     )
                     if not ok:
                         failures.append(route or "index")
@@ -414,10 +495,6 @@ def generate_static_site_for_language(
         if server is not None:
             server.shutdown()
             server.server_close()
-
-    if config.index_seo:
-        generate_sitemap(routes, config.domain, out_dir / "sitemap.xml")
-        print("Sitemap has been successfully created!", flush=True)
 
     time_taken = time.monotonic() - start_time
     print(
@@ -441,9 +518,14 @@ def generate_static_site(
             generate_static_site_for_language(
                 routes, config, package_dir, out_dir / language, language
             )
-        return
+    else:
+        generate_static_site_for_language(routes, config, package_dir, out_dir)
 
-    generate_static_site_for_language(routes, config, package_dir, out_dir)
+    if config.index_seo and config.domain:
+        generate_sitemap(
+            routes, config.languages, config.domain, out_dir / "sitemap.xml"
+        )
+        print("Sitemap has been successfully created!", flush=True)
 
 
 def remove_output_dir(out_dir: Path, attempts: int = 3) -> None:

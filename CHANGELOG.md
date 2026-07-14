@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- add: SEO metadata for multilingual static output — when `indexSeo` and `domain` are set, each generated page gets a `canonical` link and, in multilingual mode, `hreflang` alternates for every language plus an `x-default` pointing at the unprefixed language-negotiated URL; the sitemap is now a single root `sitemap.xml` listing every page with the same `xhtml:link` alternates instead of one identical per-language file with unprefixed URLs
 - fix: emit DCAT distribution licenses as IRIs instead of literals so the export passes DCAT-AP 3.0.1 SHACL validation — the dataset `license` column keeps human-readable labels for the UI while the export resolves them to IRIs via the built-in table (now seeded with the DCAT-AP-CH / opendata.swiss vocabulary) plus an optional `license_uris` map in `dcat-export.config.json` merged over it; previously any label other than `cc-by-4.0` fell back to a `Literal`, which SHACL rejects on `dct:license` (`sh:BlankNodeOrIRI`)
 - fix: never leave `index.html` corrupted when a `static` build is interrupted — the local server now serves the `app-mode="static"` variant from memory instead of rewriting the live file and restoring it afterwards, so a Ctrl-C, kill, or crash mid-run can no longer strand every route on the 404 page or launder the broken marker through later builds; an index already damaged by an earlier version is repaired on the next `static` run
 

@@ -18,8 +18,8 @@ python3 datannur.py static-deploy
 
 **Configurazione** in `data/static-make.config.json`:
 
-- **domain**: il tuo dominio pubblico (es. `"https://yourdomain.com"`) - necessario per la generazione della sitemap quando `indexSeo: true`
-- **indexSeo**: `true` per consentire l'indicizzazione dai motori di ricerca, `false` per aggiungere il meta tag `noindex` (predefinito: `false`)
+- **domain**: il tuo dominio pubblico (es. `"https://yourdomain.com"`) - necessario per i link canonical/`hreflang` e la generazione della sitemap quando `indexSeo: true`
+- **indexSeo**: `true` per consentire l'indicizzazione dai motori di ricerca, `false` per aggiungere il meta tag `noindex` (predefinito: `false`). Quando è attivo con un `domain`, ogni pagina riceve anche un link `canonical` e, nell'output multilingue, alternate `hreflang` per ogni lingua più un `x-default` che punta all'URL senza prefisso negoziata per lingua; un'unica `sitemap.xml` nella radice elenca tutte le pagine con le stesse alternate
 - **languages**: cartelle di lingua da generare, ad esempio `["en", "fr", "de", "it"]`; se impostato, le pagine statiche vengono scritte in percorsi con prefisso di lingua come `/en/datasets`, `/fr/datasets`, `/de/datasets` e `/it/datasets`
 - **entities**: per quali tipi di entità generare le pagine statiche
 - **routes**: quali route pre-generare
