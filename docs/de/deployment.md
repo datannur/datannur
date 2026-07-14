@@ -18,8 +18,8 @@ python3 datannur.py static-deploy
 
 **Konfiguration** in `data/static-make.config.json`:
 
-- **domain**: Ihre öffentliche Domain (z. B. `"https://yourdomain.com"`) — erforderlich für die Sitemap-Generierung bei `indexSeo: true`
-- **indexSeo**: `true`, um die Indexierung durch Suchmaschinen zu erlauben, `false`, um das Meta-Tag `noindex` hinzuzufügen (Standard: `false`)
+- **domain**: Ihre öffentliche Domain (z. B. `"https://yourdomain.com"`) — erforderlich für die canonical/`hreflang`-Links und die Sitemap-Generierung bei `indexSeo: true`
+- **indexSeo**: `true`, um die Indexierung durch Suchmaschinen zu erlauben, `false`, um das Meta-Tag `noindex` hinzuzufügen (Standard: `false`). Aktiviert mit einer `domain`, erhält jede Seite zusätzlich einen `canonical`-Link und bei mehrsprachiger Ausgabe `hreflang`-Alternates für jede Sprache sowie ein `x-default`, das auf die sprachverhandelte URL ohne Präfix verweist; eine einzige `sitemap.xml` im Wurzelverzeichnis listet alle Seiten mit denselben Alternates
 - **languages**: Zu generierende Sprachordner, zum Beispiel `["en", "fr", "de", "it"]`; wenn gesetzt, werden die statischen Seiten unter Pfaden mit Sprachpräfix wie `/en/datasets`, `/fr/datasets`, `/de/datasets` und `/it/datasets` geschrieben
 - **entities**: Für welche Entitätstypen statische Seiten generiert werden
 - **routes**: Welche Routen vorab generiert werden
