@@ -1,5 +1,9 @@
 # datannur
 
+## Unreleased
+
+- fix: allow localized `description:<lang>` variants in the `value` schema so `datannur validate` no longer rejects catalogs with multilingual value descriptions — `value.schema.json` kept `additionalProperties: false` without the `patternProperties` block every other translatable entity carries, so the `description:de|fr|it` fields datannur itself emits were reported as unexpected
+
 ## 0.30.3 (2026-07-14)
 
 - add: SEO metadata for multilingual static output — when `indexSeo` and `domain` are set, each generated page gets a `canonical` link and, in multilingual mode, `hreflang` alternates for every language plus an `x-default` pointing at the unprefixed language-negotiated URL; the sitemap is now a single root `sitemap.xml` listing every page with the same `xhtml:link` alternates instead of one identical per-language file with unprefixed URLs
