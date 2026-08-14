@@ -3,6 +3,7 @@
 ## Unreleased
 
 - fix: allow localized `description:<lang>` variants in the `value` schema so `datannur validate` no longer rejects catalogs with multilingual value descriptions — `value.schema.json` kept `additionalProperties: false` without the `patternProperties` block every other translatable entity carries, so the `description:de|fr|it` fields datannur itself emits were reported as unexpected
+- fix: wrap license text in a span for better line breaking in LicenseInfo component
 
 ## 0.30.3 (2026-07-14)
 

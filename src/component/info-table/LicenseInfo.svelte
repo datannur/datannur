@@ -8,6 +8,6 @@
 {#if license}
   <tr>
     <td><Icon type="license" /> {t('column.license.title')}</td>
-    <td>{license}</td>
+    <td><span class="break-line">{license}</span></td>
   </tr>
 {/if}
