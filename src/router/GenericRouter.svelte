@@ -72,7 +72,13 @@
 
   if (isStaticMode && !isSsgRendering) {
     whenAppReady.then(() => {
-      if (initialPage !== loadingPage && initialPage in routerIndex) {
+      // Pages with a param need their entity prop, which only setRoute()
+      // provides: swapping them in here would render them with empty props
+      if (
+        initialPage !== loadingPage &&
+        initialPage in routerIndex &&
+        !('param' in routerIndex[initialPage])
+      ) {
         route = routerIndex[initialPage].component
       }
     })

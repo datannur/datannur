@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- fix: crash on statically deployed entity pages (`Cannot read properties of undefined (reading 'docsRecursive')`) — once the db finished loading, the router could swap in the page component before its entity prop was set; the browser runtime tests now fail on any uncaught page error
 - fix: allow localized `description:<lang>` variants in the `value` schema so `datannur validate` no longer rejects catalogs with multilingual value descriptions — `value.schema.json` kept `additionalProperties: false` without the `patternProperties` block every other translatable entity carries, so the `description:de|fr|it` fields datannur itself emits were reported as unexpected
 - fix: wrap license text in a span for better line breaking in LicenseInfo component
 
