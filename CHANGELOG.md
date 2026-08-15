@@ -1,6 +1,6 @@
 # datannur
 
-## Unreleased
+## 0.30.4 (2026-08-15)
 
 - fix: LLM assistant broken on PHP 8.5 — a `curl_close()` deprecation warning was printed before the JSON of every `api/llm` response; the no-op calls are removed and the endpoints now force `display_errors` off
 - fix: crash on statically deployed entity pages (`Cannot read properties of undefined (reading 'docsRecursive')`) — once the db finished loading, the router could swap in the page component before its entity prop was set; the browser runtime tests now fail on any uncaught page error
