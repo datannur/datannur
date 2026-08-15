@@ -87,7 +87,6 @@ function transcribeAudio(string $apiKey, string $productId, array $file, string 
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
 
     if ($response === false || $httpCode >= 400) {
         return ['error' => 'Failed to upload audio'];
@@ -120,7 +119,6 @@ function pollForResult(string $apiKey, string $productId, string $batchId): arra
         ]);
 
         $response = curl_exec($ch);
-        curl_close($ch);
 
         if ($response === false) {
             continue;

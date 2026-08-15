@@ -3,6 +3,9 @@
  * Common functions for LLM API endpoints
  */
 
+// Never let warnings/notices leak into JSON or SSE responses (errors still go to the server log)
+ini_set('display_errors', '0');
+
 /**
  * Load LLM configuration
  */
@@ -41,7 +44,6 @@ function verifyTurnstile(string $secret, string $token): bool {
         CURLOPT_TIMEOUT => 10
     ]);
     $response = curl_exec($ch);
-    curl_close($ch);
 
     if ($response === false) {
         return false;

@@ -70,6 +70,4 @@ function proxyToInfomaniak(string $apiKey, string $productId, string $body): voi
         echo "data: {\"error\": \"" . curl_error($ch) . "\"}\n\n";
         flush();
     }
-
-    curl_close($ch);
 }
