@@ -9,11 +9,11 @@
 
 # datannur
 
-datannur is an open-source data catalog that runs from static files, without requiring a server or database. This repository contains the datannur app; for most users, the easiest way to create a catalog from real files or databases is the Python builder, [`datannurpy`](https://github.com/datannur/datannurpy).
+datannur is an open-source data catalog that runs from static files, without requiring a server or database. This repository contains the datannur app; for most users, the easiest way to create a catalog from real files or databases is the Python builder, [`datannurpy`](https://github.com/datannur/datannurpy). To publish a catalog on GitHub Pages without installing anything, start from the [`datannur-template`](https://github.com/datannur/datannur-template).
 
 ![datannur catalog screenshot](https://raw.githubusercontent.com/datannur/datannur/main/docs/public/screenshot_dashboard_dark.png?raw=true)
 
-👉 [Try the live demo](https://dev.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy)
+👉 [Try the live demo](https://dev.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy) · [Publish with the template](https://github.com/datannur/datannur-template)
 
 ## Why datannur?
 
@@ -21,7 +21,13 @@ Useful datasets are often scattered across spreadsheets, databases, folders, def
 
 Start small or scale gradually: generate a portable catalog, explore it in the browser, and share it from a local folder, shared drive, web server, or cloud storage.
 
-## Quick start: generate a catalog with datannurpy
+## Quick start: publish a catalog on GitHub Pages
+
+The [datannur-template](https://github.com/datannur/datannur-template) publishes your own catalog on GitHub Pages in a few minutes, without a server or local install: click **Use this template**, point `catalog.yml` at open data URLs or drop files in `datasets/`, and every commit rebuilds the catalog automatically. See the [live example](https://datannur.github.io/datannur-template/).
+
+Everything in a public repository is public, including the data files. For internal or sensitive data, build the catalog locally with `datannurpy` instead.
+
+## Quick start: build a catalog locally with datannurpy
 
 ```bash
 pip install datannurpy
@@ -64,6 +70,8 @@ The datannur app is the portable catalog interface that runs from a single `inde
 ## Documentation
 
 🧰 **Builder:** [github.com/datannur/datannurpy](https://github.com/datannur/datannurpy)
+
+📦 **Template:** [github.com/datannur/datannur-template](https://github.com/datannur/datannur-template)
 
 🚀 **Demo:** [dev.datannur.com](https://dev.datannur.com/)
 
