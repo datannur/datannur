@@ -15,6 +15,16 @@ datannur is an open-source data catalog that runs from static files, without req
 
 👉 [Try the live demo](https://dev.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy) · [Publish with the template](https://github.com/datannur/datannur-template)
 
+## Supported data sources
+
+datannur can catalog structured data from:
+
+- **Tabular and statistical files:** CSV, Excel, ODS, Parquet, Delta Lake, Apache Iceberg, SAS, SPSS, Stata
+- **Geospatial data:** GeoJSON, Shapefile, GeoPackage, GeoParquet, GeoTIFF, GML, KML, GPX, ESRI File Geodatabase
+- **Relational databases:** PostgreSQL, MySQL, Oracle, SQL Server, SQLite, DuckDB
+
+See the [builder documentation](https://docs.datannur.com/builder/) for details, including remote and cloud data sources.
+
 ## Why datannur?
 
 Useful datasets are often scattered across spreadsheets, databases, folders, definitions, and documentation. datannur helps make this metadata visible, understandable, and shareable while keeping the catalog lightweight, portable, and under your control.
