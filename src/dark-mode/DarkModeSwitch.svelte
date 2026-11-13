@@ -5,7 +5,7 @@
 
   let { label = '' }: { label?: string } = $props()
 
-  let id = window.crypto.randomUUID()
+  const id = $props.id()
 
   function toggle(event: MouseEvent) {
     const button = event.currentTarget
