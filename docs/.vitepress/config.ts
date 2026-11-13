@@ -141,7 +141,7 @@ function localeConfig(key: string, text: LocaleText) {
     themeConfig: {
       nav: [
         { text: 'Website', link: text.websiteUrl },
-        { text: 'Demo', link: 'https://dev.datannur.com/' },
+        { text: 'Demo', link: 'https://demo.datannur.com/' },
         { text: 'Builder docs', link: 'https://docs.datannur.com/builder/' },
       ],
       sidebar: text.sidebar.map((label, index) => ({

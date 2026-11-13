@@ -5,7 +5,7 @@
 [![GitHub release](https://img.shields.io/github/v/release/datannur/datannur?color=blue)](https://github.com/datannur/datannur/releases)
 [![CI Tests](https://github.com/datannur/datannur/actions/workflows/ci.yml/badge.svg)](https://github.com/datannur/datannur/actions/workflows/ci.yml)
 [![Deploy Status](https://github.com/datannur/datannur/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/datannur/datannur/actions/workflows/deploy-pages.yml)
-[![Demo](https://img.shields.io/badge/demo-live-success)](https://dev.datannur.com/)
+[![Demo](https://img.shields.io/badge/demo-live-success)](https://demo.datannur.com/)
 
 # datannur
 
@@ -13,7 +13,7 @@ datannur is an open-source data catalog that runs from static files, without req
 
 ![datannur catalog screenshot](https://raw.githubusercontent.com/datannur/datannur/main/docs/public/screenshot_dashboard_dark.png?raw=true)
 
-👉 [Try the live demo](https://dev.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy) · [Publish with the template](https://github.com/datannur/datannur-template)
+👉 [Try the live demo](https://demo.datannur.com/) · [Read the docs](https://docs.datannur.com/app/) · [Use the Python builder](https://github.com/datannur/datannurpy) · [Publish with the template](https://github.com/datannur/datannur-template)
 
 ## Supported data sources
 
@@ -83,7 +83,7 @@ The datannur app is the portable catalog interface that runs from a single `inde
 
 📦 **Template:** [github.com/datannur/datannur-template](https://github.com/datannur/datannur-template)
 
-🚀 **Demo:** [dev.datannur.com](https://dev.datannur.com/)
+🚀 **Demo:** [demo.datannur.com](https://demo.datannur.com/)
 
 📖 **Full documentation:** [docs.datannur.com/app](https://docs.datannur.com/app/)
 
