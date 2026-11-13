@@ -19,7 +19,7 @@
     children?: Snippet
   } = $props()
 
-  let id = window.crypto.randomUUID()
+  const id = $props.id()
 </script>
 
 <div class="field {slotPosition}">
