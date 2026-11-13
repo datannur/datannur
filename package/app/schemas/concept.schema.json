@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/concept.schema.json",
+  "$id": "https://demo.datannur.com/schemas/concept.schema.json",
   "x-db": "data",
   "title": "concept",
   "description": "Business glossary concepts",

@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/frequency.schema.json",
+  "$id": "https://demo.datannur.com/schemas/frequency.schema.json",
   "x-db": "data",
   "title": "frequency",
   "description": "Value frequencies for each variable",

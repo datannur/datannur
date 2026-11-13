@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/doc.schema.json",
+  "$id": "https://demo.datannur.com/schemas/doc.schema.json",
   "x-db": "data",
   "title": "doc",
   "description": "Documentation (pdf, md) attached to an element",

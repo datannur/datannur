@@ -1,6 +1,6 @@
 {
   "$schema": "../__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/log.schema.json",
+  "$id": "https://demo.datannur.com/schemas/log.schema.json",
   "x-db": "userData",
   "title": "log",
   "description": "Logs produced by the user while using the application",

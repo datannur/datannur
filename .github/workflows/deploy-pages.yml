@@ -50,7 +50,7 @@ jobs:
         run: npm run build
       # Pages serves static files only: drop the sensitive configs, the PHP
       # APIs (app/api: REST, LLM proxy), the Apache rules and the local-only
-      # helpers, so the demo (dev.datannur.com) runs as a plain #/ SPA.
+      # helpers, so the demo (demo.datannur.com) runs as a plain #/ SPA.
       - name: Keep only what a static host serves
         run: |
           rm -f dist/data/llm-web.config.json dist/data/deploy.config.json \

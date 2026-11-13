@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/tag.schema.json",
+  "$id": "https://demo.datannur.com/schemas/tag.schema.json",
   "x-db": "data",
   "title": "tag",
   "description": "Tags",
