@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/evolution.schema.json",
+  "$id": "https://demo.datannur.com/schemas/evolution.schema.json",
   "x-db": "data",
   "title": "evolution",
   "description": "History of metadata changes",

@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/folder.schema.json",
+  "$id": "https://demo.datannur.com/schemas/folder.schema.json",
   "x-db": "data",
   "title": "folder",
   "description": "Folders",

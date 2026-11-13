@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/__table__.schema.json",
+  "$id": "https://demo.datannur.com/schemas/__table__.schema.json",
   "title": "__table__",
   "description": "Database index entry tracking a table and its last modification timestamp (array format)",
   "x-description-fr": "Entrée d'index de la base de données suivant une table et son horodatage de dernière modification (format tableau)",

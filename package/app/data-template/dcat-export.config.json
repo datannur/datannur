@@ -1,9 +1,9 @@
 {
-  "catalog_uri": "https://dev.datannur.com/catalog",
+  "catalog_uri": "https://demo.datannur.com/catalog",
   "catalog_title": "datannur Data Catalog",
   "catalog_description": "Open data catalog powered by datannur, compliant with DCAT-AP-CH standard",
   "catalog_publisher": "datannur",
-  "base_uri": "https://dev.datannur.com/",
+  "base_uri": "https://demo.datannur.com/",
   "organization_slug": "datannur",
   "default_language": "en",
   "languages": ["en", "fr", "de", "it"],

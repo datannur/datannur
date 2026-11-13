@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://dev.datannur.com/schemas/__meta__.schema.json",
+  "$id": "https://demo.datannur.com/schemas/__meta__.schema.json",
   "title": "__meta__",
   "description": "Meta-schema defining the allowed JSON Schema subset for Datannur entity schemas",
   "x-description-fr": "Meta-schema définissant le sous-ensemble JSON Schema autorisé pour les schémas d'entités Datannur",

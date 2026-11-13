@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/value.schema.json",
+  "$id": "https://demo.datannur.com/schemas/value.schema.json",
   "x-db": "data",
   "title": "value",
   "description": "Values and their description within a enumeration",

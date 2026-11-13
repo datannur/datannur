@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/config.schema.json",
+  "$id": "https://demo.datannur.com/schemas/config.schema.json",
   "x-db": "data",
   "title": "config",
   "description": "General information, including descriptions of different entities",

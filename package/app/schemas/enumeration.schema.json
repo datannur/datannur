@@ -1,6 +1,6 @@
 {
   "$schema": "./__meta__.schema.json",
-  "$id": "https://dev.datannur.com/schemas/enumeration.schema.json",
+  "$id": "https://demo.datannur.com/schemas/enumeration.schema.json",
   "x-db": "data",
   "title": "enumeration",
   "description": "Enumerations",
