@@ -48,10 +48,17 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Remove sensitive config before upload
+      # Pages serves static files only: drop the sensitive configs, the PHP
+      # APIs (app/api: REST, LLM proxy), the Apache rules and the local-only
+      # helpers, so the demo (dev.datannur.com) runs as a plain #/ SPA.
+      - name: Keep only what a static host serves
         run: |
-          rm -f dist/data/llm-web.config.json
-          rm -f dist/data/deploy.config.json
+          rm -f dist/data/llm-web.config.json dist/data/deploy.config.json \
+            dist/data/localhost-ports.config.json \
+            dist/data/static-make.config.json dist/data/update-app.json \
+            dist/data/jsonjsdb-config.html
+          rm -rf dist/app/api dist/app/scripts/python dist/app/scripts/windows
+          find dist -name .htaccess -delete
       - name: Disable Jekyll
         run: touch dist/.nojekyll
       - name: Setup Pages
